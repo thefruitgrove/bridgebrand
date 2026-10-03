@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SignalBridge — 회사소개</title>
+<meta name="description" content="소음을 걷어내고, 진짜 평판의 해상도를 높이다. 시그널브릿지는 독자적 BRIDGE 모형으로 기업·공공기관·대학·공인의 진짜 평판 신호를 해독합니다.">
+<meta property="og:title" content="SignalBridge — 회사소개">
+<meta property="og:description" content="소음을 걷어내고, 진짜 평판의 해상도를 높이다. 시그널브릿지는 독자적 BRIDGE 모형으로 기업·공공기관·대학·공인의 진짜 평판 신호를 해독합니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BRIDGE">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="ticker">
+  <button class="ticker-toggle" id="tickerToggle" aria-label="일시정지">LIVE ⏸</button>
+  <div class="ticker-viewport">
+    <div class="ticker-track" id="tickerTrack">
+    <span><b>CPR</b>삼성전자 <span class="t-score">57.5</span></span>
+    <span><b>ENT</b>방탄소년단 <span class="t-score">97.5</span></span>
+    <span><b>GOV</b>서울특별시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK하이닉스 <span class="t-score">65.3</span></span>
+    <span><b>ENT</b>임영웅 <span class="t-score">87.7</span></span>
+    <span><b>GOV</b>부산광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대차 <span class="t-score">74.9</span></span>
+    <span><b>ENT</b>유재석 <span class="t-score">100</span></span>
+    <span><b>GOV</b>대구광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG에너지솔루션 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박지훈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>인천광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성바이오로직스 <span class="t-score">74.6</span></span>
+    <span><b>ENT</b>김도영 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>광주광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>기아 <span class="t-score">68.8</span></span>
+    <span><b>ENT</b>변우석 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>대전광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>셀트리온 <span class="t-score">74.0</span></span>
+    <span><b>ENT</b>싸이 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>울산광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성SDI <span class="t-score">55.1</span></span>
+    <span><b>ENT</b>손흥민 <span class="t-score">95.6</span></span>
+    <span><b>GOV</b>세종특별자치시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>POSCO홀딩스 <span class="t-score">78.2</span></span>
+    <span><b>ENT</b>이정후 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경기도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>NAVER <span class="t-score">72.0</span></span>
+    <span><b>ENT</b>정해인 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>강원특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>카카오 <span class="t-score">56.1</span></span>
+    <span><b>ENT</b>박진영 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>충청북도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대모비스 <span class="t-score">65.1</span></span>
+    <span><b>ENT</b>공유 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>충청남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG화학 <span class="t-score">64.6</span></span>
+    <span><b>ENT</b>이찬원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전북특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>에코프로비엠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>소지섭 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전라남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성생명 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>페이커 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경상북도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK스퀘어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김종국 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경상남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>KB금융 <span class="t-score">72.6</span></span>
+    <span><b>ENT</b>성시경 <span class="t-score">100</span></span>
+    <span><b>GOV</b>제주특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한화에어로스페이스 <span class="t-score">39.6</span></span>
+    <span><b>ENT</b>김재원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국전력공사 <span class="t-score">61.3</span></span>
+    <span><b>CPR</b>두산에너빌리티 <span class="t-score">56.3</span></span>
+    <span><b>ENT</b>안효섭 <span class="t-score">100</span></span>
+    <span><b>GOV</b>한국수력원자력 <span class="t-score">82.2</span></span>
+    <span><b>CPR</b>HD현대중공업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>지창욱 <span class="t-score">94.8</span></span>
+    <span><b>GOV</b>한국토지주택공사 <span class="t-score">74.3</span></span>
+    <span><b>CPR</b>삼성물산 <span class="t-score">66.8</span></span>
+    <span><b>ENT</b>김선호 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국철도공사 <span class="t-score">64.7</span></span>
+    <span><b>CPR</b>한화시스템 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>투모로우바이투게더 <span class="t-score">93.8</span></span>
+    <span><b>GOV</b>한국가스공사 <span class="t-score">69.5</span></span>
+    <span><b>CPR</b>한국항공우주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>세븐틴 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>한국도로공사 <span class="t-score">77.5</span></span>
+    <span><b>CPR</b>SK텔레콤 <span class="t-score">56.7</span></span>
+    <span><b>ENT</b>스트레이키즈 <span class="t-score">95.3</span></span>
+    <span><b>GOV</b>인천국제공항공사 <span class="t-score">60.5</span></span>
+    <span><b>CPR</b>미래에셋증권 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>엔시티 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>신용보증기금 <span class="t-score">67.5</span></span>
+    <span><b>CPR</b>한미반도체 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이병헌 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국자산관리공사 <span class="t-score">80.0</span></span>
+    <span><b>CPR</b>주성엔지니어링 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>현빈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>강원랜드 <span class="t-score">69.8</span></span>
+    <span><b>CPR</b>원익IPS <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박서준 <span class="t-score">94.5</span></span>
+    <span><b>GOV</b>한국석유공사 <span class="t-score">66.2</span></span>
+    <span><b>CPR</b>리노공업 <span class="t-score">37.8</span></span>
+    <span><b>ENT</b>남주혁 <span class="t-score">94.0</span></span>
+    <span><b>GOV</b>한국가스안전공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>DB하이텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>송중기 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업단지공단 <span class="t-score">77.5</span></span>
+    <span><b>CPR</b>HD건설기계 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>강동원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술시험원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>OCI <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이민호 <span class="t-score">95.3</span></span>
+    <span><b>GOV</b>한국디자인진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>GS건설 <span class="t-score">63.6</span></span>
+    <span><b>ENT</b>조인성 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국무역보험공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>세방전지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>하정우 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국가스기술공사 <span class="t-score">80.0</span></span>
+    <span><b>CPR</b>GKL <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박보검 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술진흥원 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>녹십자홀딩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김수현 <span class="t-score">92.8</span></span>
+    <span><b>GOV</b>한국석유관리원 <span class="t-score">70.0</span></span>
+    <span><b>CPR</b>삼표시멘트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>지드래곤 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국로봇산업진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>휴림로봇 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>태양 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국제품안전관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대무벡스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>류현진 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한석탄공사 <span class="t-score">60.0</span></span>
+    <span><b>CPR</b>쎄트렉아이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>황희찬 <span class="t-score">100</span></span>
+    <span><b>GOV</b>한국세라믹기술원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK가스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이강인 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한무역투자진흥공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>한일시멘트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>강호동 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국광해광업공단 <span class="t-score">50.0</span></span>
+    <span><b>CPR</b>LS머트리얼즈 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>신동엽 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술평가관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한화엔진 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이경규 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전략물자관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>일진전기 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전현무 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>국민건강보험공단 <span class="t-score">79.6</span></span>
+    <span><b>CPR</b>제룡전기 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이브 <span class="t-score">92.2</span></span>
+    <span><b>GOV</b>한국관광공사 <span class="t-score">50.0</span></span>
+    <span><b>CPR</b>LS에코에너지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>블랙핑크 <span class="t-score">98.4</span></span>
+    <span><b>GOV</b>예술의전당 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>경동나비엔 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>고윤정 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국저작권위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>실리콘투 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>비비 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국콘텐츠진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한샘 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김고은 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국문화예술위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>에이피알 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>트와이스 <span class="t-score">95.0</span></span>
+    <span><b>GOV</b>영화진흥위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>브이티 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박은빈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한장애인체육회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>씨앤씨인터내셔널 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김혜수 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>국악방송 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>보로노이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전지현 <span class="t-score">100</span></span>
+    <span><b>GOV</b>게임물관리위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>펩트론 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>에스파 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>한국문화예술교육진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>동양생명 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이들 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국체육산업개발 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>롯데손해보험 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>르세라핌 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>예술경영지원센터 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>티씨케이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>손예진 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>스포츠윤리센터 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>와이씨 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김태리 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국영상자료원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>덕산테코피아 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>한지민 <span class="t-score">100</span></span>
+    <span><b>GOV</b>서울올림픽기념국민체육진흥공단 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>덕산네오룩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>수지 <span class="t-score">94.2</span></span>
+    <span><b>CPR</b>피에스케이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>임수정 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>케이씨텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김지원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>시노펙스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>신민아 <span class="t-score">100</span></span>
+    <span><b>CPR</b>SK이터닉스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박신혜 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>제주항공 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>문근영 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>명신산업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>한소희 <span class="t-score">93.5</span></span>
+    <span><b>CPR</b>성우하이텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>정유미 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>메가스터디교육 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이영애 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>오리온홀딩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김하늘 <span class="t-score">100</span></span>
+    <span><b>CPR</b>하림지주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이나영 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>JW중외제약 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>윤은혜 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>와이지엔터테인먼트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이유 <span class="t-score">46.4</span></span>
+    <span><b>CPR</b>디어유 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>태연 <span class="t-score">93.7</span></span>
+    <span><b>CPR</b>우리금융지주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>화사 <span class="t-score">92.1</span></span>
+    <span><b>CPR</b>삼성중공업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>청하 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>알테오젠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>선미 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>셀트리온헬스케어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>백예린 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>루닛 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>헤이즈 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HPSP <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김연아 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HD현대 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>안세영 <span class="t-score">100</span></span>
+    <span><b>CPR</b>금호타이어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박나래 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대건설 <span class="t-score">52.1</span></span>
+    <span><b>ENT</b>송은이 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK이노베이션 <span class="t-score">56.9</span></span>
+    <span><b>ENT</b>김숙 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한국조선해양 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>공효진 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG전자 <span class="t-score">54.2</span></span>
+    <span><b>ENT</b>김희애 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG디스플레이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전도연 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>아모레퍼시픽 <span class="t-score">60.8</span></span>
+    <span><b>ENT</b>임윤아 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG생활건강 <span class="t-score">54.8</span></span>
+    <span><b>ENT</b>한예슬 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>CJ제일제당 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김소현 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>신세계 <span class="t-score">53.9</span></span>
+    <span><b>ENT</b>리센느 <span class="t-score">98.5</span></span>
+    <span><b>CPR</b>이마트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>추영우 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>롯데쇼핑 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>연준(투모로우바이투게더) <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한국타이어앤테크놀로지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>성한빈(제로베이스원) <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대글로비스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>라이즈 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>팬오션 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>알파드라이브원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HMM <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>제로베이스원 <span class="t-score">99.5</span></span>
+    <span><b>CPR</b>포스코퓨처엠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>뉴진스 <span class="t-score">90.5</span></span>
+    <span><b>CPR</b>한온시스템 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>엔하이픈 <span class="t-score">94.3</span></span>
+    <span><b>CPR</b>코웨이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아일릿 <span class="t-score">88.5</span></span>
+    <span><b>CPR</b>삼성전자 <span class="t-score">57.5</span></span>
+    <span><b>ENT</b>방탄소년단 <span class="t-score">97.5</span></span>
+    <span><b>GOV</b>서울특별시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK하이닉스 <span class="t-score">65.3</span></span>
+    <span><b>ENT</b>임영웅 <span class="t-score">87.7</span></span>
+    <span><b>GOV</b>부산광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대차 <span class="t-score">74.9</span></span>
+    <span><b>ENT</b>유재석 <span class="t-score">100</span></span>
+    <span><b>GOV</b>대구광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG에너지솔루션 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박지훈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>인천광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성바이오로직스 <span class="t-score">74.6</span></span>
+    <span><b>ENT</b>김도영 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>광주광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>기아 <span class="t-score">68.8</span></span>
+    <span><b>ENT</b>변우석 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>대전광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>셀트리온 <span class="t-score">74.0</span></span>
+    <span><b>ENT</b>싸이 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>울산광역시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성SDI <span class="t-score">55.1</span></span>
+    <span><b>ENT</b>손흥민 <span class="t-score">95.6</span></span>
+    <span><b>GOV</b>세종특별자치시 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>POSCO홀딩스 <span class="t-score">78.2</span></span>
+    <span><b>ENT</b>이정후 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경기도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>NAVER <span class="t-score">72.0</span></span>
+    <span><b>ENT</b>정해인 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>강원특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>카카오 <span class="t-score">56.1</span></span>
+    <span><b>ENT</b>박진영 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>충청북도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대모비스 <span class="t-score">65.1</span></span>
+    <span><b>ENT</b>공유 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>충청남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG화학 <span class="t-score">64.6</span></span>
+    <span><b>ENT</b>이찬원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전북특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>에코프로비엠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>소지섭 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전라남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>삼성생명 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>페이커 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경상북도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK스퀘어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김종국 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>경상남도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>KB금융 <span class="t-score">72.6</span></span>
+    <span><b>ENT</b>성시경 <span class="t-score">100</span></span>
+    <span><b>GOV</b>제주특별자치도 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한화에어로스페이스 <span class="t-score">39.6</span></span>
+    <span><b>ENT</b>김재원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국전력공사 <span class="t-score">61.3</span></span>
+    <span><b>CPR</b>두산에너빌리티 <span class="t-score">56.3</span></span>
+    <span><b>ENT</b>안효섭 <span class="t-score">100</span></span>
+    <span><b>GOV</b>한국수력원자력 <span class="t-score">82.2</span></span>
+    <span><b>CPR</b>HD현대중공업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>지창욱 <span class="t-score">94.8</span></span>
+    <span><b>GOV</b>한국토지주택공사 <span class="t-score">74.3</span></span>
+    <span><b>CPR</b>삼성물산 <span class="t-score">66.8</span></span>
+    <span><b>ENT</b>김선호 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국철도공사 <span class="t-score">64.7</span></span>
+    <span><b>CPR</b>한화시스템 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>투모로우바이투게더 <span class="t-score">93.8</span></span>
+    <span><b>GOV</b>한국가스공사 <span class="t-score">69.5</span></span>
+    <span><b>CPR</b>한국항공우주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>세븐틴 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>한국도로공사 <span class="t-score">77.5</span></span>
+    <span><b>CPR</b>SK텔레콤 <span class="t-score">56.7</span></span>
+    <span><b>ENT</b>스트레이키즈 <span class="t-score">95.3</span></span>
+    <span><b>GOV</b>인천국제공항공사 <span class="t-score">60.5</span></span>
+    <span><b>CPR</b>미래에셋증권 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>엔시티 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>신용보증기금 <span class="t-score">67.5</span></span>
+    <span><b>CPR</b>한미반도체 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이병헌 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국자산관리공사 <span class="t-score">80.0</span></span>
+    <span><b>CPR</b>주성엔지니어링 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>현빈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>강원랜드 <span class="t-score">69.8</span></span>
+    <span><b>CPR</b>원익IPS <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박서준 <span class="t-score">94.5</span></span>
+    <span><b>GOV</b>한국석유공사 <span class="t-score">66.2</span></span>
+    <span><b>CPR</b>리노공업 <span class="t-score">37.8</span></span>
+    <span><b>ENT</b>남주혁 <span class="t-score">94.0</span></span>
+    <span><b>GOV</b>한국가스안전공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>DB하이텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>송중기 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업단지공단 <span class="t-score">77.5</span></span>
+    <span><b>CPR</b>HD건설기계 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>강동원 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술시험원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>OCI <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이민호 <span class="t-score">95.3</span></span>
+    <span><b>GOV</b>한국디자인진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>GS건설 <span class="t-score">63.6</span></span>
+    <span><b>ENT</b>조인성 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국무역보험공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>세방전지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>하정우 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국가스기술공사 <span class="t-score">80.0</span></span>
+    <span><b>CPR</b>GKL <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박보검 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술진흥원 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>녹십자홀딩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김수현 <span class="t-score">92.8</span></span>
+    <span><b>GOV</b>한국석유관리원 <span class="t-score">70.0</span></span>
+    <span><b>CPR</b>삼표시멘트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>지드래곤 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국로봇산업진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>휴림로봇 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>태양 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국제품안전관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대무벡스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>류현진 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한석탄공사 <span class="t-score">60.0</span></span>
+    <span><b>CPR</b>쎄트렉아이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>황희찬 <span class="t-score">100</span></span>
+    <span><b>GOV</b>한국세라믹기술원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK가스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이강인 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한무역투자진흥공사 <span class="t-score">90.0</span></span>
+    <span><b>CPR</b>한일시멘트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>강호동 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국광해광업공단 <span class="t-score">50.0</span></span>
+    <span><b>CPR</b>LS머트리얼즈 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>신동엽 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국산업기술평가관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한화엔진 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이경규 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>전략물자관리원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>일진전기 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전현무 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>국민건강보험공단 <span class="t-score">79.6</span></span>
+    <span><b>CPR</b>제룡전기 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이브 <span class="t-score">92.2</span></span>
+    <span><b>GOV</b>한국관광공사 <span class="t-score">50.0</span></span>
+    <span><b>CPR</b>LS에코에너지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>블랙핑크 <span class="t-score">98.4</span></span>
+    <span><b>GOV</b>예술의전당 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>경동나비엔 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>고윤정 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국저작권위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>실리콘투 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>비비 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국콘텐츠진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한샘 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김고은 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국문화예술위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>에이피알 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>트와이스 <span class="t-score">95.0</span></span>
+    <span><b>GOV</b>영화진흥위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>브이티 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박은빈 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>대한장애인체육회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>씨앤씨인터내셔널 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김혜수 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>국악방송 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>보로노이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전지현 <span class="t-score">100</span></span>
+    <span><b>GOV</b>게임물관리위원회 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>펩트론 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>에스파 <span class="t-score">93.5</span></span>
+    <span><b>GOV</b>한국문화예술교육진흥원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>동양생명 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이들 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국체육산업개발 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>롯데손해보험 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>르세라핌 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>예술경영지원센터 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>티씨케이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>손예진 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>스포츠윤리센터 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>와이씨 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김태리 <span class="t-flat">N/R</span></span>
+    <span><b>GOV</b>한국영상자료원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>덕산테코피아 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>한지민 <span class="t-score">100</span></span>
+    <span><b>GOV</b>서울올림픽기념국민체육진흥공단 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>덕산네오룩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>수지 <span class="t-score">94.2</span></span>
+    <span><b>CPR</b>피에스케이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>임수정 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>케이씨텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김지원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>시노펙스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>신민아 <span class="t-score">100</span></span>
+    <span><b>CPR</b>SK이터닉스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박신혜 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>제주항공 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>문근영 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>명신산업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>한소희 <span class="t-score">93.5</span></span>
+    <span><b>CPR</b>성우하이텍 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>정유미 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>메가스터디교육 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이영애 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>오리온홀딩스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김하늘 <span class="t-score">100</span></span>
+    <span><b>CPR</b>하림지주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>이나영 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>JW중외제약 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>윤은혜 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>와이지엔터테인먼트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아이유 <span class="t-score">46.4</span></span>
+    <span><b>CPR</b>디어유 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>태연 <span class="t-score">93.7</span></span>
+    <span><b>CPR</b>우리금융지주 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>화사 <span class="t-score">92.1</span></span>
+    <span><b>CPR</b>삼성중공업 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>청하 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>알테오젠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>선미 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>셀트리온헬스케어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>백예린 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>루닛 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>헤이즈 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HPSP <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김연아 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HD현대 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>안세영 <span class="t-score">100</span></span>
+    <span><b>CPR</b>금호타이어 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>박나래 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대건설 <span class="t-score">52.1</span></span>
+    <span><b>ENT</b>송은이 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>SK이노베이션 <span class="t-score">56.9</span></span>
+    <span><b>ENT</b>김숙 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한국조선해양 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>공효진 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG전자 <span class="t-score">54.2</span></span>
+    <span><b>ENT</b>김희애 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG디스플레이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>전도연 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>아모레퍼시픽 <span class="t-score">60.8</span></span>
+    <span><b>ENT</b>임윤아 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>LG생활건강 <span class="t-score">54.8</span></span>
+    <span><b>ENT</b>한예슬 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>CJ제일제당 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>김소현 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>신세계 <span class="t-score">53.9</span></span>
+    <span><b>ENT</b>리센느 <span class="t-score">98.5</span></span>
+    <span><b>CPR</b>이마트 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>추영우 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>롯데쇼핑 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>연준(투모로우바이투게더) <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>한국타이어앤테크놀로지 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>성한빈(제로베이스원) <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>현대글로비스 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>라이즈 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>팬오션 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>알파드라이브원 <span class="t-flat">N/R</span></span>
+    <span><b>CPR</b>HMM <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>제로베이스원 <span class="t-score">99.5</span></span>
+    <span><b>CPR</b>포스코퓨처엠 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>뉴진스 <span class="t-score">90.5</span></span>
+    <span><b>CPR</b>한온시스템 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>엔하이픈 <span class="t-score">94.3</span></span>
+    <span><b>CPR</b>코웨이 <span class="t-flat">N/R</span></span>
+    <span><b>ENT</b>아일릿 <span class="t-score">88.5</span></span>
+    </div>
+  </div>
+</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">SIGNALBRIDGE</a>
+    <div class="nav-menu"><div class="nav-item"><a href="index.html" class="">HOME</a></div><div class="nav-item"><a href="this-week.html" class="">THIS WEEK</a></div>
+      <div class="nav-item has-drop">
+        <a href="cpr.html" class="">CPR</a>
+        <div class="nav-drop"><a href="cpr.html#t100">CPR B-T100</a><a href="cpr.html#bc70">CPR B-BC70</a><a href="cpr.html#bb30">CPR B-BB30</a></div>
+      </div>
+      <div class="nav-item has-drop">
+        <a href="gov.html" class="">GOV</a>
+        <div class="nav-drop"><a href="gov.html#t100">GOV B-T100</a><a href="gov.html#m40">GOV B-M40</a><a href="gov.html#c60">GOV B-C60</a></div>
+      </div>
+      <div class="nav-item has-drop">
+        <a href="uni.html" class="">UNI</a>
+        <div class="nav-drop"><a href="uni.html#t100">UNI B-T100</a><a href="uni.html#u60">UNI B-U60</a><a href="uni.html#c40">UNI B-C40</a></div>
+      </div>
+      <div class="nav-item has-drop">
+        <a href="star.html" class="">ENT</a>
+        <div class="nav-drop"><a href="star.html#t100">ENT B-T100</a><a href="star.html#am45">ENT B-AM45</a><a href="star.html#aw45">ENT B-AW45</a><a href="star.html#an10">ENT B-AN10</a></div>
+      </div></div>
+    <div class="nav-right">
+      <a class="nav-util" href="methodology.html">INDEX</a><a class="nav-util" href="trust.html">신뢰등급 | 데이터추출</a>
+      <button class="nav-toggle" aria-label="메뉴 열기">&#9776;</button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top"><span class="logo">BRIDGE</span><button class="mm-close" id="mmClose" aria-label="닫기">&times;</button></div>
+  <a href="index.html">HOME</a><a href="this-week.html">THIS WEEK</a><a href="cpr.html">CPR</a><a href="gov.html">GOV</a><a href="uni.html">UNI</a><a href="star.html">ENT</a>
+  <a href="methodology.html" class="mm-util">INDEX</a><a href="trust.html" class="mm-util">신뢰등급 | 데이터추출</a>
+  <a href="about.html" class="mm-util">시그널브릿지 회사소개</a>
+</div>
+<header class="list-hero-photo hero-about about-hero-big">
+  <div class="wrap">
+    <div class="about-kicker">SIGNALBRIDGE · COMPANY</div>
+    <h1 class="about-slogan">소음을 걷어내고,<br>진짜 평판의 해상도를 높이다.</h1>
+    <p class="about-hero-sub">시그널브릿지 (SignalBridge)</p>
+  </div>
+</header>
+
+<section class="section about-lead-sec">
+  <div class="wrap">
+    <p class="about-lead">우리는 데이터 속에 숨겨진 <b>평판의 진짜 시그널을 해독(Decode)</b>합니다.</p>
+    <p class="about-body">찰나의 화제성이나 일시적인 대중의 쏠림 현상만으로 브랜드의 진짜 가치가 결정될 수는 없습니다. 시그널브릿지는 외부의 노이즈에 흔들리지 않기 위해 독자적인 <b>&lsquo;BRIDGE 모형&rsquo;</b>을 가동합니다. 평가 대상을 무대에 올리는 기준과 실제 평판을 측정하는 기준을 철저하게 분리함으로써, 단순히 규모가 크거나 인지도가 높다는 이유만으로 계속해서 유리한 고지를 차지하는 <b>&lsquo;결과 편향&rsquo;</b>의 낡은 고리를 단호히 끊어냅니다.</p>
+  </div>
+</section>
+
+<div class="about-figure">
+  <img src="img/about_bridge.jpg" alt="두 개의 축을 잇는 다리 — BRIDGE" loading="lazy">
+  <div class="about-figure-cap">이미 큰 목소리가 아니라, 신뢰가 움직이는 방향을 잇습니다.</div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="about-sec-head">
+      <h2 class="about-h2">4개의 무대, 4개의 잣대</h2>
+      <p class="about-h2-sub">왜 영역을 한정하는가</p>
+    </div>
+    <p class="about-body" style="margin-bottom:28px">획일화된 잣대는 필연적으로 평판의 왜곡을 낳습니다. 기업과 공공기관, 대학과 공인은 대중의 신뢰가 형성되고 소비되는 방식이 완전히 다르기 때문입니다. 시그널브릿지는 이 <b>4개의 생태계(CPR, GOV, UNI, ENT)</b>를 명확히 구분하고, 각 영역의 본질에 가장 완벽하게 들어맞는 4개의 독립적인 잣대를 통해 완전히 새로운 평판의 기준을 제시합니다.</p>
+
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">CPR</span><span class="dx-title">기업</span></div>
+      <p class="dx-body">거대한 이름값이 평판으로 둔갑하는 착시를 막기 위해, 외형적 덩치와 내면의 책임을 완벽히 분리하여 기업의 묵직한 가치만을 투명하게 진단합니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">GOV</span><span class="dx-title">공공기관</span></div>
+      <p class="dx-body">역할이 전혀 다른 기관들을 한 줄로 세우는 획일화를 벗어나, 궤를 같이하는 기능군 내에서 묵묵히 쌓아온 공공의 헌신과 책임만을 정밀하게 묻습니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">UNI</span><span class="dx-title">대학</span></div>
+      <p class="dx-body">과거의 정적인 결과값으로 획일적인 서열을 만들지 않습니다. 역동적인 성장의 추이와 현장의 생생한 목소리를 융합해 대학의 진짜 명성을 짚어냅니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">ENT</span><span class="dx-title">공인</span></div>
+      <p class="dx-body">스포트라이트가 만들어낸 순간적인 유명세에 기대지 않습니다. 단발성 이슈를 단호히 걷어내고 대중의 마음속에 묵직하게 뿌리내린 진짜 신뢰만을 차분하게 기록합니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="about-figure about-figure-split">
+  <img src="img/about_ripple.jpg" alt="평판의 파동" loading="lazy">
+  <div class="about-figure-overlay">
+    <div class="about-figure-title">Absolute Independence</div>
+    <div class="about-figure-lead">절대적 독립성 원칙</div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <p class="about-body" style="margin-bottom:28px">이러한 혁신은 <b>자본과 타협하지 않는 굳건한 뼈대</b> 위에서만 가능합니다.</p>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag" style="font-size:15px">물리적 분리</span></div>
+      <p class="dx-body">데이터를 다루는 분석 조직은 비즈니스의 이해관계로부터 완전히 독립된 섬과 같습니다. 보고 체계와 의사결정 라인을 영구적으로 분리하여, 오직 팩트와 통계적 근거만으로 평가의 순수성을 묵묵히 지켜나갑니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag" style="font-size:15px">자본의 무개입</span></div>
+      <p class="dx-body">객관성은 구조를 분리하는 것에서 시작됩니다. 데이터를 다루는 분석 조직은 광고나 영업 조직과 완전히 절연되어, 오직 데이터가 가리키는 진실만을 독립적으로 바라봅니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag" style="font-size:15px">선제적 공시</span></div>
+      <p class="dx-body">공정함의 증명은 숨김없는 고백에서 시작됩니다. 복잡한 비즈니스 역학 관계가 평가에 영향을 미치지 않도록, 이해상충 소지가 있는 지점들은 언제나 투명하게 선제 공시합니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag" style="font-size:15px">진단 의견의 선행</span></div>
+      <p class="dx-body">BRIDGE 지수는 맹목적인 정답을 강요하는 순위표가 아닌 객관적인 &lsquo;통계적 진단 의견&rsquo;입니다. 최종 결과를 단편적으로 제시하기 전에, 어떠한 방법론과 근거로 이 신호들이 추출되었는지 그 검증의 과정을 세상에 먼저 투명하게 엽니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="about-sec-head">
+      <h2 class="about-h2">우리가 하지 않는 일</h2>
+      <p class="about-h2-sub">What We Do Not Do</p>
+    </div>
+    <ul class="about-donot">
+      <li>법적, 도의적, 투자적 가치 판단의 영역을 침범하지 않습니다.</li>
+      <li>개별 기업, 인물, 기관의 사적인 요청이나 압력으로 순위를 임의 조정하지 않습니다.</li>
+      <li>대중 내면의 맹목적 신뢰나 시장 가치 자체를 직접 측정했다고 오만하게 포장하지 않습니다.</li>
+      <li>&lsquo;결과가 불리하다&rsquo;는 단순한 불만으로 점수를 변경하는 일은 원천적으로 불가능합니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="about-sec-head">
+      <h2 class="about-h2">서비스 체계</h2>
+      <p class="about-h2-sub">Service Architecture</p>
+    </div>
+    <div class="about-arch">
+      <div class="about-arch-row"><div class="about-arch-k">운영 주체</div><div class="about-arch-n">SignalBridge</div><div class="about-arch-d">서비스 운영, 계약, 데이터 거버넌스 수호</div></div>
+      <div class="about-arch-row"><div class="about-arch-k">핵심 엔진</div><div class="about-arch-n">BRIDGE Framework</div><div class="about-arch-d">6축(B&middot;R&middot;I&middot;D&middot;G&middot;E) 평가 철학과 공통 산식의 근간</div></div>
+      <div class="about-arch-row"><div class="about-arch-k">공개 모듈</div><div class="about-arch-n">CPR &middot; GOV &middot; UNI &middot; ENT</div><div class="about-arch-d">프레임워크 기반 4대 생태계별 평판지수</div></div>
+      <div class="about-arch-row"><div class="about-arch-k">솔루션</div><div class="about-arch-n">BRIDGE-D vs V</div><div class="about-arch-d">공익 목적의 무료 공개형(D)과 내부 자료 결합 확장형(V)</div></div>
+    </div>
+    <p class="about-contact">문의 &nbsp;·&nbsp; <a href="contact.html" style="color:var(--gold);">문의 | 이의제기</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <span class="logo">SIGNALBRIDGE</span>
+      <div class="footer-links">
+        <a href="about.html">시그널브릿지 회사소개</a>
+        <a href="contact.html">문의 | 이의제기</a>
+      </div>
+    </div>
+    <p class="footer-op">BRIDGE is developed and operated by SignalBridge.</p>
+    <p class="footer-note">시그널브릿지(SIGNALBRIDGE)는 브랜드의 가치가 단순히 &lsquo;얼마나 자주 입에 오르내리는지&rsquo;나 &lsquo;규모가 얼마나 큰지&rsquo;로 결정될 수 없다고 믿습니다. 화제성 뒤에 가려진 진짜 목소리를 입체적으로 읽어내기 위해, 시그널브릿지는 독자적인 분석 솔루션 &lsquo;BRIDGE 브랜드평판지수&rsquo;를 선보입니다. 하나의 뭉뚱그려진 점수로 모든 대상을 줄 세우는 방식은 이제 의미가 없습니다. 시그널브릿지는 평가 대상을 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 4개 영역으로 세분화하여 각기 다른 환경과 맥락에 맞춘 &lsquo;맞춤형 잣대&rsquo;를 적용합니다. 나아가 도달(B), 반응(R), 정체성(I), 경험(D), 행동유발(G), 책임·지속(E)이라는 6개의 독립적인 렌즈로 브랜드를 둘러싼 정보와 데이터를 정밀 분해하여, 왜곡 없는 브랜드의 본연의 가치와 내일의 경쟁력을 투명하게 비춥니다.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>
