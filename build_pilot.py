@@ -2336,6 +2336,20 @@ REAL_PILOT_CASES["엔하이픈"] = {
     ],
     "limitations": ["I·D·G·E축 데이터 없음", "B·R 2축 기반 잠정 지수"]}
 
+# [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
+try:
+    import sys as _sys, os as _os
+    _sys.path.insert(0, _os.path.join(_os.path.dirname(__file__), "engine3"))
+    import scoring_v3 as _v3
+    for _nm, _r in REAL_PILOT_CASES.items():
+        _sc, _ax, _rn = _v3.composite_v3(_r.get("dims", {}))
+        if _sc is not None:
+            _r["v3_score"] = _sc          # 차등가중 종합(참고)
+            _r["v3_weights"] = _rn        # 재정규화 가중치
+except Exception as _e:
+    pass  # v3 실패해도 사이트는 기존 score로 정상 작동
+
+
 def _measured_cnt(dims):
     return sum(1 for v in dims.values() if v is not None)
 
@@ -2606,8 +2620,12 @@ BRIDGE_MODAL_HTML = '''
     </div>
     <div class="bridge-modal-score">
       <div class="bmscore-row">
-        <span class="bmscore-label">BRIDGE INDEX POINT <span class="bmscore-sub" id="bmPeriodLabel">(Week 2 · 2026.09.07–09.11)</span></span>
+        <span class="bmscore-label">BRIDGE INDEX POINT <span class="bmscore-sub" id="bmPeriodLabel">(비변동성 공시 · 변동성 관측 데이터 통합)</span></span>
         <span class="bmscore-value" id="bmIndexPoint">N/R</span>
+      </div>
+      <div class="bmscore-row bmscore-v3row">
+        <span class="bmscore-label">BRIDGE 가중지수 <span class="bmscore-sub">(차등가중 참고치 · B15·R25·I15·D10·G20·E15)</span></span>
+        <span class="bmscore-value" id="bmV3Score">N/R</span>
       </div>
       <div class="bmscore-row">
         <span class="bmscore-label">WoW Δ <span class="bmscore-sub" id="bmWowLabel">(Week-over-Week, Week 1 2026.08.31–09.04 대비)</span></span>
