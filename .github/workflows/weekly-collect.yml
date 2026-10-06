@@ -1,0 +1,37 @@
+name: Weekly BRIDGE Collect
+
+on:
+  schedule:
+    - cron: '0 21 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build corp_code map
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+        run: python3 collectors/corp_code_mapper.py || echo "skip"
+      - name: Collect DART
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+        run: python3 collectors/apply_weekly.py || echo "skip"
+      - name: Rebuild
+        run: |
+          python3 build.py
+          python3 build_spa.py
+      - name: Commit
+        run: |
+          git config user.name "bridge-bot"
+          git config user.email "bot@bridgebrand"
+          git add -A
+          git commit -m "weekly collect" || echo "no change"
+          git push || echo "nothing"
