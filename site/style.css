@@ -799,3 +799,25 @@ footer .logo .op{ color:#7c86a0;}
 /* [2026-09] THIS WEEK 최신 갱신 배지 */
 .tw-latest{ display:inline-block; margin-top:12px; padding:6px 16px; background:rgba(240,217,138,.18);
   border:1px solid rgba(240,217,138,.4); border-radius:20px; font-size:13px; color:#f0d98a; font-weight:600; letter-spacing:.02em; }
+
+/* [2026-10] 모달 v3 가중지수 행 (참고치) */
+.bmscore-v3row{ opacity:.82; }
+.bmscore-v3row .bmscore-value{ color:#8a6d1f; font-size:0.92em; }
+
+/* [2026-10] 모달 다이어그램 축 배지 (상징색) */
+.axis-badge{ display:inline-block; width:26px; height:26px; line-height:26px; text-align:center;
+  border-radius:7px; font-family:var(--myeongjo,serif); font-weight:800; font-size:15px; color:#fff; }
+.axis-B{ background:#2e6fd5; } /* 도달 - 파랑 */
+.axis-R{ background:#d14b4b; } /* 반응 - 빨강 */
+.axis-I{ background:#8a5cd1; } /* 정체성 - 보라 */
+.axis-D{ background:#2e9e7e; } /* 경험 - 청록 */
+.axis-G{ background:#d1962e; } /* 행동유발 - 주황 */
+.axis-E{ background:#5a6b7a; } /* 책임지속 - 회청 */
+.bridge-modal-table .axis-def{ font-size:12.5px; line-height:1.4; color:#4a463d; white-space:nowrap; }
+.bridge-modal-table .axis-val{ font-weight:800; font-size:15px; color:var(--navy); text-align:right; }
+.bridge-modal-table td{ vertical-align:middle; padding:7px 8px; }
+@media (max-width:600px){ .bridge-modal-table .axis-def{ font-size:11px; white-space:normal; } }
+
+/* [2026-10] 하단 지표 — 중요 지표 회색 배경 강조 */
+.bmscore-hl{ background:#efefe9; border-radius:8px; padding:10px 12px !important; margin:2px 0; }
+.bmscore-hl .bmscore-value{ font-weight:800; }

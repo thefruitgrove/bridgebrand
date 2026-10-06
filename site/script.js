@@ -1,96 +1,3 @@
-// BRIDGE v0.3 실측 파일럿 데이터 (실제 기업 연동용)
-window.BRIDGE_PILOT_CASES = {
-  "삼성전자": {
-    method: "변동성",
-    score: 57.5,
-    dims: { "B": 82.0, "R": 42.0, "I": 62.0, "D": null, "G": 0.0, "E": 65.8 },
-    history: [
-      { week: "2026-W39", score: 61.7 },
-      { week: "2026-W38", score: 75.0 }
-    ]
-  },
-  "LG화학": {
-    method: "변동성",
-    score: 64.6,
-    dims: { "B": 43.7, "R": 100.0, "I": null, "D": null, "G": 0.0, "E": 50.0 },
-    history: [
-      { week: "2026-W39", score: 66.7 },
-      { week: "2026-W38", score: 78.0 }
-    ]
-  },
-  "KB금융": {
-    method: "변동성",
-    score: 72.6,
-    dims: { "B": 38.0, "R": 96.6, "I": null, "D": null, "G": 72.0, "E": 83.3 },
-    history: [
-      { week: "2026-W39", score: 71.1 },
-      { week: "2026-W38", score: 89.0 }
-    ]
-  },
-  "금호타이어": {
-    method: "변동성",
-    score: 63.5,
-    dims: { "B": 52.0, "R": 88.0, "I": null, "D": null, "G": 61.5, "E": 55.0 },
-    history: [
-      { week: "2026-W39", score: 61.4 },
-      { week: "2026-W38", score: 80.1 }
-    ]
-  },
-  "동양생명": {
-    method: "변동성",
-    score: 62.2,
-    dims: { "B": 48.0, "R": 90.5, "I": null, "D": null, "G": 58.0, "E": 52.3 },
-    history: [
-      { week: "2026-W39", score: 63.4 },
-      { week: "2026-W38", score: 71.0 }
-    ]
-  },
-  "다이오": {
-    method: "변동성",
-    score: 71.3,
-    dims: { "B": 60.0, "R": 85.0, "I": null, "D": null, "G": 65.0, "E": 70.0 },
-    history: [
-      { week: "2026-W39", score: 70.5 },
-      { week: "2026-W38", score: 73.0 }
-    ]
-  },
-  "메가스터디교육": {
-    method: "변동성",
-    score: 68.7,
-    dims: { "B": 55.0, "R": 82.0, "I": null, "D": null, "G": 68.0, "E": 69.5 },
-    history: [
-      { week: "2026-W39", score: 68.2 },
-      { week: "2026-W38", score: 74.0 }
-    ]
-  },
-  "미래에셋증권": {
-    method: "변동성",
-    score: 58.8,
-    dims: { "B": 50.0, "R": 75.0, "I": null, "D": null, "G": 55.0, "E": 55.2 },
-    history: [
-      { week: "2026-W39", score: 60.3 },
-      { week: "2026-W38", score: 69.0 }
-    ]
-  },
-  "신세계": {
-    method: "변동성",
-    score: 63.2,
-    dims: { "B": 58.0, "R": 80.0, "I": null, "D": null, "G": 60.0, "E": 61.5 },
-    history: [
-      { week: "2026-W39", score: 62.4 },
-      { week: "2026-W38", score: 73.0 }
-    ]
-  },
-  "아모레퍼시픽": {
-    method: "변동성",
-    score: 78.0,
-    dims: { "B": 65.0, "R": 92.0, "I": null, "D": null, "G": 75.0, "E": 80.0 },
-    history: [
-      { week: "2026-W39", score: 75.5 },
-      { week: "2026-W38", score: 84.0 }
-    ]
-  }
-};
 (function(){
   // ---- LIVE ticker: pause on hover, and a manual play/pause button ----
   var track = document.getElementById('tickerTrack');
@@ -255,9 +162,9 @@ window.BRIDGE_PILOT_CASES = {
     var flagEl = document.getElementById('bridgeModalFlag');
     var evList = document.getElementById('bridgeEvidenceList');
     var scoreNote = document.getElementById('bmScoreNote');
-    var periodLbl = document.getElementById('bmPeriodLabel');
-    var wowLbl = document.getElementById('bmWowLabel');
-    var cumLbl = document.getElementById('bmCumLabel');
+    var periodLbl = document.getElementById('bmPeriodLabel') || {};
+    var wowLbl = document.getElementById('bmWowLabel') || {};
+    var cumLbl = document.getElementById('bmCumLabel') || {};
     var pilot = PILOT_CASES[name];
     document.getElementById('bridgeModalTitle').textContent = name;
     if(pilot){
@@ -273,29 +180,31 @@ window.BRIDGE_PILOT_CASES = {
         var v = pilot.dims[k];
         document.getElementById('bm'+k).textContent = (v === null || v === undefined) ? '데이터 없음' : v;
       });
-      periodLbl.textContent = '(비변동성 공시 · 변동성 관측 데이터 통합)';
+      // [2026-10] 5단 지표 — 예시 표현 제거, 전주·누적 실측 표기
+      document.getElementById('bmIndexPoint').textContent = pilot.score;
+      var _v3el = document.getElementById('bmV3Score');
+      if(_v3el){ _v3el.textContent = (pilot.v3_score != null ? pilot.v3_score : '—'); }
       if(pilot.history && pilot.history.length){
         var prevWeek = pilot.history[pilot.history.length - 1];
-        var realWow = Math.round((pilot.score - prevWeek.score) * 10) / 10;
+        var prevScore = prevWeek.score;
+        var realWow = Math.round((pilot.score - prevScore) * 10) / 10;
         var arrow2 = realWow > 0 ? '▲' : (realWow < 0 ? '▼' : '—');
-        wowLbl.textContent = '(주간 변동 갱신 지표)';
-        document.getElementById('bmWow').textContent = arrow2 + ' ' + Math.abs(realWow) + ' (실측)';
-        var histSum = prevWeek.score + pilot.score;
-        var histAvg = Math.round((histSum / 2) * 10) / 10;
-        cumLbl.textContent = '(누적 추세 지표)';
-        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>합계</span> <span class=\'cum-num\'>' + histSum.toFixed(1) + '</span>' + '<span class=\'cum-sep\'>/</span>' + '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + histAvg + '</span>' + '<span class=\'cum-tail\'>(실측 2주)</span>';
-      } else if(pilot.method === '비변동성'){
-        wowLbl.textContent = '(주간 변동 갱신 지표)';
-        cumLbl.textContent = '(단일 시점 측정)';
-        document.getElementById('bmWow').textContent = '—';
-        document.getElementById('bmCumulative').textContent = '—';
+        // 2) 전주 지표
+        document.getElementById('bmLastWeek').textContent = (prevScore != null ? prevScore : '—');
+        // 3) WoW (실측 표기 제거)
+        document.getElementById('bmWow').textContent = arrow2 + ' ' + Math.abs(realWow);
+        // 5) 누적 (실측→주간수 표기)
+        var weeksN = pilot.history.length + 1;
+        var allScores = pilot.history.map(function(h){return h.score;}).concat([pilot.score]);
+        var histSum = allScores.reduce(function(a,b){return a+b;}, 0);
+        var histAvg = Math.round((histSum / weeksN) * 10) / 10;
+        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>합계</span> <span class=\'cum-num\'>' + histSum.toFixed(1) + '</span><span class=\'cum-sep\'>/</span><span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + histAvg + '</span><span class=\'cum-tail\'>(' + weeksN + '주간)</span>';
       } else {
-        wowLbl.textContent = '(주간 변동 갱신 지표)';
-        cumLbl.textContent = '(누적 추세 지표)';
-        document.getElementById('bmWow').textContent = '—';
-        document.getElementById('bmCumulative').textContent = '—';
+        // 전주 데이터 아직 없음 — 이번 주가 첫 기록
+        document.getElementById('bmLastWeek').textContent = '—';
+        document.getElementById('bmWow').textContent = '— (첫 주)';
+        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>합계</span> <span class=\'cum-num\'>' + pilot.score + '</span><span class=\'cum-sep\'>/</span><span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + pilot.score + '</span><span class=\'cum-tail\'>(1주간)</span>';
       }
-      document.getElementById('bmIndexPoint').textContent = pilot.score;
       var isNonVolatile = pilot.method === '비변동성';
       scoreNote.textContent = '여론의 소음이 아닌, 검증된 공식 데이터와 실제 관측값만으로 구성된 지수입니다. 유효한 근거가 확보된 축만 투명하게 계산하며, 아직 확인되지 않은 데이터는 투명성을 위해 N/A로 남겨두었습니다.';
       var evItems = document.getElementById('bridgeEvidenceItems');
@@ -338,24 +247,22 @@ window.BRIDGE_PILOT_CASES = {
       limItems.innerHTML = lim.join('');
       evList.style.display = 'block';
     } else {
-      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · BRIDGE 모형 예시 다이어그램';
-      flagEl.textContent = '예시 다이어그램 — 실제 산출값 아님 (BRIDGE 점수는 현재 미산출 · N/R)';
+      // [2026-10] 예시 제거 — 미산출 대상은 N/R로 정직하게 표기
+      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · BRIDGE 모형 다이어그램';
+      flagEl.textContent = '현재 공개 기준(유효 축 2개 이상)을 충족하지 못해 미산출(N/R) 상태입니다. 데이터가 확보되면 자동 산출됩니다.';
       flagEl.style.background = '';
       flagEl.style.color = '';
       flagEl.style.borderColor = '';
-      var vals2 = seededAxisValuesForWeek(name, 36);
       var svg2 = document.getElementById('bridgeRadar');
-      svg2.innerHTML = buildRadarSVG(vals2);
-      ['B','R','I','D','G','E'].forEach(function(k, i){
-        document.getElementById('bm'+k).textContent = vals2[i] + ' (예시)';
+      svg2.innerHTML = buildRadarSVG([0,0,0,0,0,0]);
+      ['B','R','I','D','G','E'].forEach(function(k){
+        document.getElementById('bm'+k).textContent = 'N/R';
       });
-      var cum = cumulativeStats(name);
-      periodLbl.textContent = '(Week 36 · 2026.09.07–09.11)';
-      wowLbl.textContent = '(Week-over-Week, Week 35 2026.08.31–09.04 대비)';
-      cumLbl.textContent = '(2026 W1~W36, 36주 합계 · 평균 — 전부 예시)';
-      document.getElementById('bmIndexPoint').textContent = cum.week36 + ' (예시)';
-      document.getElementById('bmWow').textContent = (cum.wow >= 0 ? '▲ ' : '▼ ') + Math.abs(cum.wow) + ' (예시)';
-      document.getElementById('bmCumulative').textContent = '합계 ' + cum.sum + ' / 평균 ' + cum.avg + ' (예시, ' + cum.weeks + '주)';
+      document.getElementById('bmIndexPoint').textContent = 'N/R';
+      document.getElementById('bmLastWeek').textContent = 'N/R';
+      document.getElementById('bmWow').textContent = 'N/R';
+      document.getElementById('bmV3Score').textContent = 'N/R';
+      document.getElementById('bmCumulative').textContent = 'N/R';
       scoreNote.textContent = '';
       evList.style.display = 'none';
     }
@@ -409,46 +316,8 @@ window.BRIDGE_PILOT_CASES = {
     var grade = avg >= 85 ? 'A' : avg >= 70 ? 'B' : avg >= 55 ? 'C' : 'D';
     return { score: cum.week36, delta: cum.wow, grade: grade, dims: vals };
   }
-  document.querySelectorAll('.format-toggle').forEach(function(btn){
-    var page = btn.dataset.page;
-    var on = false;
-    function apply(){
-      btn.classList.toggle('active', on);
-      btn.textContent = on ? '형식 예시 끄기' : '형식 예시 보기';
-      var scope = document.getElementById('view-' + page) || document;
-      scope.querySelectorAll('.rk-clickable').forEach(function(row){
-        if(row.dataset.realpilot === 'true') return; // never overwritten by 형식 예시 toggle
-        row.classList.toggle('example-mode', on);
-        var scoreEl = row.querySelector('.rk-score');
-        var wowEl = row.querySelector('.rk-wow');
-        var dimsEl = row.querySelector('.rk-dims');
-        var trustEl = row.querySelector('.trust-badge');
-        if(on){
-          var r = seededScoreAndGrade(row.dataset.entity);
-          if(scoreEl) scoreEl.innerHTML = r.score + '<span class="example-tag">예시</span>';
-          if(wowEl){
-            var arrow = r.delta > 0 ? '▲' : (r.delta < 0 ? '▼' : '—');
-            wowEl.innerHTML = '<span class="wow">' + arrow + ' ' + Math.abs(r.delta) + '</span><span class="example-tag">예시</span>';
-          }
-          if(dimsEl){
-            var labels = ['B','R','I','D','G','E'];
-            dimsEl.innerHTML = labels.map(function(l,i){ return '<span class="dm"><b>'+l+'</b>'+r.dims[i]+'</span>'; }).join(' ') + '<span class="example-tag">예시</span>';
-          }
-          if(trustEl){ trustEl.textContent = r.grade; trustEl.title = '예시 등급 — 실제 산출값 아님'; }
-        } else {
-          if(scoreEl) scoreEl.textContent = '—';
-          if(wowEl) wowEl.innerHTML = '<span class="wow wow-flat">해당없음</span>';
-          if(dimsEl) dimsEl.innerHTML = '<span class="dm">BRIDGE 평판점수 — 미산출 (대상선정 단계)</span>';
-          if(trustEl){ trustEl.textContent = 'N/R'; trustEl.removeAttribute('title'); }
-        }
-      });
-    }
-    btn.addEventListener('click', function(){ on = !on; apply(); });
-    // Default ON per explicit user request — every value still carries the "예시" tag
-    // and the button still lets you switch back to N/R at any time.
-    on = true;
-    apply();
-  });
+  // [2026-10] 형식 예시 토글 제거 — 항상 실제 데이터 표시
+
 })();
 
 

@@ -592,3 +592,10 @@ footer .logo .op{ color:#7c86a0;}
 .tg-badge{display:inline-block;min-width:34px;text-align:center;padding:3px 8px;border-radius:6px;font-family:var(--myeongjo);font-weight:800;font-size:14px;color:#fff;}
 .tg-a{background:#2e7d5a;}.tg-b{background:#3a7bd5;}.tg-c{background:#c9a84a;}.tg-d{background:#b0784a;}.tg-nr{background:#9a958a;font-size:12px;}
 .tw-latest{display:inline-block;margin-top:12px;padding:6px 16px;background:rgba(240,217,138,.18);border:1px solid rgba(240,217,138,.4);border-radius:20px;font-size:13px;color:#f0d98a;font-weight:600;}
+.bmscore-v3row{opacity:.82;}.bmscore-v3row .bmscore-value{color:#8a6d1f;font-size:0.92em;}
+.axis-badge{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:7px;font-weight:800;font-size:15px;color:#fff;}
+.axis-B{background:#2e6fd5;}.axis-R{background:#d14b4b;}.axis-I{background:#8a5cd1;}.axis-D{background:#2e9e7e;}.axis-G{background:#d1962e;}.axis-E{background:#5a6b7a;}
+.bridge-modal-table .axis-def{font-size:12.5px;line-height:1.4;color:#4a463d;white-space:nowrap;}
+.bridge-modal-table .axis-val{font-weight:800;font-size:15px;color:var(--navy);text-align:right;}
+.bmscore-hl{background:#efefe9;border-radius:8px;padding:10px 12px;margin:2px 0;}.bmscore-hl .bmscore-value{font-weight:800;}
+@media (max-width:600px){.bridge-modal-table .axis-def{font-size:11px;white-space:normal;}}
