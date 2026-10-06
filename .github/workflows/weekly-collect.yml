@@ -38,10 +38,6 @@ jobs:
         run: |
           python3 collectors/collect_uni_news.py || echo "UNI 뉴스 수집 실패(계속)"
 
-      - name: Collect Google News → update ENT R/I/G-axis
-        run: |
-          python3 collectors/collect_ent_news.py || echo "ENT 뉴스 수집 실패(계속)"
-
       - name: Rebuild site
         run: |
           python3 build.py
