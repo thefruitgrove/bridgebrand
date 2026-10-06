@@ -103,3 +103,18 @@
 
 ## 6. 신규 자료원 추가 로그 (이어서)
 - 2026-09-30: [엔진] scoring_v3 구현 — 100점모델·차등가중·3원포인트·정체페널티(OFF)
+
+## ─────────────────────────────────────────────
+## 7. 자동 수집 파이프라인 (DART G축) — collectors/
+## ─────────────────────────────────────────────
+## 상태: 구현·모의검증 완료. 실가동은 GitHub Actions(DART_API_KEY 필요).
+
+- [1] corp_code_mapper.py → CPR 기업명을 DART 8자리 고유번호로 매핑 (corpCode.xml 캐시)
+- [2] collect_dart.py → 주간 신규 공시 수집 (성과형=G, 정기보고서=D). 공시 제목만 근거로 사용
+- [3] apply_weekly.py → G축 변동을 data/weekly_updates.json에 주차별 기록
+- [4] build_pilot.py → weekly_updates.json 읽어 G축 반영 + history 보존(WoW용). 코드 미수정, 데이터만 갱신
+- [5] .github/workflows/weekly-collect.yml → 매주 월 06:00 KST 자동 실행 → 커밋 → Cloudflare 자동배포
+  ※ 핵심: 성과 공시 있으면 G 자동 상승(+4~6), 없으면 변동 없음(정체는 엔진 플래그가 처리)
+  ※ GitHub Secrets에 DART_API_KEY 등록돼 있어야 작동. Actions 쓰기권한 필요.
+
+- 2026-10-05: [파이프라인] DART 자동수집 5단계 구현 — G축 주간 자동 갱신 체계 완성

@@ -2336,6 +2336,35 @@ REAL_PILOT_CASES["엔하이픈"] = {
     ],
     "limitations": ["I·D·G·E축 데이터 없음", "B·R 2축 기반 잠정 지수"]}
 
+# [2026-10] 주간 자동수집 반영 — data/weekly_updates.json의 G축 변동을 적용
+try:
+    import json as _wj, os as _wo, datetime as _wd
+    _wpath = _wo.path.join(_wo.path.dirname(__file__), "data", "weekly_updates.json")
+    if _wo.path.exists(_wpath):
+        _wall = _wj.load(open(_wpath, encoding="utf-8"))
+        # 가장 최근 주차의 업데이트 적용
+        if _wall:
+            _latest_wk = sorted(_wall.keys())[-1]
+            for _nm, _u in _wall[_latest_wk].items():
+                if _nm in REAL_PILOT_CASES:
+                    _r = REAL_PILOT_CASES[_nm]
+                    _g = _r["dims"].get("G")
+                    if _g is not None:
+                        # 직전 상태를 history에 보존
+                        _prev = {"week_num": None, "range": "직전", 
+                                 "dims": dict(_r["dims"]), "score": _r.get("score"),
+                                 "evidence_summary": "자동수집 직전값"}
+                        _r.setdefault("history", []).append(_prev)
+                        # G축 가산 (100점 상한)
+                        _r["dims"]["G"] = min(100.0, round(_g + _u["g_delta"], 1))
+                        # score 재계산 (단순평균 유지)
+                        _vals = [v for v in _r["dims"].values() if v is not None]
+                        _r["score"] = round(sum(_vals) / len(_vals), 1)
+                        # 근거 추가
+                        _r.setdefault("evidence", []).insert(0, (_u["evidence"], "DART 자동수집", ""))
+except Exception as _we:
+    pass  # 실패해도 기존 데이터로 정상 작동
+
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
