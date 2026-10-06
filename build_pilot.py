@@ -2365,6 +2365,30 @@ try:
 except Exception as _we:
     pass  # 실패해도 기존 데이터로 정상 작동
 
+# [2026-10] UNI 구글뉴스 I축 반영 — data/uni_updates.json의 I축 증감 적용
+try:
+    import json as _uj, os as _uo
+    _upath = _uo.path.join(_uo.path.dirname(__file__), "data", "uni_updates.json")
+    if _uo.path.exists(_upath):
+        _uall = _uj.load(open(_upath, encoding="utf-8"))
+        if _uall:
+            _ulatest = sorted(_uall.keys())[-1]
+            for _un, _uu in _uall[_ulatest].items():
+                if _un in REAL_PILOT_CASES:
+                    _ur = REAL_PILOT_CASES[_un]
+                    _ui = _ur["dims"].get("I")
+                    _ur.setdefault("history", []).append({
+                        "week_num": None, "range": "직전",
+                        "dims": dict(_ur["dims"]), "score": _ur.get("score"),
+                        "evidence_summary": "UNI 뉴스수집 직전값"})
+                    _ubase = _ui if _ui is not None else 50.0
+                    _ur["dims"]["I"] = max(0.0, min(100.0, round(_ubase + _uu["i_delta"], 1)))
+                    _uvals = [v for v in _ur["dims"].values() if v is not None]
+                    _ur["score"] = round(sum(_uvals) / len(_uvals), 1)
+                    _ur.setdefault("evidence", []).insert(0, (_uu["evidence"], "구글뉴스 RSS 자동수집", ""))
+except Exception:
+    pass
+
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
