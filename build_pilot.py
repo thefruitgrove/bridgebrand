@@ -2989,6 +2989,25 @@ def this_week_digest_html():
     if _week_label: _badge_parts.append(_week_label)
     _badge_parts.append(f"이번 주 변동 {_changed}건")
     latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>'
+    # [2026-10] 영역별 누적점수 TOP15 랭킹 (THIS WEEK 4분할)
+    from collections import defaultdict as _dd
+    _dom_rank = _dd(list)
+    for _rn, _rc in REAL_PILOT_CASES.items():
+        if len([v for v in _rc.get("dims", {}).values() if v is not None]) >= 2:
+            _dom_rank[_domain_of(_rn)].append((_rn, _rc["score"]))
+    _dom_meta = {"CPR": ("CPR", "기업", "cpr.html"), "GOV": ("GOV", "공공기관", "gov.html"), "UNI": ("UNI", "대학", "uni.html"), "ENT": ("ENT", "공인", "star.html")}
+    _rank_blocks = []
+    for _dk in ["CPR", "GOV", "UNI", "ENT"]:
+        _lst = sorted(_dom_rank.get(_dk, []), key=lambda x: -x[1])[:15]
+        _label, _kor, _page = _dom_meta[_dk]
+        _items = []
+        for _i, (_nm, _sc) in enumerate(_lst, 1):
+            _medal = "twr-top3" if _i <= 3 else ""
+            _items.append('<li class="twr-item ' + _medal + '"><span class="twr-rank">' + str(_i) + '</span><span class="twr-name">' + esc(_nm) + '</span><span class="twr-score">' + str(_sc) + '</span></li>')
+        _block = '<div class="twr-col"><a class="twr-head twr-head-' + _dk.lower() + '" href="' + _page + '">' + _label + ' <span class="twr-head-kor">' + _kor + '</span></a><ol class="twr-list">' + "".join(_items) + '</ol></div>'
+        _rank_blocks.append(_block)
+    rank_section = '<section class="section tw-rank-sec"><div class="wrap"><h2 class="tw-about-h">영역별 누적 지수 랭킹 <span class="twr-sub">BRIDGE CUMULATIVE INDEX · 현재 기준</span></h2><div class="twr-grid">' + "".join(_rank_blocks) + '</div></div></section>'
+
     cards = []
     for name, domain, date, score, trust, method, headline, wow, is_new in rows:
         method_tag = "비변동성" if "비변동성" in method else "뉴스기반"
@@ -3055,6 +3074,7 @@ def this_week_digest_html():
       </div>
     </div>
   </section>
+  {rank_section}
   <section class="section">
     <div class="wrap">
       <div class="tw-grid">
