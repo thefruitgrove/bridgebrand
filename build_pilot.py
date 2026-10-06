@@ -2349,19 +2349,19 @@ try:
                 if _nm in REAL_PILOT_CASES:
                     _r = REAL_PILOT_CASES[_nm]
                     _g = _r["dims"].get("G")
-                    if _g is not None:
-                        # 직전 상태를 history에 보존
-                        _prev = {"week_num": None, "range": "직전", 
-                                 "dims": dict(_r["dims"]), "score": _r.get("score"),
-                                 "evidence_summary": "자동수집 직전값"}
-                        _r.setdefault("history", []).append(_prev)
-                        # G축 가산 (100점 상한)
-                        _r["dims"]["G"] = min(100.0, round(_g + _u["g_delta"], 1))
-                        # score 재계산 (단순평균 유지)
-                        _vals = [v for v in _r["dims"].values() if v is not None]
-                        _r["score"] = round(sum(_vals) / len(_vals), 1)
-                        # 근거 추가
-                        _r.setdefault("evidence", []).insert(0, (_u["evidence"], "DART 자동수집", ""))
+                    # 직전 상태를 history에 보존
+                    _prev = {"week_num": None, "range": "직전",
+                             "dims": dict(_r["dims"]), "score": _r.get("score"),
+                             "evidence_summary": "자동수집 직전값"}
+                    _r.setdefault("history", []).append(_prev)
+                    # G축: 있으면 가산, 없으면 중립 50에서 시작 (GOV 공기업 신규 G축 생성)
+                    _base_g = _g if _g is not None else 50.0
+                    _r["dims"]["G"] = min(100.0, round(_base_g + _u["g_delta"], 1))
+                    # score 재계산 (단순평균 유지)
+                    _vals = [v for v in _r["dims"].values() if v is not None]
+                    _r["score"] = round(sum(_vals) / len(_vals), 1)
+                    # 근거 추가
+                    _r.setdefault("evidence", []).insert(0, (_u["evidence"], "DART 자동수집", ""))
 except Exception as _we:
     pass  # 실패해도 기존 데이터로 정상 작동
 
