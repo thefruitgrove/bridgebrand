@@ -137,21 +137,33 @@
       return x.toFixed(1) + ',' + y.toFixed(1);
     }).join(' ');
   }
-  function buildRadarSVG(vals){
+  function buildRadarSVG(vals, missing){
     var cx=160, cy=160, maxR=120;
+    missing = missing || [];
     var rings = [0.33, 0.66, 1.0].map(function(f){
       return '<polygon points="' + polygonPoints([f*100,f*100,f*100,f*100,f*100,f*100], cx, cy, maxR) + '" fill="none" stroke="#DEDAD1" stroke-width="1"/>';
     }).join('');
-    var dataPoly = '<polygon points="' + polygonPoints(vals, cx, cy, maxR) + '" fill="rgba(169,136,79,0.25)" stroke="#a9884f" stroke-width="2"/>';
+    // 결측 축은 레이더 꼭짓점을 작게(흐리게) — 찌그러짐 완화
+    var dataPoly = '<polygon points="' + polygonPoints(vals, cx, cy, maxR) + '" fill="rgba(169,136,79,0.22)" stroke="#a9884f" stroke-width="2"/>';
     var labels = ['B','R','I','D','G','E'];
     var angles = [-90,-30,30,90,150,210];
     var labelEls = labels.map(function(l, i){
       var rad = angles[i]*Math.PI/180;
       var x = cx + (maxR+20)*Math.cos(rad);
       var y = cy + (maxR+20)*Math.sin(rad);
-      return '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="#161513">'+l+'</text>';
+      var isM = missing.indexOf(l) >= 0;
+      var col = isM ? '#c9c4b8' : '#161513';   // 결측 축 라벨 흐리게
+      return '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="'+col+'">'+l+'</text>';
     }).join('');
-    return rings + dataPoly + labelEls;
+    // 결측 축 꼭짓점에 작은 점선 표식
+    var missDots = labels.map(function(l,i){
+      if(missing.indexOf(l)<0) return '';
+      var rad = angles[i]*Math.PI/180;
+      var x = cx + (maxR*0.12)*Math.cos(rad);
+      var y = cy + (maxR*0.12)*Math.sin(rad);
+      return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="3" fill="none" stroke="#c9c4b8" stroke-width="1" stroke-dasharray="2,2"/>';
+    }).join('');
+    return rings + dataPoly + missDots + labelEls;
   }
 
   var modalOverlay = document.getElementById('bridgeModalOverlay');
@@ -174,11 +186,13 @@
       flagEl.style.color = '#1d5c42';
       flagEl.style.borderColor = '#2e7d5a';
       var svg = document.getElementById('bridgeRadar');
-      var vals = ['B','R','I','D','G','E'].map(function(k){ return pilot.dims[k] === null || pilot.dims[k] === undefined ? 0 : pilot.dims[k]; });
-      svg.innerHTML = buildRadarSVG(vals);
+      var missingAxes = ['B','R','I','D','G','E'].filter(function(k){ return pilot.dims[k] === null || pilot.dims[k] === undefined; });
+      // 결측 축은 0 대신 중앙 근처(8)로 — 찌그러짐 완화, 라벨은 흐리게
+      var vals = ['B','R','I','D','G','E'].map(function(k){ var v=pilot.dims[k]; return (v === null || v === undefined) ? 8 : v; });
+      svg.innerHTML = buildRadarSVG(vals, missingAxes);
       ['B','R','I','D','G','E'].forEach(function(k){
         var v = pilot.dims[k];
-        document.getElementById('bm'+k).textContent = (v === null || v === undefined) ? '데이터 없음' : v;
+        document.getElementById('bm'+k).textContent = (v === null || v === undefined) ? 'N/R' : v;
       });
       // [2026-10] 5단 지표 — 예시 표현 제거, 전주·누적 실측 표기
       document.getElementById('bmIndexPoint').textContent = pilot.score;
