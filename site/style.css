@@ -828,3 +828,24 @@ footer .logo .op{ color:#7c86a0;}
 .tw-chip-up{ background:#e3f2e8; color:#2e7d5a; }
 .tw-chip-down{ background:#fdeaea; color:#c0392b; }
 .tw-chip-flat{ background:#efece5; color:#9a958a; }
+
+/* [2026-10] THIS WEEK 영역별 누적 랭킹 TOP15 (4분할) */
+.tw-rank-sec{ padding-top:8px; padding-bottom:8px; }
+.twr-sub{ font-size:12px; font-weight:400; color:#9a958a; letter-spacing:.02em; margin-left:8px; }
+.twr-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; margin-top:18px; }
+.twr-col{ background:#fff; border:1px solid #ece6d6; border-radius:12px; padding:16px 18px; }
+.twr-head{ display:flex; align-items:center; gap:8px; font-family:var(--myeongjo,serif); font-weight:800;
+  font-size:17px; color:#fff; padding:8px 14px; border-radius:8px; text-decoration:none; margin-bottom:12px; }
+.twr-head-kor{ font-size:12px; font-weight:400; opacity:.85; }
+.twr-head-cpr{ background:#1f3a5f; } .twr-head-gov{ background:#2e6b57; }
+.twr-head-uni{ background:#6b4a8a; } .twr-head-ent{ background:#a8434f; }
+.twr-list{ list-style:none; margin:0; padding:0; }
+.twr-item{ display:grid; grid-template-columns:26px 1fr auto; align-items:center; gap:10px;
+  padding:7px 4px; border-bottom:1px solid #f2efe8; font-size:14px; }
+.twr-item:last-child{ border-bottom:none; }
+.twr-rank{ font-weight:800; color:#b0ab9e; text-align:center; font-size:13px; }
+.twr-top3 .twr-rank{ color:#c9a84a; font-size:15px; }
+.twr-name{ color:#2a2621; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.twr-top3 .twr-name{ font-weight:700; }
+.twr-score{ font-family:var(--myeongjo,serif); font-weight:700; color:var(--navy); font-size:15px; }
+@media (max-width:760px){ .twr-grid{ grid-template-columns:1fr; gap:16px; } }
