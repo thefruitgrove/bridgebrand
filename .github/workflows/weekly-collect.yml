@@ -1,9 +1,13 @@
 name: Weekly BRIDGE Collect
 
+# 매주 월요일, DART에서 신규 공시를 수집해 G축을 갱신하고 커밋한다.
+# → 커밋 발생 → Cloudflare Git연동이 자동 빌드·배포.
+# → 이것이 '사람 없는 주간 자동 갱신'의 핵심.
+
 on:
   schedule:
-    - cron: '0 21 * * 0'
-  workflow_dispatch:
+    - cron: '0 21 * * 0'      # 일 21:00 UTC = 월 06:00 KST
+  workflow_dispatch:          # 수동 실행 버튼 (테스트용)
 
 permissions:
   contents: write
@@ -13,25 +17,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build corp_code map
+
+      - name: Build corp_code map (최초 1회·캐시)
         env:
           DART_API_KEY: ${{ secrets.DART_API_KEY }}
-        run: python3 collectors/corp_code_mapper.py || echo "skip"
-      - name: Collect DART
+        run: |
+          python3 collectors/corp_code_mapper.py || echo "매핑 실패(계속)"
+
+      - name: Collect DART filings → update G-axis
         env:
           DART_API_KEY: ${{ secrets.DART_API_KEY }}
-        run: python3 collectors/apply_weekly.py || echo "skip"
-      - name: Rebuild
+        run: |
+          python3 collectors/apply_weekly.py || echo "DART 수집 실패(계속)"
+
+      - name: Collect Google News → update UNI I-axis
+        run: |
+          python3 collectors/collect_uni_news.py || echo "UNI 뉴스 수집 실패(계속)"
+
+      - name: Rebuild site
         run: |
           python3 build.py
           python3 build_spa.py
-      - name: Commit
+
+      - name: Commit changes
         run: |
-          git config user.name "bridge-bot"
+          git config user.name  "bridge-bot"
           git config user.email "bot@bridgebrand"
           git add -A
-          git commit -m "weekly collect" || echo "no change"
-          git push || echo "nothing"
+          git commit -m "chore: weekly collect $(date -u +%Y-%m-%d)" || echo "no change"
+          git push || echo "nothing to push"
