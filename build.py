@@ -374,10 +374,6 @@ def real_list_page(active, page, title, note, model_blurb, seg_html, panels_html
   <section class="section">
     <div class="wrap">
       <div class="pilot-notice">{model_blurb}</div>
-      <div class="example-toggle-row">
-        <button class="format-toggle active" data-page="{page}">형식 예시 끄기</button>
-        <span class="format-toggle-note">기본값으로 형식 예시가 켜져 있습니다 — 모든 값에 "예시" 표기가 붙어 있으며 실명 대상의 실제 산출값이 아닙니다. 버튼을 누르면 N/R(미산출)로 전환됩니다.</span>
-      </div>
       {build_pilot.period_selector_html(page, period_unit)}
       <div class="rk-legend">
         <span class="rk-legend-item"><b>점수</b> 0~100점 (높을수록 긍정)</span>

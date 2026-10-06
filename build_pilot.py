@@ -2416,6 +2416,33 @@ try:
 except Exception:
     pass
 
+# [2026-10] CPR·GOV 구글뉴스 반영 — data/corpgov_updates.json의 R·I·G축 변동 적용
+try:
+    import json as _cj, os as _co
+    _cpath = _co.path.join(_co.path.dirname(__file__), "data", "corpgov_updates.json")
+    if _co.path.exists(_cpath):
+        _call = _cj.load(open(_cpath, encoding="utf-8"))
+        if _call:
+            _clatest = sorted(_call.keys())[-1]
+            for _cn, _cu in _call[_clatest].items():
+                if _cn in REAL_PILOT_CASES:
+                    _cr = REAL_PILOT_CASES[_cn]
+                    _cr.setdefault("history", []).append({
+                        "week_num": None, "range": "직전",
+                        "dims": dict(_cr["dims"]), "score": _cr.get("score"),
+                        "evidence_summary": "CPR·GOV 뉴스수집 직전값"})
+                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta")]:
+                        _dv = _cu.get(_key, 0.0)
+                        if _dv:
+                            _cv = _cr["dims"].get(_ax)
+                            _cb = _cv if _cv is not None else (100.0 if _ax=="R" else 50.0)
+                            _cr["dims"][_ax] = max(0.0, min(100.0, round(_cb + _dv, 1)))
+                    _cvals = [v for v in _cr["dims"].values() if v is not None]
+                    _cr["score"] = round(sum(_cvals) / len(_cvals), 1)
+                    _cr.setdefault("evidence", []).insert(0, (_cu["evidence"], "구글뉴스 RSS 자동수집", ""))
+except Exception:
+    pass
+
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
@@ -2690,34 +2717,35 @@ BRIDGE_MODAL_HTML = '''
       <svg id="bridgeRadar" viewBox="0 0 320 320" class="bridge-radar"></svg>
       <table class="mini-table bridge-modal-table">
         <tr><th>축</th><th>정의</th><th>값</th></tr>
-        <tr><td><b>B</b></td><td>도달 — 검색·언급 노출</td><td id="bmB">-</td></tr>
-        <tr><td><b>R</b></td><td>반응 — 긍부정 논조</td><td id="bmR">-</td></tr>
-        <tr><td><b>I</b></td><td>정체성 — 전공균형·연구실적</td><td id="bmI">-</td></tr>
-        <tr><td><b>D</b></td><td>경험 — 재학생·졸업생 후기</td><td id="bmD">-</td></tr>
-        <tr><td><b>G</b></td><td>행동유발 — 언급 서사·참여</td><td id="bmG">-</td></tr>
-        <tr><td><b>E</b></td><td>책임·지속 — 이슈 대응</td><td id="bmE">-</td></tr>
+        <tr><td><span class="axis-badge axis-B">B</span></td><td class="axis-def">도달 — 검색점유율, 고유기사, 영상도달, 채널다양성</td><td class="axis-val" id="bmB">-</td></tr>
+        <tr><td><span class="axis-badge axis-R">R</span></td><td class="axis-def">반응 — 순평판, 신뢰·호감, 분노·실망, 반응지속</td><td class="axis-val" id="bmR">-</td></tr>
+        <tr><td><span class="axis-badge axis-I">I</span></td><td class="axis-def">정체성 — 핵심연상, 의미집중도, 경쟁중복, 메시지적합</td><td class="axis-val" id="bmI">-</td></tr>
+        <tr><td><span class="axis-badge axis-D">D</span></td><td class="axis-def">경험 — 품질·서비스·광고·행정 경험, 불만유형</td><td class="axis-val" id="bmD">-</td></tr>
+        <tr><td><span class="axis-badge axis-G">G</span></td><td class="axis-def">행동유발 — 공유·추천·탐색·참여·구매관련 행동신호</td><td class="axis-val" id="bmG">-</td></tr>
+        <tr><td><span class="axis-badge axis-E">E</span></td><td class="axis-def">책임·지속 — 제재·위기·책임인정·시정·재발·회복속도</td><td class="axis-val" id="bmE">-</td></tr>
       </table>
     </div>
     <div class="bridge-modal-score">
-      <div class="bmscore-row">
-        <span class="bmscore-label">BRIDGE INDEX POINT <span class="bmscore-sub" id="bmPeriodLabel">(비변동성 공시 · 변동성 관측 데이터 통합)</span></span>
+      <div class="bmscore-row bmscore-hl">
+        <span class="bmscore-label">BRIDGE INDEX POINT <span class="bmscore-sub">(비변동성 공시 · 변동성 관측 데이터 통합)</span></span>
         <span class="bmscore-value" id="bmIndexPoint">N/R</span>
       </div>
-      <div class="bmscore-row bmscore-v3row">
-        <span class="bmscore-label">BRIDGE 가중지수 <span class="bmscore-sub">(차등가중 참고치 · B15·R25·I15·D10·G20·E15)</span></span>
-        <span class="bmscore-value" id="bmV3Score">N/R</span>
+      <div class="bmscore-row">
+        <span class="bmscore-label">BRIDGE INDEX LAST WEEK's POINT <span class="bmscore-sub">(전주 지표)</span></span>
+        <span class="bmscore-value" id="bmLastWeek">N/R</span>
       </div>
       <div class="bmscore-row">
-        <span class="bmscore-label">WoW Δ <span class="bmscore-sub" id="bmWowLabel">(Week-over-Week, Week 1 2026.08.31–09.04 대비)</span></span>
+        <span class="bmscore-label">WoW &Delta; <span class="bmscore-sub">(Week-over-Week · 주간 변동 갱신 지표)</span></span>
         <span class="bmscore-value bmscore-wow" id="bmWow">N/R</span>
       </div>
-      <div class="bmscore-row">
-        <span class="bmscore-label">BRIDGE 누적 포인트 <span class="bmscore-sub" id="bmCumLabel">(2026 W1~W36, 36주 합계 · 평균)</span></span>
+      <div class="bmscore-row bmscore-v3row">
+        <span class="bmscore-label">BRIDGE WEIGHTED INDEX <span class="bmscore-sub">(차등가중 참고지수 · B15·R25·I15·D10·G20·E15)</span></span>
+        <span class="bmscore-value" id="bmV3Score">N/R</span>
+      </div>
+      <div class="bmscore-row bmscore-hl">
+        <span class="bmscore-label">BRIDGE CUMULATIVE INDEX <span class="bmscore-sub">(누적 포인트 지표)</span></span>
         <span class="bmscore-value" id="bmCumulative">N/R</span>
       </div>
-      <p class="bmscore-note" id="bmScoreNote">2주치 수집 구간(Week 1 / Week 2)은 스키마상 이미 마련돼 있습니다.
-      실제 뉴스·SNS 수집·감성분류 파이프라인이 가동되기 전까지는 두 값 모두 N/R입니다 —
-      실명 대상에 가상 점수를 부여하지 않는다는 원칙에 따른 것입니다.</p>
     </div>
     <div class="evidence-list" id="bridgeEvidenceList" style="display:none;">
       <h4>실측 근거 (Evidence Card)</h4>
