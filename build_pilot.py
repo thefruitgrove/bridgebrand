@@ -2376,13 +2376,16 @@ try:
             for _un, _uu in _uall[_ulatest].items():
                 if _un in REAL_PILOT_CASES:
                     _ur = REAL_PILOT_CASES[_un]
-                    _ui = _ur["dims"].get("I")
                     _ur.setdefault("history", []).append({
                         "week_num": None, "range": "직전",
                         "dims": dict(_ur["dims"]), "score": _ur.get("score"),
                         "evidence_summary": "UNI 뉴스수집 직전값"})
-                    _ubase = _ui if _ui is not None else 50.0
-                    _ur["dims"]["I"] = max(0.0, min(100.0, round(_ubase + _uu["i_delta"], 1)))
+                    for _uax, _ukey in [("R","r_delta"),("I","i_delta"),("G","g_delta"),("D","d_delta")]:
+                        _udv = _uu.get(_ukey, 0.0)
+                        if _udv:
+                            _uc = _ur["dims"].get(_uax)
+                            _ub = _uc if _uc is not None else (100.0 if _uax=="R" else 50.0)
+                            _ur["dims"][_uax] = max(0.0, min(100.0, round(_ub + _udv, 1)))
                     _uvals = [v for v in _ur["dims"].values() if v is not None]
                     _ur["score"] = round(sum(_uvals) / len(_uvals), 1)
                     _ur.setdefault("evidence", []).insert(0, (_uu["evidence"], "구글뉴스 RSS 자동수집", ""))
@@ -2404,7 +2407,7 @@ try:
                         "week_num": None, "range": "직전",
                         "dims": dict(_er["dims"]), "score": _er.get("score"),
                         "evidence_summary": "ENT 뉴스수집 직전값"})
-                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta")]:
+                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta"),("D","d_delta")]:
                         _dv = _eu.get(_key, 0.0)
                         if _dv:
                             _cur = _er["dims"].get(_ax)
@@ -2431,7 +2434,7 @@ try:
                         "week_num": None, "range": "직전",
                         "dims": dict(_cr["dims"]), "score": _cr.get("score"),
                         "evidence_summary": "CPR·GOV 뉴스수집 직전값"})
-                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta")]:
+                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta"),("D","d_delta")]:
                         _dv = _cu.get(_key, 0.0)
                         if _dv:
                             _cv = _cr["dims"].get(_ax)
@@ -2918,16 +2921,28 @@ def _domain_of(name):
     return "?"
 
 def this_week_digest_entries(limit=20):
-    """REAL_PILOT_CASES 전체를 최신 날짜순으로 정렬해 상위 N개를 반환.
-    각 항목: (name, domain, date, score, trust, method, headline_evidence)
+    """변동(WoW)이 큰 순서로 정렬해 상위 N개 반환 — '이번 주 가장 많이 움직인' 대상.
+    각 항목: (name, domain, date, score, trust, method, headline, wow, is_new)
     """
     rows = []
     for name, case in REAL_PILOT_CASES.items():
+        if len([v for v in case.get("dims", {}).values() if v is not None]) < 2:
+            continue  # 공개 대상만
         date = _extract_latest_date(case.get("week", ""))
         headline = case["evidence"][0][0] if case.get("evidence") else "근거 요약 없음"
+        # WoW 변동 계산 (history 있으면)
+        wow = None; is_new = False
+        hist = case.get("history", [])
+        if hist:
+            prev = hist[-1].get("score")
+            if prev is not None and case.get("score") is not None:
+                wow = round(case["score"] - prev, 1)
+        else:
+            is_new = True  # 비교 이력 없음 = 신규
         rows.append((name, _domain_of(name), date, case["score"], case["trust"],
-                      case.get("method", "news"), headline))
-    rows.sort(key=lambda r: r[2], reverse=True)
+                      case.get("method", "news"), headline, wow, is_new))
+    # 정렬: 변동 절댓값 큰 순 → 변동 없는 건 뒤로
+    rows.sort(key=lambda r: (abs(r[7]) if r[7] is not None else -1), reverse=True)
     return rows[:limit]
 
 def this_week_digest_html():
@@ -2968,19 +2983,29 @@ def this_week_digest_html():
         _week_label = f"{_monday.month}월 {_nth_ko}주 (WEEK {_wknum})"
     except Exception:
         _week_label = ""
-    # 배지: "10월 첫째주 (WEEK 41) | 최신 갱신 · 2026-10-06 기준"
+    # 배지: "10월 첫째주 (WEEK 41) | 이번 주 변동 N건" — 날짜 대신 변동 중심
+    _changed = sum(1 for _r in rows if (len(_r)>7 and _r[7] is not None and _r[7]!=0) or (len(_r)>8 and _r[8]))
     _badge_parts = []
     if _week_label: _badge_parts.append(_week_label)
-    if _latest: _badge_parts.append(f"최신 갱신 · {esc(_latest)} 기준")
-    latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>' if _badge_parts else ""
+    _badge_parts.append(f"이번 주 변동 {_changed}건")
+    latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>'
     cards = []
-    for name, domain, date, score, trust, method, headline in rows:
+    for name, domain, date, score, trust, method, headline, wow, is_new in rows:
         method_tag = "비변동성" if "비변동성" in method else "뉴스기반"
+        # 날짜 대신 변동 배지: New(신규) / ▲▼ 변동폭 / — (변동없음)
+        if is_new:
+            badge = '<span class="tw-chip tw-chip-new">NEW</span>'
+        elif wow is not None and wow != 0:
+            arr = "▲" if wow > 0 else "▼"
+            cls = "tw-chip-up" if wow > 0 else "tw-chip-down"
+            badge = f'<span class="tw-chip {cls}">{arr} {abs(wow)}</span>'
+        else:
+            badge = '<span class="tw-chip tw-chip-flat">—</span>'
         cards.append(f'''
         <a class="tw-card" href="{domain_page.get(domain,'index.html')}">
           <div class="tw-card-top">
             <span class="tw-domain tw-domain-{domain.lower()}">{domain}</span>
-            <span class="tw-date">{esc(date) or '날짜미상'}</span>
+            {badge}
           </div>
           <div class="tw-name">{esc(name)}</div>
           <div class="tw-headline">{esc(headline[:70])}{'…' if len(headline) > 70 else ''}</div>
