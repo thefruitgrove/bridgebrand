@@ -161,7 +161,7 @@
     if(!modalOverlay) return;
     var flagEl = document.getElementById('bridgeModalFlag');
     var evList = document.getElementById('bridgeEvidenceList');
-    var scoreNote = document.getElementById('bmScoreNote');
+    var scoreNote = document.getElementById('bmScoreNote') || {};
     var periodLbl = document.getElementById('bmPeriodLabel') || {};
     var wowLbl = document.getElementById('bmWowLabel') || {};
     var cumLbl = document.getElementById('bmCumLabel') || {};
