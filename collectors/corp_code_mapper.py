@@ -87,14 +87,29 @@ def build_map(target_names):
 if __name__ == "__main__":
     if not DART_KEY:
         print("※ DART_API_KEY 없음. GitHub Secrets/.env 설정 필요."); raise SystemExit(1)
-    # CPR 대상 명단 로드
+    # CPR + GOV(공기업) 대상 명단 로드 — DART 공시 대상만 매핑됨(비상장은 자동 제외)
     import sys
     sys.path.insert(0, os.path.join(HERE, "..", "real_data"))
+    names = []
     try:
         import cpr_real
-        names = [t[0] for t in cpr_real.CPR_REAL]
+        names += [t[0] for t in cpr_real.CPR_REAL]
     except Exception:
-        names = ["삼성전자", "SK하이닉스", "현대차", "NAVER", "카카오"]  # 폴백
+        pass
+    try:
+        # GOV 공기업도 추가 — DART에 있는 것만 매핑되고 나머지는 미매칭으로 남음
+        import gov_real
+        names += [t[0] for t in gov_real.GOV_REAL]
+    except Exception:
+        try:
+            # gov_real이 real_data 밖에 있을 수 있음
+            sys.path.insert(0, os.path.join(HERE, ".."))
+            import gov_real
+            names += [t[0] for t in gov_real.GOV_REAL]
+        except Exception:
+            pass
+    if not names:
+        names = ["삼성전자", "한국전력공사"]  # 폴백
     mp, un = build_map(names)
     with open(MAP_OUT, "w", encoding="utf-8") as f:
         json.dump(mp, f, ensure_ascii=False, indent=2)
