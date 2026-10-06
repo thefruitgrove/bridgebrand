@@ -2389,33 +2389,6 @@ try:
 except Exception:
     pass
 
-# [2026-10] ENT 구글뉴스 반영 — data/ent_updates.json의 R·I·G축 변동 적용
-try:
-    import json as _ej, os as _eo
-    _epath = _eo.path.join(_eo.path.dirname(__file__), "data", "ent_updates.json")
-    if _eo.path.exists(_epath):
-        _eall = _ej.load(open(_epath, encoding="utf-8"))
-        if _eall:
-            _elatest = sorted(_eall.keys())[-1]
-            for _en, _eu in _eall[_elatest].items():
-                if _en in REAL_PILOT_CASES:
-                    _er = REAL_PILOT_CASES[_en]
-                    _er.setdefault("history", []).append({
-                        "week_num": None, "range": "직전",
-                        "dims": dict(_er["dims"]), "score": _er.get("score"),
-                        "evidence_summary": "ENT 뉴스수집 직전값"})
-                    for _ax, _key in [("R","r_delta"),("I","i_delta"),("G","g_delta")]:
-                        _dv = _eu.get(_key, 0.0)
-                        if _dv:
-                            _cur = _er["dims"].get(_ax)
-                            _base = _cur if _cur is not None else (100.0 if _ax=="R" else 50.0)
-                            _er["dims"][_ax] = max(0.0, min(100.0, round(_base + _dv, 1)))
-                    _evals = [v for v in _er["dims"].values() if v is not None]
-                    _er["score"] = round(sum(_evals) / len(_evals), 1)
-                    _er.setdefault("evidence", []).insert(0, (_eu["evidence"], "구글뉴스 RSS 자동수집", ""))
-except Exception:
-    pass
-
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
