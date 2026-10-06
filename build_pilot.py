@@ -2854,12 +2854,46 @@ def this_week_digest_entries(limit=20):
 def this_week_digest_html():
     rows = this_week_digest_entries(20)
     domain_page = {"CPR": "cpr.html", "GOV": "gov.html", "UNI": "uni.html", "ENT": "star.html"}
-    # 최신 근거 날짜 자동 추출 (데이터가 갱신되면 자동으로 바뀜)
+    # 최신 근거 날짜 자동 추출 (데이터·자동수집 갱신 시 자동 반영)
     _latest = ""
     for _r in rows:
         _d = _r[2] or ""
         if _d > _latest: _latest = _d
-    latest_badge = f'<span class="tw-latest">최신 갱신 · {esc(_latest)} 기준</span>' if _latest else ""
+    # 자동수집(weekly_updates.json)의 최신 주차 날짜도 반영
+    try:
+        import os as _bo, json as _bj, datetime as _bd
+        _wu = _bo.path.join(_bo.path.dirname(__file__), "data", "weekly_updates.json")
+        if _bo.path.exists(_wu):
+            _wd = _bj.load(open(_wu, encoding="utf-8"))
+            if _wd:
+                _wk = sorted(_wd.keys())[-1]  # YYYYMMDD
+                if len(_wk) == 8:
+                    _iso = f"{_wk[:4]}-{_wk[4:6]}-{_wk[6:8]}"
+                    if _iso > _latest: _latest = _iso
+    except Exception:
+        pass
+    # 발행 주차 자동 계산 (published 기반, 매주 자동 변경)
+    try:
+        import datetime as _d2, json as _d2j, os as _d2o
+        _pub = "auto"
+        _dpath = _d2o.path.join(_d2o.path.dirname(__file__), "data", "bridge_data_v2.json")
+        if _d2o.path.exists(_dpath):
+            _pub = _d2j.load(open(_dpath, encoding="utf-8")).get("published", "auto")
+        _pd = _d2.date.today() if _pub in ("auto","",None) else _d2.date.fromisoformat(_pub)
+        _wknum = _pd.isocalendar()[1]
+        _month = _pd.month
+        # 그 달의 몇째 주 — 그 주의 '월요일'이 속한 달 기준
+        _monday = _pd - _d2.timedelta(days=_pd.weekday())
+        _nth = (_monday.day - 1) // 7 + 1
+        _nth_ko = ["첫째","둘째","셋째","넷째","다섯째"][min(_nth-1,4)]
+        _week_label = f"{_monday.month}월 {_nth_ko}주 (WEEK {_wknum})"
+    except Exception:
+        _week_label = ""
+    # 배지: "10월 첫째주 (WEEK 41) | 최신 갱신 · 2026-10-06 기준"
+    _badge_parts = []
+    if _week_label: _badge_parts.append(_week_label)
+    if _latest: _badge_parts.append(f"최신 갱신 · {esc(_latest)} 기준")
+    latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>' if _badge_parts else ""
     cards = []
     for name, domain, date, score, trust, method, headline in rows:
         method_tag = "비변동성" if "비변동성" in method else "뉴스기반"
