@@ -22,6 +22,8 @@ UNI_TARGETS = [
 UNI_CRISIS = "논란 OR 비리 OR 입시비리 OR 사건 OR 징계 OR 적발 OR 성추행 OR 갑질"
 UNI_GROWTH = "글로컬 OR 선정 OR 국책사업 OR 계약학과 OR 신설 OR 수주 OR BK21 OR 협약"
 UNI_DEPTH  = "연구 OR 논문 OR 특허 OR 취업 OR 장학금 OR 등록금 OR 축제 OR 경쟁률"
+# 커뮤니티 site: — 수험생·대학생 여론 (구글 색인 공개글, 건수만)
+COMMUNITY = "site:orbi.kr OR site:pann.nate.com OR site:theqoo.net"
 
 def _count(query, period="7d", retries=2):
     url = (f"https://news.google.com/rss/search?"
@@ -76,21 +78,24 @@ def run():
         crisis = _count(f'"{uni}" ({UNI_CRISIS})', "7d")
         growth = _count(f'"{uni}" ({UNI_GROWTH})', "1m")
         depth  = _count(f'"{uni}" ({UNI_DEPTH})', "1m")
+        community = _count(f'"{uni}" ({COMMUNITY})', "1m")
         pv = prev_data.get(uni, {})
         if vol is None: vol = pv.get("vol")
         if crisis is None: crisis = pv.get("crisis", 0)
         if growth is None: growth = pv.get("growth", 0)
         if depth is None: depth = pv.get("depth", 0)
-        tw[uni] = {"vol": vol, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0}
-        i_d, i_r = i_from_trend(pv.get("vol"), vol)
+        if community is None: community = pv.get("community", 0)
+        vol_total = (vol or 0) + (community or 0)
+        tw[uni] = {"vol": vol_total, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0, "community": community or 0}
+        i_d, i_r = i_from_trend(pv.get("vol"), vol_total)
         r_d, r_r = r_from_crisis(crisis)
         g_d, g_r = g_from_growth(growth)
-        d_d, d_r = d_from_depth(depth)
+        d_d, d_r = d_from_depth((depth or 0) + (community or 0))
         if i_d or r_d or g_d or d_d:
             parts = [x for x in [i_r, r_r, g_r, d_r] if x]
             upd[uni] = {"i_delta": i_d, "r_delta": r_d, "g_delta": g_d, "d_delta": d_d,
                         "evidence": f"[구글뉴스 {today}] " + " / ".join(parts), "week": today}
-        time.sleep(1.8)
+        time.sleep(2.2)
     hist[today] = tw
     for old in sorted(hist.keys())[:-12]: del hist[old]
     os.makedirs(os.path.dirname(HIST_FILE), exist_ok=True)

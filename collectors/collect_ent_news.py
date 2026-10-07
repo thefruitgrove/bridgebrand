@@ -14,6 +14,8 @@ ENT_TARGETS = [
 CRISIS_KW = "논란 OR 사과 OR 의혹 OR 폭로 OR 하차 OR 마약 OR 음주운전 OR 학폭"
 GROWTH_KW = "수상 OR 대상 OR 빌보드 OR 앰버서더 OR 월드투어 OR 1위 OR 신기록 OR 완판"
 DEPTH_KW  = "컴백 OR 앨범 OR 신곡 OR 드라마 OR 영화 OR 출연 OR 화보 OR 팬미팅"
+# 커뮤니티 site: 검색 — 구글이 색인한 공개글만, 건수 집계(원문 저장 안 함)
+COMMUNITY = "site:theqoo.net OR site:instiz.net OR site:pann.nate.com"
 
 def _count(query, period="7d", retries=2):
     url = (f"https://news.google.com/rss/search?"
@@ -71,21 +73,25 @@ def run():
         crisis = _count(f'"{name}" ({CRISIS_KW})', "7d")
         growth = _count(f'"{name}" ({GROWTH_KW})', "1m")
         depth  = _count(f'"{name}" ({DEPTH_KW})', "1m")
+        community = _count(f'"{name}" ({COMMUNITY})', "1m")  # 커뮤니티 화제
         pv = prev_data.get(name, {})
         if vol is None: vol = pv.get("vol")
         if crisis is None: crisis = pv.get("crisis", 0)
         if growth is None: growth = pv.get("growth", 0)
         if depth is None: depth = pv.get("depth", 0)
-        tw[name] = {"vol": vol, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0}
-        i_d, i_r = i_from_trend(pv.get("vol"), vol)
+        if community is None: community = pv.get("community", 0)
+        # 커뮤니티 건수를 전체 화제량(vol)에 합산 — I축(화제성) 보강
+        vol_total = (vol or 0) + (community or 0)
+        tw[name] = {"vol": vol_total, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0, "community": community or 0}
+        i_d, i_r = i_from_trend(pv.get("vol"), vol_total)
         r_d, r_r = r_from_crisis(crisis)
         g_d, g_r = g_from_growth(growth)
-        d_d, d_r = d_from_depth(depth)
+        d_d, d_r = d_from_depth((depth or 0) + (community or 0))  # 커뮤니티 경험담도 D축 보강
         if i_d or r_d or g_d or d_d:
             parts = [x for x in [i_r, r_r, g_r, d_r] if x]
             upd[name] = {"i_delta": i_d, "r_delta": r_d, "g_delta": g_d, "d_delta": d_d,
                          "evidence": f"[구글뉴스 {today}] " + " / ".join(parts), "week": today}
-        time.sleep(1.8)
+        time.sleep(2.2)
     hist[today] = tw
     for old in sorted(hist.keys())[:-12]: del hist[old]
     os.makedirs(os.path.dirname(HIST_FILE), exist_ok=True)

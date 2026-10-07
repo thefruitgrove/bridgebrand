@@ -35,6 +35,9 @@ CPR_DEPTH  = "품질 OR 서비스 OR FDA OR 승인 OR 파트너십 OR 공장 OR 
 GOV_CRISIS = "비리 OR 감사 OR 징계 OR 사고 OR 논란 OR 횡령 OR 방만 OR 적발 OR 중대재해"
 GOV_GROWTH = "표창 OR 우수 OR 선정 OR 협약 OR 수상 OR 개선 OR 달성 OR 혁신 OR 투자 OR 유치"
 GOV_DEPTH  = "서비스 OR 민원 OR 개선 OR 안전 OR 공공 OR 지원사업 OR 협력 OR 정책"
+# 커뮤니티 site: — CPR은 투자자·소비자 반응 (구글 색인 공개글, 건수만)
+CPR_COMMUNITY = "site:finance.naver.com OR site:pann.nate.com OR site:fmkorea.com"
+GOV_COMMUNITY = "site:pann.nate.com OR site:fmkorea.com OR site:clien.net"
 
 def _count(query, period="7d", retries=2):
     url = (f"https://news.google.com/rss/search?"
@@ -93,32 +96,35 @@ def collect(targets, kw, hist, today):
         crisis = _count(f'"{name}" ({kw["crisis"]})', "7d")   # 위기(7d)
         growth = _count(f'"{name}" ({kw["growth"]})', "1m")   # 성과(1m)
         depth  = _count(f'"{name}" ({kw["depth"]})', "1m")    # 경험·구조(1m)
+        community = _count(f'"{name}" ({kw["community"]})', "1m")  # 커뮤니티 반응
         # 전주 이월: None(수집실패)이면 전주값 사용
         pv = prev_data.get(name, {})
         if vol is None: vol = pv.get("vol")
         if crisis is None: crisis = pv.get("crisis", 0)
         if growth is None: growth = pv.get("growth", 0)
         if depth is None: depth = pv.get("depth", 0)
-        tw[name] = {"vol": vol, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0}
+        if community is None: community = pv.get("community", 0)
+        vol_total = (vol or 0) + (community or 0)
+        tw[name] = {"vol": vol_total, "crisis": crisis or 0, "growth": growth or 0, "depth": depth or 0, "community": community or 0}
 
         prev_vol = pv.get("vol")
-        i_d, i_r = i_from_trend(prev_vol, vol)
+        i_d, i_r = i_from_trend(prev_vol, vol_total)
         r_d, r_r = r_from_crisis(crisis)
         g_d, g_r = g_from_growth(growth)
-        d_d, d_r = d_from_depth(depth)
+        d_d, d_r = d_from_depth((depth or 0) + (community or 0))
         if i_d or r_d or g_d or d_d:
             parts = [x for x in [i_r, r_r, g_r, d_r] if x]
             upd[name] = {"i_delta": i_d, "r_delta": r_d, "g_delta": g_d, "d_delta": d_d,
                          "evidence": f"[구글뉴스 {today}] " + " / ".join(parts), "week": today}
-        time.sleep(1.8)  # 대상당 4회 호출
+        time.sleep(2.2)  # 대상당 5회 호출
     return tw, upd
 
 def run():
     today = datetime.date.today().isoformat()
     hist = json.load(open(HIST_FILE, encoding="utf-8")) if os.path.exists(HIST_FILE) else {}
     tw_all, upd_all = {}, {}
-    cpr_kw = {"crisis": CPR_CRISIS, "growth": CPR_GROWTH, "depth": CPR_DEPTH}
-    gov_kw = {"crisis": GOV_CRISIS, "growth": GOV_GROWTH, "depth": GOV_DEPTH}
+    cpr_kw = {"crisis": CPR_CRISIS, "growth": CPR_GROWTH, "depth": CPR_DEPTH, "community": CPR_COMMUNITY}
+    gov_kw = {"crisis": GOV_CRISIS, "growth": GOV_GROWTH, "depth": GOV_DEPTH, "community": GOV_COMMUNITY}
     for targets, kw in [(CPR_TARGETS, cpr_kw), (GOV_TARGETS, gov_kw)]:
         tw, upd = collect(targets, kw, hist, today)
         tw_all.update(tw); upd_all.update(upd)
