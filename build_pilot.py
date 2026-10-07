@@ -2446,6 +2446,31 @@ try:
 except Exception:
     pass
 
+# [2026-10] 2주치 history 시드 — 주간 비교(WoW·누적) 실증
+try:
+    import json as _sj, os as _so
+    _spath = _so.path.join(_so.path.dirname(__file__), "data", "week_snapshots.json")
+    if _so.path.exists(_spath):
+        _snap = _sj.load(open(_spath, encoding="utf-8"))
+        for _sn, _sv in _snap.items():
+            if _sn in REAL_PILOT_CASES:
+                _sr = REAL_PILOT_CASES[_sn]
+                # W41 점수를 현재 score로, W40을 history로 세팅
+                _w40 = _sv.get("w40", {})
+                _w41 = _sv.get("w41", {})
+                # history를 2주 구조로 재구성 (W40이 직전주)
+                _new_hist = [{
+                    "week_num": 40, "range": _w40.get("range", "W40"),
+                    "dims": dict(_sr["dims"]), "score": _w40.get("score"),
+                    "evidence_summary": _w40.get("note", "직전 주")
+                }]
+                # 기존 history가 있으면 그 앞에 (더 오래된 것)
+                _old = _sr.get("history", [])
+                _sr["history"] = _old + _new_hist
+                # 현재 score는 W41 (이미 현재값이므로 유지)
+except Exception:
+    pass
+
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
