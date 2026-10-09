@@ -37,6 +37,19 @@ GOV_NAME_ALIASES = {
     "문화재청": ["국가유산청"],
 }
 
+UNI_NAME_ALIASES = {
+    "한국과학기술원(KAIST)": ["한국과학기술원"],
+    "포항공과대학교(POSTECH)": ["포항공과대학교"],
+    "부경대학교": ["국립부경대학교"],
+    "한국외대(글로벌)": ["한국외국어대학교"],
+    "한밭대학교": ["국립한밭대학교"],
+    "공주대학교": ["국립공주대학교"],
+    "목포대학교": ["국립목포대학교"],
+    "인천재능대학교": ["재능대학교"],
+    "용인송담대학교": ["용인예술과학대학교"],
+    "동주대학교": ["부산보건대학교"],
+}
+
 
 def load_targets() -> list[dict]:
     from cpr_real import CPR_REAL
@@ -58,9 +71,9 @@ def load_targets() -> list[dict]:
     for index, (name, category, subcat) in enumerate(STAR_REAL, 1):
         rows.append({"domain": "STAR", "external_id": f"STAR-{index:03d}", "name": name, "category": category, "subcategory": COHORT_CODES.get(subcat, subcat), "aliases": [], "metadata": {}, "active": True})
     for index, (name, region, kind) in enumerate(UNI_4YEAR, 1):
-        rows.append({"domain": "UNI", "external_id": f"UNI-U{index:02d}", "name": name, "category": kind, "subcategory": "U60", "aliases": [], "metadata": {"region": region}, "active": True})
+        rows.append({"domain": "UNI", "external_id": f"UNI-U{index:02d}", "name": name, "category": kind, "subcategory": "U60", "aliases": UNI_NAME_ALIASES.get(name, []), "metadata": {"region": region}, "active": True})
     for index, (name, region) in enumerate(UNI_2YEAR, 1):
-        rows.append({"domain": "UNI", "external_id": f"UNI-C{index:02d}", "name": name, "category": "전문대학", "subcategory": "C40", "aliases": [], "metadata": {"region": region}, "active": True})
+        rows.append({"domain": "UNI", "external_id": f"UNI-C{index:02d}", "name": name, "category": "전문대학", "subcategory": "C40", "aliases": UNI_NAME_ALIASES.get(name, []), "metadata": {"region": region}, "active": True})
     return rows
 
 
