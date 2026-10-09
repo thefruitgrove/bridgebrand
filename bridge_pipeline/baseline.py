@@ -43,6 +43,11 @@ def mean_present(values: Iterable[float | None]) -> float | None:
     return round(sum(present) / len(present), 2) if present else None
 
 
+def coverage(values: Iterable[float | None]) -> float:
+    values = list(values)
+    return round(sum(value is not None for value in values) / len(values), 2) if values else 0.0
+
+
 def _cohort(rows, keys):
     groups = {}
     for row in rows:
@@ -67,37 +72,40 @@ def normalize_uni(rows: list[dict]) -> list[dict]:
         competition = number(row.get("competition_rate"))
         fill = number(row.get("freshman_fill_rate"))
         international = number(row.get("international_student_rate"))
-        b = mean_present([
+        b_parts = [
             _pct(groups, row, "competition_rate"),
             _pct(groups, row, "freshman_fill_rate"),
             _pct(groups, row, "international_student_rate"),
-        ])
-        i = mean_present([
+        ]
+        i_parts = [
             _pct(groups, row, "program_distinctiveness"),
             _pct(groups, row, "specialization_concentration"),
-        ])
-        d = mean_present([
+        ]
+        d_parts = [
             _pct(groups, row, "retention_rate"),
             _pct(groups, row, "dropout_rate", False),
             _pct(groups, row, "scholarship_per_student"),
             _pct(groups, row, "education_spend_per_student"),
             _pct(groups, row, "dorm_capacity_rate"),
-        ])
-        g = mean_present([
+            _pct(groups, row, "faculty_capacity_rate"),
+            _pct(groups, row, "library_resources_per_student"),
+        ]
+        g_parts = [
             _pct(groups, row, "employment_rate"),
             _pct(groups, row, "research_per_faculty"),
             _pct(groups, row, "industry_revenue_per_student"),
             _pct(groups, row, "tech_transfer_income"),
-        ])
-        e = mean_present([
+        ]
+        e_parts = [
             _pct(groups, row, "disclosure_completeness"),
             _pct(groups, row, "financial_stability"),
             _pct(groups, row, "education_condition_trend"),
-        ])
-        values = {"B": b, "I": i, "D": d, "G": g, "E": e}
-        for axis, score in values.items():
+        ]
+        values = {"B": b_parts, "I": i_parts, "D": d_parts, "G": g_parts, "E": e_parts}
+        for axis, parts in values.items():
+            score = mean_present(parts)
             if score is not None:
-                output.append(_official_row(row, axis, score, "academyinfo"))
+                output.append(_official_row(row, axis, score, "academyinfo", coverage(parts), sum(value is not None for value in parts)))
     return output
 
 
@@ -123,11 +131,11 @@ def normalize_gov(rows: list[dict]) -> list[dict]:
     return output
 
 
-def _official_row(row, axis, score, source_id):
+def _official_row(row, axis, score, source_id, coverage_value=1.0, evidence_count=1):
     return {
         "external_id": row["external_id"], "axis": axis, "score": f"{score:.2f}",
-        "confidence": "0.95", "coverage": "1.0", "source_families": "1",
-        "evidence_count": "1", "freshness_days": row.get("freshness_days") or "0",
+        "confidence": "0.95", "coverage": f"{coverage_value:.2f}", "source_families": "1",
+        "evidence_count": str(evidence_count), "freshness_days": row.get("freshness_days") or "0",
         "source_id": source_id, "evidence_url": row.get("evidence_url") or "",
         "note": row.get("note") or "official baseline"
     }
