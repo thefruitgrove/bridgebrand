@@ -1,6 +1,8 @@
 import unittest
 
 from bridge_pipeline.baseline import grade, normalize_gov, normalize_uni, percentile
+from bridge_pipeline.gov_source import convert
+from bridge_pipeline.targets import load_targets, target_quota_report
 
 
 class OfficialBaselineTest(unittest.TestCase):
@@ -29,6 +31,31 @@ class OfficialBaselineTest(unittest.TestCase):
         self.assertGreater(by_entity["UNI-001"]["B"], by_entity["UNI-002"]["B"])
         self.assertGreater(by_entity["UNI-001"]["D"], by_entity["UNI-002"]["D"])
         self.assertNotIn("I", by_entity["UNI-001"])
+
+    def test_gov_frame_has_no_public_corporations(self):
+        targets = [row for row in load_targets() if row["domain"] == "GOV"]
+        self.assertEqual(len(targets), 100)
+        self.assertFalse(any(row["name"] == "한국전력공사" for row in targets))
+        gov_quota = [row for row in target_quota_report() if row["domain"] == "GOV"]
+        self.assertTrue(all(row["exact_match"] for row in gov_quota))
+
+    def test_gov_source_accepts_historical_and_prefixed_names(self):
+        source = [
+            {
+                "평가연도": "2025년", "기관유형": "중앙행정기관", "기관명": "기획재정부",
+                "종합등급": "가", "민원행정 전략 및 체계": "나", "민원제도운영": "다",
+                "국민신문고민원 처리": "가", "고충민원 처리": "", "민원만족도": "나",
+            },
+            {
+                "평가연도": "2025년", "기관유형": "기초자치단체", "기관명": "경기도 수원시",
+                "종합등급": "가", "민원행정 전략 및 체계": "가", "민원제도운영": "가",
+                "국민신문고민원 처리": "가", "고충민원 처리": "가", "민원만족도": "가",
+            },
+        ]
+        converted, _missing = convert(source)
+        ids = {row["external_id"] for row in converted}
+        self.assertIn("GOV-M01", ids)
+        self.assertIn("GOV-C18", ids)
 
 
 if __name__ == "__main__":
