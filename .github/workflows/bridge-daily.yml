@@ -58,6 +58,17 @@ jobs:
       - name: Collect regulatory evidence
         run: python -m bridge_pipeline.run collect-dart ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
+      - name: Normalize and import official baselines
+        run: |
+          if [ "$(wc -l < automation/uni_baseline_input.csv)" -gt 1 ]; then
+            python -m bridge_pipeline.baseline --domain UNI --input automation/uni_baseline_input.csv --output /tmp/uni_axes.csv
+            python -m bridge_pipeline.run import-official --file /tmp/uni_axes.csv ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+          fi
+          if [ "$(wc -l < automation/gov_baseline_input.csv)" -gt 1 ]; then
+            python -m bridge_pipeline.baseline --domain GOV --input automation/gov_baseline_input.csv --output /tmp/gov_axes.csv
+            python -m bridge_pipeline.run import-official --file /tmp/gov_axes.csv ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+          fi
+
       - name: Compute shadow scores and rankings
         run: python -m bridge_pipeline.run score ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
