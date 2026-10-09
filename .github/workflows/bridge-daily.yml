@@ -1,6 +1,13 @@
 name: BRIDGE Daily Pipeline
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-daily.yml'
+      - 'bridge_pipeline/**'
+      - 'automation/**'
+      - 'real_data/**'
   schedule:
     - cron: "15 20 * * *" # 매일 05:15 KST
   workflow_dispatch:
