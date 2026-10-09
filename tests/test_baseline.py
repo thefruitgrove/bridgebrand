@@ -1,11 +1,31 @@
 import unittest
 
 from bridge_pipeline.baseline import grade, normalize_gov, normalize_uni, percentile
+from bridge_pipeline.cpr_financials import extract_metrics, normalize as normalize_cpr
 from bridge_pipeline.gov_source import convert
 from bridge_pipeline.targets import load_targets, target_quota_report
 
 
 class OfficialBaselineTest(unittest.TestCase):
+    def test_cpr_financial_metrics_and_cohort_percentiles(self):
+        rows = [
+            {"fs_div": "CFS", "account_nm": "매출액", "thstrm_amount": "1200", "frmtrm_amount": "1000"},
+            {"fs_div": "CFS", "account_nm": "영업이익", "thstrm_amount": "120", "frmtrm_amount": "80"},
+            {"fs_div": "CFS", "account_nm": "당기순이익", "thstrm_amount": "90", "frmtrm_amount": "70"},
+            {"fs_div": "CFS", "account_nm": "자산총계", "thstrm_amount": "2000", "frmtrm_amount": "1800"},
+            {"fs_div": "CFS", "account_nm": "부채총계", "thstrm_amount": "800", "frmtrm_amount": "750"},
+            {"fs_div": "CFS", "account_nm": "자본총계", "thstrm_amount": "1200", "frmtrm_amount": "1050"},
+        ]
+        metrics = extract_metrics(rows)
+        self.assertEqual(metrics["revenue_growth"], 20.0)
+        self.assertEqual(metrics["operating_margin"], 10.0)
+        records = [
+            {"external_id": "CPR-001", "cohort": "BC70", **metrics},
+            {"external_id": "CPR-002", "cohort": "BC70", **{**metrics, "revenue_growth": 0, "operating_margin": 1}},
+        ]
+        normalized = normalize_cpr(records, 2025)
+        by_id = {(row["external_id"], row["axis"]): float(row["score"]) for row in normalized}
+        self.assertGreater(by_id[("CPR-001", "G")], by_id[("CPR-002", "G")])
     def test_percentile_direction(self):
         self.assertGreater(percentile([1, 2, 3], 3), percentile([1, 2, 3], 1))
         self.assertLess(percentile([1, 2, 3], 3, False), percentile([1, 2, 3], 1, False))
