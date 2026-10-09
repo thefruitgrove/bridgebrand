@@ -32,7 +32,7 @@ def page_title(name: str) -> str:
 
 
 def fetch_batch_views(titles: list[str], start: dt.date, end: dt.date) -> dict[str, list[int]]:
-    """Fetch up to 50 titles through MediaWiki's pageviews property in one request."""
+    """Fetch up to 10 titles (the production PageViewInfo lookup limit)."""
     params = urllib.parse.urlencode({
         "action": "query", "prop": "pageviews", "titles": "|".join(titles),
         "redirects": "1", "format": "json", "formatversion": "2",
@@ -119,8 +119,8 @@ def collect(as_of: dt.date) -> tuple[list[dict], list[str]]:
     start = as_of - dt.timedelta(days=27)
     records, missing = [], []
     targets = [row for row in load_targets() if row["domain"] == "STAR"]
-    for offset in range(0, len(targets), 50):
-        batch = targets[offset:offset + 50]
+    for offset in range(0, len(targets), 10):
+        batch = targets[offset:offset + 10]
         titles = [page_title(target["name"]) for target in batch]
         views_by_title = fetch_batch_views(titles, start, as_of)
         for target, title in zip(batch, titles):
