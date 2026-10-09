@@ -18,6 +18,14 @@ HERE = os.path.dirname(__file__)
 CACHE_XML = os.path.join(HERE, "corpcode_cache.xml")
 MAP_OUT = os.path.join(HERE, "corp_code_map.json")
 
+# 서비스 표기명과 DART 법인명이 다른 상장사. 별칭은 추측하지 않고
+# 사업보고서 법인명으로만 관리한다.
+DART_NAME_ALIASES = {
+    "현대차": "현대자동차",
+    "동양생명": "동양생명보험",
+    "한국조선해양": "HD한국조선해양",
+}
+
 
 def download_corpcode():
     """corpCode.xml(ZIP) 다운로드 → CORPCODE.xml 추출 → 캐시 저장."""
@@ -71,16 +79,14 @@ def build_map(target_names):
 
     result, unmatched = {}, []
     for nm in target_names:
-        key = _norm(nm)
-        if key in dart_index:
-            result[nm] = dart_index[key][0]
+        key = _norm(DART_NAME_ALIASES.get(nm, nm))
+        match = dart_index.get(key)
+        # CPR 모집단은 코스피·코스닥 상장사다. 비상장 동명 법인이나 재단을
+        # 잡을 수 있는 광범위한 부분일치(fuzzy match)는 사용하지 않는다.
+        if match and match[1]:
+            result[nm] = match[0]
         else:
-            # 부분매칭 시도 (앞부분 일치)
-            cand = [v[0] for k, v in dart_index.items() if k.startswith(key) or key.startswith(k)]
-            if cand:
-                result[nm] = cand[0]
-            else:
-                unmatched.append(nm)
+            unmatched.append(nm)
     return result, unmatched
 
 
