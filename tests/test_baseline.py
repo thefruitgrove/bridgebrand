@@ -57,6 +57,28 @@ class OfficialBaselineTest(unittest.TestCase):
         self.assertIn("GOV-M01", ids)
         self.assertIn("GOV-C18", ids)
 
+    def test_uni_aliases_cover_renamed_schools(self):
+        targets = [row for row in load_targets() if row["domain"] == "UNI"]
+        aliases = {row["name"]: row["aliases"] for row in targets}
+        self.assertIn("한국과학기술원", aliases["한국과학기술원(KAIST)"])
+        self.assertIn("부산보건대학교", aliases["동주대학교"])
+
+    def test_uni_axis_coverage_reflects_missing_variables(self):
+        rows = normalize_uni([{
+            "external_id": "UNI-U01", "school_type": "4년제", "region_group": "수도권",
+            "competition_rate": "10", "freshman_fill_rate": "100", "international_student_rate": "5",
+            "scholarship_per_student": "300", "education_spend_per_student": "1000",
+            "dorm_capacity_rate": "20", "faculty_capacity_rate": "90",
+            "library_resources_per_student": "50", "employment_rate": "70",
+            "disclosure_completeness": "100", "financial_stability": "150",
+        }])
+        by_axis = {row["axis"]: row for row in rows}
+        self.assertEqual(by_axis["B"]["coverage"], "1.00")
+        self.assertEqual(by_axis["D"]["coverage"], "0.71")
+        self.assertEqual(by_axis["G"]["coverage"], "0.25")
+        self.assertEqual(by_axis["E"]["coverage"], "0.67")
+        self.assertNotIn("I", by_axis)
+
 
 if __name__ == "__main__":
     unittest.main()
