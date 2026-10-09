@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import argparse
-import concurrent.futures
 import csv
 import datetime as dt
 import json
 import math
 import statistics
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -35,14 +35,24 @@ def fetch_daily_views(title: str, start: dt.date, end: dt.date) -> list[int]:
     article = urllib.parse.quote(title.replace(" ", "_"), safe="")
     url = f"{API_ROOT}/ko.wikipedia/all-access/user/{article}/daily/{start:%Y%m%d}00/{end:%Y%m%d}00"
     request = urllib.request.Request(url, headers={"User-Agent": "SignalBridgeBot/1.0 (contact: bridgebrand.co.kr)"})
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        if exc.code in {400, 404}:
-            return []
-        raise
-    except urllib.error.URLError:
+    payload = None
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            if exc.code in {400, 404}:
+                return []
+            if exc.code != 429 or attempt == 4:
+                raise
+            retry_after = int(exc.headers.get("Retry-After") or 2 ** attempt)
+            time.sleep(min(30, max(1, retry_after)))
+        except urllib.error.URLError:
+            if attempt == 4:
+                return []
+            time.sleep(2 ** attempt)
+    if payload is None:
         return []
     return [int(item.get("views") or 0) for item in payload.get("items") or []]
 
@@ -89,19 +99,14 @@ def collect(as_of: dt.date) -> tuple[list[dict], list[str]]:
     start = as_of - dt.timedelta(days=27)
     records, missing = [], []
     targets = [row for row in load_targets() if row["domain"] == "STAR"]
-    def fetch_target(target):
+    for target in targets:
         title = page_title(target["name"])
         views = fetch_daily_views(title, start, as_of)
-        return target, title, views
-
-    # Wikimedia 정책을 존중하는 낮은 동시성으로 실행시간만 단축한다.
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        results = executor.map(fetch_target, targets)
-    for target, title, views in results:
         if len(views) < 14:
             missing.append(target["name"])
-            continue
-        records.append({"external_id": target["external_id"], "title": title, "days": len(views), **metrics(views)})
+        else:
+            records.append({"external_id": target["external_id"], "title": title, "days": len(views), **metrics(views)})
+        time.sleep(0.25)
     return records, missing
 
 
