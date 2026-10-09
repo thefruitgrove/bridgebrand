@@ -60,6 +60,8 @@ jobs:
 
       - name: Normalize and import official baselines
         run: |
+          python -m bridge_pipeline.cpr_financials --output /tmp/cpr_axes.csv
+          python -m bridge_pipeline.run import-official --file /tmp/cpr_axes.csv ${AS_OF_DATE:+--date "$AS_OF_DATE"}
           if [ "$(wc -l < automation/uni_baseline_input.csv)" -gt 1 ]; then
             python -m bridge_pipeline.baseline --domain UNI --input automation/uni_baseline_input.csv --output /tmp/uni_axes.csv
             python -m bridge_pipeline.run import-official --file /tmp/uni_axes.csv ${AS_OF_DATE:+--date "$AS_OF_DATE"}
