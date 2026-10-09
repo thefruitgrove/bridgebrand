@@ -93,6 +93,9 @@ jobs:
           git add site/data/latest.json data/pipeline_status.json site/
           git diff --cached --quiet && exit 0
           git commit -m "data: daily BRIDGE refresh $(date +%F)"
+          # build scripts may touch reproducible working files outside the public export.
+          # Discard those ephemeral changes so rebase is never blocked by a dirty runner.
+          git restore --worktree .
           git pull --rebase origin main
           git push origin HEAD:main
 
