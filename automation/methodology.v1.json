@@ -1,0 +1,53 @@
+{
+  "version": "2026.10-shadow-1",
+  "timezone": "Asia/Seoul",
+  "daily_cutoff_hour": 5,
+  "weekly_publish_day": 0,
+  "minimum_publishable_axes": 3,
+  "minimum_source_families": 2,
+  "maximum_stale_days": 14,
+  "release_policy": {
+    "mode": "beta_daily",
+    "daily_domains": ["CPR", "STAR", "GOV", "UNI"],
+    "public_domain_labels": {"STAR": "ENT"},
+    "daily_ranking_types": ["T100"],
+    "cohort_rankings_require_exact_quota": true
+  },
+  "axis_weights": {
+    "B": 0.15,
+    "R": 0.25,
+    "I": 0.15,
+    "D": 0.10,
+    "G": 0.20,
+    "E": 0.15
+  },
+  "axis_names": {
+    "B": "Brand Visibility",
+    "R": "Reputation Response",
+    "I": "Identity and Relevance",
+    "D": "Direct Public Experience",
+    "G": "Generated Action",
+    "E": "Ethics and Endurance"
+  },
+  "trust_thresholds": {
+    "A": 85,
+    "B": 70,
+    "C": 55,
+    "D": 0
+  },
+  "review_required": ["R", "E"],
+  "source_quality": {
+    "official": 1.0,
+    "regulatory": 1.0,
+    "public_data": 0.95,
+    "major_news": 0.80,
+    "trade_news": 0.70,
+    "community_index": 0.35
+  },
+  "beta_eligibility": {
+    "CPR": {"minimum_source_families": 2, "minimum_confidence_score": 55},
+    "STAR": {"minimum_source_families": 1, "minimum_confidence_score": 0},
+    "GOV": {"minimum_source_families": 1, "minimum_confidence_score": 0},
+    "UNI": {"minimum_source_families": 1, "minimum_confidence_score": 0}
+  }
+}

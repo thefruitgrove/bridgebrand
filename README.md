@@ -42,6 +42,24 @@ python3 build_spa.py    # site/bridge_full_site.html 단일 배포본
 → (주력) 운영자가 각 기관에서 CSV/엑셀 전체명단 다운로드 후 대조 반영,
    (보조) 대화형 검색으로 개별 R축 탐색. 대부분 연 1회 갱신(주간 갱신은 R축뿐).
 
+## 데일리 자동화
+
+- 매일 05:15 KST에 `.github/workflows/bridge-daily.yml`이 실행된다.
+- CPR·ENT·GOV·UNI 400개 대상을 수집하고 Supabase 원장에 근거·축점수·랭킹을 적재한다.
+- 검증을 통과한 네 영역의 T100만 `site/data/latest.json`으로 공개한다.
+- 내부 도메인 코드 `STAR`는 홈페이지와 공개 JSON에서 `ENT`로 표시한다.
+- 하위랭킹은 모집단 쿼터가 정확히 일치할 때까지 별도 공개 게이트를 적용한다.
+- 기존 주간 수집기는 충돌 방지를 위해 수동 실행 전용으로 전환했다.
+
+GitHub Actions Secrets:
+
+```text
+SUPABASE_URL
+SUPABASE_SECRET_KEY
+DART_API_KEY
+CLOUDFLARE_DEPLOY_HOOK  # 선택 사항; Git 연동만 사용하면 생략 가능
+```
+
 ## 문서
 
 - 쉽게배우는_BRIDGE_교과서.docx — 입문·설명용

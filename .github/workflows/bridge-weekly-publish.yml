@@ -1,0 +1,33 @@
+name: BRIDGE Weekly Publication Gate
+
+on:
+  schedule:
+    - cron: "0 21 * * 0" # 월요일 06:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-weekly-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Verify source health before publication
+        run: python -m bridge_pipeline.run healthcheck
+      - name: Enforce approved target quotas
+        run: python -m bridge_pipeline.run audit-targets
+      - name: Publish only scores that passed the evidence gate
+        run: python -m bridge_pipeline.run publish
+      - name: Export latest approved rankings
+        run: python -m bridge_pipeline.run export

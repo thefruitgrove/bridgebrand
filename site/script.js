@@ -1,4 +1,53 @@
 (function(){
+  // Published Supabase snapshot overlay. The generated HTML remains a safe
+  // fallback, while a valid daily snapshot replaces visible rank fields.
+  (function loadBridgeDailySnapshot(){
+    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var domain = page === 'cpr.html' ? 'CPR' : page === 'gov.html' ? 'GOV' :
+      page === 'uni.html' ? 'UNI' : page === 'star.html' ? 'ENT' : null;
+    fetch('data/latest.json', {cache:'no-store'}).then(function(res){
+      if(!res.ok) throw new Error('snapshot unavailable');
+      return res.json();
+    }).then(function(payload){
+      var rows = (payload.rankings || []).filter(function(r){ return r.ranking_type === 'T100'; });
+      var byKey = {};
+      rows.forEach(function(r){ byKey[r.domain + '|' + r.name] = r; });
+      if(domain){
+        document.querySelectorAll('.rk-row').forEach(function(el){
+          var nameEl = el.querySelector('.nm');
+          if(!nameEl) return;
+          var rec = byKey[domain + '|' + nameEl.textContent.trim()];
+          if(!rec) return;
+          var rankEl = el.querySelector('.rk-num');
+          var scoreEl = el.querySelector('.rk-score');
+          var wowEl = el.querySelector('.rk-wow');
+          var trustEl = el.querySelector('.rk-trust');
+          if(rankEl) rankEl.textContent = String(rec.rank).padStart(2, '0');
+          if(scoreEl) scoreEl.textContent = Number(rec.score).toFixed(1);
+          if(wowEl){
+            var d = Number(rec.rank_change || 0);
+            wowEl.textContent = d > 0 ? '▲ ' + d : d < 0 ? '▼ ' + Math.abs(d) : '— 0';
+          }
+          if(trustEl) trustEl.innerHTML = '<span class="trust-badge grade-' + rec.trust_grade + '">' + rec.trust_grade + '</span>';
+          el.setAttribute('data-live-date', payload.asOfDate || '');
+        });
+      }
+      document.querySelectorAll('#tickerTrack > span').forEach(function(el){
+        var tagEl = el.querySelector('b');
+        if(!tagEl) return;
+        var tag = tagEl.textContent.trim();
+        var name = '';
+        el.childNodes.forEach(function(node){ if(node.nodeType === 3 && !name) name = node.textContent.trim(); });
+        var rec = byKey[tag + '|' + name];
+        if(!rec) return;
+        var score = el.querySelector('.t-score, .t-flat');
+        if(score){ score.className = 't-score'; score.textContent = Number(rec.score).toFixed(1); }
+      });
+    }).catch(function(){
+      // Never replace the last deployed snapshot with zeroes after a failed run.
+    });
+  })();
+
   // ---- LIVE ticker: pause on hover, and a manual play/pause button ----
   var track = document.getElementById('tickerTrack');
   var toggleBtn = document.getElementById('tickerToggle');

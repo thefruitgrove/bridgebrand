@@ -1,13 +1,11 @@
-name: Weekly BRIDGE Collect
+name: Legacy BRIDGE Collect (Manual Only)
 
 # 매주 월요일, DART에서 신규 공시를 수집해 G축을 갱신하고 커밋한다.
 # → 커밋 발생 → Cloudflare Git연동이 자동 빌드·배포.
 # → 이것이 '사람 없는 주간 자동 갱신'의 핵심.
 
 on:
-  schedule:
-    - cron: '0 21 * * 0'      # 일 21:00 UTC = 월 06:00 KST
-  workflow_dispatch:          # 수동 실행 버튼 (테스트용)
+  workflow_dispatch:
 
 permissions:
   contents: write

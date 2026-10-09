@@ -1,0 +1,82 @@
+name: BRIDGE Daily Pipeline
+
+on:
+  schedule:
+    - cron: "15 20 * * *" # 매일 05:15 KST
+  workflow_dispatch:
+    inputs:
+      as_of_date:
+        description: "KST date YYYY-MM-DD; blank means today"
+        required: false
+        type: string
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect-validate-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      AS_OF_DATE: ${{ inputs.as_of_date }}
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Unit and regression tests
+        run: |
+          python -m unittest discover -s tests -v
+          python engine3/test_scoring_v3.py
+
+      - name: Collect daily evidence
+        run: python -m bridge_pipeline.run collect-news ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Refresh DART entity map
+        run: python collectors/corp_code_mapper.py
+
+      - name: Collect regulatory evidence
+        run: python -m bridge_pipeline.run collect-dart ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Compute shadow scores and rankings
+        run: python -m bridge_pipeline.run score ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Publish CPR, ENT, GOV and UNI T100 beta snapshot
+        run: python -m bridge_pipeline.run publish-daily ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Export published snapshot
+        run: python -m bridge_pipeline.run export ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Pipeline health gate
+        run: python -m bridge_pipeline.run healthcheck
+
+      - name: Rebuild static site
+        run: |
+          python build.py
+          python build_spa.py
+
+      - name: Commit reproducible public export
+        run: |
+          git config user.name "bridge-bot"
+          git config user.email "bot@bridgebrand.co.kr"
+          git add site/data/latest.json data/pipeline_status.json site/
+          git diff --cached --quiet && exit 0
+          git commit -m "data: daily BRIDGE refresh $(date +%F)"
+          git push
+
+      - name: Trigger Cloudflare deployment hook
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 3 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
