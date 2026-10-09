@@ -240,6 +240,13 @@ def merge_official_and_flow(official: dict, flow: dict, domain: str) -> dict:
 
 def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     cfg = load_methodology()
+    # 같은 날짜를 재실행할 때 이전 실행의 적격 행이 공개 상태로 남으면 서로
+    # 다른 스냅샷의 순위가 섞인다. 현재 방법론의 당일 공개표시를 먼저 해제하고
+    # 이번 계산에서 통과한 행만 publish 단계에서 다시 공개한다.
+    db.patch(
+        "bridge_rankings", {"published_at": None},
+        f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+    )
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
     since = (as_of - dt.timedelta(days=28)).isoformat()
