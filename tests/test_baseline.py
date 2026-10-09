@@ -2,11 +2,28 @@ import unittest
 
 from bridge_pipeline.baseline import grade, normalize_gov, normalize_uni, percentile
 from bridge_pipeline.cpr_financials import extract_metrics, normalize as normalize_cpr
+from bridge_pipeline.ent_interest import metrics, normalize as normalize_ent, page_title
 from bridge_pipeline.gov_source import convert
 from bridge_pipeline.targets import load_targets, target_quota_report
 
 
 class OfficialBaselineTest(unittest.TestCase):
+    def test_ent_interest_axes_are_behavioral_not_sentiment(self):
+        stable = metrics([100] * 28)
+        rising = metrics([50] * 21 + [200] * 7)
+        self.assertGreater(rising["momentum"], stable["momentum"])
+        self.assertGreater(stable["endurance"], rising["endurance"])
+        rows = normalize_ent([
+            {"external_id": "STAR-001", "title": "A", "days": 28, **stable},
+            {"external_id": "STAR-002", "title": "B", "days": 28, **rising},
+        ], __import__("datetime").date(2026, 10, 10))
+        self.assertEqual({row["axis"] for row in rows}, {"B", "G", "E"})
+        self.assertTrue(any("평판 호감도와 동일시하지 않음" in row["note"] for row in rows))
+
+    def test_ent_ambiguous_titles_have_explicit_overrides(self):
+        self.assertEqual(page_title("김도영"), "김도영 (야구 선수)")
+        self.assertEqual(page_title("수지"), "배수지")
+
     def test_cpr_financial_metrics_and_cohort_percentiles(self):
         rows = [
             {"fs_div": "CFS", "account_nm": "매출액", "thstrm_amount": "1200", "frmtrm_amount": "1000"},
