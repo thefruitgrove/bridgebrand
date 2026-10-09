@@ -19,7 +19,7 @@ on:
 
 concurrency:
   group: bridge-daily-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -96,7 +96,9 @@ jobs:
           # build scripts may touch reproducible working files outside the public export.
           # Discard those ephemeral changes so rebase is never blocked by a dirty runner.
           git restore --worktree .
-          git pull --rebase origin main
+          # During a rebase, "theirs" is the pipeline commit being replayed. Prefer the
+          # newest deterministic export if another run updated the same generated files.
+          git pull --rebase -X theirs origin main
           git push origin HEAD:main
 
       - name: Trigger Cloudflare deployment hook
