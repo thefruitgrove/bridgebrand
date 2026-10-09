@@ -26,6 +26,17 @@ COHORT_CODES = {
     "AN": "AN20",
 }
 
+GOV_NAME_ALIASES = {
+    "재정경제부": ["기획재정부"],
+    "산업통상부": ["산업통상자원부"],
+    "환경부": ["기후에너지환경부"],
+    "여성가족부": ["성평등가족부"],
+    "국가데이터처": ["통계청"],
+    "검찰청": ["대검찰청"],
+    "특허청": ["지식재산처"],
+    "문화재청": ["국가유산청"],
+}
+
 
 def load_targets() -> list[dict]:
     from cpr_real import CPR_REAL
@@ -39,10 +50,11 @@ def load_targets() -> list[dict]:
         subcat = COHORT_CODES.get(item[-1]) if item else None
         rows.append({"domain": "CPR", "external_id": f"CPR-{index:03d}", "name": name, "category": sector, "subcategory": subcat, "aliases": [], "metadata": {"market": market}, "active": True})
     for index, (name, level) in enumerate(GOV_M40, 1):
-        rows.append({"domain": "GOV", "external_id": f"GOV-M{index:02d}", "name": name, "category": level, "subcategory": "GM40", "aliases": [], "metadata": {}, "active": True})
+        rows.append({"domain": "GOV", "external_id": f"GOV-M{index:02d}", "name": name, "category": level, "subcategory": "GM40", "aliases": GOV_NAME_ALIASES.get(name, []), "metadata": {}, "active": True})
     for index, item in enumerate(GOV_C60, 1):
         name, owner, kind = item
-        rows.append({"domain": "GOV", "external_id": f"GOV-C{index:02d}", "name": name, "category": kind, "subcategory": "GC60", "aliases": [], "metadata": {"owner": owner}, "active": True})
+        aliases = [f"{owner} {name}"] if kind == "기초지자체" else []
+        rows.append({"domain": "GOV", "external_id": f"GOV-C{index:02d}", "name": name, "category": kind, "subcategory": "GC60", "aliases": aliases, "metadata": {"owner": owner}, "active": True})
     for index, (name, category, subcat) in enumerate(STAR_REAL, 1):
         rows.append({"domain": "STAR", "external_id": f"STAR-{index:03d}", "name": name, "category": category, "subcategory": COHORT_CODES.get(subcat, subcat), "aliases": [], "metadata": {}, "active": True})
     for index, (name, region, kind) in enumerate(UNI_4YEAR, 1):
