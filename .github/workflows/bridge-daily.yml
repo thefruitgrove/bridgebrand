@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 45
     env:
       TZ: Asia/Seoul
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
       DART_API_KEY: ${{ secrets.DART_API_KEY }}
       AS_OF_DATE: ${{ inputs.as_of_date }}
