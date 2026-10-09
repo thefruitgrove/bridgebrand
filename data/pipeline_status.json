@@ -1,13 +1,5 @@
 {
-  "generatedAt": "2026-10-09T15:55:09.384Z",
-  "asOfDate": "2026-10-09",
-  "recordCount": 12,
-  "status": "published-beta",
-  "domains": {
-    "CPR": 0,
-    "ENT": 0,
-    "GOV": 12,
-    "UNI": 0
-  },
-  "note": "Only records passing the current beta eligibility gate are public."
+  "generatedAt": "2026-10-10T01:35:17.205947+09:00",
+  "asOfDate": "2026-10-10",
+  "recordCount": 63
 }
