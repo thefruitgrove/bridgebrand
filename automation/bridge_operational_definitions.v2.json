@@ -1,0 +1,353 @@
+{
+  "version": "2026.10-operational-2",
+  "model": {
+    "layers": {
+      "baseline": "Official structural and outcome data; annual or quarterly; guarantees comparable coverage.",
+      "flow": "Weekly visibility, response and action signals from news, search and platform metadata.",
+      "issue": "Event heat, verification, response latency, correction reach and recovery."
+    },
+    "domain_layer_weights": {
+      "CPR": {
+        "baseline": 0.4,
+        "flow": 0.45,
+        "issue": 0.15
+      },
+      "ENT": {
+        "baseline": 0.2,
+        "flow": 0.6,
+        "issue": 0.2
+      },
+      "GOV": {
+        "baseline": 0.55,
+        "flow": 0.3,
+        "issue": 0.15
+      },
+      "UNI": {
+        "baseline": 0.7,
+        "flow": 0.2,
+        "issue": 0.1
+      }
+    },
+    "missing_data": "Never replace missing observations with zero. Carry forward official baselines within their validity period; publish confidence and coverage separately.",
+    "normalization": "Winsorized percentile within a declared peer cohort, then 0-100 scaling.",
+    "issue_heat": {
+      "volume": 0.3,
+      "engagement": 0.25,
+      "acceleration": 0.2,
+      "persistence": 0.15,
+      "cross_source": 0.1
+    },
+    "rumor_rule": "Unverified community claims affect Issue Heat and stability only. They do not directly reduce R or E until corroborated and reviewed.",
+    "verification_levels": {
+      "V0": "single anonymous claim",
+      "V1": "repeated claims in one community",
+      "V2": "independent cross-community recurrence",
+      "V3": "major-news coverage or named-party response",
+      "V4": "official, regulatory or judicial confirmation",
+      "V5": "correction, resolution and recovery observed"
+    }
+  },
+  "domains": {
+    "CPR": {
+      "B": [
+        {
+          "metric": "qualified_news_visibility",
+          "definition": "Deduplicated entity-matched news volume, share of voice and 7-day velocity",
+          "sources": [
+            "google_news_rss"
+          ],
+          "cadence": "daily"
+        },
+        {
+          "metric": "search_attention",
+          "definition": "Search-volume index and week-over-week change",
+          "sources": [
+            "naver_datalab"
+          ],
+          "cadence": "weekly"
+        }
+      ],
+      "R": [
+        {
+          "metric": "verified_response_balance",
+          "definition": "Reviewed positive/negative response balance; unverified allegations excluded from score",
+          "sources": [
+            "major_news",
+            "regulatory",
+            "community_index"
+          ],
+          "cadence": "daily"
+        },
+        {
+          "metric": "consumer_issue_change",
+          "definition": "Category-adjusted change in 1372 consultation volume and confirmed recalls or sanctions",
+          "sources": [
+            "kca_1372",
+            "safety_korea",
+            "fair_trade"
+          ],
+          "cadence": "monthly"
+        }
+      ],
+      "I": [
+        {
+          "metric": "identity_relevance",
+          "definition": "Entity-name precision, business-segment coherence and distinctiveness against same-industry peers",
+          "sources": [
+            "opendart",
+            "official_company"
+          ],
+          "cadence": "quarterly"
+        }
+      ],
+      "D": [
+        {
+          "metric": "consumer_experience",
+          "definition": "Complaint, recall, service, safety and customer-support outcomes normalized by exposure",
+          "sources": [
+            "kca_1372",
+            "safety_korea",
+            "major_news"
+          ],
+          "cadence": "monthly"
+        }
+      ],
+      "G": [
+        {
+          "metric": "generated_action",
+          "definition": "Verified launches, contracts, hiring, investment, innovation and audience amplification",
+          "sources": [
+            "opendart",
+            "official_company",
+            "major_news"
+          ],
+          "cadence": "daily"
+        }
+      ],
+      "E": [
+        {
+          "metric": "responsibility_resilience",
+          "definition": "Sanctions, governance, ESG disclosure, response latency, correction reach and 4/12-week recovery",
+          "sources": [
+            "opendart",
+            "fair_trade",
+            "safety_korea",
+            "official_company"
+          ],
+          "cadence": "weekly"
+        }
+      ]
+    },
+    "ENT": {
+      "B": [
+        {
+          "metric": "audience_reach",
+          "definition": "Deduplicated news reach, search attention, video views and week-over-week velocity",
+          "sources": [
+            "google_news_rss",
+            "naver_datalab",
+            "youtube_data"
+          ],
+          "cadence": "daily"
+        }
+      ],
+      "R": [
+        {
+          "metric": "public_response",
+          "definition": "Reviewed reaction balance from news, video comments and licensed community aggregates",
+          "sources": [
+            "major_news",
+            "youtube_data",
+            "community_index"
+          ],
+          "cadence": "daily"
+        }
+      ],
+      "I": [
+        {
+          "metric": "brand_fit",
+          "definition": "Semantic fit between talent identity, audience profile, campaign category and verified endorsement history",
+          "sources": [
+            "campaign_announcements",
+            "official_profiles",
+            "major_news"
+          ],
+          "cadence": "weekly"
+        }
+      ],
+      "D": [
+        {
+          "metric": "audience_experience",
+          "definition": "Engagement quality, repeat audience interaction, event or content reception and complaint signals",
+          "sources": [
+            "youtube_data",
+            "kobis",
+            "community_index"
+          ],
+          "cadence": "weekly"
+        }
+      ],
+      "G": [
+        {
+          "metric": "earned_action",
+          "definition": "View/like/comment acceleration, search lift, cross-platform spread and campaign response",
+          "sources": [
+            "youtube_data",
+            "naver_datalab",
+            "kobis"
+          ],
+          "cadence": "daily"
+        }
+      ],
+      "E": [
+        {
+          "metric": "ethics_recovery",
+          "definition": "Only verified controversies, contract continuity, official response, correction diffusion and recovery time",
+          "sources": [
+            "official_statements",
+            "major_news",
+            "regulatory"
+          ],
+          "cadence": "event"
+        }
+      ]
+    },
+    "GOV": {
+      "B": [
+        {
+          "metric": "public_visibility",
+          "definition": "Qualified policy and institutional coverage, share of voice and owned-channel publication reach",
+          "sources": [
+            "google_news_rss",
+            "policy_briefing",
+            "official_agency"
+          ],
+          "cadence": "daily"
+        }
+      ],
+      "R": [
+        {
+          "metric": "citizen_response",
+          "definition": "Citizen satisfaction, reviewed media response and issue heat separated from factual confirmation",
+          "sources": [
+            "civil_service_eval",
+            "major_news",
+            "community_index"
+          ],
+          "cadence": "weekly"
+        }
+      ],
+      "I": [
+        {
+          "metric": "mandate_coherence",
+          "definition": "Consistency between statutory mandate, policy topics and communicated priorities",
+          "sources": [
+            "government_org",
+            "policy_briefing",
+            "official_agency"
+          ],
+          "cadence": "quarterly"
+        }
+      ],
+      "D": [
+        {
+          "metric": "public_service_experience",
+          "definition": "Civil-service evaluation, complaint handling, grievance processing and satisfaction grade",
+          "sources": [
+            "civil_service_eval",
+            "epeople"
+          ],
+          "cadence": "annual"
+        }
+      ],
+      "G": [
+        {
+          "metric": "policy_outcome",
+          "definition": "Government-performance results, policy outputs, execution and public uptake",
+          "sources": [
+            "government_performance_eval",
+            "policy_briefing",
+            "official_agency"
+          ],
+          "cadence": "quarterly"
+        }
+      ],
+      "E": [
+        {
+          "metric": "integrity_resilience",
+          "definition": "Integrity, audit findings, disclosure quality, correction speed and recovery",
+          "sources": [
+            "integrity_eval",
+            "board_audit",
+            "information_disclosure"
+          ],
+          "cadence": "annual"
+        }
+      ]
+    },
+    "UNI": {
+      "B": [
+        {
+          "metric": "admission_attention",
+          "definition": "Competition, enrollment fill, international-student scale and weekly attention",
+          "sources": [
+            "academyinfo",
+            "google_news_rss"
+          ],
+          "cadence": "annual+weekly"
+        }
+      ],
+      "R": [
+        {
+          "metric": "university_response",
+          "definition": "Licensed or permitted public-reaction aggregates; unverified claims remain an overlay",
+          "sources": [
+            "major_news",
+            "licensed_campus_community"
+          ],
+          "cadence": "weekly"
+        }
+      ],
+      "I": [
+        {
+          "metric": "institutional_distinctiveness",
+          "definition": "Program mix, specialization and differentiation within type, size and region cohorts",
+          "sources": [
+            "academyinfo"
+          ],
+          "cadence": "annual"
+        }
+      ],
+      "D": [
+        {
+          "metric": "student_experience_proxy",
+          "definition": "Retention, inverse dropout, scholarship, education expenditure and dormitory capacity",
+          "sources": [
+            "academyinfo"
+          ],
+          "cadence": "annual"
+        }
+      ],
+      "G": [
+        {
+          "metric": "student_research_outcome",
+          "definition": "Employment adjusted for field mix, research, industry collaboration and technology transfer",
+          "sources": [
+            "academyinfo"
+          ],
+          "cadence": "annual"
+        }
+      ],
+      "E": [
+        {
+          "metric": "educational_endurance",
+          "definition": "Disclosure completeness, financial sustainability and multi-year education-condition trend",
+          "sources": [
+            "academyinfo"
+          ],
+          "cadence": "annual"
+        }
+      ]
+    }
+  }
+}
