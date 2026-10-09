@@ -82,7 +82,8 @@ jobs:
           git add site/data/latest.json data/pipeline_status.json site/
           git diff --cached --quiet && exit 0
           git commit -m "data: daily BRIDGE refresh $(date +%F)"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Trigger Cloudflare deployment hook
         if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
