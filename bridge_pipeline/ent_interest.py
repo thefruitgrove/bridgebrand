@@ -16,7 +16,7 @@ from .baseline import percentile
 from .targets import load_targets
 
 
-API_ROOT = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article"
+ACTION_API = "https://ko.wikipedia.org/w/api.php"
 FIELDS = ["external_id", "axis", "score", "confidence", "coverage", "source_families",
           "evidence_count", "freshness_days", "source_id", "evidence_url", "note"]
 TITLE_OVERRIDES = {
@@ -31,10 +31,16 @@ def page_title(name: str) -> str:
     return TITLE_OVERRIDES.get(name, name)
 
 
-def fetch_daily_views(title: str, start: dt.date, end: dt.date) -> list[int]:
-    article = urllib.parse.quote(title.replace(" ", "_"), safe="")
-    url = f"{API_ROOT}/ko.wikipedia/all-access/user/{article}/daily/{start:%Y%m%d}00/{end:%Y%m%d}00"
-    request = urllib.request.Request(url, headers={"User-Agent": "SignalBridgeBot/1.0 (contact: bridgebrand.co.kr)"})
+def fetch_batch_views(titles: list[str], start: dt.date, end: dt.date) -> dict[str, list[int]]:
+    """Fetch up to 50 titles through MediaWiki's pageviews property in one request."""
+    params = urllib.parse.urlencode({
+        "action": "query", "prop": "pageviews", "titles": "|".join(titles),
+        "redirects": "1", "format": "json", "formatversion": "2",
+    }).encode()
+    request = urllib.request.Request(
+        ACTION_API, data=params,
+        headers={"User-Agent": "SignalBridgeBot/1.0 (contact: bridgebrand.co.kr)"},
+    )
     payload = None
     for attempt in range(5):
         try:
@@ -43,18 +49,32 @@ def fetch_daily_views(title: str, start: dt.date, end: dt.date) -> list[int]:
             break
         except urllib.error.HTTPError as exc:
             if exc.code in {400, 404}:
-                return []
+                return {title: [] for title in titles}
             if exc.code != 429 or attempt == 4:
                 raise
             retry_after = int(exc.headers.get("Retry-After") or 2 ** attempt)
             time.sleep(min(30, max(1, retry_after)))
         except urllib.error.URLError:
             if attempt == 4:
-                return []
+                return {title: [] for title in titles}
             time.sleep(2 ** attempt)
     if payload is None:
-        return []
-    return [int(item.get("views") or 0) for item in payload.get("items") or []]
+        return {title: [] for title in titles}
+    query = payload.get("query") or {}
+    aliases = {item["from"]: item["to"] for item in (query.get("normalized") or [])}
+    aliases.update({item["from"]: item["to"] for item in (query.get("redirects") or [])})
+    pages = {page.get("title"): page for page in (query.get("pages") or [])}
+    result = {}
+    for title in titles:
+        resolved = aliases.get(title, title)
+        resolved = aliases.get(resolved, resolved)
+        pageviews = (pages.get(resolved) or {}).get("pageviews") or {}
+        values = []
+        for offset in range((end - start).days + 1):
+            day = (start + dt.timedelta(days=offset)).isoformat()
+            values.append(int(pageviews.get(day) or 0))
+        result[title] = values if pageviews else []
+    return result
 
 
 def metrics(views: list[int]) -> dict:
@@ -99,14 +119,17 @@ def collect(as_of: dt.date) -> tuple[list[dict], list[str]]:
     start = as_of - dt.timedelta(days=27)
     records, missing = [], []
     targets = [row for row in load_targets() if row["domain"] == "STAR"]
-    for target in targets:
-        title = page_title(target["name"])
-        views = fetch_daily_views(title, start, as_of)
-        if len(views) < 14:
-            missing.append(target["name"])
-        else:
-            records.append({"external_id": target["external_id"], "title": title, "days": len(views), **metrics(views)})
-        time.sleep(0.25)
+    for offset in range(0, len(targets), 50):
+        batch = targets[offset:offset + 50]
+        titles = [page_title(target["name"]) for target in batch]
+        views_by_title = fetch_batch_views(titles, start, as_of)
+        for target, title in zip(batch, titles):
+            views = views_by_title.get(title) or []
+            if len(views) < 14:
+                missing.append(target["name"])
+            else:
+                records.append({"external_id": target["external_id"], "title": title, "days": len(views), **metrics(views)})
+        time.sleep(1)
     return records, missing
 
 
