@@ -93,7 +93,9 @@ def collect_dart(db: SupabaseRest, as_of: dt.date) -> None:
         raise RuntimeError("collectors/corp_code_map.json missing; run corp_code_mapper.py first")
     corp_map = json.loads(map_path.read_text(encoding="utf-8"))
     entities = {r["name"]: r for r in db.select("bridge_entities", "select=id,external_id,name&active=eq.true&domain=in.(CPR,GOV)")}
-    start_date = as_of - dt.timedelta(days=1)
+    # 휴일·주말에도 안정적으로 근거가 남도록 최근 7일을 재수집한다.
+    # raw/signals의 고유키 upsert가 중복을 제거한다.
+    start_date = as_of - dt.timedelta(days=6)
     start = dt.datetime.combine(start_date, dt.time.min, tzinfo=now_kst().tzinfo)
     end = dt.datetime.combine(as_of + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo)
     run_id = _start_run(db, "opendart", start, end)
@@ -203,6 +205,39 @@ def import_official(db: SupabaseRest, csv_path: str, as_of: dt.date) -> None:
     print(f"imported {len(rows)} official axis observations")
 
 
+OFFICIAL_BASELINE_WEIGHTS = {"CPR": 0.55, "STAR": 0.25, "GOV": 0.65, "UNI": 0.78}
+
+
+def merge_official_and_flow(official: dict, flow: dict, domain: str) -> dict:
+    """Preserve official baseline while adding current public-response flow."""
+    baseline_weight = OFFICIAL_BASELINE_WEIGHTS.get(domain, 0.5)
+    flow_weight = 1.0 - baseline_weight
+    official_diag = official.get("diagnostics") or {}
+    flow_diag = flow.get("diagnostics") or {}
+    source_ids = set(official_diag.get("source_ids") or [])
+    if official_diag.get("source_id"):
+        source_ids.add(official_diag["source_id"])
+    source_ids.update(flow_diag.get("source_ids") or [])
+    merged = dict(flow)
+    merged.update({
+        "score": round(float(official["score"]) * baseline_weight + float(flow["score"]) * flow_weight, 2),
+        "confidence": round(float(official["confidence"]) * baseline_weight + float(flow["confidence"]) * flow_weight, 4),
+        "coverage": round(float(official.get("coverage") or 0) * baseline_weight + float(flow.get("coverage") or 0) * flow_weight, 4),
+        "source_families": len(source_ids),
+        "evidence_count": int(official.get("evidence_count") or 0) + int(flow.get("evidence_count") or 0),
+        "freshness_days": min(int(official.get("freshness_days") or 0), int(flow.get("freshness_days") or 0)),
+        "diagnostics": {
+            "aggregation": "official_baseline_plus_public_flow",
+            "baseline_weight": baseline_weight,
+            "flow_weight": flow_weight,
+            "source_ids": sorted(source_ids),
+            "official": official_diag,
+            "flow": flow_diag,
+        },
+    })
+    return merged
+
+
 def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     cfg = load_methodology()
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
@@ -220,6 +255,12 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         domain = entity_by_id.get(entity_id, {}).get("domain")
         max_counts[(domain, axis)] = max(max_counts.get((domain, axis), 0), len(values))
 
+    existing_rows = db.select(
+        "bridge_axis_observations",
+        f"select=entity_id,axis,score,confidence,coverage,source_families,evidence_count,freshness_days,status,diagnostics"
+        f"&as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+    )
+    existing = {(row["entity_id"], row["axis"]): row for row in existing_rows}
     observations: list[dict] = []
     for (entity_id, axis), values in grouped.items():
         entity = entity_by_id.get(entity_id)
@@ -235,14 +276,18 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
             score = 100.0 * math.log1p(count) / math.log1p(max_count) if max_count else None
         families = len({v["source_id"] for v in values})
         confidence = min(1.0, (sum(float(v["confidence"]) for v in values) / count) * min(1.0, count / 5) * min(1.0, families / 2))
-        observations.append({
+        observation = {
             "entity_id": entity_id, "as_of_date": as_of.isoformat(), "axis": axis,
             "score": round(score, 2) if score is not None else None,
             "confidence": round(confidence, 4), "coverage": round(min(1.0, count / 5), 4),
             "source_families": families, "evidence_count": count, "freshness_days": 0,
             "status": "measured", "methodology_version": cfg["version"],
             "diagnostics": {"window_days": 28, "aggregation": "domain_log_count" if axis != "R" else "reviewed_event_decay_pending", "source_ids": sorted({v["source_id"] for v in values})}
-        })
+        }
+        official = existing.get((entity_id, axis))
+        if official and (official.get("diagnostics") or {}).get("source_id"):
+            observation = merge_official_and_flow(official, observation, entity["domain"])
+        observations.append(observation)
     if observations:
         db.upsert("bridge_axis_observations", observations, "entity_id,as_of_date,axis,methodology_version")
 
