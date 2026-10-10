@@ -1,9 +1,9 @@
 {
-  "version": "2026.10-shadow-2",
+  "version": "2026.10-shadow-3",
   "timezone": "Asia/Seoul",
   "daily_cutoff_hour": 5,
   "weekly_publish_day": 0,
-  "minimum_publishable_axes": 3,
+  "minimum_publishable_axes": 2,
   "minimum_source_families": 2,
   "maximum_stale_days": 14,
   "release_policy": {
@@ -11,7 +11,14 @@
     "daily_domains": ["CPR", "STAR", "GOV", "UNI"],
     "public_domain_labels": {"STAR": "ENT"},
     "daily_ranking_types": ["T100"],
-    "cohort_rankings_require_exact_quota": true
+    "cohort_rankings_require_exact_quota": false
+  },
+  "dynamic_universe": {
+    "enabled": true,
+    "candidate_statuses": ["discovered", "review", "promoted"],
+    "minimum_mentions_for_review": 2,
+    "minimum_publishers_for_review": 2,
+    "t100_is_output_not_input": true
   },
   "axis_weights": {
     "B": 0.15,
@@ -22,10 +29,16 @@
     "E": 0.15
   },
   "attention_continuity": {
-    "STAR": 0.35,
-    "CPR": 0.10,
-    "GOV": 0.00,
-    "UNI": 0.00
+    "description": "공중기억 연속성: 언급 존재 자체와 언급 내용의 방향을 분리해 결합한다.",
+    "neutral_score": 50.0,
+    "no_mention_score": 45.0,
+    "mention_base_score": 55.0,
+    "volume_bonus_max": 20.0,
+    "source_diversity_bonus_max": 5.0,
+    "tone_adjustment_max": 20.0,
+    "minimum_diverse_sources": 3,
+    "domain_weight": {"STAR": 0.35, "CPR": 0.10, "GOV": 0.08, "UNI": 0.05},
+    "half_life_days": {"STAR": 7, "CPR": 14, "GOV": 21, "UNI": 28}
   },
   "axis_names": {
     "B": "Brand Visibility",

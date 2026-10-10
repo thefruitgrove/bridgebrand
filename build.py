@@ -492,14 +492,14 @@ INDEX_BODY = '''
 <section class="section tw-about idx-about">
   <div class="wrap">
     <h2 class="tw-about-h">이 페이지에 대하여</h2>
-    <p class="tw-about-p">우리는 순위를 흥정하지 않습니다. 과정 없는 결과는 기만이며, 산출 방식을 숨긴 점수는 신뢰할 수 없기 때문입니다. 상업적 압력으로부터 완벽히 격리된 이 공간에서, BRIDGE가 데이터를 정제하고 평판 신호를 추출하는 모든 뼈대를 투명하게 공개합니다.</p>
+    <p class="tw-about-p">우리는 순위를 흥정하지 않습니다. 평가 철학, 데이터 범위, 신뢰등급과 정정 원칙을 공개하고 상업적 압력으로부터 독립된 기준으로 결과를 제시합니다. 세부 산식과 보정계수는 지수의 일관성과 조작 방지를 위해 내부 검증 규정으로 관리합니다.</p>
   </div>
 </section>
 <section class="section" style="padding-top:8px">
   <div class="wrap">
     <div class="dx-domain" id="philosophy">
       <div class="dx-head"><span class="dx-tag">철학</span><span class="dx-title">순위를 흥정하지 않습니다</span></div>
-      <p class="dx-body">과정 없는 결과는 기만이며, 산출 방식을 숨긴 점수는 신뢰할 수 없습니다. &ldquo;팔리지 않는다&rdquo;는 것은 단순한 수사가 아닌 BRIDGE의 구체적인 약속입니다. 방문자가 늘어난다고 순위가 바뀌지 않으며, 광고비를 대가로 점수를 조정하지 않습니다. 이 공간은 트래픽이나 자본의 논리가 개입할 수 없도록, 우리의 모든 산식과 데이터 통제 과정을 남김없이 공개하는 절대적인 독립 구역입니다.</p>
+      <p class="dx-body">&ldquo;팔리지 않는다&rdquo;는 것은 BRIDGE의 구체적인 약속입니다. 방문자 수나 광고비를 대가로 점수를 조정하지 않습니다. 공개 화면에서는 평가 원칙과 결과의 의미, 데이터 충족 범위와 신뢰등급을 밝히고, 세부 산식은 독립된 내부 검증 규정과 변경 이력으로 통제합니다.</p>
     </div>
 
     <div class="dx-domain" id="why-free">
@@ -511,21 +511,21 @@ INDEX_BODY = '''
       <div class="dx-head"><span class="dx-tag">렌즈</span><span class="dx-title">평판의 6대 축 (B·R·I·D·G·E)</span></div>
       <p class="dx-body">발견(B)에서 시작해 평가(R), 정체성(I), 경험(D), 행동(G), 책임과 지속성(E)으로 이어지는 하나의 흐름입니다. 각 축은 통계적으로 구별되지만 실제 현상에서는 서로 영향을 주고받습니다. 높은 가시성이 긍정 평가로 이어지지 않을 수 있고, 긍정 평가가 행동으로 전환되지 않을 수도 있습니다 — BRIDGE는 바로 이 단절 지점을 찾아 보여줍니다.</p>
       <table class="idx-table">
-        <thead><tr><th>축</th><th>핵심 질문</th><th>대표 관측지표</th></tr></thead>
+        <thead><tr><th>축</th><th>공개 정의</th></tr></thead>
         <tbody>
-          <tr><td><b>B</b> Brand Visibility</td><td>얼마나 발견되고 도달되는가</td><td>검색점유율, 고유기사, 영상도달, 채널다양성</td></tr>
-          <tr><td><b>R</b> Reputation Response</td><td>어떻게 평가되고 반응되는가</td><td>순평판, 신뢰·호감, 분노·실망, 반응지속</td></tr>
-          <tr><td><b>I</b> Identity &amp; Relevance</td><td>무엇으로 구별되고 적합한가</td><td>핵심연상, 의미집중도, 경쟁중복, 메시지적합</td></tr>
-          <tr><td><b>D</b> Direct Public Experience</td><td>어떤 경험이 표현되는가</td><td>품질·서비스·광고·행정 경험, 불만유형</td></tr>
-          <tr><td><b>G</b> Generated Action</td><td>무엇을 하게 만들었는가</td><td>공유·추천·탐색·참여·구매관련 행동신호</td></tr>
-          <tr><td><b>E</b> Ethics &amp; Endurance</td><td>책임 있게 지속·회복하는가</td><td>제재·위기·책임인정·시정·재발·회복속도</td></tr>
+          <tr><td><b>B</b> Brand Visibility</td><td>도달 — 얼마나 널리 발견되는가</td></tr>
+          <tr><td><b>R</b> Reputation Response</td><td>반응 — 공중은 어떻게 응답하는가</td></tr>
+          <tr><td><b>I</b> Identity &amp; Relevance</td><td>정체성 — 무엇으로 기억되는가</td></tr>
+          <tr><td><b>D</b> Direct Public Experience</td><td>경험 — 실제 접점은 어떠한가</td></tr>
+          <tr><td><b>G</b> Generated Action</td><td>행동유발 — 어떤 움직임을 만드는가</td></tr>
+          <tr><td><b>E</b> Ethics &amp; Endurance</td><td>책임·지속 — 신뢰를 얼마나 지켜내는가</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="dx-domain" id="calc">
       <div class="dx-head"><span class="dx-tag">원칙</span><span class="dx-title">타협 없는 데이터 통제</span></div>
-      <p class="dx-body">출처가 명확한 데이터(A·B등급) 위주로 산출하며, 출처 불명의 불확실한 자료(D등급)는 즉각 배제합니다. 수집된 데이터는 관련성, 진정성, 출처 신뢰도, 시간 감쇠 등 5가지 승수 함수를 거치며, 로버스트 표준화(중앙값·MAD 기반)를 통해 통계적 극단치가 제거된 유효가중치만이 점수화됩니다.</p>
+      <p class="dx-body">출처가 확인된 데이터만을 사용하며, 불확실하거나 재현할 수 없는 자료는 공식 점수에서 제외합니다. 수집·식별·중복 제거·교차 검증·시점 확인 절차를 통과한 신호만 BRIDGE 여섯 축에 반영합니다. 세부 변환식과 보정계수는 외부 개입과 역산 조작을 막기 위해 내부 검증 규정으로 관리합니다.</p>
       <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 신뢰등급의 세부 기준은 <a href="trust.html" style="color:var(--gold);">신뢰등급 | 데이터추출</a> 페이지에서 확인하실 수 있습니다.</div>
     </div>
 
@@ -538,7 +538,7 @@ INDEX_BODY = '''
 </section>
 '''
 
-methodology_html = head("INDEX — BRIDGE 방법론·데이터정책", "우리는 순위를 흥정하지 않습니다. BRIDGE가 데이터를 정제하고 평판 신호를 추출하는 모든 뼈대를 투명하게 공개하는, 사이트에서 유일하게 상업적 목적이 없는 화면입니다.") + base_header("INDEX") + '''
+methodology_html = head("INDEX — BRIDGE 방법론·데이터정책", "우리는 순위를 흥정하지 않습니다. BRIDGE의 평가 철학, 데이터 원칙, 신뢰등급과 정정 체계를 공개합니다.") + base_header("INDEX") + '''
 <header class="list-hero-photo hero-methodology">
   <div class="wrap">
     <div class="about-kicker">INDEX · 방법론과 데이터정책</div>
@@ -860,4 +860,13 @@ data_extraction_html = head("BRIDGE — 데이터 추출 방법론", "BRIDGE가 
 </section>
 ''' + footer("index")
 with open(f"{OUT}/data-extraction.html","w",encoding="utf-8") as f: f.write(data_extraction_html)
+
+# site_fix is retained as a compatibility mirror by the legacy deployment layout.
+# Keep it synchronized so an old directly-addressable URL cannot expose stale copy.
+import shutil as _shutil
+_site_fix = os.path.join(OUT, "site_fix")
+os.makedirs(_site_fix, exist_ok=True)
+for _public_file in ("cpr.html", "gov.html", "uni.html", "star.html", "methodology.html",
+                     "this-week.html", "script.js", "style.css"):
+    _shutil.copy2(os.path.join(OUT, _public_file), os.path.join(_site_fix, _public_file))
 print("data-extraction.html written")

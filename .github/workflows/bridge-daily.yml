@@ -50,7 +50,9 @@ jobs:
           python engine3/test_scoring_v3.py
 
       - name: Collect daily evidence
-        run: python -m bridge_pipeline.run collect-news ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+        run: |
+          python -m bridge_pipeline.run discover ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+          python -m bridge_pipeline.run collect-news ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
       - name: Refresh DART entity map
         run: python collectors/corp_code_mapper.py

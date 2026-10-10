@@ -6,13 +6,14 @@ import datetime as dt
 import json
 import math
 import os
+import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
 from urllib.parse import quote
 
 from .core import (
-    ROOT, SupabaseRest, classify_headline, dump_json, fetch_google_news,
+    ROOT, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
     iso_week, load_methodology, now_kst, publication_date, robust_rank,
     trust_grade, weighted_score
 )
@@ -82,6 +83,70 @@ def collect_news(db: SupabaseRest, as_of: dt.date, domain: str | None = None) ->
     except Exception as exc:
         db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "error_code": type(exc).__name__, "error_detail": str(exc)[:2000]}, f"id=eq.{run_id}")
         db.insert("bridge_pipeline_alerts", [{"run_id": run_id, "severity": "critical", "code": "COLLECTOR_FAILED", "message": str(exc)[:1000], "context": {"source": "google_news_rss"}}])
+        raise
+
+
+DISCOVERY_QUERIES = {
+    "CPR": '코스피 코스닥 기업 신제품 실적 논란',
+    "STAR": '광고모델 배우 가수 아이돌 스포츠스타 화제',
+    "GOV": '정부 부처 지자체 정책 민원 발표',
+    "UNI": '대학교 전문대학 입시 교육 연구 논란',
+}
+
+DISCOVERY_PATTERNS = {
+    "GOV": re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:부|청|처|위원회|특별시|광역시|특별자치시|특별자치도|도|시|군|구|공사|공단))(?![가-힣])"),
+    "UNI": re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:대학교|대학))(?![가-힣])"),
+}
+
+
+def discover_candidates(db: SupabaseRest, as_of: dt.date) -> None:
+    """Discover challengers outside the current roster; never auto-publish unverified names."""
+    existing = db.select("bridge_entities", "select=domain,name,aliases")
+    known = {(row["domain"], row["name"]) for row in existing}
+    for row in existing:
+        known.update((row["domain"], alias) for alias in (row.get("aliases") or []))
+    candidate_hits: dict[tuple[str, str], dict] = {}
+    start = dt.datetime.combine(as_of, dt.time.min, tzinfo=now_kst().tzinfo)
+    end = start + dt.timedelta(days=1)
+    run_id = _start_run(db, "google_news_discovery", start, end)
+    fetched = accepted = 0
+    try:
+        for domain, query in DISCOVERY_QUERIES.items():
+            items = fetch_google_news(query, 1)
+            fetched += len(items)
+            pattern = DISCOVERY_PATTERNS.get(domain)
+            if not pattern:
+                # CPR/ENT는 오탐 위험이 높아 기존 사전 밖 이름을 자동 승격하지 않는다.
+                continue
+            for item in items:
+                for name in pattern.findall(item.title):
+                    name = name.strip()
+                    if (domain, name) in known or len(name) < 3:
+                        continue
+                    hit = candidate_hits.setdefault((domain, name), {"publishers": set(), "evidence": []})
+                    hit["publishers"].add(item.publisher or "unknown")
+                    if len(hit["evidence"]) < 5:
+                        hit["evidence"].append({"title": item.title[:180], "url": item.canonical_url, "publisher": item.publisher})
+        rows = []
+        for (domain, name), hit in candidate_hits.items():
+            mentions = len(hit["evidence"])
+            publishers = len(hit["publishers"])
+            score = min(100.0, 12.0 * mentions + 18.0 * publishers)
+            rows.append({"domain": domain, "canonical_name": name, "discovery_score": score,
+                         "mention_count": mentions, "publisher_count": publishers,
+                         "status": "review" if mentions >= 2 and publishers >= 2 else "discovered",
+                         "last_seen_at": now_kst().isoformat(), "evidence": hit["evidence"],
+                         "metadata": {"discovery_date": as_of.isoformat()}})
+        if rows:
+            db.upsert("bridge_entity_candidates", rows, "domain,canonical_name")
+        accepted = len(rows)
+        db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(),
+                 "fetched_count": fetched, "accepted_count": accepted}, f"id=eq.{run_id}")
+        print(f"candidate discovery success: fetched={fetched} candidates={accepted}")
+    except Exception as exc:
+        db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(),
+                 "fetched_count": fetched, "accepted_count": accepted, "error_code": type(exc).__name__,
+                 "error_detail": str(exc)[:2000]}, f"id=eq.{run_id}")
         raise
 
 
@@ -238,6 +303,63 @@ def merge_official_and_flow(official: dict, flow: dict, domain: str) -> dict:
     return merged
 
 
+def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities: list[dict],
+                          score_rows: list[dict], accepted_by_entity: dict[str, list[dict]]) -> None:
+    """Persist level indices separately from additive activity volume."""
+    monday = as_of - dt.timedelta(days=as_of.weekday())
+    previous_monday = monday - dt.timedelta(days=7)
+    history_start = as_of - dt.timedelta(days=371)
+    history = db.select(
+        "bridge_scores",
+        f"select=entity_id,as_of_date,score&as_of_date=gte.{history_start.isoformat()}"
+        f"&as_of_date=lte.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+    )
+    by_entity: dict[str, list[dict]] = {}
+    for row in history:
+        if row.get("score") is not None:
+            by_entity.setdefault(row["entity_id"], []).append(row)
+    current = {row["entity_id"]: row for row in score_rows}
+    metric_rows = []
+    for entity in entities:
+        row = current.get(entity["id"])
+        if not row or row.get("score") is None:
+            continue
+        daily = float(row["score"])
+        dated = [(dt.date.fromisoformat(h["as_of_date"]), float(h["score"])) for h in by_entity.get(entity["id"], [])]
+        this_week = [v for d, v in dated if monday <= d <= as_of]
+        last_week = [v for d, v in dated if previous_monday <= d < monday]
+        weekly = round(sum(this_week) / len(this_week), 2) if this_week else daily
+        previous = round(sum(last_week) / len(last_week), 2) if last_week else None
+        week_buckets: dict[dt.date, list[float]] = {}
+        for day, value in dated:
+            key = day - dt.timedelta(days=day.weekday())
+            week_buckets.setdefault(key, []).append(value)
+        weekly_series = [sum(vals) / len(vals) for _, vals in sorted(week_buckets.items())]
+        cumulative = round(sum(weekly_series) / len(weekly_series), 2) if weekly_series else weekly
+        recent = weekly_series[-4:]
+        weights = [0.1, 0.2, 0.3, 0.4][-len(recent):]
+        momentum = round(sum(v * w for v, w in zip(recent, weights)) / sum(weights), 2) if recent else weekly
+        mean = sum(weekly_series[-12:]) / max(1, len(weekly_series[-12:]))
+        variance = sum((v - mean) ** 2 for v in weekly_series[-12:]) / max(1, len(weekly_series[-12:]))
+        stability = round(max(0.0, 100.0 - math.sqrt(variance) * 5.0), 2)
+        activity = 0.0
+        for signal in accepted_by_entity.get(entity["id"], []):
+            occurred = dt.datetime.fromisoformat(str(signal["occurred_at"]).replace("Z", "+00:00")).date()
+            if occurred == as_of:
+                activity += float(signal.get("magnitude") or 0) * float(signal.get("confidence") or 0)
+        metric_rows.append({
+            "entity_id": entity["id"], "as_of_date": as_of.isoformat(), "daily_index": round(daily, 2),
+            "weekly_index": weekly, "last_week_index": previous,
+            "wow_delta": round(weekly - previous, 2) if previous is not None else 0,
+            "weighted_index": round(daily, 2), "activity_points": round(activity, 2),
+            "cumulative_performance": cumulative, "momentum": momentum, "stability": stability,
+            "observed_days": len(this_week), "methodology_version": cfg["version"],
+            "diagnostics": {"weekly_method": "daily_level_mean", "cumulative_method": "weekly_level_mean"}
+        })
+    if metric_rows:
+        db.upsert("bridge_index_metrics", metric_rows, "entity_id,as_of_date,methodology_version")
+
+
 def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     cfg = load_methodology()
     # 같은 날짜를 재실행할 때 이전 실행의 적격 행이 공개 상태로 남으면 서로
@@ -250,8 +372,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
     since = (as_of - dt.timedelta(days=28)).isoformat()
-    signals = db.select("bridge_signals", f"select=entity_id,axis,direction,magnitude,confidence,occurred_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z")
+    signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z")
     grouped: dict[tuple[str, str], list[dict]] = {}
+    accepted_by_entity: dict[str, list[dict]] = {}
     for signal in signals:
         # 부정 귀속은 사람의 승인을 요구하지만, 명시적인 긍정 반응 신호는
         # 자동 집계한다. 무보도 자체를 부정 감성으로 간주하지는 않는다.
@@ -259,6 +382,7 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         if signal["review_status"] == "rejected" or (needs_review and signal["review_status"] != "approved"):
             continue
         grouped.setdefault((signal["entity_id"], signal["axis"]), []).append(signal)
+        accepted_by_entity.setdefault(signal["entity_id"], []).append(signal)
 
     max_counts: dict[tuple[str, str], int] = {}
     for (entity_id, axis), values in grouped.items():
@@ -339,15 +463,18 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         axis_scores = {o["axis"]: o["score"] for o in obs if o["status"] in {"measured", "carried"}}
         confidences = {o["axis"]: float(o["confidence"]) for o in obs}
         score, confidence_score, axes = weighted_score(axis_scores, confidences, cfg)
-        # 기억 점유/활동 지속성 보정. 28일 적격 뉴스 노출을 동일 영역 내
-        # 로그 정규화하고, ENT 최대 35%, CPR 최대 10%의 감쇠를 적용한다.
-        attention_weight = float((cfg.get("attention_continuity") or {}).get(entity["domain"], 0))
-        attention_count = len(grouped.get((entity["id"], "B"), []))
-        attention_max = max_counts.get((entity["domain"], "B"), 0)
-        attention_index = (math.log1p(attention_count) / math.log1p(attention_max)) if attention_max else 0.0
+        # 공중기억 연속성: 언급 자체의 기억 유지효과와 언급 내용의 방향을
+        # 분리한다. 무언급은 중립보다 소폭 낮게, 오래된 언급은 감쇠한다.
+        attention_cfg = cfg.get("attention_continuity") or {}
+        attention_weight = float((attention_cfg.get("domain_weight") or {}).get(entity["domain"], 0))
+        attention_score, attention_diag = attention_continuity_score(
+            accepted_by_entity.get(entity["id"], []),
+            max_counts.get((entity["domain"], "B"), 0),
+            as_of, entity["domain"], cfg,
+        )
         base_score = score
         if score is not None and attention_weight:
-            score = round(score * ((1.0 - attention_weight) + attention_weight * attention_index), 2)
+            score = round(base_score * (1.0 - attention_weight) + attention_score * attention_weight, 2)
         source_ids = set()
         for observation in obs:
             diagnostics = observation.get("diagnostics") or {}
@@ -365,14 +492,15 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
             "publish_status": status, "methodology_version": cfg["version"],
             "diagnostics": {"source_families": source_families,
                             "base_score_before_attention": base_score,
-                            "attention_count_28d": attention_count,
-                            "attention_index": round(attention_index, 4),
+                            "attention_score": attention_score,
+                            "attention_diagnostics": attention_diag,
                             "attention_weight": attention_weight,
                             "beta_gate": {"minimum_source_families": min_families, "minimum_confidence_score": min_confidence}}
         })
         if eligible:
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
     db.upsert("bridge_scores", score_rows, "entity_id,as_of_date,methodology_version")
+    compute_index_metrics(db, as_of, cfg, entities, score_rows, accepted_by_entity)
 
     previous_rows = db.select("bridge_rankings", f"select=entity_id,rank,score,domain,ranking_type&as_of_date=lt.{as_of.isoformat()}&order=as_of_date.desc&limit=1000")
     previous = {}
@@ -385,7 +513,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         for subcat in sorted({c.get("subcategory") for c in domain_rows if c.get("subcategory")}):
             ranking_types[subcat] = [c for c in domain_rows if c.get("subcategory") == subcat]
         for ranking_type, members in ranking_types.items():
-            for member in robust_rank(members):
+            limits = {"T100": 100, "BC70": 70, "BB30": 30, "AM40": 40, "AW40": 40,
+                      "AN20": 20, "GM40": 40, "GC60": 60, "U60": 60, "C40": 40}
+            for member in robust_rank(members)[:limits.get(ranking_type, 100)]:
                 prev = previous.get((domain, ranking_type, member["id"]))
                 ranking_rows.append({
                     "as_of_date": as_of.isoformat(), "domain": domain, "ranking_type": ranking_type,
@@ -438,7 +568,7 @@ def healthcheck(db: SupabaseRest) -> None:
     latest = {}
     for run in runs:
         latest.setdefault(run["source_id"], run)
-    required = {"google_news_rss", "opendart"}
+    required = {"google_news_discovery", "google_news_rss", "opendart"}
     missing = sorted(required - set(latest))
     critical = [r for r in latest.values() if r["status"] != "success"]
     print(json.dumps({"ok": not critical and not missing, "latestRuns": list(latest.values()), "missingSources": missing}, ensure_ascii=False, indent=2))
@@ -448,7 +578,7 @@ def healthcheck(db: SupabaseRest) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="BRIDGE data automation")
-    parser.add_argument("command", choices=("bootstrap", "audit-targets", "collect-news", "collect-dart", "import-official", "score", "publish-daily", "publish", "export", "healthcheck"))
+    parser.add_argument("command", choices=("bootstrap", "audit-targets", "discover", "collect-news", "collect-dart", "import-official", "score", "publish-daily", "publish", "export", "healthcheck"))
     parser.add_argument("--date")
     parser.add_argument("--domain", choices=("CPR", "STAR", "GOV", "UNI"))
     parser.add_argument("--file")
@@ -459,6 +589,7 @@ def main(argv: list[str] | None = None) -> None:
     elif args.command == "audit-targets":
         if not all(row["exact_match"] for row in audit_targets(db)):
             raise SystemExit(2)
+    elif args.command == "discover": discover_candidates(db, as_of)
     elif args.command == "collect-news": collect_news(db, as_of, args.domain)
     elif args.command == "collect-dart": collect_dart(db, as_of)
     elif args.command == "import-official":

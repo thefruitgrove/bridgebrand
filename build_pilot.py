@@ -2742,36 +2742,47 @@ BRIDGE_MODAL_HTML = '''
     <h3 class="bridge-modal-title" id="bridgeModalTitle">-</h3>
     <p class="bridge-modal-sub" id="bridgeModalSub">-</p>
     <div class="bridge-modal-body">
-      <svg id="bridgeRadar" viewBox="0 0 320 320" class="bridge-radar"></svg>
+      <div class="bridge-radar-stage">
+        <div class="bridge-radar-wordmark" aria-hidden="true"><span>B</span><span>R</span><span>I</span><span>D</span><span>G</span><span>E</span></div>
+        <svg id="bridgeRadar" viewBox="0 0 320 320" class="bridge-radar"></svg>
+      </div>
       <table class="mini-table bridge-modal-table">
         <tr><th>축</th><th>정의</th><th>값</th></tr>
-        <tr><td><span class="axis-badge axis-B">B</span></td><td class="axis-def">도달 — 검색점유율, 고유기사, 영상도달, 채널다양성</td><td class="axis-val" id="bmB">-</td></tr>
-        <tr><td><span class="axis-badge axis-R">R</span></td><td class="axis-def">반응 — 순평판, 신뢰·호감, 분노·실망, 반응지속</td><td class="axis-val" id="bmR">-</td></tr>
-        <tr><td><span class="axis-badge axis-I">I</span></td><td class="axis-def">정체성 — 핵심연상, 의미집중도, 경쟁중복, 메시지적합</td><td class="axis-val" id="bmI">-</td></tr>
-        <tr><td><span class="axis-badge axis-D">D</span></td><td class="axis-def">경험 — 품질·서비스·광고·행정 경험, 불만유형</td><td class="axis-val" id="bmD">-</td></tr>
-        <tr><td><span class="axis-badge axis-G">G</span></td><td class="axis-def">행동유발 — 공유·추천·탐색·참여·구매관련 행동신호</td><td class="axis-val" id="bmG">-</td></tr>
-        <tr><td><span class="axis-badge axis-E">E</span></td><td class="axis-def">책임·지속 — 제재·위기·책임인정·시정·재발·회복속도</td><td class="axis-val" id="bmE">-</td></tr>
+        <tr><td><span class="axis-badge axis-B">B</span></td><td class="axis-def"><b>도달</b> — 얼마나 널리 발견되는가</td><td class="axis-val" id="bmB">-</td></tr>
+        <tr><td><span class="axis-badge axis-R">R</span></td><td class="axis-def"><b>반응</b> — 공중은 어떻게 응답하는가</td><td class="axis-val" id="bmR">-</td></tr>
+        <tr><td><span class="axis-badge axis-I">I</span></td><td class="axis-def"><b>정체성</b> — 무엇으로 기억되는가</td><td class="axis-val" id="bmI">-</td></tr>
+        <tr><td><span class="axis-badge axis-D">D</span></td><td class="axis-def"><b>경험</b> — 실제 접점은 어떠한가</td><td class="axis-val" id="bmD">-</td></tr>
+        <tr><td><span class="axis-badge axis-G">G</span></td><td class="axis-def"><b>행동유발</b> — 어떤 움직임을 만드는가</td><td class="axis-val" id="bmG">-</td></tr>
+        <tr><td><span class="axis-badge axis-E">E</span></td><td class="axis-def"><b>책임·지속</b> — 신뢰를 얼마나 지켜내는가</td><td class="axis-val" id="bmE">-</td></tr>
       </table>
     </div>
     <div class="bridge-modal-score">
-      <div class="bmscore-row bmscore-hl">
-        <span class="bmscore-label">BRIDGE INDEX POINT <span class="bmscore-sub">(비변동성 공시 · 변동성 관측 데이터 통합)</span></span>
+      <div class="bmscore-row bmscore-hl bmscore-primary">
+        <span class="bmscore-label">BRIDGE DAILY INDEX <span class="bmscore-sub">오늘의 평판 수준</span></span>
         <span class="bmscore-value" id="bmIndexPoint">N/R</span>
       </div>
+      <div class="bmscore-row bmscore-hl bmscore-primary">
+        <span class="bmscore-label">BRIDGE WEEKLY INDEX <span class="bmscore-sub">이번 주 대표 평판 수준</span></span>
+        <span class="bmscore-value" id="bmWeekly">N/R</span>
+      </div>
       <div class="bmscore-row">
-        <span class="bmscore-label">BRIDGE INDEX LAST WEEK's POINT <span class="bmscore-sub">(전주 지표)</span></span>
+        <span class="bmscore-label">LAST WEEK INDEX <span class="bmscore-sub">지난주의 대표 평판 수준</span></span>
         <span class="bmscore-value" id="bmLastWeek">N/R</span>
       </div>
       <div class="bmscore-row">
-        <span class="bmscore-label">WoW &Delta; <span class="bmscore-sub">(Week-over-Week · 주간 변동 갱신 지표)</span></span>
+        <span class="bmscore-label">WoW &Delta; <span class="bmscore-sub">전주 대비 변화</span></span>
         <span class="bmscore-value bmscore-wow" id="bmWow">N/R</span>
       </div>
       <div class="bmscore-row bmscore-v3row">
-        <span class="bmscore-label">BRIDGE WEIGHTED INDEX <span class="bmscore-sub">(차등가중 참고지수 · B15·R25·I15·D10·G20·E15)</span></span>
+        <span class="bmscore-label">BRIDGE WEIGHTED INDEX <span class="bmscore-sub">여섯 축을 반영한 종합지수</span></span>
         <span class="bmscore-value" id="bmV3Score">N/R</span>
       </div>
-      <div class="bmscore-row bmscore-hl">
-        <span class="bmscore-label">BRIDGE CUMULATIVE INDEX <span class="bmscore-sub">(누적 포인트 지표)</span></span>
+      <div class="bmscore-row bmscore-hl bmscore-primary">
+        <span class="bmscore-label">BRIDGE ACTIVITY POINTS <span class="bmscore-sub">이번 주 관심·반응·행동의 총량</span></span>
+        <span class="bmscore-value" id="bmActivity">N/R</span>
+      </div>
+      <div class="bmscore-row bmscore-hl bmscore-primary">
+        <span class="bmscore-label">BRIDGE CUMULATIVE PERFORMANCE <span class="bmscore-sub">장기 평판 성과</span></span>
         <span class="bmscore-value" id="bmCumulative">N/R</span>
       </div>
     </div>
@@ -2783,7 +2794,22 @@ BRIDGE_MODAL_HTML = '''
     </div>
   </div>
 </div>
-<script>window.BRIDGE_PILOT_CASES = ''' + _json.dumps(REAL_PILOT_CASES, ensure_ascii=False) + ''';</script>
+<script>window.BRIDGE_PILOT_CASES = ''' + _json.dumps({
+    _name: {
+        "dims": _case.get("dims", {}),
+        "score": _case.get("score"),
+        "daily_index": _case.get("daily_index"),
+        "weekly_index": _case.get("weekly_index"),
+        "activity_points": _case.get("activity_points"),
+        "cumulative_performance": _case.get("cumulative_performance"),
+        "trust": _case.get("trust"),
+        "method": _case.get("method"),
+        "history": [{"score": h.get("score")} for h in _case.get("history", [])],
+        "v3_score": _case.get("v3_score"),
+        "has_revision": bool(_case.get("revision_note")),
+    }
+    for _name, _case in REAL_PILOT_CASES.items()
+}, ensure_ascii=False) + ''';</script>
 '''
 
 
@@ -2954,7 +2980,19 @@ def this_week_digest_entries(limit=20):
         if len([v for v in case.get("dims", {}).values() if v is not None]) < 2:
             continue  # 공개 대상만
         date = _extract_latest_date(case.get("week", ""))
-        headline = case["evidence"][0][0] if case.get("evidence") else "근거 요약 없음"
+        # 공개 화면에는 원천변수·변환식·세부 산출근거를 노출하지 않는다.
+        # 가장 두드러진 유효 축을 BRIDGE 공통 언어로만 요약한다.
+        axis_public = {
+            "B": "도달 — 브랜드의 가시성이 관측되었습니다.",
+            "R": "반응 — 공중의 응답 변화가 관측되었습니다.",
+            "I": "정체성 — 브랜드 고유성이 관측되었습니다.",
+            "D": "경험 — 실제 접점의 변화가 관측되었습니다.",
+            "G": "행동유발 — 공중의 움직임이 관측되었습니다.",
+            "E": "책임·지속 — 신뢰의 지속성이 관측되었습니다.",
+        }
+        valid_dims = [(k, v) for k, v in case.get("dims", {}).items() if isinstance(v, (int, float))]
+        strongest_axis = max(valid_dims, key=lambda kv: kv[1])[0] if valid_dims else None
+        headline = axis_public.get(strongest_axis, "BRIDGE 유효 신호가 관측되었습니다.")
         # WoW 변동 계산 (history 있으면)
         wow = None; is_new = False
         hist = case.get("history", [])
@@ -3014,7 +3052,7 @@ def this_week_digest_html():
     if _week_label: _badge_parts.append(_week_label)
     _badge_parts.append(f"이번 주 변동 {_changed}건")
     latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>'
-    # [2026-10] 영역별 누적점수 TOP15 랭킹 (THIS WEEK 4분할)
+    # 영역별 장기 성과 스냅샷 (THIS WEEK 4분할)
     from collections import defaultdict as _dd
     _dom_rank = _dd(list)
     for _rn, _rc in REAL_PILOT_CASES.items():
@@ -3031,11 +3069,11 @@ def this_week_digest_html():
             _items.append('<li class="twr-item ' + _medal + '"><span class="twr-rank">' + str(_i) + '</span><span class="twr-name">' + esc(_nm) + '</span><span class="twr-score">' + str(_sc) + '</span></li>')
         _block = '<div class="twr-col"><a class="twr-head twr-head-' + _dk.lower() + '" href="' + _page + '">' + _label + ' <span class="twr-head-kor">' + _kor + '</span></a><ol class="twr-list">' + "".join(_items) + '</ol></div>'
         _rank_blocks.append(_block)
-    rank_section = '<section class="section tw-rank-sec"><div class="wrap"><h2 class="tw-about-h">영역별 누적 지수 랭킹 <span class="twr-sub">BRIDGE CUMULATIVE INDEX · 현재 기준</span></h2><div class="twr-grid">' + "".join(_rank_blocks) + '</div></div></section>'
+    rank_section = '<section class="section tw-rank-sec"><div class="wrap"><div class="twr-titleline"><span class="bridge-axis-wordmark" aria-hidden="true"><i>B</i><i>R</i><i>I</i><i>D</i><i>G</i><i>E</i></span><h2 class="tw-about-h">영역별 장기 평판 성과 <span class="twr-sub">CUMULATIVE PERFORMANCE · CURRENT VIEW</span></h2></div><div class="twr-grid">' + "".join(_rank_blocks) + '</div></div></section>'
 
     cards = []
     for name, domain, date, score, trust, method, headline, wow, is_new in rows:
-        method_tag = "비변동성" if "비변동성" in method else "뉴스기반"
+        method_tag = "검증 신호"
         # 날짜 대신 변동 배지: New(신규) / ▲▼ 변동폭 / — (변동없음)
         if is_new:
             badge = '<span class="tw-chip tw-chip-new">NEW</span>'
@@ -3086,15 +3124,14 @@ def this_week_digest_html():
           '아직 측정되지 않음(N/R)'을 뜻하는 정직한 공백입니다.</div>
         </div>
         <div class="tw-read-item">
-          <div class="tw-read-t">다양한 정보의 반영 · 서사</div>
-          <div class="tw-read-d">점수 카드에는 변화를 이끌어낸 최근의 근거 날짜와 헤드라인이 함께 표시됩니다.
-          초대형 사건의 발생이나 시간이 지남에 따른 회복력 등, <b>숫자를 만든 실제 서사</b>를
-          차트와 함께 읽어보십시오.</div>
+          <div class="tw-read-t">신호의 맥락 · 서사</div>
+          <div class="tw-read-d">점수 카드에는 이번 관측에서 두드러진 BRIDGE 축과 변화 방향이 표시됩니다.
+          숫자만이 아니라 브랜드의 현재 위치와 움직임을 함께 읽을 수 있습니다.</div>
         </div>
         <div class="tw-read-item">
-          <div class="tw-read-t">측정 방식의 투명성</div>
-          <div class="tw-read-d">각 데이터가 B·R·I·D·G·E 각 요소의 <b>변동성 지표</b>인지,
-          공식 통계에 기반한 <b>비변동성 지표</b>인지 명시하여 산출 근거의 성격을 직접 제시합니다.</div>
+          <div class="tw-read-t">검증 상태 · 신뢰</div>
+          <div class="tw-read-d">확인된 데이터 범위와 신뢰등급을 함께 제시합니다. 측정되지 않은 값은
+          임의로 채우지 않고 <b>N/R</b>로 남겨 결과의 경계를 분명히 합니다.</div>
         </div>
       </div>
     </div>

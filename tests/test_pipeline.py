@@ -1,6 +1,7 @@
+import datetime as dt
 import unittest
 
-from bridge_pipeline.core import RawItem, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
+from bridge_pipeline.core import RawItem, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
 from bridge_pipeline.run import merge_official_and_flow
 from bridge_pipeline.targets import target_quota_report
 
@@ -8,7 +9,13 @@ from bridge_pipeline.targets import target_quota_report
 CFG = {
     "minimum_publishable_axes": 3,
     "axis_weights": {"B": .15, "R": .25, "I": .15, "D": .10, "G": .20, "E": .15},
-    "trust_thresholds": {"A": 85, "B": 70, "C": 55, "D": 0}
+    "trust_thresholds": {"A": 85, "B": 70, "C": 55, "D": 0},
+    "attention_continuity": {
+        "no_mention_score": 45, "mention_base_score": 55,
+        "volume_bonus_max": 20, "source_diversity_bonus_max": 5,
+        "tone_adjustment_max": 20, "minimum_diverse_sources": 3,
+        "half_life_days": {"STAR": 7, "CPR": 14}
+    }
 }
 
 
@@ -63,6 +70,22 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(merged["score"], 53.0)
         self.assertEqual(merged["source_families"], 2)
         self.assertEqual(merged["evidence_count"], 5)
+
+    def test_no_mention_is_slightly_below_neutral(self):
+        score, diag = attention_continuity_score([], 10, dt.date(2026, 10, 11), "STAR", CFG)
+        self.assertEqual(score, 45)
+        self.assertTrue(diag["no_mention_observed"])
+
+    def test_mention_presence_and_tone_are_separate(self):
+        base = {"id": "1", "raw_item_id": "a", "source_id": "news", "occurred_at": "2026-10-11T00:00:00Z"}
+        neutral = [{**base, "axis": "B", "signal_type": "qualified_visibility", "direction": 1, "magnitude": 1, "confidence": .7}]
+        negative = neutral + [{**base, "id": "2", "axis": "R", "signal_type": "adverse_mention", "direction": -1, "magnitude": 30, "confidence": 1}]
+        neutral_score, neutral_diag = attention_continuity_score(neutral, 10, dt.date(2026, 10, 11), "STAR", CFG)
+        negative_score, negative_diag = attention_continuity_score(negative, 10, dt.date(2026, 10, 11), "STAR", CFG)
+        self.assertGreater(neutral_score, 45)
+        self.assertEqual(neutral_diag["unique_mentions"], 1)
+        self.assertLess(negative_score, neutral_score)
+        self.assertEqual(negative_diag["unique_mentions"], 1)
 
 
 if __name__ == "__main__":

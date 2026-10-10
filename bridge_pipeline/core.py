@@ -194,6 +194,64 @@ def weighted_score(axis_scores: dict[str, float | None], confidences: dict[str, 
     return round(score, 2), round(confidence, 2), sorted(present)
 
 
+def attention_continuity_score(
+    signals: list[dict[str, Any]], domain_max_effective_mentions: float,
+    as_of: dt.date, domain: str, config: dict[str, Any],
+) -> tuple[float, dict[str, Any]]:
+    """언급 존재와 언급 내용의 방향을 분리한 공중기억 연속성 점수."""
+    cfg = config.get("attention_continuity") or {}
+    no_mention = float(cfg.get("no_mention_score", 45.0))
+    mention_base = float(cfg.get("mention_base_score", 55.0))
+    volume_bonus_max = float(cfg.get("volume_bonus_max", 20.0))
+    diversity_bonus_max = float(cfg.get("source_diversity_bonus_max", 5.0))
+    tone_max = float(cfg.get("tone_adjustment_max", 20.0))
+    diverse_target = max(1, int(cfg.get("minimum_diverse_sources", 3)))
+    half_life = max(1.0, float((cfg.get("half_life_days") or {}).get(domain, 14)))
+
+    mentions: dict[str, float] = {}
+    sources: set[str] = set()
+    positive = adverse = 0.0
+    for signal in signals:
+        occurred = str(signal.get("occurred_at") or "")
+        try:
+            occurred_date = dt.datetime.fromisoformat(occurred.replace("Z", "+00:00")).date()
+        except ValueError:
+            occurred_date = as_of
+        age = max(0, (as_of - occurred_date).days)
+        decay = 0.5 ** (age / half_life)
+        raw_key = str(signal.get("raw_item_id") or signal.get("id") or stable_hash(signal.get("source_id"), occurred, signal.get("signal_type")))
+        if signal.get("axis") == "B" and signal.get("signal_type") == "qualified_visibility":
+            mentions[raw_key] = max(mentions.get(raw_key, 0.0), decay)
+            if signal.get("source_id"):
+                sources.add(str(signal["source_id"]))
+        if signal.get("axis") == "R":
+            strength = float(signal.get("magnitude") or 0) * float(signal.get("confidence") or 0) * decay
+            if int(signal.get("direction") or 0) > 0:
+                positive += strength
+            elif int(signal.get("direction") or 0) < 0:
+                adverse += strength
+
+    effective_mentions = sum(mentions.values())
+    volume_index = tone_balance = 0.0
+    if effective_mentions <= 0:
+        score = no_mention
+    else:
+        max_mentions = max(effective_mentions, float(domain_max_effective_mentions or 0))
+        volume_index = math.log1p(effective_mentions) / math.log1p(max_mentions)
+        tone_total = positive + adverse
+        tone_balance = (positive - adverse) / tone_total if tone_total else 0.0
+        diversity_index = min(1.0, len(sources) / diverse_target)
+        score = mention_base + volume_bonus_max * volume_index + diversity_bonus_max * diversity_index + tone_max * tone_balance
+    score = round(max(0.0, min(100.0, score)), 2)
+    return score, {
+        "effective_mentions": round(effective_mentions, 4), "unique_mentions": len(mentions),
+        "source_families": len(sources), "volume_index": round(volume_index, 4),
+        "positive_strength": round(positive, 4), "adverse_strength": round(adverse, 4),
+        "tone_balance": round(tone_balance, 4), "half_life_days": half_life,
+        "no_mention_observed": effective_mentions <= 0,
+    }
+
+
 def trust_grade(confidence_score: float, config: dict[str, Any]) -> str:
     for grade in ("A", "B", "C", "D"):
         if confidence_score >= config["trust_thresholds"][grade]:

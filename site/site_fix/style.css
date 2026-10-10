@@ -239,10 +239,18 @@ ul{list-style:none;}
 .bridge-modal-title{ font-family:var(--serif); font-size:30px; margin-bottom:6px;}
 .bridge-modal-sub{ font-size:12.5px; color:#8b8779; margin-bottom:24px;}
 .bridge-modal-body{ display:grid; grid-template-columns:280px 1fr; gap:28px; align-items:start;}
-.bridge-radar{ width:100%; height:auto;}
+.bridge-radar-stage{ position:relative; padding:12px; border:1px solid #e4dfd2; border-radius:18px;
+  background:radial-gradient(circle at 50% 48%,#fff 0,#f7f4ec 62%,#eee8db 100%); overflow:hidden; }
+.bridge-radar-stage::after{ content:""; position:absolute; inset:10px; border:1px solid rgba(169,136,79,.18); border-radius:14px; pointer-events:none; }
+.bridge-radar{ position:relative; z-index:2; width:100%; height:auto; filter:drop-shadow(0 8px 18px rgba(62,49,25,.08));}
+.bridge-radar-wordmark{ position:absolute; inset:auto 16px 13px; display:flex; justify-content:center; gap:4px;
+  opacity:.2; font-family:var(--serif); font-size:10px; font-weight:800; letter-spacing:.08em; }
+.bridge-radar-wordmark span{ display:grid; place-items:center; width:18px; height:18px; border:1px solid currentColor; border-radius:50%; }
 .bridge-modal-table{ font-size:12.5px;}
 .bridge-modal-score{ margin-top:24px; border-top:1px solid var(--line); padding-top:18px; display:flex; flex-direction:column; gap:10px;}
-.bmscore-row{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px;}
+.bmscore-row{ display:flex; justify-content:space-between; align-items:baseline; gap:20px; font-size:13px;
+  padding:9px 12px; border-bottom:1px solid rgba(222,218,209,.75); }
+.bmscore-row:last-child{ border-bottom:0; }
 .bmscore-label{ font-weight:700; letter-spacing:.03em;}
 .bmscore-sub{ font-weight:400; font-size:11px; color:#8b8779; margin-left:4px;}
 .bmscore-value{ font-family:var(--serif); font-size:22px; color:#9a968a;}
@@ -497,6 +505,7 @@ footer .logo .op{ color:#7c86a0;}
    ============================================================ */
 .rk-panel{ display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:16px; }
 .rk-panel.hidden{ display:none; }
+.live-snapshot-note{margin:14px 0 10px;padding:11px 14px;border-left:2px solid var(--gold);background:rgba(169,136,79,.08);font-size:12px;letter-spacing:.03em;color:var(--muted)}
 
 .rk-row{
   display:flex; flex-direction:column; gap:10px;
@@ -819,5 +828,67 @@ footer .logo .op{ color:#7c86a0;}
 @media (max-width:600px){ .bridge-modal-table .axis-def{ font-size:11px; white-space:normal; } }
 
 /* [2026-10] 하단 지표 — 중요 지표 회색 배경 강조 */
-.bmscore-hl{ background:#efefe9; border-radius:8px; padding:10px 12px !important; margin:2px 0; }
-.bmscore-hl .bmscore-value{ font-weight:800; }
+.bmscore-hl{ background:linear-gradient(120deg,#17243a 0%,#263c5d 100%); border:1px solid #314969;
+  border-radius:10px; padding:12px 14px !important; margin:3px 0; box-shadow:0 5px 16px rgba(20,34,54,.11); }
+.bmscore-hl .bmscore-label,.bmscore-hl .bmscore-value{ color:#fff; font-weight:800; }
+.bmscore-hl .bmscore-sub{ color:rgba(255,255,255,.64); }
+.bmscore-primary .bmscore-value{ color:#f0d98a; }
+
+.twr-titleline{ display:flex; align-items:center; gap:16px; }
+.bridge-axis-wordmark{ display:flex; flex:0 0 auto; }
+.bridge-axis-wordmark i{ display:grid; place-items:center; width:25px; height:25px; margin-left:-3px; border-radius:50%;
+  border:1px solid rgba(169,136,79,.56); background:rgba(255,255,255,.92); color:#725b2c;
+  font-family:var(--serif); font-size:11px; font-style:normal; font-weight:800; box-shadow:0 3px 10px rgba(50,40,20,.06); }
+.bridge-axis-wordmark i:first-child{ margin-left:0; }
+
+/* [2026-10] THIS WEEK 변동 칩 (날짜 대체) */
+.tw-chip{ display:inline-block; padding:2px 9px; border-radius:11px; font-size:11px; font-weight:800; letter-spacing:.02em; }
+.tw-chip-new{ background:#c0392b; color:#fff; }
+.tw-chip-up{ background:#e3f2e8; color:#2e7d5a; }
+.tw-chip-down{ background:#fdeaea; color:#c0392b; }
+.tw-chip-flat{ background:#efece5; color:#9a958a; }
+
+/* [2026-10] THIS WEEK 영역별 누적 랭킹 TOP15 (4분할) */
+.tw-rank-sec{ padding-top:8px; padding-bottom:8px; }
+.twr-sub{ font-size:12px; font-weight:400; color:#9a958a; letter-spacing:.02em; margin-left:8px; }
+.twr-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; margin-top:18px; }
+.twr-col{ background:#fff; border:1px solid #ece6d6; border-radius:12px; padding:16px 18px; }
+.twr-head{ display:flex; align-items:center; gap:8px; font-family:var(--myeongjo,serif); font-weight:800;
+  font-size:17px; color:#fff; padding:8px 14px; border-radius:8px; text-decoration:none; margin-bottom:12px; }
+.twr-head-kor{ font-size:12px; font-weight:400; opacity:.85; }
+.twr-head-cpr{ background:#1f3a5f; } .twr-head-gov{ background:#2e6b57; }
+.twr-head-uni{ background:#6b4a8a; } .twr-head-ent{ background:#a8434f; }
+.twr-list{ list-style:none; margin:0; padding:0; }
+.twr-item{ display:grid; grid-template-columns:26px 1fr auto; align-items:center; gap:10px;
+  padding:7px 4px; border-bottom:1px solid #f2efe8; font-size:14px; }
+.twr-item:last-child{ border-bottom:none; }
+.twr-rank{ font-weight:800; color:#b0ab9e; text-align:center; font-size:13px; }
+.twr-top3 .twr-rank{ color:#c9a84a; font-size:15px; }
+.twr-name{ color:#2a2621; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.twr-top3 .twr-name{ font-weight:700; }
+.twr-score{ font-family:var(--myeongjo,serif); font-weight:700; color:var(--navy); font-size:15px; }
+@media (max-width:760px){ .twr-grid{ grid-template-columns:1fr; gap:16px; } }
+
+/* [2026-10] 모바일 세부 다듬기 (오늘 추가분 최적화) */
+@media (max-width:600px){
+  /* 랭킹 제목 부제 — 줄바꿈 깔끔하게 */
+  .tw-rank-sec .tw-about-h{ font-size:19px; line-height:1.4; }
+  .twr-sub{ display:block; margin-left:0; margin-top:3px; font-size:11px; }
+  /* 랭킹 상단 여백 축소 */
+  .tw-rank-sec{ padding-top:4px; }
+  /* 랭킹 항목 터치 영역·가독성 */
+  .twr-item{ padding:9px 2px; font-size:14.5px; }
+  .twr-head{ font-size:16px; padding:9px 14px; }
+  /* 모달 5단 지표 — 라벨/부제 모바일 정리 */
+  .bmscore-row{ flex-wrap:wrap; align-items:baseline; }
+  .bmscore-label{ font-size:13px; font-weight:700; flex:1 1 auto; }
+  .bmscore-sub{ display:block; font-size:10.5px; color:#9a958a; font-weight:400; margin-top:1px; width:100%; }
+  .bmscore-value{ font-size:17px; flex:0 0 auto; }
+  .bmscore-hl{ padding:9px 11px !important; }
+  /* 모달 다이어그램 정의 — 2줄 허용하되 간결 */
+  .bridge-modal-table .axis-def{ font-size:11.5px; line-height:1.35; }
+  .bridge-modal-table .axis-val{ font-size:14px; }
+  .axis-badge{ width:23px; height:23px; line-height:23px; font-size:13px; }
+  /* THIS WEEK 변동칩 — 터치 가독성 */
+  .tw-chip{ font-size:10.5px; padding:2px 8px; }
+}
