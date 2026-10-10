@@ -1,5 +1,5 @@
 {
-  "version": "2026.10-shadow-1",
+  "version": "2026.10-shadow-2",
   "timezone": "Asia/Seoul",
   "daily_cutoff_hour": 5,
   "weekly_publish_day": 0,
@@ -20,6 +20,12 @@
     "D": 0.10,
     "G": 0.20,
     "E": 0.15
+  },
+  "attention_continuity": {
+    "STAR": 0.35,
+    "CPR": 0.10,
+    "GOV": 0.00,
+    "UNI": 0.00
   },
   "axis_names": {
     "B": "Brand Visibility",
