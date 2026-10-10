@@ -10,7 +10,7 @@ on:
       - 'real_data/**'
   schedule:
     - cron: "15 20 * * *" # 매일 05:15 KST
-    - cron: "35 21 * * *" # one-time production activation; remove after verified run
+    - cron: "45 21 * * *" # one-time production activation; remove after verified run
   workflow_dispatch:
     inputs:
       as_of_date:
