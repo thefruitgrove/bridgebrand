@@ -1,6 +1,6 @@
 (function(){
-  // Published Supabase snapshot overlay. The generated HTML remains a safe
-  // fallback, while a valid daily snapshot replaces visible rank fields.
+  // Published Supabase snapshot. A valid daily snapshot rebuilds the public
+  // T100 list in score/rank order; static HTML is fallback only.
   (function loadBridgeDailySnapshot(){
     var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var domain = page === 'cpr.html' ? 'CPR' : page === 'gov.html' ? 'GOV' :
@@ -10,38 +10,50 @@
       return res.json();
     }).then(function(payload){
       var rows = (payload.rankings || []).filter(function(r){ return r.ranking_type === 'T100'; });
-      var byKey = {};
-      rows.forEach(function(r){ byKey[r.domain + '|' + r.name] = r; });
-      if(domain){
-        document.querySelectorAll('.rk-row').forEach(function(el){
-          var nameEl = el.querySelector('.nm');
-          if(!nameEl) return;
-          var rec = byKey[domain + '|' + nameEl.textContent.trim()];
-          if(!rec) return;
-          var rankEl = el.querySelector('.rk-num');
-          var scoreEl = el.querySelector('.rk-score');
-          var wowEl = el.querySelector('.rk-wow');
-          var trustEl = el.querySelector('.rk-trust');
-          if(rankEl) rankEl.textContent = String(rec.rank).padStart(2, '0');
-          if(scoreEl) scoreEl.textContent = Number(rec.score).toFixed(1);
-          if(wowEl){
-            var d = Number(rec.rank_change || 0);
-            wowEl.textContent = d > 0 ? '▲ ' + d : d < 0 ? '▼ ' + Math.abs(d) : '— 0';
-          }
-          if(trustEl) trustEl.innerHTML = '<span class="trust-badge grade-' + rec.trust_grade + '">' + rec.trust_grade + '</span>';
-          el.setAttribute('data-live-date', payload.asOfDate || '');
-        });
+      rows.sort(function(a,b){ return Number(a.rank)-Number(b.rank) || Number(b.score)-Number(a.score); });
+      function esc(v){ var d=document.createElement('div'); d.textContent=String(v==null?'':v); return d.innerHTML; }
+      function change(rec){
+        var d=Number(rec.rank_change||0), cls=d>0?'wow-up':d<0?'wow-down':'wow-flat';
+        return '<span class="wow '+cls+'">'+(d>0?'▲ '+d:d<0?'▼ '+Math.abs(d):'— 0')+'</span>';
       }
-      document.querySelectorAll('#tickerTrack > span').forEach(function(el){
-        var tagEl = el.querySelector('b');
-        if(!tagEl) return;
-        var tag = tagEl.textContent.trim();
-        var name = '';
-        el.childNodes.forEach(function(node){ if(node.nodeType === 3 && !name) name = node.textContent.trim(); });
-        var rec = byKey[tag + '|' + name];
-        if(!rec) return;
-        var score = el.querySelector('.t-score, .t-flat');
-        if(score){ score.className = 't-score'; score.textContent = Number(rec.score).toFixed(1); }
+      function rankRow(rec){
+        var n=Number(rec.rank), top=n<=3?' top3':'';
+        return '<div class="rk-row live-row'+top+'" data-live-date="'+esc(payload.asOfDate||'')+'">'+
+          '<div class="rk-num">'+String(n).padStart(2,'0')+'</div>'+
+          '<div class="rk-name"><div class="nm">'+esc(rec.name)+'</div><div class="sub">'+esc(rec.external_id)+' · '+esc(rec.category||'')+' · '+esc(rec.subcategory||'T100')+'</div></div>'+
+          '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div>'+
+          '<div class="rk-dims"><span class="dm">실측 공개적격 · '+esc(payload.asOfDate||'')+'</span></div>'+
+          '<div class="rk-score">'+Number(rec.score).toFixed(1)+'</div>'+
+          '<div class="rk-wow">'+change(rec)+'</div>'+
+          '<div class="rk-trust"><span class="trust-badge grade-'+esc(rec.trust_grade)+'">'+esc(rec.trust_grade)+'</span></div></div>';
+      }
+      if(domain){
+        var live=rows.filter(function(r){return r.domain===domain;});
+        var prefix=domain==='ENT'?'star':domain.toLowerCase(), panel=document.getElementById(prefix+'-t100');
+        if(panel){ panel.innerHTML=live.map(rankRow).join(''); panel.setAttribute('data-shown','1000'); }
+        var btn=document.querySelector('.seg-btn[data-target="'+prefix+'-t100"] span');
+        if(btn) btn.textContent=live.length+'/100';
+        if(panel){
+          var note=document.createElement('div'); note.className='live-snapshot-note';
+          note.textContent='실측 공개 '+live.length+' / 100 · '+(payload.asOfDate||'')+' · 공개적격 전 대상 표시';
+          panel.parentNode.insertBefore(note,panel);
+        }
+      }
+      // 주식시황형 LIVE 바: CPR 1~10, ENT 1~10, GOV 1~10,
+      // CPR 11~20, ENT 11~20, GOV 11~20. 각 영역 50위까지만 사용한다.
+      var track=document.getElementById('tickerTrack');
+      if(track){
+        function take(d,a,b){return rows.filter(function(r){return r.domain===d&&Number(r.rank)>=a&&Number(r.rank)<=b&&Number(r.rank)<=50;});}
+        var seq=[].concat(take('CPR',1,10),take('ENT',1,10),take('GOV',1,10),take('CPR',11,20),take('ENT',11,20),take('GOV',11,20));
+        var html=seq.map(function(r){var d=Number(r.rank_change||0);return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d>0?'+'+d:d)+'</i></span>';}).join('');
+        track.innerHTML=html+html;
+      }
+      // THIS WEEK의 네 영역 목록도 같은 스냅샷으로 교체한다.
+      document.querySelectorAll('.twr-col').forEach(function(col){
+        var h=col.querySelector('.twr-head'), list=col.querySelector('.twr-list'); if(!h||!list)return;
+        var d=(h.textContent.trim().match(/^(CPR|GOV|UNI|ENT)/)||[])[1]; if(!d)return;
+        var live=rows.filter(function(r){return r.domain===d;}).slice(0,15);
+        list.innerHTML=live.map(function(r){return '<li class="twr-item '+(Number(r.rank)<=3?'twr-top3':'')+'"><span class="twr-rank">'+r.rank+'</span><span class="twr-name">'+esc(r.name)+'</span><span class="twr-score">'+Number(r.score).toFixed(1)+'</span></li>';}).join('');
       });
     }).catch(function(){
       // Never replace the last deployed snapshot with zeroes after a failed run.

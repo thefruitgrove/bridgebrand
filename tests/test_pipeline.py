@@ -22,6 +22,13 @@ class PipelineTest(unittest.TestCase):
         adverse = [s for s in signals if s.axis == "R"]
         self.assertEqual(adverse[0].review_status, "pending")
 
+    def test_ent_commercial_and_response_signals_are_separate(self):
+        item = RawItem("google_news_rss", "2", "아이유 브랜드 광고 캠페인 화제", "https://x", "신문", None, {}, "h2")
+        signals = classify_headline(item, "STAR-001", "아이유")
+        self.assertIn("I", {s.axis for s in signals})
+        positive_r = [s for s in signals if s.axis == "R" and s.direction > 0]
+        self.assertEqual(positive_r[0].signal_type, "positive_public_response")
+
     def test_missing_axes_are_not_zero(self):
         score, confidence, axes = weighted_score({"B": 80, "R": 70, "I": None, "D": None, "G": None, "E": None}, {"B": .8, "R": .8}, CFG)
         self.assertIsNone(score)

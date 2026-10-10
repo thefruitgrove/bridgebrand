@@ -152,6 +152,8 @@ POSITIVE = {
     "수주": 2, "신제품": 1, "출시": 1, "돌파": 2, "혁신": 2, "개선": 1
 }
 EXPERIENCE = {"서비스", "품질", "고객", "민원", "사용자", "안전", "지원"}
+COMMERCIAL_RELEVANCE = {"광고", "광고모델", "전속모델", "브랜드", "앰배서더", "캠페인", "화보", "협찬", "CF"}
+REPUTATION_RESPONSE = {"호평", "화제", "인기", "흥행", "완판", "선호", "팬덤", "반응", "찬사"}
 
 
 def entity_match(title: str, name: str, aliases: Iterable[str] = ()) -> bool:
@@ -171,6 +173,10 @@ def classify_headline(item: RawItem, external_id: str, name: str, aliases: Itera
         signals.append(Signal(external_id, "R", "adverse_mention", -1, min(100.0, neg * 8.0), 0.55, occurred, "pending", "부정 키워드 탐지이며 사실관계와 귀속은 검토 전", item.content_hash))
     if pos:
         signals.append(Signal(external_id, "G", "verified_action_candidate", 1, min(100.0, pos * 7.0), 0.60, occurred, "auto", "성과·행동 키워드가 포함된 공개 보도", item.content_hash))
+    if any(word in title for word in COMMERCIAL_RELEVANCE):
+        signals.append(Signal(external_id, "I", "commercial_relevance", 1, 14.0, 0.65, occurred, "auto", "광고·브랜드 적합성 맥락의 공개 보도", item.content_hash))
+    if any(word in title for word in REPUTATION_RESPONSE):
+        signals.append(Signal(external_id, "R", "positive_public_response", 1, 12.0, 0.55, occurred, "auto", "대중 반응을 명시한 공개 보도", item.content_hash))
     if any(word in title for word in EXPERIENCE):
         signals.append(Signal(external_id, "D", "experience_mention", 0, 12.0, 0.45, occurred, "auto", "경험 관련 공개 보도 포착", item.content_hash))
     signals.append(Signal(external_id, "B", "qualified_visibility", 1, 1.0, 0.70, occurred, "auto", "정확한 대상명과 일치한 고유 기사", item.content_hash))

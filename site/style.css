@@ -497,6 +497,7 @@ footer .logo .op{ color:#7c86a0;}
    ============================================================ */
 .rk-panel{ display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:16px; }
 .rk-panel.hidden{ display:none; }
+.live-snapshot-note{margin:14px 0 10px;padding:11px 14px;border-left:2px solid var(--gold);background:rgba(169,136,79,.08);font-size:12px;letter-spacing:.03em;color:var(--muted)}
 
 .rk-row{
   display:flex; flex-direction:column; gap:10px;

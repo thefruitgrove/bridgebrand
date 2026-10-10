@@ -253,7 +253,10 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     signals = db.select("bridge_signals", f"select=entity_id,axis,direction,magnitude,confidence,occurred_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z")
     grouped: dict[tuple[str, str], list[dict]] = {}
     for signal in signals:
-        if signal["review_status"] == "rejected" or (signal["axis"] in cfg["review_required"] and signal["review_status"] != "approved"):
+        # 부정 귀속은 사람의 승인을 요구하지만, 명시적인 긍정 반응 신호는
+        # 자동 집계한다. 무보도 자체를 부정 감성으로 간주하지는 않는다.
+        needs_review = signal["axis"] in cfg["review_required"] and int(signal["direction"]) < 0
+        if signal["review_status"] == "rejected" or (needs_review and signal["review_status"] != "approved"):
             continue
         grouped.setdefault((signal["entity_id"], signal["axis"]), []).append(signal)
 
@@ -278,7 +281,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         if axis == "R":
             penalty = sum(float(v["magnitude"]) * float(v["confidence"]) for v in values if int(v["direction"]) < 0)
             benefit = sum(float(v["magnitude"]) * float(v["confidence"]) for v in values if int(v["direction"]) > 0)
-            score = max(0.0, min(100.0, 100.0 - penalty + min(penalty, benefit)))
+            # 반응은 중립점 50에서 시작한다. 반응이 없다는 이유만으로 긍정
+            # 100점을 부여하던 종전 구조를 제거한다.
+            score = max(0.0, min(100.0, 50.0 + benefit - penalty))
         else:
             score = 100.0 * math.log1p(count) / math.log1p(max_count) if max_count else None
         families = len({v["source_id"] for v in values})
@@ -295,6 +300,31 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         if official and (official.get("diagnostics") or {}).get("source_id"):
             observation = merge_official_and_flow(official, observation, entity["domain"])
         observations.append(observation)
+
+    # 뉴스 검색을 실제 수행했으나 적격 노출/브랜드 맥락이 한 건도 없었던
+    # 경우는 '결측'이 아니라 관측된 0이다. ENT와 CPR에서만 적용한다.
+    # R은 감성 축이므로 무보도를 부정 반응으로 위조하지 않는다.
+    observed_keys = {(row["entity_id"], row["axis"]) for row in observations}
+    for entity in entities:
+        if entity["domain"] not in {"STAR", "CPR"}:
+            continue
+        for axis in ("B", "I"):
+            key = (entity["id"], axis)
+            if key in observed_keys:
+                continue
+            zero = {
+                "entity_id": entity["id"], "as_of_date": as_of.isoformat(), "axis": axis,
+                "score": 0.0, "confidence": 0.70 if axis == "B" else 0.60,
+                "coverage": 1.0, "source_families": 1, "evidence_count": 0,
+                "freshness_days": 0, "status": "measured", "methodology_version": cfg["version"],
+                "diagnostics": {"window_days": 28, "aggregation": "observed_zero_news_monitoring",
+                                "source_ids": ["google_news_rss"], "meaning": "검색 수행 후 적격 신호 0건"}
+            }
+            official = existing.get(key)
+            if official and (official.get("diagnostics") or {}).get("source_id"):
+                zero = merge_official_and_flow(official, zero, entity["domain"])
+            observations.append(zero)
+            observed_keys.add(key)
     if observations:
         db.upsert("bridge_axis_observations", observations, "entity_id,as_of_date,axis,methodology_version")
 
@@ -309,6 +339,15 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         axis_scores = {o["axis"]: o["score"] for o in obs if o["status"] in {"measured", "carried"}}
         confidences = {o["axis"]: float(o["confidence"]) for o in obs}
         score, confidence_score, axes = weighted_score(axis_scores, confidences, cfg)
+        # 기억 점유/활동 지속성 보정. 28일 적격 뉴스 노출을 동일 영역 내
+        # 로그 정규화하고, ENT 최대 35%, CPR 최대 10%의 감쇠를 적용한다.
+        attention_weight = float((cfg.get("attention_continuity") or {}).get(entity["domain"], 0))
+        attention_count = len(grouped.get((entity["id"], "B"), []))
+        attention_max = max_counts.get((entity["domain"], "B"), 0)
+        attention_index = (math.log1p(attention_count) / math.log1p(attention_max)) if attention_max else 0.0
+        base_score = score
+        if score is not None and attention_weight:
+            score = round(score * ((1.0 - attention_weight) + attention_weight * attention_index), 2)
         source_ids = set()
         for observation in obs:
             diagnostics = observation.get("diagnostics") or {}
@@ -324,7 +363,12 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
             "entity_id": entity["id"], "as_of_date": as_of.isoformat(), "score": score,
             "confidence_score": confidence_score, "trust_grade": grade, "axes_used": axes,
             "publish_status": status, "methodology_version": cfg["version"],
-            "diagnostics": {"source_families": source_families, "beta_gate": {"minimum_source_families": min_families, "minimum_confidence_score": min_confidence}}
+            "diagnostics": {"source_families": source_families,
+                            "base_score_before_attention": base_score,
+                            "attention_count_28d": attention_count,
+                            "attention_index": round(attention_index, 4),
+                            "attention_weight": attention_weight,
+                            "beta_gate": {"minimum_source_families": min_families, "minimum_confidence_score": min_confidence}}
         })
         if eligible:
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
