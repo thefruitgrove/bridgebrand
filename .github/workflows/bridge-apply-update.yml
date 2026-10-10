@@ -22,7 +22,7 @@ jobs:
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
           base64 --decode .github/workflows/bridge-update.bundle.b64 > /tmp/bridge-update.bundle
-          git fetch /tmp/bridge-update.bundle b4f585f:refs/remotes/bundle/bridge-update
+          git fetch /tmp/bridge-update.bundle refs/heads/bridge-update:refs/remotes/bundle/bridge-update
           git cherry-pick refs/remotes/bundle/bridge-update
           git rm .github/workflows/bridge-update.bundle.b64 .github/workflows/bridge-apply-update.yml
           git commit -m "chore: remove one-time update carrier"
