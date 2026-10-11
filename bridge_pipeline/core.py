@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import email.utils
 import hashlib
 import json
 import math
@@ -114,7 +115,18 @@ class SupabaseRest:
         return self.request("POST", table, rows, f"on_conflict={urllib.parse.quote(conflict)}", "resolution=merge-duplicates,return=representation")
 
     def select(self, table: str, query: str) -> list[dict[str, Any]]:
-        return self.request("GET", table, query=query) or []
+        if re.search(r"(?:^|&)limit=", query):
+            return self.request("GET", table, query=query) or []
+        rows: list[dict[str, Any]] = []
+        offset = 0
+        page_size = 1000
+        while True:
+            page_query = f"{query}&limit={page_size}&offset={offset}" if query else f"limit={page_size}&offset={offset}"
+            page = self.request("GET", table, query=page_query) or []
+            rows.extend(page)
+            if len(page) < page_size:
+                return rows
+            offset += page_size
 
     def insert(self, table: str, rows: list[dict[str, Any]]) -> Any:
         return self.request("POST", table, rows)
@@ -123,8 +135,16 @@ class SupabaseRest:
         return self.request("PATCH", table, values, query)
 
 
-def fetch_google_news(query: str, days: int = 1) -> list[RawItem]:
-    q = f'{query} when:{days}d'
+def fetch_google_news(
+    query: str, days: int = 1,
+    start_date: dt.date | None = None, end_date: dt.date | None = None,
+) -> list[RawItem]:
+    if start_date and end_date:
+        query_after = start_date - dt.timedelta(days=1)
+        query_before = end_date + dt.timedelta(days=1)
+        q = f'{query} after:{query_after.isoformat()} before:{query_before.isoformat()}'
+    else:
+        q = f'{query} when:{days}d'
     url = "https://news.google.com/rss/search?" + urllib.parse.urlencode({"q": q, "hl": "ko", "gl": "KR", "ceid": "KR:ko"})
     req = urllib.request.Request(url, headers={"User-Agent": "SignalBridgeBot/1.0 (+https://bridgebrand.co.kr)"})
     with urllib.request.urlopen(req, timeout=30) as resp:
@@ -135,10 +155,19 @@ def fetch_google_news(query: str, days: int = 1) -> list[RawItem]:
         link = canonical_url((node.findtext("link") or "").strip())
         guid = (node.findtext("guid") or link).strip()
         pub = (node.findtext("pubDate") or "").strip() or None
+        if start_date and end_date:
+            try:
+                published = email.utils.parsedate_to_datetime(pub).astimezone(KST).date()
+            except (TypeError, ValueError, OverflowError):
+                continue
+            if published < start_date or published > end_date:
+                continue
         source = node.find("source")
         publisher = source.text.strip() if source is not None and source.text else None
         content_hash = stable_hash(title.casefold(), link or guid)
-        items.append(RawItem("google_news_rss", guid, title, link, publisher, pub, {"query": query}, content_hash))
+        items.append(RawItem("google_news_rss", guid, title, link, publisher, pub,
+                             {"query": query, "window_start": start_date.isoformat() if start_date else None,
+                              "window_end": end_date.isoformat() if end_date else None}, content_hash))
     return items
 
 
