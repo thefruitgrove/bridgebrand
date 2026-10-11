@@ -1,7 +1,7 @@
 import datetime as dt
 import unittest
 
-from bridge_pipeline.core import RawItem, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
+from bridge_pipeline.core import RawItem, SupabaseRest, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
 from bridge_pipeline.run import merge_official_and_flow
 from bridge_pipeline.targets import target_quota_report
 
@@ -20,6 +20,19 @@ CFG = {
 
 
 class PipelineTest(unittest.TestCase):
+    def test_supabase_select_exhausts_default_row_cap(self):
+        db = object.__new__(SupabaseRest)
+        calls = []
+
+        def fake_request(method, table, data=None, query="", prefer="return=representation"):
+            calls.append(query)
+            return [{"n": len(calls)}] * (1000 if len(calls) == 1 else 7)
+
+        db.request = fake_request
+        rows = db.select("x", "select=id")
+        self.assertEqual(len(rows), 1007)
+        self.assertIn("offset=1000", calls[1])
+
     def test_tracking_params_are_removed(self):
         self.assertEqual(canonical_url("https://A.com/x/?utm_source=z&a=1#x"), "https://a.com/x?a=1")
 
