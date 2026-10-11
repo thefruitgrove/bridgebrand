@@ -33,6 +33,20 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(len(rows), 1007)
         self.assertIn("offset=1000", calls[1])
 
+    def test_supabase_upsert_batches_historical_payloads(self):
+        db = object.__new__(SupabaseRest)
+        sizes = []
+
+        def fake_request(method, table, data=None, query="", prefer="return=representation"):
+            sizes.append(len(data))
+            return data
+
+        db.request = fake_request
+        rows = [{"id": i} for i in range(1201)]
+        result = db.upsert("x", rows, "id")
+        self.assertEqual(sizes, [500, 500, 201])
+        self.assertEqual(len(result), 1201)
+
     def test_tracking_params_are_removed(self):
         self.assertEqual(canonical_url("https://A.com/x/?utm_source=z&a=1#x"), "https://a.com/x?a=1")
 
