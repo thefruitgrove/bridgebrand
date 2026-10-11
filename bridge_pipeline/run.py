@@ -94,7 +94,7 @@ def collect_news(
                 event_groups[key] = (entity, [])
             event_groups[key][1].append(signal)
         db.upsert("bridge_signals", signal_rows, "entity_id,raw_item_id,axis,signal_type")
-        event_rows = []
+        event_rows_by_key: dict[tuple[str, str], dict] = {}
         for (_, content_hash), (entity, item_signals) in event_groups.items():
             raw_id = raw_ids.get(content_hash)
             item = items_by_hash.get(content_hash)
@@ -102,7 +102,23 @@ def collect_news(
                 continue
             event = build_event_record(entity, item, raw_id, item_signals)
             if event:
-                event_rows.append(event)
+                event_key = (event["entity_id"], event["event_key"])
+                existing = event_rows_by_key.get(event_key)
+                if existing is None:
+                    event_rows_by_key[event_key] = event
+                else:
+                    # Syndicated headlines may have different raw content
+                    # hashes but intentionally converge on one public event.
+                    # Merge them before the ON CONFLICT upsert so Postgres
+                    # never receives the same constrained key twice.
+                    existing["evidence_count"] += 1
+                    existing["source_ids"] = sorted(set(existing["source_ids"] + event["source_ids"]))
+                    existing["last_seen_at"] = max(existing["last_seen_at"], event["last_seen_at"])
+                    existing["severity"] = max(existing["severity"], event["severity"])
+                    existing["action_strength"] = max(existing["action_strength"], event["action_strength"])
+                    existing["response_quality"] = max(existing["response_quality"], event["response_quality"])
+                    existing["confidence"] = max(existing["confidence"], event["confidence"])
+        event_rows = list(event_rows_by_key.values())
         db.upsert("bridge_event_ledger", event_rows, "entity_id,event_key")
         db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected}, f"id=eq.{run_id}")
         print(f"news collection success: fetched={fetched} accepted={accepted} rejected={rejected}")

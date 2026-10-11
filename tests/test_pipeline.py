@@ -42,6 +42,14 @@ class PipelineTest(unittest.TestCase):
                                "activity_points": 12, "stability": 85})
         self.assertEqual(tags, ["상승 흐름", "중기 평균 상회", "활동 신호 활발"])
 
+    def test_event_keys_converge_for_syndicated_headlines(self):
+        first = RawItem("google_news_rss", "x", "가수A 월드투어 완판 - 매체A", "https://a", "매체A", "2026-10-11T00:00:00Z", {}, "h1")
+        second = RawItem("google_news_rss", "x", "가수A 월드투어 완판 - 매체B", "https://b", "매체B", "2026-10-11T00:01:00Z", {}, "h2")
+        entity = {"id": "entity", "domain": "STAR"}
+        one = build_event_record(entity, first, "raw1", classify_headline(first, "ENT-A", "가수A"))
+        two = build_event_record(entity, second, "raw2", classify_headline(second, "ENT-A", "가수A"))
+        self.assertEqual(one["event_key"], two["event_key"])
+
     def test_supabase_select_exhausts_default_row_cap(self):
         db = object.__new__(SupabaseRest)
         calls = []
