@@ -8,6 +8,7 @@ import os
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 from pathlib import Path
 
 from .baseline import coverage, mean_present, percentile
@@ -40,11 +41,24 @@ def _safe_ratio(numerator, denominator, scale=1.0):
     return numerator / denominator * scale
 
 
-def fetch_accounts(corp_code: str, year: int, api_key: str) -> list[dict]:
+def fetch_accounts(corp_code: str, year: int, api_key: str, attempts: int = 3) -> list[dict]:
     params = {"crtfc_key": api_key, "corp_code": corp_code, "bsns_year": str(year), "reprt_code": "11011"}
     url = API_URL + "?" + urllib.parse.urlencode(params)
-    with urllib.request.urlopen(url, timeout=30) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(url, timeout=30) as response:
+                body = response.read().decode("utf-8", errors="replace").strip()
+            if not body:
+                raise RuntimeError("empty response")
+            payload = json.loads(body)
+            break
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, RuntimeError) as exc:
+            last_error = exc
+            if attempt < attempts:
+                time.sleep(attempt * 1.5)
+    else:
+        raise RuntimeError(f"OpenDART {corp_code}: response unavailable after {attempts} attempts: {last_error}")
     if payload.get("status") == "013":
         return []
     if payload.get("status") != "000":
@@ -107,15 +121,19 @@ def normalize(records: list[dict], year: int) -> list[dict]:
     return output
 
 
-def build_records(corp_map: dict[str, str], year: int, api_key: str) -> tuple[list[dict], list[str]]:
+def build_records(corp_map: dict[str, str], year: int, api_key: str) -> tuple[list[dict], list[str], list[str]]:
     targets = {row["name"]: row for row in load_targets() if row["domain"] == "CPR"}
-    records, missing = [], []
+    records, missing, failed = [], [], []
     for index, (name, target) in enumerate(targets.items()):
         corp_code = corp_map.get(name)
         if not corp_code:
             missing.append(name)
             continue
-        rows = fetch_accounts(corp_code, year, api_key)
+        try:
+            rows = fetch_accounts(corp_code, year, api_key)
+        except RuntimeError as exc:
+            failed.append(f"{name}: {exc}")
+            continue
         metrics = extract_metrics(rows)
         if not any(value is not None for value in metrics.values()):
             missing.append(name)
@@ -123,7 +141,7 @@ def build_records(corp_map: dict[str, str], year: int, api_key: str) -> tuple[li
         records.append({"external_id": target["external_id"], "cohort": target["subcategory"], **metrics})
         if index and index % 20 == 0:
             time.sleep(0.3)
-    return records, missing
+    return records, missing, failed
 
 
 def main(argv=None):
@@ -136,7 +154,7 @@ def main(argv=None):
     if not api_key:
         raise SystemExit("DART_API_KEY is required")
     corp_map = json.loads(Path(args.map).read_text(encoding="utf-8"))
-    records, missing = build_records(corp_map, args.year, api_key)
+    records, missing, failed = build_records(corp_map, args.year, api_key)
     normalized = normalize(records, args.year)
     path = Path(args.output)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -147,6 +165,10 @@ def main(argv=None):
     print(f"CPR OpenDART baseline: matched={len(records)} missing={len(missing)} axes={len(normalized)}")
     if missing:
         print("missing:", ", ".join(missing))
+    if failed:
+        print(f"temporarily failed={len(failed)} (pipeline continued)")
+        for item in failed[:20]:
+            print("failed:", item)
 
 
 if __name__ == "__main__":
