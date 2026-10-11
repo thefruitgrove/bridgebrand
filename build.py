@@ -331,7 +331,7 @@ def build_hero():
   </svg>
   <div class="hero-inner">
     <div>
-      <div class="hero-meta">{HERO_VOL}<br>{HERO_DATE}</div>
+      <div class="hero-meta" id="heroSeoulClock">{HERO_VOL}<br>{HERO_DATE}</div>
       <div class="hero-headline">
         <div class="l1">Reputation</div>
         <div class="l2">is a signal.</div>
