@@ -302,13 +302,16 @@ def robust_rank(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ordered = sorted(rows, key=lambda x: (-float(x["score"]), -float(x["confidence_score"]), x["external_id"]))
     last_key = None
     rank = 0
+    ranked: list[dict[str, Any]] = []
     for position, row in enumerate(ordered, 1):
         key = (round(float(row["score"]), 2), round(float(row["confidence_score"]), 2))
         if key != last_key:
             rank = position
             last_key = key
-        row["rank"] = rank
-    return ordered
+        # T100 and cohort tables reuse candidate objects. Return copies so a
+        # later cohort calculation cannot overwrite the earlier T100 rank.
+        ranked.append({**row, "rank": rank})
+    return ranked
 
 
 def dump_json(path: Path, value: Any) -> None:
