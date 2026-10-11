@@ -1,5 +1,4 @@
 name: BRIDGE Historical Weekly Backfill
-# Retry-safe: all database writes are idempotent upserts.
 
 on:
   push:
@@ -75,7 +74,7 @@ jobs:
           git config user.email "bot@bridgebrand.co.kr"
           git add site/data/latest.json data/pipeline_status.json site/
           git diff --cached --quiet && exit 0
-          git commit -m "data: complete weekly history backfill"
+          git commit -m "data: complete weekly history backfill [bridge-data]"
           git restore --worktree .
           git pull --rebase -X theirs origin main
           git push origin HEAD:main

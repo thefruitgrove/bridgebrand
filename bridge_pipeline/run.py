@@ -13,11 +13,12 @@ from pathlib import Path
 from urllib.parse import quote
 
 from .core import (
-    ROOT, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
+    ROOT, RawItem, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
     iso_week, load_methodology, now_kst, publication_date, robust_rank,
     trust_grade, weighted_score
 )
 from .targets import load_targets, target_quota_report
+from .events import build_event_record, diagnosis_tags
 
 
 def bootstrap(db: SupabaseRest) -> None:
@@ -53,6 +54,7 @@ def collect_news(
     seen_entity_items: set[tuple[str, str]] = set()
     try:
         raw_by_hash: dict[str, dict] = {}
+        items_by_hash: dict[str, RawItem] = {}
         staged: list[tuple[dict, object]] = []
         for entity in entities:
             search_names = [entity["name"]] + list(entity.get("aliases") or [])[:2]
@@ -70,10 +72,12 @@ def collect_news(
                     continue
                 accepted += 1
                 raw_by_hash[item.content_hash] = {**asdict(item), "collection_run_id": run_id}
+                items_by_hash[item.content_hash] = item
                 staged.extend((entity, signal) for signal in signals)
         inserted = db.upsert("bridge_raw_items", list(raw_by_hash.values()), "source_id,content_hash")
         raw_ids = {row["content_hash"]: row["id"] for row in inserted}
         signal_rows = []
+        event_groups: dict[tuple[str, str], tuple[dict, list]] = {}
         for entity, signal in staged:
             raw_id = raw_ids.get(signal.raw_content_hash)
             if not raw_id:
@@ -85,7 +89,21 @@ def collect_news(
                 "occurred_at": signal.occurred_at, "review_status": signal.review_status,
                 "rationale": signal.rationale, "ruleset_version": load_methodology()["version"]
             })
+            key = (entity["id"], signal.raw_content_hash)
+            if key not in event_groups:
+                event_groups[key] = (entity, [])
+            event_groups[key][1].append(signal)
         db.upsert("bridge_signals", signal_rows, "entity_id,raw_item_id,axis,signal_type")
+        event_rows = []
+        for (_, content_hash), (entity, item_signals) in event_groups.items():
+            raw_id = raw_ids.get(content_hash)
+            item = items_by_hash.get(content_hash)
+            if not raw_id or not item:
+                continue
+            event = build_event_record(entity, item, raw_id, item_signals)
+            if event:
+                event_rows.append(event)
+        db.upsert("bridge_event_ledger", event_rows, "entity_id,event_key")
         db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected}, f"id=eq.{run_id}")
         print(f"news collection success: fetched={fetched} accepted={accepted} rejected={rejected}")
     except Exception as exc:
@@ -263,6 +281,7 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
         public_axes = axes_by_entity.get(entity_ids.get(row["external_id"], ""), {})
         row["axis_scores"] = {axis: public_axes.get(axis) for axis in "BRIDGE"}
         row["axes_available"] = len(public_axes)
+        row["diagnosis_tags"] = diagnosis_tags(row)
         row["internalDomain"] = row["domain"]
         row["domain"] = labels.get(row["domain"], row["domain"])
     payload = {
@@ -275,8 +294,68 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
         "dataStatus": "published" if rows else "no-published-snapshot"
     }
     dump_json(ROOT / "site" / "data" / "latest.json", payload)
+    export_history(db, as_of)
     dump_json(ROOT / "data" / "pipeline_status.json", {"generatedAt": payload["generatedAt"], "asOfDate": payload["asOfDate"], "recordCount": len(rows)})
     print(f"exported {len(rows)} published ranking rows")
+
+
+def export_history(db: SupabaseRest, as_of: dt.date) -> None:
+    """Export a compact public archive used by the period selector.
+
+    Reputation levels remain averages; only Activity Points are additive. The
+    archive contains public outcomes, never raw evidence or internal formulas.
+    """
+    cfg = load_methodology()
+    start = dt.date(2026, 9, 1)
+    rankings = db.select(
+        "bridge_rankings",
+        f"select=entity_id,as_of_date,domain,ranking_type,rank,previous_rank,rank_change,score,score_change,trust_grade"
+        f"&as_of_date=gte.{start.isoformat()}&as_of_date=lte.{as_of.isoformat()}"
+        f"&ranking_type=eq.T100&published_at=not.is.null&methodology_version=eq.{cfg['version']}"
+        f"&order=as_of_date.asc,domain.asc,rank.asc"
+    )
+    entity_map = {row["id"]: row for row in db.select("bridge_entities", "select=id,external_id,name,category,subcategory")}
+    metrics = db.select(
+        "bridge_index_metrics",
+        f"select=entity_id,as_of_date,daily_index,weekly_index,last_week_index,wow_delta,weighted_index,activity_points,"
+        f"cumulative_performance,momentum,stability,observed_days,four_week_average,cumulative_activity,observed_weeks"
+        f"&as_of_date=gte.{start.isoformat()}&as_of_date=lte.{as_of.isoformat()}"
+        f"&methodology_version=eq.{cfg['version']}"
+    )
+    metric_map = {(row["entity_id"], row["as_of_date"]): row for row in metrics}
+    observations = db.select(
+        "bridge_axis_observations",
+        f"select=entity_id,as_of_date,axis,score,status"
+        f"&as_of_date=gte.{start.isoformat()}&as_of_date=lte.{as_of.isoformat()}"
+        f"&methodology_version=eq.{cfg['version']}"
+    )
+    axes_map: dict[tuple[str, str], dict[str, float]] = {}
+    for observation in observations:
+        if observation.get("score") is None or observation.get("status") not in {"measured", "carried"}:
+            continue
+        key = (observation["entity_id"], observation["as_of_date"])
+        axes_map.setdefault(key, {})[observation["axis"]] = round(float(observation["score"]), 1)
+    labels = cfg.get("release_policy", {}).get("public_domain_labels", {})
+    public_rows = []
+    for ranking in rankings:
+        entity = entity_map.get(ranking["entity_id"])
+        if not entity:
+            continue
+        metric = metric_map.get((ranking["entity_id"], ranking["as_of_date"]), {})
+        row = {k: v for k, v in ranking.items() if k != "entity_id"}
+        row.update({k: v for k, v in entity.items() if k != "id"})
+        row.update(metric)
+        public_axes = axes_map.get((ranking["entity_id"], ranking["as_of_date"]), {})
+        row["axis_scores"] = {axis: public_axes.get(axis) for axis in "BRIDGE"}
+        row["axes_available"] = len(public_axes)
+        row["domain"] = labels.get(row["domain"], row["domain"])
+        row["diagnosis_tags"] = diagnosis_tags(row)
+        public_rows.append(row)
+    dump_json(ROOT / "site" / "data" / "history.json", {
+        "schemaVersion": "1.0", "generatedAt": now_kst().isoformat(),
+        "fromDate": start.isoformat(), "throughDate": as_of.isoformat(),
+        "rankings": public_rows, "recordCount": len(public_rows),
+    })
 
 
 def import_official(db: SupabaseRest, csv_path: str, as_of: dt.date) -> None:
@@ -356,6 +435,15 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
     for row in history:
         if row.get("score") is not None:
             by_entity.setdefault(row["entity_id"], []).append(row)
+    metric_history = db.select(
+        "bridge_index_metrics",
+        f"select=entity_id,activity_points&as_of_date=gte.{history_start.isoformat()}"
+        f"&as_of_date=lt.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+    )
+    activity_by_entity: dict[str, float] = {}
+    for metric in metric_history:
+        entity_id = metric["entity_id"]
+        activity_by_entity[entity_id] = activity_by_entity.get(entity_id, 0.0) + float(metric.get("activity_points") or 0)
     current = {row["entity_id"]: row for row in score_rows}
     metric_rows = []
     for entity in entities:
@@ -375,6 +463,7 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
         weekly_series = [sum(vals) / len(vals) for _, vals in sorted(week_buckets.items())]
         cumulative = round(sum(weekly_series) / len(weekly_series), 2) if weekly_series else weekly
         recent = weekly_series[-4:]
+        four_week_average = round(sum(recent) / len(recent), 2) if recent else weekly
         weights = [0.1, 0.2, 0.3, 0.4][-len(recent):]
         momentum = round(sum(v * w for v, w in zip(recent, weights)) / sum(weights), 2) if recent else weekly
         mean = sum(weekly_series[-12:]) / max(1, len(weekly_series[-12:]))
@@ -390,8 +479,11 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
             "weekly_index": weekly, "last_week_index": previous,
             "wow_delta": round(weekly - previous, 2) if previous is not None else 0,
             "weighted_index": round(daily, 2), "activity_points": round(activity, 2),
+            "four_week_average": four_week_average,
+            "cumulative_activity": round(activity_by_entity.get(entity["id"], 0.0) + activity, 2),
             "cumulative_performance": cumulative, "momentum": momentum, "stability": stability,
-            "observed_days": len(this_week), "methodology_version": cfg["version"],
+            "observed_days": len(this_week), "observed_weeks": len(weekly_series),
+            "methodology_version": cfg["version"],
             "diagnostics": {"weekly_method": "daily_level_mean", "cumulative_method": "weekly_level_mean"}
         })
     if metric_rows:

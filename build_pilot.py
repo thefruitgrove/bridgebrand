@@ -2629,6 +2629,37 @@ import json as _json
 with open(os.path.join(_HERE, "real_data/periods.json"), encoding="utf-8") as _f:
     PERIODS = _json.load(_f)
 
+# Keep the selector current in every unattended build. Historical rankings are
+# available from 2026-09-01; earlier calendar choices remain visible as N/R.
+import datetime as _period_dt
+_period_end = _period_dt.date.today()
+_period_weeks = []
+_cursor = _period_dt.date(_period_end.year, 1, 1)
+while _cursor <= _period_end:
+    _monday = _cursor - _period_dt.timedelta(days=_cursor.weekday())
+    _start = max(_cursor, _monday)
+    _finish = min(_period_end, _monday + _period_dt.timedelta(days=6))
+    pair = [_start.isoformat(), _finish.isoformat()]
+    if not _period_weeks or _period_weeks[-1] != pair:
+        _period_weeks.append(pair)
+    _cursor = _finish + _period_dt.timedelta(days=1)
+_months = []
+for _month in range(1, _period_end.month + 1):
+    _start = _period_dt.date(_period_end.year, _month, 1)
+    _next = _period_dt.date(_period_end.year + (_month == 12), 1 if _month == 12 else _month + 1, 1)
+    _months.append([_start.isoformat(), min(_period_end, _next - _period_dt.timedelta(days=1)).isoformat()])
+PERIODS["week"] = _period_weeks
+PERIODS["month"] = _months
+PERIODS["quarter"] = [[f"{_period_end.year}-01-01", min(_period_end, _period_dt.date(_period_end.year,3,31)).isoformat()],
+                      [f"{_period_end.year}-04-01", min(_period_end, _period_dt.date(_period_end.year,6,30)).isoformat()],
+                      [f"{_period_end.year}-07-01", min(_period_end, _period_dt.date(_period_end.year,9,30)).isoformat()],
+                      [f"{_period_end.year}-10-01", _period_end.isoformat()]]
+PERIODS["quarter"] = [p for p in PERIODS["quarter"] if p[0] <= p[1]]
+PERIODS["half"] = [[f"{_period_end.year}-01-01", min(_period_end, _period_dt.date(_period_end.year,6,30)).isoformat()],
+                   [f"{_period_end.year}-07-01", _period_end.isoformat()]]
+PERIODS["half"] = [p for p in PERIODS["half"] if p[0] <= p[1]]
+PERIODS["year"] = [[f"{_period_end.year}-01-01", _period_end.isoformat()]]
+
 _UNIT_LABELS = [("week","주간"), ("month","월간"), ("quarter","분기"), ("half","반기"), ("year","연간")]
 
 def _fmt_range(s, e):
@@ -2648,9 +2679,9 @@ def period_selector_html(page_id, default_unit="week"):
     <select class="period-range" aria-label="기간 선택"><!-- populated by JS --></select>
     <span class="period-status">N/R</span>
   </div>
-  <p class="period-note">제공되는 기간 단위(주/월/분기/반기/연) 및 구간 데이터는 해당 주간 날짜를 기준으로
-  사전 산출되어 있습니다. 측정값이 &lsquo;N/R&rsquo;인 항목은 조회 구간과 무관하게 동일한 상태를 유지하며,
-  해당 빈자리는 향후 실제 데이터 수집 및 분석 엔진이 정식 가동된 시점부터 정확한 결과값으로 업데이트됩니다.{" UNI는 대학 뉴스 주기 특성상 기본 단위를 월간으로 표시합니다." if default_unit=="month" else ""}</p>
+  <p class="period-note">기간 단위와 조회 구간을 선택하면 해당 기간 안에서 가장 최근에 공개된 검증 스냅샷을 표시합니다.
+  실제 관측 기록이 없는 기간은 임의 보간하지 않고 &lsquo;N/R&rsquo;로 안내합니다.
+  평판 수준은 기간평균으로, 활동 발생량은 누적 총량으로 구분해 제공합니다.{" UNI는 공시·대학 데이터의 갱신 주기를 고려해 기본 단위를 월간으로 표시합니다." if default_unit=="month" else ""}</p>
 </div>'''
 
 
@@ -2773,6 +2804,10 @@ BRIDGE_MODAL_HTML = '''
         <span class="bmscore-label">WoW &Delta; <span class="bmscore-sub">전주 대비 변화</span></span>
         <span class="bmscore-value bmscore-wow" id="bmWow">N/R</span>
       </div>
+      <div class="bmscore-row bmscore-outline">
+        <span class="bmscore-label">4-WEEK AVERAGE <span class="bmscore-sub">최근 4주 대표 평균</span></span>
+        <span class="bmscore-value" id="bmFourWeek">N/R</span>
+      </div>
       <div class="bmscore-row bmscore-v3row bmscore-outline">
         <span class="bmscore-label">BRIDGE WEIGHTED INDEX <span class="bmscore-sub">여섯 축을 반영한 종합지수</span></span>
         <span class="bmscore-value" id="bmV3Score">N/R</span>
@@ -2781,9 +2816,17 @@ BRIDGE_MODAL_HTML = '''
         <span class="bmscore-label">BRIDGE ACTIVITY POINTS <span class="bmscore-sub">이번 주 관심·반응·행동의 총량</span></span>
         <span class="bmscore-value" id="bmActivity">N/R</span>
       </div>
+      <div class="bmscore-row bmscore-outline">
+        <span class="bmscore-label">CUMULATIVE ACTIVITY <span class="bmscore-sub">전체 기간 활동 누적량</span></span>
+        <span class="bmscore-value" id="bmCumulativeActivity">N/R</span>
+      </div>
       <div class="bmscore-row bmscore-hl bmscore-primary">
         <span class="bmscore-label">BRIDGE CUMULATIVE PERFORMANCE <span class="bmscore-sub">장기 평판 성과</span></span>
         <span class="bmscore-value" id="bmCumulative">N/R</span>
+      </div>
+      <div class="bmscore-row bmscore-outline">
+        <span class="bmscore-label">STABILITY <span class="bmscore-sub">평판 변동의 안정성</span></span>
+        <span class="bmscore-value" id="bmStability">N/R</span>
       </div>
     </div>
     <div class="evidence-list" id="bridgeEvidenceList" style="display:none;">
@@ -3061,7 +3104,7 @@ def this_week_digest_html():
     _dom_meta = {"CPR": ("CPR", "기업", "cpr.html"), "GOV": ("GOV", "공공기관", "gov.html"), "UNI": ("UNI", "대학", "uni.html"), "ENT": ("ENT", "공인", "star.html")}
     _rank_blocks = []
     for _dk in ["CPR", "GOV", "UNI", "ENT"]:
-        _lst = sorted(_dom_rank.get(_dk, []), key=lambda x: -x[1])[:15]
+        _lst = sorted(_dom_rank.get(_dk, []), key=lambda x: -x[1])[:20]
         _label, _kor, _page = _dom_meta[_dk]
         _items = []
         for _i, (_nm, _sc) in enumerate(_lst, 1):

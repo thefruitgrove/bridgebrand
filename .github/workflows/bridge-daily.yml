@@ -23,14 +23,18 @@ on:
 
 concurrency:
   group: bridge-daily-production
-  # A scoring run writes several related tables. Cancelling halfway can leave\n  # a mixed public snapshot, so a newer trigger waits for the active run.\n  cancel-in-progress: false
+  # A scoring run writes several related tables. Cancelling halfway can leave
+  # a mixed public snapshot, so a newer trigger waits for the active run.
+  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   collect-validate-export:
-    if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[bridge-data]')
+    # The bot's generated-data commit should deploy through Cloudflare but must
+    # not start a second collection run.
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[bridge-data]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:

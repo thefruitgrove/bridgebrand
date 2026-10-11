@@ -3,6 +3,7 @@ import unittest
 
 from bridge_pipeline.core import RawItem, SupabaseRest, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
 from bridge_pipeline.run import merge_official_and_flow
+from bridge_pipeline.events import build_event_record, diagnosis_tags
 from bridge_pipeline.targets import target_quota_report
 
 
@@ -20,6 +21,27 @@ CFG = {
 
 
 class PipelineTest(unittest.TestCase):
+    def test_signal_ledger_separates_issue_from_final_e_score(self):
+        item = RawItem("google_news_rss", "x", "가수A 음주운전 논란", "https://example.com/x", "언론사", "2026-10-11T00:00:00Z", {}, "hash")
+        signals = classify_headline(item, "ENT-A", "가수A")
+        event = build_event_record({"id": "entity", "domain": "STAR"}, item, "raw", signals)
+        self.assertEqual(event["event_type"], "issue")
+        self.assertEqual(event["review_status"], "pending")
+        self.assertIn("E", event["axes"])
+
+    def test_outcome_event_can_be_auto_recorded_for_g(self):
+        item = RawItem("google_news_rss", "x", "가수A 월드투어 완판 신기록", "https://example.com/x", "언론사", "2026-10-11T00:00:00Z", {}, "hash2")
+        signals = classify_headline(item, "ENT-A", "가수A")
+        event = build_event_record({"id": "entity", "domain": "STAR"}, item, "raw", signals)
+        self.assertEqual(event["event_type"], "outcome")
+        self.assertEqual(event["review_status"], "auto")
+        self.assertEqual(event["axes"], ["G"])
+
+    def test_public_diagnosis_uses_metrics_not_internal_formula(self):
+        tags = diagnosis_tags({"weekly_index": 74, "last_week_index": 70, "four_week_average": 68,
+                               "activity_points": 12, "stability": 85})
+        self.assertEqual(tags, ["상승 흐름", "중기 평균 상회", "활동 신호 활발"])
+
     def test_supabase_select_exhausts_default_row_cap(self):
         db = object.__new__(SupabaseRest)
         calls = []

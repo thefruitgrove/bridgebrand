@@ -18,9 +18,9 @@
   // Published Supabase snapshot. A valid daily snapshot rebuilds the public
   // T100 list in score/rank order; static HTML is fallback only.
   (function loadBridgeDailySnapshot(){
-    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    var domain = page === 'cpr.html' ? 'CPR' : page === 'gov.html' ? 'GOV' :
-      page === 'uni.html' ? 'UNI' : page === 'star.html' ? 'ENT' : null;
+    var page = (location.pathname.split('/').pop() || 'index').toLowerCase().replace(/\.html$/, '');
+    var domain = page === 'cpr' ? 'CPR' : page === 'gov' ? 'GOV' :
+      page === 'uni' ? 'UNI' : page === 'star' ? 'ENT' : null;
     fetch('data/latest.json', {cache:'no-store'}).then(function(res){
       if(!res.ok) throw new Error('snapshot unavailable');
       return res.json();
@@ -43,20 +43,22 @@
           '<div class="rk-wow">'+change(rec)+'</div>'+
           '<div class="rk-trust"><span class="trust-badge grade-'+esc(rec.trust_grade)+'">'+esc(rec.trust_grade)+'</span></div></div>';
       }
-      if(domain){
-        var live=rows.filter(function(r){return r.domain===domain;});
-        window.BRIDGE_PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
-        live.forEach(function(rec){
+      function renderDomainRows(domainRows, snapshotDate){
+        if(!domain) return;
+        domainRows.sort(function(a,b){return Number(a.rank)-Number(b.rank)||Number(b.score)-Number(a.score);});
+        domainRows.forEach(function(rec){
           window.BRIDGE_PILOT_CASES[rec.name] = {
             dims:rec.axis_scores||{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
             daily_index:rec.daily_index, weekly_index:rec.weekly_index,
             activity_points:rec.activity_points, cumulative_performance:rec.cumulative_performance,
+            four_week_average:rec.four_week_average, cumulative_activity:rec.cumulative_activity,
+            observed_weeks:rec.observed_weeks, stability:rec.stability,
             v3_score:rec.weighted_index, trust:rec.trust_grade, method:'live',
             history:rec.last_week_index==null?[]:[{score:rec.last_week_index}]
           };
         });
         var prefix=domain==='ENT'?'star':domain.toLowerCase(), panel=document.getElementById(prefix+'-t100');
-        if(panel){ panel.innerHTML=live.map(rankRow).join(''); panel.setAttribute('data-shown','1000'); }
+        if(panel){ panel.innerHTML=domainRows.map(rankRow).join(''); panel.setAttribute('data-shown','1000'); }
         if(panel && window.openBridgeModal){
           panel.querySelectorAll('.rk-clickable').forEach(function(row){
             row.addEventListener('click',function(){ window.openBridgeModal(row.dataset.entity,row.dataset.region,row.dataset.type); });
@@ -64,12 +66,24 @@
           });
         }
         var btn=document.querySelector('.seg-btn[data-target="'+prefix+'-t100"] span');
-        if(btn) btn.textContent=live.length+'/100';
-        if(panel){
-          var note=document.createElement('div'); note.className='live-snapshot-note';
-          note.textContent='실측 공개 '+live.length+' / 100 · '+(payload.asOfDate||'')+' · 공개적격 전 대상 표시';
-          panel.parentNode.insertBefore(note,panel);
-        }
+        if(btn) btn.textContent=domainRows.length+'/100';
+        var note=document.querySelector('.live-snapshot-note');
+        if(!note && panel){ note=document.createElement('div'); note.className='live-snapshot-note'; panel.parentNode.insertBefore(note,panel); }
+        if(note) note.textContent='실측 공개 '+domainRows.length+' / 100 · '+(snapshotDate||'')+' · 공개적격 전 대상 표시';
+      }
+      if(domain){
+        var live=rows.filter(function(r){return r.domain===domain;});
+        window.BRIDGE_PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
+        renderDomainRows(live,payload.asOfDate||'');
+        window.BRIDGE_RENDER_PERIOD=function(start,end){
+          var archive=(window.BRIDGE_HISTORY&&window.BRIDGE_HISTORY.rankings)||[];
+          var candidates=archive.filter(function(r){return r.domain===domain&&r.as_of_date>=start&&r.as_of_date<=end;});
+          if(!candidates.length){ renderDomainRows(live,payload.asOfDate||''); return false; }
+          var latestDate=candidates.reduce(function(a,r){return r.as_of_date>a?r.as_of_date:a;},'');
+          renderDomainRows(candidates.filter(function(r){return r.as_of_date===latestDate;}),latestDate);
+          return true;
+        };
+        fetch('data/history.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('archive unavailable');return r.json();}).then(function(h){window.BRIDGE_HISTORY=h;}).catch(function(){});
       }
       // 주식시황형 LIVE 바: CPR 1~10, ENT 1~10, GOV 1~10,
       // CPR 11~20, ENT 11~20, GOV 11~20. 각 영역 50위까지만 사용한다.
@@ -98,12 +112,17 @@
         }).join('');
         heroTop.setAttribute('data-live-date',payload.asOfDate||'');
       }
-      // THIS WEEK의 네 영역 목록도 같은 스냅샷으로 교체한다.
+      // THIS WEEK의 네 영역 TOP 20도 같은 스냅샷으로 교체한다.
       document.querySelectorAll('.twr-col').forEach(function(col){
         var h=col.querySelector('.twr-head'), list=col.querySelector('.twr-list'); if(!h||!list)return;
         var d=(h.textContent.trim().match(/^(CPR|GOV|UNI|ENT)/)||[])[1]; if(!d)return;
-        var live=rows.filter(function(r){return r.domain===d;}).slice(0,15);
-        list.innerHTML=live.map(function(r){return '<li class="twr-item '+(Number(r.rank)<=3?'twr-top3':'')+'"><span class="twr-rank">'+r.rank+'</span><span class="twr-name">'+esc(r.name)+'</span><span class="twr-score">'+Number(r.score).toFixed(1)+'</span></li>';}).join('');
+        var live=rows.filter(function(r){return r.domain===d;}).slice(0,20);
+        list.innerHTML=live.map(function(r){
+          var delta=Number(r.rank_change||0), cls=delta>0?'twr-up':delta<0?'twr-down':'twr-flat';
+          var deltaText=delta>0?'▲'+delta:delta<0?'▼'+Math.abs(delta):'—';
+          var tags=(r.diagnosis_tags||[]).slice(0,1).join('');
+          return '<li class="twr-item '+(Number(r.rank)<=3?'twr-top3':'')+'"><span class="twr-rank">'+r.rank+'</span><span class="twr-name"><b>'+esc(r.name)+'</b><small>'+esc(tags||'현재 평판 수준 관측')+'</small></span><span class="twr-score">'+Number(r.score).toFixed(1)+'<i class="'+cls+'">'+deltaText+'</i></span></li>';
+        }).join('');
       });
     }).catch(function(){
       // Never replace the last deployed snapshot with zeroes after a failed run.
@@ -269,6 +288,9 @@
       document.getElementById('bmIndexPoint').textContent = (dailyIndex != null ? dailyIndex : 'N/R');
       document.getElementById('bmWeekly').textContent = (weeklyIndex != null ? weeklyIndex : 'N/R');
       document.getElementById('bmActivity').textContent = (pilot.activity_points != null ? pilot.activity_points + 'P' : 'N/R');
+      document.getElementById('bmFourWeek').textContent = (pilot.four_week_average != null ? pilot.four_week_average : 'N/R');
+      document.getElementById('bmCumulativeActivity').textContent = (pilot.cumulative_activity != null ? pilot.cumulative_activity + 'P' : 'N/R');
+      document.getElementById('bmStability').textContent = (pilot.stability != null ? pilot.stability : 'N/R');
       var _v3el = document.getElementById('bmV3Score');
       if(_v3el){ _v3el.textContent = (pilot.v3_score != null ? pilot.v3_score : '—'); }
       if(pilot.history && pilot.history.length){
@@ -281,18 +303,18 @@
         // 3) WoW (실측 표기 제거)
         document.getElementById('bmWow').textContent = arrow2 + ' ' + Math.abs(realWow);
         // 장기 성과는 기간 합계가 아니라 비교 가능한 기간평균으로 표시한다.
-        var weeksN = pilot.history.length + 1;
+        var weeksN = pilot.observed_weeks || (pilot.history.length + 1);
         var allScores = pilot.history.map(function(h){return h.score;}).concat([weeklyIndex]);
         var histSum = allScores.reduce(function(a,b){return a+b;}, 0);
         var histAvg = Math.round((histSum / weeksN) * 10) / 10;
         var cumulativeValue = pilot.cumulative_performance != null ? pilot.cumulative_performance : histAvg;
-        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + cumulativeValue + '</span><span class=\'cum-tail\'> · ' + weeksN + '주</span>';
+        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + cumulativeValue + '</span><span class=\'cum-tail\'> · 관측 ' + weeksN + '주</span>';
       } else {
         // 전주 데이터 아직 없음 — 이번 주가 첫 기록
         document.getElementById('bmLastWeek').textContent = '—';
         document.getElementById('bmWow').textContent = '— (첫 주)';
         var firstCumulative = pilot.cumulative_performance != null ? pilot.cumulative_performance : weeklyIndex;
-        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + firstCumulative + '</span><span class=\'cum-tail\'> · 1주</span>';
+        document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + firstCumulative + '</span><span class=\'cum-tail\'> · 관측 ' + (pilot.observed_weeks || 1) + '주</span>';
       }
       var isNonVolatile = pilot.method === '비변동성';
       scoreNote.textContent = '여론의 소음이 아닌, 검증된 공식 데이터와 실제 관측값만으로 구성된 지수입니다. 유효한 근거가 확보된 축만 투명하게 계산하며, 아직 확인되지 않은 데이터는 투명성을 위해 N/A로 남겨두었습니다.';
@@ -344,6 +366,9 @@
       document.getElementById('bmWow').textContent = 'N/R';
       document.getElementById('bmV3Score').textContent = 'N/R';
       document.getElementById('bmActivity').textContent = 'N/R';
+      document.getElementById('bmFourWeek').textContent = 'N/R';
+      document.getElementById('bmCumulativeActivity').textContent = 'N/R';
+      document.getElementById('bmStability').textContent = 'N/R';
       document.getElementById('bmCumulative').textContent = 'N/R';
       scoreNote.textContent = '';
       evList.style.display = 'none';
@@ -377,6 +402,8 @@
         return '<option value="' + i + '">' + fmtRange(p) + '</option>';
       }).join('');
       if(list.length) rangeSelect.selectedIndex = list.length - 1; // default to most recent
+      var status=sel.querySelector('.period-status');
+      if(status) status.textContent=list.length ? '기간 선택 가능' : 'N/R';
     }
     tabs.forEach(function(tab){
       tab.addEventListener('click', function(){
@@ -387,6 +414,14 @@
     });
     var defaultUnit = sel.dataset.defaultUnit || 'week';
     populate(defaultUnit);
+    rangeSelect.addEventListener('change', function(){
+      var status=sel.querySelector('.period-status');
+      var unit=sel.querySelector('.period-unit.active');
+      var list=periods[unit?unit.dataset.unit:(sel.dataset.defaultUnit||'week')]||[];
+      var pair=list[Number(rangeSelect.value)];
+      var ok=pair&&window.BRIDGE_RENDER_PERIOD?window.BRIDGE_RENDER_PERIOD(pair[0],pair[1]):false;
+      if(status) status.textContent=ok?'선택 기간 · 공개 스냅샷':'해당 기간 N/R';
+    });
   });
 
 })();

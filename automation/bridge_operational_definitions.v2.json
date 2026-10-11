@@ -4,7 +4,15 @@
     "layers": {
       "baseline": "Official structural and outcome data; annual or quarterly; guarantees comparable coverage.",
       "flow": "Weekly visibility, response and action signals from news, search and platform metadata.",
-      "issue": "Event heat, verification, response latency, correction reach and recovery."
+      "issue": "Event heat, verification, response latency, correction reach and recovery.",
+      "signal_ledger": "Deduplicated event evidence for issue, response, activity and outcome lifecycles; adverse and recovery candidates remain review-gated."
+    },
+    "event_evidence": {
+      "principle": "A keyword discovers a candidate event but never proves responsibility by itself.",
+      "types": ["issue", "response", "activity", "outcome"],
+      "lifecycle": ["detected", "observed", "recovery_candidate", "verified", "resolved", "recurred"],
+      "eg_boundary": "E measures responsibility, correction, recurrence and recovery. G measures observable action and outcome, not publicity volume alone.",
+      "public_rule": "Publish concise diagnosis only; keep source rules, matched terms and scoring diagnostics internal."
     },
     "domain_layer_weights": {
       "CPR": {

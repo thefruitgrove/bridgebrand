@@ -112,6 +112,8 @@ class SupabaseRest:
     def upsert(self, table: str, rows: list[dict[str, Any]], conflict: str) -> Any:
         if not rows:
             return []
+        # Large historical windows can exceed the database statement timeout
+        # when sent as one JSON payload. Keep writes deterministic and bounded.
         result: list[dict[str, Any]] = []
         batch_size = 500
         for offset in range(0, len(rows), batch_size):
@@ -308,8 +310,6 @@ def robust_rank(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if key != last_key:
             rank = position
             last_key = key
-        # T100 and cohort tables reuse candidate objects. Return copies so a
-        # later cohort calculation cannot overwrite the earlier T100 rank.
         ranked.append({**row, "rank": rank})
     return ranked
 
