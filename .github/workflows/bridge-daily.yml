@@ -23,7 +23,7 @@ on:
 
 concurrency:
   group: bridge-daily-production
-  cancel-in-progress: true
+  # A scoring run writes several related tables. Cancelling halfway can leave\n  # a mixed public snapshot, so a newer trigger waits for the active run.\n  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -102,7 +102,7 @@ jobs:
           git config user.email "bot@bridgebrand.co.kr"
           git add site/data/latest.json data/pipeline_status.json site/
           git diff --cached --quiet && exit 0
-          git commit -m "data: daily BRIDGE refresh $(date +%F)"
+          # Generated exports must not trigger another full collection run.\n          git commit -m "data: daily BRIDGE refresh $(date +%F) [skip ci]"
           # build scripts may touch reproducible working files outside the public export.
           # Discard those ephemeral changes so rebase is never blocked by a dirty runner.
           git restore --worktree .
