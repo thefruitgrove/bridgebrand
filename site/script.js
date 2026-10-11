@@ -1,4 +1,20 @@
 (function(){
+  // The masthead is a Seoul service clock, not a stale build timestamp.
+  // Data recency remains separately disclosed by each snapshot's asOfDate.
+  (function updateSeoulMasthead(){
+    var el=document.getElementById('heroSeoulClock');
+    if(!el) return;
+    var parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    var p={}; parts.forEach(function(x){p[x.type]=x.value;});
+    var y=Number(p.year), m=Number(p.month), d=Number(p.day);
+    var utc=new Date(Date.UTC(y,m-1,d));
+    var day=(utc.getUTCDay()+6)%7;
+    utc.setUTCDate(utc.getUTCDate()-day+3);
+    var firstThu=new Date(Date.UTC(utc.getUTCFullYear(),0,4));
+    var week=1+Math.round((utc-firstThu)/604800000);
+    var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    el.innerHTML='VOL. 01 — WEEK '+week+'<br>SEOUL · '+String(d).padStart(2,'0')+' '+months[m-1]+' '+y;
+  })();
   // Published Supabase snapshot. A valid daily snapshot rebuilds the public
   // T100 list in score/rank order; static HTML is fallback only.
   (function loadBridgeDailySnapshot(){
