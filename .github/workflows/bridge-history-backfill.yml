@@ -1,4 +1,5 @@
 name: BRIDGE Historical Weekly Backfill
+# Retry-safe: all database writes are idempotent upserts.
 
 on:
   push:
