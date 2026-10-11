@@ -48,7 +48,7 @@
         window.BRIDGE_PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
         live.forEach(function(rec){
           window.BRIDGE_PILOT_CASES[rec.name] = {
-            dims:{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
+            dims:rec.axis_scores||{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
             daily_index:rec.daily_index, weekly_index:rec.weekly_index,
             activity_points:rec.activity_points, cumulative_performance:rec.cumulative_performance,
             v3_score:rec.weighted_index, trust:rec.trust_grade, method:'live',
