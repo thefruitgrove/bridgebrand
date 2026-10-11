@@ -39,31 +39,39 @@ def _start_run(db: SupabaseRest, source_id: str, start: dt.datetime, end: dt.dat
     return result[0]["id"]
 
 
-def collect_news(db: SupabaseRest, as_of: dt.date, domain: str | None = None) -> None:
+def collect_news(
+    db: SupabaseRest, as_of: dt.date, domain: str | None = None,
+    window_start: dt.date | None = None, window_end: dt.date | None = None,
+) -> None:
     entities = db.select("bridge_entities", "select=id,external_id,domain,name,aliases&active=eq.true" + (f"&domain=eq.{quote(domain)}" if domain else ""))
-    end = dt.datetime.combine(as_of + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo)
-    start = end - dt.timedelta(days=1)
+    first_date = window_start or as_of
+    last_date = window_end or as_of
+    end = dt.datetime.combine(last_date + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo)
+    start = dt.datetime.combine(first_date, dt.time.min, tzinfo=now_kst().tzinfo)
     run_id = _start_run(db, "google_news_rss", start, end)
     fetched = accepted = rejected = 0
-    seen: set[str] = set()
+    seen_entity_items: set[tuple[str, str]] = set()
     try:
-        raw_rows: list[dict] = []
+        raw_by_hash: dict[str, dict] = {}
         staged: list[tuple[dict, object]] = []
         for entity in entities:
-            items = fetch_google_news(f'"{entity["name"]}"', 1)
+            search_names = [entity["name"]] + list(entity.get("aliases") or [])[:2]
+            query = " OR ".join(f'"{name}"' for name in dict.fromkeys(search_names) if name)
+            items = fetch_google_news(query, 1, first_date, last_date)
             fetched += len(items)
             for item in items:
-                if item.content_hash in seen:
+                entity_item = (entity["id"], item.content_hash)
+                if entity_item in seen_entity_items:
                     continue
-                seen.add(item.content_hash)
+                seen_entity_items.add(entity_item)
                 signals = classify_headline(item, entity["external_id"], entity["name"], entity.get("aliases") or [])
                 if not signals:
                     rejected += 1
                     continue
                 accepted += 1
-                raw_rows.append({**asdict(item), "collection_run_id": run_id})
+                raw_by_hash[item.content_hash] = {**asdict(item), "collection_run_id": run_id}
                 staged.extend((entity, signal) for signal in signals)
-        inserted = db.upsert("bridge_raw_items", raw_rows, "source_id,content_hash")
+        inserted = db.upsert("bridge_raw_items", list(raw_by_hash.values()), "source_id,content_hash")
         raw_ids = {row["content_hash"]: row["id"] for row in inserted}
         signal_rows = []
         for entity, signal in staged:
@@ -372,7 +380,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
     since = (as_of - dt.timedelta(days=28)).isoformat()
-    signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z")
+    end_utc = dt.datetime.combine(as_of + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo).astimezone(dt.timezone.utc)
+    upper = end_utc.isoformat().replace("+00:00", "Z")
+    signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z&occurred_at=lt.{upper}")
     grouped: dict[tuple[str, str], list[dict]] = {}
     accepted_by_entity: dict[str, list[dict]] = {}
     for signal in signals:
@@ -578,10 +588,12 @@ def healthcheck(db: SupabaseRest) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="BRIDGE data automation")
-    parser.add_argument("command", choices=("bootstrap", "audit-targets", "discover", "collect-news", "collect-dart", "import-official", "score", "publish-daily", "publish", "export", "healthcheck"))
+    parser.add_argument("command", choices=("bootstrap", "audit-targets", "discover", "collect-news", "collect-news-window", "collect-dart", "import-official", "score", "publish-daily", "publish", "export", "healthcheck"))
     parser.add_argument("--date")
     parser.add_argument("--domain", choices=("CPR", "STAR", "GOV", "UNI"))
     parser.add_argument("--file")
+    parser.add_argument("--start")
+    parser.add_argument("--end")
     args = parser.parse_args(argv)
     db = SupabaseRest()
     as_of = publication_date(args.date)
@@ -591,6 +603,10 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(2)
     elif args.command == "discover": discover_candidates(db, as_of)
     elif args.command == "collect-news": collect_news(db, as_of, args.domain)
+    elif args.command == "collect-news-window":
+        if not args.start or not args.end:
+            parser.error("collect-news-window requires --start and --end")
+        collect_news(db, as_of, args.domain, dt.date.fromisoformat(args.start), dt.date.fromisoformat(args.end))
     elif args.command == "collect-dart": collect_dart(db, as_of)
     elif args.command == "import-official":
         if not args.file:
