@@ -48,7 +48,7 @@
         window.BRIDGE_PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
         live.forEach(function(rec){
           window.BRIDGE_PILOT_CASES[rec.name] = {
-            dims:{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
+            dims:rec.axis_scores||{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
             daily_index:rec.daily_index, weekly_index:rec.weekly_index,
             activity_points:rec.activity_points, cumulative_performance:rec.cumulative_performance,
             v3_score:rec.weighted_index, trust:rec.trust_grade, method:'live',
@@ -79,6 +79,24 @@
         var seq=[].concat(take('CPR',1,10),take('ENT',1,10),take('GOV',1,10),take('CPR',11,20),take('ENT',11,20),take('GOV',11,20));
         var html=seq.map(function(r){var d=Number(r.rank_change||0);return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d>0?'+'+d:d)+'</i></span>';}).join('');
         track.innerHTML=html+html;
+      }
+      // HOME hero TOP 5: the original markup is only a no-JS fallback.
+      // Replace all four cards from the same published snapshot used by the
+      // ticker and ranking pages so the landing page can never show stale data.
+      var heroTop=document.querySelector('.hero-top5');
+      if(heroTop){
+        var heroLinks={CPR:'cpr.html',GOV:'gov.html',UNI:'uni.html',ENT:'star.html'};
+        heroTop.innerHTML=['CPR','GOV','UNI','ENT'].map(function(d){
+          var top=rows.filter(function(r){return r.domain===d;}).slice(0,5);
+          var items=top.length ? top.map(function(r){
+            var delta=Number(r.rank_change||0);
+            var deltaClass=delta>0?'t5-up':delta<0?'t5-down':'t5-flat';
+            var deltaText=delta>0?'▲ '+delta:delta<0?'▼ '+Math.abs(delta):'— 0';
+            return '<li><span class="t5-nm">'+esc(r.name)+'</span><span class="t5-sc">'+Number(r.score).toFixed(1)+'</span><span class="'+deltaClass+'">'+deltaText+'</span></li>';
+          }).join('') : '<li class="t5-empty">오늘 공개 기준 충족 대상 없음</li>';
+          return '<a class="t5-block" href="'+heroLinks[d]+'"><div class="t5-head">'+d+' <span class="t5-more">TOP 5 →</span></div><ol class="t5-list">'+items+'</ol></a>';
+        }).join('');
+        heroTop.setAttribute('data-live-date',payload.asOfDate||'');
       }
       // THIS WEEK의 네 영역 목록도 같은 스냅샷으로 교체한다.
       document.querySelectorAll('.twr-col').forEach(function(col){
@@ -495,3 +513,4 @@
 
 
 /* [2026-09 수정] 모바일도 탭=모달(벤다이어그램)로 통일 — 펼침 로직 제거 */
+
