@@ -238,12 +238,13 @@ ul{list-style:none;}
 }
 .bridge-modal-title{ font-family:var(--serif); font-size:30px; margin-bottom:6px;}
 .bridge-modal-sub{ font-size:12.5px; color:#8b8779; margin-bottom:24px;}
-.bridge-modal-body{ display:grid; grid-template-columns:280px 1fr; gap:28px; align-items:start;}
+.bridge-modal-body{ display:grid; grid-template-columns:280px 1fr; gap:28px; align-items:stretch;}
 .bridge-radar-stage{ position:relative; padding:12px; border:1px solid #e4dfd2; border-radius:18px;
-  background:radial-gradient(circle at 50% 48%,#fff 0,#f7f4ec 62%,#eee8db 100%); overflow:hidden; }
+  background:radial-gradient(circle at 50% 48%,#fff 0,#f7f4ec 62%,#eee8db 100%); overflow:hidden;
+  min-height:100%; display:flex; align-items:center; }
 .bridge-radar-stage::after{ content:""; position:absolute; inset:10px; border:1px solid rgba(169,136,79,.18); border-radius:14px; pointer-events:none; }
 .bridge-radar{ position:relative; z-index:2; width:100%; height:auto; filter:drop-shadow(0 8px 18px rgba(62,49,25,.08));}
-.bridge-radar-wordmark{ position:absolute; inset:auto 16px 13px; display:flex; justify-content:center; gap:4px;
+.bridge-radar-wordmark{ position:absolute; inset:auto 16px 3px; display:flex; justify-content:center; gap:4px;
   opacity:.2; font-family:var(--serif); font-size:10px; font-weight:800; letter-spacing:.08em; }
 .bridge-radar-wordmark span{ display:grid; place-items:center; width:18px; height:18px; border:1px solid currentColor; border-radius:50%; }
 .bridge-modal-table{ font-size:12.5px;}
@@ -833,6 +834,10 @@ footer .logo .op{ color:#7c86a0;}
 .bmscore-hl .bmscore-label,.bmscore-hl .bmscore-value{ color:#fff; font-weight:800; }
 .bmscore-hl .bmscore-sub{ color:rgba(255,255,255,.64); }
 .bmscore-primary .bmscore-value{ color:#f0d98a; }
+.bmscore-outline{ background:transparent; border:1px solid rgba(31,58,95,.24); border-radius:10px;
+  padding:11px 14px !important; margin:3px 0; box-shadow:none; }
+.bmscore-outline .bmscore-label{ color:var(--navy); font-weight:800; }
+.bmscore-outline .bmscore-value{ color:#725b2c; font-weight:800; }
 
 .twr-titleline{ display:flex; align-items:center; gap:16px; }
 .bridge-axis-wordmark{ display:flex; flex:0 0 auto; }
