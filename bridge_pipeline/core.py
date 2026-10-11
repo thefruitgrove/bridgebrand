@@ -112,7 +112,16 @@ class SupabaseRest:
     def upsert(self, table: str, rows: list[dict[str, Any]], conflict: str) -> Any:
         if not rows:
             return []
-        return self.request("POST", table, rows, f"on_conflict={urllib.parse.quote(conflict)}", "resolution=merge-duplicates,return=representation")
+        result: list[dict[str, Any]] = []
+        batch_size = 500
+        for offset in range(0, len(rows), batch_size):
+            batch = self.request(
+                "POST", table, rows[offset:offset + batch_size],
+                f"on_conflict={urllib.parse.quote(conflict)}",
+                "resolution=merge-duplicates,return=representation",
+            ) or []
+            result.extend(batch)
+        return result
 
     def select(self, table: str, query: str) -> list[dict[str, Any]]:
         if re.search(r"(?:^|&)limit=", query):
