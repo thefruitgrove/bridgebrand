@@ -18,9 +18,9 @@
   // Published Supabase snapshot. A valid daily snapshot rebuilds the public
   // T100 list in score/rank order; static HTML is fallback only.
   (function loadBridgeDailySnapshot(){
-    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    var domain = page === 'cpr.html' ? 'CPR' : page === 'gov.html' ? 'GOV' :
-      page === 'uni.html' ? 'UNI' : page === 'star.html' ? 'ENT' : null;
+    var page = (location.pathname.split('/').pop() || 'index').toLowerCase().replace(/\.html$/, '');
+    var domain = page === 'cpr' ? 'CPR' : page === 'gov' ? 'GOV' :
+      page === 'uni' ? 'UNI' : page === 'star' ? 'ENT' : null;
     fetch('data/latest.json', {cache:'no-store'}).then(function(res){
       if(!res.ok) throw new Error('snapshot unavailable');
       return res.json();
