@@ -234,8 +234,35 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
         "bridge_public_latest_rankings",
         f"select=*&as_of_date=eq.{as_of.isoformat()}&order=domain.asc,ranking_type.asc,rank.asc,external_id.asc",
     )
+    # A cancelled/retried run must never leak mixed rank numbers to the public
+    # file. Rebuild one ordinal sequence per table from the published scores.
+    grouped_rows: dict[tuple[str, str], list[dict]] = {}
+    for row in rows:
+        grouped_rows.setdefault((row["domain"], row["ranking_type"]), []).append(row)
+    for members in grouped_rows.values():
+        members.sort(key=lambda r: (-float(r["score"]), str(r["external_id"])))
+        for position, row in enumerate(members, 1):
+            row["rank"] = position
+
+    # Publish only the six axis results and coverage count, never diagnostics,
+    # source queries, weights, or internal formula notes.
+    entity_ids = {r["external_id"]: r["id"] for r in db.select("bridge_entities", "select=id,external_id")}
+    axes = db.select(
+        "bridge_axis_observations",
+        f"select=entity_id,axis,score,status&as_of_date=eq.{as_of.isoformat()}"
+        f"&methodology_version=eq.{load_methodology()['version']}",
+    )
+    axes_by_entity: dict[str, dict[str, float]] = {}
+    for observation in axes:
+        if observation.get("score") is None or observation.get("status") not in {"measured", "carried"}:
+            continue
+        axes_by_entity.setdefault(observation["entity_id"], {})[observation["axis"]] = round(float(observation["score"]), 1)
+
     labels = load_methodology().get("release_policy", {}).get("public_domain_labels", {})
     for row in rows:
+        public_axes = axes_by_entity.get(entity_ids.get(row["external_id"], ""), {})
+        row["axis_scores"] = {axis: public_axes.get(axis) for axis in "BRIDGE"}
+        row["axes_available"] = len(public_axes)
         row["internalDomain"] = row["domain"]
         row["domain"] = labels.get(row["domain"], row["domain"])
     payload = {
@@ -376,10 +403,7 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     # 같은 날짜를 재실행할 때 이전 실행의 적격 행이 공개 상태로 남으면 서로
     # 다른 스냅샷의 순위가 섞인다. 현재 방법론의 당일 공개표시를 먼저 해제하고
     # 이번 계산에서 통과한 행만 publish 단계에서 다시 공개한다.
-    db.patch(
-        "bridge_rankings", {"published_at": None},
-        f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
-    )
+    db.patch("bridge_rankings", {"published_at": None}, f"as_of_date=eq.{as_of.isoformat()}")
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
     since = (as_of - dt.timedelta(days=28)).isoformat()
