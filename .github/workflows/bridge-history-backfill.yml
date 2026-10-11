@@ -1,0 +1,84 @@
+name: BRIDGE Historical Weekly Backfill
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-history-backfill.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Regression tests
+        run: |
+          python -m unittest discover -s tests -v
+          python engine3/test_scoring_v3.py
+
+      - name: Collect dated public evidence once
+        run: python -m bridge_pipeline.run collect-news-window --start 2026-09-01 --end 2026-10-10 --date 2026-10-10
+
+      - name: Prepare reusable official baselines
+        run: |
+          python -m bridge_pipeline.cpr_financials --output /tmp/cpr_axes.csv
+          python -m bridge_pipeline.baseline --domain UNI --input automation/uni_baseline_input.csv --output /tmp/uni_axes.csv
+          python -m bridge_pipeline.baseline --domain GOV --input automation/gov_baseline_input.csv --output /tmp/gov_axes.csv
+
+      - name: Build six weekly observation points
+        run: |
+          for d in 2026-09-07 2026-09-14 2026-09-21 2026-09-28 2026-10-05 2026-10-10; do
+            python -m bridge_pipeline.ent_interest --date "$d" --output /tmp/ent_axes.csv
+            python -m bridge_pipeline.run import-official --file /tmp/ent_axes.csv --date "$d"
+            python -m bridge_pipeline.run import-official --file /tmp/cpr_axes.csv --date "$d"
+            python -m bridge_pipeline.run import-official --file /tmp/uni_axes.csv --date "$d"
+            python -m bridge_pipeline.run import-official --file /tmp/gov_axes.csv --date "$d"
+            python -m bridge_pipeline.run score --date "$d"
+            python -m bridge_pipeline.run publish-daily --date "$d"
+          done
+
+      - name: Recalculate and publish the current day
+        run: |
+          TODAY=$(date +%F)
+          python -m bridge_pipeline.run score --date "$TODAY"
+          python -m bridge_pipeline.run publish-daily --date "$TODAY"
+          python -m bridge_pipeline.run export --date "$TODAY"
+          python build.py
+          python build_spa.py
+
+      - name: Commit current public snapshot
+        run: |
+          git config user.name "bridge-bot"
+          git config user.email "bot@bridgebrand.co.kr"
+          git add site/data/latest.json data/pipeline_status.json site/
+          git diff --cached --quiet && exit 0
+          git commit -m "data: complete weekly history backfill"
+          git restore --worktree .
+          git pull --rebase -X theirs origin main
+          git push origin HEAD:main
+
+      - name: Trigger Cloudflare deployment hook
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 3 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
