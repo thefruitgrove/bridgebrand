@@ -230,7 +230,10 @@ def collect_dart(db: SupabaseRest, as_of: dt.date) -> None:
 
 
 def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
-    rows = db.select("bridge_public_latest_rankings", "select=*&order=domain.asc,ranking_type.asc,rank.asc")
+    rows = db.select(
+        "bridge_public_latest_rankings",
+        f"select=*&as_of_date=eq.{as_of.isoformat()}&order=domain.asc,ranking_type.asc,rank.asc,external_id.asc",
+    )
     labels = load_methodology().get("release_policy", {}).get("public_domain_labels", {})
     for row in rows:
         row["internalDomain"] = row["domain"]
