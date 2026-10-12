@@ -32,13 +32,14 @@
         var d=Number(rec.rank_change||0), cls=d>0?'wow-up':d<0?'wow-down':'wow-flat';
         return '<span class="wow '+cls+'">'+(d>0?'▲ '+d:d<0?'▼ '+Math.abs(d):'— 0')+'</span>';
       }
-      function rankRow(rec){
+      function rankRow(rec, snapshotDate){
         var n=Number(rec.rank), top=n<=3?' top3':'';
-        return '<div class="rk-row rk-clickable live-row'+top+'" data-entity="'+esc(rec.name)+'" data-region="'+esc(rec.domain)+'" data-type="T100" data-live-date="'+esc(payload.asOfDate||'')+'" tabindex="0" role="button">'+
+        var displayedDate=snapshotDate||rec.as_of_date||payload.asOfDate||'';
+        return '<div class="rk-row rk-clickable live-row'+top+'" data-entity="'+esc(rec.name)+'" data-region="'+esc(rec.domain)+'" data-type="T100" data-live-date="'+esc(displayedDate)+'" tabindex="0" role="button">'+
           '<div class="rk-num">'+String(n).padStart(2,'0')+'</div>'+
           '<div class="rk-name"><div class="nm">'+esc(rec.name)+'</div><div class="sub">'+esc(rec.external_id)+' · '+esc(rec.category||'')+' · '+esc(rec.subcategory||'T100')+'</div></div>'+
           '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div>'+
-          '<div class="rk-dims"><span class="dm">실측 공개적격 · '+esc(payload.asOfDate||'')+'</span></div>'+
+          '<div class="rk-dims"><span class="dm">실측 공개적격 · '+esc(displayedDate)+'</span></div>'+
           '<div class="rk-score">'+Number(rec.score).toFixed(1)+'</div>'+
           '<div class="rk-wow">'+change(rec)+'</div>'+
           '<div class="rk-trust"><span class="trust-badge grade-'+esc(rec.trust_grade)+'">'+esc(rec.trust_grade)+'</span></div></div>';
@@ -58,7 +59,7 @@
           };
         });
         var prefix=domain==='ENT'?'star':domain.toLowerCase(), panel=document.getElementById(prefix+'-t100');
-        if(panel){ panel.innerHTML=domainRows.map(rankRow).join(''); panel.setAttribute('data-shown','1000'); }
+        if(panel){ panel.innerHTML=domainRows.map(function(rec){return rankRow(rec,snapshotDate);}).join(''); panel.setAttribute('data-shown','1000'); }
         if(panel && window.openBridgeModal){
           panel.querySelectorAll('.rk-clickable').forEach(function(row){
             row.addEventListener('click',function(){ window.openBridgeModal(row.dataset.entity,row.dataset.region,row.dataset.type); });
