@@ -3012,6 +3012,12 @@ def _domain_of(name):
     if name in {e[0] for e in GOV_M40} | {e[0] for e in GOV_C60}: return "GOV"
     if name in {e[0] for e in UNI_4YEAR} | {e[0] for e in UNI_2YEAR}: return "UNI"
     if name in {e[0] for e in STAR_REAL}: return "ENT"
+    # 파일럿 원장에는 GOV 정규 모집단이 확장되기 전에 수집된 공공기관
+    # 사례가 남아 있을 수 있다. 기관명이 공공부문 고유 종결어를 가지면
+    # 공개 다이제스트에서도 미분류(?)로 두지 않고 GOV로 정규화한다.
+    # 상장기업 CPR 모집단은 별도 명단으로 먼저 판정하므로 충돌하지 않는다.
+    if _re.search(r"(?:공사|공단|진흥원|연구원|재단|위원회|부|청|처)$", name or ""):
+        return "GOV"
     return "?"
 
 def this_week_digest_entries(limit=20):
