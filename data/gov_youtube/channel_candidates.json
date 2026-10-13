@@ -1,0 +1,65 @@
+{
+  "as_of_date": "2026-10-13",
+  "candidates": {
+    "GOV-C01": {
+      "channel_id": "UCOZ1mcq_3LGj3cvI_SIWd1A",
+      "title": "seoul",
+      "reason": "title_mismatch"
+    },
+    "GOV-C02": {
+      "channel_id": "UC5o2UR0P8Q3gveV-tTi6pew",
+      "title": "Changwon park",
+      "reason": "title_mismatch"
+    },
+    "GOV-C03": {
+      "channel_id": "UC7zEOa6U75HUtZYf1flelIg",
+      "title": "대구부동산TV",
+      "reason": "title_mismatch"
+    },
+    "GOV-C04": {
+      "channel_id": "UC5N3s-Gc8Fnh8Ha1QF64R_Q",
+      "title": "인천TV",
+      "reason": "title_mismatch"
+    },
+    "GOV-C05": {
+      "channel_id": "UCwL1cVnEkjGgzMN4KPFuHSw",
+      "title": "GJCity",
+      "reason": "title_mismatch"
+    },
+    "GOV-C07": {
+      "channel_id": "UCQ8pHumsjKIo4VZmVDfc5oA",
+      "title": "The Life",
+      "reason": "title_mismatch"
+    },
+    "GOV-C09": {
+      "channel_id": "UC4-IGqMz7e540V7TFwekbDQ",
+      "title": "보스쿼카",
+      "reason": "title_mismatch"
+    },
+    "GOV-C42": {
+      "channel_id": "UCqRH8Xr8FUvbfFGXdG1TxWQ",
+      "title": "한국광해광업공단 KOMIR 공식채널",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C43": {
+      "channel_id": "UCQMUYq0sUVlWNY9Y6OIdX5g",
+      "title": "ICT 정보통신기술",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C44": {
+      "channel_id": "UC83l21B4HarJD4X9Bq3zmmw",
+      "title": "무역안보관리원 - 코스티비(KOSTI-TV)",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C45": {
+      "channel_id": "UC7tsTpx4Ra-oJrjIb9ItBUA",
+      "title": "국민건강보험",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C46": {
+      "channel_id": "UC2MDW7cjUSt7_Q2F7Cg2Iaw",
+      "title": "한국관광공사TV",
+      "reason": "awaiting_human_verification"
+    }
+  }
+}
