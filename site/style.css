@@ -960,3 +960,33 @@ footer .logo .op{ color:#7c86a0;}
 .nav-util:hover{border-bottom-color:#b29766}.nav-right{gap:16px}
 @media(max-width:900px){.ranking-panels{grid-template-columns:1fr}.ranking-card-boards{grid-column:1}.ranking-master{grid-row:auto}.ranking-card-boards .ranking-cohort{max-height:740px}}
 @media(max-width:540px){.ranking-card-boards .rk-panel{grid-template-columns:1fr}.ranking-card-boards .rk-row{min-height:180px}.ranking-card-boards .rk-wow{right:18px;bottom:18px}}
+
+/* Mobile containment: content grids, score rows and dialog must fit the viewport. */
+@media(max-width:900px){
+ .ranking-panels,.ranking-card-boards,.ranking-master,.ranking-cohort,.rk-panel{min-width:0;max-width:100%}
+ .ranking-master{grid-column:1;grid-row:auto}
+ .nav-inner{gap:12px;padding-left:20px;padding-right:20px;min-height:64px}
+ .nav-toggle{min-width:44px;min-height:44px}
+ .mobile-menu{overflow-y:auto;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+ .mobile-menu a{overflow-wrap:anywhere}
+}
+@media(max-width:600px){
+ .ranking-panels{gap:24px}.ranking-master{max-height:600px}
+ .ranking-panel-head{gap:8px;flex-wrap:wrap}.ranking-panel-head span{font-size:9px}
+ .ranking-summary-strip .seg-btn{min-width:0;white-space:normal;line-height:1.45}
+ .ranking-master .rk-row{grid-template-columns:28px minmax(0,1fr) auto auto;gap:7px;padding:12px 10px}
+ .ranking-master .rk-name .nm{font-size:12px}.ranking-master .rk-score{font-size:17px}
+ .rk-clickable:focus-visible{outline:2px solid #a9884f;outline-offset:-2px}
+ .bridge-modal-overlay{padding:10px;align-items:center}
+ .bridge-modal{width:100%;max-width:100%;max-height:calc(100dvh - 20px);padding:42px 16px 20px;overflow-x:hidden;box-sizing:border-box}
+ .bridge-modal-body{grid-template-columns:minmax(0,1fr)}
+ .bridge-modal-body>*{min-width:0}.bridge-radar-stage{min-height:0;aspect-ratio:1;max-width:360px;width:100%;margin:auto}
+ .bridge-modal-title{font-size:23px;overflow-wrap:anywhere}
+ .bridge-modal-table{width:100%;table-layout:fixed}.bridge-modal-table td{padding:6px 4px;overflow-wrap:anywhere}
+ .bridge-modal-table .axis-def{white-space:normal}
+ .bmscore-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 8px;align-items:center}
+ .bmscore-label{overflow-wrap:anywhere}.bmscore-sub{display:block;margin:3px 0 0;line-height:1.45}
+ .bmscore-value{white-space:nowrap;font-size:19px}.bridge-modal-close{width:40px;height:40px;top:5px;right:6px}
+ .period-row select{width:100%;max-width:100%;min-width:0}.hero h1{overflow-wrap:anywhere}
+ .tw-grid,.twr-grid,.hero-top5{min-width:0;max-width:100%}
+}
