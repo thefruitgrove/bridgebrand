@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "BRIDGE · SignalBridge",
+  "short_name": "BRIDGE",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#121923",
+  "theme_color": "#121923",
+  "icons": [
+    {
+      "src": "/icons/bridge-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/bridge-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
