@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "run_at": "2026-10-14T02:50:46.277327+09:00",
+  "run_at": "2026-10-14T02:57:01.487784+09:00",
   "official_source": {
     "provider": "대학알리미",
     "source_file": "대학주요정보.xlsx",
@@ -18,7 +18,7 @@
       "교육비": 2026,
       "기숙사": 2025
     },
-    "retrieved_at": "2026-10-13T17:50:20.665169+00:00"
+    "retrieved_at": "2026-10-13T17:56:38.589369+00:00"
   },
   "signal_ledger": [
     {
@@ -2754,34 +2754,6 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
-      "title": "고려대의료원, ‘SMTOWN RUN CLUB 26’ 현장 의료지원…구급차 3대 배치 - 더퍼스트미디어",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBhazNOX3YtWlVzWmJPWjRLWjZrMFh6VmtDUFhTaWhYcDZtUS1QMzZpcVJ5S3M2UmJMRk5Md2dCNGc3VzRiSkdiX1RmRzVvVTllZXRjeWQ4dXV1N0YtRk1DMHk4V1dqZkxwM3dxZUxyMUtyYXpm0gF0QVVfeXFMUGFrM05fdi1aVXNaYk9aNEtaNmswWHpWa0NQWFNpaFhwNm1RLVAzNmlxUnlLczZSYkxGTkx3Z0I0ZzdXNGJKR2JfVGZHNW9VOWVldGN5ZDh1dXU3Ri1GTUMweThXV2pmTHAzd3FlTHIxS3JhemY?oc=5",
-      "source_id": "news:더퍼스트미디어",
-      "published_at": "2026-10-11T21:19:41+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "고려대의료원, ‘SMTOWN RUN CLUB 26’ 현장 의료지원…구급차 3대 배치 - 더퍼스트미디어",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBhazNOX3YtWlVzWmJPWjRLWjZrMFh6VmtDUFhTaWhYcDZtUS1QMzZpcVJ5S3M2UmJMRk5Md2dCNGc3VzRiSkdiX1RmRzVvVTllZXRjeWQ4dXV1N0YtRk1DMHk4V1dqZkxwM3dxZUxyMUtyYXpm0gF0QVVfeXFMUGFrM05fdi1aVXNaYk9aNEtaNmswWHpWa0NQWFNpaFhwNm1RLVAzNmlxUnlLczZSYkxGTkx3Z0I0ZzdXNGJKR2JfVGZHNW9VOWVldGN5ZDh1dXU3Ri1GTUMweThXV2pmTHAzd3FlTHIxS3JhemY?oc=5",
-      "source_id": "news:더퍼스트미디어",
-      "published_at": "2026-10-11T21:19:41+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
       "title": "고려대 의대 전옥희 교수, 83억 원 규모 국책과제 수주...역노화 치료제 개발 착수:약품신문 - 약품신문",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9TYVdGYVNnOENGcVl1ZXRMTE5ISXROWlZ1ZFlPZnhOaTlGTjNKTnpuV2Y5bE9oa0pYVGZSM0VaWjhMeFV6YWR0RVRBekRCMlUzQlA4RU1rSldtbzRXSkpkbtIBYEFVX3lxTE9TYVdGYVNnOENGcVl1ZXRMTE5ISXROWlZ1ZFlPZnhOaTlGTjNKTnpuV2Y5bE9oa0pYVGZSM0VaWjhMeFV6YWR0RVRBekRCMlUzQlA4RU1rSldtbzRXSkpkbg?oc=5",
@@ -3263,20 +3235,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1qYTZHSkxUUUx5LXlsVmtsTEEyTTZ2MlZpaU1yQVZoR0NsWi1PQ2txT0dGVGlhTl9PdmtGeklrUFduNzZZV283aUgtV0lCTnFFR2NzOG9TRTI0T2NBRkZWNnpPNmMtSU0?oc=5",
       "source_id": "news:청년일보",
       "published_at": "2026-10-12T04:30:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-71DF76D19DD5",
-      "name": "국립한국해양대학교",
-      "title": "국립한국해양대, 해사대학 여학생 대상 ‘예비 승선 멘토링’ 개최 - 부산일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE55azJKUzhsRWFZMHRaaUpFczNwUktnMjBtSnJXQkppbGFPR21ZUUw2VU5WS3RncUFTRDd1Q0VTNm82dmFES2huVGk3dE5jeFpSMGZjcGlkVXFwMWFPenZxLUF0VXZtVEtXQVpPUGloUVBJcE9Pd0h1MHpFQQ?oc=5",
-      "source_id": "news:부산일보",
-      "published_at": "2026-10-12T02:21:29+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -5332,7 +5290,7 @@
       "name": "부산과학기술대학교",
       "title": "부산과학기술대학교, ‘2026 산학연협력 EXPO’ 우수 성과상 수상 - 피앤피뉴스",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBHUjR3VGZKVWtLMS1fNHlKVnF5RGVBTktfNUw3bFVnTHlISEY2THlIMklJOEFMVGFPTE0temxuOVhJOWhDb0RfalNuU0phUm1zSmN4bDVR?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1OV1libU13WjRIYjU1R1hhVUl4YURIU2lXMnhIUS1xbXJvQkJ4LVhGQVFFUDQzWUhWejJpUjd6R21mNlJGdmZnY1JhQWswd0NHWk9SejVCT19nZi1GMkE?oc=5",
       "source_id": "news:피앤피뉴스",
       "published_at": "2026-10-12T05:46:09+00:00",
       "verification_status": "single_source",
@@ -5346,7 +5304,7 @@
       "name": "부산과학기술대학교",
       "title": "부산과학기술대학교, ‘2026 산학연협력 EXPO’ 우수 성과상 수상 - 피앤피뉴스",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBHUjR3VGZKVWtLMS1fNHlKVnF5RGVBTktfNUw3bFVnTHlISEY2THlIMklJOEFMVGFPTE0temxuOVhJOWhDb0RfalNuU0phUm1zSmN4bDVR?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1OV1libU13WjRIYjU1R1hhVUl4YURIU2lXMnhIUS1xbXJvQkJ4LVhGQVFFUDQzWUhWejJpUjd6R21mNlJGdmZnY1JhQWswd0NHWk9SejVCT19nZi1GMkE?oc=5",
       "source_id": "news:피앤피뉴스",
       "published_at": "2026-10-12T05:46:09+00:00",
       "verification_status": "single_source",
@@ -5354,6 +5312,132 @@
       "axis": "R",
       "direction": 1,
       "severity": 0.7999999999999999
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대학교, 청원축제 드론스포츠대회 일반대학부 1위 - 전국매일신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5GbW9OTEszemw4QVJmZFo3TWVRaXhMWDZwd1VvOThpRDA1ZTk4Mi1VZ210ZlZGNWJlVTJjUVAwZlJVMlZBTUtVN0lyd2ZoSGJPVG1ZUHdoWlpybXVlVEtTdXVBaURpZFRQUWVyM29B?oc=5",
+      "source_id": "news:전국매일신문",
+      "published_at": "2026-10-12T06:42:45+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대 드론팀, 청원축제 드론농구 일반대학부 1위 - 당진신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0zdjlJa0J1aDd0Vlp0UWhFZGRkNTFKaDd3NmRvM1NkSzIzdElkdFE5SjZhMkRHWXJRU1pnRjkxSGNKLXVkQnlSTEtYMmMtVUFEdGFvLXF4UVZZWXM5TWN6ZV9EeHJpRVU1?oc=5",
+      "source_id": "news:당진신문",
+      "published_at": "2026-10-12T02:20:47+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대, 드론스포츠대회 1위 수상 - 로컬투데이",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5QUlRqVGhSN3FMMW5HRHpHR2hHbkJad0JpeVVCT3U4OVcwbmZxVlJlWlBOaDhCSnpGc18yQlFuYVBXLXJRd2tGbG9zZjdwc09jUTRMR3JVblZCeFl1eEtCcUJqSjNuQlFfNGtGNkdzT3c?oc=5",
+      "source_id": "news:로컬투데이",
+      "published_at": "2026-10-12T02:40:14+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대, 드론스포츠대회 1위 수상 - 로컬투데이",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5QUlRqVGhSN3FMMW5HRHpHR2hHbkJad0JpeVVCT3U4OVcwbmZxVlJlWlBOaDhCSnpGc18yQlFuYVBXLXJRd2tGbG9zZjdwc09jUTRMR3JVblZCeFl1eEtCcUJqSjNuQlFfNGtGNkdzT3c?oc=5",
+      "source_id": "news:로컬투데이",
+      "published_at": "2026-10-12T02:40:14+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "준오헤어, 신성대 준오헤어디자인과에 매년 1000만 원 장학금 기탁 - 충청일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5oOWFIdlFDa1k0WFp1MlpFYnIwcnZoMDlUVzZCckJMajB4cmlyZ3FSY3ZjNU4wMHNUWFFXS0xEVkFtR1BZeW52REw1VUY3dWRLLXNibzVVWmpUVEJFTGRJMm9lVjJaZnVJaEtCOE8xaw?oc=5",
+      "source_id": "news:충청일보",
+      "published_at": "2026-10-12T06:35:18+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "준오헤어, 신성대 준오헤어디자인과에 매년 1000만 원 장학금 기탁 - 충청일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5oOWFIdlFDa1k0WFp1MlpFYnIwcnZoMDlUVzZCckJMajB4cmlyZ3FSY3ZjNU4wMHNUWFFXS0xEVkFtR1BZeW52REw1VUY3dWRLLXNibzVVWmpUVEJFTGRJMm9lVjJaZnVJaEtCOE8xaw?oc=5",
+      "source_id": "news:충청일보",
+      "published_at": "2026-10-12T06:35:18+00:00",
+      "verification_status": "single_source",
+      "event_type": "experience",
+      "axis": "D",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 수상 쾌거 - 서산포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9Odnd0SVhrNndZRkFwb05GWFN3ME9QeDBpQ1V1RDNHaE5pa3c1SUlpZk93cnBQWFQ5dUJDeEZUSFVTTkZHQmdVejNLcXl6bzBVcUg1YmJvQkVkMW82ZUo3ZVZiZXNGWk5IZjNETGdvaw?oc=5",
+      "source_id": "news:서산포스트",
+      "published_at": "2026-10-12T02:27:01+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 수상 쾌거 - 서산포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9Odnd0SVhrNndZRkFwb05GWFN3ME9QeDBpQ1V1RDNHaE5pa3c1SUlpZk93cnBQWFQ5dUJDeEZUSFVTTkZHQmdVejNLcXl6bzBVcUg1YmJvQkVkMW82ZUo3ZVZiZXNGWk5IZjNETGdvaw?oc=5",
+      "source_id": "news:서산포스트",
+      "published_at": "2026-10-12T02:27:01+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 쾌거 - 충청일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5DdFpiZkI1MjNkdktVVk9aTklfaUhTYmJVVjJsSXdwTDdDYmFYWEsxZnEyZG9LQW12YWJaQzdzbXFyY3RIbkNLd01reTNIQ0R1ZmRsaHFEQzFLU19FaGRFdUFnSTJSd2RxNFBQTUsxWQ?oc=5",
+      "source_id": "news:충청일보",
+      "published_at": "2026-10-12T06:35:18+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
     },
     {
       "university_id": "UNI-AB6525072EBC",
@@ -6392,6 +6476,62 @@
       "severity": 0.35
     },
     {
+      "university_id": "UNI-C6659E0020A3",
+      "name": "백석문화대학교",
+      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
+      "source_id": "news:백석대학교 인트로",
+      "published_at": "2026-10-11T23:02:40+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-C6659E0020A3",
+      "name": "백석문화대학교",
+      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
+      "source_id": "news:백석대학교 인트로",
+      "published_at": "2026-10-11T23:02:40+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.6499999999999999
+    },
+    {
+      "university_id": "UNI-C6659E0020A3",
+      "name": "백석문화대학교",
+      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
+      "source_id": "news:백석대학교 인트로",
+      "published_at": "2026-10-11T23:02:40+00:00",
+      "verification_status": "single_source",
+      "event_type": "claim",
+      "axis": "I",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-C6659E0020A3",
+      "name": "백석문화대학교",
+      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
+      "source_id": "news:백석대학교 인트로",
+      "published_at": "2026-10-11T23:02:40+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
       "university_id": "UNI-3AA537688056",
       "name": "수성대학교",
       "title": "수성대·수성구청·더컴퍼니씨협동조합, `웰니스 1인 창작자` 양성 맞손 - 매일신문",
@@ -6446,48 +6586,6 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-3AA537688056",
-      "name": "수성대학교",
-      "title": "수성대·수성구청·더컴퍼니씨협동조합, `웰니스 1인 창작자` 양성 맞손 - 매일신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9NanVCWEl0c1pTQVJWT05vUWhud0k3MmgxRDNNR1JUVVZNUkREb2xaTHFLQkFvRTMtSGxGSWl6dTNuU05XVGxuMTRHQ2llbDllamo5eEl6Z0ZuRG5TMk1RSU9B?oc=5",
-      "source_id": "news:매일신문",
-      "published_at": "2026-10-12T01:58:55+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-3AA537688056",
-      "name": "수성대학교",
-      "title": "수성구 청년도전지원사업 청년, 공공기관 현장 직접 본다 - 대구매거진",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5ES0xQd1gwY2E3bGVqcXowR1AzcV9EQWdDT2E0VmhKM0VTaTctVUltTVIwSmRDWkI1VEhPMDcxQVpXVHRLSUpNLW5JMVIwQ1ZJWnhUc0JwNWdITmtzV1QwRHB2alJ2akY4TGxWbmtWc9IBckFVX3lxTE42Y2M2cnhjVllteTFoMXJpU1o4SnRGaUFLaGtIMkZ1SUdWd0dGQlduZHV1NWx4TnlHaC0yWEhjLVMyOHF6Vmc3clZPRGd0QzVPV0ppSXFoMW5iQ0F1OEdZLU5rT1hwVVNFZk94WmpQcXUxUQ?oc=5",
-      "source_id": "news:대구매거진",
-      "published_at": "2026-10-12T08:20:26+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-3AA537688056",
-      "name": "수성대학교",
-      "title": "수성구 청년도전지원사업 청년, 공공기관 현장 직접 본다 - 대구매거진",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5ES0xQd1gwY2E3bGVqcXowR1AzcV9EQWdDT2E0VmhKM0VTaTctVUltTVIwSmRDWkI1VEhPMDcxQVpXVHRLSUpNLW5JMVIwQ1ZJWnhUc0JwNWdITmtzV1QwRHB2alJ2akY4TGxWbmtWc9IBckFVX3lxTE42Y2M2cnhjVllteTFoMXJpU1o4SnRGaUFLaGtIMkZ1SUdWd0dGQlduZHV1NWx4TnlHaC0yWEhjLVMyOHF6Vmc3clZPRGd0QzVPV0ppSXFoMW5iQ0F1OEdZLU5rT1hwVVNFZk94WmpQcXUxUQ?oc=5",
-      "source_id": "news:대구매거진",
-      "published_at": "2026-10-12T08:20:26+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
     },
     {
       "university_id": "UNI-3AA537688056",
@@ -6660,20 +6758,6 @@
     {
       "university_id": "UNI-5B538D749910",
       "name": "충북보건과학대학교",
-      "title": "[교수초빙] 충북보건과학대학교 2026학년도 하반기 특임교수 신규임용 채용 공고 - 교수신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkZ3EtbmppMERQeU1iZzVOelFiSUQ2S1FsRWJIb2oybThaNS1yU1NCTnZ0U1hNRmJ4OTJQSzVWek5GXzhBTDVWQUdNTUo2SzNzN0I3a3VFTVVkLUpYOGJzYkVnLVB3Qzg?oc=5",
-      "source_id": "news:교수신문",
-      "published_at": "2026-10-12T00:25:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-5B538D749910",
-      "name": "충북보건과학대학교",
       "title": "충북보건과학대, 충북 유일 전문대학 특성화 선도대학 선정 - 국제뉴스",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9zRUhaLTkxemVJeHVMM2dyeVdablNNSW5XQ3NybUZPbXBTdm5hUVMwcWRDV3p0OU5zZzE2SkdBejRpYnJuU0doZGkza0lYYTVtY045WkpncG9JVGllVG9zQjR3LVQ1UVVGa01vUjBB?oc=5",
@@ -6800,44 +6884,16 @@
     {
       "university_id": "UNI-5B538D749910",
       "name": "충북보건과학대학교",
-      "title": "충북보건과학대, 교육부 ‘특성화 선도대학’ 선정 - 아이뉴스24",
+      "title": "[교수초빙] 충북보건과학대학교 2026학년도 하반기 특임교수 신규임용 채용 공고 - 교수신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5mcHFKcjFsaWN3X3FVYzljazdRd2xNVk9iZEtKSl81MnA3MkZfVUdWUmhZbjgyUGNaLUdfUXpUWXUxeUNTZFloRnJ4RWU?oc=5",
-      "source_id": "news:아이뉴스24",
-      "published_at": "2026-10-12T07:13:27+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBkZ3EtbmppMERQeU1iZzVOelFiSUQ2S1FsRWJIb2oybThaNS1yU1NCTnZ0U1hNRmJ4OTJQSzVWek5GXzhBTDVWQUdNTUo2SzNzN0I3a3VFTVVkLUpYOGJzYkVnLVB3Qzg?oc=5",
+      "source_id": "news:교수신문",
+      "published_at": "2026-10-12T00:25:31+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-5B538D749910",
-      "name": "충북보건과학대학교",
-      "title": "충북보건과학대, 교육부 ‘특성화 선도대학’ 선정 - 아이뉴스24",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5mcHFKcjFsaWN3X3FVYzljazdRd2xNVk9iZEtKSl81MnA3MkZfVUdWUmhZbjgyUGNaLUdfUXpUWXUxeUNTZFloRnJ4RWU?oc=5",
-      "source_id": "news:아이뉴스24",
-      "published_at": "2026-10-12T07:13:27+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-5B538D749910",
-      "name": "충북보건과학대학교",
-      "title": "충북보건과학대, 교육부 ‘특성화 선도대학’ 선정 - 아이뉴스24",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5mcHFKcjFsaWN3X3FVYzljazdRd2xNVk9iZEtKSl81MnA3MkZfVUdWUmhZbjgyUGNaLUdfUXpUWXUxeUNTZFloRnJ4RWU?oc=5",
-      "source_id": "news:아이뉴스24",
-      "published_at": "2026-10-12T07:13:27+00:00",
-      "verification_status": "single_source",
-      "event_type": "claim",
-      "axis": "I",
-      "direction": 1,
-      "severity": 0.45
     },
     {
       "university_id": "UNI-5B538D749910",
@@ -6982,6 +7038,34 @@
     {
       "university_id": "UNI-077C08099741",
       "name": "강원대학교",
+      "title": "강원대학교 \"산림바이오소재공학과 최선은 교수, `강원과학기술대상` 과학기술 개발 부문 수상\" - 이코노믹포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE95Z2d2ejhVdmk3Q2hJWE1QNlN1NXdKc2ZNWVBZcEVzWlZtTFlyTkFFbUNaeG5LV1c1clFwZURzTUZpTUxBV1paLTBlZVY?oc=5",
+      "source_id": "news:이코노믹포스트",
+      "published_at": "2026-10-12T06:26:28+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-077C08099741",
+      "name": "강원대학교",
+      "title": "강원대학교 \"산림바이오소재공학과 최선은 교수, `강원과학기술대상` 과학기술 개발 부문 수상\" - 이코노믹포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE95Z2d2ejhVdmk3Q2hJWE1QNlN1NXdKc2ZNWVBZcEVzWlZtTFlyTkFFbUNaeG5LV1c1clFwZURzTUZpTUxBV1paLTBlZVY?oc=5",
+      "source_id": "news:이코노믹포스트",
+      "published_at": "2026-10-12T06:26:28+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.6499999999999999
+    },
+    {
+      "university_id": "UNI-077C08099741",
+      "name": "강원대학교",
       "title": "강원대병원, 가수 이기찬 '독감 예방 캠페인 홍보대사' 위촉 - 연합뉴스",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBBV3Z0bHJfTmNZYW0yYlBXeVVTbTgzdHFmbTRpUWxsWDQ3alNUaTRQYWs0VUxCOEpsNjc1anJFUUppSUxOM1FoT0pxaDc1ZTI4aDVBa2Z1YUZha3F0ZFIzbNIBYEFVX3lxTFBBV3Z0bHJfTmNZYW0yYlBXeVVTbTgzdHFmbTRpUWxsWDQ3alNUaTRQYWs0VUxCOEpsNjc1anJFUUppSUxOM1FoT0pxaDc1ZTI4aDVBa2Z1YUZha3F0ZFIzbA?oc=5",
@@ -6992,34 +7076,6 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-077C08099741",
-      "name": "강원대학교",
-      "title": "최선은 교수 ‘강원과학기술대상’ 과학기술 개발 부문 수상 - 프레시안",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8yMTJaTVBRd2ZfZE9Fa0ItVWNJb01lYUZDcmxBeGt3R0pMYmtfc3d2Z1FzT01adDhoR2ktRndUMmptcDRaVDk5cXQwODE1Yjl0N2JTQUNKVnE4M3pCNjdtM01JanZBZGJxenh3?oc=5",
-      "source_id": "news:프레시안",
-      "published_at": "2026-10-12T06:26:54+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-077C08099741",
-      "name": "강원대학교",
-      "title": "최선은 교수 ‘강원과학기술대상’ 과학기술 개발 부문 수상 - 프레시안",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8yMTJaTVBRd2ZfZE9Fa0ItVWNJb01lYUZDcmxBeGt3R0pMYmtfc3d2Z1FzT01adDhoR2ktRndUMmptcDRaVDk5cXQwODE1Yjl0N2JTQUNKVnE4M3pCNjdtM01JanZBZGJxenh3?oc=5",
-      "source_id": "news:프레시안",
-      "published_at": "2026-10-12T06:26:54+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.6499999999999999
     },
     {
       "university_id": "UNI-077C08099741",
@@ -7768,7 +7824,7 @@
       "name": "세종대학교",
       "title": "“총장과 학생들이 허심탄회하게 머리를 맞댔다”… 세종대, ‘2026 타운홀 미팅’ 성황 - 스마트경제",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9fam9nTlI3YUgxNmI0SXpzWjVaQ1VkeEdvMF93cGNpMTdUd0dITFNWZG1yUFFxaUlVVnpDWjd5QVlIM2xIcUloTFZWd1Zra3RyeU9kNG9UQ0YwZzgwY0VEcTNfdnU0am1nOGlPNzJmOA?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5vV0pkUl9PZzlIRkUtRWFHYWJEcEVhMnhqTVNlNW9XYlh6V0pmQk9wTm1kRElWdnNrWHJFd1ZaRmMzNFFqUXNzckEyc2lKYjhOUF9VLTFXdm9ObFZyZ2hwTHJ0RUJKUTdNYmpGRGZiS2g?oc=5",
       "source_id": "news:스마트경제",
       "published_at": "2026-10-12T04:30:16+00:00",
       "verification_status": "single_source",
@@ -8270,6 +8326,48 @@
     {
       "university_id": "UNI-956953EE36DB",
       "name": "전북대학교",
+      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
+      "source_id": "news:더팩트",
+      "published_at": "2026-10-12T07:27:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-956953EE36DB",
+      "name": "전북대학교",
+      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
+      "source_id": "news:더팩트",
+      "published_at": "2026-10-12T07:27:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-956953EE36DB",
+      "name": "전북대학교",
+      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
+      "source_id": "news:더팩트",
+      "published_at": "2026-10-12T07:27:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "claim",
+      "axis": "I",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-956953EE36DB",
+      "name": "전북대학교",
       "title": "전북대병원 간호부, 학습관리시스템 활용 장려상 수상 - 뉴시스",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFByR0llQmdpRDA5LUN2NlNxQnU0ZHR4clZoczFqdklPT2tzcEw2VWNnaTlIaExjdTd2MDBwczBoVVRMd2o0di1DQzJEa3VwaHJzM0tiZFV0ckI1eTBKRU5CaGl6WFFCM0RnOVpWNlBwcDA1X1Z5SkVmYdIBeEFVX3lxTFByR0llQmdpRDA5LUN2NlNxQnU0ZHR4clZoczFqdklPT2tzcEw2VWNnaTlIaExjdTd2MDBwczBoVVRMd2o0di1DQzJEa3VwaHJzM0tiZFV0ckI1eTBKRU5CaGl6WFFCM0RnOVpWNlBwcDA1X1Z5SkVmYQ?oc=5",
@@ -8373,48 +8471,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1iRk5hcW1YeG02NlhzTEZiQ1RocFBvS3pCZ0VBXzh3RlJMcl9IMm5GeFZWQktiNTdKa3FyQWwtVER5ZTBGaXBQbHozX3h5dXlPYlBROS10VE1hc3lpSEQyRjZKUnExQjBIaHU3TTk2cm8?oc=5",
       "source_id": "news:한국강사신문",
       "published_at": "2026-10-11T23:04:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "claim",
-      "axis": "I",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-956953EE36DB",
-      "name": "전북대학교",
-      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
-      "source_id": "news:더팩트",
-      "published_at": "2026-10-12T07:27:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-956953EE36DB",
-      "name": "전북대학교",
-      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
-      "source_id": "news:더팩트",
-      "published_at": "2026-10-12T07:27:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-956953EE36DB",
-      "name": "전북대학교",
-      "title": "전북대, 전자빔으로 차세대 반도체 소재 특성 정밀 제어 기술 개발 - 더팩트",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xR0ZhSHhaRmYxZXR1V0NhamFTY25KOE1wQ1lreEhjS25JUHRnbDBPdEtRcVhBQjNCZ1RJdExiSnZCTVVBeWZRSURnTkw0ZXZTVm1JbV9n0gFWQVVfeXFMT3FHRmFIeFpGZjFldHVXQ2FqYVNjbko4TXBDWWt4SGNLbklQdGdsME90S1FxWEFCM0JnVEl0TGJKdkJNVUF5ZlFJRGdOTDRldlNWbUltX2c?oc=5",
-      "source_id": "news:더팩트",
-      "published_at": "2026-10-12T07:27:00+00:00",
       "verification_status": "single_source",
       "event_type": "claim",
       "axis": "I",
@@ -11581,11 +11637,11 @@
       "establishment": "사립",
       "region": "충남",
       "dims": {
-        "B": 78.7,
-        "R": 51.5,
-        "I": 50.6,
+        "B": 78.9,
+        "R": 53.3,
+        "I": 51.2,
         "D": 49.7,
-        "G": 40.7,
+        "G": 41.8,
         "E": null
       },
       "raw": {
@@ -11602,19 +11658,19 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 53.4,
-      "activity_points": 2.01,
-      "event_count": 8,
+      "daily_index": 54.3,
+      "activity_points": 3.01,
+      "event_count": 12,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.73,
-        "R": 1.46,
-        "I": 0.6,
+        "B": 0.87,
+        "R": 3.33,
+        "I": 1.19,
         "D": 0.0,
-        "G": 1.12,
+        "G": 2.24,
         "E": 0.0
       },
-      "score": 53.4,
+      "score": 54.3,
       "quality": 0.83,
       "source_ids": [
         "news:뉴스홈(newshome)",
@@ -13035,8 +13091,8 @@
       "establishment": "사립",
       "region": "충남",
       "dims": {
-        "B": 57.3,
-        "R": 51.5,
+        "B": 57.5,
+        "R": 52.9,
         "I": null,
         "D": 59.3,
         "G": 70.2,
@@ -13056,30 +13112,31 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.2,
-      "activity_points": 1.82,
-      "event_count": 7,
+      "daily_index": 59.7,
+      "activity_points": 2.32,
+      "event_count": 9,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.74,
-        "R": 1.46,
+        "B": 0.89,
+        "R": 2.93,
         "I": 0.0,
         "D": 0.77,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 59.2,
+      "score": 59.7,
       "quality": 0.83,
       "source_ids": [
         "news:당진신문",
         "news:로컬투데이",
+        "news:서산포스트",
         "news:전국매일신문",
         "news:충청일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 35
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-82D0DD0F803F",
@@ -13733,7 +13790,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 33
+      "waiting_rank": 34
     },
     {
       "university_id": "UNI-3F02A7F4D408",
@@ -18021,7 +18078,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-CF6484DD80F2",
@@ -18169,7 +18226,7 @@
         "news:법률신문",
         "news:연합뉴스",
         "news:유니메이트 알파",
-        "news:프레시안"
+        "news:이코노믹포스트"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
@@ -19462,7 +19519,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 71.4,
+        "B": 71.3,
         "R": 57.0,
         "I": 50.6,
         "D": 57.1,
@@ -19484,11 +19541,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 64.6,
-      "activity_points": 8.56,
-      "event_count": 34,
+      "activity_points": 8.07,
+      "event_count": 32,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 2.94,
+        "B": 2.79,
         "R": 7.0,
         "I": 0.6,
         "D": 0.0,
@@ -19500,7 +19557,6 @@
       "source_ids": [
         "news:간호사신문",
         "news:뉴스티앤티",
-        "news:더퍼스트미디어",
         "news:데일리메디팜",
         "news:메디소비자뉴스",
         "news:병원신문",
@@ -23076,7 +23132,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 34
+      "waiting_rank": 35
     },
     {
       "university_id": "UNI-4C44A00C6DCB",
@@ -25466,7 +25522,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-49BAD3C4D45E",
@@ -28283,7 +28339,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
+      "waiting_rank": 33
     },
     {
       "university_id": "UNI-6FAB1CF39178",
@@ -35132,7 +35188,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 71.4,
+          "B": 71.3,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -35154,11 +35210,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 64.6,
-        "activity_points": 8.56,
-        "event_count": 34,
+        "activity_points": 8.07,
+        "event_count": 32,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 2.94,
+          "B": 2.79,
           "R": 7.0,
           "I": 0.6,
           "D": 0.0,
@@ -35170,7 +35226,6 @@
         "source_ids": [
           "news:간호사신문",
           "news:뉴스티앤티",
-          "news:더퍼스트미디어",
           "news:데일리메디팜",
           "news:메디소비자뉴스",
           "news:병원신문",
@@ -38664,7 +38719,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 71.4,
+          "B": 71.3,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -38686,11 +38741,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 64.6,
-        "activity_points": 8.56,
-        "event_count": 34,
+        "activity_points": 8.07,
+        "event_count": 32,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 2.94,
+          "B": 2.79,
           "R": 7.0,
           "I": 0.6,
           "D": 0.0,
@@ -38702,7 +38757,6 @@
         "source_ids": [
           "news:간호사신문",
           "news:뉴스티앤티",
-          "news:더퍼스트미디어",
           "news:데일리메디팜",
           "news:메디소비자뉴스",
           "news:병원신문",
@@ -43037,7 +43091,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 28
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-AB6525072EBC",
@@ -43089,7 +43143,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-FE70DA488610",
@@ -43144,7 +43198,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-610197CE7DD8",
@@ -43199,7 +43253,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
+      "waiting_rank": 33
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -43249,7 +43303,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 33
+      "waiting_rank": 34
     },
     {
       "university_id": "UNI-EFB5846DAFC5",
@@ -43297,61 +43351,6 @@
       "quality": 0.83,
       "source_ids": [
         "news:백석대학교 인트로"
-      ],
-      "data_date": "2026-10-12",
-      "window_start": "2026-10-12T05:15:00+09:00",
-      "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 34
-    },
-    {
-      "university_id": "UNI-BA58E00351F2",
-      "name": "신성대학교",
-      "campus": "본교",
-      "school_kind": "전문대학",
-      "school_type": "전문대학",
-      "establishment": "사립",
-      "region": "충남",
-      "dims": {
-        "B": 57.3,
-        "R": 51.5,
-        "I": null,
-        "D": 59.3,
-        "G": 70.2,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 4.6,
-        "충원율": 97.8,
-        "외국인비율": 13.3935,
-        "교육비": 13094.9,
-        "장학금": 4155921.0,
-        "기숙사": 38.1,
-        "교원당학생": 31.44,
-        "교원강의": 53.7,
-        "취업률": 76.4
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.2,
-      "activity_points": 1.82,
-      "event_count": 7,
-      "source_diversity": 1,
-      "axis_delta": {
-        "B": 0.74,
-        "R": 1.46,
-        "I": 0.0,
-        "D": 0.77,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 59.2,
-      "quality": 0.83,
-      "source_ids": [
-        "news:당진신문",
-        "news:로컬투데이",
-        "news:전국매일신문",
-        "news:충청일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",

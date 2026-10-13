@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "updated_at": "2026-10-14T02:50:46.277327+09:00",
+  "updated_at": "2026-10-14T02:57:01.487784+09:00",
   "meaning": {
     "daily_index": "오늘 현재의 대학 공공가치 평판 수준",
     "activity_points": "당일 유효 관심·반응·행동의 총량",
@@ -1879,7 +1879,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 71.4,
+          "B": 71.3,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -1887,8 +1887,8 @@
           "E": null
         },
         "daily_index": 64.6,
-        "activity_points": 8.56,
-        "event_count": 34,
+        "activity_points": 8.07,
+        "event_count": 32,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 82,
@@ -3399,7 +3399,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 71.4,
+          "B": 71.3,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -3407,8 +3407,8 @@
           "E": null
         },
         "daily_index": 64.6,
-        "activity_points": 8.56,
-        "event_count": 34,
+        "activity_points": 8.07,
+        "event_count": 32,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 82,

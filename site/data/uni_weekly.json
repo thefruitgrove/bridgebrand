@@ -1027,16 +1027,16 @@
     {
       "university_id": "UNI-C6659E0020A3",
       "name": "백석문화대학교",
-      "weekly_index": 53.4,
+      "weekly_index": 54.3,
       "dims": {
-        "B": 78.7,
-        "R": 51.5,
-        "I": 50.6,
+        "B": 78.9,
+        "R": 53.3,
+        "I": 51.2,
         "D": 49.7,
-        "G": 40.7,
+        "G": 41.8,
         "E": null
       },
-      "activity_points": 2.01,
+      "activity_points": 3.01,
       "observed_days": 1,
       "mention_days": 1,
       "source_diversity": 4
@@ -1520,19 +1520,19 @@
     {
       "university_id": "UNI-BA58E00351F2",
       "name": "신성대학교",
-      "weekly_index": 59.2,
+      "weekly_index": 59.7,
       "dims": {
-        "B": 57.3,
-        "R": 51.5,
+        "B": 57.5,
+        "R": 52.9,
         "I": null,
         "D": 59.3,
         "G": 70.2,
         "E": null
       },
-      "activity_points": 1.82,
+      "activity_points": 2.32,
       "observed_days": 1,
       "mention_days": 1,
-      "source_diversity": 4
+      "source_diversity": 5
     },
     {
       "university_id": "UNI-82D0DD0F803F",
@@ -3698,17 +3698,17 @@
       "name": "고려대학교",
       "weekly_index": 64.6,
       "dims": {
-        "B": 71.4,
+        "B": 71.3,
         "R": 57.0,
         "I": 50.6,
         "D": 57.1,
         "G": 83.4,
         "E": null
       },
-      "activity_points": 8.56,
+      "activity_points": 8.07,
       "observed_days": 1,
       "mention_days": 1,
-      "source_diversity": 17
+      "source_diversity": 16
     },
     {
       "university_id": "UNI-185407D37364",
