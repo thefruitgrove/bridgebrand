@@ -279,42 +279,26 @@ def collect_dart(db: SupabaseRest, as_of: dt.date) -> None:
 
 
 def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
-    rows = db.select(
-        "bridge_public_latest_rankings",
-        f"select=*&as_of_date=eq.{as_of.isoformat()}&order=domain.asc,ranking_type.asc,rank.asc,external_id.asc",
-    )
-    # A cancelled/retried run must never leak mixed rank numbers to the public
-    # file. Rebuild one ordinal sequence per table from the published scores.
-    grouped_rows: dict[tuple[str, str], list[dict]] = {}
+    # Use the same version-scoped authoritative export for latest and history.
+    # The legacy public view can include multiple published methodology versions.
+    export_history(db, as_of)
+    archive = json.loads((ROOT / "site" / "data" / "history.json").read_text(encoding="utf-8"))
+    rows = [r for r in archive["rankings"] if r["as_of_date"] == as_of.isoformat()]
+    seen = set()
+    groups = {}
     for row in rows:
-        grouped_rows.setdefault((row["domain"], row["ranking_type"]), []).append(row)
-    for members in grouped_rows.values():
+        key = (row["domain"], row["ranking_type"], row["external_id"])
+        if key in seen:
+            raise RuntimeError(f"duplicate public ranking blocked: {key}")
+        seen.add(key)
+        groups.setdefault((row["domain"], row["ranking_type"]), []).append(row)
+    for members in groups.values():
         members.sort(key=lambda r: (-float(r["score"]), str(r["external_id"])))
         for position, row in enumerate(members, 1):
             row["rank"] = position
-
-    # Publish only the six axis results and coverage count, never diagnostics,
-    # source queries, weights, or internal formula notes.
-    entity_ids = {r["external_id"]: r["id"] for r in db.select("bridge_entities", "select=id,external_id")}
-    axes = db.select(
-        "bridge_axis_observations",
-        f"select=entity_id,axis,score,status&as_of_date=eq.{as_of.isoformat()}"
-        f"&methodology_version=eq.{load_methodology()['version']}",
-    )
-    axes_by_entity: dict[str, dict[str, float]] = {}
-    for observation in axes:
-        if observation.get("score") is None or observation.get("status") not in {"measured", "carried"}:
-            continue
-        axes_by_entity.setdefault(observation["entity_id"], {})[observation["axis"]] = round(float(observation["score"]), 1)
-
-    labels = load_methodology().get("release_policy", {}).get("public_domain_labels", {})
-    for row in rows:
-        public_axes = axes_by_entity.get(entity_ids.get(row["external_id"], ""), {})
-        row["axis_scores"] = {axis: public_axes.get(axis) for axis in "BRIDGE"}
-        row["axes_available"] = len(public_axes)
-        row["diagnosis_tags"] = diagnosis_tags(row)
-        row["internalDomain"] = row["domain"]
-        row["domain"] = labels.get(row["domain"], row["domain"])
+            previous = row.get("previous_rank")
+            row["rank_change"] = int(previous) - position if previous is not None else 0
+    rows.sort(key=lambda r: (r["domain"], r["ranking_type"], r["rank"]))
     payload = {
         "schemaVersion": "1.0",
         "generatedAt": now_kst().isoformat(),
@@ -325,7 +309,6 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
         "dataStatus": "published" if rows else "no-published-snapshot"
     }
     dump_json(ROOT / "site" / "data" / "latest.json", payload)
-    export_history(db, as_of)
     dump_json(ROOT / "data" / "pipeline_status.json", {"generatedAt": payload["generatedAt"], "asOfDate": payload["asOfDate"], "recordCount": len(rows)})
     print(f"exported {len(rows)} published ranking rows")
 
