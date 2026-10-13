@@ -526,6 +526,7 @@ footer .logo .op{ color:#7c86a0;}
 .ranking-panels .rk-name .sub,.ranking-panels .rk-market,.ranking-panels .rk-dims,.ranking-panels .rk-trust{display:none}
 .ranking-panels .rk-score{font-size:18px;align-self:center;margin:0}.ranking-panels .rk-wow{align-self:center;min-width:38px;text-align:right}
 .ranking-master .rk-row{border-color:rgba(255,255,255,.11);color:#f4f1e8}.ranking-master .rk-row:hover{background:rgba(255,255,255,.05)}
+.ranking-master .rk-row.top3{background:rgba(210,175,102,.11);border-color:rgba(210,175,102,.28)}
 .ranking-master .rk-name .nm,.ranking-master .rk-score{color:#fff}.ranking-master .rk-num{color:#758091}.ranking-master .rk-row.top3 .rk-num{color:#d2af66}
 @media(max-width:900px){.ranking-panels{grid-template-columns:1fr}.ranking-master,.ranking-cohort{grid-column:1;grid-row:auto;max-height:680px}.ranking-summary-strip{display:grid;grid-template-columns:repeat(2,1fr)}.ranking-summary-strip .seg-btn{border:0;border-bottom:1px solid #d8d1c2;border-right:1px solid #d8d1c2;padding:11px 12px}}
 @media(max-width:520px){.ranking-panels .rk-row{grid-template-columns:32px minmax(0,1fr) auto auto;padding:12px 10px}.ranking-panels .rk-score{font-size:17px}.ranking-panels .rk-wow{display:block;font-size:10px}.ranking-master{max-height:620px}}

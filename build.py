@@ -142,7 +142,7 @@ NAV_ITEMS = [
     ("CPR", "cpr.html", [("CPR B-T100","cpr.html#t100"),("CPR B-BC70","cpr.html#bc70"),("CPR B-BB30","cpr.html#bb30")]),
     ("GOV", "gov.html", [("GOV B-T100","gov.html#t100"),("GOV B-M40","gov.html#m40"),("GOV B-C60","gov.html#c60")]),
     ("UNI", "uni.html", [("UNI B-T100","uni.html#t100"),("UNI B-U60","uni.html#u60"),("UNI B-C40","uni.html#c40")]),
-    ("ENT", "star.html", [("ENT B-T100","star.html#t100"),("ENT B-AM45","star.html#am45"),("ENT B-AW45","star.html#aw45"),("ENT B-AN10","star.html#an10")]),
+    ("ENT", "star.html", [("ENT B-T100","star.html#t100"),("ENT B-AM40","star.html#am45"),("ENT B-AW40","star.html#aw45"),("ENT B-AN20","star.html#an10")]),
 ]
 # 상단 우측 유틸 메뉴 항목 (INDEX·데이터추출·신뢰등급이란?)
 NAV_UTIL_ITEMS = [
