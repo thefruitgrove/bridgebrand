@@ -13,7 +13,7 @@ KST=ZoneInfo("Asia/Seoul")
 
 def read_json(path,default):
     try: return json.load(open(path,encoding="utf-8"))
-    except (FileNotFoundError,json.JSONDecodeError): return default
+    except (OSError,UnicodeError,json.JSONDecodeError): return default
 def read_events(path):
     if not Path(path).exists(): return []
     out=[]
