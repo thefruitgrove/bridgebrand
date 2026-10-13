@@ -46,7 +46,7 @@
         return '<div class="rk-row rk-clickable live-row'+top+'" data-entity="'+esc(rec.name)+'" data-region="'+esc(rec.domain)+'" data-type="T100" data-live-date="'+esc(displayedDate)+'" tabindex="0" role="button">'+
           '<div class="rk-num">'+String(n).padStart(2,'0')+'</div>'+
           '<div class="rk-name"><div class="nm">'+esc(rec.name)+'</div><div class="sub">'+esc(rec.external_id)+' · '+esc(rec.category||'')+' · '+esc(rec.subcategory||'T100')+'</div></div>'+
-          '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div>'+
+          '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div><div class="rk-diagnosis">'+(rec.last_week_index==null?'평판 관측 · 비교 데이터 축적 중':Number(rec.weekly_index||rec.score)>Number(rec.last_week_index)?'최근 평판 흐름이 개선되고 있습니다.':Number(rec.weekly_index||rec.score)<Number(rec.last_week_index)?'단기 평판 조정 신호가 관측되었습니다.':'현재 평판 수준을 유지하고 있습니다.')+'</div>'+
           '<div class="rk-dims"><span class="dm">실측 공개적격 · '+esc(displayedDate)+'</span></div>'+
           '<div class="rk-score">'+Number(rec.score).toFixed(1)+'</div>'+
           '<div class="rk-wow">'+change(rec)+'</div>'+
@@ -213,6 +213,7 @@
     var control=workspace.querySelector('.seg-control');
     var panels=workspace.querySelector('.ranking-panels');
     if(!control||!panels)return;
+    var boards=document.createElement('div'); boards.className='ranking-card-boards'; panels.appendChild(boards);
     var buttons=Array.from(control.querySelectorAll('.seg-btn'));
     var panelList=Array.from(panels.querySelectorAll('.rk-panel'));
     panelList.forEach(function(panel,index){
@@ -222,8 +223,9 @@
       h.innerHTML='<b>'+label.replace(/\d+\/?\d*$/,'').trim()+'</b><span>매일 05:15 KST 갱신</span>';
       panel.parentNode.insertBefore(h,panel);
       var shell=document.createElement('section'); shell.className=index===0?'ranking-master':'ranking-cohort';
-      if(index>0 && index===panelList.length-1 && (panelList.length-1)%2===1){ shell.classList.add('ranking-cohort-wide'); }
+
       h.parentNode.insertBefore(shell,h); shell.appendChild(h); shell.appendChild(panel);
+      if(index>0)boards.appendChild(shell);
     });
     control.classList.add('ranking-summary-strip');
   });
