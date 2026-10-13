@@ -129,6 +129,13 @@ jobs:
 
       - name: Commit reproducible public export
         run: |
+          # Never merge independently generated JSON snapshots across runs.
+          # A newer source/data commit makes this run stale; the queued run wins.
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Skip stale export: a newer production commit exists"
+            exit 0
+          fi
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
           git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/daily data/weekly data/latest/uni_latest.json data/gov_youtube site/
@@ -140,7 +147,6 @@ jobs:
           git restore --worktree .
           # During a rebase, "theirs" is the pipeline commit being replayed. Prefer the
           # newest deterministic export if another run updated the same generated files.
-          git pull --rebase -X theirs origin main
           git push origin HEAD:main
 
       - name: Trigger Cloudflare deployment hook
