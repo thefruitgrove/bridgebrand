@@ -932,3 +932,31 @@ footer .logo .op{ color:#7c86a0;}
   /* THIS WEEK 변동칩 — 터치 가독성 */
   .tw-chip{ font-size:10.5px; padding:2px 8px; }
 }
+
+/* Consumer-facing cohort cards: same visual vocabulary as This Week. */
+.ranking-panels{grid-template-columns:minmax(340px,.8fr) minmax(0,1.2fr);gap:24px}
+.ranking-master{grid-row:1;grid-column:1}
+.ranking-card-boards{grid-column:2;min-width:0;display:grid;gap:24px}
+.ranking-card-boards .ranking-cohort{border:0;background:transparent;max-height:820px;grid-column:auto;overflow:auto}
+.ranking-card-boards .ranking-panel-head{padding:14px 0;background:var(--paper);border-bottom:1px solid #ded8ca;margin-bottom:14px}
+.ranking-card-boards .rk-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ranking-card-boards .rk-row{display:flex;flex-direction:column;gap:8px;position:relative;min-height:190px;padding:18px;border:1px solid #e4dfd0;border-radius:8px;background:#fff;cursor:pointer}
+.ranking-card-boards .rk-row:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,24,31,.08)}
+.ranking-card-boards .rk-num{position:absolute;top:17px;right:18px;font-size:11px}
+.ranking-card-boards .rk-market{display:block;order:-1;align-self:flex-start;font-size:10px;letter-spacing:.06em;color:#fff;background:#6b5b95;padding:2px 7px;border-radius:3px;max-width:75%}
+[data-ranking-page=cpr] .rk-market{background:#8b7355}[data-ranking-page=gov] .rk-market{background:#4a6572}[data-ranking-page=star] .rk-market{background:#b85c56}
+.ranking-card-boards .rk-name .nm{font-size:15px;white-space:normal;padding-right:8px;line-height:1.45}
+.ranking-card-boards .rk-diagnosis{font-size:12px;line-height:1.55;color:#625e55;min-height:38px}
+.ranking-card-boards .rk-score{font-family:inherit;font-size:15px;color:#a9884f;margin-top:auto;border-top:1px solid #eeeae0;padding-top:12px}
+.ranking-card-boards .rk-trust{display:block;position:static;font-size:11px;color:#8b8779}
+.ranking-card-boards .rk-wow{position:absolute;right:18px;bottom:18px;font-size:11px}
+.ranking-master .rk-diagnosis{display:none}
+.nav-item > a{font-family:var(--serif);font-size:12px;letter-spacing:.12em;border:0;position:relative;padding:0 13px}
+.nav-item > a:after{content:'';position:absolute;bottom:3px;left:13px;right:13px;height:1px;background:#c3a16a;transform:scaleX(0);transition:transform .2s}
+.nav-item:hover > a:after,.nav-item > a.active:after{transform:scaleX(1)}
+.nav-item > a.active,.nav-item:hover > a{background:transparent;color:var(--gold)}
+.nav.on-dark .nav-item > a{color:#e8e4db}.nav.on-dark .nav-item:hover > a{color:#d2af66}
+.nav-util{font-size:10px;font-weight:500;letter-spacing:.12em;border-left:0;padding:9px 3px;border-bottom:1px solid transparent}
+.nav-util:hover{border-bottom-color:#b29766}.nav-right{gap:16px}
+@media(max-width:900px){.ranking-panels{grid-template-columns:1fr}.ranking-card-boards{grid-column:1}.ranking-master{grid-row:auto}.ranking-card-boards .ranking-cohort{max-height:740px}}
+@media(max-width:540px){.ranking-card-boards .rk-panel{grid-template-columns:1fr}.ranking-card-boards .rk-row{min-height:180px}.ranking-card-boards .rk-wow{right:18px;bottom:18px}}
