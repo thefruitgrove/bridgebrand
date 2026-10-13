@@ -1027,16 +1027,16 @@
     {
       "university_id": "UNI-C6659E0020A3",
       "name": "백석문화대학교",
-      "weekly_index": 54.3,
+      "weekly_index": 53.4,
       "dims": {
-        "B": 78.9,
-        "R": 53.3,
-        "I": 51.2,
+        "B": 78.7,
+        "R": 51.5,
+        "I": 50.6,
         "D": 49.7,
-        "G": 41.8,
+        "G": 40.7,
         "E": null
       },
-      "activity_points": 3.01,
+      "activity_points": 2.01,
       "observed_days": 1,
       "mention_days": 1,
       "source_diversity": 4
@@ -5432,17 +5432,17 @@
       "name": "성균관대학교",
       "weekly_index": 65.3,
       "dims": {
-        "B": 72.4,
+        "B": 72.5,
         "R": 53.0,
         "I": null,
         "D": 63.4,
         "G": 86.9,
         "E": 51.3
       },
-      "activity_points": 3.35,
+      "activity_points": 3.6,
       "observed_days": 1,
       "mention_days": 1,
-      "source_diversity": 10
+      "source_diversity": 11
     },
     {
       "university_id": "UNI-0B5EE3DC31DA",

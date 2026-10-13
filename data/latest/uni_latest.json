@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "run_at": "2026-10-14T02:35:30.801937+09:00",
+  "run_at": "2026-10-14T02:41:44.665475+09:00",
   "official_source": {
     "provider": "대학알리미",
     "source_file": "대학주요정보.xlsx",
@@ -18,7 +18,7 @@
       "교육비": 2026,
       "기숙사": 2025
     },
-    "retrieved_at": "2026-10-13T17:35:07.564141+00:00"
+    "retrieved_at": "2026-10-13T17:41:22.196701+00:00"
   },
   "signal_ledger": [
     {
@@ -1772,6 +1772,20 @@
       "severity": 0.45
     },
     {
+      "university_id": "UNI-3A81F974D1D8",
+      "name": "성균관대학교",
+      "title": "[JB포토] 패스하는 성균관대 임기웅 - 점프볼",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5EbTdaU09uVnVUUGNXcEYzczB1WUp5bThvOEpnLWM4QlVtcktzam1HZmZpTFhQQ3c5TFJPNm9mdnJqLVYwVk50eFppVFdkRDRFa3RYQWdPMGpXUF95UUVaRWNlYXpPUmlTZm9IS0x5dVJaLTU4aGc?oc=5",
+      "source_id": "news:점프볼",
+      "published_at": "2026-10-12T00:06:03+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
       "university_id": "UNI-185BC8BA4EA7",
       "name": "인하대학교",
       "title": "인하대학교, 로봇의 ‘다음 행동’ 예측하는 AI 모델 개발 경진대회 성료 - 한국강사신문",
@@ -3249,6 +3263,20 @@
       "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1qYTZHSkxUUUx5LXlsVmtsTEEyTTZ2MlZpaU1yQVZoR0NsWi1PQ2txT0dGVGlhTl9PdmtGeklrUFduNzZZV283aUgtV0lCTnFFR2NzOG9TRTI0T2NBRkZWNnpPNmMtSU0?oc=5",
       "source_id": "news:청년일보",
       "published_at": "2026-10-12T04:30:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-71DF76D19DD5",
+      "name": "국립한국해양대학교",
+      "title": "국립한국해양대, 해사대학 여학생 대상 ‘예비 승선 멘토링’ 개최 - 부산일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE55azJKUzhsRWFZMHRaaUpFczNwUktnMjBtSnJXQkppbGFPR21ZUUw2VU5WS3RncUFTRDd1Q0VTNm82dmFES2huVGk3dE5jeFpSMGZjcGlkVXFwMWFPenZxLUF0VXZtVEtXQVpPUGloUVBJcE9Pd0h1MHpFQQ?oc=5",
+      "source_id": "news:부산일보",
+      "published_at": "2026-10-12T02:21:29+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -5526,6 +5554,34 @@
     {
       "university_id": "UNI-BA58E00351F2",
       "name": "신성대학교",
+      "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 수상 쾌거 - 서산포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9Odnd0SVhrNndZRkFwb05GWFN3ME9QeDBpQ1V1RDNHaE5pa3c1SUlpZk93cnBQWFQ5dUJDeEZUSFVTTkZHQmdVejNLcXl6bzBVcUg1YmJvQkVkMW82ZUo3ZVZiZXNGWk5IZjNETGdvaw?oc=5",
+      "source_id": "news:서산포스트",
+      "published_at": "2026-10-12T02:27:01+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 수상 쾌거 - 서산포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9Odnd0SVhrNndZRkFwb05GWFN3ME9QeDBpQ1V1RDNHaE5pa3c1SUlpZk93cnBQWFQ5dUJDeEZUSFVTTkZHQmdVejNLcXl6bzBVcUg1YmJvQkVkMW82ZUo3ZVZiZXNGWk5IZjNETGdvaw?oc=5",
+      "source_id": "news:서산포스트",
+      "published_at": "2026-10-12T02:27:01+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
       "title": "신성대 드론자동차모빌리티과, 2026 청원축제 드론스포츠대회 1위 쾌거 - 충청일보",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5DdFpiZkI1MjNkdktVVk9aTklfaUhTYmJVVjJsSXdwTDdDYmFYWEsxZnEyZG9LQW12YWJaQzdzbXFyY3RIbkNLd01reTNIQ0R1ZmRsaHFEQzFLU19FaGRFdUFnSTJSd2RxNFBQTUsxWQ?oc=5",
@@ -6574,13 +6630,13 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-C6659E0020A3",
-      "name": "백석문화대학교",
-      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "university_id": "UNI-3AA537688056",
+      "name": "수성대학교",
+      "title": "수성대·수성구청·더컴퍼니씨협동조합, `웰니스 1인 창작자` 양성 맞손 - 매일신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
-      "source_id": "news:백석대학교 인트로",
-      "published_at": "2026-10-11T23:02:40+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9NanVCWEl0c1pTQVJWT05vUWhud0k3MmgxRDNNR1JUVVZNUkREb2xaTHFLQkFvRTMtSGxGSWl6dTNuU05XVGxuMTRHQ2llbDllamo5eEl6Z0ZuRG5TMk1RSU9B?oc=5",
+      "source_id": "news:매일신문",
+      "published_at": "2026-10-12T01:58:55+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -6588,46 +6644,32 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-C6659E0020A3",
-      "name": "백석문화대학교",
-      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
+      "university_id": "UNI-3AA537688056",
+      "name": "수성대학교",
+      "title": "수성구 청년도전지원사업 청년, 공공기관 현장 직접 본다 - 대구매거진",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
-      "source_id": "news:백석대학교 인트로",
-      "published_at": "2026-10-11T23:02:40+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9BaFF6Z283aHItVXpiMlhfek1iYndfRnV3bnJFQzhXNkctRTl4SHZYLXhmc29HYkxSajNIWkwyN1pQeWh6WDh0dnVsVmk1eTdWeWt4djAwc24xbVRfMUptTlR2Q0h6UVlyVjlGOEVn0gFyQVVfeXFMTjZjYzZyeGNWWW15MWgxcmlTWjhKdEZpQUtoa0gyRnVJR1Z3R0ZCV25kdXU1bHhOeUdoLTJYSGMtUzI4cXpWZzdyVk9EZ3RDNU9XSmlJcWgxbmJDQXU4R1ktTmtPWHBVU0VmT3haalBxdTFR?oc=5",
+      "source_id": "news:대구매거진",
+      "published_at": "2026-10-12T08:20:26+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-3AA537688056",
+      "name": "수성대학교",
+      "title": "수성구 청년도전지원사업 청년, 공공기관 현장 직접 본다 - 대구매거진",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9BaFF6Z283aHItVXpiMlhfek1iYndfRnV3bnJFQzhXNkctRTl4SHZYLXhmc29HYkxSajNIWkwyN1pQeWh6WDh0dnVsVmk1eTdWeWt4djAwc24xbVRfMUptTlR2Q0h6UVlyVjlGOEVn0gFyQVVfeXFMTjZjYzZyeGNWWW15MWgxcmlTWjhKdEZpQUtoa0gyRnVJR1Z3R0ZCV25kdXU1bHhOeUdoLTJYSGMtUzI4cXpWZzdyVk9EZ3RDNU9XSmlJcWgxbmJDQXU4R1ktTmtPWHBVU0VmT3haalBxdTFR?oc=5",
+      "source_id": "news:대구매거진",
+      "published_at": "2026-10-12T08:20:26+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
       "direction": 1,
-      "severity": 0.6499999999999999
-    },
-    {
-      "university_id": "UNI-C6659E0020A3",
-      "name": "백석문화대학교",
-      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
-      "source_id": "news:백석대학교 인트로",
-      "published_at": "2026-10-11T23:02:40+00:00",
-      "verification_status": "single_source",
-      "event_type": "claim",
-      "axis": "I",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-C6659E0020A3",
-      "name": "백석문화대학교",
-      "title": "백석문화대 조기취업형계약학과, ‘천안시 스마트도시 AI 인재양성’ 대상 수상 - 백석대학교 인트로",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBsSTlFRlZzQkVtUU9ObC1oTl9zYmJRelBhZkk2TURlaElQUE0yZEN0YkZCWE0tMjNKd3JpQ25BVGljbDlVVXd4VUNKUnhZaEE3NXRtaTVscmpzSE9ZTmtEUjhVZW1NUQ?oc=5",
-      "source_id": "news:백석대학교 인트로",
-      "published_at": "2026-10-11T23:02:40+00:00",
-      "verification_status": "single_source",
-      "event_type": "achievement",
-      "axis": "G",
-      "direction": 1,
-      "severity": 0.45
+      "severity": 0.5
     },
     {
       "university_id": "UNI-3AA537688056",
@@ -7192,11 +7234,11 @@
     {
       "university_id": "UNI-077C08099741",
       "name": "강원대학교",
-      "title": "강원대학교 \"산림바이오소재공학과 최선은 교수, `강원과학기술대상` 과학기술 개발 부문 수상\" - 이코노믹포스트",
+      "title": "최선은 교수 ‘강원과학기술대상’ 과학기술 개발 부문 수상 - 프레시안",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE95Z2d2ejhVdmk3Q2hJWE1QNlN1NXdKc2ZNWVBZcEVzWlZtTFlyTkFFbUNaeG5LV1c1clFwZURzTUZpTUxBV1paLTBlZVY?oc=5",
-      "source_id": "news:이코노믹포스트",
-      "published_at": "2026-10-12T06:26:28+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8yMTJaTVBRd2ZfZE9Fa0ItVWNJb01lYUZDcmxBeGt3R0pMYmtfc3d2Z1FzT01adDhoR2ktRndUMmptcDRaVDk5cXQwODE1Yjl0N2JTQUNKVnE4M3pCNjdtM01JanZBZGJxenh3?oc=5",
+      "source_id": "news:프레시안",
+      "published_at": "2026-10-12T06:26:54+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -7206,11 +7248,11 @@
     {
       "university_id": "UNI-077C08099741",
       "name": "강원대학교",
-      "title": "강원대학교 \"산림바이오소재공학과 최선은 교수, `강원과학기술대상` 과학기술 개발 부문 수상\" - 이코노믹포스트",
+      "title": "최선은 교수 ‘강원과학기술대상’ 과학기술 개발 부문 수상 - 프레시안",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE95Z2d2ejhVdmk3Q2hJWE1QNlN1NXdKc2ZNWVBZcEVzWlZtTFlyTkFFbUNaeG5LV1c1clFwZURzTUZpTUxBV1paLTBlZVY?oc=5",
-      "source_id": "news:이코노믹포스트",
-      "published_at": "2026-10-12T06:26:28+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE8yMTJaTVBRd2ZfZE9Fa0ItVWNJb01lYUZDcmxBeGt3R0pMYmtfc3d2Z1FzT01adDhoR2ktRndUMmptcDRaVDk5cXQwODE1Yjl0N2JTQUNKVnE4M3pCNjdtM01JanZBZGJxenh3?oc=5",
+      "source_id": "news:프레시안",
+      "published_at": "2026-10-12T06:26:54+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
@@ -7964,7 +8006,7 @@
       "name": "세종대학교",
       "title": "“총장과 학생들이 허심탄회하게 머리를 맞댔다”… 세종대, ‘2026 타운홀 미팅’ 성황 - 스마트경제",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5vV0pkUl9PZzlIRkUtRWFHYWJEcEVhMnhqTVNlNW9XYlh6V0pmQk9wTm1kRElWdnNrWHJFd1ZaRmMzNFFqUXNzckEyc2lKYjhOUF9VLTFXdm9ObFZyZ2hwTHJ0RUJKUTdNYmpGRGZiS2g?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9fam9nTlI3YUgxNmI0SXpzWjVaQ1VkeEdvMF93cGNpMTdUd0dITFNWZG1yUFFxaUlVVnpDWjd5QVlIM2xIcUloTFZWd1Zra3RyeU9kNG9UQ0YwZzgwY0VEcTNfdnU0am1nOGlPNzJmOA?oc=5",
       "source_id": "news:스마트경제",
       "published_at": "2026-10-12T04:30:16+00:00",
       "verification_status": "single_source",
@@ -11777,11 +11819,11 @@
       "establishment": "사립",
       "region": "충남",
       "dims": {
-        "B": 78.9,
-        "R": 53.3,
-        "I": 51.2,
+        "B": 78.7,
+        "R": 51.5,
+        "I": 50.6,
         "D": 49.7,
-        "G": 41.8,
+        "G": 40.7,
         "E": null
       },
       "raw": {
@@ -11798,19 +11840,19 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 54.3,
-      "activity_points": 3.01,
-      "event_count": 12,
+      "daily_index": 53.4,
+      "activity_points": 2.01,
+      "event_count": 8,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.87,
-        "R": 3.33,
-        "I": 1.19,
+        "B": 0.73,
+        "R": 1.46,
+        "I": 0.6,
         "D": 0.0,
-        "G": 2.24,
+        "G": 1.12,
         "E": 0.0
       },
-      "score": 54.3,
+      "score": 53.4,
       "quality": 0.83,
       "source_ids": [
         "news:뉴스홈(newshome)",
@@ -13275,7 +13317,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 33
+      "waiting_rank": 28
     },
     {
       "university_id": "UNI-82D0DD0F803F",
@@ -13929,7 +13971,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-3F02A7F4D408",
@@ -18220,7 +18262,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 28
+      "waiting_rank": 29
     },
     {
       "university_id": "UNI-CF6484DD80F2",
@@ -18368,7 +18410,7 @@
         "news:법률신문",
         "news:연합뉴스",
         "news:유니메이트 알파",
-        "news:이코노믹포스트"
+        "news:프레시안"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
@@ -23278,7 +23320,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
+      "waiting_rank": 33
     },
     {
       "university_id": "UNI-4C44A00C6DCB",
@@ -24786,7 +24828,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 72.4,
+        "B": 72.5,
         "R": 53.0,
         "I": null,
         "D": 63.4,
@@ -24808,11 +24850,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 65.3,
-      "activity_points": 3.35,
-      "event_count": 13,
+      "activity_points": 3.6,
+      "event_count": 14,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 1.46,
+        "B": 1.61,
         "R": 2.96,
         "I": 0.0,
         "D": 0.0,
@@ -24829,6 +24871,7 @@
         "news:유교신문",
         "news:이넷뉴스",
         "news:일간투데이",
+        "news:점프볼",
         "news:팝콘뉴스",
         "news:한국강사신문",
         "news:한국대학신문"
@@ -25675,7 +25718,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 29
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-49BAD3C4D45E",
@@ -28491,7 +28534,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-6FAB1CF39178",
@@ -34845,7 +34888,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 72.4,
+          "B": 72.5,
           "R": 53.0,
           "I": null,
           "D": 63.4,
@@ -34867,11 +34910,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 65.3,
-        "activity_points": 3.35,
-        "event_count": 13,
+        "activity_points": 3.6,
+        "event_count": 14,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 1.46,
+          "B": 1.61,
           "R": 2.96,
           "I": 0.0,
           "D": 0.0,
@@ -34888,6 +34931,7 @@
           "news:유교신문",
           "news:이넷뉴스",
           "news:일간투데이",
+          "news:점프볼",
           "news:팝콘뉴스",
           "news:한국강사신문",
           "news:한국대학신문"
@@ -38484,7 +38528,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 72.4,
+          "B": 72.5,
           "R": 53.0,
           "I": null,
           "D": 63.4,
@@ -38506,11 +38550,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 65.3,
-        "activity_points": 3.35,
-        "event_count": 13,
+        "activity_points": 3.6,
+        "event_count": 14,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 1.46,
+          "B": 1.61,
           "R": 2.96,
           "I": 0.0,
           "D": 0.0,
@@ -38527,6 +38571,7 @@
           "news:유교신문",
           "news:이넷뉴스",
           "news:일간투데이",
+          "news:점프볼",
           "news:팝콘뉴스",
           "news:한국강사신문",
           "news:한국대학신문"
@@ -43090,6 +43135,62 @@
       "waiting_rank": 27
     },
     {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "campus": "본교",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "establishment": "사립",
+      "region": "충남",
+      "dims": {
+        "B": 57.5,
+        "R": 52.9,
+        "I": null,
+        "D": 59.3,
+        "G": 70.2,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 4.6,
+        "충원율": 97.8,
+        "외국인비율": 13.3935,
+        "교육비": 13094.9,
+        "장학금": 4155921.0,
+        "기숙사": 38.1,
+        "교원당학생": 31.44,
+        "교원강의": 53.7,
+        "취업률": 76.4
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 59.7,
+      "activity_points": 2.32,
+      "event_count": 9,
+      "source_diversity": 1,
+      "axis_delta": {
+        "B": 0.89,
+        "R": 2.93,
+        "I": 0.0,
+        "D": 0.77,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 59.7,
+      "quality": 0.83,
+      "source_ids": [
+        "news:당진신문",
+        "news:로컬투데이",
+        "news:서산포스트",
+        "news:전국매일신문",
+        "news:충청일보"
+      ],
+      "data_date": "2026-10-12",
+      "window_start": "2026-10-12T05:15:00+09:00",
+      "window_end": "2026-10-13T05:15:00+09:00",
+      "waiting_rank": 28
+    },
+    {
       "university_id": "UNI-AB6525072EBC",
       "name": "강서대학교",
       "campus": "본교",
@@ -43139,7 +43240,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 28
+      "waiting_rank": 29
     },
     {
       "university_id": "UNI-FE70DA488610",
@@ -43194,7 +43295,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 29
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-610197CE7DD8",
@@ -43249,7 +43350,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -43299,7 +43400,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-EFB5846DAFC5",
@@ -43347,61 +43448,6 @@
       "quality": 0.83,
       "source_ids": [
         "news:백석대학교 인트로"
-      ],
-      "data_date": "2026-10-12",
-      "window_start": "2026-10-12T05:15:00+09:00",
-      "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
-    },
-    {
-      "university_id": "UNI-BA58E00351F2",
-      "name": "신성대학교",
-      "campus": "본교",
-      "school_kind": "전문대학",
-      "school_type": "전문대학",
-      "establishment": "사립",
-      "region": "충남",
-      "dims": {
-        "B": 57.3,
-        "R": 51.5,
-        "I": null,
-        "D": 59.3,
-        "G": 70.2,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 4.6,
-        "충원율": 97.8,
-        "외국인비율": 13.3935,
-        "교육비": 13094.9,
-        "장학금": 4155921.0,
-        "기숙사": 38.1,
-        "교원당학생": 31.44,
-        "교원강의": 53.7,
-        "취업률": 76.4
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.2,
-      "activity_points": 1.82,
-      "event_count": 7,
-      "source_diversity": 1,
-      "axis_delta": {
-        "B": 0.74,
-        "R": 1.46,
-        "I": 0.0,
-        "D": 0.77,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 59.2,
-      "quality": 0.83,
-      "source_ids": [
-        "news:당진신문",
-        "news:로컬투데이",
-        "news:전국매일신문",
-        "news:충청일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
