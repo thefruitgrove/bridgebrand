@@ -1,4 +1,12 @@
 (function(){
+  // Load the current presentation layer explicitly. This also prevents a
+  // long-lived edge/browser cache from keeping the former two-column board.
+  (function refreshPresentationLayer(){
+    var fresh=document.createElement('link');
+    fresh.rel='stylesheet';
+    fresh.href='style.css?v=20261013-2';
+    document.head.appendChild(fresh);
+  })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
   // Data recency remains separately disclosed by each snapshot's asOfDate.
   (function updateSeoulMasthead(){
