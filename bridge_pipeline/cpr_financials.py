@@ -122,7 +122,7 @@ def normalize(records: list[dict], year: int) -> list[dict]:
 
 
 def build_records(corp_map: dict[str, str], year: int, api_key: str) -> tuple[list[dict], list[str], list[str]]:
-    targets = {row["name"]: row for row in load_targets() if row["domain"] == "CPR"}
+    targets = {row["name"]: row for row in load_targets() if row["domain"] == "CPR" and row.get("active", True)}
     records, missing, failed = [], [], []
     for index, (name, target) in enumerate(targets.items()):
         corp_code = corp_map.get(name)

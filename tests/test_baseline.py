@@ -37,8 +37,8 @@ class OfficialBaselineTest(unittest.TestCase):
         self.assertEqual(metrics["revenue_growth"], 20.0)
         self.assertEqual(metrics["operating_margin"], 10.0)
         records = [
-            {"external_id": "CPR-001", "cohort": "BC70", **metrics},
-            {"external_id": "CPR-002", "cohort": "BC70", **{**metrics, "revenue_growth": 0, "operating_margin": 1}},
+            {"external_id": "CPR-001", "cohort": "BC50", **metrics},
+            {"external_id": "CPR-002", "cohort": "BC50", **{**metrics, "revenue_growth": 0, "operating_margin": 1}},
         ]
         normalized = normalize_cpr(records, 2025)
         by_id = {(row["external_id"], row["axis"]): float(row["score"]) for row in normalized}

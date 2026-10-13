@@ -110,13 +110,13 @@ class PipelineTest(unittest.TestCase):
 
     def test_target_quota_mismatch_is_visible(self):
         rows = [
-            {"domain": "CPR", "subcategory": "BC70", "active": True},
-            {"domain": "CPR", "subcategory": "BB30", "active": True},
+            {"domain": "CPR", "subcategory": "BC50", "active": True},
+            {"domain": "CPR", "subcategory": "BB50", "active": True},
         ]
         report = target_quota_report(rows)
         cpr = {row["cohort_code"]: row for row in report if row["domain"] == "CPR"}
-        self.assertEqual(cpr["BC70"]["actual_count"], 1)
-        self.assertFalse(cpr["BC70"]["exact_match"])
+        self.assertEqual(cpr["BC50"]["actual_count"], 1)
+        self.assertFalse(cpr["BC50"]["exact_match"])
 
     def test_official_baseline_is_not_overwritten_by_news_flow(self):
         official = {"score": 80, "confidence": .95, "coverage": 1, "evidence_count": 2,

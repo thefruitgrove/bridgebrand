@@ -139,7 +139,7 @@ def ticker_html():
 NAV_ITEMS = [
     ("HOME", "index.html", None),
     ("THIS WEEK", "this-week.html", None),
-    ("CPR", "cpr.html", [("CPR B-T100","cpr.html#t100"),("CPR B-BC70","cpr.html#bc70"),("CPR B-BB30","cpr.html#bb30")]),
+    ("CPR", "cpr.html", [("CPR B-T100","cpr.html#t100"),("CPR B-BC50","cpr.html#bc50"),("CPR B-BB50","cpr.html#bb50")]),
     ("GOV", "gov.html", [("GOV B-T100","gov.html#t100"),("GOV B-M40","gov.html#m40"),("GOV B-C60","gov.html#c60")]),
     ("UNI", "uni.html", [("UNI B-T100","uni.html#t100"),("UNI B-U60","uni.html#u60"),("UNI B-C40","uni.html#c40")]),
     ("ENT", "star.html", [("ENT B-T100","star.html#t100"),("ENT B-AM40","star.html#am45"),("ENT B-AW40","star.html#aw45"),("ENT B-AN20","star.html#an10")]),
@@ -147,7 +147,8 @@ NAV_ITEMS = [
 # 상단 우측 유틸 메뉴 항목 (INDEX·데이터추출·신뢰등급이란?)
 NAV_UTIL_ITEMS = [
     ("INDEX", "methodology.html"),
-    ("신뢰등급 | 데이터추출", "trust.html"),
+    ("DATA TRACE", "data-extraction.html"),
+    ("신뢰등급", "trust.html"),
 ]
 
 def nav_html(active):
@@ -155,11 +156,11 @@ def nav_html(active):
     for label, href, sub in NAV_ITEMS:
         act = "active" if label == active else ""
         if sub:
-            subitems = "".join(f'<a href="{s_href}">{s_label}</a>' for s_label, s_href in sub)
+            subitems = "".join(f'<a href="{s_href}"><span>{i:02d}</span>{s_label}</a>' for i, (s_label, s_href) in enumerate(sub, 1))
             parts.append(f'''
       <div class="nav-item has-drop">
-        <a href="{href}" class="{act}">{label}</a>
-        <div class="nav-drop">{subitems}</div>
+        <a href="{href}" class="{act}">{label}<i aria-hidden="true"></i></a>
+        <div class="nav-drop"><div class="nav-drop-kicker">{label} INDEX SERIES</div>{subitems}</div>
       </div>''')
         else:
             parts.append(f'<div class="nav-item"><a href="{href}" class="{act}">{label}</a></div>')
@@ -202,7 +203,7 @@ def base_header(active):
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top"><span class="logo">BRIDGE</span><button class="mm-close" id="mmClose" aria-label="닫기">&times;</button></div>
-  {"".join(f'<a href="{href}">{label}</a>' for label, href, sub in NAV_ITEMS)}
+  {"".join(f'<div class="mm-group"><a href="{href}">{label}</a>' + (''.join(f'<a class="mm-child" href="{s_href}">{s_label}</a>' for s_label,s_href in sub) if sub else '') + '</div>' for label, href, sub in NAV_ITEMS)}
   {"".join(f'<a href="{u_href}" class="mm-util">{u_label}</a>' for u_label, u_href in NAV_UTIL_ITEMS)}
   <a href="about.html" class="mm-util">시그널브릿지 회사소개</a>
 </div>'''
@@ -397,18 +398,18 @@ def real_list_page(active, page, title, note, model_blurb, seg_html, panels_html
   </section>
 </div>''' + footer(footer_key)
 
-# --- CPR: T100 / BC70(B2C) / BB30(B2B) ---
-cpr_segs = [("t100","CPR B-T100",len(build_pilot.CPR_REAL)), ("bc70","CPR B-BC70",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2C"])), ("bb30","CPR B-BB30",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2B"]))]
+# --- CPR: T100 / BC50(consumer-facing) / BB50(business-facing) ---
+cpr_segs = [("t100","CPR B-T100",len(build_pilot.CPR_REAL)), ("bc50","CPR B-BC50",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2C"])), ("bb50","CPR B-BB50",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2B"]))]
 cpr_seg_html = seg_control("t100", cpr_segs, "cpr")
 cpr_panels_html = (
     f'<div class="rk-panel" id="cpr-t100">{build_pilot.cpr_rows()}</div>'
-    f'<div class="rk-panel hidden" id="cpr-bc70">{build_pilot.cpr_rows("B2C")}</div>'
-    f'<div class="rk-panel hidden" id="cpr-bb30">{build_pilot.cpr_rows("B2B")}</div>'
+    f'<div class="rk-panel hidden" id="cpr-bc50">{build_pilot.cpr_rows("B2C")}</div>'
+    f'<div class="rk-panel hidden" id="cpr-bb50">{build_pilot.cpr_rows("B2B")}</div>'
 )
 cpr_html = real_list_page(
     "CPR", "cpr", "CPR — 시장의 소음을 걷어낸 진짜 가치, Corporate",
     "대한민국을 대표하는 상장 기업 100곳, 그 이면의 진짜 평판을 읽어냅니다. 산업별 특성에 꼭 맞게 "
-    "전체 기업(B-T100), 소비재 및 B2C(B-BC70), 기간산업 및 B2B(B-BB30) 3가지 기준으로 세분화하여 "
+    "전체 기업(B-T100), 소비자 직접접점 기업(B-BC50), 기업·산업재 중심 기업(B-BB50) 3가지 기준으로 세분화하여 "
     "가장 유의미한 결과를 보여드립니다. 지금 보시는 데이터는 BRIDGE 모델의 정밀한 알고리즘을 통해 "
     "도출되는 평판 지표입니다. 억지로 점수를 채워 순위를 고정하는 낡은 방식은 지양합니다. 검증된 데이터에 따라 "
     "평판 지수가 어떻게 갱신되는지, 그 정직한 변화 과정을 투명하게 경험해 보세요.",

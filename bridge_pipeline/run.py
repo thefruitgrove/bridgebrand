@@ -17,7 +17,7 @@ from .core import (
     iso_week, load_methodology, now_kst, publication_date, robust_rank,
     trust_grade, weighted_score
 )
-from .targets import load_targets, target_quota_report
+from .targets import TARGET_QUOTAS, load_targets, target_quota_report
 from .events import build_event_record, diagnosis_tags
 
 
@@ -25,6 +25,21 @@ def bootstrap(db: SupabaseRest) -> None:
     cfg = load_methodology()
     db.upsert("bridge_methodology_versions", [{"version": cfg["version"], "config": cfg, "status": "shadow"}], "version")
     db.upsert("bridge_entities", load_targets(), "domain,external_id")
+    # Keep the database governance table synchronized with the versioned target
+    # registry. Legacy cohort rules stay auditable but no longer participate in
+    # the quota-status view.
+    db.patch("bridge_target_quota_rules", {"active": False}, "domain=eq.CPR&cohort_code=in.(BC70,BB30)")
+    quota_names = {
+        ("CPR", "BC50"): "소비자 직접접점 기업 50선", ("CPR", "BB50"): "기업·산업재 중심 기업 50선",
+        ("STAR", "AM40"): "남자 광고모델 40선", ("STAR", "AW40"): "여자 광고모델 40선",
+        ("STAR", "AN20"): "라이징 스타 20선", ("GOV", "GM40"): "중앙행정기관 40선",
+        ("GOV", "GC60"): "지방자치단체 60선", ("UNI", "U60"): "일반·4년제 대학 60선",
+        ("UNI", "C40"): "전문대학 40선",
+    }
+    quota_rows = [{"domain": domain, "cohort_code": cohort, "display_name": quota_names[(domain, cohort)],
+                   "expected_count": count, "active": True}
+                  for (domain, cohort), count in TARGET_QUOTAS.items()]
+    db.upsert("bridge_target_quota_rules", quota_rows, "domain,cohort_code")
     print(f"bootstrapped {len(load_targets())} entities and methodology {cfg['version']}")
 
 
@@ -642,6 +657,13 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         for observation in obs:
             diagnostics = observation.get("diagnostics") or {}
             source_ids.update(diagnostics.get("source_ids") or ([diagnostics.get("source_id")] if diagnostics.get("source_id") else []))
+        # A completed daily search with zero accepted mentions is still an
+        # observed result, not missing data.  Count that monitored absence as
+        # a source family for CPR eligibility; its value is already expressed
+        # conservatively by the attention-continuity score (45), so this does
+        # not manufacture a positive event or an extra axis.
+        if entity["domain"] == "CPR" and attention_diag.get("no_mention_observed"):
+            source_ids.add("google_news_rss_observation")
         source_families = len(source_ids)
         beta_gate = (cfg.get("beta_eligibility") or {}).get(entity["domain"], {})
         min_families = beta_gate.get("minimum_source_families", cfg["minimum_source_families"])
@@ -676,7 +698,7 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         for subcat in sorted({c.get("subcategory") for c in domain_rows if c.get("subcategory")}):
             ranking_types[subcat] = [c for c in domain_rows if c.get("subcategory") == subcat]
         for ranking_type, members in ranking_types.items():
-            limits = {"T100": 100, "BC70": 70, "BB30": 30, "AM40": 40, "AW40": 40,
+            limits = {"T100": 100, "BC50": 50, "BB50": 50, "AM40": 40, "AW40": 40,
                       "AN20": 20, "GM40": 40, "GC60": 60, "U60": 60, "C40": 40}
             for member in robust_rank(members)[:limits.get(ranking_type, 100)]:
                 prev = previous.get((domain, ranking_type, member["id"]))

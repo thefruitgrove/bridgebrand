@@ -117,10 +117,10 @@ def ticker_html():
 NAV_ITEMS = [
     ("HOME", "home", None),
     ("THIS WEEK", "this-week", None),
-    ("CPR", "cpr", [("CPR B-T100","cpr","t100"),("CPR B-BC70","cpr","bc70"),("CPR B-BB30","cpr","bb30")]),
+    ("CPR", "cpr", [("CPR B-T100","cpr","t100"),("CPR B-BC50","cpr","bc50"),("CPR B-BB50","cpr","bb50")]),
     ("GOV", "gov", [("GOV B-T100","gov","t100"),("GOV B-M40","gov","m40"),("GOV B-C60","gov","c60")]),
     ("UNI", "uni", [("UNI B-T100","uni","t100"),("UNI B-U60","uni","u60"),("UNI B-C40","uni","c40")]),
-    ("ENT", "star", [("ENT B-T100","star","t100"),("ENT B-AM45","star","am45"),("ENT B-AW45","star","aw45"),("ENT B-AN10","star","an10")]),
+    ("ENT", "star", [("ENT B-T100","star","t100"),("ENT B-AM40","star","am45"),("ENT B-AW40","star","aw45"),("ENT B-AN20","star","an10")]),
 ]
 NAV_UTIL_ITEMS = [("INDEX","methodology"),("데이터추출","data-extraction"),("신뢰등급이란?","trust")]
 
@@ -295,12 +295,12 @@ def real_view(page, title, note, model_blurb, seg_html, panels_html, footer_key,
   {footer(footer_key)}
 </section>'''
 
-cpr_segs = [("t100","CPR B-T100",len(build_pilot.CPR_REAL)), ("bc70","CPR B-BC70",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2C"])), ("bb30","CPR B-BB30",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2B"]))]
+cpr_segs = [("t100","CPR B-T100",len(build_pilot.CPR_REAL)), ("bc50","CPR B-BC50",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2C"])), ("bb50","CPR B-BB50",len([1 for e in build_pilot.CPR_REAL if e[6]=="B2B"]))]
 cpr_seg_html = seg_control("t100", cpr_segs, "cpr")
 cpr_panels_html = (
     f'<div class="rk-panel" id="cpr-t100">{build_pilot.cpr_rows()}</div>'
-    f'<div class="rk-panel hidden" id="cpr-bc70">{build_pilot.cpr_rows("B2C")}</div>'
-    f'<div class="rk-panel hidden" id="cpr-bb30">{build_pilot.cpr_rows("B2B")}</div>'
+    f'<div class="rk-panel hidden" id="cpr-bc50">{build_pilot.cpr_rows("B2C")}</div>'
+    f'<div class="rk-panel hidden" id="cpr-bb50">{build_pilot.cpr_rows("B2B")}</div>'
 )
 THIS_WEEK_VIEW = f'''
 <section class="view" id="view-this-week">
@@ -309,14 +309,14 @@ THIS_WEEK_VIEW = f'''
 </section>'''
 
 CPR_VIEW = real_view("cpr", "CPR — Corporate",
-    f"코스피·코스닥 실제 상장기업 {len(build_pilot.CPR_REAL)}개 표본. B-T100(통합) · B-BC70(소비재 브랜드 B2C) · "
-    f"B-BB30(기간산업 브랜드 B2B) 탭으로 구분합니다. " + PRE_INDEX_NOTICE,
+    f"코스피·코스닥 실제 상장기업 {len(build_pilot.CPR_REAL)}개 표본. B-T100(통합) · B-BC50(소비자 직접접점) · "
+    f"B-BB50(기업·산업재 중심)로 구분합니다. " + PRE_INDEX_NOTICE,
     build_pilot.MODEL_BLURBS["CPR"], cpr_seg_html, cpr_panels_html, FN_CPR)
 
-star_segs = [("t100","STAR B-T100",len(build_pilot.STAR_REAL)),
-             ("am45","STAR B-AM45",len([1 for e in build_pilot.STAR_REAL if e[2]=="AM"])),
-             ("aw45","STAR B-AW45",len([1 for e in build_pilot.STAR_REAL if e[2]=="AW"])),
-             ("an10","STAR B-AN10",len([1 for e in build_pilot.STAR_REAL if e[2]=="AN"]))]
+star_segs = [("t100","ENT B-T100",len(build_pilot.STAR_REAL)),
+             ("am45","ENT B-AM40",len([1 for e in build_pilot.STAR_REAL if e[2]=="AM"])),
+             ("aw45","ENT B-AW40",len([1 for e in build_pilot.STAR_REAL if e[2]=="AW"])),
+             ("an10","ENT B-AN20",len([1 for e in build_pilot.STAR_REAL if e[2]=="AN"]))]
 star_seg_html = seg_control("t100", star_segs, "star")
 star_panels_html = (
     f'<div class="rk-panel" id="star-t100">{build_pilot.star_rows()}</div>'

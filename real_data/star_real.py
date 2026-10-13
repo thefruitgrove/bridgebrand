@@ -116,3 +116,10 @@ STAR_REAL = [
     ("엔하이픈", "보이그룹(신인급)", "AN"),
     ("아일릿", "걸그룹(신인급, 2024 데뷔)", "AN"),
 ]
+
+# Keep the announced 40 / 40 / 20 operating frame.  AN20 is a momentum cohort
+# (new or recently surging faces), not a claim that every member is a debutant.
+_RISING_EXPANSION = {"박지훈", "김도영", "변우석", "김재원", "안효섭",
+                     "아이브", "고윤정", "비비", "에스파", "르세라핌"}
+STAR_REAL = [(name, category, "AN" if name in _RISING_EXPANSION else cohort)
+             for name, category, cohort in STAR_REAL]

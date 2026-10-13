@@ -68,6 +68,11 @@ jobs:
           python engine3/test_scoring_v3.py
           python tests/test_uni_v43.py
 
+      - name: Synchronize active target registry
+        run: |
+          python -m bridge_pipeline.run bootstrap
+          python -m bridge_pipeline.run audit-targets
+
       - name: Build UNI official baseline and daily observation layer
         run: |
           python uni_builder_v43.py

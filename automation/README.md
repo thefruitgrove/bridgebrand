@@ -36,14 +36,14 @@ python -m bridge_pipeline.run bootstrap
 
 ## 대상 쿼터 검증 상태
 
-- 승인 구조: CPR `BC70/BB30`, STAR `AM40/AW40/AN20`, GOV `GM40/GC60`
-- 현재 베타 명단: CPR `B2C35/B2B65`, STAR `AM45/AW45/AN10`, GOV `GM40/GC60`
-- 따라서 현재 명단은 shadow 수집에는 사용할 수 있으나 CPR·STAR 하위랭킹의 정식 공개에는 사용할 수 없다.
-- Supabase `bridge_pipeline_alerts`에 `TARGET_QUOTA_MISMATCH` 경고를 기록했으며, 검증된 교체 명단 반영 후에만 해제한다.
+- 승인 구조: CPR `BC50/BB50`, STAR `AM40/AW40/AN20`, GOV `GM40/GC60`
+- 현재 운영 명단: CPR `BC50/BB50`, STAR `AM40/AW40/AN20`, GOV `GM40/GC60`, UNI `U60/C40`
+- CPR은 개인이 직접 구매·방문·가입할 수 있는 브랜드 접점을 BC50의 조작적 정의로 사용한다.
+- 퇴출 표본은 비활성 이력으로 남기고 신규 표본에는 새 external_id를 부여해 과거 관측의 오염을 방지한다.
 - `bridge_target_quota_status`가 확정 쿼터와 활성 대상 수를 실시간 비교한다.
 - 주간 공개 직전에 `python -m bridge_pipeline.run audit-targets`를 실행하며, 하나라도 불일치하면 종료코드 2로 공개를 차단한다.
 - 데일리 베타는 CPR·ENT·GOV·UNI의 `T100`을 공개한다. 내부 코드 `STAR`는 공개 JSON에서 `ENT`로 변환한다.
-- BC70·BB30·AM40·AW40·AN20 하위랭킹은 쿼터가 정확히 일치할 때까지 데일리 공개에서 제외한다.
+- BC50·BB50·AM40·AW40·AN20 하위랭킹은 활성 쿼터가 정확히 일치할 때만 공개한다.
 
 ## 운영 주기
 

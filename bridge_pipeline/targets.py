@@ -7,8 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "real_data"))
 
 TARGET_QUOTAS = {
-    ("CPR", "BC70"): 70,
-    ("CPR", "BB30"): 30,
+    ("CPR", "BC50"): 50,
+    ("CPR", "BB50"): 50,
     ("STAR", "AM40"): 40,
     ("STAR", "AW40"): 40,
     ("STAR", "AN20"): 20,
@@ -19,8 +19,8 @@ TARGET_QUOTAS = {
 }
 
 COHORT_CODES = {
-    "B2C": "BC70",
-    "B2B": "BB30",
+    "B2C": "BC50",
+    "B2B": "BB50",
     "AM": "AM40",
     "AW": "AW40",
     "AN": "AN20",
@@ -52,16 +52,17 @@ UNI_NAME_ALIASES = {
 
 
 def load_targets() -> list[dict]:
-    from cpr_real import CPR_REAL
+    from cpr_real import CPR_TARGETS
     from gov_real import GOV_C60, GOV_M40
     from star_real import STAR_REAL
     from uni_real import UNI_2YEAR, UNI_4YEAR
 
     rows: list[dict] = []
-    for index, item in enumerate(CPR_REAL, 1):
+    for target in CPR_TARGETS:
+        item = target["row"]
         name, market, sector, *_rest = item
         subcat = COHORT_CODES.get(item[-1]) if item else None
-        rows.append({"domain": "CPR", "external_id": f"CPR-{index:03d}", "name": name, "category": sector, "subcategory": subcat, "aliases": [], "metadata": {"market": market}, "active": True})
+        rows.append({"domain": "CPR", "external_id": target["external_id"], "name": name, "category": sector, "subcategory": subcat, "aliases": [], "metadata": {"market": market, "cohort_rule": "direct_consumer_interface_v1"}, "active": target["active"]})
     for index, (name, level) in enumerate(GOV_M40, 1):
         rows.append({"domain": "GOV", "external_id": f"GOV-M{index:02d}", "name": name, "category": level, "subcategory": "GM40", "aliases": GOV_NAME_ALIASES.get(name, []), "metadata": {}, "active": True})
     for index, item in enumerate(GOV_C60, 1):

@@ -4,7 +4,7 @@
 # thorkit.kr, stockdigging.com), cross-checked; figures are approximate and dated,
 # marked per-entry.
 #
-# biz_type added for the CPR B-BC70(소비재 브랜드 B2C) / CPR B-CC30(기간산업 B2B) split
+# biz_type added for the CPR B-BC50(소비자 직접접점) / CPR B-BB50(기업·산업재) split
 # confirmed by the user. Classification is by primary brand-facing orientation of the
 # company's main listed business, not a legal or accounting B2C/B2B designation.
 CPR_REAL = [
@@ -112,3 +112,45 @@ CPR_REAL = [
     ("한온시스템", "KOSPI", "자동차 공조부품", None, "2026-08", "시가총액 뉴스 보도", "B2B"),
     ("코웨이", "KOSPI", "생활가전 렌탈", None, "2026-08", "시가총액 뉴스 보도", "B2C"),
 ]
+
+# 2026-10-13 cohort revision
+# --------------------------
+# BC50 is deliberately narrower than a loose "consumer-related" label: an
+# individual must be able to buy, visit or subscribe to the company's branded
+# product/service directly.  To reach an honest 50:50 panel, 15 lower-priority
+# industrial names are retained as inactive historical targets and replaced by
+# listed companies with a verifiable direct consumer interface.  CPR_TARGETS
+# preserves every former external_id so historical observations can never be
+# reassigned to a different company.
+CPR_RETIRED_NAMES = {
+    "휴림로봇", "현대무벡스", "쎄트렉아이", "LS머트리얼즈", "한화엔진",
+    "일진전기", "제룡전기", "LS에코에너지", "덕산테코피아", "덕산네오룩스",
+    "피에스케이", "케이씨텍", "SK이터닉스", "명신산업", "성우하이텍",
+}
+
+CPR_CONSUMER_ADDITIONS = [
+    ("신한지주", "KOSPI", "금융지주", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("하나금융지주", "KOSPI", "금융지주", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("기업은행", "KOSPI", "은행", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("삼성화재", "KOSPI", "보험", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("현대해상", "KOSPI", "보험", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("삼성카드", "KOSPI", "카드", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("KT", "KOSPI", "통신", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("LG유플러스", "KOSPI", "통신", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("KT&G", "KOSPI", "소비재", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("호텔신라", "KOSPI", "호텔·면세", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("강원랜드", "KOSPI", "관광·레저", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("롯데칠성", "KOSPI", "음료", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("농심", "KOSPI", "식품", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("오뚜기", "KOSPI", "식품", None, "2026-10", "KRX listed-company universe", "B2C"),
+    ("BGF리테일", "KOSPI", "편의점·유통", None, "2026-10", "KRX listed-company universe", "B2C"),
+]
+
+CPR_LEGACY_REAL = list(CPR_REAL)
+CPR_REAL = [row for row in CPR_LEGACY_REAL if row[0] not in CPR_RETIRED_NAMES] + CPR_CONSUMER_ADDITIONS
+
+CPR_TARGETS = []
+for _index, _row in enumerate(CPR_LEGACY_REAL, 1):
+    CPR_TARGETS.append({"external_id": f"CPR-{_index:03d}", "row": _row, "active": _row[0] not in CPR_RETIRED_NAMES})
+for _offset, _row in enumerate(CPR_CONSUMER_ADDITIONS, 101):
+    CPR_TARGETS.append({"external_id": f"CPR-{_offset:03d}", "row": _row, "active": True})

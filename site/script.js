@@ -60,12 +60,6 @@
         });
         var prefix=domain==='ENT'?'star':domain.toLowerCase(), panel=document.getElementById(prefix+'-t100');
         if(panel){ panel.innerHTML=domainRows.map(function(rec){return rankRow(rec,snapshotDate);}).join(''); panel.setAttribute('data-shown','1000'); }
-        if(panel && window.openBridgeModal){
-          panel.querySelectorAll('.rk-clickable').forEach(function(row){
-            row.addEventListener('click',function(){ window.openBridgeModal(row.dataset.entity,row.dataset.region,row.dataset.type); });
-            row.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();row.click();} });
-          });
-        }
         var btn=document.querySelector('.seg-btn[data-target="'+prefix+'-t100"] span');
         if(btn) btn.textContent=domainRows.length+'/100';
         var note=document.querySelector('.live-snapshot-note');
@@ -75,14 +69,15 @@
         // The left rail is the always-visible T100. Cohort panels on the
         // right are independently re-ranked from the same live snapshot.
         var cohortMap={
-          CPR:[['bc70','BC70'],['bb30','BB30']],
+          CPR:[['bc50',['BC50','BC70']],['bb50',['BB50','BB30']]],
           GOV:[['m40','GM40'],['c60','GC60']],
           UNI:[['u60','U60'],['c40','C40']],
           ENT:[['am45','AM40'],['aw45','AW40'],['an10','AN20']]
         };
         (cohortMap[domain]||[]).forEach(function(pair){
           var target=document.getElementById(prefix+'-'+pair[0]); if(!target)return;
-          var subset=domainRows.filter(function(r){return String(r.subcategory||'').toUpperCase()===pair[1];});
+          var cohortCodes=Array.isArray(pair[1])?pair[1]:[pair[1]];
+          var subset=domainRows.filter(function(r){return cohortCodes.indexOf(String(r.subcategory||'').toUpperCase())>=0;});
           subset.sort(function(a,b){return Number(b.score)-Number(a.score)||String(a.name).localeCompare(String(b.name),'ko');});
           subset=subset.map(function(r,i){var copy=Object.assign({},r);copy.rank=i+1;return copy;});
           target.innerHTML=subset.map(function(r){return rankRow(r,snapshotDate);}).join('');
@@ -211,13 +206,15 @@
     var panels=workspace.querySelector('.ranking-panels');
     if(!control||!panels)return;
     var buttons=Array.from(control.querySelectorAll('.seg-btn'));
-    Array.from(panels.querySelectorAll('.rk-panel')).forEach(function(panel,index){
+    var panelList=Array.from(panels.querySelectorAll('.rk-panel'));
+    panelList.forEach(function(panel,index){
       panel.classList.remove('hidden');
       var label=buttons[index] ? buttons[index].textContent.trim() : '';
       var h=document.createElement('div'); h.className='ranking-panel-head';
       h.innerHTML='<b>'+label.replace(/\d+\/?\d*$/,'').trim()+'</b><span>매일 05:15 KST 갱신</span>';
       panel.parentNode.insertBefore(h,panel);
       var shell=document.createElement('section'); shell.className=index===0?'ranking-master':'ranking-cohort';
+      if(index>0 && index===panelList.length-1 && (panelList.length-1)%2===1){ shell.classList.add('ranking-cohort-wide'); }
       h.parentNode.insertBefore(shell,h); shell.appendChild(h); shell.appendChild(panel);
     });
     control.classList.add('ranking-summary-strip');
@@ -419,13 +416,17 @@
   }
   function closeBridgeModal(){ if(modalOverlay) modalOverlay.classList.remove('open'); }
   window.openBridgeModal = openBridgeModal;
-  document.querySelectorAll('.rk-clickable').forEach(function(row){
-    row.addEventListener('click', function(){
-      openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type);
-    });
-    row.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); row.click(); }
-    });
+  // Delegation keeps every live row interactive after the 05:15 snapshot
+  // replaces T100 and cohort markup asynchronously.
+  document.addEventListener('click', function(e){
+    var row=e.target.closest('.rk-clickable');
+    if(row) openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type);
+  });
+  document.addEventListener('keydown', function(e){
+    var row=e.target.closest && e.target.closest('.rk-clickable');
+    if(row && (e.key === 'Enter' || e.key === ' ')){
+      e.preventDefault(); openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type);
+    }
   });
   if(modalClose) modalClose.addEventListener('click', closeBridgeModal);
   if(modalOverlay) modalOverlay.addEventListener('click', function(e){ if(e.target === modalOverlay) closeBridgeModal(); });
