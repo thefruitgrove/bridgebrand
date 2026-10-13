@@ -1,5 +1,5 @@
 {
-  "as_of_date": "2026-10-13",
+  "as_of_date": "2026-10-14",
   "candidates": {
     "GOV-C01": {
       "channel_id": "UCOZ1mcq_3LGj3cvI_SIWd1A",
@@ -36,11 +36,6 @@
       "title": "보스쿼카",
       "reason": "title_mismatch"
     },
-    "GOV-C42": {
-      "channel_id": "UC2oz_Gh__7Z8xL3ykgG9eKg",
-      "title": "익산시 공식 유튜브",
-      "reason": "awaiting_human_verification"
-    },
     "GOV-C43": {
       "channel_id": "UCTwWexE_dvD6kvFDSIQMiwg",
       "title": "군산시 공식채널",
@@ -59,6 +54,11 @@
     "GOV-C46": {
       "channel_id": "UChrP3VKcPcOiR8WZ7LAdO8w",
       "title": "순천시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C47": {
+      "channel_id": "UCdsxjrFG7OILeqzOAYcwODQ",
+      "title": "광양시 │ 오롯이 광양",
       "reason": "awaiting_human_verification"
     }
   }

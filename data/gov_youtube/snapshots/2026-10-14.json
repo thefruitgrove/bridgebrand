@@ -1,0 +1,64 @@
+{
+  "as_of_date": "2026-10-14",
+  "mapping_version": "2026.10-pce-shadow-1",
+  "entities": {
+    "GOV-C06": {
+      "channel": {
+        "id": "UCzIgmDjE0lFDu2IhEF_ewOA",
+        "title": "대전TV - 대전광역시 공식 유튜브 채널",
+        "subscribers": 33300,
+        "total_views": 25098537,
+        "video_count": 1996
+      },
+      "metrics": {
+        "output_count": 25,
+        "views": 30546,
+        "median_views": 723,
+        "median_views_per_day": 135.75,
+        "likes": 386,
+        "comments": 48,
+        "engagement_per_1000_views": 15.779480128331043,
+        "identity_continuity": 16.95906432748538,
+        "action_content_count": 5,
+        "action_engagement_per_1000_views": 12.185833968012187
+      },
+      "daily_total_view_delta": 0,
+      "scores": {
+        "B": 0.0,
+        "R": 100.0,
+        "I": 0.0,
+        "G": 100.0
+      },
+      "identity_score": 0.0
+    },
+    "GOV-C17": {
+      "channel": {
+        "id": "UCK2JegInDWoDtwEpjh4HzLg",
+        "title": "제주도TV·Jeju",
+        "subscribers": 175000,
+        "total_views": 26893013,
+        "video_count": 3268
+      },
+      "metrics": {
+        "output_count": 25,
+        "views": 173175,
+        "median_views": 5761,
+        "median_views_per_day": 682.4615384615385,
+        "likes": 241,
+        "comments": 15,
+        "engagement_per_1000_views": 1.5648910062075936,
+        "identity_continuity": 21.084337349397593,
+        "action_content_count": 9,
+        "action_engagement_per_1000_views": 1.3827922756580322
+      },
+      "daily_total_view_delta": 0,
+      "scores": {
+        "B": 100.0,
+        "R": 0.0,
+        "I": 100.0,
+        "G": 0.0
+      },
+      "identity_score": 100.0
+    }
+  }
+}
