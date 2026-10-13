@@ -12,15 +12,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 22583,
+        "views": 22850,
         "median_views": 723,
-        "median_views_per_day": 160.0,
-        "likes": 322,
-        "comments": 41,
-        "engagement_per_1000_views": 17.889562945578533,
+        "median_views_per_day": 168.0,
+        "likes": 328,
+        "comments": 42,
+        "engagement_per_1000_views": 18.03063457330416,
         "identity_continuity": 16.95906432748538,
         "action_content_count": 5,
-        "action_engagement_per_1000_views": 11.988424968995453
+        "action_engagement_per_1000_views": 11.76470588235294
       },
       "daily_total_view_delta": 0,
       "scores": {
@@ -29,7 +29,36 @@
         "I": 50.0,
         "G": 50.0
       },
-      "identity_score": 50.0
+      "identity_score": 0.0
+    },
+    "GOV-C17": {
+      "channel": {
+        "id": "UCK2JegInDWoDtwEpjh4HzLg",
+        "title": "제주도TV·Jeju",
+        "subscribers": 175000,
+        "total_views": 26893013,
+        "video_count": 3268
+      },
+      "metrics": {
+        "output_count": 25,
+        "views": 172407,
+        "median_views": 5751,
+        "median_views_per_day": 813.5,
+        "likes": 229,
+        "comments": 15,
+        "engagement_per_1000_views": 1.5022591890120471,
+        "identity_continuity": 21.084337349397593,
+        "action_content_count": 9,
+        "action_engagement_per_1000_views": 1.3722293075892353
+      },
+      "daily_total_view_delta": 0,
+      "scores": {
+        "B": 100.0,
+        "R": 0.0,
+        "I": 100.0,
+        "G": 0.0
+      },
+      "identity_score": 100.0
     }
   }
 }

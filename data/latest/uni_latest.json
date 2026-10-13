@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "run_at": "2026-10-13T22:29:19.438924+09:00",
+  "run_at": "2026-10-13T22:38:28.098263+09:00",
   "official_source": {
     "provider": "대학알리미",
     "source_file": "대학주요정보.xlsx",
@@ -18,7 +18,7 @@
       "교육비": 2026,
       "기숙사": 2025
     },
-    "retrieved_at": "2026-10-13T13:28:55.528346+00:00"
+    "retrieved_at": "2026-10-13T13:38:05.575906+00:00"
   },
   "signal_ledger": [
     {
@@ -1326,6 +1326,20 @@
     {
       "university_id": "UNI-49BAD3C4D45E",
       "name": "신한대학교",
+      "title": "신한대 강성종 총장, BIE 사무총장에 ‘2035 DMZ 세계박람회’ 제안 - 미주중앙일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1oX3d4N291VFduSnJBOUZtNWxkWXU3aVhHMnl5R1pEaVpaWlJpR2x1bDU2WVJFU2MxQk15SlkwZjNZZXVWZm54RXlEeXFONFZQQnRDMFhQckRmMlpsY1FXTXdn?oc=5",
+      "source_id": "news:미주중앙일보",
+      "published_at": "2026-10-12T05:45:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-49BAD3C4D45E",
+      "name": "신한대학교",
       "title": "신한대 ‘2035 DMZ 세계박람회’ 유치 구상 제안… BIE와 협력 모색 - 경인일보",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9ZNjBtTk13WkdLaGdCVDJGV1lELXZsbFNQLTRpU1BpZUpEVzM5UWYtU3NxNVQxMG5ndWlXNFpFRFd5eV9PUkQ5SUdQZkRySnBSRkE?oc=5",
@@ -1359,20 +1373,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBjTEFwbHJaQ2ZXenRHYUtCeVlfX3pPYzVTX09wcHBLUUJCOGI3OEExNHgxVWpPUVpTMEIzSDJTSmF0RDFLUXF0VWlWUlhveXE5U29RcFh4UFJFWnpSaHRaTURpcllhbjlScFlTdlU2b9IBb0FVX3lxTFBjTEFwbHJaQ2ZXenRHYUtCeVlfX3pPYzVTX09wcHBLUUJCOGI3OEExNHgxVWpPUVpTMEIzSDJTSmF0RDFLUXF0VWlWUlhveXE5U29RcFh4UFJFWnpSaHRaTURpcllhbjlScFlTdlU2bw?oc=5",
       "source_id": "news:서울일보",
       "published_at": "2026-10-12T05:54:22+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-49BAD3C4D45E",
-      "name": "신한대학교",
-      "title": "신한대 강성종 총장, BIE 사무총장에 ‘2035 DMZ 세계박람회’ 제안 - 중앙일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1QOC1lYk5GTnlid0pGMEVuLTdEZi1KRGtmU0c3SmZHLW9GS1htNjRKNS1jSEFWelZ3bndyNjRUR0hmY0NvbmprXy00MXVOS2F0eldMaFdB?oc=5",
-      "source_id": "news:중앙일보",
-      "published_at": "2026-10-12T05:45:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -2250,6 +2250,34 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
+      "title": "[동정]고려대학교 구로병원 신경과 김지현 교수, 보건복지부장관 표창 수상 - 데일리메디팜",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FSVBpcTk4ZVZOM3VMY1ZyZXE5T19wbmF4UlAtRjhHdjl3ak1jVVZ2eHdnR04yQ19yaWEzZV94RmwxbFRhZDVVckJwd3M0bklKN0k3WXJyVDE0X2hQUFdVcmQweWpqcG44Y0NjVUVn?oc=5",
+      "source_id": "news:데일리메디팜",
+      "published_at": "2026-10-12T00:46:07+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "[동정]고려대학교 구로병원 신경과 김지현 교수, 보건복지부장관 표창 수상 - 데일리메디팜",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FSVBpcTk4ZVZOM3VMY1ZyZXE5T19wbmF4UlAtRjhHdjl3ak1jVVZ2eHdnR04yQ19yaWEzZV94RmwxbFRhZDVVckJwd3M0bklKN0k3WXJyVDE0X2hQUFdVcmQweWpqcG44Y0NjVUVn?oc=5",
+      "source_id": "news:데일리메디팜",
+      "published_at": "2026-10-12T00:46:07+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
       "title": "고려대학교 창업지원단, 2026 초기창업패키지 선정 기업 위한 ‘Pre-A 트랙’ 성료 - 피앤피뉴스",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9TRkFMay1kVUx2amsydEFTYXlsTE0wN3IxbjNDdjFQNDlNSjJOT1lhWHQzZEdQMHBJbnIzRE1DM3RpYXBRRWFlQjhPbS1SSHNfYkJxcGZR0gFWQVVfeXFMT1NGQUxrLWRVTHZqazJ0QVNheWxMTTA3cjFuM0N2MVA0OU1KMk5PWWFYdDNkR1AwcElucjNETUMzdGlhcFFFYWVCOE9tLVJIc19iQnFwZlE?oc=5",
@@ -2288,34 +2316,6 @@
       "axis": "G",
       "direction": 1,
       "severity": 0.45
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "[동정]고려대학교 구로병원 신경과 김지현 교수, 보건복지부장관 표창 수상 - 데일리메디팜",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FSVBpcTk4ZVZOM3VMY1ZyZXE5T19wbmF4UlAtRjhHdjl3ak1jVVZ2eHdnR04yQ19yaWEzZV94RmwxbFRhZDVVckJwd3M0bklKN0k3WXJyVDE0X2hQUFdVcmQweWpqcG44Y0NjVUVn?oc=5",
-      "source_id": "news:데일리메디팜",
-      "published_at": "2026-10-12T00:46:07+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "[동정]고려대학교 구로병원 신경과 김지현 교수, 보건복지부장관 표창 수상 - 데일리메디팜",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9FSVBpcTk4ZVZOM3VMY1ZyZXE5T19wbmF4UlAtRjhHdjl3ak1jVVZ2eHdnR04yQ19yaWEzZV94RmwxbFRhZDVVckJwd3M0bklKN0k3WXJyVDE0X2hQUFdVcmQweWpqcG44Y0NjVUVn?oc=5",
-      "source_id": "news:데일리메디팜",
-      "published_at": "2026-10-12T00:46:07+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
     },
     {
       "university_id": "UNI-46FC34D4A2B0",
@@ -2404,11 +2404,11 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
-      "title": "김용구 고려대 안산병원 교수, ‘세계 상위 2% 과학자’ 7년 연속 선정 - 주간한국",
+      "title": "[고려대 소식] 고려대, 생애주기 아우르는 융합연구 본격화 외 - 이뉴스투데이",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1OVENjOWpkUnZycVRVTUJfMGxMbmJ5UkZBcVFnUlA0OWc2SEREVGdfNDI1MTlobnFIdVpMZFBtWnhGUTVnbkhZeEtoUVlrVXd4SnQ3S09LOXBmRXdjTGVwZ0lZbU4wc1hvR3pjODhYdHRRX1Y50gF0QVVfeXFMTU5UQ2M5amRSdnJxVFVNQl8wbExuYnlSRkFxUWdSUDQ5ZzZIRERUZ180MjUxOWhucUh1WkxkUG1aeEZRNWduSFl4S2hRWWtVd3hKdDdLT0s5cGZFd2NMZXBnSVltTjBzWG9HemM4OFh0dFFfVjk?oc=5",
-      "source_id": "news:주간한국",
-      "published_at": "2026-10-12T02:34:49+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5qUDZBZndUbm9hRG9QZkZFQTBxN3czbEtGWXhOTU9nQjZCM0RqbFA1Yk5nR2NzeUNHQktXM21LOVJEN0E1ODFKVHpybTVNTG9EWXktU1JsOGhrYktlNkw4S19IQVVlRVdkcDBPVXF2aTZIUFlD0gF0QVVfeXFMTmpQNkFmd1Rub2FEb1BmRkVBMHE3dzNsS0ZZeE5NT2dCNkIzRGpsUDViTmdHY3N5Q0dCS1czbUs5UkQ3QTU4MUpUenJtNU1Mb0RZeS1TUmw4aGtiS2U2TDhLX0hBVWVFV2RwME9VcXZpNkhQWUM?oc=5",
+      "source_id": "news:이뉴스투데이",
+      "published_at": "2026-10-12T13:27:31+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -2418,11 +2418,25 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
-      "title": "김용구 고려대 안산병원 교수, ‘세계 상위 2% 과학자’ 7년 연속 선정 - 주간한국",
+      "title": "[동정]고려대 의대 전옥희 교수, 83억 원 규모 국책과제 수주...역노화 치료제 개발 착수 - 데일리메디팜",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1OVENjOWpkUnZycVRVTUJfMGxMbmJ5UkZBcVFnUlA0OWc2SEREVGdfNDI1MTlobnFIdVpMZFBtWnhGUTVnbkhZeEtoUVlrVXd4SnQ3S09LOXBmRXdjTGVwZ0lZbU4wc1hvR3pjODhYdHRRX1Y50gF0QVVfeXFMTU5UQ2M5amRSdnJxVFVNQl8wbExuYnlSRkFxUWdSUDQ5ZzZIRERUZ180MjUxOWhucUh1WkxkUG1aeEZRNWduSFl4S2hRWWtVd3hKdDdLT0s5cGZFd2NMZXBnSVltTjBzWG9HemM4OFh0dFFfVjk?oc=5",
-      "source_id": "news:주간한국",
-      "published_at": "2026-10-12T02:34:49+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9GbjlBbHgzcHdxcHcwZGpsaDVCYzZfS1QyX1Mtb1FrREUxX3hDeWpueDVQZVZvYXFyX2NYOWJEVnE4Q285aXRJaVc5eGZEUERDbTVaNnhhWUtmeFZ3RlFqcjRLZVg4dmR5Mm5jMlExbXE?oc=5",
+      "source_id": "news:데일리메디팜",
+      "published_at": "2026-10-12T07:33:48+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "[동정]고려대 의대 전옥희 교수, 83억 원 규모 국책과제 수주...역노화 치료제 개발 착수 - 데일리메디팜",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9GbjlBbHgzcHdxcHcwZGpsaDVCYzZfS1QyX1Mtb1FrREUxX3hDeWpueDVQZVZvYXFyX2NYOWJEVnE4Q285aXRJaVc5eGZEUERDbTVaNnhhWUtmeFZ3RlFqcjRLZVg4dmR5Mm5jMlExbXE?oc=5",
+      "source_id": "news:데일리메디팜",
+      "published_at": "2026-10-12T07:33:48+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
@@ -2488,11 +2502,11 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
-      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
+      "title": "김용구 고려대 안산병원 교수, ‘세계 상위 2% 과학자’ 7년 연속 선정 - 주간한국",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
-      "source_id": "news:간호사신문",
-      "published_at": "2026-10-12T01:55:30+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1OVENjOWpkUnZycVRVTUJfMGxMbmJ5UkZBcVFnUlA0OWc2SEREVGdfNDI1MTlobnFIdVpMZFBtWnhGUTVnbkhZeEtoUVlrVXd4SnQ3S09LOXBmRXdjTGVwZ0lZbU4wc1hvR3pjODhYdHRRX1Y50gF0QVVfeXFMTU5UQ2M5amRSdnJxVFVNQl8wbExuYnlSRkFxUWdSUDQ5ZzZIRERUZ180MjUxOWhucUh1WkxkUG1aeEZRNWduSFl4S2hRWWtVd3hKdDdLT0s5cGZFd2NMZXBnSVltTjBzWG9HemM4OFh0dFFfVjk?oc=5",
+      "source_id": "news:주간한국",
+      "published_at": "2026-10-12T02:34:49+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -2502,53 +2516,11 @@
     {
       "university_id": "UNI-46FC34D4A2B0",
       "name": "고려대학교",
-      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
+      "title": "김용구 고려대 안산병원 교수, ‘세계 상위 2% 과학자’ 7년 연속 선정 - 주간한국",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
-      "source_id": "news:간호사신문",
-      "published_at": "2026-10-12T01:55:30+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
-      "source_id": "news:간호사신문",
-      "published_at": "2026-10-12T01:55:30+00:00",
-      "verification_status": "single_source",
-      "event_type": "claim",
-      "axis": "I",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "전옥희 고려대 의대 교수,역노화 치료제 개발 착수 - 파이낸셜포스트",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5JY3Bsa0FCQXZ1ei0wWnpHQjVScXAyWDZOSVBVbW5BZWp2Tkp2R1Y4bldYWEVDemRjSWJkczBnakVQZW9WWUpneklXbktPLWl2cXRWcW5VN3pjWjBJR0hENjc1SkduOWpUOE14OEYybmVGdzVH?oc=5",
-      "source_id": "news:파이낸셜포스트",
-      "published_at": "2026-10-12T06:06:45+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-46FC34D4A2B0",
-      "name": "고려대학교",
-      "title": "전옥희 고려대 의대 교수,역노화 치료제 개발 착수 - 파이낸셜포스트",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5JY3Bsa0FCQXZ1ei0wWnpHQjVScXAyWDZOSVBVbW5BZWp2Tkp2R1Y4bldYWEVDemRjSWJkczBnakVQZW9WWUpneklXbktPLWl2cXRWcW5VN3pjWjBJR0hENjc1SkduOWpUOE14OEYybmVGdzVH?oc=5",
-      "source_id": "news:파이낸셜포스트",
-      "published_at": "2026-10-12T06:06:45+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1OVENjOWpkUnZycVRVTUJfMGxMbmJ5UkZBcVFnUlA0OWc2SEREVGdfNDI1MTlobnFIdVpMZFBtWnhGUTVnbkhZeEtoUVlrVXd4SnQ3S09LOXBmRXdjTGVwZ0lZbU4wc1hvR3pjODhYdHRRX1Y50gF0QVVfeXFMTU5UQ2M5amRSdnJxVFVNQl8wbExuYnlSRkFxUWdSUDQ5ZzZIRERUZ180MjUxOWhucUh1WkxkUG1aeEZRNWduSFl4S2hRWWtVd3hKdDdLT0s5cGZFd2NMZXBnSVltTjBzWG9HemM4OFh0dFFfVjk?oc=5",
+      "source_id": "news:주간한국",
+      "published_at": "2026-10-12T02:34:49+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
@@ -2596,6 +2568,76 @@
       "axis": "R",
       "direction": 1,
       "severity": 0.5
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "전옥희 고려대 의대 교수,역노화 치료제 개발 착수 - 파이낸셜포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5JY3Bsa0FCQXZ1ei0wWnpHQjVScXAyWDZOSVBVbW5BZWp2Tkp2R1Y4bldYWEVDemRjSWJkczBnakVQZW9WWUpneklXbktPLWl2cXRWcW5VN3pjWjBJR0hENjc1SkduOWpUOE14OEYybmVGdzVH?oc=5",
+      "source_id": "news:파이낸셜포스트",
+      "published_at": "2026-10-12T06:06:45+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "전옥희 고려대 의대 교수,역노화 치료제 개발 착수 - 파이낸셜포스트",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5JY3Bsa0FCQXZ1ei0wWnpHQjVScXAyWDZOSVBVbW5BZWp2Tkp2R1Y4bldYWEVDemRjSWJkczBnakVQZW9WWUpneklXbktPLWl2cXRWcW5VN3pjWjBJR0hENjc1SkduOWpUOE14OEYybmVGdzVH?oc=5",
+      "source_id": "news:파이낸셜포스트",
+      "published_at": "2026-10-12T06:06:45+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
+      "source_id": "news:간호사신문",
+      "published_at": "2026-10-12T01:55:30+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
+      "source_id": "news:간호사신문",
+      "published_at": "2026-10-12T01:55:30+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-46FC34D4A2B0",
+      "name": "고려대학교",
+      "title": "김용구 고려대 안산병원 교수, 세계 상위 2% 과학자 7년 연속 선정 - 간호사신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5rdkJXNzJ6M2NSOGkza08zUF9wN1BFVXgzcWk1cFluLWxPaFRZcThJTllOMWNTY3lMM3NJVHl5R1RzWUhDZmdtaE5UMjFtLWM1ZEp2dzg5NFFTX2ZHejF5d3dDZWRfd3llZDJZQzlB?oc=5",
+      "source_id": "news:간호사신문",
+      "published_at": "2026-10-12T01:55:30+00:00",
+      "verification_status": "single_source",
+      "event_type": "claim",
+      "axis": "I",
+      "direction": 1,
+      "severity": 0.45
     },
     {
       "university_id": "UNI-46FC34D4A2B0",
@@ -5596,6 +5638,20 @@
     {
       "university_id": "UNI-FE70DA488610",
       "name": "신한대학교",
+      "title": "신한대 강성종 총장, BIE 사무총장에 ‘2035 DMZ 세계박람회’ 제안 - 미주중앙일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1oX3d4N291VFduSnJBOUZtNWxkWXU3aVhHMnl5R1pEaVpaWlJpR2x1bDU2WVJFU2MxQk15SlkwZjNZZXVWZm54RXlEeXFONFZQQnRDMFhQckRmMlpsY1FXTXdn?oc=5",
+      "source_id": "news:미주중앙일보",
+      "published_at": "2026-10-12T05:45:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-FE70DA488610",
+      "name": "신한대학교",
       "title": "신한대 ‘2035 DMZ 세계박람회’ 유치 구상 제안… BIE와 협력 모색 - 경인일보",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9ZNjBtTk13WkdLaGdCVDJGV1lELXZsbFNQLTRpU1BpZUpEVzM5UWYtU3NxNVQxMG5ndWlXNFpFRFd5eV9PUkQ5SUdQZkRySnBSRkE?oc=5",
@@ -5629,20 +5685,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBjTEFwbHJaQ2ZXenRHYUtCeVlfX3pPYzVTX09wcHBLUUJCOGI3OEExNHgxVWpPUVpTMEIzSDJTSmF0RDFLUXF0VWlWUlhveXE5U29RcFh4UFJFWnpSaHRaTURpcllhbjlScFlTdlU2b9IBb0FVX3lxTFBjTEFwbHJaQ2ZXenRHYUtCeVlfX3pPYzVTX09wcHBLUUJCOGI3OEExNHgxVWpPUVpTMEIzSDJTSmF0RDFLUXF0VWlWUlhveXE5U29RcFh4UFJFWnpSaHRaTURpcllhbjlScFlTdlU2bw?oc=5",
       "source_id": "news:서울일보",
       "published_at": "2026-10-12T05:54:22+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-FE70DA488610",
-      "name": "신한대학교",
-      "title": "신한대 강성종 총장, BIE 사무총장에 ‘2035 DMZ 세계박람회’ 제안 - 중앙일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1QOC1lYk5GTnlid0pGMEVuLTdEZi1KRGtmU0c3SmZHLW9GS1htNjRKNS1jSEFWelZ3bndyNjRUR0hmY0NvbmprXy00MXVOS2F0eldMaFdB?oc=5",
-      "source_id": "news:중앙일보",
-      "published_at": "2026-10-12T05:45:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -8466,7 +8508,21 @@
     {
       "university_id": "UNI-E848CB710BB8",
       "name": "전남대학교",
-      "title": "전남대병원, ‘한국형 ARPA-H 프로젝트 VISTA’ 주관 연구기관에 선정 - 병원신문",
+      "title": "전남대와 KMI가 뭉쳤다...위기의 바다 우리가 구한다 - 한스경제",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBXdXdRMUpkQzFINjE4aHZKandCX2lSS0wzSjAzdzFaV0hwTFJoTkR2TmZPTVJLUHFhSjFsYkN4cVVQNHdoQml0OFN5czl2Ni1FcWNSaFFPX3hxM1JMTUZJNzNTZTZtMDJVNGJxTjR6TdIBb0FVX3lxTFBXdXdRMUpkQzFINjE4aHZKandCX2lSS0wzSjAzdzFaV0hwTFJoTkR2TmZPTVJLUHFhSjFsYkN4cVVQNHdoQml0OFN5czl2Ni1FcWNSaFFPX3hxM1JMTUZJNzNTZTZtMDJVNGJxTjR6TQ?oc=5",
+      "source_id": "news:한스경제",
+      "published_at": "2026-10-12T10:22:55+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-E848CB710BB8",
+      "name": "전남대학교",
+      "title": "전남대병원, '한국형 ARPA-H' 통증분야 연구기관에 선정 - 뉴시스",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE0zRUJycVFaVlJEZUNObzN4UElDSVZ1SHgyR2prSHJGdnplTE40bHM3MENZMGZONEQ1bkVIZ045aGxMaFVac0U1bzBXSVpZZWRrM0xwcUQyRDdwWFFMUndPampHbURqbHl5bmc?oc=5",
       "source_id": "news:병원신문",
@@ -8494,11 +8550,11 @@
     {
       "university_id": "UNI-E848CB710BB8",
       "name": "전남대학교",
-      "title": "전남대와 KMI가 뭉쳤다...위기의 바다 우리가 구한다 - 한스경제",
+      "title": "전남대병원 김웅모 교수팀, ARPA-H 통증 연구 주관 - 메디포뉴스",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBXdXdRMUpkQzFINjE4aHZKandCX2lSS0wzSjAzdzFaV0hwTFJoTkR2TmZPTVJLUHFhSjFsYkN4cVVQNHdoQml0OFN5czl2Ni1FcWNSaFFPX3hxM1JMTUZJNzNTZTZtMDJVNGJxTjR6TdIBb0FVX3lxTFBXdXdRMUpkQzFINjE4aHZKandCX2lSS0wzSjAzdzFaV0hwTFJoTkR2TmZPTVJLUHFhSjFsYkN4cVVQNHdoQml0OFN5czl2Ni1FcWNSaFFPX3hxM1JMTUZJNzNTZTZtMDJVNGJxTjR6TQ?oc=5",
-      "source_id": "news:한스경제",
-      "published_at": "2026-10-12T10:22:55+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBSSWtGVE5vYlpNYlZGYmY5ejJ6bWVVNm5pOTRIVTJ4WDM5QWtPS0VYa19McmtaX3VoZTVXX09teDk0Z1RpbDBiZko4RGo5TmF0eHNiekRpNFBBNDBfU0taNTNLWUE?oc=5",
+      "source_id": "news:메디포뉴스",
+      "published_at": "2026-10-12T02:02:02+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -13358,7 +13414,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 33
+      "waiting_rank": 28
     },
     {
       "university_id": "UNI-82D0DD0F803F",
@@ -14012,7 +14068,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-3F02A7F4D408",
@@ -18304,7 +18360,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 28
+      "waiting_rank": 29
     },
     {
       "university_id": "UNI-CF6484DD80F2",
@@ -19745,7 +19801,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 71.3,
+        "B": 71.4,
         "R": 57.0,
         "I": 50.6,
         "D": 57.1,
@@ -19767,11 +19823,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 64.6,
-      "activity_points": 8.05,
-      "event_count": 32,
+      "activity_points": 8.56,
+      "event_count": 34,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 2.79,
+        "B": 2.94,
         "R": 7.0,
         "I": 0.6,
         "D": 0.0,
@@ -23362,7 +23418,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
+      "waiting_rank": 33
     },
     {
       "university_id": "UNI-4C44A00C6DCB",
@@ -25754,13 +25810,14 @@
       "quality": 0.83,
       "source_ids": [
         "news:경인일보",
+        "news:미주중앙일보",
         "news:서울일보",
         "news:중앙일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 29
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-49BAD3C4D45E",
@@ -25808,6 +25865,7 @@
       "quality": 0.83,
       "source_ids": [
         "news:경인일보",
+        "news:미주중앙일보",
         "news:서울일보",
         "news:중앙일보"
       ],
@@ -28577,7 +28635,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-6FAB1CF39178",
@@ -33925,6 +33983,7 @@
         "quality": 0.83,
         "source_ids": [
           "news:경인일보",
+          "news:미주중앙일보",
           "news:서울일보",
           "news:중앙일보"
         ],
@@ -35368,7 +35427,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 71.3,
+          "B": 71.4,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -35390,11 +35449,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 64.6,
-        "activity_points": 8.05,
-        "event_count": 32,
+        "activity_points": 8.56,
+        "event_count": 34,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 2.79,
+          "B": 2.94,
           "R": 7.0,
           "I": 0.6,
           "D": 0.0,
@@ -38078,6 +38137,7 @@
         "quality": 0.83,
         "source_ids": [
           "news:경인일보",
+          "news:미주중앙일보",
           "news:서울일보",
           "news:중앙일보"
         ],
@@ -38899,7 +38959,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 71.3,
+          "B": 71.4,
           "R": 57.0,
           "I": 50.6,
           "D": 57.1,
@@ -38921,11 +38981,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 64.6,
-        "activity_points": 8.05,
-        "event_count": 32,
+        "activity_points": 8.56,
+        "event_count": 34,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 2.79,
+          "B": 2.94,
           "R": 7.0,
           "I": 0.6,
           "D": 0.0,
@@ -43174,6 +43234,62 @@
       "waiting_rank": 27
     },
     {
+      "university_id": "UNI-BA58E00351F2",
+      "name": "신성대학교",
+      "campus": "본교",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "establishment": "사립",
+      "region": "충남",
+      "dims": {
+        "B": 57.5,
+        "R": 52.9,
+        "I": null,
+        "D": 59.3,
+        "G": 70.2,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 4.6,
+        "충원율": 97.8,
+        "외국인비율": 13.3935,
+        "교육비": 13094.9,
+        "장학금": 4155921.0,
+        "기숙사": 38.1,
+        "교원당학생": 31.44,
+        "교원강의": 53.7,
+        "취업률": 76.4
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 59.7,
+      "activity_points": 2.32,
+      "event_count": 9,
+      "source_diversity": 1,
+      "axis_delta": {
+        "B": 0.89,
+        "R": 2.93,
+        "I": 0.0,
+        "D": 0.77,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 59.7,
+      "quality": 0.83,
+      "source_ids": [
+        "news:당진신문",
+        "news:로컬투데이",
+        "news:서산포스트",
+        "news:전국매일신문",
+        "news:충청일보"
+      ],
+      "data_date": "2026-10-12",
+      "window_start": "2026-10-12T05:15:00+09:00",
+      "window_end": "2026-10-13T05:15:00+09:00",
+      "waiting_rank": 28
+    },
+    {
       "university_id": "UNI-AB6525072EBC",
       "name": "강서대학교",
       "campus": "본교",
@@ -43223,7 +43339,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 28
+      "waiting_rank": 29
     },
     {
       "university_id": "UNI-FE70DA488610",
@@ -43271,13 +43387,14 @@
       "quality": 0.83,
       "source_ids": [
         "news:경인일보",
+        "news:미주중앙일보",
         "news:서울일보",
         "news:중앙일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 29
+      "waiting_rank": 30
     },
     {
       "university_id": "UNI-610197CE7DD8",
@@ -43332,7 +43449,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 30
+      "waiting_rank": 31
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -43382,7 +43499,7 @@
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",
       "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 31
+      "waiting_rank": 32
     },
     {
       "university_id": "UNI-EFB5846DAFC5",
@@ -43430,61 +43547,6 @@
       "quality": 0.83,
       "source_ids": [
         "news:백석대학교 인트로"
-      ],
-      "data_date": "2026-10-12",
-      "window_start": "2026-10-12T05:15:00+09:00",
-      "window_end": "2026-10-13T05:15:00+09:00",
-      "waiting_rank": 32
-    },
-    {
-      "university_id": "UNI-BA58E00351F2",
-      "name": "신성대학교",
-      "campus": "본교",
-      "school_kind": "전문대학",
-      "school_type": "전문대학",
-      "establishment": "사립",
-      "region": "충남",
-      "dims": {
-        "B": 57.3,
-        "R": 51.5,
-        "I": null,
-        "D": 59.3,
-        "G": 70.2,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 4.6,
-        "충원율": 97.8,
-        "외국인비율": 13.3935,
-        "교육비": 13094.9,
-        "장학금": 4155921.0,
-        "기숙사": 38.1,
-        "교원당학생": 31.44,
-        "교원강의": 53.7,
-        "취업률": 76.4
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.2,
-      "activity_points": 1.82,
-      "event_count": 7,
-      "source_diversity": 1,
-      "axis_delta": {
-        "B": 0.74,
-        "R": 1.46,
-        "I": 0.0,
-        "D": 0.77,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 59.2,
-      "quality": 0.83,
-      "source_ids": [
-        "news:당진신문",
-        "news:로컬투데이",
-        "news:전국매일신문",
-        "news:충청일보"
       ],
       "data_date": "2026-10-12",
       "window_start": "2026-10-12T05:15:00+09:00",

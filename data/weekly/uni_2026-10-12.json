@@ -3698,14 +3698,14 @@
       "name": "고려대학교",
       "weekly_index": 64.6,
       "dims": {
-        "B": 71.3,
+        "B": 71.4,
         "R": 57.0,
         "I": 50.6,
         "D": 57.1,
         "G": 83.4,
         "E": null
       },
-      "activity_points": 8.05,
+      "activity_points": 8.56,
       "observed_days": 1,
       "mention_days": 1,
       "source_diversity": 17
@@ -5714,7 +5714,7 @@
       "activity_points": 1.26,
       "observed_days": 1,
       "mention_days": 1,
-      "source_diversity": 3
+      "source_diversity": 4
     },
     {
       "university_id": "UNI-49BAD3C4D45E",
@@ -5731,7 +5731,7 @@
       "activity_points": 1.26,
       "observed_days": 1,
       "mention_days": 1,
-      "source_diversity": 3
+      "source_diversity": 4
     },
     {
       "university_id": "UNI-D6E0A398F19E",
