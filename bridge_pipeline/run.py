@@ -733,7 +733,10 @@ def healthcheck(db: SupabaseRest) -> None:
         latest.setdefault(run["source_id"], run)
     required = {"google_news_discovery", "google_news_rss", "opendart"}
     missing = sorted(required - set(latest))
-    critical = [r for r in latest.values() if r["status"] != "success"]
+    # Optional expansion sources may legitimately be partial while verified
+    # mappings are widened. They are reported but must not block publication
+    # of an otherwise valid daily snapshot. Required sources remain hard gates.
+    critical = [r for source, r in latest.items() if source in required and r["status"] != "success"]
     print(json.dumps({"ok": not critical and not missing, "latestRuns": list(latest.values()), "missingSources": missing}, ensure_ascii=False, indent=2))
     if critical or missing:
         raise SystemExit(2)

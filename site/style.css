@@ -506,6 +506,29 @@ footer .logo .op{ color:#7c86a0;}
    ============================================================ */
 .rk-panel{ display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:16px; }
 .rk-panel.hidden{ display:none; }
+
+/* Daily ranking desk: a permanent T100 rail and live cohort boards. */
+.ranking-workspace{margin-top:18px}
+.ranking-summary-strip{margin-bottom:18px;border-color:#d8d1c2}
+.ranking-panels{display:grid;grid-template-columns:minmax(360px,.82fr) minmax(0,1.18fr);gap:18px;align-items:start}
+.ranking-master{grid-row:1 / span 3;grid-column:1;background:#121923;color:#f4f1e8;border:1px solid #121923;max-height:980px;overflow:auto;scrollbar-width:thin}
+.ranking-cohort{grid-column:2;background:#fff;border:1px solid #ded8ca;max-height:470px;overflow:auto;scrollbar-width:thin}
+.ranking-panel-head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#f5f1e7;border-bottom:1px solid #ded8ca}
+.ranking-panel-head b{font-family:var(--serif);font-size:14px;color:var(--navy)}
+.ranking-panel-head span{font-size:9px;letter-spacing:.08em;color:#8b8779}
+.ranking-master .ranking-panel-head{background:#121923;border-color:rgba(255,255,255,.14)}
+.ranking-master .ranking-panel-head b{color:#d2af66}.ranking-master .ranking-panel-head span{color:#8993a2}
+.ranking-panels .rk-panel{display:block;padding:0}
+.ranking-panels .rk-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto auto;gap:10px;border:0;border-bottom:1px solid #e7e1d5;border-radius:0;padding:13px 14px;background:transparent;transform:none;box-shadow:none}
+.ranking-panels .rk-row:hover{transform:none;box-shadow:none;background:rgba(169,136,79,.07)}
+.ranking-panels .rk-num{position:static;font-size:14px;align-self:center}
+.ranking-panels .rk-name{padding:0;min-width:0}.ranking-panels .rk-name .nm{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ranking-panels .rk-name .sub,.ranking-panels .rk-market,.ranking-panels .rk-dims,.ranking-panels .rk-trust{display:none}
+.ranking-panels .rk-score{font-size:18px;align-self:center;margin:0}.ranking-panels .rk-wow{align-self:center;min-width:38px;text-align:right}
+.ranking-master .rk-row{border-color:rgba(255,255,255,.11);color:#f4f1e8}.ranking-master .rk-row:hover{background:rgba(255,255,255,.05)}
+.ranking-master .rk-name .nm,.ranking-master .rk-score{color:#fff}.ranking-master .rk-num{color:#758091}.ranking-master .rk-row.top3 .rk-num{color:#d2af66}
+@media(max-width:900px){.ranking-panels{grid-template-columns:1fr}.ranking-master,.ranking-cohort{grid-column:1;grid-row:auto;max-height:680px}.ranking-summary-strip{display:grid;grid-template-columns:repeat(2,1fr)}.ranking-summary-strip .seg-btn{border:0;border-bottom:1px solid #d8d1c2;border-right:1px solid #d8d1c2;padding:11px 12px}}
+@media(max-width:520px){.ranking-panels .rk-row{grid-template-columns:32px minmax(0,1fr) auto auto;padding:12px 10px}.ranking-panels .rk-score{font-size:17px}.ranking-panels .rk-wow{display:block;font-size:10px}.ranking-master{max-height:620px}}
 .live-snapshot-note{margin:14px 0 10px;padding:11px 14px;border-left:2px solid var(--gold);background:rgba(169,136,79,.08);font-size:12px;letter-spacing:.03em;color:var(--muted)}
 
 .rk-row{

@@ -13,6 +13,7 @@ import json
 import math
 import os
 import statistics
+import re
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -114,6 +115,9 @@ class YouTube:
 def video_window_metrics(videos: list[dict[str, Any]], as_of: dt.date, days: int = 28) -> dict[str, float]:
     start = as_of - dt.timedelta(days=days - 1)
     rows = []
+    titles = []
+    action_rows = []
+    action_pattern = re.compile(r"(신청|참여|접수|공모|모집|예약|투표|캠페인|설문|제안|신고)")
     for video in videos:
         published = (video.get("snippet") or {}).get("publishedAt")
         try:
@@ -123,12 +127,30 @@ def video_window_metrics(videos: list[dict[str, Any]], as_of: dt.date, days: int
         if not start <= date <= as_of:
             continue
         stats = video.get("statistics") or {}
+        snippet = video.get("snippet") or {}
         views = max(0, int(stats.get("viewCount") or 0))
         likes = max(0, int(stats.get("likeCount") or 0))
         comments = max(0, int(stats.get("commentCount") or 0))
         age = max(1, (as_of - date).days + 1)
         rows.append((views, likes, comments, views / age))
+        title = str(snippet.get("title") or "").strip()
+        if title:
+            titles.append(title)
+        if action_pattern.search(title + " " + str(snippet.get("description") or "")):
+            action_rows.append((views, likes, comments))
     views = sum(row[0] for row in rows)
+    # Identity is observed as continuity of public messages, not guessed from
+    # reputation. Repeated meaningful title tokens indicate a recognisable
+    # communication agenda; small samples remain unscored.
+    stop = {"공식", "영상", "대한민국", "브리핑", "뉴스", "안내", "이야기", "함께", "위한"}
+    tokens = [token for title in titles for token in re.findall(r"[가-힣A-Za-z0-9]{2,}", title)
+              if token not in stop]
+    token_counts = {token: tokens.count(token) for token in set(tokens)}
+    repeated = sum(count for count in token_counts.values() if count >= 2)
+    identity_continuity = (repeated / len(tokens) * 100) if len(titles) >= 5 and tokens else None
+    action_views = sum(row[0] for row in action_rows)
+    action_engagement = ((sum(row[1] for row in action_rows) + 2 * sum(row[2] for row in action_rows))
+                         / max(1, action_views) * 1000)
     return {
         "output_count": len(rows),
         "views": views,
@@ -138,6 +160,9 @@ def video_window_metrics(videos: list[dict[str, Any]], as_of: dt.date, days: int
         "comments": sum(row[2] for row in rows),
         "engagement_per_1000_views": ((sum(row[1] for row in rows) + 2 * sum(row[2] for row in rows))
                                       / max(1, views) * 1000),
+        "identity_continuity": identity_continuity,
+        "action_content_count": len(action_rows),
+        "action_engagement_per_1000_views": action_engagement,
     }
 
 
@@ -148,11 +173,20 @@ def score_cohorts(rows: dict[str, dict[str, Any]]) -> dict[str, dict[str, float]
         reach = percentile_scores({key: math.log1p(value["metrics"]["views"]) for key, value in cohort.items()})
         median = percentile_scores({key: math.log1p(value["metrics"]["median_views_per_day"]) for key, value in cohort.items()})
         response = percentile_scores({key: value["metrics"]["engagement_per_1000_views"] for key, value in cohort.items()})
+        identity = percentile_scores({key: value["metrics"].get("identity_continuity") for key, value in cohort.items()
+                                      if value["metrics"].get("identity_continuity") is not None})
+        action = percentile_scores({key: math.log1p(value["metrics"].get("action_content_count", 0))
+                                    + math.log1p(value["metrics"].get("action_engagement_per_1000_views", 0))
+                                    for key, value in cohort.items() if value["metrics"].get("action_content_count", 0) > 0})
         for key in cohort:
             scores[key] = {
                 "B": round(0.65 * reach[key] + 0.35 * median[key], 2),
                 "R": response[key],
             }
+            if key in identity:
+                scores[key]["I"] = identity[key]
+            if key in action:
+                scores[key]["G"] = action[key]
     return scores
 
 
@@ -198,6 +232,16 @@ def collect(as_of: dt.date, discover_limit: int = 5) -> dict[str, Any]:
                 continue
             try:
                 channel = client.channel(channel_id=mapping.get("channel_id"), handle=mapping.get("handle"))
+                # Handles change. A failed configured handle falls back to one
+                # exact-title discovery; only an institutional title match can
+                # enter scoring, and the selected channel id is preserved in
+                # the daily evidence snapshot for audit.
+                if not channel:
+                    found = client.search_channel_candidate(f'{entity["name"]} 공식 유튜브')
+                    found_id = ((found or {}).get("snippet") or {}).get("channelId")
+                    found_title = ((found or {}).get("snippet") or {}).get("title") or ""
+                    if found_id and title_matches_entity(found_title, entity):
+                        channel = client.channel(channel_id=found_id)
                 if not channel:
                     failures.append({"external_id": external_id, "reason": "channel_not_found"})
                     continue
@@ -245,6 +289,9 @@ def collect(as_of: dt.date, discover_limit: int = 5) -> dict[str, Any]:
             prior = (previous.get("entities") or {}).get(external_id, {})
             total_delta = max(0, row["channel"]["total_views"] - int((prior.get("channel") or {}).get("total_views") or row["channel"]["total_views"]))
             identity = approved_identity_score(external_id, reviews)
+            observed_identity = scores.get("I")
+            if identity is None:
+                identity = observed_identity
             snapshot["entities"][external_id] = {"channel": row["channel"], "metrics": row["metrics"],
                                                         "daily_total_view_delta": total_delta, "scores": scores,
                                                         "identity_score": identity}
@@ -260,7 +307,9 @@ def collect(as_of: dt.date, discover_limit: int = 5) -> dict[str, Any]:
             staged.extend([(entity, content_hash, "B", "gov_pce_reach", scores["B"], 0.85),
                            (entity, content_hash, "R", "gov_pce_response", scores["R"], 0.75)])
             if identity is not None:
-                staged.append((entity, content_hash, "I", "gov_pce_identity_clarity", identity, 0.70))
+                staged.append((entity, content_hash, "I", "gov_pce_identity_continuity", identity, 0.70))
+            if scores.get("G") is not None:
+                staged.append((entity, content_hash, "G", "gov_pce_action_response", scores["G"], 0.60))
 
         inserted = db.upsert("bridge_raw_items", raw_rows, "source_id,content_hash")
         raw_ids = {row["content_hash"]: row["id"] for row in inserted}

@@ -1,8 +1,9 @@
 import unittest
 
 from bridge_pipeline.gov_youtube import (
-    approved_identity_score, percentile_scores, score_cohorts, title_matches_entity,
+    approved_identity_score, percentile_scores, score_cohorts, title_matches_entity, video_window_metrics,
 )
+import datetime as dt
 
 
 class GovYoutubeTest(unittest.TestCase):
@@ -31,6 +32,15 @@ class GovYoutubeTest(unittest.TestCase):
         entity = {"name": "서울특별시", "aliases": []}
         self.assertTrue(title_matches_entity("서울시 공식 유튜브", entity))
         self.assertFalse(title_matches_entity("서울 맛집 개인 채널", entity))
+
+    def test_video_metrics_create_identity_and_action_observations(self):
+        videos=[]
+        for i in range(6):
+            videos.append({"snippet":{"publishedAt":"2026-10-10T00:00:00Z","title":f"서울 청년 정책 참여 신청 {i}","description":"온라인 신청"},
+                           "statistics":{"viewCount":"100","likeCount":"10","commentCount":"2"}})
+        metrics=video_window_metrics(videos,dt.date(2026,10,13))
+        self.assertIsNotNone(metrics["identity_continuity"])
+        self.assertEqual(metrics["action_content_count"],6)
 
 
 if __name__ == "__main__":

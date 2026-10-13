@@ -389,8 +389,10 @@ def real_list_page(active, page, title, note, model_blurb, seg_html, panels_html
           <button class="rk-sort-btn" data-sort="name" data-page="{page}">가나다순</button>
         </div>
       </div>
-      {seg_html}
-      {panels_html}
+      <div class="ranking-workspace" data-ranking-page="{page}">
+        {seg_html}
+        <div class="ranking-panels">{panels_html}</div>
+      </div>
     </div>
   </section>
 </div>''' + footer(footer_key)
@@ -416,11 +418,11 @@ cpr_html = real_list_page(
 cpr_html = cpr_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>")
 with open(f"{OUT}/cpr.html","w",encoding="utf-8") as f: f.write(cpr_html)
 
-# --- STAR: T100 / AM45(남) / AW45(여) / AN10(신인급) ---
+# --- ENT: T100 / AM40(남) / AW40(여) / AN20(신인급) ---
 star_segs = [("t100","STAR B-T100",len(build_pilot.STAR_REAL)),
-             ("am45","STAR B-AM45",len([1 for e in build_pilot.STAR_REAL if e[2]=="AM"])),
-             ("aw45","STAR B-AW45",len([1 for e in build_pilot.STAR_REAL if e[2]=="AW"])),
-             ("an10","STAR B-AN10",len([1 for e in build_pilot.STAR_REAL if e[2]=="AN"]))]
+             ("am45","ENT B-AM40",40),
+             ("aw45","ENT B-AW40",40),
+             ("an10","ENT B-AN20",20)]
 star_seg_html = seg_control("t100", star_segs, "star")
 star_panels_html = (
     f'<div class="rk-panel" id="star-t100">{build_pilot.star_rows()}</div>'
@@ -431,8 +433,8 @@ star_panels_html = (
 star_html = real_list_page(
     "ENT", "star", "ENT — 스포트라이트 이면에서 증명된 품격, 광고모델·공인",
     "대중의 시선이 머무는 100명의 공인, 그 화려한 스포트라이트 이면에 자리한 진짜 평판을 읽어냅니다. "
-    "의미 없는 통합 순위를 지양하고 대상의 특성을 고려하여 전체(B-T100), 남자 연예인(B-AM45), "
-    "여자 연예인(B-AW45), 신인급(B-AN10)의 네 가지 시선으로 평판을 입체적으로 분해합니다. 본 지수는 기존 매체들이 "
+    "의미 없는 통합 순위를 지양하고 대상의 특성을 고려하여 전체(B-T100), 남자 광고모델(B-AM40), "
+    "여자 광고모델(B-AW40), 라이징 스타(B-AN20)의 네 가지 시선으로 평판을 입체적으로 분해합니다. 본 지수는 기존 매체들이 "
     "관행적으로 발표하던 기성 평판 순위를 일절 인용하지 않은 독자적 지표입니다. 철저한 제로 베이스에서 출발하여, "
     "출처가 명확하고 검증 가능한 데이터만이 누적됨에 따라 지수가 갱신되는 과정을 투명하게 공개합니다.",
     build_pilot.MODEL_BLURBS["STAR"],

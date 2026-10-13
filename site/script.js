@@ -71,6 +71,23 @@
         var note=document.querySelector('.live-snapshot-note');
         if(!note && panel){ note=document.createElement('div'); note.className='live-snapshot-note'; panel.parentNode.insertBefore(note,panel); }
         if(note) note.textContent='실측 공개 '+domainRows.length+' / 100 · '+(snapshotDate||'')+' · 공개적격 전 대상 표시';
+
+        // The left rail is the always-visible T100. Cohort panels on the
+        // right are independently re-ranked from the same live snapshot.
+        var cohortMap={
+          CPR:[['bc70','BC70'],['bb30','BB30']],
+          GOV:[['m40','GM40'],['c60','GC60']],
+          UNI:[['u60','U60'],['c40','C40']],
+          ENT:[['am45','AM40'],['aw45','AW40'],['an10','AN20']]
+        };
+        (cohortMap[domain]||[]).forEach(function(pair){
+          var target=document.getElementById(prefix+'-'+pair[0]); if(!target)return;
+          var subset=domainRows.filter(function(r){return String(r.subcategory||'').toUpperCase()===pair[1];});
+          subset.sort(function(a,b){return Number(b.score)-Number(a.score)||String(a.name).localeCompare(String(b.name),'ko');});
+          subset=subset.map(function(r,i){var copy=Object.assign({},r);copy.rank=i+1;return copy;});
+          target.innerHTML=subset.map(function(r){return rankRow(r,snapshotDate);}).join('');
+          target.classList.remove('hidden');
+        });
       }
       if(domain){
         var live=rows.filter(function(r){return r.domain===domain;});
@@ -188,10 +205,34 @@
     });
   }
 
-  // ---- Segmented ranking tabs (CPR/STAR/GOV pages) ----
+  // ---- Ranking workspace: T100 master rail + always-visible cohorts ----
+  document.querySelectorAll('.ranking-workspace').forEach(function(workspace){
+    var control=workspace.querySelector('.seg-control');
+    var panels=workspace.querySelector('.ranking-panels');
+    if(!control||!panels)return;
+    var buttons=Array.from(control.querySelectorAll('.seg-btn'));
+    Array.from(panels.querySelectorAll('.rk-panel')).forEach(function(panel,index){
+      panel.classList.remove('hidden');
+      var label=buttons[index] ? buttons[index].textContent.trim() : '';
+      var h=document.createElement('div'); h.className='ranking-panel-head';
+      h.innerHTML='<b>'+label.replace(/\d+\/?\d*$/,'').trim()+'</b><span>매일 05:15 KST 갱신</span>';
+      panel.parentNode.insertBefore(h,panel);
+      var shell=document.createElement('section'); shell.className=index===0?'ranking-master':'ranking-cohort';
+      h.parentNode.insertBefore(shell,h); shell.appendChild(h); shell.appendChild(panel);
+    });
+    control.classList.add('ranking-summary-strip');
+  });
+
+  // Legacy tab events remain for deep links, but the dashboard itself keeps
+  // all panels visible. A hash scrolls to the relevant cohort.
   var segBtns = document.querySelectorAll('.seg-btn');
   segBtns.forEach(function(btn){
     btn.addEventListener('click', function(){
+      if(btn.closest('.ranking-workspace')){
+        var visible=document.getElementById(btn.dataset.target);
+        if(visible){ visible.closest('section').scrollIntoView({behavior:'smooth',block:'start'}); }
+        return;
+      }
       var target = btn.dataset.target;
       var group = btn.parentElement;
       group.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('active'); });
