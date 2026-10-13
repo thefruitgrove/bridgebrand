@@ -1,0 +1,11 @@
+{
+  "version": "2026.10-pce-shadow-1",
+  "reviews": {
+    "GOV-C35": {
+      "status": "pending",
+      "penalty": 15,
+      "reason": "기관 채널과 인물·개인 채널 사이의 발신 주체 및 메시지 역할 중복 가능성 검토",
+      "evidence_urls": []
+    }
+  }
+}

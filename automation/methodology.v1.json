@@ -40,6 +40,16 @@
     "domain_weight": {"STAR": 0.35, "CPR": 0.10, "GOV": 0.08, "UNI": 0.05},
     "half_life_days": {"STAR": 7, "CPR": 14, "GOV": 21, "UNI": 28}
   },
+  "gov_public_communication": {
+    "version": "2026.10-pce-shadow-1",
+    "principle": "발행량은 투입이며 실제 도달·반응·행동을 성과로 측정한다.",
+    "observation_window_days": 28,
+    "cohorts": ["central_government", "local_government"],
+    "youtube_axis_scope": ["B", "R"],
+    "identity_requires_review": true,
+    "channel_search_is_review_only": true,
+    "publishing_volume_is_not_a_positive_score": true
+  },
   "axis_names": {
     "B": "Brand Visibility",
     "R": "Reputation Response",

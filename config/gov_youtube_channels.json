@@ -1,0 +1,14 @@
+{
+  "version": "2026.10-pce-shadow-1",
+  "channels": {
+    "GOV-C01": {"handle": "@seoul", "status": "verify_title"},
+    "GOV-C02": {"handle": "@busancity", "status": "verify_title"},
+    "GOV-C03": {"handle": "@daegutv", "status": "verify_title"},
+    "GOV-C04": {"handle": "@incheontv", "status": "verify_title"},
+    "GOV-C05": {"handle": "@gjcity", "status": "verify_title"},
+    "GOV-C06": {"handle": "@daejeoncity", "status": "verify_title"},
+    "GOV-C07": {"handle": "@ulsancity", "status": "verify_title"},
+    "GOV-C09": {"handle": "@gyeonggido", "status": "verify_title"},
+    "GOV-C17": {"handle": "@jejutv", "status": "verify_title"}
+  }
+}

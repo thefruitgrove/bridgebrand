@@ -47,6 +47,7 @@ jobs:
       SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
       DART_API_KEY: ${{ secrets.DART_API_KEY }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       AS_OF_DATE: ${{ inputs.as_of_date }}
       CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
     steps:
@@ -78,6 +79,10 @@ jobs:
         run: |
           python -m bridge_pipeline.run discover ${AS_OF_DATE:+--date "$AS_OF_DATE"}
           python -m bridge_pipeline.run collect-news ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
+      - name: Collect verified GOV public-communication signals
+        if: ${{ env.YOUTUBE_API_KEY != '' }}
+        run: python -m bridge_pipeline.gov_youtube ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
       - name: Refresh DART entity map
         run: python collectors/corp_code_mapper.py
@@ -121,7 +126,7 @@ jobs:
         run: |
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
-          git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/daily data/weekly data/latest/uni_latest.json site/
+          git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/daily data/weekly data/latest/uni_latest.json data/gov_youtube site/
           git diff --cached --quiet && exit 0
           # Generated exports must not trigger another full collection run.
           git commit -m "data: daily BRIDGE refresh $(date +%F) [bridge-data]"

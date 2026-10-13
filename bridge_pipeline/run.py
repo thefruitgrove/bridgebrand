@@ -545,16 +545,32 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
         entity = entity_by_id.get(entity_id)
         if not entity:
             continue
+        # GOV-PCE signals carry a calibrated 0..100 level rather than an event
+        # count.  Keep them separate from news volume so a daily observation is
+        # not accidentally treated as another mention or added to sentiment.
+        pce_values = [v for v in values if v["source_id"] == "youtube_data_api"
+                      and str(v["signal_type"]).startswith("gov_pce_")]
+        flow_values = [v for v in values if v not in pce_values]
         count = len(values)
         max_count = max_counts[(entity["domain"], axis)]
-        if axis == "R":
-            penalty = sum(float(v["magnitude"]) * float(v["confidence"]) for v in values if int(v["direction"]) < 0)
-            benefit = sum(float(v["magnitude"]) * float(v["confidence"]) for v in values if int(v["direction"]) > 0)
+        if axis == "R" and flow_values:
+            penalty = sum(float(v["magnitude"]) * float(v["confidence"]) for v in flow_values if int(v["direction"]) < 0)
+            benefit = sum(float(v["magnitude"]) * float(v["confidence"]) for v in flow_values if int(v["direction"]) > 0)
             # 반응은 중립점 50에서 시작한다. 반응이 없다는 이유만으로 긍정
             # 100점을 부여하던 종전 구조를 제거한다.
-            score = max(0.0, min(100.0, 50.0 + benefit - penalty))
+            flow_score = max(0.0, min(100.0, 50.0 + benefit - penalty))
+        elif flow_values:
+            flow_score = 100.0 * math.log1p(len(flow_values)) / math.log1p(max_count) if max_count else None
         else:
-            score = 100.0 * math.log1p(count) / math.log1p(max_count) if max_count else None
+            flow_score = None
+        if pce_values:
+            weight_total = sum(float(v["confidence"]) for v in pce_values) or 1.0
+            pce_score = sum(float(v["magnitude"]) * float(v["confidence"]) for v in pce_values) / weight_total
+            # Platform-observed consumption is the primary GOV communication
+            # measure; news flow remains a complementary public signal.
+            score = pce_score if flow_score is None else 0.70 * pce_score + 0.30 * flow_score
+        else:
+            score = flow_score
         families = len({v["source_id"] for v in values})
         confidence = min(1.0, (sum(float(v["confidence"]) for v in values) / count) * min(1.0, count / 5) * min(1.0, families / 2))
         observation = {
@@ -563,7 +579,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
             "confidence": round(confidence, 4), "coverage": round(min(1.0, count / 5), 4),
             "source_families": families, "evidence_count": count, "freshness_days": 0,
             "status": "measured", "methodology_version": cfg["version"],
-            "diagnostics": {"window_days": 28, "aggregation": "domain_log_count" if axis != "R" else "reviewed_event_decay_pending", "source_ids": sorted({v["source_id"] for v in values})}
+            "diagnostics": {"window_days": 28,
+                            "aggregation": "gov_pce_level_plus_news" if pce_values else "domain_log_count" if axis != "R" else "reviewed_event_decay_pending",
+                            "source_ids": sorted({v["source_id"] for v in values})}
         }
         official = existing.get((entity_id, axis))
         if official and (official.get("diagnostics") or {}).get("source_id"):
