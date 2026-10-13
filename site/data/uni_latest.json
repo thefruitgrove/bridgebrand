@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "updated_at": "2026-10-13T22:38:28.098263+09:00",
+  "updated_at": "2026-10-13T22:46:43.774119+09:00",
   "meaning": {
     "daily_index": "오늘 현재의 대학 공공가치 평판 수준",
     "activity_points": "당일 유효 관심·반응·행동의 총량",
@@ -292,7 +292,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 74.9,
+          "B": 75.0,
           "R": 53.4,
           "I": null,
           "D": 79.7,
@@ -300,8 +300,8 @@
           "E": null
         },
         "daily_index": 75.1,
-        "activity_points": 2.99,
-        "event_count": 11,
+        "activity_points": 3.62,
+        "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 13,
@@ -1695,7 +1695,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 71.4,
+          "B": 71.6,
           "R": 51.5,
           "I": null,
           "D": 62.0,
@@ -1703,8 +1703,8 @@
           "E": null
         },
         "daily_index": 65.3,
-        "activity_points": 2.39,
-        "event_count": 9,
+        "activity_points": 2.64,
+        "event_count": 10,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 74,
@@ -1956,7 +1956,7 @@
           "E": null
         },
         "daily_index": 64.0,
-        "activity_points": 3.54,
+        "activity_points": 3.55,
         "event_count": 15,
         "source_diversity": 1,
         "trust": "B",
@@ -2502,7 +2502,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 74.9,
+          "B": 75.0,
           "R": 53.4,
           "I": null,
           "D": 79.7,
@@ -2510,8 +2510,8 @@
           "E": null
         },
         "daily_index": 75.1,
-        "activity_points": 2.99,
-        "event_count": 11,
+        "activity_points": 3.62,
+        "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 13,
@@ -3261,7 +3261,7 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 71.4,
+          "B": 71.6,
           "R": 51.5,
           "I": null,
           "D": 62.0,
@@ -3269,8 +3269,8 @@
           "E": null
         },
         "daily_index": 65.3,
-        "activity_points": 2.39,
-        "event_count": 9,
+        "activity_points": 2.64,
+        "event_count": 10,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 74,
@@ -3453,7 +3453,7 @@
           "E": null
         },
         "daily_index": 64.0,
-        "activity_points": 3.54,
+        "activity_points": 3.55,
         "event_count": 15,
         "source_diversity": 1,
         "trust": "B",
@@ -4922,7 +4922,7 @@
       "school_kind": "대학",
       "school_type": "대학교",
       "dims": {
-        "B": 74.6,
+        "B": 74.5,
         "R": 51.5,
         "I": null,
         "D": 44.7,
@@ -4930,8 +4930,8 @@
         "E": 51.3
       },
       "daily_index": 60.8,
-      "activity_points": 2.58,
-      "event_count": 9,
+      "activity_points": 2.32,
+      "event_count": 8,
       "source_diversity": 1,
       "trust": "B",
       "t100_rank": null,
