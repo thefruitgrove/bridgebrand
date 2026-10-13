@@ -45,10 +45,27 @@ def targets(baseline,latest,day):
     rotation=[r for r in all_rows if r["university_id"] not in seen and int(r["university_id"][-2:],16)%7==day%7]
     return picked+rotation
 
+def load_json_or_empty(path):
+    """Load a prior snapshot without letting one damaged cache stop collection.
+
+    The latest snapshot is an optimisation for selecting the daily target pool,
+    not a source of truth.  If a partial deployment or interrupted write leaves
+    it unreadable, the collector safely falls back to the rotating population;
+    the same run then recreates a valid snapshot.
+    """
+    try:
+        with open(path, encoding="utf-8") as handle:
+            return json.load(handle)
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        print(f"warning: ignored unreadable prior snapshot {path}: {type(exc).__name__}")
+        return {}
+
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--baseline",default="data/uni_baseline_v43.json")
     ap.add_argument("--latest",default="data/latest/uni_latest.json"); ap.add_argument("--out",default="data/events/inbox_uni.jsonl")
-    a=ap.parse_args(); baseline=json.load(open(a.baseline,encoding="utf-8")); latest=json.load(open(a.latest,encoding="utf-8")) if Path(a.latest).exists() else {}
+    a=ap.parse_args(); baseline=load_json_or_empty(a.baseline); latest=load_json_or_empty(a.latest) if Path(a.latest).exists() else {}
+    if not baseline.get("universities"):
+        raise RuntimeError(f"required UNI baseline is missing or unreadable: {a.baseline}")
     now=datetime.now(timezone.utc); rows=targets(baseline,latest,now.toordinal()); events=[]; failures=0
     fetched={}
     # Bounded parallelism keeps the 05:15 workflow inside its time budget
