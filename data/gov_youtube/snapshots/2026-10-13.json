@@ -12,15 +12,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 21228,
+        "views": 21420,
         "median_views": 723,
         "median_views_per_day": 156.66666666666666,
-        "likes": 294,
+        "likes": 302,
         "comments": 35,
-        "engagement_per_1000_views": 17.1471641228566,
+        "engagement_per_1000_views": 17.366946778711487,
         "identity_continuity": 16.95906432748538,
         "action_content_count": 5,
-        "action_engagement_per_1000_views": 11.18760757314974
+        "action_engagement_per_1000_views": 11.316010058675607
       },
       "daily_total_view_delta": 0,
       "scores": {
@@ -41,15 +41,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 172216,
-        "median_views": 5746,
-        "median_views_per_day": 812.5,
+        "views": 172262,
+        "median_views": 5742,
+        "median_views_per_day": 806.5,
         "likes": 229,
         "comments": 15,
-        "engagement_per_1000_views": 1.5039253031077253,
+        "engagement_per_1000_views": 1.5035237022674763,
         "identity_continuity": 21.084337349397593,
         "action_content_count": 9,
-        "action_engagement_per_1000_views": 1.3735819786044408
+        "action_engagement_per_1000_views": 1.3736041757566941
       },
       "daily_total_view_delta": 0,
       "scores": {

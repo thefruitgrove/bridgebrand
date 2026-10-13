@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-12",
-  "updated_at": "2026-10-13T21:34:16.480929+09:00",
+  "updated_at": "2026-10-13T21:45:20.317170+09:00",
   "meaning": {
     "daily_index": "오늘 현재의 대학 공공가치 평판 수준",
     "activity_points": "당일 유효 관심·반응·행동의 총량",
@@ -1528,6 +1528,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-0B6F3C11E615",
+        "name": "경희대학교",
+        "region": "서울",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 81.6,
+          "R": null,
+          "I": null,
+          "D": 54.0,
+          "G": 59.1,
+          "E": null
+        },
+        "daily_index": 65.5,
+        "activity_points": 0.25,
+        "event_count": 1,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 67,
+        "cohort_rank": 37,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-4809B97797D6",
         "name": "용인대학교",
         "region": "경기",
@@ -1546,8 +1569,8 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 67,
-        "cohort_rank": 37,
+        "t100_rank": 68,
+        "cohort_rank": 38,
         "waiting_rank": null
       },
       {
@@ -1569,7 +1592,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 31,
         "waiting_rank": null
       },
@@ -1592,7 +1615,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 32,
         "waiting_rank": null
       },
@@ -1615,8 +1638,8 @@
         "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 70,
-        "cohort_rank": 38,
+        "t100_rank": 71,
+        "cohort_rank": 39,
         "waiting_rank": null
       },
       {
@@ -1636,29 +1659,6 @@
         "daily_index": 65.3,
         "activity_points": 1.76,
         "event_count": 7,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 71,
-        "cohort_rank": 39,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-994C450050E0",
-        "name": "초당대학교",
-        "region": "전남광주",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 29.4,
-          "R": null,
-          "I": null,
-          "D": 70.8,
-          "G": 89.5,
-          "E": null
-        },
-        "daily_index": 65.3,
-        "activity_points": 0.63,
-        "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 72,
@@ -1804,6 +1804,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-994C450050E0",
+        "name": "초당대학교",
+        "region": "전남광주",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 29.2,
+          "R": null,
+          "I": null,
+          "D": 70.8,
+          "G": 88.3,
+          "E": null
+        },
+        "daily_index": 64.7,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
+        "trust": "B",
+        "t100_rank": 79,
+        "cohort_rank": 45,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-46FC34D4A2B0",
         "name": "고려대학교",
         "region": "서울",
@@ -1822,8 +1845,8 @@
         "event_count": 32,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 79,
-        "cohort_rank": 45,
+        "t100_rank": 80,
+        "cohort_rank": 46,
         "waiting_rank": null
       },
       {
@@ -1845,8 +1868,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 80,
-        "cohort_rank": 46,
+        "t100_rank": 81,
+        "cohort_rank": 47,
         "waiting_rank": null
       },
       {
@@ -1868,7 +1891,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 81,
+        "t100_rank": 82,
         "cohort_rank": 35,
         "waiting_rank": null
       },
@@ -1891,8 +1914,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 82,
-        "cohort_rank": 47,
+        "t100_rank": 83,
+        "cohort_rank": 48,
         "waiting_rank": null
       },
       {
@@ -1914,8 +1937,8 @@
         "event_count": 15,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 83,
-        "cohort_rank": 48,
+        "t100_rank": 84,
+        "cohort_rank": 49,
         "waiting_rank": null
       },
       {
@@ -1937,8 +1960,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 84,
-        "cohort_rank": 49,
+        "t100_rank": 85,
+        "cohort_rank": 50,
         "waiting_rank": null
       },
       {
@@ -1960,7 +1983,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 85,
+        "t100_rank": 86,
         "cohort_rank": 36,
         "waiting_rank": null
       },
@@ -1983,8 +2006,8 @@
         "event_count": 7,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 86,
-        "cohort_rank": 50,
+        "t100_rank": 87,
+        "cohort_rank": 51,
         "waiting_rank": null
       },
       {
@@ -2006,8 +2029,8 @@
         "event_count": 7,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 87,
-        "cohort_rank": 51,
+        "t100_rank": 88,
+        "cohort_rank": 52,
         "waiting_rank": null
       },
       {
@@ -2029,8 +2052,8 @@
         "event_count": 4,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 88,
-        "cohort_rank": 52,
+        "t100_rank": 89,
+        "cohort_rank": 53,
         "waiting_rank": null
       },
       {
@@ -2052,8 +2075,8 @@
         "event_count": 11,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 89,
-        "cohort_rank": 53,
+        "t100_rank": 90,
+        "cohort_rank": 54,
         "waiting_rank": null
       },
       {
@@ -2075,7 +2098,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 90,
+        "t100_rank": 91,
         "cohort_rank": 37,
         "waiting_rank": null
       },
@@ -2098,8 +2121,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 91,
-        "cohort_rank": 54,
+        "t100_rank": 92,
+        "cohort_rank": 55,
         "waiting_rank": null
       },
       {
@@ -2121,8 +2144,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 92,
-        "cohort_rank": 55,
+        "t100_rank": 93,
+        "cohort_rank": 56,
         "waiting_rank": null
       },
       {
@@ -2144,8 +2167,8 @@
         "event_count": 9,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 93,
-        "cohort_rank": 56,
+        "t100_rank": 94,
+        "cohort_rank": 57,
         "waiting_rank": null
       },
       {
@@ -2167,7 +2190,7 @@
         "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 94,
+        "t100_rank": 95,
         "cohort_rank": 38,
         "waiting_rank": null
       },
@@ -2190,8 +2213,8 @@
         "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 95,
-        "cohort_rank": 57,
+        "t100_rank": 96,
+        "cohort_rank": 58,
         "waiting_rank": null
       },
       {
@@ -2213,7 +2236,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 96,
+        "t100_rank": 97,
         "cohort_rank": 39,
         "waiting_rank": null
       },
@@ -2236,8 +2259,8 @@
         "event_count": 8,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 97,
-        "cohort_rank": 58,
+        "t100_rank": 98,
+        "cohort_rank": 59,
         "waiting_rank": null
       },
       {
@@ -2259,8 +2282,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 98,
-        "cohort_rank": 59,
+        "t100_rank": 99,
+        "cohort_rank": 60,
         "waiting_rank": null
       },
       {
@@ -2282,31 +2305,8 @@
         "event_count": 5,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 99,
-        "cohort_rank": 40,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-AE7FD5EB8E38",
-        "name": "대구한의대학교",
-        "region": "경북",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 64.6,
-          "R": 55.2,
-          "I": 51.2,
-          "D": 61.1,
-          "G": 74.4,
-          "E": null
-        },
-        "daily_index": 61.4,
-        "activity_points": 2.33,
-        "event_count": 10,
-        "source_diversity": 1,
-        "trust": "B",
         "t100_rank": 100,
-        "cohort_rank": 60,
+        "cohort_rank": 40,
         "waiting_rank": null
       }
     ],
@@ -3140,6 +3140,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-0B6F3C11E615",
+        "name": "경희대학교",
+        "region": "서울",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 81.6,
+          "R": null,
+          "I": null,
+          "D": 54.0,
+          "G": 59.1,
+          "E": null
+        },
+        "daily_index": 65.5,
+        "activity_points": 0.25,
+        "event_count": 1,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 67,
+        "cohort_rank": 37,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-4809B97797D6",
         "name": "용인대학교",
         "region": "경기",
@@ -3158,8 +3181,8 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 67,
-        "cohort_rank": 37,
+        "t100_rank": 68,
+        "cohort_rank": 38,
         "waiting_rank": null
       },
       {
@@ -3181,8 +3204,8 @@
         "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 70,
-        "cohort_rank": 38,
+        "t100_rank": 71,
+        "cohort_rank": 39,
         "waiting_rank": null
       },
       {
@@ -3202,29 +3225,6 @@
         "daily_index": 65.3,
         "activity_points": 1.76,
         "event_count": 7,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 71,
-        "cohort_rank": 39,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-994C450050E0",
-        "name": "초당대학교",
-        "region": "전남광주",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 29.4,
-          "R": null,
-          "I": null,
-          "D": 70.8,
-          "G": 89.5,
-          "E": null
-        },
-        "daily_index": 65.3,
-        "activity_points": 0.63,
-        "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 72,
@@ -3324,6 +3324,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-994C450050E0",
+        "name": "초당대학교",
+        "region": "전남광주",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 29.2,
+          "R": null,
+          "I": null,
+          "D": 70.8,
+          "G": 88.3,
+          "E": null
+        },
+        "daily_index": 64.7,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
+        "trust": "B",
+        "t100_rank": 79,
+        "cohort_rank": 45,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-46FC34D4A2B0",
         "name": "고려대학교",
         "region": "서울",
@@ -3342,8 +3365,8 @@
         "event_count": 32,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 79,
-        "cohort_rank": 45,
+        "t100_rank": 80,
+        "cohort_rank": 46,
         "waiting_rank": null
       },
       {
@@ -3365,8 +3388,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 80,
-        "cohort_rank": 46,
+        "t100_rank": 81,
+        "cohort_rank": 47,
         "waiting_rank": null
       },
       {
@@ -3388,8 +3411,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 82,
-        "cohort_rank": 47,
+        "t100_rank": 83,
+        "cohort_rank": 48,
         "waiting_rank": null
       },
       {
@@ -3411,8 +3434,8 @@
         "event_count": 15,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 83,
-        "cohort_rank": 48,
+        "t100_rank": 84,
+        "cohort_rank": 49,
         "waiting_rank": null
       },
       {
@@ -3434,8 +3457,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 84,
-        "cohort_rank": 49,
+        "t100_rank": 85,
+        "cohort_rank": 50,
         "waiting_rank": null
       },
       {
@@ -3457,8 +3480,8 @@
         "event_count": 7,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 86,
-        "cohort_rank": 50,
+        "t100_rank": 87,
+        "cohort_rank": 51,
         "waiting_rank": null
       },
       {
@@ -3480,8 +3503,8 @@
         "event_count": 7,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 87,
-        "cohort_rank": 51,
+        "t100_rank": 88,
+        "cohort_rank": 52,
         "waiting_rank": null
       },
       {
@@ -3503,8 +3526,8 @@
         "event_count": 4,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 88,
-        "cohort_rank": 52,
+        "t100_rank": 89,
+        "cohort_rank": 53,
         "waiting_rank": null
       },
       {
@@ -3526,8 +3549,8 @@
         "event_count": 11,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 89,
-        "cohort_rank": 53,
+        "t100_rank": 90,
+        "cohort_rank": 54,
         "waiting_rank": null
       },
       {
@@ -3549,8 +3572,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 91,
-        "cohort_rank": 54,
+        "t100_rank": 92,
+        "cohort_rank": 55,
         "waiting_rank": null
       },
       {
@@ -3572,8 +3595,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 92,
-        "cohort_rank": 55,
+        "t100_rank": 93,
+        "cohort_rank": 56,
         "waiting_rank": null
       },
       {
@@ -3595,8 +3618,8 @@
         "event_count": 9,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 93,
-        "cohort_rank": 56,
+        "t100_rank": 94,
+        "cohort_rank": 57,
         "waiting_rank": null
       },
       {
@@ -3618,8 +3641,8 @@
         "event_count": 13,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 95,
-        "cohort_rank": 57,
+        "t100_rank": 96,
+        "cohort_rank": 58,
         "waiting_rank": null
       },
       {
@@ -3641,8 +3664,8 @@
         "event_count": 8,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 97,
-        "cohort_rank": 58,
+        "t100_rank": 98,
+        "cohort_rank": 59,
         "waiting_rank": null
       },
       {
@@ -3664,30 +3687,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 98,
-        "cohort_rank": 59,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-AE7FD5EB8E38",
-        "name": "대구한의대학교",
-        "region": "경북",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 64.6,
-          "R": 55.2,
-          "I": 51.2,
-          "D": 61.1,
-          "G": 74.4,
-          "E": null
-        },
-        "daily_index": 61.4,
-        "activity_points": 2.33,
-        "event_count": 10,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 100,
+        "t100_rank": 99,
         "cohort_rank": 60,
         "waiting_rank": null
       }
@@ -4402,7 +4402,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 31,
         "waiting_rank": null
       },
@@ -4425,7 +4425,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 32,
         "waiting_rank": null
       },
@@ -4494,7 +4494,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 81,
+        "t100_rank": 82,
         "cohort_rank": 35,
         "waiting_rank": null
       },
@@ -4517,7 +4517,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 85,
+        "t100_rank": 86,
         "cohort_rank": 36,
         "waiting_rank": null
       },
@@ -4540,7 +4540,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 90,
+        "t100_rank": 91,
         "cohort_rank": 37,
         "waiting_rank": null
       },
@@ -4563,7 +4563,7 @@
         "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 94,
+        "t100_rank": 95,
         "cohort_rank": 38,
         "waiting_rank": null
       },
@@ -4586,7 +4586,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 96,
+        "t100_rank": 97,
         "cohort_rank": 39,
         "waiting_rank": null
       },
@@ -4609,7 +4609,7 @@
         "event_count": 5,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 99,
+        "t100_rank": 100,
         "cohort_rank": 40,
         "waiting_rank": null
       }
@@ -4755,6 +4755,29 @@
       "waiting_rank": 6
     },
     {
+      "university_id": "UNI-AE7FD5EB8E38",
+      "name": "대구한의대학교",
+      "region": "경북",
+      "school_kind": "대학",
+      "school_type": "대학교",
+      "dims": {
+        "B": 64.6,
+        "R": 55.2,
+        "I": 51.2,
+        "D": 61.1,
+        "G": 74.4,
+        "E": null
+      },
+      "daily_index": 61.4,
+      "activity_points": 2.33,
+      "event_count": 10,
+      "source_diversity": 1,
+      "trust": "B",
+      "t100_rank": null,
+      "cohort_rank": null,
+      "waiting_rank": 7
+    },
+    {
       "university_id": "UNI-C521B160EDF3",
       "name": "순천향대학교",
       "region": "충남",
@@ -4775,7 +4798,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 7
+      "waiting_rank": 8
     },
     {
       "university_id": "UNI-62C47798B1F4",
@@ -4798,7 +4821,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 8
+      "waiting_rank": 9
     },
     {
       "university_id": "UNI-F4B7D13135F4",
@@ -4821,7 +4844,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 9
+      "waiting_rank": 10
     },
     {
       "university_id": "UNI-A78F7C008A0A",
@@ -4844,7 +4867,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 10
+      "waiting_rank": 11
     },
     {
       "university_id": "UNI-4229407FCC52",
@@ -4867,7 +4890,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 11
+      "waiting_rank": 12
     },
     {
       "university_id": "UNI-38EF54B6A3B7",
@@ -4890,7 +4913,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 12
+      "waiting_rank": 13
     },
     {
       "university_id": "UNI-695F8AAC9625",
@@ -4899,7 +4922,7 @@
       "school_kind": "대학",
       "school_type": "대학교",
       "dims": {
-        "B": 74.6,
+        "B": 74.5,
         "R": 51.5,
         "I": null,
         "D": 44.7,
@@ -4907,13 +4930,13 @@
         "E": 51.3
       },
       "daily_index": 60.8,
-      "activity_points": 2.58,
-      "event_count": 9,
+      "activity_points": 2.32,
+      "event_count": 8,
       "source_diversity": 1,
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 13
+      "waiting_rank": 14
     },
     {
       "university_id": "UNI-AEBED6A153E6",
@@ -4936,7 +4959,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 14
+      "waiting_rank": 15
     },
     {
       "university_id": "UNI-8616F689496B",
@@ -4959,7 +4982,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 15
+      "waiting_rank": 16
     },
     {
       "university_id": "UNI-0BF2035698EC",
@@ -4982,7 +5005,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 16
+      "waiting_rank": 17
     },
     {
       "university_id": "UNI-F1E588AF9BB1",
@@ -5005,7 +5028,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 17
+      "waiting_rank": 18
     },
     {
       "university_id": "UNI-2BE2A03BFF78",
@@ -5028,7 +5051,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 18
+      "waiting_rank": 19
     },
     {
       "university_id": "UNI-1BA918976754",
@@ -5048,29 +5071,6 @@
       "activity_points": 0,
       "event_count": 0,
       "source_diversity": 0,
-      "trust": "B",
-      "t100_rank": null,
-      "cohort_rank": null,
-      "waiting_rank": 19
-    },
-    {
-      "university_id": "UNI-0B6F3C11E615",
-      "name": "경희대학교",
-      "region": "서울",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "dims": {
-        "B": 81.8,
-        "R": 51.5,
-        "I": null,
-        "D": 54.0,
-        "G": 59.1,
-        "E": null
-      },
-      "daily_index": 60.5,
-      "activity_points": 0.74,
-      "event_count": 3,
-      "source_diversity": 1,
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
