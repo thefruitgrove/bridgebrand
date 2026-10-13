@@ -287,6 +287,8 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
     seen = set()
     groups = {}
     for row in rows:
+        if any(row.get(k) is None for k in ("domain", "ranking_type", "external_id", "score", "as_of_date")):
+            raise RuntimeError("incomplete public ranking blocked")
         key = (row["domain"], row["ranking_type"], row["external_id"])
         if key in seen:
             raise RuntimeError(f"duplicate public ranking blocked: {key}")
@@ -358,7 +360,7 @@ def export_history(db: SupabaseRest, as_of: dt.date) -> None:
         metric = metric_map.get((ranking["entity_id"], ranking["as_of_date"]), {})
         row = {k: v for k, v in ranking.items() if k != "entity_id"}
         row.update({k: v for k, v in entity.items() if k != "id"})
-        row.update(metric)
+        row.update({k: v for k, v in metric.items() if k not in {"entity_id", "as_of_date"}})
         public_axes = axes_map.get((ranking["entity_id"], ranking["as_of_date"]), {})
         row["axis_scores"] = {axis: public_axes.get(axis) for axis in "BRIDGE"}
         row["axes_available"] = len(public_axes)
