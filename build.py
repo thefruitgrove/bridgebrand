@@ -183,7 +183,11 @@ def head(title, desc=None):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261014-final3">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261014">
+<link rel="apple-touch-icon" href="/icons/bridge-192.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#121923">
+<link rel="stylesheet" href="style.css?v=20261014-readable">
 </head>
 <body>'''
 
@@ -238,7 +242,7 @@ def footer(page_key):
     <p class="footer-note">{note}</p>
   </div>
 </footer>
-<script src="script.js?v=20261014-final3" defer></script>
+<script src="script.js?v=20261014-readable" defer></script>
 </body>
 </html>'''
 
