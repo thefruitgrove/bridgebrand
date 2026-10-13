@@ -6,6 +6,11 @@ on:
     paths:
       - '.github/workflows/bridge-daily.yml'
       - 'bridge_pipeline/**'
+      - 'engine3/uni_v43.py'
+      - 'uni_builder_v43.py'
+      - 'jobs/run_uni_0515.py'
+      - 'collectors/collect_uni_*_v43.py'
+      - 'config/uni_sources.json'
       - 'automation/**'
       - 'real_data/**'
       - 'build.py'
@@ -53,10 +58,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install UNI official-data dependencies
+        run: pip install pandas openpyxl
+
       - name: Unit and regression tests
         run: |
           python -m unittest discover -s tests -v
           python engine3/test_scoring_v3.py
+          python tests/test_uni_v43.py
+
+      - name: Build UNI official baseline and daily observation layer
+        run: |
+          python uni_builder_v43.py
+          python collectors/collect_uni_homepages_v43.py
+          python collectors/collect_uni_news_v43.py
+          python jobs/run_uni_0515.py
 
       - name: Collect daily evidence
         run: |
@@ -105,7 +121,7 @@ jobs:
         run: |
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
-          git add site/data/latest.json data/pipeline_status.json site/
+          git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/daily data/weekly data/latest/uni_latest.json site/
           git diff --cached --quiet && exit 0
           # Generated exports must not trigger another full collection run.
           git commit -m "data: daily BRIDGE refresh $(date +%F) [bridge-data]"

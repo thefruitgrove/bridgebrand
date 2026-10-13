@@ -464,14 +464,19 @@ gov_html = real_list_page(
 gov_html = gov_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>")
 with open(f"{OUT}/gov.html","w",encoding="utf-8") as f: f.write(gov_html)
 
-# --- UNI: T100 / U60(4년제) / C40(2년제) ---
-from uni_real import UNI_4YEAR, UNI_2YEAR
-uni_segs = [("t100","UNI B-T100",len(UNI_4YEAR)+len(UNI_2YEAR)), ("u60","UNI B-U60",len(UNI_4YEAR)), ("c40","UNI B-C40",len(UNI_2YEAR))]
+# --- UNI: dynamic T100 / U60(4년제) / C40(전문대) ---
+_uni43_path = os.path.join(_HERE, "data", "latest", "uni_latest.json")
+_uni43 = json.load(open(_uni43_path, encoding="utf-8")) if os.path.exists(_uni43_path) else {"rankings": {}, "waiting": []}
+_uni_rankings = _uni43.get("rankings", {})
+_uni_t100, _uni_u60, _uni_c40 = _uni_rankings.get("T100", []), _uni_rankings.get("U60", []), _uni_rankings.get("C40", [])
+_uni_waiting = _uni43.get("waiting", [])[:20]
+uni_segs = [("t100","UNI B-T100",len(_uni_t100)), ("u60","UNI B-U60",len(_uni_u60)), ("c40","UNI B-C40",len(_uni_c40)), ("waiting","진입 대기",len(_uni_waiting))]
 uni_seg_html = seg_control("t100", uni_segs, "uni")
 uni_panels_html = (
-    f'<div class="rk-panel" id="uni-t100">{build_pilot.uni_rows(UNI_4YEAR)}{build_pilot.uni_rows(UNI_2YEAR, is_2year=True)}</div>'
-    f'<div class="rk-panel hidden" id="uni-u60">{build_pilot.uni_rows(UNI_4YEAR)}</div>'
-    f'<div class="rk-panel hidden" id="uni-c40">{build_pilot.uni_rows(UNI_2YEAR, is_2year=True)}</div>'
+    f'<div class="rk-panel" id="uni-t100">{build_pilot.uni_rows_dynamic(_uni_t100)}</div>'
+    f'<div class="rk-panel hidden" id="uni-u60">{build_pilot.uni_rows_dynamic(_uni_u60)}</div>'
+    f'<div class="rk-panel hidden" id="uni-c40">{build_pilot.uni_rows_dynamic(_uni_c40)}</div>'
+    f'<div class="rk-panel hidden" id="uni-waiting">{build_pilot.uni_rows_dynamic(_uni_waiting)}</div>'
 )
 uni_html = real_list_page(
     "UNI", "uni", "UNI — 상아탑이 뿜어내는 고유한 철학의 온도, 대학",

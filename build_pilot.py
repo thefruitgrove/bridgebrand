@@ -2471,6 +2471,27 @@ try:
 except Exception:
     pass
 
+# UNI v4.3 public snapshot: official baseline + 05:15 daily observations.
+# Missing R/I/E remain N/R; no unobserved axis is promoted to 0 or 100.
+try:
+    import json as _uni_json
+    _uni43_path = os.path.join(_HERE, "data", "latest", "uni_latest.json")
+    if os.path.exists(_uni43_path):
+        _uni43 = _uni_json.load(open(_uni43_path, encoding="utf-8"))
+        for _row in _uni43.get("records", []):
+            _name = _row.get("name")
+            if not _name:
+                continue
+            _case = REAL_PILOT_CASES.setdefault(_name, {"week": _uni43.get("data_date"), "evidence": [], "history": []})
+            _case["dims"] = {axis: _row.get("dims", {}).get(axis) for axis in "BRIDGE"}
+            _case["score"] = _row.get("daily_index")
+            _case["daily_index"] = _row.get("daily_index")
+            _case["activity_points"] = _row.get("activity_points", 0)
+            _case["trust"] = _row.get("trust", "C")
+            _case["method"] = "비변동성+일별관측"
+except Exception as _uni43_error:
+    print(f"UNI v4.3 snapshot warning: {_uni43_error}")
+
 # [2026-10] v3 차등가중 점수 병기 — 메인 score는 유지, 참고용 v3_score 추가
 try:
     import sys as _sys, os as _os
@@ -2765,6 +2786,24 @@ def uni_rows(pool, is_2year=False):
         </div>''')
     return "\n".join(out)
 
+def uni_rows_dynamic(records):
+    out = []
+    for i, record in enumerate(records, start=1):
+        name, region = record.get("name", ""), record.get("region", "")
+        typ = "전문대학(2년제)" if record.get("school_kind") == "전문대학" else record.get("school_type", "4년제 대학")
+        pilot = _gate(REAL_PILOT_CASES.get(name))
+        if not pilot:
+            continue
+        dims_html = " ".join(f'<span class="dm"><b>{k}</b>{v if v is not None else "N/R"}</span>' for k,v in pilot["dims"].items())
+        out.append(f'''
+        <div class="rk-row rk-clickable rk-realpilot {"top3" if i<=3 else ""}" data-entity="{esc(name)}" data-region="{esc(region)}" data-type="{esc(typ)}" data-realpilot="true" tabindex="0" role="button" aria-label="{esc(name)} BRIDGE UNI 결과 보기">
+          <div class="rk-num">{i:02d}</div><div class="rk-name"><div class="nm">{esc(name)} {_method_tag(pilot)}</div>
+          <div class="sub">{esc(region)} · {esc(typ)} · 05:15 KST 일일 마감 · 공식 기준층과 변동 관측층 결합</div></div>
+          <div class="rk-market">{esc(region)}</div><div class="rk-dims">{dims_html}</div>
+          <div class="rk-score">{pilot["score"]}</div><div class="rk-wow"><span class="wow wow-flat">일별·주간 자동집계</span></div>
+          <div class="rk-trust">{_trust_badge(pilot)}</div></div>''')
+    return "\n".join(out)
+
 BRIDGE_MODAL_HTML = '''
 <div class="bridge-modal-overlay" id="bridgeModalOverlay">
   <div class="bridge-modal" role="dialog" aria-modal="true">
@@ -2859,27 +2898,25 @@ BRIDGE_MODAL_HTML = '''
 
 
 def build_uni_section():
-    sys.path.insert(0, os.path.join(_HERE, "real_data"))
-    import importlib
-    import uni_real
-    importlib.reload(uni_real)
+    _latest = os.path.join(_HERE, "data", "latest", "uni_latest.json")
+    _doc = _json.load(open(_latest, encoding="utf-8")) if os.path.exists(_latest) else {}
+    _rankings = _doc.get("rankings", {})
+    _t100, _u60, _c40, _waiting = _rankings.get("T100", []), _rankings.get("U60", []), _rankings.get("C40", []), _doc.get("waiting", [])
     return f'''
 <div class="pilot-notice">
-  <b>BRIDGE-UNI도 CPR/STAR/GOV와 같은 원칙입니다.</b> 아래 명단은 대학알리미 공시대상대학
-  목록에 근거한 실제 대학명이며, BRIDGE-UNI 여섯 축 점수는 아직 산출하지 않았습니다(N/R).
-  이론적 설계(축 정의·전공편중 보정·연구지수 반영방식)는 methodology.html의 "BRIDGE-UNI 설계"
-  절을 참고하세요.
+  <b>BRIDGE-UNI는 고정 명단이 아닙니다.</b> 대학알리미 전체 적격 모집단을 기준층으로 유지하고
+  매일 05:15 KST에 마감한 변동 관측을 결합해 T100을 다시 산출합니다. 미관측 축은 N/R이며,
+  T100 밖 대학도 동일 기준으로 계속 평가됩니다.
 </div>
 <div class="pilot-block">
-  <h2>4년제 대학 (60선)</h2>
-  <p class="list-note">규모·인지도 기준 표본. 최종 60개 확정에는 앞서 밝힌 것과 동일한 논리(재학생 규모,
-  설립유형, 지역 안배, 데이터충족도)의 가중 산식이 필요합니다.</p>
-  {uni_rows(uni_real.UNI_4YEAR)}
+  <h2>BRIDGE UNI T100</h2><p class="list-note">4년제 60개와 전문대학 40개를 통합한 현재 순위입니다.</p>{uni_rows_dynamic(_t100)}
 </div>
 <div class="pilot-block">
-  <h2>2년제 대학 (40선)</h2>
-  <p class="list-note">전문대학 166개교 중 지역 안배 표본.</p>
-  {uni_rows(uni_real.UNI_2YEAR, is_2year=True)}
+  <h2>BRIDGE U60 · 4년제</h2>{uni_rows_dynamic(_u60)}
+</div><div class="pilot-block">
+  <h2>BRIDGE C40 · 전문대학</h2>{uni_rows_dynamic(_c40)}
+</div><div class="pilot-block bridge-waiting">
+  <h2>T100 진입 대기</h2><p class="list-note">공식 기준과 신규 일별 신호에 따라 경계와 경쟁하는 후보입니다.</p>{uni_rows_dynamic(_waiting[:20])}
 </div>
 '''
 
