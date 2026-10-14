@@ -25,7 +25,7 @@ def audit(db,as_of):
     entities={e['id']:e for e in db.select('bridge_entities','select=id,external_id,name,domain')}
     scores=db.select('bridge_scores','select=entity_id,score,axes_used,publish_status,confidence_score,trust_grade,diagnostics&'+q)
     obs=db.select('bridge_axis_observations','select=entity_id,axis,score,status,diagnostics&'+q)
-    ranks=db.select('bridge_rankings','select=entity_id,domain,score,ranking_type&'+q)
+    ranks=db.select('bridge_rankings','select=entity_id,domain,score,ranking_type,published_at&'+q)
     by={}
     for o in obs:by.setdefault(o['entity_id'],[]).append(o)
     all_signal_ids=set().union(*(signal_refs(o.get('diagnostics') or {}) for o in obs)) if obs else set()
@@ -56,11 +56,15 @@ def audit(db,as_of):
                 elif (raw[rid].get('payload') or {}).get('entity_id') not in {None,s['entity_id']}:
                     errors.append({'code':'BASELINE_ENTITY_MISMATCH','external_id':e['external_id'],'axis':o['axis']})
         records.append({'domain':e['domain'],'external_id':e['external_id'],'name':e['name'],'publish_status':s['publish_status'],'axes_available':p['axes_available'],'axis_status':p['axis_status'],'trust_grade':s['trust_grade'],'collection_status':(s.get('diagnostics') or {}).get('collection_status'),'trust_basis':(s.get('diagnostics') or {}).get('trust_basis')})
+    superseded_rankings=0
     for r in ranks:
         s=sm.get(r['entity_id']);e=entities.get(r['entity_id'],{})
+        if s and s['publish_status'] in {'shadow','withheld'} and r.get('published_at') is None:
+            superseded_rankings+=1
+            continue  # preserved non-public history, not a current publish candidate
         if not s or s['publish_status'] not in {'eligible','published'} or abs(float(s['score'])-float(r['score']))>.001 or e.get('domain')!=r['domain']:
             errors.append({'code':'RANK_SCORE_LINK_MISMATCH','entity_id':r['entity_id']})
-    out={'as_of_date':as_of.isoformat(),'methodology_version':cfg['version'],'generated_at':now_kst().isoformat(),'ok':not errors,'errors':errors,'records':records,'linked_signal_count':len(signals),'linked_raw_count':len(raw)}
+    out={'as_of_date':as_of.isoformat(),'methodology_version':cfg['version'],'generated_at':now_kst().isoformat(),'ok':not errors,'errors':errors,'records':records,'linked_signal_count':len(signals),'linked_raw_count':len(raw),'superseded_nonpublic_rankings':superseded_rankings}
     path=ROOT/'data/audit/v5_lineage_latest.json';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(out,ensure_ascii=False,indent=2))
     print(json.dumps({k:v for k,v in out.items() if k not in {'records','errors'}},ensure_ascii=False))
     if errors:raise RuntimeError(f'V5 lineage audit blocked: {len(errors)} errors')

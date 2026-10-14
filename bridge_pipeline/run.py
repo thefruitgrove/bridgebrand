@@ -835,6 +835,11 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
         f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
         f"&domain=in.({','.join(domains)})&ranking_type=in.({','.join(ranking_types)})"
     )
+    eligible = db.select("bridge_scores", f"select=entity_id&as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}&publish_status=in.(eligible,published)")
+    if not eligible:
+        raise RuntimeError("daily beta publication blocked: no current eligible scores")
+    entity_ids = ",".join(sorted({row["entity_id"] for row in eligible}))
+    ranking_query += f"&entity_id=in.({entity_ids})"
     candidates = db.select("bridge_rankings", f"select=id&{ranking_query}&limit=1")
     if not candidates:
         raise RuntimeError("daily beta publication blocked: no eligible CPR/ENT T100 rankings")
