@@ -990,3 +990,21 @@ footer .logo .op{ color:#7c86a0;}
  .period-row select{width:100%;max-width:100%;min-width:0}.hero h1{overflow-wrap:anywhere}
  .tw-grid,.twr-grid,.hero-top5{min-width:0;max-width:100%}
 }
+
+/* Mobile ranking rail: explicit columns prevent hidden rank shifting the name. */
+@media(max-width:600px){
+ .ranking-master .rk-row .rk-num{display:block;position:static;grid-column:1;grid-row:1;color:#a8afba;font-size:11px}
+ .ranking-master .rk-row .rk-name{grid-column:2;grid-row:1;min-width:0;padding:0}
+ .ranking-master .rk-row .rk-name .nm{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.5;font-size:13px}
+ .ranking-master .rk-row .rk-score{grid-column:3;grid-row:1;font-family:var(--sans);font-size:17px;justify-self:end;white-space:nowrap}
+ .ranking-master .rk-row .rk-wow{display:block;grid-column:4;grid-row:1;position:static;font-size:10px;min-width:30px}
+ .ranking-master .rk-row{grid-template-columns:24px minmax(0,1fr) 42px 34px;min-height:62px;gap:6px;padding:10px}
+ .ranking-card-boards .rk-row .rk-num{display:block;font-size:11px}
+ .ranking-master .live-snapshot-note{font-size:11px;line-height:1.65;padding:10px 12px}
+ .ranking-master .ranking-panel-head{position:sticky;padding:12px}
+ .nav-inner{min-height:62px;padding-top:8px;padding-bottom:8px}.logo{font-size:18px;letter-spacing:.03em}
+}
+
+/* V5 evidence states stay visible on narrow screens. */
+.axis-reference{color:#777!important;font-size:13px!important;white-space:normal;}
+@media(max-width:640px){.bm-val{white-space:normal;overflow-wrap:anywhere;}}

@@ -1,14 +1,80 @@
 {
-  "version": "2026.10-pce-shadow-1",
+  "version": "2026.10-v5-official-links-1",
   "channels": {
-    "GOV-C01": {"handle": "@seoul", "status": "verify_title"},
-    "GOV-C02": {"handle": "@busancity", "status": "verify_title"},
-    "GOV-C03": {"handle": "@daegutv", "status": "verify_title"},
-    "GOV-C04": {"handle": "@incheontv", "status": "verify_title"},
-    "GOV-C05": {"handle": "@gjcity", "status": "verify_title"},
-    "GOV-C06": {"handle": "@daejeoncity", "status": "verify_title"},
-    "GOV-C07": {"handle": "@ulsancity", "status": "verify_title"},
-    "GOV-C09": {"handle": "@gyeonggido", "status": "verify_title"},
-    "GOV-C17": {"handle": "@jejutv", "status": "verify_title"}
+    "GOV-C01": {
+      "channel_id": "UCZUPZW5idAxYp-Asj__lVAA",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.seoul.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320551+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-C02": {
+      "handle": "@busancity",
+      "status": "verify_title"
+    },
+    "GOV-C03": {
+      "handle": "@daegutv",
+      "status": "verify_title"
+    },
+    "GOV-C04": {
+      "channel_id": "UC960xfXepXPsJ8HHePGvAKw",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.incheon.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320563+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-C05": {
+      "handle": "@gjcity",
+      "status": "verify_title"
+    },
+    "GOV-C06": {
+      "channel_id": "UCzIgmDjE0lFDu2IhEF_ewOA",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.daejeon.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320565+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-C07": {
+      "channel_id": "UCTHZPqsEmZLP5rrCLXJFwNg",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.ulsan.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320567+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-C09": {
+      "channel_id": "UCIuDua3JS1-m9zi4CuAqBVw",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.gg.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320568+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-C17": {
+      "handle": "@jejudo_official",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.jeju.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320570+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    },
+    "GOV-M24": {
+      "username": "acrc0229",
+      "status": "verified",
+      "evidence_urls": [
+        "https://www.acrc.go.kr"
+      ],
+      "verified_at": "2026-10-14T14:52:09.320561+00:00",
+      "verification_method": "institutional_homepage_outbound_link"
+    }
   }
 }

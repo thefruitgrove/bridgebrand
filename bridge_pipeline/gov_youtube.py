@@ -86,12 +86,14 @@ class YouTube:
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.loads(response.read().decode("utf-8"))
 
-    def channel(self, *, channel_id: str | None = None, handle: str | None = None) -> dict[str, Any] | None:
+    def channel(self, *, channel_id: str | None = None, handle: str | None = None, username: str | None = None) -> dict[str, Any] | None:
         params = {"part": "snippet,statistics,contentDetails"}
         if channel_id:
             params["id"] = channel_id
         elif handle:
             params["forHandle"] = handle.lstrip("@")
+        elif username:
+            params["forUsername"] = username
         else:
             return None
         items = self.get("channels", **params).get("items") or []
@@ -231,17 +233,14 @@ def collect(as_of: dt.date, discover_limit: int = 5) -> dict[str, Any]:
             if not entity:
                 continue
             try:
-                channel = client.channel(channel_id=mapping.get("channel_id"), handle=mapping.get("handle"))
-                # Handles change. A failed configured handle falls back to one
-                # exact-title discovery; only an institutional title match can
-                # enter scoring, and the selected channel id is preserved in
-                # the daily evidence snapshot for audit.
-                if not channel:
-                    found = client.search_channel_candidate(f'{entity["name"]} 공식 유튜브')
-                    found_id = ((found or {}).get("snippet") or {}).get("channelId")
-                    found_title = ((found or {}).get("snippet") or {}).get("title") or ""
-                    if found_id and title_matches_entity(found_title, entity):
-                        channel = client.channel(channel_id=found_id)
+                if mapping.get('status')!='verified' or not mapping.get('evidence_urls'):
+                    candidates[external_id]={'reason':'ownership_evidence_required'}
+                    continue
+                verified_date=str(mapping.get('verified_at') or '')[:10]
+                if not verified_date or (as_of-dt.date.fromisoformat(verified_date)).days>30:
+                    candidates[external_id]={'reason':'ownership_verification_expired'}
+                    continue
+                channel = client.channel(channel_id=mapping.get('channel_id'),handle=mapping.get('handle'),username=mapping.get('username'))
                 if not channel:
                     failures.append({"external_id": external_id, "reason": "channel_not_found"})
                     continue

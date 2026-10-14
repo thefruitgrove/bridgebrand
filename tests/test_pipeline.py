@@ -87,7 +87,7 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(adverse[0].review_status, "pending")
 
     def test_ent_commercial_and_response_signals_are_separate(self):
-        item = RawItem("google_news_rss", "2", "아이유 브랜드 광고 캠페인 화제", "https://x", "신문", None, {}, "h2")
+        item = RawItem("google_news_rss", "2", "아이유 브랜드 광고 캠페인 호평", "https://x", "신문", None, {}, "h2")
         signals = classify_headline(item, "STAR-001", "아이유")
         self.assertIn("I", {s.axis for s in signals})
         positive_r = [s for s in signals if s.axis == "R" and s.direction > 0]

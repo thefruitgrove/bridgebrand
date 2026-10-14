@@ -1004,3 +1004,7 @@ footer .logo .op{ color:#7c86a0;}
  .ranking-master .ranking-panel-head{position:sticky;padding:12px}
  .nav-inner{min-height:62px;padding-top:8px;padding-bottom:8px}.logo{font-size:18px;letter-spacing:.03em}
 }
+
+/* V5 evidence states stay visible on narrow screens. */
+.axis-reference{color:#777!important;font-size:13px!important;white-space:normal;}
+@media(max-width:640px){.bm-val{white-space:normal;overflow-wrap:anywhere;}}

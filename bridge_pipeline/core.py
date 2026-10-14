@@ -32,7 +32,8 @@ def now_kst() -> dt.datetime:
 def publication_date(value: str | None = None) -> dt.date:
     if value:
         return dt.date.fromisoformat(value)
-    return now_kst().date()
+    now=now_kst()
+    return now.date()-dt.timedelta(days=1) if now.time()<dt.time(5,15) else now.date()
 
 
 def iso_week(value: dt.date) -> str:
@@ -193,7 +194,9 @@ POSITIVE = {
 }
 EXPERIENCE = {"서비스", "품질", "고객", "민원", "사용자", "안전", "지원"}
 COMMERCIAL_RELEVANCE = {"광고", "광고모델", "전속모델", "브랜드", "앰배서더", "캠페인", "화보", "협찬", "CF"}
-REPUTATION_RESPONSE = {"호평", "화제", "인기", "흥행", "완판", "선호", "팬덤", "반응", "찬사"}
+REPUTATION_RESPONSE = {"호평", "찬사", "호감", "긍정 반응", "높은 만족", "만족도 상승", "좋은 평가"}
+RESPONSE_NEUTRAL = {"반응", "여론", "의견", "댓글", "만족도", "설문 결과"}
+DIRECT_EXPERIENCE = {"사용 후기", "사용후기", "관람 후기", "공연 후기", "수강 후기", "민원 경험", "서비스 경험", "고객 경험"}
 
 
 def entity_match(title: str, name: str, aliases: Iterable[str] = ()) -> bool:
@@ -217,7 +220,9 @@ def classify_headline(item: RawItem, external_id: str, name: str, aliases: Itera
         signals.append(Signal(external_id, "I", "commercial_relevance", 1, 14.0, 0.65, occurred, "auto", "광고·브랜드 적합성 맥락의 공개 보도", item.content_hash))
     if any(word in title for word in REPUTATION_RESPONSE):
         signals.append(Signal(external_id, "R", "positive_public_response", 1, 12.0, 0.55, occurred, "auto", "대중 반응을 명시한 공개 보도", item.content_hash))
-    if any(word in title for word in EXPERIENCE):
+    elif any(word in title for word in RESPONSE_NEUTRAL):
+        signals.append(Signal(external_id,"R","public_response_observed",0,8.0,0.45,occurred,"auto","반응 관련 보도 관측; 감성 방향 단정 제외",item.content_hash))
+    if any(word in title for word in DIRECT_EXPERIENCE) or any(word in title for word in EXPERIENCE):
         signals.append(Signal(external_id, "D", "experience_mention", 0, 12.0, 0.45, occurred, "auto", "경험 관련 공개 보도 포착", item.content_hash))
     signals.append(Signal(external_id, "B", "qualified_visibility", 1, 1.0, 0.70, occurred, "auto", "정확한 대상명과 일치한 고유 기사", item.content_hash))
     return signals
@@ -254,12 +259,12 @@ def attention_continuity_score(
     for signal in signals:
         occurred = str(signal.get("occurred_at") or "")
         try:
-            occurred_date = dt.datetime.fromisoformat(occurred.replace("Z", "+00:00")).date()
+            occurred_date = dt.datetime.fromisoformat(occurred.replace("Z", "+00:00")).astimezone(KST).date()
         except ValueError:
-            occurred_date = as_of
+            continue
         age = max(0, (as_of - occurred_date).days)
         decay = 0.5 ** (age / half_life)
-        raw_key = str(signal.get("raw_item_id") or signal.get("id") or stable_hash(signal.get("source_id"), occurred, signal.get("signal_type")))
+        raw_key = str(signal.get("event_content_key") or signal.get("raw_item_id") or signal.get("id") or stable_hash(signal.get("source_id"), occurred, signal.get("signal_type")))
         if signal.get("axis") == "B" and signal.get("signal_type") == "qualified_visibility":
             mentions[raw_key] = max(mentions.get(raw_key, 0.0), decay)
             if signal.get("source_id"):
