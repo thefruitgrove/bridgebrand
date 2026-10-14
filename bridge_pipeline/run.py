@@ -456,10 +456,16 @@ def import_official(db: SupabaseRest, csv_path: str, as_of: dt.date) -> None:
                                 "reference_date_known":bool(evidence_date),"baseline_fingerprint":signature,"policy_version":POLICY_VERSION}
             })
     db.upsert('bridge_source_registry',list(sources.values()),'id')
+    import_runs={}
+    for sid in sources:
+        run=db.insert('bridge_collection_runs',[{'source_id':sid,'status':'running','window_start':dt.datetime.combine(as_of,dt.time.min,tzinfo=now_kst().tzinfo).isoformat(),'window_end':dt.datetime.combine(as_of+dt.timedelta(days=1),dt.time.min,tzinfo=now_kst().tzinfo).isoformat(),'diagnostics':{'module':'canonical_baseline_import','policy_version':POLICY_VERSION}}])[0]
+        import_runs[sid]=run['id']
+    for raw in raw_rows:raw['collection_run_id']=import_runs[raw['source_id']]
     inserted=db.upsert('bridge_raw_items',raw_rows,'source_id,content_hash')
     raw_ids={r['content_hash']:r['id'] for r in inserted}
     for row in rows:row['diagnostics']['raw_item_id']=raw_ids.get(row['diagnostics']['baseline_fingerprint'])
     db.upsert("bridge_axis_observations", rows, "entity_id,as_of_date,axis,methodology_version")
+    for sid,rid in import_runs.items():db.patch('bridge_collection_runs',{'status':'success','finished_at':now_kst().isoformat(),'fetched_count':sum(r['source_id']==sid for r in raw_rows),'accepted_count':sum(r['source_id']==sid for r in raw_rows)},f'id=eq.{rid}')
     print(f"imported {len(rows)} official axis observations")
 
 
