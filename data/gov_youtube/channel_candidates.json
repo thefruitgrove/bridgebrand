@@ -1,64 +1,35 @@
 {
   "as_of_date": "2026-10-14",
   "candidates": {
-    "GOV-C01": {
-      "channel_id": "UCOZ1mcq_3LGj3cvI_SIWd1A",
-      "title": "seoul",
-      "reason": "title_mismatch"
-    },
     "GOV-C02": {
-      "channel_id": "UC5o2UR0P8Q3gveV-tTi6pew",
-      "title": "Changwon park",
-      "reason": "title_mismatch"
+      "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
-      "channel_id": "UC7zEOa6U75HUtZYf1flelIg",
-      "title": "대구부동산TV",
-      "reason": "title_mismatch"
+      "reason": "ownership_evidence_required"
     },
-    "GOV-C04": {
-      "channel_id": "UC5N3s-Gc8Fnh8Ha1QF64R_Q",
-      "title": "인천TV",
-      "reason": "title_mismatch"
-    },
-    "GOV-C05": {
-      "channel_id": "UCwL1cVnEkjGgzMN4KPFuHSw",
-      "title": "GJCity",
-      "reason": "title_mismatch"
-    },
-    "GOV-C07": {
-      "channel_id": "UCQ8pHumsjKIo4VZmVDfc5oA",
-      "title": "The Life",
-      "reason": "title_mismatch"
-    },
-    "GOV-C09": {
-      "channel_id": "UC4-IGqMz7e540V7TFwekbDQ",
-      "title": "보스쿼카",
-      "reason": "title_mismatch"
-    },
-    "GOV-C43": {
-      "channel_id": "UCTwWexE_dvD6kvFDSIQMiwg",
-      "title": "군산시 공식채널",
+    "GOV-C29": {
+      "channel_id": "UCOh1joWcwzHrvqFOIdz1P2g",
+      "title": "김포시",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C44": {
-      "channel_id": "UCW0dK4y2eV-3CllA7MdCILA",
-      "title": "목포시",
+    "GOV-C30": {
+      "channel_id": "UCicR_6NEnfhLP-FvM4txuUA",
+      "title": "파주시청",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C45": {
-      "channel_id": "UCtQ7Fc7Eny5MfWa9QD6CqcA",
-      "title": "여수시-여수이야기",
+    "GOV-C31": {
+      "channel_id": "UChqGvsUJKv4d9zIkmIUda8Q",
+      "title": "의정부시",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C46": {
-      "channel_id": "UChrP3VKcPcOiR8WZ7LAdO8w",
-      "title": "순천시",
+    "GOV-C32": {
+      "channel_id": "UCvaZvtBYTNRdmROnFHSFwAA",
+      "title": "광주시",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C47": {
-      "channel_id": "UCsSLsKLdiDth65M276ML50w",
-      "title": "광양시청티비",
+    "GOV-C33": {
+      "channel_id": "UCklZw3tdXy-cjSZFvT7jqiQ",
+      "title": "이천시청",
       "reason": "awaiting_human_verification"
     }
   }

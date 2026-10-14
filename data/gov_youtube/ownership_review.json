@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-15T00:59:58.309760+09:00",
+  "review": {
+    "GOV-C02": {
+      "status": "review",
+      "homepage": "https://www.busan.go.kr",
+      "reason": "URLError"
+    },
+    "GOV-C03": {
+      "status": "review",
+      "homepage": "https://www.daegu.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@PowerfulDaeguTv",
+        "https://www.youtube.com/@OfficialDaeguTV"
+      ]
+    },
+    "GOV-C08": {
+      "status": "review",
+      "reason": "homepage_redirect_requires_review",
+      "homepage": "https://www.sejong.go.kr"
+    },
+    "GOV-C09": {
+      "status": "review",
+      "homepage": "https://www.gg.go.kr",
+      "reason": "TimeoutError"
+    },
+    "GOV-C10": {
+      "status": "review",
+      "homepage": "https://www.provin.gangwon.kr",
+      "reason": "URLError"
+    },
+    "GOV-C11": {
+      "status": "review",
+      "homepage": "https://www.chungbuk.go.kr",
+      "reason": "RemoteDisconnected"
+    },
+    "GOV-C12": {
+      "status": "review",
+      "homepage": "https://www.chungnam.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@topcnitv/streams",
+        "https://www.youtube.com/user/topcnitv/"
+      ]
+    },
+    "GOV-C16": {
+      "status": "review",
+      "homepage": "https://www.gyeongnam.go.kr",
+      "reason": "URLError"
+    },
+    "GOV-M08": {
+      "status": "review",
+      "homepage": "https://www.moe.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": []
+    },
+    "GOV-M10": {
+      "status": "review",
+      "homepage": "https://www.mcst.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": []
+    },
+    "GOV-M06": {
+      "status": "review",
+      "homepage": "https://www.mois.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": []
+    },
+    "GOV-M17": {
+      "status": "review",
+      "homepage": "https://www.molit.go.kr",
+      "reason": "HTTPError"
+    }
+  }
+}
