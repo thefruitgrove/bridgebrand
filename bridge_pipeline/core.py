@@ -92,7 +92,7 @@ class SupabaseRest:
     def request(self, method: str, table: str, data: Any = None, query: str = "", prefer: str = "return=representation") -> Any:
         endpoint = f"{self.url}/rest/v1/{table}"
         if query:
-            endpoint += "?" + query
+            endpoint += "?" + query.replace("+", "%2B")
         body = None if data is None else json.dumps(data, ensure_ascii=False).encode("utf-8")
         req = urllib.request.Request(endpoint, data=body, method=method)
         req.add_header("apikey", self.key)
