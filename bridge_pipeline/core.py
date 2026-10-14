@@ -127,6 +127,10 @@ class SupabaseRest:
         return result
 
     def select(self, table: str, query: str) -> list[dict[str, Any]]:
+        # Offset pages require a unique order; mixed-version archives otherwise
+        # can lose or repeat axes when Postgres changes its offset query plan.
+        if table in {"bridge_axis_observations", "bridge_index_metrics"} and not re.search(r"(?:^|&)order=",query):
+            query += ("&" if query else "") + "order=id.asc"
         if re.search(r"(?:^|&)limit=", query):
             return self.request("GET", table, query=query) or []
         rows: list[dict[str, Any]] = []
