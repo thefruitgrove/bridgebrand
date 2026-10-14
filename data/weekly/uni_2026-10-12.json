@@ -721,18 +721,18 @@
     {
       "university_id": "UNI-5F98CF7DF0D4",
       "name": "대전보건대학교",
-      "weekly_index": 58.1,
+      "weekly_index": 57.3,
       "dims": {
         "B": 62.3,
-        "R": null,
+        "R": 51.5,
         "I": null,
         "D": 51.2,
         "G": 58.4,
         "E": null
       },
-      "activity_points": 0.51,
+      "activity_points": 1.01,
       "observed_days": 3,
-      "mention_days": 1,
+      "mention_days": 2,
       "source_diversity": 2
     },
     {
@@ -1165,17 +1165,17 @@
       "name": "삼육보건대학교",
       "weekly_index": 72.0,
       "dims": {
-        "B": 88.7,
+        "B": 88.6,
         "R": null,
         "I": null,
         "D": 44.6,
         "G": 73.3,
         "E": null
       },
-      "activity_points": 0.5,
+      "activity_points": 0.25,
       "observed_days": 3,
       "mention_days": 1,
-      "source_diversity": 2
+      "source_diversity": 1
     },
     {
       "university_id": "UNI-6F70D4702C43",
@@ -1282,19 +1282,19 @@
     {
       "university_id": "UNI-793B1F04139A",
       "name": "서정대학교",
-      "weekly_index": 64.8,
+      "weekly_index": 66.1,
       "dims": {
-        "B": 73.6,
+        "B": 73.5,
         "R": null,
         "I": null,
         "D": 43.6,
         "G": 74.5,
-        "E": 52.7
+        "E": 54.0
       },
-      "activity_points": 6.35,
+      "activity_points": 5.49,
       "observed_days": 3,
       "mention_days": 2,
-      "source_diversity": 13
+      "source_diversity": 11
     },
     {
       "university_id": "UNI-F5C26CE765A4",
@@ -1724,19 +1724,19 @@
     {
       "university_id": "UNI-80E642C934B5",
       "name": "영진전문대학교",
-      "weekly_index": 57.8,
+      "weekly_index": 58.8,
       "dims": {
-        "B": 75.9,
-        "R": 52.9,
-        "I": 50.6,
+        "B": 75.6,
+        "R": null,
+        "I": null,
         "D": 57.4,
         "G": 46.9,
         "E": null
       },
-      "activity_points": 2.69,
+      "activity_points": 0.52,
       "observed_days": 3,
-      "mention_days": 2,
-      "source_diversity": 8
+      "mention_days": 1,
+      "source_diversity": 2
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -2948,19 +2948,19 @@
     {
       "university_id": "UNI-F1E588AF9BB1",
       "name": "한림성심대학교",
-      "weekly_index": 59.0,
+      "weekly_index": 60.6,
       "dims": {
-        "B": 61.7,
-        "R": 47.0,
+        "B": 61.5,
+        "R": null,
         "I": null,
         "D": 42.2,
         "G": 69.1,
         "E": null
       },
-      "activity_points": 1.81,
+      "activity_points": 0.0,
       "observed_days": 3,
-      "mention_days": 1,
-      "source_diversity": 4
+      "mention_days": 0,
+      "source_diversity": 0
     },
     {
       "university_id": "UNI-A7F8A4E45518",
@@ -3152,19 +3152,19 @@
     {
       "university_id": "UNI-8B3E104763F2",
       "name": "가톨릭대학교",
-      "weekly_index": 59.1,
+      "weekly_index": 59.9,
       "dims": {
-        "B": 84.4,
+        "B": 84.2,
         "R": null,
-        "I": 50.6,
+        "I": null,
         "D": 54.1,
         "G": 44.5,
         "E": null
       },
-      "activity_points": 0.93,
+      "activity_points": 0.0,
       "observed_days": 3,
-      "mention_days": 1,
-      "source_diversity": 3
+      "mention_days": 0,
+      "source_diversity": 0
     },
     {
       "university_id": "UNI-B5DBF6F16AB5",
@@ -3645,19 +3645,19 @@
     {
       "university_id": "UNI-0B6F3C11E615",
       "name": "경희대학교",
-      "weekly_index": 62.2,
+      "weekly_index": 65.5,
       "dims": {
-        "B": 82.2,
-        "R": 43.0,
+        "B": 81.7,
+        "R": null,
         "I": null,
         "D": 54.0,
         "G": 59.1,
-        "E": 44.7
+        "E": null
       },
-      "activity_points": 6.43,
+      "activity_points": 1.01,
       "observed_days": 3,
-      "mention_days": 3,
-      "source_diversity": 14
+      "mention_days": 2,
+      "source_diversity": 4
     },
     {
       "university_id": "UNI-0D1B00861E1E",
@@ -3749,14 +3749,14 @@
       "name": "고신대학교",
       "weekly_index": 64.7,
       "dims": {
-        "B": 61.3,
+        "B": 61.2,
         "R": 51.5,
         "I": null,
         "D": 67.7,
         "G": 69.9,
         "E": null
       },
-      "activity_points": 2.13,
+      "activity_points": 1.88,
       "observed_days": 3,
       "mention_days": 2,
       "source_diversity": 5
@@ -4002,16 +4002,16 @@
     {
       "university_id": "UNI-2BE2A03BFF78",
       "name": "국립목포대학교",
-      "weekly_index": 61.4,
+      "weekly_index": 60.2,
       "dims": {
-        "B": 44.1,
-        "R": 55.7,
+        "B": 44.3,
+        "R": 54.7,
         "I": null,
         "D": 69.7,
         "G": 74.5,
         "E": null
       },
-      "activity_points": 6.36,
+      "activity_points": 7.15,
       "observed_days": 3,
       "mention_days": 3,
       "source_diversity": 9
@@ -4140,17 +4140,17 @@
       "name": "국립한국교통대학교",
       "weekly_index": 58.5,
       "dims": {
-        "B": 46.8,
+        "B": 46.9,
         "R": null,
         "I": null,
         "D": 58.9,
         "G": 67.0,
         "E": null
       },
-      "activity_points": 0.0,
+      "activity_points": 0.26,
       "observed_days": 3,
-      "mention_days": 0,
-      "source_diversity": 0
+      "mention_days": 1,
+      "source_diversity": 1
     },
     {
       "university_id": "UNI-71DF76D19DD5",
@@ -4334,10 +4334,10 @@
         "G": 65.3,
         "E": null
       },
-      "activity_points": 1.79,
+      "activity_points": 1.54,
       "observed_days": 3,
-      "mention_days": 2,
-      "source_diversity": 7
+      "mention_days": 1,
+      "source_diversity": 6
     },
     {
       "university_id": "UNI-D7255A9049D7",
@@ -4633,14 +4633,14 @@
       "name": "동국대학교",
       "weekly_index": 62.4,
       "dims": {
-        "B": 86.3,
+        "B": 86.2,
         "R": 53.3,
         "I": 50.9,
         "D": 52.9,
         "G": 66.1,
         "E": null
       },
-      "activity_points": 6.82,
+      "activity_points": 6.57,
       "observed_days": 3,
       "mention_days": 3,
       "source_diversity": 14
@@ -5226,19 +5226,19 @@
     {
       "university_id": "UNI-FA21CCC05EB9",
       "name": "서울대학교",
-      "weekly_index": 56.1,
+      "weekly_index": 56.4,
       "dims": {
-        "B": 46.1,
-        "R": 53.5,
+        "B": 46.2,
+        "R": 54.9,
         "I": null,
         "D": 61.8,
         "G": 63.9,
         "E": 51.3
       },
-      "activity_points": 11.48,
+      "activity_points": 12.77,
       "observed_days": 3,
       "mention_days": 2,
-      "source_diversity": 16
+      "source_diversity": 19
     },
     {
       "university_id": "UNI-B50057CD1538",
@@ -5277,19 +5277,19 @@
     {
       "university_id": "UNI-0FC5DA7185B5",
       "name": "서울시립대학교",
-      "weekly_index": 58.2,
+      "weekly_index": 59.1,
       "dims": {
         "B": 77.2,
-        "R": 51.5,
+        "R": null,
         "I": null,
         "D": 44.1,
         "G": 53.0,
         "E": null
       },
-      "activity_points": 1.01,
+      "activity_points": 0.51,
       "observed_days": 3,
-      "mention_days": 2,
-      "source_diversity": 3
+      "mention_days": 1,
+      "source_diversity": 2
     },
     {
       "university_id": "UNI-2B2ABD5860E3",
@@ -5430,19 +5430,19 @@
     {
       "university_id": "UNI-3A81F974D1D8",
       "name": "성균관대학교",
-      "weekly_index": 67.6,
+      "weekly_index": 67.3,
       "dims": {
         "B": 71.9,
-        "R": 52.9,
+        "R": 52.5,
         "I": null,
         "D": 63.4,
-        "G": 88.4,
+        "G": 88.0,
         "E": 51.3
       },
-      "activity_points": 8.53,
+      "activity_points": 7.67,
       "observed_days": 3,
       "mention_days": 3,
-      "source_diversity": 20
+      "source_diversity": 19
     },
     {
       "university_id": "UNI-0B5EE3DC31DA",
@@ -5626,7 +5626,7 @@
         "G": 49.9,
         "E": null
       },
-      "activity_points": 14.91,
+      "activity_points": 15.43,
       "observed_days": 3,
       "mention_days": 3,
       "source_diversity": 22
@@ -5770,19 +5770,19 @@
     {
       "university_id": "UNI-E469D33A26F6",
       "name": "안양대학교",
-      "weekly_index": 59.5,
+      "weekly_index": 58.9,
       "dims": {
-        "B": 81.1,
-        "R": 56.0,
-        "I": null,
+        "B": 81.0,
+        "R": 54.5,
+        "I": 50.6,
         "D": 37.4,
         "G": 55.7,
         "E": null
       },
-      "activity_points": 3.44,
+      "activity_points": 3.07,
       "observed_days": 3,
       "mention_days": 1,
-      "source_diversity": 6
+      "source_diversity": 4
     },
     {
       "university_id": "UNI-A083F43B0879",
@@ -6195,19 +6195,19 @@
     {
       "university_id": "UNI-B73338E399A2",
       "name": "이화여자대학교",
-      "weekly_index": 58.5,
+      "weekly_index": 58.6,
       "dims": {
-        "B": 60.8,
+        "B": 60.9,
         "R": null,
         "I": null,
         "D": 55.6,
         "G": 58.3,
         "E": null
       },
-      "activity_points": 0.51,
+      "activity_points": 1.01,
       "observed_days": 3,
-      "mention_days": 1,
-      "source_diversity": 1
+      "mention_days": 2,
+      "source_diversity": 2
     },
     {
       "university_id": "UNI-0F59818D6DE2",
@@ -6552,16 +6552,16 @@
     {
       "university_id": "UNI-4BFBD4D55A62",
       "name": "중원대학교",
-      "weekly_index": 70.7,
+      "weekly_index": 70.8,
       "dims": {
-        "B": 63.5,
-        "R": 56.9,
+        "B": 63.6,
+        "R": 57.0,
         "I": null,
         "D": 76.1,
         "G": 77.8,
         "E": null
       },
-      "activity_points": 3.85,
+      "activity_points": 4.36,
       "observed_days": 3,
       "mention_days": 2,
       "source_diversity": 7
@@ -6620,19 +6620,19 @@
     {
       "university_id": "UNI-B7A619BF974D",
       "name": "창신대학교",
-      "weekly_index": 71.6,
+      "weekly_index": 71.4,
       "dims": {
         "B": 66.4,
-        "R": 53.8,
+        "R": 53.0,
         "I": null,
         "D": 72.5,
         "G": 87.7,
         "E": null
       },
-      "activity_points": 5.13,
+      "activity_points": 4.61,
       "observed_days": 3,
       "mention_days": 3,
-      "source_diversity": 15
+      "source_diversity": 14
     },
     {
       "university_id": "UNI-610197CE7DD8",
@@ -7295,7 +7295,7 @@
       "activity_points": 9.62,
       "observed_days": 3,
       "mention_days": 3,
-      "source_diversity": 16
+      "source_diversity": 17
     },
     {
       "university_id": "UNI-8FCD50065925",
