@@ -10,7 +10,9 @@ on:
     paths:
       - tools/verify_live.py
       - .github/workflows/bridge-live-verify.yml
-      - site/script.js
+      - 'site/**'
+      - build.py
+      - build_pilot.py
       - tests/test_presentation.js
   workflow_dispatch:
 
@@ -51,3 +53,4 @@ jobs:
         run: |
           echo '### BRIDGE deployment verification' >> "$GITHUB_STEP_SUMMARY"
           echo 'This job reads the live JSON, index.html and script.js and compares their SHA-256 with checked-out main. It never collects data, writes to the database or deploys. Failure means publication is unverified; inspect the artifact before taking recovery action.' >> "$GITHUB_STEP_SUMMARY"
+
