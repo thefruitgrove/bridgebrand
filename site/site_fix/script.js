@@ -1,4 +1,17 @@
 (function(){
+  function scopeMessage(status){
+    return {baseline_pending:'새 기준의 비교 자료 축적 중',scope_expanded:'근거 범위 확대 · 변화 해석 주의',scope_reduced:'근거 범위 축소 · 비교 제한',scope_changed:'근거 구성 변경 · 비교 제한',methodology_changed:'산출 기준 변경 · 직접 비교 제한',legacy_unverified:'이전 기준 · 비교 검토 필요'}[status] || '비교 조건 확인 필요';
+  }
+  function snapshotDiagnosis(rec){
+    if(rec.comparison_status !== 'same_scope') return scopeMessage(rec.comparison_status);
+    if(rec.last_week_index == null || rec.weekly_index == null) return '평판 관측 · 비교 데이터 축적 중';
+    return Number(rec.weekly_index)>Number(rec.last_week_index)?'최근 평판 수준이 전주를 웃돕니다.':Number(rec.weekly_index)<Number(rec.last_week_index)?'최근 평판 수준이 전주를 밑돕니다.':'전주 평판 수준을 유지하고 있습니다.';
+  }
+  function selectModalCase(name, region, snapshotDate){
+    var domain=region==='STAR'?'ENT':region;
+    if(snapshotDate) return (window.BRIDGE_DATED_CASES||{})[domain+'|'+name+'|'+snapshotDate] || null;
+    return (window.BRIDGE_LIVE_CASES||{})[domain+'|'+name] || (window.BRIDGE_PILOT_CASES||{})[name];
+  }
   // Load the current presentation layer explicitly. This also prevents a
   // long-lived edge/browser cache from keeping the former two-column board.
   (function refreshPresentationLayer(){
@@ -33,10 +46,18 @@
       if(!res.ok) throw new Error('snapshot unavailable');
       return res.json();
     }).then(function(payload){
+      if(payload.dataStatus!=='published'||!Array.isArray(payload.rankings)||!payload.rankings.length) throw new Error('invalid published snapshot');
+      var snapshotKeys={};
+      payload.rankings.forEach(function(rec){
+        var key=rec.domain+'|'+rec.ranking_type+'|'+rec.external_id;
+        if(snapshotKeys[key]||rec.score==null||!Number.isFinite(Number(rec.score))||Number(rec.score)<0||Number(rec.score)>100||rec.as_of_date!==payload.asOfDate) throw new Error('inconsistent snapshot');
+        snapshotKeys[key]=true;
+      });
       var rows = (payload.rankings || []).filter(function(r){ return r.ranking_type === 'T100'; });
       rows.sort(function(a,b){ return Number(a.rank)-Number(b.rank) || Number(b.score)-Number(a.score); });
       function esc(v){ var d=document.createElement('div'); d.textContent=String(v==null?'':v); return d.innerHTML; }
       function change(rec){
+        if(rec.previous_rank==null) return '<span class="wow wow-flat">비교대기</span>';
         var d=Number(rec.rank_change||0), cls=d>0?'wow-up':d<0?'wow-down':'wow-flat';
         return '<span class="wow '+cls+'">'+(d>0?'▲ '+d:d<0?'▼ '+Math.abs(d):'— 0')+'</span>';
       }
@@ -46,7 +67,7 @@
         return '<div class="rk-row rk-clickable live-row'+top+'" data-entity="'+esc(rec.name)+'" data-region="'+esc(rec.domain)+'" data-type="T100" data-live-date="'+esc(displayedDate)+'" tabindex="0" role="button">'+
           '<div class="rk-num">'+String(n).padStart(2,'0')+'</div>'+
           '<div class="rk-name"><div class="nm">'+esc(rec.name)+'</div><div class="sub">'+esc(rec.external_id)+' · '+esc(rec.category||'')+' · '+esc(rec.subcategory||'T100')+'</div></div>'+
-          '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div><div class="rk-diagnosis">'+(rec.last_week_index==null?'평판 관측 · 비교 데이터 축적 중':Number(rec.weekly_index||rec.score)>Number(rec.last_week_index)?'최근 평판 흐름이 개선되고 있습니다.':Number(rec.weekly_index||rec.score)<Number(rec.last_week_index)?'단기 평판 조정 신호가 관측되었습니다.':'현재 평판 수준을 유지하고 있습니다.')+'</div>'+
+          '<div class="rk-market">'+esc(rec.subcategory||rec.domain)+'</div><div class="rk-diagnosis">'+esc(snapshotDiagnosis(rec))+'</div>'+
           '<div class="rk-dims"><span class="dm">공개 관측 · '+esc(displayedDate)+'</span></div>'+
           '<div class="rk-score">'+Number(rec.score).toFixed(1)+'</div>'+
           '<div class="rk-wow">'+change(rec)+'</div>'+
@@ -56,7 +77,7 @@
         if(!domain) return;
         domainRows.sort(function(a,b){return Number(a.rank)-Number(b.rank)||Number(b.score)-Number(a.score);});
         domainRows.forEach(function(rec){
-          window.BRIDGE_PILOT_CASES[rec.name] = {
+          var selectedCase = {
             dims:rec.axis_scores||{B:null,R:null,I:null,D:null,G:null,E:null}, score:rec.score,
             axis_status:rec.axis_status,axis_evidence_dates:rec.axis_evidence_dates,
             observed_days:rec.observed_days,collection_ok_days:rec.collection_ok_days,
@@ -66,8 +87,12 @@
             four_week_average:rec.four_week_average, cumulative_activity:rec.cumulative_activity,
             observed_weeks:rec.observed_weeks, stability:rec.stability,
             v3_score:rec.weighted_index, trust:rec.trust_grade, method:'live',
+            snapshot_date:snapshotDate||rec.as_of_date, last_week_index:rec.last_week_index, wow_delta:rec.wow_delta,
             history:rec.last_week_index==null?[]:[{score:rec.last_week_index}]
           };
+          window.BRIDGE_PILOT_CASES[rec.name]=selectedCase;
+          window.BRIDGE_DATED_CASES=window.BRIDGE_DATED_CASES||{};
+          window.BRIDGE_DATED_CASES[domain+'|'+rec.name+'|'+selectedCase.snapshot_date]=selectedCase;
         });
         var prefix=domain==='ENT'?'star':domain.toLowerCase(), panel=document.getElementById(prefix+'-t100');
         if(panel){ panel.innerHTML=domainRows.map(function(rec){return rankRow(rec,snapshotDate);}).join(''); panel.setAttribute('data-shown','1000'); }
@@ -90,7 +115,7 @@
           var cohortCodes=Array.isArray(pair[1])?pair[1]:[pair[1]];
           var subset=domainRows.filter(function(r){return cohortCodes.indexOf(String(r.subcategory||'').toUpperCase())>=0;});
           subset.sort(function(a,b){return Number(b.score)-Number(a.score)||String(a.name).localeCompare(String(b.name),'ko');});
-          subset=subset.map(function(r,i){var copy=Object.assign({},r);copy.rank=i+1;return copy;});
+          subset=subset.map(function(r,i){var copy=Object.assign({},r);copy.rank=i+1;copy.previous_rank=null;copy.rank_change=null;return copy;});
           target.innerHTML=subset.map(function(r){return rankRow(r,snapshotDate);}).join('');
           target.classList.remove('hidden');
         });
@@ -113,9 +138,10 @@
         window.BRIDGE_PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
         renderDomainRows(live,payload.asOfDate||'');
         window.BRIDGE_RENDER_PERIOD=function(start,end){
+          if(!window.BRIDGE_HISTORY) return null;
           var archive=(window.BRIDGE_HISTORY&&window.BRIDGE_HISTORY.rankings)||[];
           var candidates=archive.filter(function(r){return r.domain===domain&&r.as_of_date>=start&&r.as_of_date<=end;});
-          if(!candidates.length){ renderDomainRows(live,payload.asOfDate||''); return false; }
+          if(!candidates.length){ renderDomainRows([],start+' ~ '+end); return false; }
           var latestDate=candidates.reduce(function(a,r){return r.as_of_date>a?r.as_of_date:a;},'');
           renderDomainRows(candidates.filter(function(r){return r.as_of_date===latestDate;}),latestDate);
           return true;
@@ -129,7 +155,7 @@
         function take(d,a,b){return rows.filter(function(r){return r.domain===d&&Number(r.rank)>=a&&Number(r.rank)<=b&&Number(r.rank)<=50;});}
         var seq=[];
         for(var start=1;start<=50;start+=10){seq=seq.concat(take('CPR',start,start+9),take('ENT',start,start+9),take('GOV',start,start+9));}
-        var html=seq.map(function(r){var valid=r.last_week_index!=null&&r.wow_delta!=null,d=valid?Number(r.wow_delta):null;return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d===null?'비교대기':d>0?'+'+d.toFixed(1):d.toFixed(1))+'</i></span>';}).join('');
+        var html=seq.map(function(r){var valid=r.comparison_status==='same_scope'&&r.last_week_index!=null&&r.wow_delta!=null,d=valid?Number(r.wow_delta):null;return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d===null?'비교대기':d>0?'+'+d.toFixed(1):d.toFixed(1))+'</i></span>';}).join('');
         track.innerHTML=html+html;
       }
       // HOME hero TOP 5: the original markup is only a no-JS fallback.
@@ -143,7 +169,7 @@
           var items=top.length ? top.map(function(r){
             var delta=Number(r.rank_change||0);
             var deltaClass=delta>0?'t5-up':delta<0?'t5-down':'t5-flat';
-            var deltaText=delta>0?'▲ '+delta:delta<0?'▼ '+Math.abs(delta):'— 0';
+            var deltaText=r.previous_rank==null?'비교대기':delta>0?'▲ '+delta:delta<0?'▼ '+Math.abs(delta):'— 0';
             return '<li><span class="t5-nm">'+esc(r.name)+'</span><span class="t5-sc">'+Number(r.score).toFixed(1)+'</span><span class="'+deltaClass+'">'+deltaText+'</span></li>';
           }).join('') : '<li class="t5-empty">오늘 공개 기준 충족 대상 없음</li>';
           return '<a class="t5-block" href="'+heroLinks[d]+'"><div class="t5-head">'+d+' <span class="t5-more">TOP 5 →</span></div><ol class="t5-list">'+items+'</ol></a>';
@@ -151,19 +177,27 @@
         heroTop.setAttribute('data-live-date',payload.asOfDate||'');
       }
       // THIS WEEK의 네 영역 TOP 20도 같은 스냅샷으로 교체한다.
+      var weekNote=document.querySelector('.tw-latest');
+      if(weekNote)weekNote.textContent=(payload.asOfDate||'')+' 기준 · 영역별 일별 순위 TOP 20';
       document.querySelectorAll('.twr-col').forEach(function(col){
         var h=col.querySelector('.twr-head'), list=col.querySelector('.twr-list'); if(!h||!list)return;
         var d=(h.textContent.trim().match(/^(CPR|GOV|UNI|ENT)/)||[])[1]; if(!d)return;
         var live=rows.filter(function(r){return r.domain===d;}).slice(0,20);
         list.innerHTML=live.map(function(r){
           var delta=Number(r.rank_change||0), cls=delta>0?'twr-up':delta<0?'twr-down':'twr-flat';
-          var deltaText=delta>0?'▲'+delta:delta<0?'▼'+Math.abs(delta):'—';
-          var tags=(r.diagnosis_tags||[]).slice(0,1).join('');
+          var deltaText=r.previous_rank==null?'비교대기':delta>0?'▲'+delta:delta<0?'▼'+Math.abs(delta):'—';
+          var tags=snapshotDiagnosis(r);
           return '<li class="twr-item '+(Number(r.rank)<=3?'twr-top3':'')+'"><span class="twr-rank">'+r.rank+'</span><span class="twr-name"><b>'+esc(r.name)+'</b><small>'+esc(tags||'현재 평판 수준 관측')+'</small></span><span class="twr-score">'+Number(r.score).toFixed(1)+'<i class="'+cls+'">'+deltaText+'</i></span></li>';
         }).join('');
       });
     }).catch(function(){
       // Never replace the last deployed snapshot with zeroes after a failed run.
+      var notice=document.createElement('div');
+      notice.className='live-snapshot-note';
+      notice.setAttribute('role','status');
+      notice.textContent='최신 공개 데이터 연결을 확인하지 못했습니다. 현재 표시는 배포 시 저장된 자료이며 최신 결과와 다를 수 있습니다.';
+      var main=document.querySelector('main')||document.body;
+      main.insertBefore(notice,main.firstChild);
     });
   })();
 
@@ -291,14 +325,26 @@
       return x.toFixed(1) + ',' + y.toFixed(1);
     }).join(' ');
   }
-  function buildRadarSVG(vals, missing){
+  function buildRadarSVG(vals, missing, references){
     var cx=160, cy=160, maxR=120;
     missing = missing || [];
+    references = references || [];
     var rings = [0.33, 0.66, 1.0].map(function(f){
       return '<polygon points="' + polygonPoints([f*100,f*100,f*100,f*100,f*100,f*100], cx, cy, maxR) + '" fill="none" stroke="#DEDAD1" stroke-width="1"/>';
     }).join('');
     // 결측 축은 레이더 꼭짓점을 작게(흐리게) — 찌그러짐 완화
-    var dataPoly = '<polygon points="' + polygonPoints(vals, cx, cy, maxR) + '" fill="rgba(169,136,79,0.22)" stroke="#a9884f" stroke-width="2"/>';
+    var points=polygonPoints(vals,cx,cy,maxR).split(' ');
+    var axisNames=['B','R','I','D','G','E'];
+    var dataPoly = '<polygon points="'+points.join(' ')+'" fill="rgba(169,136,79,0.12)" stroke="none"/>';
+    dataPoly+=points.map(function(point,i){
+      var next=(i+1)%6, dashed=references.indexOf(axisNames[i])>=0||references.indexOf(axisNames[next])>=0;
+      return '<polyline points="'+point+' '+points[next]+'" fill="none" stroke="'+(dashed?'#999':'#a9884f')+'" stroke-width="2"'+(dashed?' stroke-dasharray="5,4"':'')+'/>';
+    }).join('');
+    dataPoly+=points.map(function(point,i){
+      if(references.indexOf(axisNames[i])<0)return '';
+      var xy=point.split(',');
+      return '<circle cx="'+xy[0]+'" cy="'+xy[1]+'" r="4" fill="white" stroke="#999"><title>'+axisNames[i]+' · 참조 기준 · 대상 평가값 아님</title></circle>';
+    }).join('');
     var labels = ['B','R','I','D','G','E'];
     var angles = [-90,-30,30,90,150,210];
     var labelEls = labels.map(function(l, i){
@@ -323,7 +369,7 @@
   var modalOverlay = document.getElementById('bridgeModalOverlay');
   var modalClose = document.getElementById('bridgeModalClose');
   var PILOT_CASES = window.BRIDGE_PILOT_CASES || {};
-  function openBridgeModal(name, region, type){
+  function openBridgeModal(name, region, type, snapshotDate){
     if(!modalOverlay) return;
     var flagEl = document.getElementById('bridgeModalFlag');
     var evList = document.getElementById('bridgeEvidenceList');
@@ -331,11 +377,11 @@
     var periodLbl = document.getElementById('bmPeriodLabel') || {};
     var wowLbl = document.getElementById('bmWowLabel') || {};
     var cumLbl = document.getElementById('bmCumLabel') || {};
-    var pilot = (window.BRIDGE_LIVE_CASES||{})[(region==='STAR'?'ENT':region)+'|'+name] || PILOT_CASES[name];
+    var pilot = selectModalCase(name,region,snapshotDate);
     document.getElementById('bridgeModalTitle').textContent = name;
     if(pilot){
-      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · BRIDGE 관측 결과 · 신뢰 ' + (pilot.trust || 'N/R');
-      flagEl.textContent = '여섯 축의 상태 프로필입니다. 참조 기준은 대상 실측이 아니며 순위 계산에서 제외됩니다.';
+      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · '+(pilot.snapshot_date||snapshotDate||'현재 공개본')+' · 신뢰 ' + (pilot.trust || 'N/R');
+      flagEl.textContent = '여섯 축의 상태 프로필입니다. 점선·빈 원의 참조 기준은 대상 실측이 아니며 순위 계산에서 제외됩니다.';
       flagEl.style.background = '#e8f3ee';
       flagEl.style.color = '#1d5c42';
       flagEl.style.borderColor = '#2e7d5a';
@@ -343,7 +389,8 @@
       var missingAxes = ['B','R','I','D','G','E'].filter(function(k){ return pilot.dims[k] === null || pilot.dims[k] === undefined; });
       // 결측 축은 0 대신 중앙 근처(8)로 — 찌그러짐 완화, 라벨은 흐리게
       var vals = ['B','R','I','D','G','E'].map(function(k){ var v=pilot.dims[k]; return (v === null || v === undefined) ? 8 : v; });
-      svg.innerHTML = buildRadarSVG(vals, missingAxes);
+      var referenceAxes=['B','R','I','D','G','E'].filter(function(k){return (pilot.axis_status||{})[k]==='reference';});
+      svg.innerHTML = buildRadarSVG(vals, missingAxes, referenceAxes);
       ['B','R','I','D','G','E'].forEach(function(k){
         var v = pilot.dims[k];
         var state=(pilot.axis_status||{})[k];
@@ -387,6 +434,9 @@
         var firstCumulative = pilot.cumulative_performance != null ? pilot.cumulative_performance : weeklyIndex;
         document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + firstCumulative + '</span><span class=\'cum-tail\'> · 관측 ' + (pilot.observed_weeks || 1) + '주</span>';
       }
+      if(pilot.comparison_status !== 'same_scope'){
+        document.getElementById('bmWow').textContent='— · '+scopeMessage(pilot.comparison_status);
+      }
       var isNonVolatile = pilot.method === '비변동성';
       scoreNote.textContent = '평판 수준은 평균으로, 활동은 총량으로 읽습니다. 관측·유지·추정·참조 상태를 구분하며 참조 축은 순위에 반영하지 않습니다.';
       if(pilot.observed_days!=null)scoreNote.textContent+=' 이번 주 평가 가능 '+pilot.observed_days+'일 · 수집 정상 '+(pilot.collection_ok_days==null?'확인 중':pilot.collection_ok_days+'일')+'.';
@@ -425,7 +475,7 @@
     } else {
       // [2026-10] 예시 제거 — 미산출 대상은 N/R로 정직하게 표기
       document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · BRIDGE 모형 다이어그램';
-      flagEl.textContent = '현재 공개 기준(유효 축 2개 이상)을 충족하지 못해 미산출(N/R) 상태입니다. 데이터가 확보되면 자동 산출됩니다.';
+      flagEl.textContent = snapshotDate?'선택한 날짜의 공개 상세 자료를 확인할 수 없습니다. 최신 자료로 대체하지 않습니다.':'공개 상세 근거를 확인할 수 없습니다. 유효 축·출처·신뢰도 등 공개 조건을 충족한 자료만 표시합니다.';
       flagEl.style.background = '';
       flagEl.style.color = '';
       flagEl.style.borderColor = '';
@@ -455,12 +505,12 @@
   // replaces T100 and cohort markup asynchronously.
   document.addEventListener('click', function(e){
     var row=e.target.closest('.rk-clickable');
-    if(row) openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type);
+    if(row) openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type, row.dataset.liveDate);
   });
   document.addEventListener('keydown', function(e){
     var row=e.target.closest && e.target.closest('.rk-clickable');
     if(row && (e.key === 'Enter' || e.key === ' ')){
-      e.preventDefault(); openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type);
+      e.preventDefault(); openBridgeModal(row.dataset.entity, row.dataset.region, row.dataset.type, row.dataset.liveDate);
     }
   });
   if(modalClose) modalClose.addEventListener('click', closeBridgeModal);
@@ -498,7 +548,7 @@
       var list=periods[unit?unit.dataset.unit:(sel.dataset.defaultUnit||'week')]||[];
       var pair=list[Number(rangeSelect.value)];
       var ok=pair&&window.BRIDGE_RENDER_PERIOD?window.BRIDGE_RENDER_PERIOD(pair[0],pair[1]):false;
-      if(status) status.textContent=ok?'선택 기간 · 공개 스냅샷':'해당 기간 N/R';
+      if(status) status.textContent=ok===null?'기간 이력을 불러오는 중입니다. 잠시 후 다시 선택해 주세요.':ok?'선택 기간 안의 마지막 공개일 스냅샷':'해당 기간 N/R';
     });
   });
 

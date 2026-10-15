@@ -10,6 +10,8 @@ on:
     paths:
       - tools/verify_live.py
       - .github/workflows/bridge-live-verify.yml
+      - site/script.js
+      - tests/test_presentation.js
   workflow_dispatch:
 
 permissions:
@@ -31,10 +33,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check public presentation contracts
+        run: |
+          node --check site/script.js
+          node tests/test_presentation.js
       - name: Verify deployed JSON and frontend against current main
         run: |
           set -o pipefail
-          python tools/verify_live.py --attempts 8 --delay 30 | tee live-verification.jsonl
+          python tools/verify_live.py --attempts 6 --delay 30 | tee live-verification.jsonl
       - name: Preserve deployment verification evidence
         if: always()
         uses: actions/upload-artifact@v4

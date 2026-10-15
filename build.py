@@ -10,10 +10,11 @@ with open(os.path.join(_HERE, "data/bridge_data_v2.json"), encoding="utf-8") as 
 WEEK = DATA["week"]
 # 발행일 기반 자동 VOL/WEEK/날짜 표기 (발행일만 바꾸면 자동 갱신)
 import datetime as _dt
+from zoneinfo import ZoneInfo as _ZoneInfo
 _PUB = DATA.get("published") or DATA.get("verifiedAt") or "auto"
 # published가 "auto"이거나 비어있으면 빌드하는 날(오늘)을 자동 사용 — 재배포 시 날짜 자동 갱신
 if _PUB in ("auto", "", None):
-    _pubdate = _dt.date.today()
+    _pubdate = _dt.datetime.now(_ZoneInfo('Asia/Seoul')).date()
 else:
     _pubdate = _dt.date.fromisoformat(_PUB)
 _iso = _pubdate.isocalendar()
@@ -242,7 +243,7 @@ def footer(page_key):
     <p class="footer-note">{note}</p>
   </div>
 </footer>
-<script src="script.js?v=20261014-v5-evidence" defer></script>
+<script src="script.js?v=20261015-v5-recovery" defer></script>
 </body>
 </html>'''
 
