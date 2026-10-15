@@ -36,6 +36,16 @@ class PublicityTests(unittest.TestCase):
  def test_example_is_distinct_from_formal(self):
   a,s=articles_for(self.history('2026-10-14'),dt.date(2026,10,14),True)
   self.assertEqual(len(a),1);self.assertTrue(a[0]['is_example']);self.assertTrue(a[0]['id'].endswith('-example'));self.assertEqual({r['domain'] for r in s['rows']},{'CPR'})
+ def test_invalid_axes_and_unvalidated_estimates_block(self):
+  h=self.history();h['rankings'][0]['axis_scores']['E']=float('nan')
+  with self.assertRaisesRegex(ValueError,'Invalid axis'):articles_for(h,dt.date(2026,10,16))
+  h=self.history();h['rankings'][0]['axis_status']['E']='estimated'
+  with self.assertRaisesRegex(ValueError,'Unvalidated estimated'):articles_for(h,dt.date(2026,10,16))
+ def test_low_responsibility_not_described_as_high(self):
+  h=self.history()
+  for r in h['rankings']:r['axis_scores']['E']=13.3
+  a,s=articles_for(h,dt.date(2026,10,16))
+  self.assertNotIn('두 축의 값이 높다는',json.dumps(a,ensure_ascii=False))
  def test_input_values_are_not_mutated(self):
   h=self.history();old=copy.deepcopy(h);articles_for(h,dt.date(2026,10,16));self.assertEqual(h,old)
 if __name__=='__main__':unittest.main()

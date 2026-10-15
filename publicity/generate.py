@@ -41,6 +41,15 @@ def freeze(history, spec):
         keys.add(key)
         if r['score'] is None or not math.isfinite(float(r['score'])) or not 0<=float(r['score'])<=100:raise ValueError('Invalid public score')
         if set(r.get('axis_status') or {})!=set(AXES):raise ValueError('Missing evidence-state contract')
+        if any(state not in ('observed','maintained','reference') for state in r['axis_status'].values()):raise ValueError('Unvalidated estimated axis requires editorial review')
+        for axis in AXES:
+            value=(r.get('axis_scores') or {}).get(axis)
+            if not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<=value<=100:raise ValueError('Invalid axis value')
+        for field in ('weekly_index','last_week_index'):
+            value=r.get(field)
+            if value is not None and (not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<=value<=100):raise ValueError('Invalid period level')
+        value=r.get('activity_points')
+        if value is not None and (not isinstance(value,(int,float)) or not math.isfinite(value) or value<0):raise ValueError('Invalid activity amount')
     # Do not turn yesterday's snapshot into today's scheduled analysis.
     for domain in DOMAINS:
         if not any(r['domain']==domain and r['as_of_date']==through for r in rows):raise ValueError(f'{domain}: required observation date {through} missing; publication held')
@@ -70,7 +79,7 @@ def domain_content(snapshot,domain):
       f"{snapshot['period_through']} 기준 {domain} 공개 적격 대상은 {len(members)}개다. 선두 {leader['name']}의 일별 지수는 {leader['score']:.1f}점이며, 공개 대상의 일별 지수 평균은 {mean:.1f}점이다. 이 평균은 공개 적격 집합의 설명값으로, 전체 분야나 비공개 대상을 대표하지 않는다.",
       f"이번 기사는 {snapshot['period_from']}부터 {snapshot['period_through']}까지 중 실제 자료가 확보된 {len(dates)}개 날짜를 바탕으로 작성했다. 일별 순위를 주간 확정 순위로 바꾸어 소개하지 않으며, 분석 주차와 자료 마감일을 구분한다."]},
       {'heading':'여섯 축의 관계 — 강점과 관측 공백을 함께 보기','paragraphs':[
-      f"{leader['name']}은 유효 근거가 있는 축 중 {AXES[high]} {leader['axis_scores'][high]:.1f}점이 가장 높고, {AXES[low]} {leader['axis_scores'][low]:.1f}점이 가장 낮다. 이는 이 대상의 관측된 프로필 안에서 읽는 차이이며, 특정 행위가 다른 축을 변화시켰다는 인과관계는 아니다." if high else '대상별 축 해석에 필요한 근거를 추가 확인해야 한다.',
+      f"{leader['name']}의 프로필에서는 유효 근거가 있는 축 중 {AXES[high]} {leader['axis_scores'][high]:.1f}점이 가장 높고, {AXES[low]} {leader['axis_scores'][low]:.1f}점이 가장 낮다. 이는 이 대상의 관측된 프로필 안에서 읽는 차이이며, 특정 행위가 다른 축을 변화시켰다는 인과관계는 아니다." if high else '대상별 축 해석에 필요한 근거를 추가 확인해야 한다.',
       f"공개 대상 가운데 {AXES[strong]}은 {coverage[strong]}개, {AXES[weak]}은 {coverage[weak]}개 대상에서 관측·유지 근거가 확인된다. 근거가 적다는 사실은 그 관계 요소가 나쁘다는 뜻이 아니다. 확보하지 못한 반응을 부정 반응으로, 경험 자료의 부재를 나쁜 경험으로 해석하지 않는다."]},
       {'heading':'순위 밖의 관찰 지점 — 다른 관계 구성을 찾다','paragraphs':[]},
       {'heading':'활동과 지속성 — 많이 발생한 일과 높은 평판을 분리하다','paragraphs':[
@@ -80,7 +89,7 @@ def domain_content(snapshot,domain):
     candidates=[r for r in lower if usable(r,'D') and usable(r,'E')]
     if candidates:
         other=max(candidates,key=lambda r:(r['axis_scores']['D']+r['axis_scores']['E'],r['external_id']))
-        sections[2]['paragraphs']=[f"공개 순위 {other['rank']}위인 {other['name']}은 경험 {other['axis_scores']['D']:.1f}점, 책임·지속 {other['axis_scores']['E']:.1f}점의 프로필을 보인다. 선두권에 들지 않았더라도 이처럼 확인된 관계 요소를 별도로 읽을 수 있다. 두 축의 값이 높다는 사실만으로 미래 순위 상승을 예측하지는 않는다."]
+        sections[2]['paragraphs']=[f"공개 순위 {other['rank']}위인 {other['name']}은 경험 {other['axis_scores']['D']:.1f}점, 책임·지속 {other['axis_scores']['E']:.1f}점의 프로필을 보인다. 선두권에 들지 않았더라도 이처럼 확인된 관계 요소를 별도로 읽을 수 있다. 이러한 축별 수치만으로 미래 순위 상승을 예측하지는 않는다."]
     else:
         other=members[-1]
         sections[2]['paragraphs']=[f"공개 순위 {other['rank']}위인 {other['name']} 역시 유효 근거가 있는 축의 구성과 관측 범위를 함께 보아야 한다. 현재 자료에서는 경험과 책임을 함께 비교할 하위권 사례가 충분하지 않아, 순위를 보완할 강점을 임의로 부여하지 않았다."]
@@ -109,6 +118,7 @@ def articles_for(history,publication_date,example=False):
             content['sections'].append({'heading':'다음 주에 확인할 신호','paragraphs':['네 영역은 관측 대상과 자료의 성격이 달라 점수의 단순 비교로 분야의 우열을 판단할 수 없다. 공통으로 살펴볼 것은 관심이 반응·경험·행동과 어떤 구성을 보이는지, 그리고 근거 범위가 유지되는지다.','이번 종합본은 전주에 실제로 관측된 자료만 사용한다. 날짜가 비어 있거나 새 방법론의 비교 이력이 짧은 경우에는 한 주 전체의 변화나 지속성을 확정하지 않는다.']})
         else:content=domain_content(snapshot,domain)
         payload={**content,'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
+        if example:payload['revision_note']='예시 문장 검수본입니다. 표현을 교정했으며 수치와 입력 스냅샷은 동일합니다.'
         if example:payload['standfirst']='샘플 · 실제 10월 14일 공개 데이터를 바탕으로 구성한 형식 예시입니다. 정식 발행본이 아닙니다. '+payload['standfirst']
         article={'id':f"{spec['week'].lower()}-{spec['slot'].lower()}-{domain.lower()}"+('-example' if example else ''),'issue_week':spec['week'],'slot':spec['slot'],'domain':domain,'scheduled_at':(dt.datetime.now(KST) if example else spec['scheduled_at']).isoformat(),'is_example':example,'payload':payload,'snapshot_hash':digest}
         articles.append(article)

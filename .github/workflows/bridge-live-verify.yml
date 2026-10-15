@@ -43,7 +43,7 @@ jobs:
       - name: Verify deployed JSON and frontend against current main
         run: |
           set -o pipefail
-          python tools/verify_live.py --attempts 5 --delay 30 | tee live-verification.jsonl
+          python tools/verify_live.py --attempts 3 --delay 30 | tee live-verification.jsonl
       - name: Preserve deployment verification evidence
         if: always()
         uses: actions/upload-artifact@v4

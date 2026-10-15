@@ -28,7 +28,7 @@ def verify(origin):
         expected = (ROOT / 'site' / name).read_bytes()
         result = subprocess.run(
             ['curl', '--fail', '--silent', '--show-error', '--location',
-             '--connect-timeout', '5', '--max-time', '10',
+             '--connect-timeout', '10', '--max-time', '20',
              '--header', 'Cache-Control: no-cache', origin.rstrip('/') + ('/' if name == 'index.html' else '/' + name)],
             capture_output=True, check=False)
         item = {'path': name, 'expected_sha256': hashlib.sha256(expected).hexdigest(),
