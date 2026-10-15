@@ -56,3 +56,4 @@ Deployment acceptance: sample visible, future article probe invisible and remove
 - LIVE ticker uses a valid same-scope weekly comparison when available; otherwise the highest valid axis and valid-axis count. Reference axes never become observed findings. No comparison history is invented.
 - Legacy `bridge_full_site.html` entry routes to canonical pages, preserving recognized view hashes. This prevents an independent stale copy from reappearing in the daily build. `site_fix` mirrors share the new footer.
 - Responsive QA page offers 360/390/430px frames. Embedded checks assess responsive CSS; these do not replace real iOS/Android device testing.
+- Live inspection also found that the initial HTML still showed legacy pilot values before JavaScript loaded. The home TOP5 and initial ticker now read the same published `latest.json`; unavailable input produces a connection notice rather than pilot results.

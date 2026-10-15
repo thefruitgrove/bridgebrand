@@ -118,14 +118,9 @@ def ticker_items():
     return items
 
 def ticker_html():
-    items = ticker_items()
-    def item_span(tag, name):
-        pilot = build_pilot.REAL_PILOT_CASES.get(name)
-        if pilot:
-            return f'<span><b>{tag}</b>{esc(name)} <span class="t-score">{pilot["score"]}</span></span>'
-        return f'<span><b>{tag}</b>{esc(name)} <span class="t-flat">N/R</span></span>'
-    spans = [item_span(tag, name) for tag, name in items]
-    all_spans = "\n    ".join(spans)
+    from presentation.home import published_rows
+    rows=published_rows(os.path.join(OUT,'data/latest.json'))
+    all_spans=''.join(f'<span><b>{esc(r["domain"])}</b>{esc(r["name"])} <span class="t-score">{r["score"]:.1f}</span></span>' for r in rows if r['domain'] in ('CPR','GOV','ENT') and int(r['rank'])<=50) or '<span>공개 지수 연결을 확인하고 있습니다.</span>'
     return f'''
 <div class="ticker">
   <button class="ticker-toggle" id="tickerToggle" aria-label="일시정지">LIVE ⏸</button>
@@ -188,7 +183,7 @@ def head(title, desc=None):
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261015-editorial">
+<link rel="stylesheet" href="style.css?v=20261015-editorial2">
 </head>
 <body>'''
 
@@ -234,7 +229,7 @@ def footer(page_key):
     <p class="footer-note">{note}</p>
   </div>
 </footer>
-<script src="script.js?v=20261015-editorial" defer></script>
+<script src="script.js?v=20261015-editorial2" defer></script>
 </body>
 </html>'''
 
@@ -245,46 +240,8 @@ def footer(page_key):
 # the navy/card source files confirmed earlier. The underlying data/content logic (leader
 # card pulling from real CPR data, ticker, nav) is unchanged — only the visual skin.
 def home_top5_html():
-    """홈 우측: 도메인별 공개 점수 TOP5 + 주간 업앤다운(이력 있는 것만)."""
-    import uni_real as _uni
-    R = build_pilot.REAL_PILOT_CASES
-    cpr_set = set(t[0] for t in build_pilot.CPR_REAL)
-    gov_set = set(t[0] for t in build_pilot.GOV_REAL)
-    ent_set = set(t[0] for t in build_pilot.STAR_REAL)
-    uni_set = set(t[0] for t in _uni.UNI_4YEAR) | set(t[0] for t in _uni.UNI_2YEAR)
-    def measured_cnt(n):
-        return len([v for v in R[n]["dims"].values() if v is not None])
-    def top5(names):
-        pub = [(n, R[n]["score"]) for n in names if n in R and measured_cnt(n) >= 2]
-        return sorted(pub, key=lambda x: (-x[1], x[0]))[:5]
-    def wow_html(name):
-        rec = R.get(name, {})
-        hist = rec.get("history")
-        if hist:
-            prev = hist[-1].get("score")
-            if prev is not None:
-                d = round(rec["score"] - prev, 1)
-                if d > 0:  return f'<span class="t5-up">▲ {abs(d)}</span>'
-                if d < 0:  return f'<span class="t5-down">▼ {abs(d)}</span>'
-                return '<span class="t5-flat">—</span>'
-        return '<span class="t5-flat">—</span>'
-    domains = [("CPR", cpr_set, "cpr.html"), ("GOV", gov_set, "gov.html"),
-               ("UNI", uni_set, "uni.html"), ("ENT", ent_set, "star.html")]
-    blocks = []
-    for tag, names, href in domains:
-        rows = top5(names)
-        if rows:
-            lis = "".join(
-                f'<li><span class="t5-nm">{esc(n)}</span>'
-                f'<span class="t5-sc">{sc}</span>{wow_html(n)}</li>'
-                for n, sc in rows)
-        else:
-            lis = '<li class="t5-empty">공개 대상 없음 (근거 축 2개 미만)</li>'
-        blocks.append(
-            f'<a class="t5-block" href="{href}">'
-            f'<div class="t5-head">{tag} <span class="t5-more">TOP 5 →</span></div>'
-            f'<ol class="t5-list">{lis}</ol></a>')
-    return '<div class="hero-top5">' + "".join(blocks) + '</div>'
+    from presentation.home import published_rows, render_home
+    return render_home(published_rows(os.path.join(OUT,'data/latest.json')))
 
 def build_hero():
     cpr_count = len(build_pilot.CPR_REAL)
