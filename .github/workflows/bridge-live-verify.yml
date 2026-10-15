@@ -17,13 +17,12 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: bridge-live-verification
-  cancel-in-progress: true
-
 jobs:
   verify-live:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    concurrency:
+      group: bridge-live-verification
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
