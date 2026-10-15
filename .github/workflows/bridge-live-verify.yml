@@ -1,0 +1,48 @@
+name: BRIDGE Live Deployment Verification
+
+on:
+  workflow_run:
+    workflows: [BRIDGE Daily Pipeline]
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - tools/verify_live.py
+      - .github/workflows/bridge-live-verify.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-live-verification
+  cancel-in-progress: true
+
+jobs:
+  verify-live:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify deployed JSON and frontend against current main
+        run: |
+          set -o pipefail
+          python tools/verify_live.py --attempts 8 --delay 30 | tee live-verification.jsonl
+      - name: Preserve deployment verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bridge-live-verification
+          path: live-verification.jsonl
+      - name: Explain verification boundary
+        if: always()
+        run: |
+          echo '### BRIDGE deployment verification' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This job reads the live JSON, index.html and script.js and compares their SHA-256 with checked-out main. It never collects data, writes to the database or deploys. Failure means publication is unverified; inspect the artifact before taking recovery action.' >> "$GITHUB_STEP_SUMMARY"
