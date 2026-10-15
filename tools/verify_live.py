@@ -9,7 +9,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ('data/latest.json', 'index.html', 'script.js')
+FILES = ('data/latest.json', 'index.html', 'script.js', 'style.css', 'publicity.html', 'publicity-article.html', 'publicity.js', 'publicity.css', 'publicity-config.js')
 
 
 def compare(expected, actual, name=''):
@@ -28,7 +28,7 @@ def verify(origin):
         expected = (ROOT / 'site' / name).read_bytes()
         result = subprocess.run(
             ['curl', '--fail', '--silent', '--show-error', '--location',
-             '--connect-timeout', '10', '--max-time', '25',
+             '--connect-timeout', '5', '--max-time', '10',
              '--header', 'Cache-Control: no-cache', origin.rstrip('/') + ('/' if name == 'index.html' else '/' + name)],
             capture_output=True, check=False)
         item = {'path': name, 'expected_sha256': hashlib.sha256(expected).hexdigest(),

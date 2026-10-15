@@ -38,10 +38,12 @@ jobs:
         run: |
           node --check site/script.js
           node tests/test_presentation.js
+          node --check site/publicity.js
+          python tools/verify_publicity.py
       - name: Verify deployed JSON and frontend against current main
         run: |
           set -o pipefail
-          python tools/verify_live.py --attempts 6 --delay 30 | tee live-verification.jsonl
+          python tools/verify_live.py --attempts 5 --delay 30 | tee live-verification.jsonl
       - name: Preserve deployment verification evidence
         if: always()
         uses: actions/upload-artifact@v4

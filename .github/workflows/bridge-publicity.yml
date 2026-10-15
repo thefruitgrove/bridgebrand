@@ -1,0 +1,55 @@
+name: BRIDGE PUBLICITY Scheduled Editorial
+
+on:
+  schedule:
+    - cron: '30 1 * * 1,3,5' # 10:30 KST prepare
+    - cron: '15,45 2 * * 1,3,5' # 11:15 and 11:45 KST recovery
+    - cron: '10,40 3 * * 1,3,5' # delayed-input recovery; disclosed as delayed
+  workflow_dispatch:
+    inputs:
+      publication_date:
+        description: 'KST publication date YYYY-MM-DD (blank: today)'
+        required: false
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - 'publicity/**'
+      - 'tests/test_publicity.py'
+      - '.github/workflows/bridge-publicity.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-publicity-editorial
+  cancel-in-progress: false
+
+jobs:
+  validate-and-prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      PUBLICATION_DATE: ${{ inputs.publication_date }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Editorial contract tests
+        run: python -m unittest discover -s tests -p test_publicity.py -v
+      - name: Prepare the due edition atomically
+        if: ${{ github.event_name != 'push' }}
+        run: python -m publicity.generate ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
+      - name: Validate published article access
+        run: python tools/verify_publicity.py
+      - name: Publication summary
+        if: always()
+        run: |
+          echo '### PUBLICITY editorial' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Missing required observation dates block preparation; existing published articles are not overwritten.' >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,1 @@
+window.BRIDGE_PUBLICITY_CONFIG={"url":"https://gorlbfqvyxtdsxgoqinf.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdvcmxiZnF2eXh0ZHN4Z29xaW5mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MTc3MDIsImV4cCI6MjEwNzA5MzcwMn0.-NUg7XGnnrqdR8oxWPkT4k3mrdCvLHDrNSsLm7GrUfQ","launchDate":"2026-10-16","timezone":"Asia/Seoul"};

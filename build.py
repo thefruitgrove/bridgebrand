@@ -349,7 +349,7 @@ def build_hero():
       </div>
       <div class="hero-explore">
         <div class="hero-tower-inline">{home_top5_html()}</div>
-        <a class="btn" href="this-week.html">EXPLORE THIS WEEK ↓</a>
+        <div class="hero-actions"><a class="btn" href="this-week.html">EXPLORE THIS WEEK ↓</a><a class="btn publicity-link" href="publicity.html">PUBLICITY</a></div>
       </div>
     </div>
   </div>
@@ -883,3 +883,7 @@ for _public_file in ("cpr.html", "gov.html", "uni.html", "star.html", "methodolo
                      "this-week.html", "script.js", "style.css"):
     _shutil.copy2(os.path.join(OUT, _public_file), os.path.join(_site_fix, _public_file))
 print("data-extraction.html written")
+
+# PUBLICITY is built from the same brand shell, without internal score inputs.
+from publicity.build import build_publicity
+build_publicity(head, base_header, footer)

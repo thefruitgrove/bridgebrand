@@ -1008,3 +1008,4 @@ footer .logo .op{ color:#7c86a0;}
 /* V5 evidence states stay visible on narrow screens. */
 .axis-reference{color:#777!important;font-size:13px!important;white-space:normal;}
 @media(max-width:640px){.bm-val{white-space:normal;overflow-wrap:anywhere;}}
+.hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;align-items:start}.hero-actions .btn{justify-self:start;white-space:nowrap}.hero-actions .publicity-link{color:#dbc397}
