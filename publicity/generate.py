@@ -42,6 +42,7 @@ def freeze(history, spec):
         if r['score'] is None or not math.isfinite(float(r['score'])) or not 0<=float(r['score'])<=100:raise ValueError('Invalid public score')
         if set(r.get('axis_status') or {})!=set(AXES):raise ValueError('Missing evidence-state contract')
         if any(state not in ('observed','maintained','reference') for state in r['axis_status'].values()):raise ValueError('Unvalidated estimated axis requires editorial review')
+        if sum(state in ('observed','maintained') for state in r['axis_status'].values())<2:raise ValueError('Insufficient measured axes in public input')
         for axis in AXES:
             value=(r.get('axis_scores') or {}).get(axis)
             if not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<=value<=100:raise ValueError('Invalid axis value')

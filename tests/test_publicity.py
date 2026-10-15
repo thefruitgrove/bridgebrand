@@ -46,6 +46,9 @@ class PublicityTests(unittest.TestCase):
   for r in h['rankings']:r['axis_scores']['E']=13.3
   a,s=articles_for(h,dt.date(2026,10,16))
   self.assertNotIn('두 축의 값이 높다는',json.dumps(a,ensure_ascii=False))
+ def test_reference_only_profile_cannot_be_interpreted_as_public_score(self):
+  h=self.history();h['rankings'][0]['axis_status']={a:'reference' for a in 'BRIDGE'}
+  with self.assertRaisesRegex(ValueError,'Insufficient measured axes'):articles_for(h,dt.date(2026,10,16))
  def test_input_values_are_not_mutated(self):
   h=self.history();old=copy.deepcopy(h);articles_for(h,dt.date(2026,10,16));self.assertEqual(h,old)
 if __name__=='__main__':unittest.main()
