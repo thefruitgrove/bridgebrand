@@ -265,7 +265,7 @@ def home_top5_html():
         return len([v for v in R[n]["dims"].values() if v is not None])
     def top5(names):
         pub = [(n, R[n]["score"]) for n in names if n in R and measured_cnt(n) >= 2]
-        return sorted(pub, key=lambda x: -x[1])[:5]
+        return sorted(pub, key=lambda x: (-x[1], x[0]))[:5]
     def wow_html(name):
         rec = R.get(name, {})
         hist = rec.get("history")

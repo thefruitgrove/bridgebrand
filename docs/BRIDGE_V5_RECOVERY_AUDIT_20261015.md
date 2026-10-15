@@ -21,7 +21,8 @@ Authority: BRIDGE_whitepaper_v5, dated 2026-10-14. Document version and engine v
 4. Radar reference edges use dashes and hollow points; reference values stay excluded from ranking inputs. The display reference 50 remains a beta presentation convention, not measured neutral reputation or a validated estimate.
 5. Fetch/contract failure keeps deployed fallback data and explicitly identifies it as unverified current data.
 6. Cohort re-ranking never reuses T100 rank movement. Missing prior ranks are shown as comparison pending. THIS WEEK identifies its daily ranking basis.
-7. Static masthead generation uses Asia/Seoul rather than the build host timezone. Script cache version updated.
+7. Static TOP5 ties use a stable name tie-break instead of set iteration order; two builds with different PYTHONHASHSEED values produce identical index hashes.
+8. Static masthead generation uses Asia/Seoul rather than the build host timezone. Script cache version updated.
 
 ## Whitepaper acceptance status
 
