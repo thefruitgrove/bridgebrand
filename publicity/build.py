@@ -2,7 +2,7 @@
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def build_publicity(head,header,footer):
-    body='''<link rel="stylesheet" href="publicity.css?v=20261015-1">
+    body='''<link rel="stylesheet" href="publicity.css?v=20261015-2">
 <main class="pub-shell">
   <section class="pub-cover">
     <a class="pub-back" href="index.html">BRIDGE / SIGNALBRIDGE</a>
@@ -22,6 +22,6 @@ def build_publicity(head,header,footer):
   </article>
   <div class="pub-note">PUBLICITY는 공개자료에서 관측한 관계와 신호를 해석합니다. 순위는 모든 가치를 판정하지 않으며, 관측 공백은 부정 평가와 다릅니다.</div>
 </main>
-<script src="publicity-config.js?v=1" defer></script><script src="publicity.js?v=20261015-1" defer></script>'''
+<script src="publicity-config.js?v=1" defer></script><script src="publicity.js?v=20261015-2" defer></script>'''
     shell=head('BRIDGE — PUBLICITY')+header('PUBLICITY')+body+footer('index')
     for name in ('publicity.html','publicity-article.html'):(ROOT/'site'/name).write_text(shell)
