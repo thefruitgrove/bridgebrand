@@ -11,7 +11,7 @@ def main():
  url=config['url']+'/rest/v1/bridge_publicity_articles?select=id,scheduled_at,is_example,payload&order=scheduled_at.desc&limit=240'
  result=subprocess.run(['curl','--fail','--silent','--show-error','--max-time','30',*headers,url],capture_output=True,check=True)
  rows=json.loads(result.stdout)
- assert isinstance(rows,list) and any(r['id']=='2026-w42-wed-cpr-example' for r in rows),'Example not accessible'
+ assert isinstance(rows,list) and all(any(r['id']=='2026-w42-wed-'+d+'-example' for r in rows) for d in ('cpr','ent')),'Example not accessible'
  import datetime as dt
  now=dt.datetime.now(dt.timezone.utc)
  assert all(dt.datetime.fromisoformat(r['scheduled_at'].replace('Z','+00:00'))<=now for r in rows),'Future article leaked'

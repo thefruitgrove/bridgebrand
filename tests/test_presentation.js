@@ -32,3 +32,9 @@ context.openBridgeModal('기업A','CPR','T100','2026-09-01');
 assert.equal(cells.bmIndexPoint.textContent,'N/R','missing historical record must not fall back to current');
 assert.match(cells.bridgeModalFlag.textContent,/최신 자료로 대체하지 않습니다/);
 console.log('Presentation regressions passed: dated modal, missing history, scope-limited comparisons, reference radar, zero values.');
+
+const tickerStart=source.indexOf('      function tickerEvidence('), tickerEnd=source.indexOf('      // 주식시황형 LIVE',tickerStart);
+vm.runInContext('function esc(x){return String(x)};'+source.slice(tickerStart,tickerEnd),context);
+assert.equal(context.tickerEvidence({axis_status:{B:'observed',R:'reference',E:'maintained'},axis_scores:{B:61,R:100,E:72}}),'E 72.0 · 유효 2축');
+assert(!source.slice(source.indexOf('// 주식시황형 LIVE'),source.indexOf('// HOME hero')).includes('비교대기'));
+console.log('Ticker uses valid weekly comparison or actual evidence; reference values excluded.');

@@ -49,6 +49,14 @@ class PublicityTests(unittest.TestCase):
  def test_reference_only_profile_cannot_be_interpreted_as_public_score(self):
   h=self.history();h['rankings'][0]['axis_status']={a:'reference' for a in 'BRIDGE'}
   with self.assertRaisesRegex(ValueError,'Insufficient measured axes'):articles_for(h,dt.date(2026,10,16))
+ def test_ent_sample_and_news_attribution(self):
+  a,s=articles_for(self.history('2026-10-14'),dt.date(2026,10,14),True,'ENT')
+  self.assertEqual(a[0]['domain'],'ENT');self.assertEqual({r['domain'] for r in s['rows']},{'ENT'})
+  prose=' '.join(t for section in a[0]['payload']['sections'] for t in section['paragraphs'])
+  self.assertEqual(prose.count('SIGNALBRIDGE BRIDGE 브랜드평판지수 INDEX에 따르면'),1)
+ def test_public_article_hides_internal_snapshot_identifier(self):
+  source=(Path(__file__).resolve().parents[1]/'site/publicity.js').read_text()
+  self.assertNotIn('입력 식별:',source);self.assertNotIn('작성 시점의 입력본',source)
  def test_input_values_are_not_mutated(self):
   h=self.history();old=copy.deepcopy(h);articles_for(h,dt.date(2026,10,16));self.assertEqual(h,old)
 if __name__=='__main__':unittest.main()

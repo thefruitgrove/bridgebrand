@@ -46,3 +46,13 @@ The source repository is public: do not place future drafts, private snapshots, 
 Regular preparation is python -m publicity.generate; manual date uses --date YYYY-MM-DD. The existing repository secret SUPABASE_SECRET_KEY is used only in the GitHub runner. No additional provider key is required. Check the PUBLICITY workflow failure log first, then exact observation-date coverage, then the public table's scheduled_at/status and anonymous API. Never lower evidence gates to meet article count.
 
 Deployment acceptance: sample visible, future article probe invisible and removed, anon writes and private snapshot access denied, duplicate preparation idempotent, Friday four/Monday one and ISO-week rollover tested, existing score tests pass, live assets match.
+
+## 2026-10-15 editorial and public-copy revision
+
+- Rule writer 1.1 now uses a news lead, named profile contrasts, activity findings and qualified follow-up questions. Attribution names SIGNALBRIDGE BRIDGE 브랜드평판지수 INDEX once per domain article.
+- CPR example wording revised without changing its frozen data; ENT example added from actual October 14 v5 public data. Formal published articles remain protected from automatic overwrite.
+- Input hash and snapshot-storage explanation are retained internally, removed from visible article copy. Private input remains outside public article data.
+- Public explanations are centralized in `presentation/public_copy.py`, including the shared footer. Thresholds, coefficients and collection strategies are not disclosed. Unverified claims of statistical independence, perfect bias removal and fully established organizational separation are removed.
+- LIVE ticker uses a valid same-scope weekly comparison when available; otherwise the highest valid axis and valid-axis count. Reference axes never become observed findings. No comparison history is invented.
+- Legacy `bridge_full_site.html` entry routes to canonical pages, preserving recognized view hashes. This prevents an independent stale copy from reappearing in the daily build. `site_fix` mirrors share the new footer.
+- Responsive QA page offers 360/390/430px frames. Embedded checks assess responsive CSS; these do not replace real iOS/Android device testing.

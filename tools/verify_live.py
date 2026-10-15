@@ -9,7 +9,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ('data/latest.json', 'index.html', 'script.js', 'style.css', 'publicity.html', 'publicity-article.html', 'publicity.js', 'publicity.css', 'publicity-config.js')
+FILES = ('data/latest.json', 'index.html', 'script.js', 'style.css', 'publicity.html', 'publicity-article.html', 'publicity.js', 'publicity.css', 'publicity-config.js', 'methodology.html', 'trust.html', 'about.html', 'data-extraction.html', 'data/publicity-example.json', 'bridge_full_site.html')
 
 
 def compare(expected, actual, name=''):

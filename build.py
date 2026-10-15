@@ -188,7 +188,7 @@ def head(title, desc=None):
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261014-readable">
+<link rel="stylesheet" href="style.css?v=20261015-editorial">
 </head>
 <body>'''
 
@@ -215,17 +215,8 @@ def base_header(active):
 
 PRE_INDEX_NOTICE = "본 결과는 BRIDGE 모형의 초기 데이터 파이프라인을 검증하기 위한 예비지수이며, 데이터 범위와 신뢰등급에 따라 순위가 수정될 수 있습니다."
 
-FOOTER_NOTES = {
-    "index": "시그널브릿지(SIGNALBRIDGE)는 브랜드의 가치가 단순히 &lsquo;얼마나 자주 입에 오르내리는지&rsquo;나 &lsquo;규모가 얼마나 큰지&rsquo;로 결정될 수 없다고 믿습니다. 화제성 뒤에 가려진 진짜 목소리를 입체적으로 읽어내기 위해, 시그널브릿지는 독자적인 분석 솔루션 &lsquo;BRIDGE 브랜드평판지수&rsquo;를 선보입니다. 하나의 뭉뚱그려진 점수로 모든 대상을 줄 세우는 방식은 이제 의미가 없습니다. 시그널브릿지는 평가 대상을 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 4개 영역으로 세분화하여 각기 다른 환경과 맥락에 맞춘 &lsquo;맞춤형 잣대&rsquo;를 적용합니다. 나아가 도달(B), 반응(R), 정체성(I), 경험(D), 행동유발(G), 책임·지속(E)이라는 6개의 독립적인 렌즈로 브랜드를 둘러싼 정보와 데이터를 정밀 분해하여, 왜곡 없는 브랜드의 본연의 가치와 내일의 경쟁력을 투명하게 비춥니다.",
-    "cpr": "본 페이지는 서비스 출시 전 제작된 샘플 화면입니다. 화면에 표시된 대상명과 수치는 데모를 위해 임의로 구성한 가상의 예시이며, 실제 기업·인물·기관의 평판과 무관합니다. 본 지수는 공개 접근 데이터에 대한 통계적 분석이며, 사실판단·법률판단·투자판단을 대신하지 않습니다.",
-    "star": "본 페이지는 서비스 출시 전 제작된 샘플 화면입니다. 화면에 표시된 인물명과 수치는 데모를 위해 임의로 구성한 가상의 예시이며, 실제 인물의 평판과 무관합니다. 인물 이미지는 초상권 확인 전이므로 추상 데이터 아트로 대체했습니다.",
-    "gov": "본 페이지는 서비스 출시 전 제작된 샘플 화면입니다. 화면에 표시된 기관명과 수치는 데모를 위해 임의로 구성한 가상의 예시이며, 실제 기관의 평판과 무관합니다. 본 지수는 정책 찬반이 아닌 소통·설명책임에 대한 통계적 분석입니다.",
-    "methodology": "본 페이지는 서비스 출시 전 제작된 샘플 화면입니다. 표기된 버전·정정 이력은 데모를 위한 예시입니다.",
-    # trust/about: no real source provided yet — reuse the index/cpr-family note as the
-    # closest match until the real files are confirmed (flagged in CHANGELOG).
-    "trust": "",
-    "about": "",
-}
+from presentation.public_copy import FOOTER_COPY, INDEX, TRUST, TRACE, ABOUT
+FOOTER_NOTES = {"index": FOOTER_COPY}
 
 def footer(page_key):
     note = FOOTER_NOTES["index"]  # 모든 페이지 하단 문구를 SignalBridge 소개로 통일
@@ -243,7 +234,7 @@ def footer(page_key):
     <p class="footer-note">{note}</p>
   </div>
 </footer>
-<script src="script.js?v=20261015-v5-recovery" defer></script>
+<script src="script.js?v=20261015-editorial" defer></script>
 </body>
 </html>'''
 
@@ -501,127 +492,15 @@ uni_html = uni_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>"
 with open(f"{OUT}/uni.html","w",encoding="utf-8") as f: f.write(uni_html)
 
 # ---------- INDEX(methodology) 페이지: 5단 구성 (철학·무기·렌즈+표·원칙·자정) ----------
-INDEX_BODY = '''
-<section class="section tw-about idx-about">
-  <div class="wrap">
-    <h2 class="tw-about-h">이 페이지에 대하여</h2>
-    <p class="tw-about-p">우리는 순위를 흥정하지 않습니다. 평가 철학, 데이터 범위, 신뢰등급과 정정 원칙을 공개하고 상업적 압력으로부터 독립된 기준으로 결과를 제시합니다. 세부 산식과 보정계수는 지수의 일관성과 조작 방지를 위해 내부 검증 규정으로 관리합니다.</p>
-  </div>
-</section>
-<section class="section" style="padding-top:8px">
-  <div class="wrap">
-    <div class="dx-domain" id="philosophy">
-      <div class="dx-head"><span class="dx-tag">철학</span><span class="dx-title">순위를 흥정하지 않습니다</span></div>
-      <p class="dx-body">&ldquo;팔리지 않는다&rdquo;는 것은 BRIDGE의 구체적인 약속입니다. 방문자 수나 광고비를 대가로 점수를 조정하지 않습니다. 공개 화면에서는 평가 원칙과 결과의 의미, 데이터 충족 범위와 신뢰등급을 밝히고, 세부 산식은 독립된 내부 검증 규정과 변경 이력으로 통제합니다.</p>
-    </div>
-
-    <div class="dx-domain" id="why-free">
-      <div class="dx-head"><span class="dx-tag">무기</span><span class="dx-title">독점적 데이터가 아닌 &lsquo;투명한 프로토콜&rsquo;</span></div>
-      <p class="dx-body">BRIDGE의 권위는 우리만 아는 은밀한 데이터가 아니라, 누구나 검증할 수 있는 분석 프로토콜에서 나옵니다. 단순한 언급량으로 대상을 줄 세우지 않습니다. 브랜드 사전 구축, 감정 분류, 규모 보정, 시간축 처리 등 흩어진 데이터를 정제하고 진짜 평판 신호로 변환해 내는 이 정교한 해석 방법론 자체가 우리의 가장 강력한 자산입니다.</p>
-    </div>
-
-    <div class="dx-domain" id="axes">
-      <div class="dx-head"><span class="dx-tag">렌즈</span><span class="dx-title">평판의 6대 축 (B·R·I·D·G·E)</span></div>
-      <p class="dx-body">발견(B)에서 시작해 평가(R), 정체성(I), 경험(D), 행동(G), 책임과 지속성(E)으로 이어지는 하나의 흐름입니다. 각 축은 통계적으로 구별되지만 실제 현상에서는 서로 영향을 주고받습니다. 높은 가시성이 긍정 평가로 이어지지 않을 수 있고, 긍정 평가가 행동으로 전환되지 않을 수도 있습니다 — BRIDGE는 바로 이 단절 지점을 찾아 보여줍니다.</p>
-      <table class="idx-table">
-        <thead><tr><th>축</th><th>공개 정의</th></tr></thead>
-        <tbody>
-          <tr><td><b>B</b> Brand Visibility</td><td>도달 — 얼마나 널리 발견되는가</td></tr>
-          <tr><td><b>R</b> Reputation Response</td><td>반응 — 공중은 어떻게 응답하는가</td></tr>
-          <tr><td><b>I</b> Identity &amp; Relevance</td><td>정체성 — 무엇으로 기억되는가</td></tr>
-          <tr><td><b>D</b> Direct Public Experience</td><td>경험 — 실제 접점은 어떠한가</td></tr>
-          <tr><td><b>G</b> Generated Action</td><td>행동유발 — 어떤 움직임을 만드는가</td></tr>
-          <tr><td><b>E</b> Ethics &amp; Endurance</td><td>책임·지속 — 신뢰를 얼마나 지켜내는가</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="dx-domain" id="calc">
-      <div class="dx-head"><span class="dx-tag">원칙</span><span class="dx-title">타협 없는 데이터 통제</span></div>
-      <p class="dx-body">출처가 확인된 데이터만을 사용하며, 불확실하거나 재현할 수 없는 자료는 공식 점수에서 제외합니다. 수집·식별·중복 제거·교차 검증·시점 확인 절차를 통과한 신호만 BRIDGE 여섯 축에 반영합니다. 세부 변환식과 보정계수는 외부 개입과 역산 조작을 막기 위해 내부 검증 규정으로 관리합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 신뢰등급의 세부 기준은 <a href="trust.html" style="color:var(--gold);">신뢰등급 | 데이터추출</a> 페이지에서 확인하실 수 있습니다.</div>
-    </div>
-
-    <div class="dx-domain" id="version">
-      <div class="dx-head"><span class="dx-tag">자정</span><span class="dx-title">정정 이력과 이의제기</span></div>
-      <p class="dx-body" id="dispute">평가하는 자가 가장 먼저 평가받아야 합니다. 데이터 식별 및 산출 과정의 오류는 덮어두지 않고 투명하게 [정정 이력]에 기록하여 시스템의 자정 작용을 증명합니다. 데이터 오류에 대한 이의 제기는 엄밀히 검토하지만, 단순히 &lsquo;결과가 불리하다&rsquo;는 이유의 홍보성 점수 조정 요청은 영구히 차단됩니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">CONTACT</span> 대상 식별 오류·데이터 누락·산식 적용 오류 등에 대한 이의제기는 <a href="contact.html" style="color:var(--gold);">문의 | 이의제기</a> 페이지에서 접수합니다.</div>
-    </div>
-  </div>
-</section>
-'''
-
-methodology_html = head("INDEX — BRIDGE 방법론·데이터정책", "우리는 순위를 흥정하지 않습니다. BRIDGE의 평가 철학, 데이터 원칙, 신뢰등급과 정정 체계를 공개합니다.") + base_header("INDEX") + '''
-<header class="list-hero-photo hero-methodology">
-  <div class="wrap">
-    <div class="about-kicker">INDEX · 방법론과 데이터정책</div>
-    <h1 class="idx-hero-h">이 페이지는 팔리지 않습니다.</h1>
-  </div>
-</header>''' + INDEX_BODY + footer("methodology")
+INDEX_BODY = INDEX
+methodology_html = head("INDEX — BRIDGE 분석의 기준", "현재 위치·관계 구성·변화 방향으로 읽는 BRIDGE의 정의와 분석 틀.") + base_header("INDEX") + INDEX_BODY + footer("methodology")
 with open(f"{OUT}/methodology.html","w",encoding="utf-8") as f: f.write(methodology_html)
 
 # ---------- trust: grounded in the confirmed white paper §14 (신뢰등급) ----------
 # Previous drafts used my own approximation of A~D. This version uses the actual
 # grade criteria from "BRIDGE 브랜드평판지수 방법론 및 신뢰성 백서" §14, including the
 # N/R grade that my earlier drafts omitted entirely.
-trust_html = head("TRUST — 신뢰등급 | 데이터추출", "신뢰등급과 4개 영역별 데이터 추출 원리를 밝힙니다.") + base_header("INDEX") + '''
-<header class="list-hero-photo hero-trust">
-  <div class="wrap">
-    <h1>신뢰등급 | 데이터추출</h1>
-    <p class="list-note">기업(CPR), 공공(GOV), 대학(UNI), 공인(ENT)이라는 각기 다른 네 개의 생태계에서 BRIDGE가 어떠한 근거와 논리로 유의미한 평판 신호를 추출하는지 명확히 밝힙니다. 발생 기전이 전혀 다른 평판들을 단일한 지표로 재단하는 것은 필연적으로 데이터의 왜곡을 낳습니다. 우리는 이러한 오류를 원천 차단하기 위해 각 영역이 지닌 고유한 특성을 분석하고, 데이터 수집부터 가중치 산정까지 완전히 차별화된 맞춤형 추출 알고리즘을 구축했습니다.</p>
-  </div>
-</header>
-<section class="section">
-  <div class="wrap">
-    <div class="dx-common">
-      <h2 class="about-h2">공통 원칙</h2>
-      <ul class="about-donot dx-plus">
-        <li>대상선정(누구를 평가할 것인가)과 평판측정(그 대상이 몇 점인가)을 분리합니다.</li>
-        <li>모든 점수에는 근거자료(Evidence Card)와 신뢰등급(A~D, N/R)을 함께 표시합니다.</li>
-        <li>산정방식을 비공개로 두는 외부 지수의 점수·순위는 근거자료로 인용하지 않습니다.</li>
-      </ul>
-    </div>
-
-    <div class="dx-domain dx-trust">
-      <div class="dx-head"><span class="dx-tag">신뢰등급</span><span class="dx-title">그 점수를 얼마나 믿을 수 있는가</span></div>
-      <p class="dx-body">신뢰등급은 평판점수가 아니라 &lsquo;그 점수를 얼마나 믿을 수 있는가&rsquo;를 나타냅니다. 등급이 낮다는 것은 평판이 나쁘다는 뜻이 아니라, 데이터의 검증 수준이 아직 낮다는 뜻입니다.</p>
-      <table class="trust-grade-table">
-        <tr><th>등급</th><th>기준</th></tr>
-        <tr><td><span class="tg-badge tg-a">A</span></td><td>핵심자료원 90% 이상 확보, 다원출처 확보, 표본 충분, 검증 완료</td></tr>
-        <tr><td><span class="tg-badge tg-b">B</span></td><td>핵심자료원 75% 이상, 3종 이상의 독립자료원 확보</td></tr>
-        <tr><td><span class="tg-badge tg-c">C</span></td><td>핵심자료원 60% 이상, 일부 자료원에 편중</td></tr>
-        <tr><td><span class="tg-badge tg-d">D</span></td><td>단일 주간 또는 제한된 자료원에 의한 예비측정</td></tr>
-        <tr><td><span class="tg-badge tg-nr">N/R</span></td><td>최소 산출기준 미충족 — 점수를 산출하지 않음</td></tr>
-      </table>
-      <div class="dx-routing"><span class="dx-routing-k">DATA POLICY</span> 데이터가 부족한 대상은 낮은 점수가 아니라 별도의 데이터 신뢰등급으로 표시합니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">CPR</span><span class="dx-title">기업 | 위상적 분리와 로버스트 정제</span></div>
-      <p class="dx-body">기업의 경제적 규모와 실질적인 평판을 혼동하지 않기 위해, 시가총액과 매출 등 객관적 지표로 평가 대상을 먼저 확정하는 철저한 분리 원칙을 적용합니다. 이후 수집된 데이터는 엄격한 교차 검증을 거쳐 통계적 편향과 극단적인 노이즈를 걷어내며, 시간의 흐름과 정보의 신뢰도까지 통제하는 5가지 복합 가중치 알고리즘을 거치게 됩니다. 이처럼 까다로운 정제 과정을 통과한 진짜 데이터만이 6개의 핵심 평판 축(B·R·I·D·G·E)에 정밀하게 맵핑되어 거대 기업의 이름값에 가려지지 않은 투명한 가치를 비춰줍니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공시 데이터 1차 집계인 MCNA와 심층 추출망 BRIDGE DB를 활용하며, 확고한 외부 평가는 비변동성 데이터의 2기 엔진 자체 DB를 통해 산출됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">GOV</span><span class="dx-title">공공기관 | 제한적 비교와 매체 편중 제어</span></div>
-      <p class="dx-body">각기 다른 무게의 책임을 진 공공기관들을 무의미한 통합 서열표로 묶지 않고, 역할의 궤를 같이하는 기관 사이에서만 유의미한 평판 척도를 산출합니다. 찰나의 여론이나 특정 정보망의 과도한 쏠림 현상에 휩쓸리지 않도록, 폭넓은 신호의 다양성을 점수화하여 공공 평판의 묵직한 중심을 잡습니다. 나아가 기관이 묵묵히 쌓아온 본연의 가치가 소수의 단편적인 논란에 훼손되지 않도록, 텍스트 이면의 주체를 추적하는 귀속 규칙을 적용해 흔들림 없는 객관적 데이터만을 투명하게 분리합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공공기관 현황 1차 집계망인 AGK와 BRIDGE DB를 교차시키며, 기관 경영평가 등은 비변동성 데이터의 2기 엔진 자체 DB 안에서 독립 관리됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">UNI</span><span class="dx-title">대학 | 서사 지표 추출과 발화자 계층화</span></div>
-      <p class="dx-body">취업률과 논문 건수에 의존하던 기존의 획일적인 서열화 방식에서 벗어나, 평판 측정의 새로운 기준을 제시합니다. 단편적인 결과(Outcome) 대신 &lsquo;경쟁률의 증감&rsquo;과 같은 서사적 변화(Narrative)를 핵심 지표로 측정하여, 소수 알려진 대학에 쏠리던 평가의 편향성을 원천 차단합니다. 나아가 발화 주체를 예비 수험생, 재학생, 졸업생으로 세밀하게 층화(Stratification)하여, 각 교육 수요자 그룹이 실질적으로 체감하는 입체적인 평판을 완성합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 대학 공시 1차 집계망인 AGK와 BRIDGE DB를 거쳐 목소리를 텍스트화하며, 평가의 뼈대는 비변동성 데이터의 2기 엔진 자체 DB가 지탱합니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">ENT</span><span class="dx-title">공인 | 감성 분해와 결측의 허용</span></div>
-      <p class="dx-body">대중적인 유명세가 곧 특정 브랜드와의 적합성을 의미하지는 않기에, 대중적 인지도(STAR-P)와 실질적 브랜드 적합성(STAR-F)을 철저하게 분리하여 진단합니다. 텍스트 이면의 뉘앙스를 세밀하게 해체하는 감성 분석과 시간의 흐름에 따라 영향력을 제어하는 가중치 함수를 통해, 찰나의 &lsquo;반짝 이슈&rsquo;와 단단한 &lsquo;구조적 신뢰&rsquo;를 뚜렷하게 갈라냅니다. 특히 검증할 수 있는 적합성 데이터가 부족할 경우 억지로 점수를 채워 넣지 않고 과감히 공란으로 남겨두어, 불확실한 데이터를 아는 척하지 않는 투명성의 원칙을 지킵니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공개 보도 집계망 ABAJN과 BRIDGE DB를 통해 뉴스의 거품을 걷어내며, 기저의 절대 지표들은 비변동성 데이터의 2기 엔진 자체 DB로 굳건히 제어합니다.</div>
-    </div>
-  </div>
-</section>
-''' + footer("trust")
+trust_html = head("신뢰등급 — 근거의 충실성", "평판의 수준과 측정 근거의 충실성을 구분해 읽습니다.") + base_header("INDEX") + TRUST + footer("index")
 with open(f"{OUT}/trust.html","w",encoding="utf-8") as f: f.write(trust_html)
 
 # ---------- contact: 문의|이의제기 (Web3Forms 실제 전송 + 완료 표시) ----------
@@ -708,115 +587,7 @@ contact_html = head("BRIDGE — 문의·이의제기", "BRIDGE 지수에 대한 
 with open(f"{OUT}/contact.html","w",encoding="utf-8") as f: f.write(contact_html)
 
 # ---------- about: grounded in 전략기획서 v0.3 §1.4 (운영회사와 브랜드 체계) + §15/16 ----------
-about_html = head("SignalBridge — 회사소개", "소음을 걷어내고, 진짜 평판의 해상도를 높이다. 시그널브릿지는 독자적 BRIDGE 모형으로 기업·공공기관·대학·공인의 진짜 평판 신호를 해독합니다.") + base_header("INDEX") + '''
-<header class="list-hero-photo hero-about about-hero-big">
-  <div class="wrap">
-    <div class="about-kicker">SIGNALBRIDGE · COMPANY</div>
-    <h1 class="about-slogan">소음을 걷어내고,<br>진짜 평판의 해상도를 높이다.</h1>
-    <p class="about-hero-sub">시그널브릿지 (SignalBridge)</p>
-  </div>
-</header>
-
-<section class="section about-lead-sec">
-  <div class="wrap">
-    <p class="about-lead">우리는 데이터 속에 숨겨진 <b>평판의 진짜 시그널을 해독(Decode)</b>합니다.</p>
-    <p class="about-body">찰나의 화제성이나 일시적인 대중의 쏠림 현상만으로 브랜드의 진짜 가치가 결정될 수는 없습니다. 시그널브릿지는 외부의 노이즈에 흔들리지 않기 위해 독자적인 <b>&lsquo;BRIDGE 모형&rsquo;</b>을 가동합니다. 평가 대상을 무대에 올리는 기준과 실제 평판을 측정하는 기준을 철저하게 분리함으로써, 단순히 규모가 크거나 인지도가 높다는 이유만으로 계속해서 유리한 고지를 차지하는 <b>&lsquo;결과 편향&rsquo;</b>의 낡은 고리를 단호히 끊어냅니다.</p>
-  </div>
-</section>
-
-<div class="about-figure">
-  <img src="img/about_bridge.jpg" alt="두 개의 축을 잇는 다리 — BRIDGE" loading="lazy">
-  <div class="about-figure-cap">이미 큰 목소리가 아니라, 신뢰가 움직이는 방향을 잇습니다.</div>
-</div>
-
-<section class="section">
-  <div class="wrap">
-    <div class="about-sec-head">
-      <h2 class="about-h2">4개의 무대, 4개의 잣대</h2>
-      <p class="about-h2-sub">왜 영역을 한정하는가</p>
-    </div>
-    <p class="about-body" style="margin-bottom:28px">획일화된 잣대는 필연적으로 평판의 왜곡을 낳습니다. 기업과 공공기관, 대학과 공인은 대중의 신뢰가 형성되고 소비되는 방식이 완전히 다르기 때문입니다. 시그널브릿지는 이 <b>4개의 생태계(CPR, GOV, UNI, ENT)</b>를 명확히 구분하고, 각 영역의 본질에 가장 완벽하게 들어맞는 4개의 독립적인 잣대를 통해 완전히 새로운 평판의 기준을 제시합니다.</p>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">CPR</span><span class="dx-title">기업</span></div>
-      <p class="dx-body">거대한 이름값이 평판으로 둔갑하는 착시를 막기 위해, 외형적 덩치와 내면의 책임을 완벽히 분리하여 기업의 묵직한 가치만을 투명하게 진단합니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">GOV</span><span class="dx-title">공공기관</span></div>
-      <p class="dx-body">역할이 전혀 다른 기관들을 한 줄로 세우는 획일화를 벗어나, 궤를 같이하는 기능군 내에서 묵묵히 쌓아온 공공의 헌신과 책임만을 정밀하게 묻습니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">UNI</span><span class="dx-title">대학</span></div>
-      <p class="dx-body">과거의 정적인 결과값으로 획일적인 서열을 만들지 않습니다. 역동적인 성장의 추이와 현장의 생생한 목소리를 융합해 대학의 진짜 명성을 짚어냅니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">ENT</span><span class="dx-title">공인</span></div>
-      <p class="dx-body">스포트라이트가 만들어낸 순간적인 유명세에 기대지 않습니다. 단발성 이슈를 단호히 걷어내고 대중의 마음속에 묵직하게 뿌리내린 진짜 신뢰만을 차분하게 기록합니다.</p>
-    </div>
-  </div>
-</section>
-
-<div class="about-figure about-figure-split">
-  <img src="img/about_ripple.jpg" alt="평판의 파동" loading="lazy">
-  <div class="about-figure-overlay">
-    <div class="about-figure-title">Absolute Independence</div>
-    <div class="about-figure-lead">절대적 독립성 원칙</div>
-  </div>
-</div>
-
-<section class="section">
-  <div class="wrap">
-    <p class="about-body" style="margin-bottom:28px">이러한 혁신은 <b>자본과 타협하지 않는 굳건한 뼈대</b> 위에서만 가능합니다.</p>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag" style="font-size:15px">물리적 분리</span></div>
-      <p class="dx-body">데이터를 다루는 분석 조직은 비즈니스의 이해관계로부터 완전히 독립된 섬과 같습니다. 보고 체계와 의사결정 라인을 영구적으로 분리하여, 오직 팩트와 통계적 근거만으로 평가의 순수성을 묵묵히 지켜나갑니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag" style="font-size:15px">자본의 무개입</span></div>
-      <p class="dx-body">객관성은 구조를 분리하는 것에서 시작됩니다. 데이터를 다루는 분석 조직은 광고나 영업 조직과 완전히 절연되어, 오직 데이터가 가리키는 진실만을 독립적으로 바라봅니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag" style="font-size:15px">선제적 공시</span></div>
-      <p class="dx-body">공정함의 증명은 숨김없는 고백에서 시작됩니다. 복잡한 비즈니스 역학 관계가 평가에 영향을 미치지 않도록, 이해상충 소지가 있는 지점들은 언제나 투명하게 선제 공시합니다.</p>
-    </div>
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag" style="font-size:15px">진단 의견의 선행</span></div>
-      <p class="dx-body">BRIDGE 지수는 맹목적인 정답을 강요하는 순위표가 아닌 객관적인 &lsquo;통계적 진단 의견&rsquo;입니다. 최종 결과를 단편적으로 제시하기 전에, 어떠한 방법론과 근거로 이 신호들이 추출되었는지 그 검증의 과정을 세상에 먼저 투명하게 엽니다.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section tint">
-  <div class="wrap">
-    <div class="about-sec-head">
-      <h2 class="about-h2">우리가 하지 않는 일</h2>
-      <p class="about-h2-sub">What We Do Not Do</p>
-    </div>
-    <ul class="about-donot">
-      <li>법적, 도의적, 투자적 가치 판단의 영역을 침범하지 않습니다.</li>
-      <li>개별 기업, 인물, 기관의 사적인 요청이나 압력으로 순위를 임의 조정하지 않습니다.</li>
-      <li>대중 내면의 맹목적 신뢰나 시장 가치 자체를 직접 측정했다고 오만하게 포장하지 않습니다.</li>
-      <li>&lsquo;결과가 불리하다&rsquo;는 단순한 불만으로 점수를 변경하는 일은 원천적으로 불가능합니다.</li>
-    </ul>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="about-sec-head">
-      <h2 class="about-h2">서비스 체계</h2>
-      <p class="about-h2-sub">Service Architecture</p>
-    </div>
-    <div class="about-arch">
-      <div class="about-arch-row"><div class="about-arch-k">운영 주체</div><div class="about-arch-n">SignalBridge</div><div class="about-arch-d">서비스 운영, 계약, 데이터 거버넌스 수호</div></div>
-      <div class="about-arch-row"><div class="about-arch-k">핵심 엔진</div><div class="about-arch-n">BRIDGE Framework</div><div class="about-arch-d">6축(B&middot;R&middot;I&middot;D&middot;G&middot;E) 평가 철학과 공통 산식의 근간</div></div>
-      <div class="about-arch-row"><div class="about-arch-k">공개 모듈</div><div class="about-arch-n">CPR &middot; GOV &middot; UNI &middot; ENT</div><div class="about-arch-d">프레임워크 기반 4대 생태계별 평판지수</div></div>
-      <div class="about-arch-row"><div class="about-arch-k">솔루션</div><div class="about-arch-n">BRIDGE-D vs V</div><div class="about-arch-d">공익 목적의 무료 공개형(D)과 내부 자료 결합 확장형(V)</div></div>
-    </div>
-    <p class="about-contact">문의 &nbsp;·&nbsp; <a href="contact.html" style="color:var(--gold);">문의 | 이의제기</a></p>
-  </div>
-</section>
-''' + footer("about")
+about_html = head("SIGNALBRIDGE — 회사소개", "데이터를 관계로, 관계를 의미로. 시그널브릿지의 관점과 운영 원칙.") + base_header("INDEX") + ABOUT + footer("index")
 with open(f"{OUT}/about.html","w",encoding="utf-8") as f: f.write(about_html)
 
 print("pages written:", os.listdir(OUT))
@@ -828,50 +599,7 @@ print("pages written:", os.listdir(OUT))
 # methodology (the actual know-how) lives in the white paper §21-24, not here.
 import importlib
 importlib.reload(build_pilot)
-data_extraction_html = head("BRIDGE — 데이터 추출 방법론", "BRIDGE가 CPR·GOV·UNI·ENT 네 영역에서 무엇을 근거로 어떻게 평판 신호를 추출하는지에 대한 요약입니다.") + base_header("데이터 추출") + '''
-<header class="list-hero-photo hero-data-extraction">
-  <div class="wrap">
-    <h1>데이터 추출</h1>
-    <p class="list-note">기업(CPR), 공공(GOV), 대학(UNI), 공인(ENT)이라는 각기 다른 네 개의 생태계에서 BRIDGE가 어떠한 근거와 논리로 유의미한 평판 신호를 추출하는지 명확히 밝힙니다. 발생 기전이 전혀 다른 평판들을 단일한 지표로 재단하는 것은 필연적으로 데이터의 왜곡을 낳습니다. 우리는 이러한 오류를 원천 차단하기 위해 각 영역이 지닌 고유한 특성을 분석하고, 데이터 수집부터 가중치 산정까지 완전히 차별화된 맞춤형 추출 알고리즘을 구축했습니다.</p>
-  </div>
-</header>
-<section class="section">
-  <div class="wrap">
-    <div class="dx-common">
-      <h2 class="about-h2">공통 원칙</h2>
-      <ul class="about-donot dx-plus">
-        <li>대상선정(누구를 평가할 것인가)과 평판측정(그 대상이 몇 점인가)을 분리합니다.</li>
-        <li>모든 점수에는 근거자료(Evidence Card)와 신뢰등급(A~D, N/R)을 함께 표시합니다.</li>
-        <li>산정방식을 비공개로 두는 외부 지수의 점수·순위는 근거자료로 인용하지 않습니다.</li>
-      </ul>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">CPR</span><span class="dx-title">기업 | 위상적 분리와 로버스트 정제</span></div>
-      <p class="dx-body">기업의 경제적 규모와 실질적인 평판을 혼동하지 않기 위해, 시가총액과 매출 등 객관적 지표로 평가 대상을 먼저 확정하는 철저한 분리 원칙을 적용합니다. 이후 수집된 데이터는 엄격한 교차 검증을 거쳐 통계적 편향과 극단적인 노이즈를 걷어내며, 시간의 흐름과 정보의 신뢰도까지 통제하는 5가지 복합 가중치 알고리즘을 거치게 됩니다. 이처럼 까다로운 정제 과정을 통과한 진짜 데이터만이 6개의 핵심 평판 축(B·R·I·D·G·E)에 정밀하게 맵핑되어 거대 기업의 이름값에 가려지지 않은 투명한 가치를 비춰줍니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공시 데이터 1차 집계인 MCNA와 심층 추출망 BRIDGE DB를 활용하며, 확고한 외부 평가는 비변동성 데이터의 2기 엔진 자체 DB를 통해 산출됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">GOV</span><span class="dx-title">공공기관 | 제한적 비교와 매체 편중 제어</span></div>
-      <p class="dx-body">각기 다른 무게의 책임을 진 공공기관들을 무의미한 통합 서열표로 묶지 않고, 역할의 궤를 같이하는 기관 사이에서만 유의미한 평판 척도를 산출합니다. 찰나의 여론이나 특정 정보망의 과도한 쏠림 현상에 휩쓸리지 않도록, 폭넓은 신호의 다양성을 점수화하여 공공 평판의 묵직한 중심을 잡습니다. 나아가 기관이 묵묵히 쌓아온 본연의 가치가 소수의 단편적인 논란에 훼손되지 않도록, 텍스트 이면의 주체를 추적하는 귀속 규칙을 적용해 흔들림 없는 객관적 데이터만을 투명하게 분리합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공공기관 현황 1차 집계망인 AGK와 BRIDGE DB를 교차시키며, 기관 경영평가 등은 비변동성 데이터의 2기 엔진 자체 DB 안에서 독립 관리됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">UNI</span><span class="dx-title">대학 | 서사 지표 추출과 발화자 계층화</span></div>
-      <p class="dx-body">취업률과 논문 건수에 의존하던 기존의 획일적인 서열화 방식에서 벗어나, 평판 측정의 새로운 기준을 제시합니다. 단편적인 결과(Outcome) 대신 &lsquo;경쟁률의 증감&rsquo;과 같은 서사적 변화(Narrative)를 핵심 지표로 측정하여, 소수 알려진 대학에 쏠리던 평가의 편향성을 원천 차단합니다. 나아가 발화 주체를 예비 수험생, 재학생, 졸업생으로 세밀하게 층화(Stratification)하여, 각 교육 수요자 그룹이 실질적으로 체감하는 입체적인 평판을 완성합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 대학 공시 1차 집계망인 AGK와 BRIDGE DB를 거쳐 목소리를 텍스트화하며, 평가의 뼈대는 비변동성 데이터의 2기 엔진 자체 DB가 지탱합니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">ENT</span><span class="dx-title">공인 | 감성 분해와 결측의 허용</span></div>
-      <p class="dx-body">대중적인 유명세가 곧 특정 브랜드와의 적합성을 의미하지는 않기에, 대중적 인지도(STAR-P)와 실질적 브랜드 적합성(STAR-F)을 철저하게 분리하여 진단합니다. 텍스트 이면의 뉘앙스를 세밀하게 해체하는 감성 분석과 시간의 흐름에 따라 영향력을 제어하는 가중치 함수를 통해, 찰나의 &lsquo;반짝 이슈&rsquo;와 단단한 &lsquo;구조적 신뢰&rsquo;를 뚜렷하게 갈라냅니다. 특히 검증할 수 있는 적합성 데이터가 부족할 경우 억지로 점수를 채워 넣지 않고 과감히 공란으로 남겨두어, 불확실한 데이터를 아는 척하지 않는 투명성의 원칙을 지킵니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공개 보도 집계망 ABAJN과 BRIDGE DB를 통해 뉴스의 거품을 걷어내며, 기저의 절대 지표들은 비변동성 데이터의 2기 엔진 자체 DB로 굳건히 제어합니다.</div>
-    </div>
-  </div>
-</section>
-''' + footer("index")
+data_extraction_html = head("DATA TRACE — 근거의 맥락", "공개자료의 시점·귀속·유효성과 비교 가능성을 읽는 원칙.") + base_header("INDEX") + TRACE + footer("index")
 with open(f"{OUT}/data-extraction.html","w",encoding="utf-8") as f: f.write(data_extraction_html)
 
 # site_fix is retained as a compatibility mirror by the legacy deployment layout.
@@ -880,7 +608,7 @@ import shutil as _shutil
 _site_fix = os.path.join(OUT, "site_fix")
 os.makedirs(_site_fix, exist_ok=True)
 for _public_file in ("cpr.html", "gov.html", "uni.html", "star.html", "methodology.html",
-                     "this-week.html", "script.js", "style.css"):
+                     "this-week.html", "index.html", "contact.html", "about.html", "trust.html", "data-extraction.html", "script.js", "style.css"):
     _shutil.copy2(os.path.join(OUT, _public_file), os.path.join(_site_fix, _public_file))
 print("data-extraction.html written")
 

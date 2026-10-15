@@ -17,7 +17,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261014-readable';
+    fresh.href='style.css?v=20261015-editorial';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -148,6 +148,13 @@
         };
         fetch('data/history.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('archive unavailable');return r.json();}).then(function(h){window.BRIDGE_HISTORY=h;}).catch(function(){});
       }
+      // Without a valid weekly baseline, show actual evidence, never a fabricated delta.
+      function tickerEvidence(r){
+        var states=r.axis_status||{},scores=r.axis_scores||{};
+        var axes=Object.keys(states).filter(function(a){return (states[a]==='observed'||states[a]==='maintained')&&typeof scores[a]==='number'&&Number.isFinite(scores[a]);});
+        axes.sort(function(a,b){return scores[b]-scores[a]||a.localeCompare(b);});
+        return axes.length?esc(axes[0])+' '+scores[axes[0]].toFixed(1)+' · 유효 '+axes.length+'축':'활동 '+Number(r.activity_points||0).toFixed(1)+'P';
+      }
       // 주식시황형 LIVE 바: CPR 1~10, ENT 1~10, GOV 1~10,
       // CPR 11~20, ENT 11~20, GOV 11~20. 각 영역 50위까지만 사용한다.
       var track=document.getElementById('tickerTrack');
@@ -155,7 +162,7 @@
         function take(d,a,b){return rows.filter(function(r){return r.domain===d&&Number(r.rank)>=a&&Number(r.rank)<=b&&Number(r.rank)<=50;});}
         var seq=[];
         for(var start=1;start<=50;start+=10){seq=seq.concat(take('CPR',start,start+9),take('ENT',start,start+9),take('GOV',start,start+9));}
-        var html=seq.map(function(r){var valid=r.comparison_status==='same_scope'&&r.last_week_index!=null&&r.wow_delta!=null,d=valid?Number(r.wow_delta):null;return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d===null?'비교대기':d>0?'+'+d.toFixed(1):d.toFixed(1))+'</i></span>';}).join('');
+        var html=seq.map(function(r){var valid=r.comparison_status==='same_scope'&&r.last_week_index!=null&&r.wow_delta!=null,d=valid?Number(r.wow_delta):null;return '<span><b>'+esc(r.domain)+'</b>'+esc(r.name)+' <span class="t-score">'+Number(r.score).toFixed(1)+'</span> <i class="'+(d>0?'t-up':d<0?'t-down':'t-flat')+'">'+(d===null?tickerEvidence(r):'주간 '+(d>0?'+':'')+d.toFixed(1))+'</i></span>';}).join('');
         track.innerHTML=html+html;
       }
       // HOME hero TOP 5: the original markup is only a no-JS fallback.

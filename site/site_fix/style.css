@@ -1009,3 +1009,13 @@ footer .logo .op{ color:#7c86a0;}
 .axis-reference{color:#777!important;font-size:13px!important;white-space:normal;}
 @media(max-width:640px){.bm-val{white-space:normal;overflow-wrap:anywhere;}}
 .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;align-items:start}.hero-actions .btn{justify-self:start;white-space:nowrap}.hero-actions .publicity-link{color:#dbc397}
+
+.hero-actions .publicity-link{justify-self:end;text-align:right}
+
+/* Public whitepaper v5 explanations */
+.public-hero-title{font-size:clamp(30px,4.4vw,62px);line-height:1.2;letter-spacing:-.045em;word-break:keep-all;max-width:1000px}
+.public-copy{max-width:1020px}.public-copy .dx-title{margin:0;font-size:clamp(20px,2vw,26px);line-height:1.45;word-break:keep-all}.public-copy .dx-head{flex-wrap:wrap;gap:12px}.public-copy .dx-body{line-height:1.95;max-width:900px;word-break:keep-all;overflow-wrap:anywhere}.public-copy a{color:var(--gold);text-decoration:underline;text-underline-offset:4px}
+.public-triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:36px 0;background:rgba(206,175,117,.25);border:1px solid rgba(206,175,117,.25)}.public-triptych>div{background:#111519;padding:30px}.public-triptych small,.public-statement small{font-size:11px;letter-spacing:.15em;color:var(--gold)}.public-triptych h2{font-size:25px;margin:16px 0}.public-triptych p{font-size:15px;line-height:1.8;color:#b9bdc1}
+.public-flow{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;gap:12px;margin:36px 0}.public-flow li{border-top:1px solid var(--gold);padding:20px 10px}.public-flow b{display:block;font-size:20px;margin-bottom:12px}.public-flow span{font-size:13px;line-height:1.8;color:#b9bdc1}.public-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.public-table-scroll table{width:100%;min-width:510px}.public-statement{padding:30px 0 50px}.public-statement p{font-size:clamp(23px,3.4vw,40px);line-height:1.6;letter-spacing:-.03em;word-break:keep-all}.public-statement b{color:var(--gold)}
+@media(max-width:650px){.public-triptych{grid-template-columns:1fr}.public-triptych>div{padding:25px}.public-flow{grid-template-columns:1fr 1fr;gap:8px}.public-copy .dx-domain{padding:25px 0}.public-copy .dx-tag{font-size:11px}.public-copy .dx-head{align-items:flex-start}.public-copy .dx-body{font-size:15px}.about-figure-title{overflow-wrap:anywhere;word-break:normal}.about-arch-row{min-width:0}.about-arch-n,.about-arch-d{overflow-wrap:anywhere}.hero-actions{gap:5px}.hero-actions .btn{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none!important;overflow:auto}}

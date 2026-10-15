@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BRIDGE — 데이터 추출 방법론</title>
-<meta name="description" content="BRIDGE가 CPR·GOV·UNI·ENT 네 영역에서 무엇을 근거로 어떻게 평판 신호를 추출하는지에 대한 요약입니다.">
-<meta property="og:title" content="BRIDGE — 데이터 추출 방법론">
-<meta property="og:description" content="BRIDGE가 CPR·GOV·UNI·ENT 네 영역에서 무엇을 근거로 어떻게 평판 신호를 추출하는지에 대한 요약입니다.">
+<title>DATA TRACE — 근거의 맥락</title>
+<meta name="description" content="공개자료의 시점·귀속·유효성과 비교 가능성을 읽는 원칙.">
+<meta property="og:title" content="DATA TRACE — 근거의 맥락">
+<meta property="og:description" content="공개자료의 시점·귀속·유효성과 비교 가능성을 읽는 원칙.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BRIDGE">
 <meta name="twitter:card" content="summary">
@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261014-readable">
+<link rel="stylesheet" href="style.css?v=20261015-editorial">
 </head>
 <body>
 
@@ -579,50 +579,7 @@
   <div class="mm-group"><a href="index.html">HOME</a></div><div class="mm-group"><a href="this-week.html">THIS WEEK</a></div><div class="mm-group"><a href="cpr.html">CPR</a><a class="mm-child" href="cpr.html#t100">CPR B-T100</a><a class="mm-child" href="cpr.html#bc50">CPR B-BC50</a><a class="mm-child" href="cpr.html#bb50">CPR B-BB50</a></div><div class="mm-group"><a href="gov.html">GOV</a><a class="mm-child" href="gov.html#t100">GOV B-T100</a><a class="mm-child" href="gov.html#m40">GOV B-M40</a><a class="mm-child" href="gov.html#c60">GOV B-C60</a></div><div class="mm-group"><a href="uni.html">UNI</a><a class="mm-child" href="uni.html#t100">UNI B-T100</a><a class="mm-child" href="uni.html#u60">UNI B-U60</a><a class="mm-child" href="uni.html#c40">UNI B-C40</a></div><div class="mm-group"><a href="star.html">ENT</a><a class="mm-child" href="star.html#t100">ENT B-T100</a><a class="mm-child" href="star.html#am45">ENT B-AM40</a><a class="mm-child" href="star.html#aw45">ENT B-AW40</a><a class="mm-child" href="star.html#an10">ENT B-AN20</a></div>
   <a href="methodology.html" class="mm-util">INDEX</a><a href="data-extraction.html" class="mm-util">DATA TRACE</a><a href="trust.html" class="mm-util">신뢰등급</a>
   <a href="about.html" class="mm-util">시그널브릿지 회사소개</a>
-</div>
-<header class="list-hero-photo hero-data-extraction">
-  <div class="wrap">
-    <h1>데이터 추출</h1>
-    <p class="list-note">기업(CPR), 공공(GOV), 대학(UNI), 공인(ENT)이라는 각기 다른 네 개의 생태계에서 BRIDGE가 어떠한 근거와 논리로 유의미한 평판 신호를 추출하는지 명확히 밝힙니다. 발생 기전이 전혀 다른 평판들을 단일한 지표로 재단하는 것은 필연적으로 데이터의 왜곡을 낳습니다. 우리는 이러한 오류를 원천 차단하기 위해 각 영역이 지닌 고유한 특성을 분석하고, 데이터 수집부터 가중치 산정까지 완전히 차별화된 맞춤형 추출 알고리즘을 구축했습니다.</p>
-  </div>
-</header>
-<section class="section">
-  <div class="wrap">
-    <div class="dx-common">
-      <h2 class="about-h2">공통 원칙</h2>
-      <ul class="about-donot dx-plus">
-        <li>대상선정(누구를 평가할 것인가)과 평판측정(그 대상이 몇 점인가)을 분리합니다.</li>
-        <li>모든 점수에는 근거자료(Evidence Card)와 신뢰등급(A~D, N/R)을 함께 표시합니다.</li>
-        <li>산정방식을 비공개로 두는 외부 지수의 점수·순위는 근거자료로 인용하지 않습니다.</li>
-      </ul>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">CPR</span><span class="dx-title">기업 | 위상적 분리와 로버스트 정제</span></div>
-      <p class="dx-body">기업의 경제적 규모와 실질적인 평판을 혼동하지 않기 위해, 시가총액과 매출 등 객관적 지표로 평가 대상을 먼저 확정하는 철저한 분리 원칙을 적용합니다. 이후 수집된 데이터는 엄격한 교차 검증을 거쳐 통계적 편향과 극단적인 노이즈를 걷어내며, 시간의 흐름과 정보의 신뢰도까지 통제하는 5가지 복합 가중치 알고리즘을 거치게 됩니다. 이처럼 까다로운 정제 과정을 통과한 진짜 데이터만이 6개의 핵심 평판 축(B·R·I·D·G·E)에 정밀하게 맵핑되어 거대 기업의 이름값에 가려지지 않은 투명한 가치를 비춰줍니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공시 데이터 1차 집계인 MCNA와 심층 추출망 BRIDGE DB를 활용하며, 확고한 외부 평가는 비변동성 데이터의 2기 엔진 자체 DB를 통해 산출됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">GOV</span><span class="dx-title">공공기관 | 제한적 비교와 매체 편중 제어</span></div>
-      <p class="dx-body">각기 다른 무게의 책임을 진 공공기관들을 무의미한 통합 서열표로 묶지 않고, 역할의 궤를 같이하는 기관 사이에서만 유의미한 평판 척도를 산출합니다. 찰나의 여론이나 특정 정보망의 과도한 쏠림 현상에 휩쓸리지 않도록, 폭넓은 신호의 다양성을 점수화하여 공공 평판의 묵직한 중심을 잡습니다. 나아가 기관이 묵묵히 쌓아온 본연의 가치가 소수의 단편적인 논란에 훼손되지 않도록, 텍스트 이면의 주체를 추적하는 귀속 규칙을 적용해 흔들림 없는 객관적 데이터만을 투명하게 분리합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공공기관 현황 1차 집계망인 AGK와 BRIDGE DB를 교차시키며, 기관 경영평가 등은 비변동성 데이터의 2기 엔진 자체 DB 안에서 독립 관리됩니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">UNI</span><span class="dx-title">대학 | 서사 지표 추출과 발화자 계층화</span></div>
-      <p class="dx-body">취업률과 논문 건수에 의존하던 기존의 획일적인 서열화 방식에서 벗어나, 평판 측정의 새로운 기준을 제시합니다. 단편적인 결과(Outcome) 대신 &lsquo;경쟁률의 증감&rsquo;과 같은 서사적 변화(Narrative)를 핵심 지표로 측정하여, 소수 알려진 대학에 쏠리던 평가의 편향성을 원천 차단합니다. 나아가 발화 주체를 예비 수험생, 재학생, 졸업생으로 세밀하게 층화(Stratification)하여, 각 교육 수요자 그룹이 실질적으로 체감하는 입체적인 평판을 완성합니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 대학 공시 1차 집계망인 AGK와 BRIDGE DB를 거쳐 목소리를 텍스트화하며, 평가의 뼈대는 비변동성 데이터의 2기 엔진 자체 DB가 지탱합니다.</div>
-    </div>
-
-    <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">ENT</span><span class="dx-title">공인 | 감성 분해와 결측의 허용</span></div>
-      <p class="dx-body">대중적인 유명세가 곧 특정 브랜드와의 적합성을 의미하지는 않기에, 대중적 인지도(STAR-P)와 실질적 브랜드 적합성(STAR-F)을 철저하게 분리하여 진단합니다. 텍스트 이면의 뉘앙스를 세밀하게 해체하는 감성 분석과 시간의 흐름에 따라 영향력을 제어하는 가중치 함수를 통해, 찰나의 &lsquo;반짝 이슈&rsquo;와 단단한 &lsquo;구조적 신뢰&rsquo;를 뚜렷하게 갈라냅니다. 특히 검증할 수 있는 적합성 데이터가 부족할 경우 억지로 점수를 채워 넣지 않고 과감히 공란으로 남겨두어, 불확실한 데이터를 아는 척하지 않는 투명성의 원칙을 지킵니다.</p>
-      <div class="dx-routing"><span class="dx-routing-k">SIGNAL ROUTING</span> 공개 보도 집계망 ABAJN과 BRIDGE DB를 통해 뉴스의 거품을 걷어내며, 기저의 절대 지표들은 비변동성 데이터의 2기 엔진 자체 DB로 굳건히 제어합니다.</div>
-    </div>
-  </div>
-</section>
-
+</div><header class="list-hero-photo hero-data-extraction"><div class="wrap"><div class="about-kicker">BRIDGE / DATA TRACE</div><h1 class="public-hero-title">숫자가 된 근거의<br>맥락을 따라갑니다.</h1><p class="list-note">무엇을 보았는지, 어느 기간을 설명하는지, 어디까지 해석할 수 있는지. 데이터의 양만큼 중요한 것은 연결의 맥락입니다.</p></div></header><section class="section"><div class="wrap public-copy"><div class="dx-domain"><div class="dx-head"><span class="dx-tag">01 / SOURCES</span><h2 class="dx-title">빠른 신호와 오래 유지되는 기반</h2></div><p class="dx-body">뉴스·공식 채널·공중 반응은 비교적 빠른 변화를, 공시·교육여건·공식 통계와 평가자료는 기준기간의 기반을 설명합니다. 이들은 같은 종류의 근거가 아닙니다. 자료 유형별 활용 범위가 다르고, 모든 대상에서 모든 출처가 확보되는 것은 아닙니다. 공식 홍보 문구도 공중의 긍정 반응으로 곧바로 바꾸어 읽지 않습니다.</p></div><ol class="public-flow"><li><b>자료</b><span>출처와 기준시점 확인</span></li><li><b>대상·사건</b><span>귀속과 중복 점검</span></li><li><b>축·기간</b><span>평가 목적과 유효성 확인</span></li><li><b>공개 결과</b><span>지수·근거 상태·해석</span></li></ol><div class="dx-domain"><div class="dx-head"><span class="dx-tag">02 / VALIDITY</span><h2 class="dx-title">오래된 사건을 새 사건으로 만들지 않습니다</h2></div><p class="dx-body">발생·발행 시점과 수집 시점, 자료의 기준기간을 구분합니다. 유효성은 영역·축·자료 유형에 맞춘 공통 규칙으로 관리하는 것이 원칙입니다. 유효한 공시가 다음 날에도 평가 기반이 될 수는 있지만 매일 새로운 활동으로 반복 가산되지는 않습니다. 책임 사건은 기간 경과만으로 후속 조치와 이력이 사라졌다고 해석하지 않습니다.</p></div><div class="dx-domain"><div class="dx-head"><span class="dx-tag">03 / DISTINCT EVENTS</span><h2 class="dx-title">사건의 수와 확산의 크기를 구분합니다</h2></div><p class="dx-body">동일 자료의 재수집과 전재를 독립 사건처럼 반복 세지 않습니다. 실질적으로 새로운 사실이나 반응이 있는 후속 자료는 구분해 검토합니다. 한 사건이 여러 축을 설명하더라도 활동량은 사건 단위로 관리합니다. 영상의 누적 반응과 관측 시점 사이의 증분도 구별해야 합니다.</p></div><div class="dx-domain"><div class="dx-head"><span class="dx-tag">04 / OBSERVATION</span><h2 class="dx-title">발견하지 못한 것과 관측하지 못한 것은 다릅니다</h2></div><p class="dx-body">정해진 수집 범위를 정상적으로 확인했으나 유효 언급을 찾지 못한 경우와, 실패·차단·실행 누락으로 확인하지 못한 경우를 구분합니다. 부분 관측은 확보된 근거만 해석하며 전체 무언급으로 확장하지 않습니다. 수집 실패를 대상의 소통 부재나 부정적 평판으로 바꾸지 않습니다.</p></div><div class="dx-domain"><div class="dx-head"><span class="dx-tag">05 / COVERAGE</span><h2 class="dx-title">일주일의 두께를 함께 읽습니다</h2></div><p class="dx-body">수집이 정상 완료된 날과 새로운 근거가 발견된 날은 서로 다른 정보입니다. 유효 축의 범위, 자료의 최신성, 출처 구성, 기존 기준자료에 대한 의존도도 함께 살펴야 합니다. 하루의 자료가 있는 잠정 주간값을 일주일 전체를 관측한 결과처럼 표현하지 않습니다.</p></div><div class="dx-domain"><div class="dx-head"><span class="dx-tag">06 / COMPARABILITY</span><h2 class="dx-title">평판의 변화와 근거 범위의 변화를 나눠 봅니다</h2></div><p class="dx-body">새로운 축·출처가 추가되거나 기존 근거가 만료되면 비교 조건이 달라집니다. 기준 변경과 근거 범위 확대·축소는 해석에 함께 표시해야 합니다. 공통 축이 있더라도 출처 구성까지 같다는 보장은 없으므로 점수 차이를 순수한 인과 효과로 설명하지 않습니다. <a href="trust.html">신뢰등급</a>은 이 판단을 돕는 근거 충실성 정보입니다.</p></div></div></section>
 <footer>
   <div class="wrap">
     <div class="footer-top">
@@ -633,9 +590,9 @@
       </div>
     </div>
     <p class="footer-op">BRIDGE is developed and operated by SignalBridge.</p>
-    <p class="footer-note">시그널브릿지(SIGNALBRIDGE)는 브랜드의 가치가 단순히 &lsquo;얼마나 자주 입에 오르내리는지&rsquo;나 &lsquo;규모가 얼마나 큰지&rsquo;로 결정될 수 없다고 믿습니다. 화제성 뒤에 가려진 진짜 목소리를 입체적으로 읽어내기 위해, 시그널브릿지는 독자적인 분석 솔루션 &lsquo;BRIDGE 브랜드평판지수&rsquo;를 선보입니다. 하나의 뭉뚱그려진 점수로 모든 대상을 줄 세우는 방식은 이제 의미가 없습니다. 시그널브릿지는 평가 대상을 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 4개 영역으로 세분화하여 각기 다른 환경과 맥락에 맞춘 &lsquo;맞춤형 잣대&rsquo;를 적용합니다. 나아가 도달(B), 반응(R), 정체성(I), 경험(D), 행동유발(G), 책임·지속(E)이라는 6개의 독립적인 렌즈로 브랜드를 둘러싼 정보와 데이터를 정밀 분해하여, 왜곡 없는 브랜드의 본연의 가치와 내일의 경쟁력을 투명하게 비춥니다.</p>
+    <p class="footer-note">시그널브릿지(SIGNALBRIDGE)는 공개자료와 공중의 관측 신호를 바탕으로 브랜드와 공중 사이의 관계를 읽습니다. BRIDGE 브랜드평판지수는 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 맥락을 구분하고, 도달(B)·반응(R)·정체성(I)·경험(D)·행동유발(G)·책임·지속(E)의 여섯 축으로 현재 위치와 관계 구성, 변화의 방향을 함께 살핍니다. 순위는 관측된 상대적 위치이며 대상의 모든 가치를 뜻하지 않습니다. 결과는 자료의 기준기간과 근거 상태, 신뢰등급을 함께 확인해 해석해야 합니다.</p>
   </div>
 </footer>
-<script src="script.js?v=20261015-v5-recovery" defer></script>
+<script src="script.js?v=20261015-editorial" defer></script>
 </body>
 </html>
