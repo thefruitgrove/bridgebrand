@@ -12,15 +12,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 272772,
+        "views": 274322,
         "median_views": 2514,
-        "median_views_per_day": 430.0,
-        "likes": 1818,
+        "median_views_per_day": 430.8,
+        "likes": 1822,
         "comments": 273,
-        "engagement_per_1000_views": 8.6665786810963,
+        "engagement_per_1000_views": 8.632191366350492,
         "identity_continuity": 27.11864406779661,
         "action_content_count": 5,
-        "action_engagement_per_1000_views": 16.808042726987118
+        "action_engagement_per_1000_views": 16.888193901485536
       },
       "daily_total_view_delta": 87333,
       "scores": {
@@ -41,15 +41,15 @@
       },
       "metrics": {
         "output_count": 16,
-        "views": 707175,
+        "views": 707183,
         "median_views": 1328.5,
         "median_views_per_day": 131.2875,
         "likes": 706,
         "comments": 782,
-        "engagement_per_1000_views": 3.2099551030508713,
+        "engagement_per_1000_views": 3.209918790468662,
         "identity_continuity": 13.253012048192772,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 15.365952284674485
+        "action_engagement_per_1000_views": 15.347334410339256
       },
       "daily_total_view_delta": 3631,
       "scores": {
@@ -70,12 +70,12 @@
       },
       "metrics": {
         "output_count": 11,
-        "views": 102173,
+        "views": 102513,
         "median_views": 11315,
         "median_views_per_day": 788.2666666666667,
         "likes": 134,
         "comments": 18,
-        "engagement_per_1000_views": 1.663844655633093,
+        "engagement_per_1000_views": 1.658326261059573,
         "identity_continuity": 20.0,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -98,15 +98,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 60203,
-        "median_views": 686,
-        "median_views_per_day": 179.33333333333334,
-        "likes": 544,
-        "comments": 63,
-        "engagement_per_1000_views": 11.129013504310416,
+        "views": 60569,
+        "median_views": 687,
+        "median_views_per_day": 188.0,
+        "likes": 545,
+        "comments": 64,
+        "engagement_per_1000_views": 11.111294556621374,
         "identity_continuity": 19.54022988505747,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 15.071390798519301
+        "action_engagement_per_1000_views": 14.859228362877998
       },
       "daily_total_view_delta": 38876,
       "scores": {
@@ -127,24 +127,24 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 24210,
-        "median_views": 1036,
-        "median_views_per_day": 345.3333333333333,
-        "likes": 691,
-        "comments": 66,
-        "engagement_per_1000_views": 33.99421726559273,
+        "views": 24698,
+        "median_views": 1037,
+        "median_views_per_day": 358.0,
+        "likes": 712,
+        "comments": 67,
+        "engagement_per_1000_views": 34.25378573163819,
         "identity_continuity": 21.641791044776117,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 96.21993127147766
+        "action_engagement_per_1000_views": 93.23432343234325
       },
       "daily_total_view_delta": 48674,
       "scores": {
         "B": 15.55,
         "R": 100.0,
-        "I": 77.78,
+        "I": 66.67,
         "G": 100.0
       },
-      "identity_score": 77.78
+      "identity_score": 66.67
     },
     "GOV-C09": {
       "channel": {
@@ -155,25 +155,25 @@
         "video_count": 3084
       },
       "metrics": {
-        "output_count": 23,
-        "views": 118937,
-        "median_views": 1307,
-        "median_views_per_day": 70.5,
-        "likes": 580,
-        "comments": 377,
-        "engagement_per_1000_views": 11.216021927575103,
-        "identity_continuity": 20.858895705521473,
+        "output_count": 24,
+        "views": 118986,
+        "median_views": 1287.5,
+        "median_views_per_day": 70.66666666666666,
+        "likes": 581,
+        "comments": 379,
+        "engagement_per_1000_views": 11.25342477266233,
+        "identity_continuity": 23.076923076923077,
         "action_content_count": 4,
-        "action_engagement_per_1000_views": 9.110458864897852
+        "action_engagement_per_1000_views": 9.15006100040667
       },
       "daily_total_view_delta": 7407,
       "scores": {
         "B": 21.66,
         "R": 77.78,
-        "I": 66.67,
+        "I": 88.89,
         "G": 42.86
       },
-      "identity_score": 66.67
+      "identity_score": 88.89
     },
     "GOV-C17": {
       "channel": {
@@ -185,15 +185,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 211139,
-        "median_views": 5871,
-        "median_views_per_day": 1012.3,
-        "likes": 3888,
-        "comments": 230,
-        "engagement_per_1000_views": 20.59306902088198,
+        "views": 213029,
+        "median_views": 5869,
+        "median_views_per_day": 1016.25,
+        "likes": 3922,
+        "comments": 234,
+        "engagement_per_1000_views": 20.607522919414727,
         "identity_continuity": 17.682926829268293,
         "action_content_count": 6,
-        "action_engagement_per_1000_views": 1.170053822475834
+        "action_engagement_per_1000_views": 1.1577991129477565
       },
       "daily_total_view_delta": 25854,
       "scores": {
@@ -214,15 +214,15 @@
       },
       "metrics": {
         "output_count": 11,
-        "views": 789631,
+        "views": 790195,
         "median_views": 686,
         "median_views_per_day": 42.875,
-        "likes": 1029,
+        "likes": 1030,
         "comments": 1100,
-        "engagement_per_1000_views": 4.089251815088313,
+        "engagement_per_1000_views": 4.087598630717735,
         "identity_continuity": 37.5,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 4.444000673604394
+        "action_engagement_per_1000_views": 4.441757583969767
       },
       "daily_total_view_delta": 28594,
       "scores": {
@@ -243,12 +243,12 @@
       },
       "metrics": {
         "output_count": 9,
-        "views": 208909,
-        "median_views": 14041,
-        "median_views_per_day": 2269.5,
+        "views": 209009,
+        "median_views": 14118,
+        "median_views_per_day": 2248.25,
         "likes": 815,
         "comments": 1,
-        "engagement_per_1000_views": 3.910793694862356,
+        "engagement_per_1000_views": 3.9089225822811455,
         "identity_continuity": 22.448979591836736,
         "action_content_count": 1,
         "action_engagement_per_1000_views": 2.6514094334356684
@@ -257,10 +257,10 @@
       "scores": {
         "B": 63.89,
         "R": 22.22,
-        "I": 88.89,
+        "I": 77.78,
         "G": 0.0
       },
-      "identity_score": 88.89
+      "identity_score": 77.78
     },
     "GOV-C14": {
       "channel": {
@@ -272,12 +272,12 @@
       },
       "metrics": {
         "output_count": 5,
-        "views": 437054,
+        "views": 437248,
         "median_views": 4422,
-        "median_views_per_day": 519.6875,
+        "median_views_per_day": 519.75,
         "likes": 1723,
         "comments": 109,
-        "engagement_per_1000_views": 4.4410988115885,
+        "engagement_per_1000_views": 4.4391283665105385,
         "identity_continuity": 20.588235294117645,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -300,15 +300,15 @@
       },
       "metrics": {
         "output_count": 22,
-        "views": 385418,
-        "median_views": 2216.5,
-        "median_views_per_day": 181.61111111111111,
+        "views": 385551,
+        "median_views": 2217.0,
+        "median_views_per_day": 207.0,
         "likes": 705,
         "comments": 851,
-        "engagement_per_1000_views": 6.245167584285114,
+        "engagement_per_1000_views": 6.243013245977834,
         "identity_continuity": 20.555555555555554,
         "action_content_count": 10,
-        "action_engagement_per_1000_views": 6.123975873567147
+        "action_engagement_per_1000_views": 6.123495102589324
       },
       "daily_total_view_delta": 22002,
       "scores": {

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-16T05:50:34.950099+09:00",
+  "checked_at": "2026-10-16T07:12:43.567161+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -9,11 +9,7 @@
     "GOV-C03": {
       "status": "review",
       "homepage": "https://www.daegu.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@PowerfulDaeguTv",
-        "https://www.youtube.com/@OfficialDaeguTV"
-      ]
+      "reason": "URLError"
     },
     "GOV-C08": {
       "status": "review",
