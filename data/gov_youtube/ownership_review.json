@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-16T17:15:03.744401+09:00",
+  "checked_at": "2026-10-16T23:15:24.001317+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -9,32 +9,16 @@
     "GOV-C03": {
       "status": "review",
       "homepage": "https://www.daegu.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-C04": {
-      "status": "review",
-      "homepage": "https://www.incheon.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-C06": {
-      "status": "review",
-      "homepage": "https://www.daejeon.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-C07": {
-      "status": "review",
-      "homepage": "https://www.ulsan.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@PowerfulDaeguTv",
+        "https://www.youtube.com/@OfficialDaeguTV"
+      ]
     },
     "GOV-C08": {
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
-    },
-    "GOV-C09": {
-      "status": "review",
-      "homepage": "https://www.gg.go.kr",
-      "reason": "URLError"
     },
     "GOV-C10": {
       "status": "review",
@@ -49,51 +33,39 @@
     "GOV-C12": {
       "status": "review",
       "homepage": "https://www.chungnam.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-C14": {
-      "status": "review",
-      "homepage": "https://www.jeonnam.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-C15": {
-      "status": "review",
-      "homepage": "https://www.gb.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@topcnitv/streams",
+        "https://www.youtube.com/user/topcnitv/"
+      ]
     },
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@gyeongnamdo",
-        "https://www.youtube.com/user/gyeongnamdo?cpath="
-      ]
-    },
-    "GOV-M24": {
-      "status": "review",
-      "homepage": "https://www.acrc.go.kr",
       "reason": "URLError"
     },
     "GOV-M08": {
       "status": "review",
       "homepage": "https://www.moe.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": []
     },
     "GOV-M10": {
       "status": "review",
       "homepage": "https://www.mcst.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": []
     },
     "GOV-M06": {
       "status": "review",
       "homepage": "https://www.mois.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": []
     },
     "GOV-M17": {
       "status": "review",
       "homepage": "https://www.molit.go.kr",
-      "reason": "URLError"
+      "reason": "HTTPError"
     }
   }
 }

@@ -1021,3 +1021,10 @@ footer .logo .op{ color:#7c86a0;}
 @media(prefers-reduced-motion:reduce){.ticker-track{animation:none!important;overflow:auto}}
 
 .public-triptych h2{color:#f6f3ed}.public-flow span{color:#545b62}
+
+
+/* 2026-10-16: align PUBLICITY text with the ENT delta column. */
+@media (min-width:901px){
+  #hero-cinematic .hero-actions{max-width:320px;}
+  #hero-cinematic .hero-actions .publicity-link{margin-right:15px;}
+}
