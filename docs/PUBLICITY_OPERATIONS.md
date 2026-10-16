@@ -30,7 +30,7 @@ publicity/generate.py uses only PUBLIC_FIELDS from site/data/history.json. It do
 
 ## Frozen records and permissions
 
-public.bridge_publicity_articles contains public article payloads only. bridge_publicity_private.snapshots stores immutable source inputs keyed by SHA-256; anon/authenticated cannot access it. Public clients have SELECT only and cannot execute bridge_stage_publicity. Existing scoring tables/policies are unchanged.
+public.bridge_publicity_articles contains public article payloads only. bridge_publicity_private.snapshots stores immutable source inputs keyed by SHA-256; anon/authenticated cannot access it. Public clients have column-limited SELECT access and cannot read `snapshot_hash` or execute bridge_stage_publicity. Existing scoring tables/policies are unchanged.
 
 bridge_stage_publicity is SECURITY INVOKER, callable only by service_role. A four-domain issue is staged in a single transaction. IDs and a unique(issue_week,slot,domain,is_example) constraint prevent duplicate editions. Repeated preparation may refresh a future draft; published articles are not overwritten by this RPC. Corrections require an explicit editorial change and a correction note; do not silently rewrite a published article.
 
@@ -84,6 +84,6 @@ The table and relationship diagrams appear after paragraphs 1â€“2. Paragraphs 3â
 
 ### Explicit correction and recovery
 
-Published articles remain immutable to the scheduled generator. A full rewrite requires an explicit editorial decision, keeps the original article ID and scheduled time, uses the original frozen snapshot, and adds a visible revision note. `tools/build_publicity_revision.py` prepares a reviewable bundle from either verified history or an exported frozen snapshot; it never writes to the database. Database replacement is a separate privileged operation and must be limited to the named article IDs in one transaction. After a correction, run the complete test suite and `tools/verify_publicity.py` as an anonymous reader.
+Published articles remain immutable to the scheduled generator. A full rewrite requires an explicit editorial decision, keeps the original article ID and scheduled time, uses the original frozen snapshot, and adds a visible revision note. The correction bundle must be prepared in a controlled private workspace and must not be committed to the public repository. Database replacement is a separate privileged operation and must be limited to the named article IDs in one transaction. After a correction, run the complete test suite and `tools/verify_publicity.py` as an anonymous reader.
 
 For the 2026-W42 launch correction, the two sample rows were removed and replaced by four formal Wednesday articles dated 2026-10-14. The four Friday articles dated 2026-10-16 retained their IDs and frozen facts and received the 2.0 editorial rewrite. This is a one-time editorial correction, not permission for scheduled jobs to overwrite published copy.
