@@ -183,7 +183,7 @@ def head(title, desc=None):
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261015-editorial2">
+<link rel="stylesheet" href="style.css?v=20261016-publicity-nav1">
 </head>
 <body>'''
 
@@ -204,6 +204,7 @@ def base_header(active):
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top"><span class="logo">BRIDGE</span><button class="mm-close" id="mmClose" aria-label="닫기">&times;</button></div>
   {"".join(f'<div class="mm-group"><a href="{href}">{label}</a>' + (''.join(f'<a class="mm-child" href="{s_href}">{s_label}</a>' for s_label,s_href in sub) if sub else '') + '</div>' for label, href, sub in NAV_ITEMS)}
+  <a href="publicity.html" class="mm-util">PUBLICITY</a>
   {"".join(f'<a href="{u_href}" class="mm-util">{u_label}</a>' for u_label, u_href in NAV_UTIL_ITEMS)}
   <a href="about.html" class="mm-util">시그널브릿지 회사소개</a>
 </div>'''
