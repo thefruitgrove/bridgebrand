@@ -71,7 +71,7 @@ From 2026-10-16, every CPR, GOV, UNI and ENT article follows the same verified n
 7. **Paragraph 6 — observation coverage:** compare the most and least covered axes and distinguish missing evidence from a negative state.
 8. **Paragraph 7 — time and purpose:** state the actual observation dates, prohibit converting the daily position into a confirmed weekly result, and close with the next relationship question.
 
-The table and relationship diagrams appear after paragraphs 1–2. Paragraphs 3–7 follow the visuals under three descriptive subheads. Every domain article therefore contains exactly seven prose paragraphs in a `2 + 2 + 3` section pattern. Korean dates and subject/topic particles are generated through tested helpers to prevent recurring errors such as `디어유이`, `진주시이` and `고려대학교은`.
+The table and relationship diagrams appear after paragraphs 1–2. Paragraphs 3–7 follow the visuals under three descriptive subheads, grouped as paragraphs `3–4`, `5`, and `6–7`. Every domain article therefore contains exactly seven prose paragraphs in a `2 + 2 + 1 + 2` data-section pattern, with the unheaded first section rendered as the lead. Korean dates and subject/topic particles are generated through tested helpers to prevent recurring errors such as `디어유이`, `진주시이` and `고려대학교은`.
 
 ### Language and evidence rules
 
