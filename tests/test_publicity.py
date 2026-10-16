@@ -53,7 +53,26 @@ class PublicityTests(unittest.TestCase):
   a,s=articles_for(self.history('2026-10-14'),dt.date(2026,10,14),True,'ENT')
   self.assertEqual(a[0]['domain'],'ENT');self.assertEqual({r['domain'] for r in s['rows']},{'ENT'})
   prose=' '.join(t for section in a[0]['payload']['sections'] for t in section['paragraphs'])
-  self.assertEqual(prose.count('SIGNALBRIDGE BRIDGE 브랜드평판지수 INDEX에 따르면'),1)
+  self.assertEqual(prose.count('시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면'),1)
+ def test_editorial_standard_has_exactly_seven_paragraphs(self):
+  articles,_=articles_for(self.history(),dt.date(2026,10,16))
+  for article in articles:
+   payload=article['payload']
+   self.assertEqual(payload['template_version'],'publicity-rules-2.0')
+   self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
+   self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,3])
+   self.assertIn('2026년 10월 16일',payload['sections'][0]['paragraphs'][0])
+   self.assertIn('해당 분야 전체의 절대적 수준을 대변하지 않는다',payload['sections'][0]['paragraphs'][0])
+   self.assertIn('향후 순위 상승을 예고하는 것은 경계해야 한다',payload['sections'][1]['paragraphs'][1])
+ def test_korean_particles_do_not_repeat_known_errors(self):
+  h=self.history()
+  names={'CPR':'디어유','GOV':'진주시','UNI':'고려대학교','ENT':'방탄소년단'}
+  for row in h['rankings']:
+   if row['rank']==1:row['name']=names[row['domain']]
+  articles,_=articles_for(h,dt.date(2026,10,16))
+  prose=json.dumps(articles,ensure_ascii=False)
+  for bad in ('디어유이','디어유은','진주시이','고려대학교이','고려대학교은','방탄소년단가'):
+   self.assertNotIn(bad,prose)
  def test_public_article_hides_internal_snapshot_identifier(self):
   source=(Path(__file__).resolve().parents[1]/'site/publicity.js').read_text()
   self.assertNotIn('입력 식별:',source);self.assertNotIn('작성 시점의 입력본',source)
