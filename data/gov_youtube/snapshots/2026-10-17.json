@@ -12,15 +12,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 270332,
-        "median_views": 2229,
+        "views": 270569,
+        "median_views": 2230,
         "median_views_per_day": 367.0,
-        "likes": 1821,
-        "comments": 287,
-        "engagement_per_1000_views": 8.859476495568412,
+        "likes": 1827,
+        "comments": 289,
+        "engagement_per_1000_views": 8.888675347138808,
         "identity_continuity": 32.20338983050847,
         "action_content_count": 5,
-        "action_engagement_per_1000_views": 16.629547141796586
+        "action_engagement_per_1000_views": 16.61228122218926
       },
       "daily_total_view_delta": 144028,
       "scores": {
@@ -41,15 +41,15 @@
       },
       "metrics": {
         "output_count": 18,
-        "views": 708565,
-        "median_views": 1219.0,
+        "views": 708587,
+        "median_views": 1219.5,
         "median_views_per_day": 128.64181818181817,
-        "likes": 730,
-        "comments": 787,
-        "engagement_per_1000_views": 3.251642404013746,
+        "likes": 731,
+        "comments": 788,
+        "engagement_per_1000_views": 3.255775225907334,
         "identity_continuity": 13.26530612244898,
         "action_content_count": 3,
-        "action_engagement_per_1000_views": 19.87353206865402
+        "action_engagement_per_1000_views": 20.664869721473494
       },
       "daily_total_view_delta": 5348,
       "scores": {
@@ -70,12 +70,12 @@
       },
       "metrics": {
         "output_count": 12,
-        "views": 112433,
-        "median_views": 11009.0,
+        "views": 112478,
+        "median_views": 11010.0,
         "median_views_per_day": 931.909090909091,
         "likes": 158,
         "comments": 23,
-        "engagement_per_1000_views": 1.8144139176220506,
+        "engagement_per_1000_views": 1.8136880100997528,
         "identity_continuity": 19.444444444444446,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -98,15 +98,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 71583,
-        "median_views": 602,
-        "median_views_per_day": 152.66666666666666,
-        "likes": 576,
+        "views": 72220,
+        "median_views": 642,
+        "median_views_per_day": 168.0,
+        "likes": 583,
         "comments": 63,
-        "engagement_per_1000_views": 9.806797703365323,
+        "engagement_per_1000_views": 9.817225145389088,
         "identity_continuity": 27.011494252873565,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 14.074074074074074
+        "action_engagement_per_1000_views": 14.34127369956247
       },
       "daily_total_view_delta": 24437,
       "scores": {
@@ -122,22 +122,22 @@
         "id": "UCTHZPqsEmZLP5rrCLXJFwNg",
         "title": "울산시청TV - 울산광역시 공식 채널 ",
         "subscribers": 47600,
-        "total_views": 27127474,
+        "total_views": 27170944,
         "video_count": 4258
       },
       "metrics": {
         "output_count": 25,
-        "views": 29486,
+        "views": 29545,
         "median_views": 1117,
-        "median_views_per_day": 356.25,
-        "likes": 951,
-        "comments": 88,
-        "engagement_per_1000_views": 38.22152886115445,
+        "median_views_per_day": 357.25,
+        "likes": 952,
+        "comments": 89,
+        "engagement_per_1000_views": 38.24674225757319,
         "identity_continuity": 23.57142857142857,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 87.9424778761062
+        "action_engagement_per_1000_views": 89.30540242557883
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 43470,
       "scores": {
         "B": 15.55,
         "R": 100.0,
@@ -156,15 +156,15 @@
       },
       "metrics": {
         "output_count": 24,
-        "views": 132638,
+        "views": 132946,
         "median_views": 1288.5,
         "median_views_per_day": 91.03133903133903,
         "likes": 608,
         "comments": 404,
-        "engagement_per_1000_views": 10.675673638022285,
+        "engagement_per_1000_views": 10.650940983557234,
         "identity_continuity": 26.21951219512195,
         "action_content_count": 3,
-        "action_engagement_per_1000_views": 8.511480601741884
+        "action_engagement_per_1000_views": 8.507481142574502
       },
       "daily_total_view_delta": 24866,
       "scores": {
@@ -185,19 +185,19 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 247446,
-        "median_views": 5377,
+        "views": 249319,
+        "median_views": 5378,
         "median_views_per_day": 1293.7272727272727,
-        "likes": 4666,
+        "likes": 4676,
         "comments": 263,
-        "engagement_per_1000_views": 20.982355746304247,
+        "engagement_per_1000_views": 20.86483581275394,
         "identity_continuity": 19.2090395480226,
         "action_content_count": 8,
-        "action_engagement_per_1000_views": 0.9856778028345704
+        "action_engagement_per_1000_views": 0.9803630314013251
       },
       "daily_total_view_delta": 104312,
       "scores": {
-        "B": 56.11,
+        "B": 63.34,
         "R": 88.89,
         "I": 33.33,
         "G": 14.29
@@ -209,22 +209,22 @@
         "id": "UCUAYkowhhWi7W5EPHpSO_gg",
         "title": "국민권익위원회  권익비전",
         "subscribers": 95500,
-        "total_views": 72217111,
+        "total_views": 72242415,
         "video_count": 2784
       },
       "metrics": {
         "output_count": 11,
-        "views": 802990,
+        "views": 803450,
         "median_views": 690,
         "median_views_per_day": 40.588235294117645,
-        "likes": 1061,
+        "likes": 1060,
         "comments": 1121,
-        "engagement_per_1000_views": 4.113376256242294,
+        "engagement_per_1000_views": 4.109776588462256,
         "identity_continuity": 37.5,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 4.4654338016973325
+        "action_engagement_per_1000_views": 4.460974142412402
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 25304,
       "scores": {
         "B": 50.0,
         "R": 50.0,
@@ -238,24 +238,24 @@
         "id": "UCgciFvhDgtOBu6ieoE9zdhg",
         "title": "전북특별자치도",
         "subscribers": 99400,
-        "total_views": 145965182,
+        "total_views": 145996484,
         "video_count": 2299
       },
       "metrics": {
         "output_count": 11,
-        "views": 247528,
-        "median_views": 15545,
-        "median_views_per_day": 3109.0,
+        "views": 247712,
+        "median_views": 15511,
+        "median_views_per_day": 3102.2,
         "likes": 891,
         "comments": 7,
-        "engagement_per_1000_views": 3.6561520312853495,
+        "engagement_per_1000_views": 3.6534362485466993,
         "identity_continuity": 18.333333333333332,
         "action_content_count": 1,
         "action_engagement_per_1000_views": 2.651224447080165
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 31302,
       "scores": {
-        "B": 71.11,
+        "B": 63.89,
         "R": 22.22,
         "I": 22.22,
         "G": 0.0
@@ -272,12 +272,12 @@
       },
       "metrics": {
         "output_count": 6,
-        "views": 449518,
-        "median_views": 7541.0,
-        "median_views_per_day": 1372.8333333333333,
-        "likes": 1836,
-        "comments": 138,
-        "engagement_per_1000_views": 4.698365805151296,
+        "views": 449895,
+        "median_views": 7683.5,
+        "median_views_per_day": 1389.8333333333333,
+        "likes": 1845,
+        "comments": 139,
+        "engagement_per_1000_views": 4.718878849509331,
         "identity_continuity": 17.5,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -300,15 +300,15 @@
       },
       "metrics": {
         "output_count": 23,
-        "views": 386495,
+        "views": 386530,
         "median_views": 2185,
-        "median_views_per_day": 164.0,
+        "median_views_per_day": 173.5,
         "likes": 747,
         "comments": 901,
-        "engagement_per_1000_views": 6.595169407107465,
+        "engagement_per_1000_views": 6.594572219491372,
         "identity_continuity": 19.473684210526315,
         "action_content_count": 11,
-        "action_engagement_per_1000_views": 6.599489725428068
+        "action_engagement_per_1000_views": 6.598881920076626
       },
       "daily_total_view_delta": 10525,
       "scores": {
