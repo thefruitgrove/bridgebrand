@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-16",
+  "as_of_date": "2026-10-17",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C31": {
-      "channel_id": "UChqGvsUJKv4d9zIkmIUda8Q",
-      "title": "의정부시",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C32": {
       "channel_id": "UCvaZvtBYTNRdmROnFHSFwAA",
@@ -30,6 +25,11 @@
     "GOV-C35": {
       "channel_id": "UCWiS4vemV0wcxuxYPx9Z62g",
       "title": "충주시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C36": {
+      "channel_id": "UCMDecCsy3-Lbpo9OSPzJP5w",
+      "title": "제천시",
       "reason": "awaiting_human_verification"
     }
   }
