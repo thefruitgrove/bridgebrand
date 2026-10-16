@@ -15,8 +15,30 @@ ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
-VERSION='publicity-rules-1.1'
+VERSION='publicity-rules-2.0'
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
+DOMAIN_LABELS={
+    'CPR':{'scope':'기업','entity':'기업','distribution':'기업별','experience':'기업 경험 전반','ethics':'대상의 도덕성·윤리성'},
+    'GOV':{'scope':'공공기관·지자체','entity':'대상','distribution':'공공 대상별','experience':'공공서비스 경험 전반','ethics':'기관의 윤리성·책무성'},
+    'UNI':{'scope':'대학','entity':'대학','distribution':'대학별','experience':'대학 경험 전반','ethics':'기관의 윤리성·책무성'},
+    'ENT':{'scope':'대중문화·인물','entity':'인물','distribution':'대중문화·인물별','experience':'활동 전반','ethics':'대상의 도덕성·윤리성'},
+}
+
+def korean_date(value):
+    d=dt.date.fromisoformat(value)
+    return f'{d.year}년 {d.month}월 {d.day}일'
+
+def has_final_consonant(value):
+    for char in reversed(value):
+        code=ord(char)
+        if 0xAC00<=code<=0xD7A3:return (code-0xAC00)%28!=0
+    return False
+
+def subject(value):
+    return value+('이' if has_final_consonant(value) else '가')
+
+def topic(value):
+    return value+('은' if has_final_consonant(value) else '는')
 
 def edition(publication_date):
     if publication_date.weekday() not in (0,2,4):raise ValueError('PUBLICITY is issued on Monday, Wednesday and Friday only')
@@ -80,17 +102,30 @@ def domain_content(snapshot,domain):
     other=max(candidates,key=lambda r:(r['axis_scores']['D']+r['axis_scores']['E'],r['external_id'])) if candidates else members[-1]
     activity=max(members,key=lambda r:float(r.get('activity_points') or 0))
     total=float(activity.get('activity_points') or 0)
+    labels=DOMAIN_LABELS[domain]
+    date_count=len(dates)
+    date_word='날짜' if date_count==1 else '개 날짜'
     title=f"{leader['name']} {leader['score']:.1f}점… {domain}, 선두의 수치 뒤에 남은 연결 과제"
-    sections=[{'heading':'순위의 앞자리, 그 안의 다른 표정','paragraphs':[
-      f"{leader['name']}이 {snapshot['period_through']} 기준 {domain} 공개 순위에서 선두에 올랐다. SIGNALBRIDGE BRIDGE 브랜드평판지수 INDEX에 따르면 {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번에 공개 요건을 충족한 {len(members)}개 대상의 평균은 {mean:.1f}점으로 집계됐다. 평균의 범위는 이 공개 집합이며, 분야 전체의 수준을 뜻하지 않는다.",
-      f"눈길을 끄는 것은 순위보다 그 안의 구성이다. {leader['name']}은 유효 근거가 있는 축 가운데 {AXES[high]} {leader['axis_scores'][high]:.1f}점, {AXES[low]} {leader['axis_scores'][low]:.1f}점을 기록했다. 같은 이름 아래 묶인 수치라도 공중과 만나는 접점의 모습은 다르다. 선두라는 위치만으로 관심·반응·경험·신뢰가 고르게 연결됐다고 읽기 어려운 이유다."]},
+    if candidates:
+        d_score=other['axis_scores']['D'];e_score=other['axis_scores']['E']
+        relation=(f"경험은 {d_score:.1f}점인 반면, 책임·지속은 {e_score:.1f}점으로 더 높게 나타났다." if e_score>d_score else
+                  f"경험은 {d_score:.1f}점인 반면, 책임·지속은 {e_score:.1f}점에 머물렀다." if e_score<d_score else
+                  f"경험과 책임·지속은 각각 {d_score:.1f}점으로 같은 수준을 보였다.")
+        profile_text=(f"공개 순위 {other['rank']}위인 {other['name']}에서는 또 다른 성격의 관계 구성이 나타났다. {relation} "
+                      f"이 두 수치를 나란히 비교하면 총점이라는 단일 지표에 가려진 대외 접점의 결을 읽을 수 있다. 다만 이는 공개 자료로 포착한 관계의 프로필일 뿐, 실제 {labels['experience']}이나 {labels['ethics']}을 직접 판정한 결과는 아님을 유의해야 한다.")
+    else:
+        profile_text=(f"공개 순위 하위권인 {other['name']} 역시 총점 하나의 수치만으로 설명되지 않는다. 다만 현재 확보된 자료상으로는 경험과 책임·지속의 근거를 함께 비교할 하위권 표본이 충분하지 않다. "
+                      "순위가 낮다는 이유로 모든 대외 접점이 취약하다고 속단하거나, 반대로 객관적으로 확인되지 않은 잠재력을 임의로 부여해서는 안 된다.")
+    sections=[{'heading':'현상 제시와 순위 이면의 구성','paragraphs':[
+      f"{subject(leader['name'])} {korean_date(snapshot['period_through'])} 기준 {domain}({labels['scope']}) 공개 순위에서 선두에 올랐다. 시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면, {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번에 공개 요건을 충족한 {len(members)}개 대상의 평균은 {mean:.1f}점으로 집계됐다. 단, 이 평균은 이번 공개 집합에 한정된 값일 뿐, 해당 분야 전체의 절대적 수준을 대변하지 않는다.",
+      f"눈길을 끄는 대목은 순위 그 자체보다 그 내부의 구성이다. {topic(leader['name'])} 유효 근거가 확인된 축 중에서 {AXES[high]} {leader['axis_scores'][high]:.1f}점, {AXES[low]} {leader['axis_scores'][low]:.1f}점을 기록했다. 이처럼 같은 선두권이라도 공중과 만나는 접점의 결은 서로 다르다. 단순히 ‘선두’라는 위치만으로 관심·반응·경험·신뢰가 고르게 연결되어 있다고 단정하기 어려운 이유가 여기에 있다."]},
       {'heading':'선두 밖에서도 읽히는 관계의 차이','paragraphs':[
-      f"공개 순위 {other['rank']}위인 {other['name']}에서는 또 다른 구성이 나타났다. 경험은 {other['axis_scores']['D']:.1f}점, 책임·지속은 {other['axis_scores']['E']:.1f}점이다. 두 수치를 나란히 보면 총점에 가려진 접점의 차이를 읽을 수 있다. 이는 공개자료로 포착한 관계의 프로필이며, 실제 경험 전반이나 대상의 윤리성을 직접 판정한 결과는 아니다." if candidates else f"공개 순위 {other['rank']}위인 {other['name']}도 총점 하나로 설명되지는 않는다. 다만 현재 자료로는 경험과 책임의 근거를 함께 비교할 하위권 사례가 충분하지 않다. 순위가 낮다는 이유로 모든 접점이 약하다고 단정하거나, 반대로 확인되지 않은 강점을 부여할 근거도 없다.",
-      '이런 차이는 순위를 지우기보다 읽는 폭을 넓힌다. 상위권에서는 연결이 덜 확인된 지점을, 다른 대상에서는 별도로 주목할 관계 구성을 찾을 수 있다. 한 축의 수치만으로 다른 축의 변화 원인을 설명하거나 다음 순위의 상승을 예고할 수는 없다.']},
+      profile_text,
+      '이러한 데이터의 차이는 순위라는 단편적 서사를 지우기보다, 오히려 현상을 입체적으로 읽는 시야를 넓혀준다. 상위권 안에서도 연결 고리가 덜 확인된 지점을 발견할 수 있고, 개별 대상마다 주목해야 할 고유한 관계 구성이 있음을 알 수 있다. 결국 한 축의 수치만으로 다른 축의 변화 원인을 단정하거나 향후 순위 상승을 예고하는 것은 경계해야 한다.']},
       {'heading':'활동의 크기와 평판의 방향은 다른 신호','paragraphs':[
-      f"활동량에서는 {activity['name']}이 당주 {total:,.1f}P로 이번 공개 집합에서 가장 크게 나타났다. 새로 포착한 유효 사건과 행동이 어느 대상에 모였는지를 보여주는 수치다. 그러나 활동량이 많다는 사실만으로 긍정 반응이 많았다고 해석할 수는 없다. 평판의 수준과 활동의 총량을 함께 보아야 같은 점수에서도 서로 다른 움직임이 보인다." if total>0 else '이번 공개 대상에서는 당주 유효 활동 포인트가 기록되지 않았다. 이는 실제 활동이 전혀 없었다는 증명이 아니라, 설정된 관측·검수 범위에서 포인트로 인정된 활동이 없다는 뜻이다. 기존 자료가 평가 기반으로 유지되는 것과 새로운 활동이 발생하는 것은 구분된다.',
-      f"앞으로의 관찰 지점은 숫자가 채워지는 속도보다 그 연결의 내용이다. 현재 {AXES[strong]}은 {coverage[strong]}개 대상에서 유효 근거가 확인되지만, {AXES[weak]}은 {coverage[weak]}개에 그친다. 자료를 확보하지 못한 접점을 부정적인 상태로 읽어서는 안 된다. 새로운 근거가 더해질 때에는 실제 변화와 평가 범위의 확대를 구분해 살펴볼 필요가 있다.",
-      f"이번 분석은 {snapshot['period_from']}부터 {snapshot['period_through']}까지 실제 자료가 있는 {len(dates)}개 날짜를 다뤘다. 현재의 일별 위치를 주간 확정 결과로 바꾸어 말하지 않는다. 같은 기준의 관측이 더 쌓였을 때, 오늘의 관계 구성이 이어지는지와 어느 접점이 달라지는지가 다음 기사의 질문이 된다."]}]
+      f"활동량 측면에서는 {subject(activity['name'])} 이번 공개 집합에서 가장 높은 수치({total:,.1f}P)를 기록했다. 이는 새롭게 포착된 유효 사건과 행동이 특정 {labels['entity']}에 얼마나 집중되었는지를 보여주는 지표다. 그러나 활동량이 많다는 사실 자체가 곧 우호적이거나 긍정적인 반응이 많았음을 의미하지는 않는다. 평판의 질적 수준과 활동의 양적 총량을 함께 고찰할 때 비로소 동일한 점수 뒤에 숨겨진 입체적 움직임이 포착된다." if total>0 else '이번 공개 대상에서는 당주 유효 활동 포인트가 기록되지 않았다. 이는 실제 활동이 전혀 없었다는 증명이 아니라, 설정된 관측·검수 범위에서 포인트로 인정된 활동이 없다는 뜻이다. 기존 자료가 평가 기반으로 유지되는 것과 새로운 활동이 발생하는 것은 구분된다.',
+      f"향후 관찰의 초점은 지표의 숫자가 채워지는 속도가 아니라, 그 연결의 실질적 내용에 맞춰져야 한다. 현재 {AXES[strong]} 축은 {coverage[strong]}개 대상에서 유효 근거가 확인되는 반면, {AXES[weak]} 축은 {coverage[weak]}개에 그친다. 그렇다고 데이터가 확보되지 않은 접점을 곧바로 ‘부정적 상태’로 해석해서는 곤란하다. 새로운 근거 데이터가 유입될 때는 실제 평판의 변화와 시스템적 평가 범위의 확대를 엄밀히 구분해 고찰할 필요가 있다.",
+      f"이번 분석은 {korean_date(snapshot['period_from'])}부터 {korean_date(snapshot['period_through'])}까지 실제 유효 데이터가 확보된 {date_count}{date_word}의 시계열적 흐름을 다루고 있다. 따라서 현재의 일별 위치를 곧바로 주간 확정 결과로 일반화해서는 안 된다. {leader['name']}의 선두 기록과 {labels['distribution']} 분포는 단순한 우열을 가리기 위한 것이 아니라, {domain} 영역에서 데이터 유입 속도와 관계 범위(B·R·I·D·G·E)가 어떻게 드러나는지를 보여주는 하나의 단면이다. 동일한 기준의 관측이 누적될 때 오늘의 관계 구성이 이어지는지, 어느 접점이 달라지는지를 추적하는 것이 BRIDGE PUBLICITY가 지향하는 데이터 해석의 핵심이다."]}]
     profiles=[]
     for r in [leader,other]:
         profiles.append({'name':r['name'],'axes':r['axis_scores'],'states':r['axis_status']})
@@ -99,6 +134,15 @@ def domain_content(snapshot,domain):
 
 def articles_for(history,publication_date,example=False,example_domain='CPR'):
     spec=edition(publication_date);snapshot,digest=freeze(history,spec)
+    return articles_from_snapshot(snapshot,digest,spec,example,example_domain)
+
+def articles_from_snapshot(snapshot,digest,spec,example=False,example_domain='CPR'):
+    """Render a previously frozen and verified input without changing its facts.
+
+    This recovery path exists for explicit editorial corrections. The caller must
+    provide the original snapshot digest; it does not fetch or infer missing data.
+    """
+    snapshot=json.loads(json.dumps(snapshot,ensure_ascii=False))
     if example:
         snapshot['rows']=[r for r in snapshot['rows'] if r['domain']==example_domain]
         digest=hashlib.sha256(json.dumps(snapshot,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
