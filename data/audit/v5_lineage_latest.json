@@ -1,36 +1,36 @@
 {
   "as_of_date": "2026-10-16",
   "methodology_version": "2026.10-v5-beta1",
-  "generated_at": "2026-10-16T07:21:49.609143+09:00",
+  "generated_at": "2026-10-16T17:26:53.819904+09:00",
   "ok": true,
   "errors": [],
   "records": [
     {
       "domain": "UNI",
-      "external_id": "UNI-C31",
-      "name": "부산여자대학교",
+      "external_id": "UNI-C07",
+      "name": "인천재능대학교",
       "publish_status": "eligible",
       "axes_available": 4,
       "axis_status": {
         "B": "observed",
         "R": "reference",
         "I": "reference",
-        "D": "observed",
-        "G": "observed",
+        "D": "maintained",
+        "G": "maintained",
         "E": "maintained"
       },
-      "trust_grade": "B",
+      "trust_grade": "A",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 81.09
+        "confidence_score": 90.16
       }
     },
     {
       "domain": "UNI",
-      "external_id": "UNI-C40",
-      "name": "삼육보건대학교",
+      "external_id": "UNI-C08",
+      "name": "대림대학교",
       "publish_status": "eligible",
       "axes_available": 4,
       "axis_status": {
@@ -47,6 +47,28 @@
         "axes_available": 4,
         "source_families": 1,
         "confidence_score": 95.0
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-C09",
+      "name": "유한대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 87.23
       }
     },
     {
@@ -91,226 +113,6 @@
         "axes_available": 6,
         "source_families": 2,
         "confidence_score": 46.4
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-011",
-      "name": "카카오",
-      "publish_status": "shadow",
-      "axes_available": 6,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 6,
-        "source_families": 2,
-        "confidence_score": 45.67
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-012",
-      "name": "현대모비스",
-      "publish_status": "shadow",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 53.07
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-013",
-      "name": "LG화학",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 42.38
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-014",
-      "name": "에코프로비엠",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 3,
-        "confidence_score": 65.48
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-015",
-      "name": "삼성생명",
-      "publish_status": "shadow",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 36.0
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-016",
-      "name": "SK스퀘어",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 60.98
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-017",
-      "name": "KB금융",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 3,
-        "confidence_score": 48.97
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-018",
-      "name": "한화에어로스페이스",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 49.06
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-019",
-      "name": "두산에너빌리티",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 3,
-        "confidence_score": 61.39
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-008",
-      "name": "삼성SDI",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 40.79
       }
     },
     {
@@ -865,446 +667,6 @@
     },
     {
       "domain": "CPR",
-      "external_id": "CPR-001",
-      "name": "삼성전자",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 3,
-        "confidence_score": 52.38
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-002",
-      "name": "SK하이닉스",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 62.06
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-003",
-      "name": "현대차",
-      "publish_status": "shadow",
-      "axes_available": 6,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 6,
-        "source_families": 2,
-        "confidence_score": 41.15
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-004",
-      "name": "LG에너지솔루션",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 42.38
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-005",
-      "name": "삼성바이오로직스",
-      "publish_status": "shadow",
-      "axes_available": 6,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 6,
-        "source_families": 2,
-        "confidence_score": 37.0
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-006",
-      "name": "기아",
-      "publish_status": "shadow",
-      "axes_available": 6,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 6,
-        "source_families": 2,
-        "confidence_score": 45.02
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-007",
-      "name": "셀트리온",
-      "publish_status": "shadow",
-      "axes_available": 6,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 6,
-        "source_families": 3,
-        "confidence_score": 43.41
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-037",
-      "name": "지드래곤",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 45.9
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-048",
-      "name": "경동나비엔",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 47.11
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-049",
-      "name": "실리콘투",
-      "publish_status": "shadow",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 3,
-        "confidence_score": 48.89
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-050",
-      "name": "한샘",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 44.29
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-051",
-      "name": "에이피알",
-      "publish_status": "shadow",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 48.03
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-052",
-      "name": "브이티",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 3,
-        "confidence_score": 60.5
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-053",
-      "name": "씨앤씨인터내셔널",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 70.7
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-054",
-      "name": "보로노이",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 87.5
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-055",
-      "name": "펩트론",
-      "publish_status": "shadow",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 53.17
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-056",
-      "name": "동양생명",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 58.17
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-057",
-      "name": "롯데손해보험",
-      "publish_status": "shadow",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 3,
-        "confidence_score": 47.58
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-058",
-      "name": "티씨케이",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 74.9
-      }
-    },
-    {
-      "domain": "CPR",
-      "external_id": "CPR-059",
-      "name": "와이씨",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 77.0
-      }
-    },
-    {
-      "domain": "CPR",
       "external_id": "CPR-072",
       "name": "JW중외제약",
       "publish_status": "eligible",
@@ -1542,7 +904,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 48.03
+        "confidence_score": 49.33
       }
     },
     {
@@ -1608,7 +970,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 3,
-        "confidence_score": 56.55
+        "confidence_score": 56.52
       }
     },
     {
@@ -1740,7 +1102,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 45.43
+        "confidence_score": 46.73
       }
     },
     {
@@ -2070,7 +1432,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 3,
-        "confidence_score": 43.58
+        "confidence_score": 44.33
       }
     },
     {
@@ -2231,22 +1593,22 @@
       "domain": "CPR",
       "external_id": "CPR-114",
       "name": "오뚜기",
-      "publish_status": "shadow",
+      "publish_status": "eligible",
       "axes_available": 4,
       "axis_status": {
         "B": "observed",
         "R": "reference",
         "I": "observed",
         "D": "reference",
-        "G": "observed",
+        "G": "maintained",
         "E": "maintained"
       },
-      "trust_grade": "D",
+      "trust_grade": "C",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 49.24
+        "confidence_score": 68.81
       }
     },
     {
@@ -2290,7 +1652,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 47.32
+        "confidence_score": 47.58
       }
     },
     {
@@ -2378,7 +1740,7 @@
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 65.37
+        "confidence_score": 66.15
       }
     },
     {
@@ -2400,7 +1762,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 50.1
+        "confidence_score": 54.1
       }
     },
     {
@@ -2488,7 +1850,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 47.58
+        "confidence_score": 47.85
       }
     },
     {
@@ -2544,7 +1906,7 @@
       "axis_status": {
         "B": "observed",
         "R": "reference",
-        "I": "maintained",
+        "I": "observed",
         "D": "observed",
         "G": "observed",
         "E": "reference"
@@ -2554,7 +1916,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 54.1
+        "confidence_score": 46.36
       }
     },
     {
@@ -2576,7 +1938,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 45.83
+        "confidence_score": 46.1
       }
     },
     {
@@ -3046,21 +2408,21 @@
       "external_id": "GOV-M36",
       "name": "방위사업청",
       "publish_status": "eligible",
-      "axes_available": 3,
+      "axes_available": 4,
       "axis_status": {
         "B": "observed",
         "R": "reference",
         "I": "maintained",
         "D": "observed",
-        "G": "reference",
+        "G": "observed",
         "E": "reference"
       },
-      "trust_grade": "C",
+      "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
-        "axes_available": 3,
+        "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 59.72
+        "confidence_score": 49.82
       }
     },
     {
@@ -3117,16 +2479,16 @@
         "B": "observed",
         "R": "reference",
         "I": "maintained",
-        "D": "observed",
+        "D": "maintained",
         "G": "reference",
         "E": "reference"
       },
-      "trust_grade": "C",
+      "trust_grade": "B",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 64.58
+        "confidence_score": 72.5
       }
     },
     {
@@ -3170,7 +2532,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 3,
-        "confidence_score": 39.36
+        "confidence_score": 47.62
       }
     },
     {
@@ -3284,6 +2646,204 @@
       }
     },
     {
+      "domain": "CPR",
+      "external_id": "CPR-011",
+      "name": "카카오",
+      "publish_status": "shadow",
+      "axes_available": 6,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 6,
+        "source_families": 2,
+        "confidence_score": 45.67
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-012",
+      "name": "현대모비스",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 53.07
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-013",
+      "name": "LG화학",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 42.38
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-014",
+      "name": "에코프로비엠",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 3,
+        "confidence_score": 65.48
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-015",
+      "name": "삼성생명",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 44.0
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-016",
+      "name": "SK스퀘어",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 60.98
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-017",
+      "name": "KB금융",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 3,
+        "confidence_score": 48.97
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-018",
+      "name": "한화에어로스페이스",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 49.06
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-019",
+      "name": "두산에너빌리티",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 3,
+        "confidence_score": 61.39
+      }
+    },
+    {
       "domain": "GOV",
       "external_id": "GOV-C07",
       "name": "울산광역시",
@@ -3358,7 +2918,7 @@
       "axis_status": {
         "B": "observed",
         "R": "reference",
-        "I": "observed",
+        "I": "maintained",
         "D": "observed",
         "G": "observed",
         "E": "reference"
@@ -3368,7 +2928,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 46.36
+        "confidence_score": 50.1
       }
     },
     {
@@ -3534,8 +3094,8 @@
       "axis_status": {
         "B": "observed",
         "R": "reference",
-        "I": "observed",
-        "D": "observed",
+        "I": "maintained",
+        "D": "maintained",
         "G": "observed",
         "E": "reference"
       },
@@ -3544,7 +3104,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 48.63
+        "confidence_score": 51.33
       }
     },
     {
@@ -3655,6 +3215,182 @@
         "axes_available": 5,
         "source_families": 2,
         "confidence_score": 37.56
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-008",
+      "name": "삼성SDI",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 40.79
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-001",
+      "name": "삼성전자",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 3,
+        "confidence_score": 52.38
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-002",
+      "name": "SK하이닉스",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 62.06
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-003",
+      "name": "현대차",
+      "publish_status": "shadow",
+      "axes_available": 6,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 6,
+        "source_families": 2,
+        "confidence_score": 41.15
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-004",
+      "name": "LG에너지솔루션",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 42.38
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-005",
+      "name": "삼성바이오로직스",
+      "publish_status": "shadow",
+      "axes_available": 6,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 6,
+        "source_families": 2,
+        "confidence_score": 37.0
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-006",
+      "name": "기아",
+      "publish_status": "shadow",
+      "axes_available": 6,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 6,
+        "source_families": 2,
+        "confidence_score": 45.02
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-007",
+      "name": "셀트리온",
+      "publish_status": "shadow",
+      "axes_available": 6,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 6,
+        "source_families": 3,
+        "confidence_score": 43.41
       }
     },
     {
@@ -4424,7 +4160,7 @@
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 62.0
+        "confidence_score": 64.62
       }
     },
     {
@@ -4644,7 +4380,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 37.25
+        "confidence_score": 41.01
       }
     },
     {
@@ -4784,11 +4520,11 @@
       "external_id": "STAR-015",
       "name": "페이커",
       "publish_status": "eligible",
-      "axes_available": 4,
+      "axes_available": 5,
       "axis_status": {
         "B": "observed",
         "R": "observed",
-        "I": "reference",
+        "I": "observed",
         "D": "reference",
         "G": "observed",
         "E": "observed"
@@ -4796,9 +4532,9 @@
       "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
-        "axes_available": 4,
+        "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 43.42
+        "confidence_score": 37.26
       }
     },
     {
@@ -4864,7 +4600,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 38.14
+        "confidence_score": 39.11
       }
     },
     {
@@ -5265,14 +5001,36 @@
     },
     {
       "domain": "STAR",
+      "external_id": "STAR-037",
+      "name": "지드래곤",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 45.9
+      }
+    },
+    {
+      "domain": "STAR",
       "external_id": "STAR-038",
       "name": "태양",
       "publish_status": "eligible",
-      "axes_available": 4,
+      "axes_available": 6,
       "axis_status": {
         "B": "observed",
-        "R": "reference",
-        "I": "reference",
+        "R": "observed",
+        "I": "observed",
         "D": "observed",
         "G": "observed",
         "E": "observed"
@@ -5280,9 +5038,9 @@
       "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
-        "axes_available": 4,
+        "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 53.44
+        "confidence_score": 39.69
       }
     },
     {
@@ -5348,7 +5106,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 39.05
+        "confidence_score": 39.0
       }
     },
     {
@@ -5480,7 +5238,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 46.82
+        "confidence_score": 47.9
       }
     },
     {
@@ -5810,7 +5568,7 @@
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 74.48
+        "confidence_score": 71.33
       }
     },
     {
@@ -6228,7 +5986,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 37.21
+        "confidence_score": 38.34
       }
     },
     {
@@ -6409,50 +6167,6 @@
     },
     {
       "domain": "STAR",
-      "external_id": "STAR-089",
-      "name": "한예슬",
-      "publish_status": "eligible",
-      "axes_available": 3,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 3,
-        "source_families": 2,
-        "confidence_score": 77.63
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-091",
-      "name": "리센느",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "reference"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 32.13
-      }
-    },
-    {
-      "domain": "STAR",
       "external_id": "STAR-092",
       "name": "추영우",
       "publish_status": "eligible",
@@ -6493,6 +6207,270 @@
         "axes_available": 3,
         "source_families": 2,
         "confidence_score": 85.5
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-048",
+      "name": "경동나비엔",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 47.11
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-049",
+      "name": "실리콘투",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 3,
+        "confidence_score": 48.89
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-050",
+      "name": "한샘",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 44.29
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-051",
+      "name": "에이피알",
+      "publish_status": "shadow",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 48.03
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-052",
+      "name": "브이티",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 3,
+        "confidence_score": 47.67
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-053",
+      "name": "씨앤씨인터내셔널",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 70.7
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-054",
+      "name": "보로노이",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 68.6
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-055",
+      "name": "펩트론",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "reference",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 53.17
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-056",
+      "name": "동양생명",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 46.25
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-057",
+      "name": "롯데손해보험",
+      "publish_status": "shadow",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 3,
+        "confidence_score": 47.58
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-058",
+      "name": "티씨케이",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 74.9
+      }
+    },
+    {
+      "domain": "CPR",
+      "external_id": "CPR-059",
+      "name": "와이씨",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 77.0
       }
     },
     {
@@ -6562,6 +6540,534 @@
       }
     },
     {
+      "domain": "STAR",
+      "external_id": "STAR-089",
+      "name": "한예슬",
+      "publish_status": "eligible",
+      "axes_available": 3,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 3,
+        "source_families": 2,
+        "confidence_score": 77.63
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-091",
+      "name": "리센느",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "reference"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 32.13
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U17",
+      "name": "세종대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 88.38
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U18",
+      "name": "서강대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 62.67
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U19",
+      "name": "한국과학기술원(KAIST)",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 84.02
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U20",
+      "name": "포항공과대학교(POSTECH)",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "maintained",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 1,
+        "confidence_score": 95.0
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U21",
+      "name": "서울과학기술대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 91.31
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U22",
+      "name": "광운대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 85.17
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U23",
+      "name": "명지대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 91.7
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U24",
+      "name": "상명대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.55
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U25",
+      "name": "성신여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "maintained",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 1,
+        "confidence_score": 95.0
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U26",
+      "name": "덕성여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.16
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U27",
+      "name": "동덕여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.16
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U28",
+      "name": "서울여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.55
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U29",
+      "name": "가톨릭대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 82.46
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U30",
+      "name": "아주대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 82.3
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U31",
+      "name": "인하대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.61
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U32",
+      "name": "가천대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.16
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U33",
+      "name": "단국대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 67.62
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U34",
+      "name": "경기대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "maintained",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 1,
+        "confidence_score": 95.0
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U35",
+      "name": "한림대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 81.86
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U36",
+      "name": "강원대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "C",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 68.32
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U37",
+      "name": "부산대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.5
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U39",
+      "name": "전남대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.61
+      }
+    },
+    {
       "domain": "UNI",
       "external_id": "UNI-U43",
       "name": "제주대학교",
@@ -6581,6 +7087,468 @@
         "axes_available": 5,
         "source_families": 2,
         "confidence_score": 67.75
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-096",
+      "name": "알파드라이브원",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 50.07
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-097",
+      "name": "제로베이스원",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 37.51
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-098",
+      "name": "뉴진스",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 48.44
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-099",
+      "name": "엔하이픈",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "observed",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 54.01
+      }
+    },
+    {
+      "domain": "STAR",
+      "external_id": "STAR-100",
+      "name": "아일릿",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "observed",
+        "I": "reference",
+        "D": "reference",
+        "G": "observed",
+        "E": "observed"
+      },
+      "trust_grade": "D",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 48.92
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U01",
+      "name": "서울대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 73.34
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U02",
+      "name": "연세대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.06
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U03",
+      "name": "고려대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 70.92
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U04",
+      "name": "성균관대학교",
+      "publish_status": "eligible",
+      "axes_available": 5,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "observed",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 5,
+        "source_families": 2,
+        "confidence_score": 71.44
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U05",
+      "name": "한양대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 82.35
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U06",
+      "name": "중앙대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 88.0
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U07",
+      "name": "경희대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 82.3
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U08",
+      "name": "한국외국어대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 86.93
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U09",
+      "name": "서울시립대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 85.17
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U10",
+      "name": "건국대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 88.38
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U11",
+      "name": "동국대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 88.38
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U12",
+      "name": "홍익대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 85.17
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U13",
+      "name": "이화여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 91.7
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U14",
+      "name": "숙명여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 85.17
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U15",
+      "name": "국민대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.16
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U16",
+      "name": "숭실대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 90.93
       }
     },
     {
@@ -6646,29 +7614,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 90.93
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U49",
-      "name": "원광대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.17
+        "confidence_score": 91.31
       }
     },
     {
@@ -6691,6 +7637,138 @@
         "axes_available": 5,
         "source_families": 2,
         "confidence_score": 68.08
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U38",
+      "name": "경북대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.78
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U40",
+      "name": "전북대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.34
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U42",
+      "name": "충북대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 82.46
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U44",
+      "name": "영남대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 91.31
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U47",
+      "name": "부경대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 80.7
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-U49",
+      "name": "원광대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 83.17
       }
     },
     {
@@ -6747,16 +7825,16 @@
         "B": "observed",
         "R": "reference",
         "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
+        "D": "observed",
+        "G": "observed",
         "E": "maintained"
       },
-      "trust_grade": "A",
+      "trust_grade": "B",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 90.16
+        "confidence_score": 81.86
       }
     },
     {
@@ -7377,1062 +8455,6 @@
     },
     {
       "domain": "UNI",
-      "external_id": "UNI-U17",
-      "name": "세종대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 88.38
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U18",
-      "name": "서강대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 62.67
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U19",
-      "name": "한국과학기술원(KAIST)",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 84.02
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U20",
-      "name": "포항공과대학교(POSTECH)",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "maintained",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 1,
-        "confidence_score": 95.0
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U21",
-      "name": "서울과학기술대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 91.31
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U22",
-      "name": "광운대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 85.17
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U23",
-      "name": "명지대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 91.7
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U24",
-      "name": "상명대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.55
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U25",
-      "name": "성신여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "maintained",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 1,
-        "confidence_score": 95.0
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U26",
-      "name": "덕성여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.16
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U27",
-      "name": "동덕여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.16
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U28",
-      "name": "서울여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.55
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U29",
-      "name": "가톨릭대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 82.46
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U30",
-      "name": "아주대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 82.3
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U31",
-      "name": "인하대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.61
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U32",
-      "name": "가천대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.16
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U33",
-      "name": "단국대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 67.62
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U34",
-      "name": "경기대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "maintained",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 1,
-        "confidence_score": 95.0
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U35",
-      "name": "한림대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 81.86
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U36",
-      "name": "강원대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "C",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 68.32
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U37",
-      "name": "부산대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.5
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U39",
-      "name": "전남대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.61
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-096",
-      "name": "알파드라이브원",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 50.07
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-097",
-      "name": "제로베이스원",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 37.51
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-098",
-      "name": "뉴진스",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 48.44
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-099",
-      "name": "엔하이픈",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "observed",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 54.01
-      }
-    },
-    {
-      "domain": "STAR",
-      "external_id": "STAR-100",
-      "name": "아일릿",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "observed",
-        "I": "reference",
-        "D": "reference",
-        "G": "observed",
-        "E": "observed"
-      },
-      "trust_grade": "D",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 48.92
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U01",
-      "name": "서울대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 73.34
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U02",
-      "name": "연세대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.06
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U03",
-      "name": "고려대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 70.92
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U04",
-      "name": "성균관대학교",
-      "publish_status": "eligible",
-      "axes_available": 5,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "observed",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 5,
-        "source_families": 2,
-        "confidence_score": 71.44
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U05",
-      "name": "한양대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 81.97
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U06",
-      "name": "중앙대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 87.23
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U07",
-      "name": "경희대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 82.3
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U08",
-      "name": "한국외국어대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 86.93
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U09",
-      "name": "서울시립대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 85.17
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U10",
-      "name": "건국대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 88.38
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U11",
-      "name": "동국대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 88.38
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U12",
-      "name": "홍익대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 85.17
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U13",
-      "name": "이화여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 91.7
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U14",
-      "name": "숙명여자대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 85.17
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U15",
-      "name": "국민대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.16
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U16",
-      "name": "숭실대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.55
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U38",
-      "name": "경북대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.78
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U40",
-      "name": "전북대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 83.34
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U42",
-      "name": "충북대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 82.46
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U44",
-      "name": "영남대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 91.31
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-U47",
-      "name": "부경대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "observed",
-        "E": "maintained"
-      },
-      "trust_grade": "B",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 80.7
-      }
-    },
-    {
-      "domain": "UNI",
       "external_id": "UNI-C06",
       "name": "경인여자대학교",
       "publish_status": "eligible",
@@ -8451,72 +8473,6 @@
         "axes_available": 4,
         "source_families": 2,
         "confidence_score": 83.63
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-C07",
-      "name": "인천재능대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 90.16
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-C08",
-      "name": "대림대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "maintained",
-        "R": "reference",
-        "I": "reference",
-        "D": "maintained",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 1,
-        "confidence_score": 95.0
-      }
-    },
-    {
-      "domain": "UNI",
-      "external_id": "UNI-C09",
-      "name": "유한대학교",
-      "publish_status": "eligible",
-      "axes_available": 4,
-      "axis_status": {
-        "B": "observed",
-        "R": "reference",
-        "I": "reference",
-        "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
-      },
-      "trust_grade": "A",
-      "collection_status": "success",
-      "trust_basis": {
-        "axes_available": 4,
-        "source_families": 2,
-        "confidence_score": 87.23
       }
     },
     {
@@ -8618,15 +8574,15 @@
         "R": "reference",
         "I": "observed",
         "D": "maintained",
-        "G": "maintained",
+        "G": "observed",
         "E": "maintained"
       },
-      "trust_grade": "B",
+      "trust_grade": "C",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 73.74
+        "confidence_score": 69.48
       }
     },
     {
@@ -8802,11 +8758,55 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 84.02
+        "confidence_score": 84.4
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-C31",
+      "name": "부산여자대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "observed",
+        "R": "reference",
+        "I": "reference",
+        "D": "observed",
+        "G": "observed",
+        "E": "maintained"
+      },
+      "trust_grade": "B",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 2,
+        "confidence_score": 81.09
+      }
+    },
+    {
+      "domain": "UNI",
+      "external_id": "UNI-C40",
+      "name": "삼육보건대학교",
+      "publish_status": "eligible",
+      "axes_available": 4,
+      "axis_status": {
+        "B": "maintained",
+        "R": "reference",
+        "I": "reference",
+        "D": "maintained",
+        "G": "maintained",
+        "E": "maintained"
+      },
+      "trust_grade": "A",
+      "collection_status": "success",
+      "trust_basis": {
+        "axes_available": 4,
+        "source_families": 1,
+        "confidence_score": 95.0
       }
     }
   ],
-  "linked_signal_count": 49542,
-  "linked_raw_count": 41971,
-  "superseded_nonpublic_rankings": 4
+  "linked_signal_count": 50141,
+  "linked_raw_count": 42491,
+  "superseded_nonpublic_rankings": 6
 }

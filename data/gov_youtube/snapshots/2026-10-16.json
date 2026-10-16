@@ -8,23 +8,23 @@
         "title": "서울시 · Seoul",
         "subscribers": 325000,
         "total_views": 131602448,
-        "video_count": 7210
+        "video_count": 7211
       },
       "metrics": {
         "output_count": 25,
-        "views": 274322,
-        "median_views": 2514,
-        "median_views_per_day": 430.8,
-        "likes": 1822,
-        "comments": 273,
-        "engagement_per_1000_views": 8.632191366350492,
-        "identity_continuity": 27.11864406779661,
+        "views": 270842,
+        "median_views": 2201,
+        "median_views_per_day": 429.3333333333333,
+        "likes": 1819,
+        "comments": 290,
+        "engagement_per_1000_views": 8.857562711839375,
+        "identity_continuity": 27.500000000000004,
         "action_content_count": 5,
-        "action_engagement_per_1000_views": 16.888193901485536
+        "action_engagement_per_1000_views": 17.03940362087327
       },
       "daily_total_view_delta": 87333,
       "scores": {
-        "B": 62.78,
+        "B": 58.89,
         "R": 55.56,
         "I": 100.0,
         "G": 71.43
@@ -35,21 +35,21 @@
       "channel": {
         "id": "UC960xfXepXPsJ8HHePGvAKw",
         "title": "인천광역시",
-        "subscribers": 90900,
+        "subscribers": 91000,
         "total_views": 78237243,
-        "video_count": 7811
+        "video_count": 7812
       },
       "metrics": {
-        "output_count": 16,
-        "views": 707183,
-        "median_views": 1328.5,
-        "median_views_per_day": 131.2875,
-        "likes": 706,
+        "output_count": 17,
+        "views": 707477,
+        "median_views": 1307,
+        "median_views_per_day": 130.7,
+        "likes": 711,
         "comments": 782,
-        "engagement_per_1000_views": 3.209918790468662,
-        "identity_continuity": 13.253012048192772,
+        "engagement_per_1000_views": 3.215652240284843,
+        "identity_continuity": 11.827956989247312,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 15.347334410339256
+        "action_engagement_per_1000_views": 14.552238805970148
       },
       "daily_total_view_delta": 3631,
       "scores": {
@@ -64,25 +64,25 @@
       "channel": {
         "id": "UCpCtv8fw6egexjhOJpN1IZw",
         "title": "전남광주통합특별시 (구. 광주)",
-        "subscribers": 90800,
+        "subscribers": 91100,
         "total_views": 26825477,
-        "video_count": 799
+        "video_count": 800
       },
       "metrics": {
-        "output_count": 11,
-        "views": 102513,
-        "median_views": 11315,
-        "median_views_per_day": 788.2666666666667,
-        "likes": 134,
-        "comments": 18,
-        "engagement_per_1000_views": 1.658326261059573,
-        "identity_continuity": 20.0,
+        "output_count": 12,
+        "views": 109226,
+        "median_views": 11005.0,
+        "median_views_per_day": 756.8333333333333,
+        "likes": 151,
+        "comments": 20,
+        "engagement_per_1000_views": 1.7486678995843479,
+        "identity_continuity": 19.444444444444446,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
       },
       "daily_total_view_delta": 23841,
       "scores": {
-        "B": 41.67,
+        "B": 37.78,
         "R": 0.0,
         "I": 33.33
       },
@@ -94,28 +94,28 @@
         "title": "대전TV - 대전광역시 공식 유튜브 채널",
         "subscribers": 33300,
         "total_views": 25148751,
-        "video_count": 2007
+        "video_count": 2011
       },
       "metrics": {
         "output_count": 25,
-        "views": 60569,
-        "median_views": 687,
-        "median_views_per_day": 188.0,
-        "likes": 545,
-        "comments": 64,
-        "engagement_per_1000_views": 11.111294556621374,
-        "identity_continuity": 19.54022988505747,
+        "views": 63178,
+        "median_views": 690,
+        "median_views_per_day": 183.5,
+        "likes": 541,
+        "comments": 58,
+        "engagement_per_1000_views": 10.399189591313432,
+        "identity_continuity": 25.862068965517242,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 14.859228362877998
+        "action_engagement_per_1000_views": 14.976958525345621
       },
       "daily_total_view_delta": 38876,
       "scores": {
         "B": 15.0,
         "R": 66.67,
-        "I": 22.22,
+        "I": 88.89,
         "G": 85.71
       },
-      "identity_score": 22.22
+      "identity_score": 88.89
     },
     "GOV-C07": {
       "channel": {
@@ -123,23 +123,23 @@
         "title": "울산시청TV - 울산광역시 공식 채널 ",
         "subscribers": 47700,
         "total_views": 27127474,
-        "video_count": 4255
+        "video_count": 4256
       },
       "metrics": {
         "output_count": 25,
-        "views": 24698,
-        "median_views": 1037,
-        "median_views_per_day": 358.0,
-        "likes": 712,
-        "comments": 67,
-        "engagement_per_1000_views": 34.25378573163819,
-        "identity_continuity": 21.641791044776117,
+        "views": 27265,
+        "median_views": 1040,
+        "median_views_per_day": 443.5,
+        "likes": 854,
+        "comments": 82,
+        "engagement_per_1000_views": 37.33724555290666,
+        "identity_continuity": 24.822695035460992,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 93.23432343234325
+        "action_engagement_per_1000_views": 93.54838709677419
       },
       "daily_total_view_delta": 48674,
       "scores": {
-        "B": 15.55,
+        "B": 19.45,
         "R": 100.0,
         "I": 66.67,
         "G": 100.0
@@ -152,28 +152,28 @@
         "title": "경기도청",
         "subscribers": 196000,
         "total_views": 117924162,
-        "video_count": 3084
+        "video_count": 3085
       },
       "metrics": {
-        "output_count": 24,
-        "views": 118986,
-        "median_views": 1287.5,
-        "median_views_per_day": 70.66666666666666,
-        "likes": 581,
-        "comments": 379,
-        "engagement_per_1000_views": 11.25342477266233,
-        "identity_continuity": 23.076923076923077,
+        "output_count": 25,
+        "views": 126455,
+        "median_views": 1268,
+        "median_views_per_day": 87.34615384615384,
+        "likes": 600,
+        "comments": 394,
+        "engagement_per_1000_views": 10.97623660590724,
+        "identity_continuity": 25.287356321839084,
         "action_content_count": 4,
-        "action_engagement_per_1000_views": 9.15006100040667
+        "action_engagement_per_1000_views": 8.852137499668707
       },
       "daily_total_view_delta": 7407,
       "scores": {
         "B": 21.66,
         "R": 77.78,
-        "I": 88.89,
+        "I": 77.78,
         "G": 42.86
       },
-      "identity_score": 88.89
+      "identity_score": 77.78
     },
     "GOV-C17": {
       "channel": {
@@ -181,28 +181,28 @@
         "title": "제주도TV·Jeju",
         "subscribers": 175000,
         "total_views": 26965478,
-        "video_count": 3276
+        "video_count": 3279
       },
       "metrics": {
         "output_count": 25,
-        "views": 213029,
-        "median_views": 5869,
-        "median_views_per_day": 1016.25,
-        "likes": 3922,
-        "comments": 234,
-        "engagement_per_1000_views": 20.607522919414727,
-        "identity_continuity": 17.682926829268293,
-        "action_content_count": 6,
-        "action_engagement_per_1000_views": 1.1577991129477565
+        "views": 207607,
+        "median_views": 4151,
+        "median_views_per_day": 1272.25,
+        "likes": 4336,
+        "comments": 249,
+        "engagement_per_1000_views": 23.284378657752388,
+        "identity_continuity": 19.318181818181817,
+        "action_content_count": 7,
+        "action_engagement_per_1000_views": 1.0933542285474789
       },
       "daily_total_view_delta": 25854,
       "scores": {
-        "B": 67.23,
+        "B": 60.0,
         "R": 88.89,
-        "I": 11.11,
+        "I": 22.22,
         "G": 14.29
       },
-      "identity_score": 11.11
+      "identity_score": 22.22
     },
     "GOV-M24": {
       "channel": {
@@ -214,15 +214,15 @@
       },
       "metrics": {
         "output_count": 11,
-        "views": 790195,
-        "median_views": 686,
-        "median_views_per_day": 42.875,
-        "likes": 1030,
-        "comments": 1100,
-        "engagement_per_1000_views": 4.087598630717735,
+        "views": 793499,
+        "median_views": 688,
+        "median_views_per_day": 43.0,
+        "likes": 1053,
+        "comments": 1118,
+        "engagement_per_1000_views": 4.144932759839646,
         "identity_continuity": 37.5,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 4.441757583969767
+        "action_engagement_per_1000_views": 4.507461315402271
       },
       "daily_total_view_delta": 28594,
       "scores": {
@@ -239,28 +239,28 @@
         "title": "전북특별자치도",
         "subscribers": 99400,
         "total_views": 145965182,
-        "video_count": 2297
+        "video_count": 2298
       },
       "metrics": {
-        "output_count": 9,
-        "views": 209009,
-        "median_views": 14118,
-        "median_views_per_day": 2248.25,
-        "likes": 815,
-        "comments": 1,
-        "engagement_per_1000_views": 3.9089225822811455,
-        "identity_continuity": 22.448979591836736,
+        "output_count": 10,
+        "views": 219531,
+        "median_views": 14114.0,
+        "median_views_per_day": 2233.9583333333335,
+        "likes": 829,
+        "comments": 2,
+        "engagement_per_1000_views": 3.79445271966146,
+        "identity_continuity": 20.754716981132077,
         "action_content_count": 1,
         "action_engagement_per_1000_views": 2.6514094334356684
       },
       "daily_total_view_delta": 25423,
       "scores": {
-        "B": 63.89,
+        "B": 71.11,
         "R": 22.22,
-        "I": 77.78,
+        "I": 55.56,
         "G": 0.0
       },
-      "identity_score": 77.78
+      "identity_score": 55.56
     },
     "GOV-C14": {
       "channel": {
@@ -268,27 +268,27 @@
         "title": "전남광주통합특별시 (구.전남)",
         "subscribers": 156000,
         "total_views": 23922830,
-        "video_count": 2796
+        "video_count": 2797
       },
       "metrics": {
-        "output_count": 5,
-        "views": 437248,
-        "median_views": 4422,
-        "median_views_per_day": 519.75,
-        "likes": 1723,
-        "comments": 109,
-        "engagement_per_1000_views": 4.4391283665105385,
-        "identity_continuity": 20.588235294117645,
+        "output_count": 6,
+        "views": 440302,
+        "median_views": 4392.5,
+        "median_views_per_day": 1239.71875,
+        "likes": 1764,
+        "comments": 118,
+        "engagement_per_1000_views": 4.542336850616168,
+        "identity_continuity": 17.5,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
       },
       "daily_total_view_delta": 7794,
       "scores": {
-        "B": 81.11,
+        "B": 85.0,
         "R": 33.33,
-        "I": 55.56
+        "I": 11.11
       },
-      "identity_score": 55.56
+      "identity_score": 11.11
     },
     "GOV-C15": {
       "channel": {
@@ -296,19 +296,19 @@
         "title": "보이소 TV, BOISO TV",
         "subscribers": 378000,
         "total_views": 45164602,
-        "video_count": 1949
+        "video_count": 1950
       },
       "metrics": {
-        "output_count": 22,
-        "views": 385551,
-        "median_views": 2217.0,
-        "median_views_per_day": 207.0,
-        "likes": 705,
-        "comments": 851,
-        "engagement_per_1000_views": 6.243013245977834,
-        "identity_continuity": 20.555555555555554,
-        "action_content_count": 10,
-        "action_engagement_per_1000_views": 6.123495102589324
+        "output_count": 23,
+        "views": 385834,
+        "median_views": 2185,
+        "median_views_per_day": 186.0,
+        "likes": 714,
+        "comments": 861,
+        "engagement_per_1000_views": 6.313596002425914,
+        "identity_continuity": 19.473684210526315,
+        "action_content_count": 11,
+        "action_engagement_per_1000_views": 6.172013128799804
       },
       "daily_total_view_delta": 22002,
       "scores": {
