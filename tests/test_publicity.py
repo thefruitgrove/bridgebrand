@@ -60,7 +60,12 @@ class PublicityTests(unittest.TestCase):
    payload=article['payload']
    self.assertEqual(payload['template_version'],'publicity-rules-2.0')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
-   self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,3])
+   self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
+   self.assertEqual([s['heading'] for s in payload['sections'][1:]],[
+    '선두 밖에서도 읽히는 관계의 차이',
+    '활동의 크기와 평판의 방향은 다른 신호',
+    '관측 범위와 다음 해석의 경계',
+   ])
    self.assertIn('2026년 10월 16일',payload['sections'][0]['paragraphs'][0])
    self.assertIn('해당 분야 전체의 절대적 수준을 대변하지 않는다',payload['sections'][0]['paragraphs'][0])
    self.assertIn('향후 순위 상승을 예고하는 것은 경계해야 한다',payload['sections'][1]['paragraphs'][1])
