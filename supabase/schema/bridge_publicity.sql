@@ -26,7 +26,8 @@ create table if not exists public.bridge_publicity_articles (
 );
 alter table public.bridge_publicity_articles enable row level security;
 revoke all on public.bridge_publicity_articles from public,anon,authenticated;
-grant select on public.bridge_publicity_articles to anon,authenticated;
+grant select (id,issue_week,slot,domain,scheduled_at,is_example,payload,status,prepared_at)
+on public.bridge_publicity_articles to anon,authenticated;
 grant all on public.bridge_publicity_articles to service_role;
 create policy publicity_release_clock on public.bridge_publicity_articles
 for select to anon, authenticated using(status='ready' and scheduled_at <= (select now()));
