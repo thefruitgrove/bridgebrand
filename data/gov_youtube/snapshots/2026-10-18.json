@@ -12,19 +12,19 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 275556,
+        "views": 275746,
         "median_views": 2149,
-        "median_views_per_day": 393.55555555555554,
-        "likes": 1857,
-        "comments": 320,
-        "engagement_per_1000_views": 9.061678932775916,
+        "median_views_per_day": 395.5,
+        "likes": 1861,
+        "comments": 322,
+        "engagement_per_1000_views": 9.084447281193562,
         "identity_continuity": 31.48936170212766,
         "action_content_count": 4,
-        "action_engagement_per_1000_views": 15.628345108113894
+        "action_engagement_per_1000_views": 15.601624278692027
       },
       "daily_total_view_delta": 82729,
       "scores": {
-        "B": 55.56,
+        "B": 48.33,
         "R": 66.67,
         "I": 100.0,
         "G": 42.86
@@ -41,15 +41,15 @@
       },
       "metrics": {
         "output_count": 18,
-        "views": 709320,
+        "views": 709351,
         "median_views": 1225.5,
-        "median_views_per_day": 121.66586538461539,
+        "median_views_per_day": 121.69711538461539,
         "likes": 736,
         "comments": 789,
-        "engagement_per_1000_views": 3.2622793661534994,
+        "engagement_per_1000_views": 3.262136798284629,
         "identity_continuity": 13.26530612244898,
         "action_content_count": 3,
-        "action_engagement_per_1000_views": 19.833824711873493
+        "action_engagement_per_1000_views": 19.754404698344903
       },
       "daily_total_view_delta": 3972,
       "scores": {
@@ -70,12 +70,12 @@
       },
       "metrics": {
         "output_count": 13,
-        "views": 115288,
+        "views": 115905,
         "median_views": 10463,
-        "median_views_per_day": 765.5,
+        "median_views_per_day": 871.9166666666666,
         "likes": 177,
         "comments": 27,
-        "engagement_per_1000_views": 2.003677746166123,
+        "engagement_per_1000_views": 1.9930115180535781,
         "identity_continuity": 19.17808219178082,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -94,19 +94,19 @@
         "title": "대전TV - 대전광역시 공식 유튜브 채널",
         "subscribers": 33300,
         "total_views": 25196733,
-        "video_count": 2013
+        "video_count": 2014
       },
       "metrics": {
         "output_count": 25,
-        "views": 92354,
-        "median_views": 801,
-        "median_views_per_day": 199.33333333333334,
-        "likes": 652,
+        "views": 92685,
+        "median_views": 734,
+        "median_views_per_day": 205.66666666666666,
+        "likes": 647,
         "comments": 67,
-        "engagement_per_1000_views": 8.510730450224138,
-        "identity_continuity": 27.84090909090909,
+        "engagement_per_1000_views": 8.426390462318606,
+        "identity_continuity": 28.488372093023255,
         "action_content_count": 6,
-        "action_engagement_per_1000_views": 12.726893386188191
+        "action_engagement_per_1000_views": 12.684549802453732
       },
       "daily_total_view_delta": 23545,
       "scores": {
@@ -127,15 +127,15 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 27181,
-        "median_views": 1073,
-        "median_views_per_day": 266.0,
-        "likes": 1018,
+        "views": 27400,
+        "median_views": 1077,
+        "median_views_per_day": 267.2,
+        "likes": 1029,
         "comments": 106,
-        "engagement_per_1000_views": 45.252198226702475,
+        "engagement_per_1000_views": 45.291970802919714,
         "identity_continuity": 22.916666666666664,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 93.41500765696783
+        "action_engagement_per_1000_views": 92.98780487804878
       },
       "daily_total_view_delta": 34068,
       "scores": {
@@ -156,15 +156,15 @@
       },
       "metrics": {
         "output_count": 24,
-        "views": 142010,
-        "median_views": 1453.5,
+        "views": 144920,
+        "median_views": 1462.5,
         "median_views_per_day": 86.51785714285714,
         "likes": 618,
         "comments": 418,
-        "engagement_per_1000_views": 10.23871558340962,
+        "engagement_per_1000_views": 10.033121722329561,
         "identity_continuity": 26.21951219512195,
         "action_content_count": 3,
-        "action_engagement_per_1000_views": 8.26711614094229
+        "action_engagement_per_1000_views": 8.138432364096081
       },
       "daily_total_view_delta": 12029,
       "scores": {
@@ -185,19 +185,19 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 273361,
-        "median_views": 6393,
-        "median_views_per_day": 1186.5833333333333,
-        "likes": 5065,
-        "comments": 277,
-        "engagement_per_1000_views": 20.55523648216095,
+        "views": 297799,
+        "median_views": 6931,
+        "median_views_per_day": 1590.7272727272727,
+        "likes": 5086,
+        "comments": 279,
+        "engagement_per_1000_views": 18.95238063257432,
         "identity_continuity": 18.96551724137931,
         "action_content_count": 8,
-        "action_engagement_per_1000_views": 0.9859246286566777
+        "action_engagement_per_1000_views": 0.9285051067780873
       },
       "daily_total_view_delta": 76251,
       "scores": {
-        "B": 56.11,
+        "B": 70.56,
         "R": 88.89,
         "I": 33.33,
         "G": 14.29
@@ -214,15 +214,15 @@
       },
       "metrics": {
         "output_count": 11,
-        "views": 815389,
+        "views": 816604,
         "median_views": 693,
         "median_views_per_day": 38.5,
-        "likes": 1110,
-        "comments": 1176,
-        "engagement_per_1000_views": 4.2458262252740715,
+        "likes": 1113,
+        "comments": 1186,
+        "engagement_per_1000_views": 4.2676744174655035,
         "identity_continuity": 37.5,
         "action_content_count": 7,
-        "action_engagement_per_1000_views": 4.6141944965504775
+        "action_engagement_per_1000_views": 4.639114699890254
       },
       "daily_total_view_delta": 15028,
       "scores": {
@@ -243,19 +243,19 @@
       },
       "metrics": {
         "output_count": 11,
-        "views": 277404,
-        "median_views": 21189,
-        "median_views_per_day": 3531.5,
-        "likes": 947,
-        "comments": 12,
-        "engagement_per_1000_views": 3.500310017159089,
+        "views": 280212,
+        "median_views": 21935,
+        "median_views_per_day": 3655.8333333333335,
+        "likes": 953,
+        "comments": 13,
+        "engagement_per_1000_views": 3.4937832783749445,
         "identity_continuity": 18.333333333333332,
         "action_content_count": 1,
         "action_engagement_per_1000_views": 2.650669642857143
       },
       "daily_total_view_delta": 40590,
       "scores": {
-        "B": 78.34,
+        "B": 71.11,
         "R": 22.22,
         "I": 22.22,
         "G": 0.0
@@ -272,12 +272,12 @@
       },
       "metrics": {
         "output_count": 6,
-        "views": 469998,
-        "median_views": 12461.5,
-        "median_views_per_day": 2569.1666666666665,
-        "likes": 2082,
-        "comments": 183,
-        "engagement_per_1000_views": 5.208532802267244,
+        "views": 470433,
+        "median_views": 12681.0,
+        "median_views_per_day": 2567.1666666666665,
+        "likes": 2092,
+        "comments": 184,
+        "engagement_per_1000_views": 5.229224990593772,
         "identity_continuity": 17.5,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -300,15 +300,15 @@
       },
       "metrics": {
         "output_count": 23,
-        "views": 387410,
+        "views": 387472,
         "median_views": 2189,
-        "median_views_per_day": 188.75,
-        "likes": 782,
-        "comments": 940,
-        "engagement_per_1000_views": 6.871273327998761,
+        "median_views_per_day": 191.25,
+        "likes": 784,
+        "comments": 943,
+        "engagement_per_1000_views": 6.890820497997274,
         "identity_continuity": 19.473684210526315,
         "action_content_count": 11,
-        "action_engagement_per_1000_views": 6.960322488820326
+        "action_engagement_per_1000_views": 6.958788913676131
       },
       "daily_total_view_delta": 7045,
       "scores": {

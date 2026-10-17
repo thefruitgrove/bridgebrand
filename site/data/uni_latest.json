@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-17",
-  "updated_at": "2026-10-18T05:41:17.240018+09:00",
+  "updated_at": "2026-10-18T08:44:46.434369+09:00",
   "meaning": {
     "daily_index": "오늘 현재의 대학 공공가치 평판 수준",
     "activity_points": "당일 유효 관심·반응·행동의 총량",
@@ -1488,7 +1488,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 64.4,
+          "B": 64.6,
           "R": null,
           "I": null,
           "D": 65.3,
@@ -1496,8 +1496,8 @@
           "E": null
         },
         "daily_index": 67.7,
-        "activity_points": 0.52,
-        "event_count": 2,
+        "activity_points": 0.77,
+        "event_count": 3,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 65,
@@ -2034,6 +2034,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-46FC34D4A2B0",
+        "name": "고려대학교",
+        "region": "서울",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 69.3,
+          "R": 53.0,
+          "I": null,
+          "D": 57.1,
+          "G": 82.2,
+          "E": null
+        },
+        "daily_index": 65.4,
+        "activity_points": 1.8,
+        "event_count": 7,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 89,
+        "cohort_rank": 54,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-4809B97797D6",
         "name": "용인대학교",
         "region": "경기",
@@ -2052,8 +2075,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 89,
-        "cohort_rank": 54,
+        "t100_rank": 90,
+        "cohort_rank": 55,
         "waiting_rank": null
       },
       {
@@ -2075,31 +2098,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 90,
-        "cohort_rank": 36,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-46FC34D4A2B0",
-        "name": "고려대학교",
-        "region": "서울",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 68.9,
-          "R": 53.0,
-          "I": null,
-          "D": 57.1,
-          "G": 82.2,
-          "E": null
-        },
-        "daily_index": 65.3,
-        "activity_points": 1.28,
-        "event_count": 5,
-        "source_diversity": 1,
-        "trust": "B",
         "t100_rank": 91,
-        "cohort_rank": 55,
+        "cohort_rank": 36,
         "waiting_rank": null
       },
       {
@@ -3531,6 +3531,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-46FC34D4A2B0",
+        "name": "고려대학교",
+        "region": "서울",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 69.3,
+          "R": 53.0,
+          "I": null,
+          "D": 57.1,
+          "G": 82.2,
+          "E": null
+        },
+        "daily_index": 65.4,
+        "activity_points": 1.8,
+        "event_count": 7,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 89,
+        "cohort_rank": 54,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-4809B97797D6",
         "name": "용인대학교",
         "region": "경기",
@@ -3549,30 +3572,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 89,
-        "cohort_rank": 54,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-46FC34D4A2B0",
-        "name": "고려대학교",
-        "region": "서울",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 68.9,
-          "R": 53.0,
-          "I": null,
-          "D": 57.1,
-          "G": 82.2,
-          "E": null
-        },
-        "daily_index": 65.3,
-        "activity_points": 1.28,
-        "event_count": 5,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 91,
+        "t100_rank": 90,
         "cohort_rank": 55,
         "waiting_rank": null
       },
@@ -4229,7 +4229,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 64.4,
+          "B": 64.6,
           "R": null,
           "I": null,
           "D": 65.3,
@@ -4237,8 +4237,8 @@
           "E": null
         },
         "daily_index": 67.7,
-        "activity_points": 0.52,
-        "event_count": 2,
+        "activity_points": 0.77,
+        "event_count": 3,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 65,
@@ -4517,7 +4517,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 90,
+        "t100_rank": 91,
         "cohort_rank": 36,
         "waiting_rank": null
       },

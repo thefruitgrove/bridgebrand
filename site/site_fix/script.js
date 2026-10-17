@@ -1,4 +1,48 @@
 (function(){
+  // Apply the approved wordmark without changing the dimensions or alignment
+  // of any existing SIGNALBRIDGE logo slot.
+  (function installSignalBridgeWordmarks(){
+    Array.prototype.forEach.call(document.querySelectorAll('.logo'), function(slot){
+      if(slot.dataset.brandWordmark === '1' || slot.textContent.trim() !== 'SIGNALBRIDGE') return;
+      var box=slot.getBoundingClientRect();
+      if(!box.width || !box.height) return;
+      slot.style.setProperty('--brand-slot-width', box.width.toFixed(2)+'px');
+      slot.style.setProperty('--brand-slot-height', box.height.toFixed(2)+'px');
+      slot.classList.add('brand-logo-slot');
+      slot.dataset.brandWordmark='1';
+      slot.textContent='';
+      var img=document.createElement('img');
+      img.className='brand-wordmark-image';
+      img.src='assets/signalbridge-wordmark.svg?v=20261018-1';
+      img.alt='SIGNALBRIDGE';
+      slot.appendChild(img);
+    });
+  })();
+
+  // PUBLICITY is a primary mobile destination: THIS WEEK → PUBLICITY → CPR.
+  (function normalizeMobilePublicity(){
+    var menu=document.getElementById('mobileMenu');
+    if(!menu) return;
+    Array.prototype.forEach.call(menu.querySelectorAll('a.mm-util'), function(link){
+      if(link.textContent.trim()==='PUBLICITY') link.remove();
+    });
+    var groups=Array.prototype.slice.call(menu.querySelectorAll('.mm-group'));
+    var hasPrimary=groups.some(function(group){
+      var first=group.querySelector('a');
+      return first && first.textContent.trim()==='PUBLICITY';
+    });
+    if(hasPrimary) return;
+    var thisWeek=groups.find(function(group){
+      var first=group.querySelector('a');
+      return first && first.textContent.trim()==='THIS WEEK';
+    });
+    if(!thisWeek) return;
+    var group=document.createElement('div');
+    group.className='mm-group';
+    group.innerHTML='<a href="publicity.html">PUBLICITY</a>';
+    thisWeek.insertAdjacentElement('afterend', group);
+  })();
+
   function scopeMessage(status){
     return {baseline_pending:'새 기준의 비교 자료 축적 중',scope_expanded:'근거 범위 확대 · 변화 해석 주의',scope_reduced:'근거 범위 축소 · 비교 제한',scope_changed:'근거 구성 변경 · 비교 제한',methodology_changed:'산출 기준 변경 · 직접 비교 제한',legacy_unverified:'이전 기준 · 비교 검토 필요'}[status] || '비교 조건 확인 필요';
   }
@@ -17,7 +61,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261016-publicity-nav1';
+    fresh.href='style.css?v=20261018-brand2';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -34,7 +78,7 @@
     var firstThu=new Date(Date.UTC(utc.getUTCFullYear(),0,4));
     var week=1+Math.round((utc-firstThu)/604800000);
     var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    el.innerHTML='VOL. 01 — WEEK '+week+'<br>SEOUL · '+String(d).padStart(2,'0')+' '+months[m-1]+' '+y;
+    el.innerHTML='<span>VOL. 02 — WEEK '+week+'</span><span>SEOUL · '+String(d).padStart(2,'0')+' '+months[m-1]+' '+y+'</span>';
   })();
   // Published Supabase snapshot. A valid daily snapshot rebuilds the public
   // T100 list in score/rank order; static HTML is fallback only.
