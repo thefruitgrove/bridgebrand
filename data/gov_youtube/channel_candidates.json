@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-17",
+  "as_of_date": "2026-10-18",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C32": {
-      "channel_id": "UCvaZvtBYTNRdmROnFHSFwAA",
-      "title": "광주시",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C33": {
       "channel_id": "UCklZw3tdXy-cjSZFvT7jqiQ",
@@ -30,6 +25,11 @@
     "GOV-C36": {
       "channel_id": "UCMDecCsy3-Lbpo9OSPzJP5w",
       "title": "제천시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C37": {
+      "channel_id": "UCS9Hk665uj6anEose2quMdw",
+      "title": "천안시 · Cheonan",
       "reason": "awaiting_human_verification"
     }
   }
