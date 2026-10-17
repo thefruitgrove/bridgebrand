@@ -1076,3 +1076,10 @@ footer .brand-wordmark-image{
   line-height:1.7;
   letter-spacing:.12em;
 }
+
+
+/* static SIGNALBRIDGE logo markup — mobile-safe, independent of script cache */
+.logo.brand-logo-static{width:151.7px;height:27px;display:inline-flex;align-items:center;flex:0 0 151.7px;line-height:0}
+.logo.brand-logo-static .brand-wordmark-image{width:100%;height:100%;object-fit:fill;object-position:left center}
+.nav:not(.on-dark) .brand-logo-static .brand-wordmark-image,.mobile-menu .brand-logo-static .brand-wordmark-image{filter:grayscale(1) brightness(.48) contrast(.92)}
+.nav.on-dark .brand-logo-static .brand-wordmark-image,footer .brand-logo-static .brand-wordmark-image{filter:none}
