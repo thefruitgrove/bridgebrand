@@ -61,7 +61,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261018-brand1';
+    fresh.href='style.css?v=20261018-brand2';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -78,7 +78,7 @@
     var firstThu=new Date(Date.UTC(utc.getUTCFullYear(),0,4));
     var week=1+Math.round((utc-firstThu)/604800000);
     var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    el.innerHTML='<span>VOL. 01 — WEEK '+week+'</span><span>SEOUL · '+String(d).padStart(2,'0')+' '+months[m-1]+' '+y+'</span>';
+    el.innerHTML='<span>VOL. 02 — WEEK '+week+'</span><span>SEOUL · '+String(d).padStart(2,'0')+' '+months[m-1]+' '+y+'</span>';
   })();
   // Published Supabase snapshot. A valid daily snapshot rebuilds the public
   // T100 list in score/rank order; static HTML is fallback only.
