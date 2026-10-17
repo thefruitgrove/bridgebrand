@@ -1064,3 +1064,15 @@ footer .brand-wordmark-image{
   font-size:inherit;
   letter-spacing:inherit;
 }
+
+
+/* masthead VOL. 02 typography — same family as Reputation is a signal. */
+#heroSeoulClock.hero-meta,
+#heroSeoulClock.hero-meta > span{
+  font-family:var(--serif) !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  font-style:normal !important;
+  line-height:1.7;
+  letter-spacing:.12em;
+}
