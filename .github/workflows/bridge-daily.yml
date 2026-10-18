@@ -139,6 +139,7 @@ jobs:
         run: |
           python build.py
           python build_spa.py
+          python tools/apply_brand_shell.py
 
       - name: Commit reproducible public export
         run: |
