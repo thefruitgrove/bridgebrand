@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-18",
+  "as_of_date": "2026-10-19",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C33": {
-      "channel_id": "UCklZw3tdXy-cjSZFvT7jqiQ",
-      "title": "이천시청",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C34": {
       "channel_id": "UCKdAjOi831AeX6Kzb4dv4Sg",
@@ -28,8 +23,13 @@
       "reason": "awaiting_human_verification"
     },
     "GOV-C37": {
-      "channel_id": "UCS9Hk665uj6anEose2quMdw",
-      "title": "천안시 · Cheonan",
+      "channel_id": "UCbR7bnw-DhlR-Yz-Nfsmraw",
+      "title": "천안TV-천안신문(CAN)",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C38": {
+      "channel_id": "UCYnJQ3U2gVL5SXaKGr39Eyg",
+      "title": "아산시",
       "reason": "awaiting_human_verification"
     }
   }
