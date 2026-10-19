@@ -15,7 +15,7 @@ ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
-VERSION='publicity-rules-2.0'
+VERSION='publicity-rules-2.1'
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
 DOMAIN_LABELS={
     'CPR':{'scope':'기업','entity':'기업','distribution':'기업별','experience':'기업 경험 전반','ethics':'대상의 도덕성·윤리성'},
@@ -90,6 +90,45 @@ def summary(rows,domain,through):
     mean=round(statistics.mean(float(r['score']) for r in members),1)
     return members,coverage,mean
 
+def relationship_change(snapshot,leader):
+    """Describe comparable axis movement without inventing an unavailable baseline."""
+    prior=sorted(
+        (r for r in snapshot['rows']
+         if r['domain']==leader['domain']
+         and r['external_id']==leader['external_id']
+         and r['as_of_date']<leader['as_of_date']),
+        key=lambda r:r['as_of_date'],
+    )
+    if not prior:
+        return ('직전 비교 가능한 동일 대상의 축별 관측값이 이번 확인 범위에 포함되지 않아, '
+                '이 회차는 현재 관계 구성과 근거 상태를 중심으로 읽는다.')
+    previous=prior[-1]
+    deltas=[]
+    for axis in AXES:
+        if usable(leader,axis) and usable(previous,axis):
+            delta=round(float(leader['axis_scores'][axis])-float(previous['axis_scores'][axis]),1)
+            deltas.append((axis,delta))
+    state_changes=[
+        axis for axis in AXES
+        if leader.get('axis_status',{}).get(axis)!=previous.get('axis_status',{}).get(axis)
+    ]
+    if deltas:
+        notable=sorted(deltas,key=lambda item:(-abs(item[1]),item[0]))[:2]
+        movement=', '.join(
+            f"{AXES[axis]} {'+' if delta>0 else ''}{delta:.1f}점"
+            for axis,delta in notable
+        )
+        axis_text=f"직전 비교 가능한 관측값({korean_date(previous['as_of_date'])})과 대조한 주요 축 변화는 {movement}이다."
+    else:
+        axis_text='직전 회차와 직접 대조할 수 있는 동일 상태의 축이 없어 수치 변화를 확정하지 않는다.'
+    if state_changes:
+        scope_text=(
+            f"동시에 {len(state_changes)}개 축의 근거 상태가 달라져, 실제 관계 변화와 확인 범위의 변화를 분리해 해석해야 한다."
+        )
+    else:
+        scope_text='비교된 축의 근거 상태는 유지되어, 이번 변화는 동일한 확인 조건 안에서 읽을 수 있다.'
+    return axis_text+' '+scope_text
+
 def domain_content(snapshot,domain):
     members,coverage,mean=summary(snapshot['rows'],domain,snapshot['period_through']);leader=members[0]
     weak=min(AXES,key=lambda a:coverage[a]);strong=max(AXES,key=lambda a:coverage[a])
@@ -105,7 +144,8 @@ def domain_content(snapshot,domain):
     labels=DOMAIN_LABELS[domain]
     date_count=len(dates)
     date_word='날짜' if date_count==1 else '개 날짜'
-    title=f"{leader['name']} {leader['score']:.1f}점… {domain}, 선두의 수치 뒤에 남은 연결 과제"
+    change_text=relationship_change(snapshot,leader)
+    title=f"{leader['name']} 1위·{leader['score']:.1f}점… {domain}, 선두의 수치 뒤에 남은 연결 과제"
     if candidates:
         d_score=other['axis_scores']['D'];e_score=other['axis_scores']['E']
         relation=(f"경험은 {d_score:.1f}점인 반면, 책임·지속은 {e_score:.1f}점으로 더 높게 나타났다." if e_score>d_score else
@@ -114,18 +154,18 @@ def domain_content(snapshot,domain):
         profile_text=(f"공개 순위 {other['rank']}위인 {other['name']}에서는 또 다른 성격의 관계 구성이 나타났다. {relation} "
                       f"이 두 수치를 나란히 비교하면 총점이라는 단일 지표에 가려진 대외 접점의 결을 읽을 수 있다. 다만 이는 공개 자료로 포착한 관계의 프로필일 뿐, 실제 {labels['experience']}이나 {labels['ethics']}을 직접 판정한 결과는 아님을 유의해야 한다.")
     else:
-        profile_text=(f"공개 순위 하위권인 {other['name']} 역시 총점 하나의 수치만으로 설명되지 않는다. 다만 현재 확보된 자료상으로는 경험과 책임·지속의 근거를 함께 비교할 하위권 표본이 충분하지 않다. "
+        profile_text=(f"공개 순위 하위권인 {other['name']} 역시 총점 하나의 수치만으로 설명되지 않는다. 다만 현재 확인 범위에서는 경험과 책임·지속을 같은 조건으로 나란히 제시할 하위권 사례가 확인되지 않았다. "
                       "순위가 낮다는 이유로 모든 대외 접점이 취약하다고 속단하거나, 반대로 객관적으로 확인되지 않은 잠재력을 임의로 부여해서는 안 된다.")
     sections=[{'heading':'현상 제시와 순위 이면의 구성','paragraphs':[
-      f"{subject(leader['name'])} {korean_date(snapshot['period_through'])} 기준 {domain}({labels['scope']}) 공개 순위에서 선두에 올랐다. 시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면, {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번에 공개 요건을 충족한 {len(members)}개 대상의 평균은 {mean:.1f}점으로 집계됐다. 단, 이 평균은 이번 공개 집합에 한정된 값일 뿐, 해당 분야 전체의 절대적 수준을 대변하지 않는다.",
-      f"눈길을 끄는 대목은 순위 그 자체보다 그 내부의 구성이다. {topic(leader['name'])} 유효 근거가 확인된 축 중에서 {AXES[high]} {leader['axis_scores'][high]:.1f}점, {AXES[low]} {leader['axis_scores'][low]:.1f}점을 기록했다. 이처럼 같은 선두권이라도 공중과 만나는 접점의 결은 서로 다르다. 단순히 ‘선두’라는 위치만으로 관심·반응·경험·신뢰가 고르게 연결되어 있다고 단정하기 어려운 이유가 여기에 있다."]},
+      f"{subject(leader['name'])} {korean_date(snapshot['period_through'])} 기준 {domain}({labels['scope']}) 공개 순위에서 선두에 올랐다. 시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면, {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번 회차 T100 공개 요건을 충족한 비교 집합은 {len(members)}개 대상이며 평균은 {mean:.1f}점으로 집계됐다. 대상 구성은 기준일과 관측 상태에 따라 달라질 수 있다. 단, 이 평균은 이번 공개 집합에 한정된 값일 뿐, 해당 분야 전체의 절대적 수준을 대변하지 않는다.",
+      f"눈길을 끄는 대목은 순위 그 자체보다 그 내부의 구성이다. {topic(leader['name'])} 유효 근거가 확인된 축 중에서 {AXES[high]} {leader['axis_scores'][high]:.1f}점, {AXES[low]} {leader['axis_scores'][low]:.1f}점을 기록했다. {change_text} 이처럼 같은 선두권이라도 공중과 만나는 접점의 결은 서로 다르다. 단순히 ‘선두’라는 위치만으로 관심·반응·경험·신뢰가 고르게 연결되어 있다고 단정하기 어려운 이유가 여기에 있다."]},
       {'heading':'선두 밖에서도 읽히는 관계의 차이','paragraphs':[
       profile_text,
       '이러한 데이터의 차이는 순위라는 단편적 서사를 지우기보다, 오히려 현상을 입체적으로 읽는 시야를 넓혀준다. 상위권 안에서도 연결 고리가 덜 확인된 지점을 발견할 수 있고, 개별 대상마다 주목해야 할 고유한 관계 구성이 있음을 알 수 있다. 결국 한 축의 수치만으로 다른 축의 변화 원인을 단정하거나 향후 순위 상승을 예고하는 것은 경계해야 한다.']},
       {'heading':'활동의 크기와 평판의 방향은 다른 신호','paragraphs':[
       f"활동량 측면에서는 {subject(activity['name'])} 이번 공개 집합에서 가장 높은 수치({total:,.1f}P)를 기록했다. 이는 새롭게 포착된 유효 사건과 행동이 특정 {labels['entity']}에 얼마나 집중되었는지를 보여주는 지표다. 그러나 활동량이 많다는 사실 자체가 곧 우호적이거나 긍정적인 반응이 많았음을 의미하지는 않는다. 평판의 질적 수준과 활동의 양적 총량을 함께 고찰할 때 비로소 동일한 점수 뒤에 숨겨진 입체적 움직임이 포착된다." if total>0 else '이번 공개 대상에서는 당주 유효 활동 포인트가 기록되지 않았다. 이는 실제 활동이 전혀 없었다는 증명이 아니라, 설정된 관측·검수 범위에서 포인트로 인정된 활동이 없다는 뜻이다. 기존 자료가 평가 기반으로 유지되는 것과 새로운 활동이 발생하는 것은 구분된다.']},
       {'heading':'관측 범위와 다음 해석의 경계','paragraphs':[
-      f"향후 관찰의 초점은 지표의 숫자가 채워지는 속도가 아니라, 그 연결의 실질적 내용에 맞춰져야 한다. 현재 {AXES[strong]} 축은 {coverage[strong]}개 대상에서 유효 근거가 확인되는 반면, {AXES[weak]} 축은 {coverage[weak]}개에 그친다. 그렇다고 데이터가 확보되지 않은 접점을 곧바로 ‘부정적 상태’로 해석해서는 곤란하다. 새로운 근거 데이터가 유입될 때는 실제 평판의 변화와 시스템적 평가 범위의 확대를 엄밀히 구분해 고찰할 필요가 있다.",
+      f"향후 관찰의 초점은 지표의 숫자가 채워지는 속도가 아니라, 그 연결의 실질적 내용에 맞춰져야 한다. 현재 {AXES[strong]} 축은 {coverage[strong]}개 대상에서 유효 근거가 확인되는 반면, {AXES[weak]} 축은 {coverage[weak]}개에 그친다. 그렇다고 이번 확인 범위에 포함되지 않은 접점을 곧바로 ‘부정적 상태’로 해석해서는 곤란하다. 새로운 근거 데이터가 유입될 때는 실제 평판의 변화와 시스템적 평가 범위의 확대를 엄밀히 구분해 고찰할 필요가 있다.",
       f"이번 분석은 {korean_date(snapshot['period_from'])}부터 {korean_date(snapshot['period_through'])}까지 실제 유효 데이터가 확보된 {date_count}{date_word}의 시계열적 흐름을 다루고 있다. 따라서 현재의 일별 위치를 곧바로 주간 확정 결과로 일반화해서는 안 된다. {leader['name']}의 선두 기록과 {labels['distribution']} 분포는 단순한 우열을 가리기 위한 것이 아니라, {domain} 영역에서 데이터 유입 속도와 관계 범위(B·R·I·D·G·E)가 어떻게 드러나는지를 보여주는 하나의 단면이다. 동일한 기준의 관측이 누적될 때 오늘의 관계 구성이 이어지는지, 어느 접점이 달라지는지를 추적하는 것이 BRIDGE PUBLICITY가 지향하는 데이터 해석의 핵심이다."]}]
     profiles=[]
     for r in [leader,other]:
