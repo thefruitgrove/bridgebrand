@@ -208,7 +208,7 @@ def entity_match(title: str, name: str, aliases: Iterable[str] = ()) -> bool:
     return any(re.sub(r"\s+", "", candidate).casefold() in compact for candidate in (name, *aliases) if candidate)
 
 
-def classify_headline(item: RawItem, external_id: str, name: str, aliases: Iterable[str] = (), ruleset: str = "2026.10-shadow-1") -> list[Signal]:
+def classify_headline(item: RawItem, external_id: str, name: str, aliases: Iterable[str] = (), ruleset: str = "2026.10-shadow-1", domain: str = "") -> list[Signal]:
     if not entity_match(item.title, name, aliases):
         return []
     title = item.title
@@ -228,6 +228,18 @@ def classify_headline(item: RawItem, external_id: str, name: str, aliases: Itera
         signals.append(Signal(external_id,"R","public_response_observed",0,8.0,0.45,occurred,"auto","반응 관련 보도 관측; 감성 방향 단정 제외",item.content_hash))
     if any(word in title for word in DIRECT_EXPERIENCE) or any(word in title for word in EXPERIENCE):
         signals.append(Signal(external_id, "D", "experience_mention", 0, 12.0, 0.45, occurred, "auto", "경험 관련 공개 보도 포착", item.content_hash))
+    if domain == "UNI":
+        from .uni_reputation_v6 import POLICY_VERSION, classify_uni_evidence
+        existing = {(signal.axis, signal.signal_type) for signal in signals}
+        for row in classify_uni_evidence(title):
+            key = (row["axis"], row["type"])
+            if key in existing:
+                continue
+            signals.append(Signal(
+                external_id, row["axis"], row["type"], row["direction"], row["magnitude"],
+                row["confidence"], occurred, row["review_status"],
+                f"UNI 관계근거 분류({row['term']}); {POLICY_VERSION}; 제목 수준 후보", item.content_hash,
+            ))
     signals.append(Signal(external_id, "B", "qualified_visibility", 1, 1.0, 0.70, occurred, "auto", "정확한 대상명과 일치한 고유 기사", item.content_hash))
     return signals
 
