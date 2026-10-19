@@ -187,7 +187,7 @@ DISCOVERY_PATTERNS = {
         re.compile(r"(?<![A-Za-z0-9])([A-Z][A-Z0-9&.]{1,15}(?:[ -]+[A-Z][A-Z0-9&.]{1,15}){0,2})(?![A-Za-z0-9])"),
     ),
     "STAR": (
-        re.compile(r"(?<![A-Za-z0-9])([A-Z][A-Z0-9]{1,15}(?:[ -]+[A-Z][A-Z0-9]{1,15}){0,2})(?![A-Za-z0-9])"),
+        re.compile(r"(?<![A-Za-z0-9])([A-Z][A-Z0-9]{1,15}(?:[ -]+[A-Z][A-Z0-9]{1,15}){0,4})(?![A-Za-z0-9])"),
         re.compile(r"(?:신인|걸그룹|보이그룹|아이돌|가수|배우|선수)[ '‘’\"“”]*([가-힣]{2,12})(?![가-힣])"),
         re.compile(r"(?<![가-힣])([가-힣]{2,12})(?=[ '’\"”]*(?:데뷔|컴백|신곡|열애|논란|화제|광고모델))"),
     ),
@@ -814,7 +814,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                             "new_evidence_observed":any(day(v.get('occurred_at')) in {as_of,as_of-dt.timedelta(days=1)} for v in accepted_by_entity.get(entity['id'],[])),
                             "trust_basis":{"axes_available":len(axes),"source_families":source_families,"confidence_score":confidence_score},
                             **({"uni_relationship_enrichment": __import__("bridge_pipeline.uni_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
-                               if entity["domain"] == "UNI" else {})}
+                               if entity["domain"] == "UNI" else {}),
+                            **({"gov_relationship_enrichment": __import__("bridge_pipeline.gov_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
+                               if entity["domain"] == "GOV" else {})}
         })
         if eligible:
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
