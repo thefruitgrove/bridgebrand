@@ -15,7 +15,8 @@ ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
-VERSION='publicity-rules-2.1'
+VERSION='publicity-rules-3.0'
+EDITORIAL_STYLE_EFFECTIVE=dt.date(2026,10,21)
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
 DOMAIN_LABELS={
     'CPR':{'scope':'기업','entity':'기업','distribution':'기업별','experience':'기업 경험 전반','ethics':'대상의 도덕성·윤리성'},
@@ -90,6 +91,26 @@ def summary(rows,domain,through):
     mean=round(statistics.mean(float(r['score']) for r in members),1)
     return members,coverage,mean
 
+def editorial_style(publication_date):
+    """Alternate Sample 1 and Sample 3 on every Monday/Wednesday/Friday issue."""
+    if publication_date<EDITORIAL_STYLE_EFFECTIVE:
+        return 'legacy'
+    issue_days=sum(
+        1 for offset in range((publication_date-EDITORIAL_STYLE_EFFECTIVE).days+1)
+        if (EDITORIAL_STYLE_EFFECTIVE+dt.timedelta(days=offset)).weekday() in (0,2,4)
+    )
+    return 'sample-1' if issue_days%2 else 'sample-3'
+
+def axis_diagram(row):
+    return {
+        'title':f"{row['name']} 관계 구조",
+        'items':[
+            {'axis':axis,'label':AXES[axis],'value':round(float(row['axis_scores'][axis]),1),
+             'state':row['axis_status'][axis]}
+            for axis in AXES if usable(row,axis)
+        ],
+    }
+
 def relationship_change(snapshot,leader):
     """Describe comparable axis movement without inventing an unavailable baseline."""
     prior=sorted(
@@ -129,7 +150,7 @@ def relationship_change(snapshot,leader):
         scope_text='비교된 축의 근거 상태는 유지되어, 이번 변화는 동일한 확인 조건 안에서 읽을 수 있다.'
     return axis_text+' '+scope_text
 
-def domain_content(snapshot,domain):
+def domain_content(snapshot,domain,style='legacy'):
     members,coverage,mean=summary(snapshot['rows'],domain,snapshot['period_through']);leader=members[0]
     weak=min(AXES,key=lambda a:coverage[a]);strong=max(AXES,key=lambda a:coverage[a])
     dates=sorted({r['as_of_date'] for r in snapshot['rows'] if r['domain']==domain})
@@ -145,7 +166,11 @@ def domain_content(snapshot,domain):
     date_count=len(dates)
     date_word='날짜' if date_count==1 else '개 날짜'
     change_text=relationship_change(snapshot,leader)
-    title=f"{leader['name']} 1위·{leader['score']:.1f}점… {domain}, 선두의 수치 뒤에 남은 연결 과제"
+    title=(f"{leader['name']} 1위·{leader['score']:.1f}점… {domain}, 순위 뒤에서 읽는 관계 구조"
+           if style=='sample-1' else
+           f"{leader['name']} 1위, 숫자보다 이유가 달랐다… {domain} 관계의 안쪽"
+           if style=='sample-3' else
+           f"{leader['name']} 1위·{leader['score']:.1f}점… {domain}, 선두의 수치 뒤에 남은 연결 과제")
     if candidates:
         d_score=other['axis_scores']['D'];e_score=other['axis_scores']['E']
         relation=(f"경험은 {d_score:.1f}점인 반면, 책임·지속은 {e_score:.1f}점으로 더 높게 나타났다." if e_score>d_score else
@@ -167,11 +192,15 @@ def domain_content(snapshot,domain):
       {'heading':'관측 범위와 다음 해석의 경계','paragraphs':[
       f"향후 관찰의 초점은 지표의 숫자가 채워지는 속도가 아니라, 그 연결의 실질적 내용에 맞춰져야 한다. 현재 {AXES[strong]} 축은 {coverage[strong]}개 대상에서 유효 근거가 확인되는 반면, {AXES[weak]} 축은 {coverage[weak]}개에 그친다. 그렇다고 이번 확인 범위에 포함되지 않은 접점을 곧바로 ‘부정적 상태’로 해석해서는 곤란하다. 새로운 근거 데이터가 유입될 때는 실제 평판의 변화와 시스템적 평가 범위의 확대를 엄밀히 구분해 고찰할 필요가 있다.",
       f"이번 분석은 {korean_date(snapshot['period_from'])}부터 {korean_date(snapshot['period_through'])}까지 실제 유효 데이터가 확보된 {date_count}{date_word}의 시계열적 흐름을 다루고 있다. 따라서 현재의 일별 위치를 곧바로 주간 확정 결과로 일반화해서는 안 된다. {leader['name']}의 선두 기록과 {labels['distribution']} 분포는 단순한 우열을 가리기 위한 것이 아니라, {domain} 영역에서 데이터 유입 속도와 관계 범위(B·R·I·D·G·E)가 어떻게 드러나는지를 보여주는 하나의 단면이다. 동일한 기준의 관측이 누적될 때 오늘의 관계 구성이 이어지는지, 어느 접점이 달라지는지를 추적하는 것이 BRIDGE PUBLICITY가 지향하는 데이터 해석의 핵심이다."]}]
+    if style in ('sample-1','sample-3'):
+        sections.append({'heading':'BRIDGE가 남기는 다음 질문','paragraphs':[
+          f"이번 {domain} 순위는 독자의 시선을 여는 출발점이다. 그러나 다음 회차에서 확인할 핵심은 {leader['name']}의 숫자가 유지되는지 하나만이 아니라, 현재 관계 구조를 이끄는 {AXES[high]} 축과 상대적으로 낮게 나타난 {AXES[low]} 축이 같은 방향으로 움직이는지다. 두 축이 서로 다른 방향으로 움직인다면 종합점수 하나로는 설명되지 않는 관계의 재구성이 진행되고 있을 수 있다.",
+          f"BRIDGE는 누가 더 많이 언급됐는지에 머물지 않고, 발견·반응·기억·경험·행동·책임이 어떤 연결을 이루는지 반복해서 관찰한다. 다음 분석에서는 새 사건의 발생, 기존 사건의 반복 노출, 실제 축 변화, 확인 범위의 확대를 분리해 살필 예정이다. 이 구분이 유지될 때 {leader['name']}의 1위는 단순한 서열이 아니라 관계를 이해하기 위한 정보가 된다."]})
     profiles=[]
     for r in [leader,other]:
         profiles.append({'name':r['name'],'axes':r['axis_scores'],'states':r['axis_status']})
     table=[{'rank':r['rank'],'name':r['name'],'daily':r['score'],'weekly':r.get('weekly_index'),'activity':r.get('activity_points'),'trust':r['trust_grade']} for r in members[:5]]
-    return {'title':title,'standfirst':f"{domain} 공개 적격 {len(members)}개 대상의 위치·관계 구성·관측 범위를 함께 읽는 BRIDGE 분석.",'sections':sections,'table':table,'profiles':profiles,'coverage':coverage,'eligible_count':len(members),'observation_days':len(dates)}
+    return {'title':title,'standfirst':f"{domain} 공개 적격 {len(members)}개 대상의 위치·관계 구성·변화 원인·관측 범위를 함께 읽는 BRIDGE 분석.",'sections':sections,'table':table,'profiles':profiles,'diagram':axis_diagram(leader),'coverage':coverage,'eligible_count':len(members),'observation_days':len(dates),'leader':leader}
 
 def articles_for(history,publication_date,example=False,example_domain='CPR'):
     spec=edition(publication_date);snapshot,digest=freeze(history,spec)
@@ -187,18 +216,29 @@ def articles_from_snapshot(snapshot,digest,spec,example=False,example_domain='CP
     if example:
         snapshot['rows']=[r for r in snapshot['rows'] if r['domain']==example_domain]
         digest=hashlib.sha256(json.dumps(snapshot,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    style=editorial_style(spec['scheduled_at'].date())
     domains=(example_domain,) if example else ('ALL',) if spec['slot']=='OVERALL' else DOMAINS
     articles=[]
     for domain in domains:
         if domain=='ALL':
-            parts={d:domain_content(snapshot,d) for d in DOMAINS}
-            content={'title':'한 주의 BRIDGE — 같은 순위표보다 다른 관계 구성을 읽다','standfirst':f"{spec['week']} CPR·GOV·UNI·ENT 통합 분석. 서로 다른 분야의 점수를 단순 우열로 바꾸지 않는다.",'sections':[], 'table':[], 'profiles':[], 'coverage':{},'eligible_count':sum(x['eligible_count'] for x in parts.values()),'observation_days':len({r['as_of_date'] for r in snapshot['rows']})}
+            parts={d:domain_content(snapshot,d,style) for d in DOMAINS}
+            overall_title=('한 주의 BRIDGE — 같은 순위표보다 다른 관계 구성을 읽다'
+                           if style=='sample-1' else
+                           "‘1위’는 같았지만 이유는 달랐다 — 한 주의 네 가지 관계")
+            content={'title':overall_title,'standfirst':f"{spec['week']} CPR·GOV·UNI·ENT 통합 분석. 순위는 주목의 입구로, 축별 구조와 변화 원인은 해석의 본체로 읽는다.",'sections':[], 'table':[], 'profiles':[], 'diagram':{'title':'영역별 선두 관계 구조','items':[]}, 'coverage':{},'eligible_count':sum(x['eligible_count'] for x in parts.values()),'observation_days':len({r['as_of_date'] for r in snapshot['rows']})}
             for d,p in parts.items():
-                content['sections'].append({'heading':d+' — '+p['title'],'paragraphs':[p['sections'][0]['paragraphs'][0],p['sections'][1]['paragraphs'][1],p['sections'][1]['paragraphs'][0]]})
+                paragraphs=[p['sections'][0]['paragraphs'][0],p['sections'][1]['paragraphs'][1],p['sections'][1]['paragraphs'][0]]
+                if style in ('sample-1','sample-3'):
+                    paragraphs.append(p['sections'][-1]['paragraphs'][0])
+                content['sections'].append({'heading':d+' — '+p['title'],'paragraphs':paragraphs})
                 content['table'].append({'domain':d,'eligible':p['eligible_count'],'observation_days':p['observation_days']})
+                content['profiles'].append({'name':d+' · '+p['profiles'][0]['name'],'axes':p['profiles'][0]['axes'],'states':p['profiles'][0]['states']})
+                lead=p['leader'];valid=[a for a in AXES if usable(lead,a)]
+                strongest=max(valid,key=lambda a:lead['axis_scores'][a])
+                content['diagram']['items'].append({'axis':d,'label':lead['name']+' · '+AXES[strongest],'value':round(float(lead['axis_scores'][strongest]),1),'state':lead['axis_status'][strongest]})
             content['sections'].append({'heading':'다음 주에 확인할 신호','paragraphs':['네 영역은 관측 대상과 자료의 성격이 달라 점수의 단순 비교로 분야의 우열을 판단할 수 없다. 공통으로 살펴볼 것은 관심이 반응·경험·행동과 어떤 구성을 보이는지, 그리고 근거 범위가 유지되는지다.','이번 종합본은 전주에 실제로 관측된 자료만 사용한다. 날짜가 비어 있거나 새 방법론의 비교 이력이 짧은 경우에는 한 주 전체의 변화나 지속성을 확정하지 않는다.']})
-        else:content=domain_content(snapshot,domain)
-        payload={**content,'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
+        else:content=domain_content(snapshot,domain,style)
+        payload={**content,'editorial_style':style,'visual_contract':['table','profile-figure','relationship-diagram'],'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
         if example:payload['revision_note']='기사체로 다듬은 샘플입니다. 10월 14일의 공개 수치를 사용했습니다.'
         if example:payload['standfirst']='샘플 · 실제 10월 14일 공개 데이터를 바탕으로 구성한 형식 예시입니다. 정식 발행본이 아닙니다. '+payload['standfirst']
         article={'id':f"{spec['week'].lower()}-{spec['slot'].lower()}-{domain.lower()}"+('-example' if example else ''),'issue_week':spec['week'],'slot':spec['slot'],'domain':domain,'scheduled_at':(dt.datetime.now(KST) if example else spec['scheduled_at']).isoformat(),'is_example':example,'payload':payload,'snapshot_hash':digest}
@@ -219,3 +259,4 @@ def main():
         print(json.dumps(result))
     else:print(json.dumps({'ids':[r['id'] for r in articles],'snapshot_hash':articles[0]['snapshot_hash'],'dry_run':True}))
 if __name__=='__main__':main()
+
