@@ -22,6 +22,29 @@ FOOTER_WORDMARK = (
 PRIMARY_PUBLICITY = '<div class="mm-group"><a href="publicity.html">PUBLICITY</a></div>'
 THIS_WEEK = '<div class="mm-group"><a href="this-week.html">THIS WEEK</a></div>'
 
+IDENTITY_SECTION = '''<section class="section bridge-identity" data-bridge-identity="v1">
+  <div class="wrap public-copy">
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">01-1 / BRIDGE IDENTITY</span><h2 class="dx-title">랭킹 산업이 압축해서 버린 맥락을 복원합니다</h2></div>
+      <p class="dx-body">BRIDGE는 공개자료와 공중의 관측 신호를 근거 원장에 축적하고, 브랜드와 공중 사이의 관계 상태·구성·변화·관측 신뢰도를 분리해 반복적으로 진단하는 관계 기반 평판 인텔리전스 시스템입니다. 온라인 화제성을 평판 전체로 오인하지 않고, 능력 평가와 관계 평가를 구분하며, 종합점수 뒤의 여섯 축과 변화 원인을 함께 보여줍니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">THE QUESTION</span><h2 class="dx-title">BRIDGE가 묻는 질문은 다릅니다</h2></div>
+      <p class="dx-body">누가 더 많이 언급·검색되었는지, 누가 긍정 반응이나 선호를 얻었는지, 누가 특정 역량에서 우수한지만 묻지 않습니다. “이 대상은 공중에게 어떻게 발견되고, 어떤 반응을 얻으며, 무엇으로 기억되고, 어떤 경험과 행동으로 연결되고, 책임과 신뢰를 어떻게 유지하고 있는가?”를 묻습니다.</p>
+    </div>
+    <div class="public-triptych">
+      <div><small>DISTINGUISH</small><h2>구분</h2><p>대상의 실제 상태와 관측 가능한 상태, 0과 미관측, 무언급과 수집 실패를 구분합니다.</p></div>
+      <div><small>TRACE</small><h2>추적</h2><p>새 사건과 반복 전재, 실제 변화와 근거 범위 확대, 직접 관측과 유지·참조값을 구분합니다.</p></div>
+      <div><small>EXPLAIN</small><h2>설명</h2><p>순위를 해석의 출발점으로 삼고 축별 구조·변화 원인·산출 근거의 신뢰등급을 함께 읽습니다.</p></div>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">PUBLIC EVIDENCE</span><h2 class="dx-title">공개 근거 기반 관계 평판 인텔리전스</h2></div>
+      <p class="dx-body">BRIDGE의 상품은 순위 그 자체가 아닙니다. 순위 뒤에 있는 관계를 설명하는 능력과, 그 설명이 어디까지 유효한지를 스스로 밝히는 능력입니다. 순위는 독자의 시선을 여는 입구이며, 축별 구조와 변화 원인, 근거 상태가 해석의 본체입니다.</p>
+    </div>
+  </div>
+</section>'''
+IDENTITY_ANCHOR = '<div class="about-figure"><img src="img/about_bridge.jpg"'
+
 def apply(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
     updated = text
@@ -49,6 +72,8 @@ def apply(path: Path) -> bool:
         updated,
     )
     updated = updated.replace("VOL. 01 — WEEK", "VOL. 02 — WEEK")
+    if path.name == "about.html" and 'data-bridge-identity="v1"' not in updated and IDENTITY_ANCHOR in updated:
+        updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
     if updated != text:
         path.write_text(updated, encoding="utf-8")
         return True
