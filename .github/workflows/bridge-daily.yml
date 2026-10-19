@@ -138,7 +138,11 @@ jobs:
       - name: Rebuild static site
         run: |
           python build.py
+          # Apply durable page copy before SPA assembly so routed pages and
+          # standalone HTML share the same approved public language.
+          python tools/apply_brand_shell.py
           python build_spa.py
+          # Reapply shell-only replacements to the assembled artifact.
           python tools/apply_brand_shell.py
 
       - name: Commit reproducible public export
