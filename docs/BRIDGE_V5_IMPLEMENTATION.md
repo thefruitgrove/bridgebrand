@@ -24,6 +24,26 @@ The audited production baseline on 2026-10-14 had CPR 53 eligible, GOV/UNI/ENT 1
 
 CPR/UNI R requires actual response evidence, not DART or admission indicators. ENT D requires genuine audience/product/advertising-contact experience, not general article exposure. Expanded response/experience keyword detectors yield low-confidence proxies; publication volume is not proof of quality. Channel engagement is a response proxy, not proof of positive sentiment.
 
+
+## Dynamic target discovery and candidate ledger
+
+Effective 2026-10-20, the active ranking roster is not treated as a closed or permanent population. T100 membership may change whenever newly observed entities satisfy identity, evidence and cohort requirements. This is especially important near ranks 80–100; a fixed roster would measure only the selected list rather than the current field.
+
+The daily pipeline must run a separate discovery pass for CPR, GOV, UNI and STAR/ENT before scoring. Discovery output is subordinate data and does not itself change a score or a published rank. For every plausible name outside the active registry, retain the domain, proposed canonical name, observed aliases, first/last seen time, rolling mention and distinct-publisher counts, evidence references, ambiguity flags and review state in `bridge_entity_candidates`.
+
+Candidate review follows this order:
+
+1. confirm whether the entity already exists in `bridge_entities`;
+2. test canonical name, Korean/English spellings, abbreviations, group/member and parent/sub-brand aliases;
+3. verify that recent three-day raw items were collected and distinguish collection failure from no mention;
+4. verify entity attribution rather than crediting only another registered subject in the same headline;
+5. evaluate domain/cohort eligibility and comparable evidence coverage;
+6. only after review, promote the entity to the active registry for a future scoring run.
+
+No candidate is automatically inserted into a published T100/AN20 or used to displace an incumbent. Promotion requires identity resolution, duplicate and homonym review, domain-specific eligibility, auditable evidence and a recorded effective date. Existing published editions are never rewritten to insert a newly discovered entity.
+
+All four domains are checked daily. Operational triage is ENT first because debut, comeback and issue cycles change fastest, followed by GOV, CPR and UNI; this ordering changes review urgency, not evidence thresholds or the obligation to inspect every domain. Candidate aging and repeated absence are retained as review history rather than silently deleted. Daily health output must report discovery completion and candidate counts by domain, including zero, so an empty candidate table cannot be mistaken for successful coverage.
+
 ## Operation
 
 1. Bootstrap closes collector records abandoned for more than three hours and syncs registry.
