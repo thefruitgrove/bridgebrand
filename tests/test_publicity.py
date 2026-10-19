@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import unittest
 from pathlib import Path
-from publicity.generate import edition,freeze,articles_for,domain_content,DOMAINS,PUBLIC_FIELDS
+from publicity.generate import edition,freeze,articles_for,domain_content,editorial_style,DOMAINS,PUBLIC_FIELDS
 
 class PublicityTests(unittest.TestCase):
  def history(self,date='2026-10-16'):
@@ -58,7 +58,7 @@ class PublicityTests(unittest.TestCase):
   articles,_=articles_for(self.history(),dt.date(2026,10,16))
   for article in articles:
    payload=article['payload']
-   self.assertEqual(payload['template_version'],'publicity-rules-2.1')
+   self.assertEqual(payload['template_version'],'publicity-rules-3.0')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
    self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
    self.assertEqual([s['heading'] for s in payload['sections'][1:]],[
@@ -101,6 +101,23 @@ class PublicityTests(unittest.TestCase):
  def test_public_article_hides_internal_snapshot_identifier(self):
   source=(Path(__file__).resolve().parents[1]/'site/publicity.js').read_text()
   self.assertNotIn('입력 식별:',source);self.assertNotIn('작성 시점의 입력본',source)
+  self.assertIn('relationshipDiagram(p.diagram)',source)
  def test_input_values_are_not_mutated(self):
   h=self.history();old=copy.deepcopy(h);articles_for(h,dt.date(2026,10,16));self.assertEqual(h,old)
+ def test_styles_alternate_from_october_21(self):
+  self.assertEqual(editorial_style(dt.date(2026,10,19)),'legacy')
+  self.assertEqual(editorial_style(dt.date(2026,10,21)),'sample-1')
+  self.assertEqual(editorial_style(dt.date(2026,10,23)),'sample-3')
+  self.assertEqual(editorial_style(dt.date(2026,10,26)),'sample-1')
+ def test_new_editorial_contract_is_longer_and_visual(self):
+  articles,_=articles_for(self.history('2026-10-21'),dt.date(2026,10,21))
+  for article in articles:
+   payload=article['payload']
+   self.assertEqual(payload['editorial_style'],'sample-1')
+   self.assertEqual(payload['visual_contract'],['table','profile-figure','relationship-diagram'])
+   self.assertTrue(payload['table']);self.assertTrue(payload['profiles'])
+   self.assertTrue(payload['diagram']['items'])
+   self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),9)
+   self.assertIn('BRIDGE가 남기는 다음 질문',[s['heading'] for s in payload['sections']])
 if __name__=='__main__':unittest.main()
+
