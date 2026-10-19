@@ -162,17 +162,59 @@ def collect_news(
 
 
 DISCOVERY_QUERIES = {
-    "CPR": '코스피 코스닥 기업 신제품 실적 논란',
-    "STAR": '광고모델 배우 가수 아이돌 스포츠스타 화제',
-    "GOV": '정부 부처 지자체 정책 민원 발표',
-    "UNI": '대학교 전문대학 입시 교육 연구 논란',
+    "CPR": (
+        '코스피 코스닥 기업 신제품 실적 논란',
+        '신생 기업 브랜드 상장 투자 화제',
+    ),
+    "STAR": (
+        '광고모델 배우 가수 아이돌 스포츠스타 화제',
+        '신인 아이돌 그룹 데뷔 컴백',
+        '신인 배우 가수 스포츠스타 화제',
+    ),
+    "GOV": (
+        '정부 부처 지자체 정책 민원 발표',
+        '공공기관 지방자치단체 정책 이슈',
+    ),
+    "UNI": (
+        '대학교 전문대학 입시 교육 연구 논란',
+        '대학 교육 연구 산학협력 이슈',
+    ),
 }
 
 DISCOVERY_PATTERNS = {
-    "GOV": re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:부|청|처|위원회|특별시|광역시|특별자치시|특별자치도|도|시|군|구|공사|공단))(?![가-힣])"),
-    "UNI": re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:대학교|대학))(?![가-힣])"),
+    "CPR": (
+        re.compile(r"(?<![가-힣])([가-힣]{2,12}(?:전자|그룹|홀딩스|바이오|테크|건설|금융|은행|카드|보험|제약|모빌리티|엔터테인먼트))(?![가-힣])"),
+        re.compile(r"(?<![A-Za-z0-9])([A-Z][A-Z0-9&.]{1,15}(?:[ -]+[A-Z][A-Z0-9&.]{1,15}){0,2})(?![A-Za-z0-9])"),
+    ),
+    "STAR": (
+        re.compile(r"(?<![A-Za-z0-9])([A-Z][A-Z0-9]{1,15}(?:[ -]+[A-Z][A-Z0-9]{1,15}){0,2})(?![A-Za-z0-9])"),
+        re.compile(r"(?:신인|걸그룹|보이그룹|아이돌|가수|배우|선수)[ '‘’\"“”]*([가-힣]{2,12})(?![가-힣])"),
+        re.compile(r"(?<![가-힣])([가-힣]{2,12})(?=[ '’\"”]*(?:데뷔|컴백|신곡|열애|논란|화제|광고모델))"),
+    ),
+    "GOV": (
+        re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:부|청|처|위원회|특별시|광역시|특별자치시|특별자치도|도|시|군|구|공사|공단))(?![가-힣])"),
+    ),
+    "UNI": (
+        re.compile(r"(?<![가-힣])([가-힣]{2,14}(?:대학교|대학))(?![가-힣])"),
+    ),
 }
 
+DISCOVERY_STOPWORDS = {
+    "CPR": {"AI", "CEO", "ESG", "IPO", "KOSPI", "KOSDAQ", "M&A"},
+    "STAR": {"AI", "AAA", "KPOP", "K-POP", "SMP", "VS", "TV", "OTT", "SNS", "MV"},
+}
+
+
+def _extract_candidate_names(domain: str, title: str) -> set[str]:
+    names: set[str] = set()
+    stopwords = DISCOVERY_STOPWORDS.get(domain, set())
+    for pattern in DISCOVERY_PATTERNS.get(domain, ()):
+        for match in pattern.findall(title or ""):
+            name = re.sub(r"\s+", " ", match).strip(" -'‘’\"“”·:[]()")
+            if len(name) < 2 or name.upper() in stopwords:
+                continue
+            names.add(name)
+    return names
 
 def discover_candidates(db: SupabaseRest, as_of: dt.date) -> None:
     """Discover challengers outside the current roster; never auto-publish unverified names."""
@@ -186,22 +228,18 @@ def discover_candidates(db: SupabaseRest, as_of: dt.date) -> None:
     run_id = _start_run(db, "google_news_discovery", start, end)
     fetched = accepted = 0
     try:
-        for domain, query in DISCOVERY_QUERIES.items():
-            items = fetch_google_news(query, 1)
-            fetched += len(items)
-            pattern = DISCOVERY_PATTERNS.get(domain)
-            if not pattern:
-                # CPR/ENT는 오탐 위험이 높아 기존 사전 밖 이름을 자동 승격하지 않는다.
-                continue
-            for item in items:
-                for name in pattern.findall(item.title):
-                    name = name.strip()
-                    if (domain, name) in known or len(name) < 3:
-                        continue
-                    hit = candidate_hits.setdefault((domain, name), {"publishers": set(), "evidence": []})
-                    hit["publishers"].add(item.publisher or "unknown")
-                    if len(hit["evidence"]) < 5:
-                        hit["evidence"].append({"title": item.title[:180], "url": item.canonical_url, "publisher": item.publisher})
+        for domain, queries in DISCOVERY_QUERIES.items():
+            for query in queries:
+                items = fetch_google_news(query, 1)
+                fetched += len(items)
+                for item in items:
+                    for name in _extract_candidate_names(domain, item.title):
+                        if (domain, name) in known:
+                            continue
+                        hit = candidate_hits.setdefault((domain, name), {"publishers": set(), "evidence": []})
+                        hit["publishers"].add(item.publisher or "unknown")
+                        if len(hit["evidence"]) < 5:
+                            hit["evidence"].append({"title": item.title[:180], "url": item.canonical_url, "publisher": item.publisher})
         rows = []
         for (domain, name), hit in candidate_hits.items():
             mentions = len(hit["evidence"])
