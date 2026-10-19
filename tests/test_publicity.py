@@ -58,7 +58,7 @@ class PublicityTests(unittest.TestCase):
   articles,_=articles_for(self.history(),dt.date(2026,10,16))
   for article in articles:
    payload=article['payload']
-   self.assertEqual(payload['template_version'],'publicity-rules-2.0')
+   self.assertEqual(payload['template_version'],'publicity-rules-2.1')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
    self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
    self.assertEqual([s['heading'] for s in payload['sections'][1:]],[
@@ -78,6 +78,26 @@ class PublicityTests(unittest.TestCase):
   prose=json.dumps(articles,ensure_ascii=False)
   for bad in ('디어유이','디어유은','진주시이','고려대학교이','고려대학교은','방탄소년단가'):
    self.assertNotIn(bad,prose)
+ def test_headline_keeps_rank_hook_and_body_explains_dynamic_set(self):
+  articles,_=articles_for(self.history(),dt.date(2026,10,16))
+  for article in articles:
+   self.assertIn('1위·',article['payload']['title'])
+   prose=json.dumps(article['payload'],ensure_ascii=False)
+   self.assertIn('대상 구성은 기준일과 관측 상태에 따라 달라질 수 있다',prose)
+   self.assertIn('현재 관계 구성과 근거 상태를 중심으로 읽는다',prose)
+ def test_axis_and_evidence_change_are_reported_when_comparable(self):
+  h=self.history()
+  previous=copy.deepcopy(h['rankings'])
+  for row in previous:
+   row['as_of_date']='2026-10-15'
+   if row['rank']==1:
+    row['axis_scores']['B']=55
+    row['axis_status']['D']='observed'
+  h['rankings'].extend(previous)
+  articles,_=articles_for(h,dt.date(2026,10,16))
+  prose=json.dumps(articles,ensure_ascii=False)
+  self.assertIn('주요 축 변화는 도달 +10.0점',prose)
+  self.assertIn('근거 상태가 달라져',prose)
  def test_public_article_hides_internal_snapshot_identifier(self):
   source=(Path(__file__).resolve().parents[1]/'site/publicity.js').read_text()
   self.assertNotIn('입력 식별:',source);self.assertNotIn('작성 시점의 입력본',source)
