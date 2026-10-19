@@ -45,6 +45,23 @@ IDENTITY_SECTION = '''<section class="section bridge-identity" data-bridge-ident
 </section>'''
 IDENTITY_ANCHOR = '<div class="about-figure"><img src="img/about_bridge.jpg"'
 
+PUBLIC_PRINCIPLES = '''<section class="section bridge-public-principles" data-bridge-principles="v1">
+  <div class="wrap public-copy">
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">BRIDGE / PUBLIC STANDARD</span><h2 class="dx-title">순위를 보여주되, 순위로 평판을 단정하지 않습니다</h2></div>
+      <p class="dx-body"><strong>BRIDGE 브랜드평판지수는 공개자료와 공중의 관측 신호를 바탕으로 브랜드와 공중 사이의 관계 상태, 구성과 변화 방향을 반복 관측하는 관계 기반 평판지수입니다.</strong></p>
+      <p class="dx-body">BRIDGE는 언급량을 평판 전체로 보지 않습니다. 도달·반응·정체성·경험·행동유발·책임과 지속을 나누어 보고, 결과를 뒷받침하는 근거의 충실성도 함께 제시합니다.</p>
+      <p class="dx-body">순위는 정해진 기간과 공개자료 범위에서 관측된 상대적 위치입니다. 대상의 절대적 가치·능력·윤리성 전체를 판정하지 않습니다.</p>
+    </div>
+    <div class="dx-domain">
+      <div class="dx-head"><span class="dx-tag">SIGNALBRIDGE</span><h2 class="dx-title">Reputation is a signal.</h2></div>
+      <p class="dx-body"><strong>BRIDGE reads the relationship behind the rank.</strong></p>
+    </div>
+  </div>
+</section>'''
+PRINCIPLE_PAGES = {"methodology.html", "data-extraction.html", "trust.html"}
+PRINCIPLES_ANCHOR = "<footer>"
+
 def apply(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
     updated = text
@@ -74,6 +91,8 @@ def apply(path: Path) -> bool:
     updated = updated.replace("VOL. 01 — WEEK", "VOL. 02 — WEEK")
     if path.name == "about.html" and 'data-bridge-identity="v1"' not in updated and IDENTITY_ANCHOR in updated:
         updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
+    if path.name in PRINCIPLE_PAGES and 'data-bridge-principles="v1"' not in updated and PRINCIPLES_ANCHOR in updated:
+        updated = updated.replace(PRINCIPLES_ANCHOR, PUBLIC_PRINCIPLES + PRINCIPLES_ANCHOR, 1)
     if updated != text:
         path.write_text(updated, encoding="utf-8")
         return True
