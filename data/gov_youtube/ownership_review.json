@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-19T21:42:04.953587+09:00",
+  "checked_at": "2026-10-19T22:00:26.052854+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -19,11 +19,6 @@
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
-    },
-    "GOV-C09": {
-      "status": "review",
-      "homepage": "https://www.gg.go.kr",
-      "reason": "TimeoutError"
     },
     "GOV-C10": {
       "status": "review",

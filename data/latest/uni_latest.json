@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-18",
-  "run_at": "2026-10-19T21:38:47.297834+09:00",
+  "run_at": "2026-10-19T21:57:07.500840+09:00",
   "official_source": {
     "provider": "대학알리미",
     "source_file": "대학주요정보.xlsx",
@@ -18,7 +18,7 @@
       "교육비": 2026,
       "기숙사": 2025
     },
-    "retrieved_at": "2026-10-19T12:38:28.141432+00:00"
+    "retrieved_at": "2026-10-19T12:56:51.262702+00:00"
   },
   "signal_ledger": [
     {
@@ -253,6 +253,20 @@
       "source_url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE4tamZzVEtpb192M05ncDlsSjNhYURrLXJjSEF3bGpCclBkQkk4aFgyX1FLck0xdDlXZDdLMy1EUWNtMDNvTXpHdGtqaXc4REw0UDliUnphRDh0cWc0UUxTM0NSUHE?oc=5",
       "source_id": "news:중도일보",
       "published_at": "2026-10-18T00:18:23+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-4229407FCC52",
+      "name": "연세대학교",
+      "title": "성동구, 청소년 '꿈잡이 대학탐방' 운영…서울대·연세대·한양대 방문 - 미디어인뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBYRlBpdFhBQWZLWXBvNnZ2WUNGVFRsakVWeC1kTUdTcm1uRFVhRWhYbUdfak9PZXl6NUN2bzBRUmszeG1rZ3otc2ZiSWVQTGFvSzdhUURncWNXY3RjakxRZGQ2cDB6Y0pYak5JR1dB?oc=5",
+      "source_id": "news:미디어인뉴스",
+      "published_at": "2026-10-18T09:11:14+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -554,41 +568,13 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-AE7FD5EB8E38",
-      "name": "대구한의대학교",
-      "title": "글로컬대학 대구한의대학교, 학생 진로 탐색 강화 - 경상투데이",
+      "university_id": "UNI-610197CE7DD8",
+      "name": "청운대학교",
+      "title": "청운대, 네팔 홍수 피해 주민 돕기 성금 전달 - 뉴스티앤티",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFByN1hRSXhTeXlQb3QxdnBqZnVGSC13enlMSkhmUkVuQjdDVTNiazVNYVh4dFJtQ3JhQlhlSjR2VFpwZnFSbkhteEMwbjZUMEtlaFBUaWVzajlvdW9IU0NXbXhJTTh2aUk?oc=5",
-      "source_id": "news:경상투데이",
-      "published_at": "2026-10-18T08:31:29+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-AE7FD5EB8E38",
-      "name": "대구한의대학교",
-      "title": "글로컬대학 대구한의대학교, 학생 진로 탐색 강화 - 경상투데이",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFByN1hRSXhTeXlQb3QxdnBqZnVGSC13enlMSkhmUkVuQjdDVTNiazVNYVh4dFJtQ3JhQlhlSjR2VFpwZnFSbkhteEMwbjZUMEtlaFBUaWVzajlvdW9IU0NXbXhJTTh2aUk?oc=5",
-      "source_id": "news:경상투데이",
-      "published_at": "2026-10-18T08:31:29+00:00",
-      "verification_status": "single_source",
-      "event_type": "claim",
-      "axis": "I",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-AE7FD5EB8E38",
-      "name": "대구한의대학교",
-      "title": "대구한의대 재학생고용서비스사업팀, 재학생 신직업 설계 프로그램 - 세명일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9KMjZxSnpBcDhyNzRMWTdxaWh4N3FWYUJWalpySlgxR0QwcmFsem9iYlJ2LWJjSnlQLUs1SDNoZTR3VEJlTTU1dEZBa1FMTDFOc0tUTw?oc=5",
-      "source_id": "news:세명일보",
-      "published_at": "2026-10-18T00:47:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5MQk5GU1lYRk0xUm0xLXVIM1FpVW9WZ093R0VPdm9vSzFNM3dOTjMzRUVpQURXOHhnREpkVzlESUhDZVhiOWhmV2tmdGp0OVRadm91NERSeFJtMHNWaTdsb0dCN2lNbWFua3c?oc=5",
+      "source_id": "news:뉴스티앤티",
+      "published_at": "2026-10-18T05:40:13+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -652,13 +638,13 @@
       "severity": 0.45
     },
     {
-      "university_id": "UNI-4229407FCC52",
-      "name": "연세대학교",
-      "title": "성동구, 청소년 '꿈잡이 대학탐방' 운영…서울대·연세대·한양대 방문 - 미디어인뉴스",
+      "university_id": "UNI-AE7FD5EB8E38",
+      "name": "대구한의대학교",
+      "title": "글로컬대학 대구한의대학교, 학생 진로 탐색 강화 - 경상투데이",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBYRlBpdFhBQWZLWXBvNnZ2WUNGVFRsakVWeC1kTUdTcm1uRFVhRWhYbUdfak9PZXl6NUN2bzBRUmszeG1rZ3otc2ZiSWVQTGFvSzdhUURncWNXY3RjakxRZGQ2cDB6Y0pYak5JR1dB?oc=5",
-      "source_id": "news:미디어인뉴스",
-      "published_at": "2026-10-18T09:11:14+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFByN1hRSXhTeXlQb3QxdnBqZnVGSC13enlMSkhmUkVuQjdDVTNiazVNYVh4dFJtQ3JhQlhlSjR2VFpwZnFSbkhteEMwbjZUMEtlaFBUaWVzajlvdW9IU0NXbXhJTTh2aUk?oc=5",
+      "source_id": "news:경상투데이",
+      "published_at": "2026-10-18T08:31:29+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -666,46 +652,32 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-42447EF140AB",
-      "name": "한국체육대학교",
-      "title": "한국체육대학교 스포츠분석센터 을 위한 필수 정보 및 팁 - 성공을 위한 필수 요소 - Calgary Roughnecks",
+      "university_id": "UNI-AE7FD5EB8E38",
+      "name": "대구한의대학교",
+      "title": "글로컬대학 대구한의대학교, 학생 진로 탐색 강화 - 경상투데이",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9vNFhqT1RBdzlpMHI5LTAySEQ5VXZFMEhoS0x6Ql9iME5zZWNCdl8ydGp2VUVRdk5xSXBUMWlFZTRUNnNLeWpTM3I3R25NR1VUWE9PT0xLSnJDV1AyQlY1enM0X01UZkRFMGxMd3Zn?oc=5",
-      "source_id": "news:Calgary Roughnecks",
-      "published_at": "2026-10-18T16:25:57+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFByN1hRSXhTeXlQb3QxdnBqZnVGSC13enlMSkhmUkVuQjdDVTNiazVNYVh4dFJtQ3JhQlhlSjR2VFpwZnFSbkhteEMwbjZUMEtlaFBUaWVzajlvdW9IU0NXbXhJTTh2aUk?oc=5",
+      "source_id": "news:경상투데이",
+      "published_at": "2026-10-18T08:31:29+00:00",
       "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-42447EF140AB",
-      "name": "한국체육대학교",
-      "title": "이상현 대한사이클연맹 회장, 한국체육학회 우수 박사학위 논문상 수상 - 매일경제",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE1NMjJ3SC0zLWN1NkNQUFBLYTdqblNBbUN2NXZqTHNJSDEtX1hCZUZHUXFpb2xqbEprVUNtVm5jQjZHWHBWaVE?oc=5",
-      "source_id": "news:매일경제",
-      "published_at": "2026-10-18T04:56:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-42447EF140AB",
-      "name": "한국체육대학교",
-      "title": "이상현 대한사이클연맹 회장, 한국체육학회 우수 박사학위 논문상 수상 - 매일경제",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE1NMjJ3SC0zLWN1NkNQUFBLYTdqblNBbUN2NXZqTHNJSDEtX1hCZUZHUXFpb2xqbEprVUNtVm5jQjZHWHBWaVE?oc=5",
-      "source_id": "news:매일경제",
-      "published_at": "2026-10-18T04:56:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
+      "event_type": "claim",
+      "axis": "I",
       "direction": 1,
-      "severity": 0.6499999999999999
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-AE7FD5EB8E38",
+      "name": "대구한의대학교",
+      "title": "대구한의대 재학생고용서비스사업팀, 재학생 신직업 설계 프로그램 - 세명일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9KMjZxSnpBcDhyNzRMWTdxaWh4N3FWYUJWalpySlgxR0QwcmFsem9iYlJ2LWJjSnlQLUs1SDNoZTR3VEJlTTU1dEZBa1FMTDFOc0tUTw?oc=5",
+      "source_id": "news:세명일보",
+      "published_at": "2026-10-18T00:47:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
     },
     {
       "university_id": "UNI-D8A8FB7BBED6",
@@ -762,6 +734,48 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
+    },
+    {
+      "university_id": "UNI-42447EF140AB",
+      "name": "한국체육대학교",
+      "title": "한국체육대학교 스포츠분석센터 을 위한 필수 정보 및 팁 - 성공을 위한 필수 요소 - Calgary Roughnecks",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9vNFhqT1RBdzlpMHI5LTAySEQ5VXZFMEhoS0x6Ql9iME5zZWNCdl8ydGp2VUVRdk5xSXBUMWlFZTRUNnNLeWpTM3I3R25NR1VUWE9PT0xLSnJDV1AyQlY1enM0X01UZkRFMGxMd3Zn?oc=5",
+      "source_id": "news:Calgary Roughnecks",
+      "published_at": "2026-10-18T16:25:57+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-42447EF140AB",
+      "name": "한국체육대학교",
+      "title": "이상현 대한사이클연맹 회장, 한국체육학회 우수 박사학위 논문상 수상 - 매일경제",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE1NMjJ3SC0zLWN1NkNQUFBLYTdqblNBbUN2NXZqTHNJSDEtX1hCZUZHUXFpb2xqbEprVUNtVm5jQjZHWHBWaVE?oc=5",
+      "source_id": "news:매일경제",
+      "published_at": "2026-10-18T04:56:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-42447EF140AB",
+      "name": "한국체육대학교",
+      "title": "이상현 대한사이클연맹 회장, 한국체육학회 우수 박사학위 논문상 수상 - 매일경제",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE1NMjJ3SC0zLWN1NkNQUFBLYTdqblNBbUN2NXZqTHNJSDEtX1hCZUZHUXFpb2xqbEprVUNtVm5jQjZHWHBWaVE?oc=5",
+      "source_id": "news:매일경제",
+      "published_at": "2026-10-18T04:56:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.6499999999999999
     },
     {
       "university_id": "UNI-C6E10A3A549E",
@@ -918,20 +932,6 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-610197CE7DD8",
-      "name": "청운대학교",
-      "title": "청운대, 네팔 홍수 피해 주민 돕기 성금 전달 - 뉴스티앤티",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5MQk5GU1lYRk0xUm0xLXVIM1FpVW9WZ093R0VPdm9vSzFNM3dOTjMzRUVpQURXOHhnREpkVzlESUhDZVhiOWhmV2tmdGp0OVRadm91NERSeFJtMHNWaTdsb0dCN2lNbWFua3c?oc=5",
-      "source_id": "news:뉴스티앤티",
-      "published_at": "2026-10-18T05:40:13+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
       "university_id": "UNI-E469D33A26F6",
       "name": "안양대학교",
       "title": "지역 사회 그늘 밝히는 풋풋한 온기…안양대 ‘아리봉사단’의 동행 - 경기일보",
@@ -960,13 +960,13 @@
       "severity": 0.45
     },
     {
-      "university_id": "UNI-80E642C934B5",
-      "name": "영진전문대학교",
-      "title": "영진전문대, 전국체전 씨름 선수 컨디셔닝 지원 - 경북신문",
+      "university_id": "UNI-9F940F77A6DD",
+      "name": "수원대학교",
+      "title": "대학-지역사회 손잡고 청소년 꿈 키운다… 화성시, 수원대와 맞손 - 경기신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1kN1VrdUVKTm51Zjc3ajljNHNGXzhoZGlJbG9WWUpqTG9mYlJOSWZYUFZaSGw2VHB6VlMtRDN1MW5oT1FlRVRqLURBZ2pSc3hvY29oWEFWTzY?oc=5",
-      "source_id": "news:경북신문",
-      "published_at": "2026-10-18T02:48:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBsSzl5UVNOMVJiOWJxaEhsUmRURzJOeXhwY2cybWNCOXRtcFVpZ045RFdmRDN4U2VaLVdyOHVSNXlZRGV3amNzS1VDbnNfLWY5NjkyQkdWMGxsUmpFbDNuM3N5ZzE?oc=5",
+      "source_id": "news:경기신문",
+      "published_at": "2026-10-18T08:13:38+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -974,18 +974,102 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-80E642C934B5",
-      "name": "영진전문대학교",
-      "title": "영진전문대, 전국체전 씨름 선수 컨디셔닝 지원 - 경북신문",
+      "university_id": "UNI-9F940F77A6DD",
+      "name": "수원대학교",
+      "title": "화성특례시 시립아동청소년센터-수원대 사회봉사센터, 아동·청소년 성장 지원 업무협약 - 뉴스 따옴",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1kN1VrdUVKTm51Zjc3ajljNHNGXzhoZGlJbG9WWUpqTG9mYlJOSWZYUFZaSGw2VHB6VlMtRDN1MW5oT1FlRVRqLURBZ2pSc3hvY29oWEFWTzY?oc=5",
-      "source_id": "news:경북신문",
-      "published_at": "2026-10-18T02:48:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQdIBckFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQQ?oc=5",
+      "source_id": "news:뉴스 따옴",
+      "published_at": "2026-10-18T12:11:27+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-9F940F77A6DD",
+      "name": "수원대학교",
+      "title": "화성특례시 시립아동청소년센터-수원대 사회봉사센터, 아동·청소년 성장 지원 업무협약 - 뉴스 따옴",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQdIBckFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQQ?oc=5",
+      "source_id": "news:뉴스 따옴",
+      "published_at": "2026-10-18T12:11:27+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.6499999999999999
+    },
+    {
+      "university_id": "UNI-9F940F77A6DD",
+      "name": "수원대학교",
+      "title": "화성특례시 시립아동청소년센터-수원대 사회봉사센터, 아동·청소년 성장 지원 업무협약 - 뉴스 따옴",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQdIBckFVX3lxTE9ZWWZOYWFnM0djUzlDY2h4ZDFGbmo1b2k4a0ZyQTlwQS1ONGRVRkdnREt4aW5BU2tyRU90ck1zcnlVc0tsdU9BUVh2RHNRbWV4M0lmMF9icUQ4Q2d4dHlKby1YSmpDa00yRXhvTUc4SzVuQQ?oc=5",
+      "source_id": "news:뉴스 따옴",
+      "published_at": "2026-10-18T12:11:27+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-C608A47484C0",
+      "name": "우석대학교",
+      "title": "[전북일보-우석대학교 공동기획] 수소·피지컬AI 융합으로 전북 미래산업 성장동력 키운다 - 전북일보 인터넷신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB6ZnA2dUFqUFdVWXR4WlhlUmNDQ0JCLW9xUHFvLUJ1djZvQWw4U3o0dDh5Z3NncEFCWEROUk9FbVFaTE12bjU0cUt3NHVhX2t0R3lOLXNIMVTSAVhBVV95cUxQemZwNnVBalBXVVl0eFpYZVJjQ0NCQi1vcVBxby1CdXY2b0FsOFN6NHQ4eWdzZ3BBQlhETlJPRW1RWkxNdm41NHFLdzR1YV9rdEd5Ti1zSDFU?oc=5",
+      "source_id": "news:전북일보 인터넷신문",
+      "published_at": "2026-10-18T07:33:02+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-C608A47484C0",
+      "name": "우석대학교",
+      "title": "어셔바이오-우석대 산학협력단, 천연물·한의약 바이오 연구개발 ‘맞손’ > 뉴스 - 한의신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVDA5Qk92Wld5SGxXcGREWURCUUxaVVVEYVpBdDhJTnZ6NUpDMXI2ZjJNQmc5VVR4MnNuYmpsNko5c3FoOXRNMzVWNUFwR3psclgwbGtyT0h5TzFYRVpqYUpFVlE0VWlCcThMWFFTUEUzVFUxWFNFWWlpR3NVdmktaTJRYnFRVUlDbU80N0RMZF96ZW1HaGtzbWM0dms5c3BzVUdQNHM3angyR1F6TDZzdEVabEZuR1FITnVoQWloS0J3eElid3Y4elJNUGlJbERlekQ5LVRmZzRUM3B3WEM1QS1BMjc5VU85YV9HRWRvNmxnUQ?oc=5",
+      "source_id": "news:한의신문",
+      "published_at": "2026-10-17T23:49:32+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-C608A47484C0",
+      "name": "우석대학교",
+      "title": "어셔바이오-우석대 산학협력단, 천연물·한의약 바이오 연구개발 ‘맞손’ > 뉴스 - 한의신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVDA5Qk92Wld5SGxXcGREWURCUUxaVVVEYVpBdDhJTnZ6NUpDMXI2ZjJNQmc5VVR4MnNuYmpsNko5c3FoOXRNMzVWNUFwR3psclgwbGtyT0h5TzFYRVpqYUpFVlE0VWlCcThMWFFTUEUzVFUxWFNFWWlpR3NVdmktaTJRYnFRVUlDbU80N0RMZF96ZW1HaGtzbWM0dms5c3BzVUdQNHM3angyR1F6TDZzdEVabEZuR1FITnVoQWloS0J3eElid3Y4elJNUGlJbERlekQ5LVRmZzRUM3B3WEM1QS1BMjc5VU85YV9HRWRvNmxnUQ?oc=5",
+      "source_id": "news:한의신문",
+      "published_at": "2026-10-17T23:49:32+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
       "direction": 1,
       "severity": 0.5
+    },
+    {
+      "university_id": "UNI-C608A47484C0",
+      "name": "우석대학교",
+      "title": "어셔바이오-우석대 산학협력단, 천연물·한의약 바이오 연구개발 ‘맞손’ > 뉴스 - 한의신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVDA5Qk92Wld5SGxXcGREWURCUUxaVVVEYVpBdDhJTnZ6NUpDMXI2ZjJNQmc5VVR4MnNuYmpsNko5c3FoOXRNMzVWNUFwR3psclgwbGtyT0h5TzFYRVpqYUpFVlE0VWlCcThMWFFTUEUzVFUxWFNFWWlpR3NVdmktaTJRYnFRVUlDbU80N0RMZF96ZW1HaGtzbWM0dms5c3BzVUdQNHM3angyR1F6TDZzdEVabEZuR1FITnVoQWloS0J3eElid3Y4elJNUGlJbERlekQ5LVRmZzRUM3B3WEM1QS1BMjc5VU85YV9HRWRvNmxnUQ?oc=5",
+      "source_id": "news:한의신문",
+      "published_at": "2026-10-17T23:49:32+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
     },
     {
       "university_id": "UNI-DD617A0F138B",
@@ -4993,7 +5077,8 @@
       "source_ids": [],
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00"
+      "window_end": "2026-10-19T05:15:00+09:00",
+      "waiting_rank": 40
     },
     {
       "university_id": "UNI-C86E98C1D7DF",
@@ -6442,8 +6527,8 @@
       "establishment": "사립",
       "region": "대구",
       "dims": {
-        "B": 75.6,
-        "R": 51.5,
+        "B": 75.5,
+        "R": null,
         "I": null,
         "D": 57.4,
         "G": 46.9,
@@ -6463,26 +6548,25 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 56.2,
-      "activity_points": 0.5,
-      "event_count": 2,
-      "source_diversity": 1,
+      "daily_index": 58.8,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.15,
-        "R": 1.47,
+        "B": 0.0,
+        "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 56.2,
-      "quality": 0.83,
-      "source_ids": [
-        "news:경북신문"
-      ],
+      "score": 58.8,
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00"
+      "window_end": "2026-10-19T05:15:00+09:00",
+      "waiting_rank": 38
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -6532,7 +6616,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 37
+      "waiting_rank": 35
     },
     {
       "university_id": "UNI-3F02A7F4D408",
@@ -9961,7 +10045,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 39
+      "waiting_rank": 37
     },
     {
       "university_id": "UNI-49889DCF7061",
@@ -16871,7 +16955,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 38
+      "waiting_rank": 36
     },
     {
       "university_id": "UNI-2B2ABD5860E3",
@@ -17419,7 +17503,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 40
+      "waiting_rank": 39
     },
     {
       "university_id": "UNI-86D801ECC564",
@@ -17677,11 +17761,11 @@
       "establishment": "사립",
       "region": "경기",
       "dims": {
-        "B": 70.8,
-        "R": null,
+        "B": 71.1,
+        "R": 52.0,
         "I": null,
         "D": 38.7,
-        "G": 62.3,
+        "G": 63.5,
         "E": null
       },
       "raw": {
@@ -17698,25 +17782,27 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.9,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 57.5,
+      "activity_points": 1.15,
+      "event_count": 4,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
+        "B": 0.3,
+        "R": 1.98,
         "I": 0.0,
         "D": 0.0,
-        "G": 0.0,
+        "G": 1.18,
         "E": 0.0
       },
-      "score": 59.9,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 57.5,
+      "quality": 0.83,
+      "source_ids": [
+        "news:경기신문",
+        "news:뉴스 따옴"
+      ],
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 35
+      "window_end": "2026-10-19T05:15:00+09:00"
     },
     {
       "university_id": "UNI-7D9D9F23E632",
@@ -18928,11 +19014,11 @@
       "establishment": "사립",
       "region": "전북",
       "dims": {
-        "B": 57.5,
-        "R": null,
+        "B": 57.8,
+        "R": 51.4,
         "I": null,
         "D": 63.9,
-        "G": 59.8,
+        "G": 60.9,
         "E": null
       },
       "raw": {
@@ -18949,25 +19035,27 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.9,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 57.3,
+      "activity_points": 1.1,
+      "event_count": 4,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
+        "B": 0.29,
+        "R": 1.45,
         "I": 0.0,
         "D": 0.0,
-        "G": 0.0,
+        "G": 1.12,
         "E": 0.0
       },
-      "score": 59.9,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 57.3,
+      "quality": 0.83,
+      "source_ids": [
+        "news:전북일보 인터넷신문",
+        "news:한의신문"
+      ],
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 36
+      "window_end": "2026-10-19T05:15:00+09:00"
     },
     {
       "university_id": "UNI-0694651CD080",
@@ -35466,106 +35554,6 @@
       "waiting_rank": 34
     },
     {
-      "university_id": "UNI-9F940F77A6DD",
-      "name": "수원대학교",
-      "campus": "본교",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "establishment": "사립",
-      "region": "경기",
-      "dims": {
-        "B": 70.8,
-        "R": null,
-        "I": null,
-        "D": 38.7,
-        "G": 62.3,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 15.5,
-        "충원율": 100.0,
-        "외국인비율": 0.7035,
-        "교육비": 13087.6,
-        "장학금": 4223572.4,
-        "기숙사": 12.2,
-        "교원당학생": 32.43,
-        "교원강의": 52.6,
-        "취업률": 65.4
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.9,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
-      "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
-        "I": 0.0,
-        "D": 0.0,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 59.9,
-      "quality": 0.79,
-      "source_ids": [],
-      "data_date": "2026-10-18",
-      "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 35
-    },
-    {
-      "university_id": "UNI-C608A47484C0",
-      "name": "우석대학교",
-      "campus": "본교",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "establishment": "사립",
-      "region": "전북",
-      "dims": {
-        "B": 57.5,
-        "R": null,
-        "I": null,
-        "D": 63.9,
-        "G": 59.8,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 5.3,
-        "충원율": 100.0,
-        "외국인비율": 18.3473,
-        "교육비": 15522.7,
-        "장학금": 4568561.3,
-        "기숙사": 25.8,
-        "교원당학생": 27.94,
-        "교원강의": 71.9,
-        "취업률": 64.9
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.9,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
-      "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
-        "I": 0.0,
-        "D": 0.0,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 59.9,
-      "quality": 0.79,
-      "source_ids": [],
-      "data_date": "2026-10-18",
-      "window_start": "2026-10-18T05:15:00+09:00",
-      "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 36
-    },
-    {
       "university_id": "UNI-E2432BE54B73",
       "name": "오산대학교",
       "campus": "본교",
@@ -35613,7 +35601,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 37
+      "waiting_rank": 35
     },
     {
       "university_id": "UNI-0FC5DA7185B5",
@@ -35663,7 +35651,7 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 38
+      "waiting_rank": 36
     },
     {
       "university_id": "UNI-A855E0311296",
@@ -35713,7 +35701,57 @@
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",
-      "waiting_rank": 39
+      "waiting_rank": 37
+    },
+    {
+      "university_id": "UNI-80E642C934B5",
+      "name": "영진전문대학교",
+      "campus": "본교",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "establishment": "사립",
+      "region": "대구",
+      "dims": {
+        "B": 75.5,
+        "R": null,
+        "I": null,
+        "D": 57.4,
+        "G": 46.9,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 7.4,
+        "충원율": 100.0,
+        "외국인비율": 12.2265,
+        "교육비": 13403.5,
+        "장학금": 4976016.8,
+        "기숙사": 16.1,
+        "교원당학생": 32.99,
+        "교원강의": 48.6,
+        "취업률": 73.2
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 58.8,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
+      "axis_delta": {
+        "B": 0.0,
+        "R": 0.0,
+        "I": 0.0,
+        "D": 0.0,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 58.8,
+      "quality": 0.79,
+      "source_ids": [],
+      "data_date": "2026-10-18",
+      "window_start": "2026-10-18T05:15:00+09:00",
+      "window_end": "2026-10-19T05:15:00+09:00",
+      "waiting_rank": 38
     },
     {
       "university_id": "UNI-DD617A0F138B",
@@ -35762,6 +35800,56 @@
       "source_ids": [
         "news:충북일보"
       ],
+      "data_date": "2026-10-18",
+      "window_start": "2026-10-18T05:15:00+09:00",
+      "window_end": "2026-10-19T05:15:00+09:00",
+      "waiting_rank": 39
+    },
+    {
+      "university_id": "UNI-84DC8A935565",
+      "name": "서영대학교",
+      "campus": "본교",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "establishment": "사립",
+      "region": "전남광주",
+      "dims": {
+        "B": 68.3,
+        "R": null,
+        "I": null,
+        "D": 36.5,
+        "G": 62.6,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 7.0,
+        "충원율": 99.4,
+        "외국인비율": 27.0894,
+        "교육비": 11863.3,
+        "장학금": 4175619.6,
+        "기숙사": 10.9,
+        "교원당학생": 36.57,
+        "교원강의": 34.6,
+        "취업률": 75.6
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 58.7,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
+      "axis_delta": {
+        "B": 0.0,
+        "R": 0.0,
+        "I": 0.0,
+        "D": 0.0,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 58.7,
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-18",
       "window_start": "2026-10-18T05:15:00+09:00",
       "window_end": "2026-10-19T05:15:00+09:00",

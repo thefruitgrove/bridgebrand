@@ -1724,18 +1724,18 @@
     {
       "university_id": "UNI-80E642C934B5",
       "name": "영진전문대학교",
-      "weekly_index": 58.4,
+      "weekly_index": 58.8,
       "dims": {
         "B": 75.6,
-        "R": 51.5,
+        "R": null,
         "I": null,
         "D": 57.4,
         "G": 46.9,
         "E": null
       },
-      "activity_points": 1.26,
+      "activity_points": 0.76,
       "observed_days": 7,
-      "mention_days": 3,
+      "mention_days": 2,
       "source_diversity": 3
     },
     {
@@ -5566,19 +5566,19 @@
     {
       "university_id": "UNI-9F940F77A6DD",
       "name": "수원대학교",
-      "weekly_index": 59.9,
+      "weekly_index": 59.6,
       "dims": {
         "B": 70.9,
-        "R": null,
+        "R": 52.0,
         "I": null,
         "D": 38.8,
-        "G": 62.3,
+        "G": 62.5,
         "E": null
       },
-      "activity_points": 1.08,
+      "activity_points": 2.23,
       "observed_days": 7,
-      "mention_days": 2,
-      "source_diversity": 3
+      "mention_days": 3,
+      "source_diversity": 5
     },
     {
       "university_id": "UNI-7D9D9F23E632",
@@ -5991,19 +5991,19 @@
     {
       "university_id": "UNI-C608A47484C0",
       "name": "우석대학교",
-      "weekly_index": 59.5,
+      "weekly_index": 59.1,
       "dims": {
         "B": 57.6,
         "R": 51.5,
         "I": null,
         "D": 63.9,
-        "G": 59.8,
+        "G": 60.0,
         "E": null
       },
-      "activity_points": 1.03,
+      "activity_points": 2.13,
       "observed_days": 7,
-      "mention_days": 2,
-      "source_diversity": 3
+      "mention_days": 3,
+      "source_diversity": 5
     },
     {
       "university_id": "UNI-0694651CD080",
