@@ -31,6 +31,13 @@ function radar(profile){
  names.forEach(function(a,i){svg+='<text x="'+(cx+Math.cos(angles[i])*(r+20))+'" y="'+(cy+Math.sin(angles[i])*(r+20))+'" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#6e6b61">'+a+' '+esc(profile.axes[a])+'</text>';});
  return '<div class="pub-profile"><b>'+esc(profile.name)+'</b><svg viewBox="0 0 270 260" role="img" aria-label="'+esc(profile.name)+' 여섯 축 프로필">'+svg+'</svg><p>실선: 관측·유지 / 점선: 참조<br>참조값은 대상 평가가 아닙니다.</p></div>';
 }
+function relationshipDiagram(diagram){
+ if(!diagram||!Array.isArray(diagram.items)||!diagram.items.length)return '';
+ return '<figure class="pub-relationship-diagram" aria-label="'+esc(diagram.title||'관계 구조 다이어그램')+'"><figcaption>'+esc(diagram.title||'관계 구조 다이어그램')+'</figcaption><div class="pub-diagram-items">'+diagram.items.map(function(item){
+   var value=Math.max(0,Math.min(100,Number(item.value)||0));
+   return '<div class="pub-diagram-item"><div class="pub-diagram-meta"><b>'+esc(item.axis)+' · '+esc(item.label)+'</b><span>'+value.toFixed(1)+'</span></div><div class="pub-diagram-track"><i style="width:'+value+'%"></i></div><small>'+esc(item.state==='observed'?'직접 관측':item.state==='maintained'?'유지 근거':'확인 상태')+'</small></div>';
+ }).join('')+'</div><p>막대는 기사에서 해석 가능한 축만 표시합니다. 축의 길이는 서로 다른 분야의 절대 우열을 뜻하지 않습니다.</p></figure>';
+}
 function renderArticle(id){
  var a=articles.find(function(x){return x.id===id;});document.getElementById('pubBoard').hidden=true;document.getElementById('pubArticle').hidden=false;
  var node=document.getElementById('pubArticleContent');
@@ -44,6 +51,7 @@ function renderArticle(id){
  (p.sections&&p.sections[0]?'<div class="pub-story-lead">'+p.sections[0].paragraphs.map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>':'')+
  (p.revision_note?'<p class="pub-data-caption">'+esc(p.revision_note)+'</p>':'')+'<div class="pub-table-wrap"><table class="pub-table"><thead><tr>'+th.map(function(t){return '<th scope="col">'+t+'</th>';}).join('')+'</tr></thead><tbody>'+rows+'</tbody></table></div><p class="pub-data-caption">'+(overall?'영역별 집계이며 분야 사이의 점수 우열 비교가 아닙니다.':'* Weekly는 자료 마감일까지의 잠정 주간 수준입니다. 표의 순위는 Daily 기준이며, 활동 P는 당주 총량입니다.')+'</p>'+
  '<div class="pub-profiles">'+(p.profiles||[]).map(radar).join('')+'</div>'+
+ relationshipDiagram(p.diagram)+
  (p.sections||[]).slice(1).map(function(s){return '<section><h3>'+esc(s.heading)+'</h3>'+s.paragraphs.map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</section>';}).join('')+
  '<aside class="pub-limit"><p><b>이 분석을 읽는 기준</b></p><ul>'+(p.limitations||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></aside><div class="pub-share"><button id="pubCopy" type="button">기사 주소 복사</button><span id="pubCopyStatus" role="status"></span></div>';
  document.getElementById('pubCopy').onclick=function(){navigator.clipboard.writeText(location.href).then(function(){document.getElementById('pubCopyStatus').textContent='복사했습니다.';}).catch(function(){document.getElementById('pubCopyStatus').textContent='주소창의 링크를 복사해 주세요.';});};
@@ -53,3 +61,4 @@ function load(){var headers={apikey:cfg.key};if(cfg.key&&cfg.key.indexOf('eyJ')=
  return fetch(cfg.url+'/rest/v1/bridge_publicity_articles?select=id,issue_week,slot,domain,scheduled_at,is_example,payload,prepared_at&order=scheduled_at.desc&limit=240',{headers:headers,cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('publicity unavailable');return r.json();}).then(function(rows){if(!Array.isArray(rows))throw new Error('invalid response');articles=rows;fallback=false;render();}).catch(function(){return fetch('data/publicity-example.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('example unavailable');return r.json();}).then(function(data){articles=data.articles||[];fallback=true;render();}).catch(function(){document.getElementById('pubStatus').textContent='분석 기사 연결을 확인하지 못했습니다. 잠시 후 다시 확인해 주세요.';});});}
 load();setInterval(function(){if(!document.hidden)load();},60000);
 })();
+
