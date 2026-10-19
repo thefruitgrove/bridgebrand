@@ -2,7 +2,7 @@ import datetime as dt
 import unittest
 
 from bridge_pipeline.core import RawItem, SupabaseRest, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
-from bridge_pipeline.run import merge_official_and_flow
+from bridge_pipeline.run import _extract_candidate_names, merge_official_and_flow
 from bridge_pipeline.events import build_event_record, diagnosis_tags
 from bridge_pipeline.targets import target_quota_report
 
@@ -117,6 +117,18 @@ class PipelineTest(unittest.TestCase):
         cpr = {row["cohort_code"]: row for row in report if row["domain"] == "CPR"}
         self.assertEqual(cpr["BC50"]["actual_count"], 1)
         self.assertFalse(cpr["BC50"]["exact_match"])
+
+    def test_ent_discovery_extracts_new_group_names(self):
+        names = _extract_candidate_names(
+            "STAR",
+            "신인 아이돌 A2O LITE-A2O SOUL 데뷔, K-POP 판도 화제",
+        )
+        self.assertIn("A2O LITE-A2O SOUL", names)
+        self.assertNotIn("K-POP", names)
+
+    def test_discovery_keeps_unregistered_candidate_as_subdata_only(self):
+        names = _extract_candidate_names("STAR", "걸그룹 에이투오라이트 데뷔 화제")
+        self.assertIn("에이투오라이트", names)
 
     def test_official_baseline_is_not_overwritten_by_news_flow(self):
         official = {"score": 80, "confidence": .95, "coverage": 1, "evidence_count": 2,
