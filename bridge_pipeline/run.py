@@ -98,7 +98,7 @@ def collect_news(
                 if entity_item in seen_entity_items:
                     continue
                 seen_entity_items.add(entity_item)
-                signals = classify_headline(item, entity["external_id"], entity["name"], entity.get("aliases") or [])
+                signals = classify_headline(item, entity["external_id"], entity["name"], entity.get("aliases") or [], domain=entity["domain"])
                 if not signals:
                     rejected += 1
                     continue
@@ -812,7 +812,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                             "axis_profile":profile(obs,as_of),
                             "collection_status":news_state.get('status','not_observed'),
                             "new_evidence_observed":any(day(v.get('occurred_at')) in {as_of,as_of-dt.timedelta(days=1)} for v in accepted_by_entity.get(entity['id'],[])),
-                            "trust_basis":{"axes_available":len(axes),"source_families":source_families,"confidence_score":confidence_score}}
+                            "trust_basis":{"axes_available":len(axes),"source_families":source_families,"confidence_score":confidence_score},
+                            **({"uni_relationship_enrichment": __import__("bridge_pipeline.uni_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
+                               if entity["domain"] == "UNI" else {})}
         })
         if eligible:
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
