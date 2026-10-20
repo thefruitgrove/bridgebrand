@@ -16,6 +16,7 @@ class PublicityTests(unittest.TestCase):
   f=edition(dt.date(2026,10,16));m=edition(dt.date(2026,10,19))
   self.assertEqual(f['scheduled_at'].isoformat(),'2026-10-16T12:00:00+09:00')
   self.assertEqual(m['week'],'2026-W42');self.assertEqual(m['through'],dt.date(2026,10,18));self.assertEqual(m['slot'],'OVERALL')
+  w=edition(dt.date(2026,10,21));self.assertEqual((w['calendar_from'],w['calendar_through']),(dt.date(2026,10,19),dt.date(2026,10,25)));self.assertEqual(w['through'],dt.date(2026,10,21))
  def test_friday_four_and_monday_one(self):
   a,s=articles_for(self.history(),dt.date(2026,10,16));self.assertEqual({x['domain'] for x in a},set(DOMAINS))
   b,t=articles_for(self.history('2026-10-18'),dt.date(2026,10,19));self.assertEqual(len(b),1);self.assertEqual(b[0]['domain'],'ALL')
