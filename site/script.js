@@ -460,7 +460,7 @@
       var maintainedCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='maintained';}).length;
       var referenceCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='reference';}).length;
       function setMetricSub(id,text){
-        var el=document.getElementById(id), row=el&&el.closest('.bmscore-row'), sub=row&&row.querySelector('.bmscore-sub');
+        var el=document.getElementById(id), row=el&&typeof el.closest==='function'?el.closest('.bmscore-row'):null, sub=row&&typeof row.querySelector==='function'?row.querySelector('.bmscore-sub'):null;
         if(sub)sub.textContent=text;
       }
       setMetricSub('bmIndexPoint','오늘의 관측 가능한 관계 평판 수준');
