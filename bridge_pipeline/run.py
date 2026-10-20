@@ -817,6 +817,8 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                                if entity["domain"] == "UNI" else {}),
                             **({"gov_relationship_enrichment": __import__("bridge_pipeline.gov_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
                                if entity["domain"] == "GOV" else {}),
+                            **({"cpr_relationship_enrichment": __import__("bridge_pipeline.cpr_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
+                               if entity["domain"] == "CPR" else {}),
                             **({"ent_relationship_enrichment": __import__("bridge_pipeline.ent_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
                                if entity["domain"] == "STAR" else {})}
         })
