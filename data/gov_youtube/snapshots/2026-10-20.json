@@ -12,13 +12,13 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 192910,
+        "views": 192943,
         "median_views": 2257,
         "median_views_per_day": 324.27272727272725,
         "likes": 1602,
-        "comments": 705,
-        "engagement_per_1000_views": 15.613498522627133,
-        "identity_continuity": 33.47457627118644,
+        "comments": 706,
+        "engagement_per_1000_views": 15.621193824082761,
+        "identity_continuity": 33.47280334728033,
         "action_content_count": 4,
         "action_engagement_per_1000_views": 16.949152542372882
       },
@@ -41,15 +41,15 @@
       },
       "metrics": {
         "output_count": 20,
-        "views": 711788,
+        "views": 711784,
         "median_views": 1109.0,
         "median_views_per_day": 118.70238095238095,
         "likes": 782,
         "comments": 789,
-        "engagement_per_1000_views": 3.315593968990767,
+        "engagement_per_1000_views": 3.3156126015757588,
         "identity_continuity": 18.34862385321101,
         "action_content_count": 6,
-        "action_engagement_per_1000_views": 19.46624803767661
+        "action_engagement_per_1000_views": 19.4815396700707
       },
       "daily_total_view_delta": 551,
       "scores": {
@@ -70,12 +70,12 @@
       },
       "metrics": {
         "output_count": 13,
-        "views": 128403,
+        "views": 124349,
         "median_views": 10485,
         "median_views_per_day": 748.9285714285714,
         "likes": 194,
         "comments": 37,
-        "engagement_per_1000_views": 2.0871786484739454,
+        "engagement_per_1000_views": 2.155224408720617,
         "identity_continuity": 19.17808219178082,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
@@ -93,22 +93,22 @@
         "id": "UCzIgmDjE0lFDu2IhEF_ewOA",
         "title": "대전TV - 대전광역시 공식 유튜브 채널",
         "subscribers": 33400,
-        "total_views": 25231753,
+        "total_views": 25233674,
         "video_count": 2020
       },
       "metrics": {
         "output_count": 25,
-        "views": 45970,
+        "views": 45999,
         "median_views": 819,
-        "median_views_per_day": 165.6,
+        "median_views_per_day": 168.0,
         "likes": 365,
         "comments": 39,
-        "engagement_per_1000_views": 9.63671959973896,
+        "engagement_per_1000_views": 9.630644144437923,
         "identity_continuity": 22.988505747126435,
         "action_content_count": 6,
-        "action_engagement_per_1000_views": 12.429378531073446
+        "action_engagement_per_1000_views": 12.427038222556957
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 1921,
       "scores": {
         "B": 15.0,
         "R": 66.67,
@@ -123,19 +123,19 @@
         "title": "울산시청TV - 울산광역시 공식 채널 ",
         "subscribers": 47600,
         "total_views": 27267336,
-        "video_count": 4266
+        "video_count": 4267
       },
       "metrics": {
         "output_count": 25,
-        "views": 30136,
-        "median_views": 1127,
-        "median_views_per_day": 258.6666666666667,
-        "likes": 1152,
-        "comments": 116,
-        "engagement_per_1000_views": 45.925139368197506,
-        "identity_continuity": 20.408163265306122,
+        "views": 28773,
+        "median_views": 1093,
+        "median_views_per_day": 259.1666666666667,
+        "likes": 1036,
+        "comments": 115,
+        "engagement_per_1000_views": 43.999582942341775,
+        "identity_continuity": 22.758620689655174,
         "action_content_count": 2,
-        "action_engagement_per_1000_views": 97.3659454374412
+        "action_engagement_per_1000_views": 98.16815406294035
       },
       "daily_total_view_delta": 4486,
       "scores": {
@@ -156,15 +156,15 @@
       },
       "metrics": {
         "output_count": 19,
-        "views": 180856,
+        "views": 180883,
         "median_views": 1439,
         "median_views_per_day": 85.63636363636364,
-        "likes": 502,
-        "comments": 312,
-        "engagement_per_1000_views": 6.225947715309418,
+        "likes": 504,
+        "comments": 314,
+        "engagement_per_1000_views": 6.258188995096278,
         "identity_continuity": 26.119402985074625,
         "action_content_count": 3,
-        "action_engagement_per_1000_views": 6.96275794842337
+        "action_engagement_per_1000_views": 7.014795474325501
       },
       "daily_total_view_delta": 788,
       "scores": {
@@ -185,12 +185,12 @@
       },
       "metrics": {
         "output_count": 25,
-        "views": 324040,
+        "views": 325946,
         "median_views": 9960,
         "median_views_per_day": 1618.7777777777778,
-        "likes": 5291,
+        "likes": 5295,
         "comments": 282,
-        "engagement_per_1000_views": 18.06875694358721,
+        "engagement_per_1000_views": 17.975370153338282,
         "identity_continuity": 18.562874251497004,
         "action_content_count": 8,
         "action_engagement_per_1000_views": 0.7717750826901875
@@ -214,15 +214,15 @@
       },
       "metrics": {
         "output_count": 9,
-        "views": 282436,
-        "median_views": 339,
-        "median_views_per_day": 21.1875,
+        "views": 282863,
+        "median_views": 341,
+        "median_views_per_day": 21.3125,
         "likes": 601,
         "comments": 580,
-        "engagement_per_1000_views": 6.235040858814032,
+        "engagement_per_1000_views": 6.225628661224691,
         "identity_continuity": 16.129032258064516,
         "action_content_count": 6,
-        "action_engagement_per_1000_views": 6.167539005853996
+        "action_engagement_per_1000_views": 6.158169981144829
       },
       "daily_total_view_delta": 0,
       "scores": {
@@ -238,22 +238,22 @@
         "id": "UCgciFvhDgtOBu6ieoE9zdhg",
         "title": "전북특별자치도",
         "subscribers": 99300,
-        "total_views": 146094888,
+        "total_views": 146102290,
         "video_count": 2301
       },
       "metrics": {
         "output_count": 10,
-        "views": 331006,
+        "views": 331440,
         "median_views": 31827.5,
         "median_views_per_day": 4426.45,
-        "likes": 1054,
+        "likes": 1058,
         "comments": 29,
-        "engagement_per_1000_views": 3.3594557198358945,
+        "engagement_per_1000_views": 3.3671252715423607,
         "identity_continuity": 19.642857142857142,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 7402,
       "scores": {
         "B": 78.34,
         "R": 22.22,
@@ -266,22 +266,22 @@
         "id": "UCgdZeqgyKQL1durJSAsFAnw",
         "title": "전남광주통합특별시 공식 채널",
         "subscribers": 156000,
-        "total_views": 23994870,
+        "total_views": 23996552,
         "video_count": 2798
       },
       "metrics": {
         "output_count": 7,
-        "views": 486822,
-        "median_views": 9297,
-        "median_views_per_day": 464.85,
-        "likes": 2174,
+        "views": 486884,
+        "median_views": 9301,
+        "median_views_per_day": 465.05,
+        "likes": 2176,
         "comments": 218,
-        "engagement_per_1000_views": 5.361302488383845,
+        "engagement_per_1000_views": 5.364727532636111,
         "identity_continuity": 20.0,
         "action_content_count": 0,
         "action_engagement_per_1000_views": 0.0
       },
-      "daily_total_view_delta": 0,
+      "daily_total_view_delta": 1682,
       "scores": {
         "B": 81.11,
         "R": 33.33,
@@ -299,15 +299,15 @@
       },
       "metrics": {
         "output_count": 24,
-        "views": 364920,
-        "median_views": 2498.0,
+        "views": 367172,
+        "median_views": 2498.5,
         "median_views_per_day": 378.3181818181818,
-        "likes": 760,
+        "likes": 761,
         "comments": 870,
-        "engagement_per_1000_views": 6.850816617340787,
+        "engagement_per_1000_views": 6.811521575719281,
         "identity_continuity": 17.894736842105264,
         "action_content_count": 12,
-        "action_engagement_per_1000_views": 6.889369953523684
+        "action_engagement_per_1000_views": 6.815968841285297
       },
       "daily_total_view_delta": 1374,
       "scores": {
