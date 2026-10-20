@@ -252,6 +252,18 @@ def classify_headline(item: RawItem, external_id: str, name: str, aliases: Itera
                 row["confidence"], occurred, row["review_status"],
                 f"GOV 관계근거 분류({row['term']}); {POLICY_VERSION}; 제목 수준 후보", item.content_hash,
             ))
+    if domain == "STAR":
+        from .ent_reputation_v6 import POLICY_VERSION, classify_ent_evidence
+        existing = {(signal.axis, signal.signal_type) for signal in signals}
+        for row in classify_ent_evidence(title):
+            key = (row["axis"], row["type"])
+            if key in existing:
+                continue
+            signals.append(Signal(
+                external_id, row["axis"], row["type"], row["direction"], row["magnitude"],
+                row["confidence"], occurred, row["review_status"],
+                f"ENT 관계근거 분류({row['term']}); {POLICY_VERSION}; 제목 수준 후보", item.content_hash,
+            ))
     signals.append(Signal(external_id, "B", "qualified_visibility", 1, 1.0, 0.70, occurred, "auto", "정확한 대상명과 일치한 고유 기사", item.content_hash))
     return signals
 
