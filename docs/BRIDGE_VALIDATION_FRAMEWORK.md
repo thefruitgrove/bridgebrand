@@ -83,3 +83,27 @@ T100 및 각 세부 순위의 비교 대상은 고정 모집단이 아니다. �
 ## 7. 완료 조건
 
 ‘검증 완료’는 문서 존재가 아니라 사전 정의된 표본, 실행 로그, 결과표, 반례 검토, 승인 기록이 함께 존재할 때만 선언한다. 현재 데이터가 없는 검증은 설계 완료로만 기록하며 결과를 추정하지 않는다.
+
+## Weekly observability validation
+
+From 2026-W43, validation separates measurement coverage from collection
+completion.
+
+1. Every active entity-axis must have O, M, R or F for the current week.
+2. O and M are score-available; R is honestly excluded; F is an operating
+   failure requiring diagnosis.
+3. Weekly comparisons must disclose scope expansion, reduction or change.
+4. Consecutive reference streaks must enter the staged remediation queue.
+5. Domain validation reports must include six-axis coverage distributions,
+   full-coverage rate, reference streaks and collection failures.
+6. A higher coverage rate is not accepted as improvement if attribution,
+   deduplication, construct validity or source independence deteriorates.
+7. New domain indicators remain parallel/shadow evidence until robustness and
+   direction tests confirm that they improve explanation without destabilizing
+   rank mechanically.
+
+The operational chain for each research-derived indicator is: theoretical
+construct → operational definition → observable indicator → source family →
+collection cadence → attribution → deduplication → validity period → axis
+mapping → confidence. A concept that cannot complete this chain is not admitted
+to scoring.

@@ -115,3 +115,26 @@ flowchart TD
 6. 보강 전후 병행 검증 절차
 7. 공개 가능한 설명과 비공개 지식재산의 경계
 8. 한계, 정정, 버전 및 재현성 관리
+
+## Weekly six-axis observability contract — effective 2026-W43
+
+The two-layer model is operationally complete only when every active entity and
+each B·R·I·D·G·E axis is checked during the Monday-Sunday week. A check does
+not force a score. It produces one auditable internal state:
+
+- O (new observation): new valid evidence was measured during the week.
+- M (verified maintenance): prior evidence was rechecked and remains valid.
+- R (confirmed reference): collection completed but no valid entity-level
+  evaluation value was available. The display reference is excluded from score
+  and rank.
+- F (collection failure): collection or attribution verification was not
+  completed. F is an operating defect, not evidence about reputation.
+
+Weekly collection completion and score coverage are different measures. A week
+may be collection-complete at 6/6 while only 5/6 axes are score-available.
+Reference never becomes a neutral score merely because the calendar closes.
+
+Consecutive R states trigger internal remediation: supplementary-source search
+at two weeks, attribution/alias review at three weeks, operational-definition
+review at four weeks, and measurement-design review at six weeks. Weekly and
+monthly reporting must retain axis coverage alongside level indices.
