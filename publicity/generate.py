@@ -17,6 +17,7 @@ DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
 VERSION='publicity-rules-3.0'
 EDITORIAL_STYLE_EFFECTIVE=dt.date(2026,10,21)
+WEEK_CALENDAR_EFFECTIVE=dt.date(2026,10,19)
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
 DOMAIN_LABELS={
     'CPR':{'scope':'기업','entity':'기업','distribution':'기업별','experience':'기업 경험 전반','ethics':'대상의 도덕성·윤리성'},
@@ -46,8 +47,9 @@ def edition(publication_date):
     overall=publication_date.weekday()==0
     end=publication_date-dt.timedelta(days=1) if overall else publication_date
     start=end-dt.timedelta(days=end.weekday())
+    calendar_end=start+dt.timedelta(days=6)
     y,w,_=end.isocalendar()
-    return {'week':f'{y}-W{w:02d}','slot':'OVERALL' if overall else 'WED' if publication_date.weekday()==2 else 'FRI','from':start,'through':end,'scheduled_at':dt.datetime.combine(publication_date,dt.time(12),KST)}
+    return {'week':f'{y}-W{w:02d}','slot':'OVERALL' if overall else 'WED' if publication_date.weekday()==2 else 'FRI','from':start,'through':end,'calendar_from':start,'calendar_through':calendar_end,'scheduled_at':dt.datetime.combine(publication_date,dt.time(12),KST)}
 
 def freeze(history, spec):
     through=spec['through'].isoformat();start=spec['from'].isoformat()
