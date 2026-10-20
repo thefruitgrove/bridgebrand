@@ -816,7 +816,9 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                             **({"uni_relationship_enrichment": __import__("bridge_pipeline.uni_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
                                if entity["domain"] == "UNI" else {}),
                             **({"gov_relationship_enrichment": __import__("bridge_pipeline.gov_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
-                               if entity["domain"] == "GOV" else {})}
+                               if entity["domain"] == "GOV" else {}),
+                            **({"ent_relationship_enrichment": __import__("bridge_pipeline.ent_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
+                               if entity["domain"] == "STAR" else {})}
         })
         if eligible:
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
