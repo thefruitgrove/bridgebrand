@@ -21,6 +21,7 @@ from .core import (
 from .targets import TARGET_QUOTAS, load_targets, target_quota_report
 from .events import build_event_record, diagnosis_tags
 from .evidence_v5 import (POLICY_VERSION, collection_states, valid_signal, unique_signals, profile, comparison, event_activity, weighted_level, day, carry_valid)
+from .weekly_observation import AXES as WEEKLY_AXES, remediation_stage, weekly_entity_summary
 
 
 def bootstrap(db: SupabaseRest) -> None:
@@ -437,6 +438,11 @@ def export_history(db: SupabaseRest, as_of: dt.date) -> None:
         row['comparison_status']=diag.get('comparison_status','legacy_unverified')
         row['collection_ok_days']=diag.get('collection_ok_days')
         row['new_evidence_days']=diag.get('new_evidence_days')
+        row['weekly_axis_states']=diag.get('weekly_axis_states')
+        row['weekly_axis_coverage']=diag.get('weekly_axis_coverage')
+        row['weekly_collection_complete']=diag.get('weekly_collection_complete')
+        row['weekly_reference_axes']=diag.get('weekly_reference_axes')
+        row['weekly_failed_axes']=diag.get('weekly_failed_axes')
         row['four_week_observed_weeks']=diag.get('four_week_observed_weeks')
         row['activity_period']=diag.get('activity_period','legacy_signal_sum')
         row['daily_activity_points']=diag.get('daily_activity_points')
@@ -555,6 +561,22 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
     for row in history:
         if row.get("score") is not None:
             by_entity.setdefault(row["entity_id"], []).append(row)
+    axis_history = db.select(
+        "bridge_axis_observations",
+        f"select=entity_id,as_of_date,axis,score,status&as_of_date=gte.{monday.isoformat()}"
+        f"&as_of_date=lte.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+    )
+    weekly_axis_by_entity: dict[str, dict[str, list[dict]]] = {}
+    for observation in axis_history:
+        weekly_axis_by_entity.setdefault(observation["entity_id"], {}).setdefault(observation["axis"], []).append(observation)
+    prior_coverage = db.select(
+        "bridge_axis_weekly_coverage",
+        f"select=entity_id,axis,week_start,state&week_start=lt.{monday.isoformat()}"
+        f"&methodology_version=eq.{cfg['version']}&order=week_start.desc"
+    )
+    prior_states: dict[tuple[str, str], list[str]] = {}
+    for coverage in prior_coverage:
+        prior_states.setdefault((coverage["entity_id"], coverage["axis"]), []).append(coverage["state"])
     metric_history = db.select(
         "bridge_index_metrics",
         f"select=entity_id,as_of_date,activity_points&as_of_date=gte.{history_start.isoformat()}"
@@ -570,11 +592,41 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
     daily_activity=event_activity(event_rows,as_of,window_start,window_end)
     current = {row["entity_id"]: row for row in score_rows}
     metric_rows = []
+    weekly_coverage_rows = []
     for entity in entities:
         row = current.get(entity["id"])
         if not row or row.get("score") is None:
             continue
         daily = float(row["score"])
+        weekly_summary = weekly_entity_summary(
+            weekly_axis_by_entity.get(entity["id"], {}),
+            (row.get("diagnostics") or {}).get("collection_status", "not_observed"),
+        )
+        reference_streaks = {}
+        for axis in WEEKLY_AXES:
+            state = weekly_summary["state_codes"][axis]
+            streak = 0
+            if state == "R":
+                streak = 1
+                for prior_state in prior_states.get((entity["id"], axis), []):
+                    if prior_state != "R":
+                        break
+                    streak += 1
+            reference_streaks[axis] = streak
+            axis_summary = weekly_summary["states"][axis]
+            weekly_coverage_rows.append({
+                "entity_id": entity["id"], "week_start": monday.isoformat(), "week_end": sunday.isoformat(),
+                "as_of_date": as_of.isoformat(), "axis": axis, "state": state,
+                "public_state": axis_summary["public_state"],
+                "new_observation_days": axis_summary["new_observation_days"],
+                "maintained_days": axis_summary["maintained_days"],
+                "reference_days": axis_summary["reference_days"],
+                "collection_checked": axis_summary["collection_checked"],
+                "reference_streak_weeks": streak,
+                "remediation_stage": remediation_stage(streak),
+                "methodology_version": cfg["version"],
+                "diagnostics": {"contract_version": "weekly-observability-2026.10-1"},
+            })
         dated = [(dt.date.fromisoformat(h["as_of_date"]), float(h["score"])) for h in by_entity.get(entity["id"], [])]
         this_week = [v for d, v in dated if monday <= d <= as_of]
         last_week = [v for d, v in dated if previous_monday <= d < monday]
@@ -618,6 +670,13 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
             "diagnostics": {"weekly_method": "daily_quality_weighted_mean", "week_calendar": "monday_sunday", "week_start": monday.isoformat(), "week_end": sunday.isoformat(), "previous_week_start": previous_monday.isoformat(), "previous_week_end": previous_sunday.isoformat(), "cumulative_method": "weekly_level_mean", "evidence_policy_version":POLICY_VERSION,
                             "comparison_status":comparison_status, "collection_ok_days":collection_ok_days,
                             "new_evidence_days":sum(bool((h.get('diagnostics') or {}).get('new_evidence_observed')) for h in week_rows),
+                            "weekly_axis_states":weekly_summary["state_codes"],
+                            "weekly_axis_public_states":weekly_summary["public_states"],
+                            "weekly_axis_coverage":weekly_summary["available_axes"],
+                            "weekly_collection_complete":weekly_summary["collection_complete"],
+                            "weekly_reference_axes":weekly_summary["reference_axes"],
+                            "weekly_failed_axes":weekly_summary["failed_axes"],
+                            "weekly_reference_streaks":reference_streaks,
                             "four_week_observed_weeks":len(recent),
                             "reference_axes_count":(row.get('diagnostics') or {}).get('axis_profile',{}).get('reference_axes_count',0),
                             "observation_window_start":window_start.isoformat(),"observation_window_end":window_end.isoformat(),
@@ -627,6 +686,8 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
         })
     if metric_rows:
         db.upsert("bridge_index_metrics", metric_rows, "entity_id,as_of_date,methodology_version")
+    if weekly_coverage_rows:
+        db.upsert("bridge_axis_weekly_coverage", weekly_coverage_rows, "entity_id,week_start,axis,methodology_version")
 
 
 def score_day(db: SupabaseRest, as_of: dt.date) -> None:
