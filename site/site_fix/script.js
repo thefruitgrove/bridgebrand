@@ -126,6 +126,9 @@
             axis_status:rec.axis_status,axis_evidence_dates:rec.axis_evidence_dates,
             observed_days:rec.observed_days,collection_ok_days:rec.collection_ok_days,
             reference_axes_count:rec.reference_axes_count,comparison_status:rec.comparison_status,
+            weekly_axis_states:rec.weekly_axis_states,weekly_axis_coverage:rec.weekly_axis_coverage,
+            weekly_collection_complete:rec.weekly_collection_complete,
+            weekly_reference_axes:rec.weekly_reference_axes,weekly_failed_axes:rec.weekly_failed_axes,
             daily_index:rec.daily_index, weekly_index:rec.weekly_index,
             activity_points:rec.activity_points, cumulative_performance:rec.cumulative_performance,
             four_week_average:rec.four_week_average, cumulative_activity:rec.cumulative_activity,
@@ -431,8 +434,8 @@
     var pilot = selectModalCase(name,region,snapshotDate);
     document.getElementById('bridgeModalTitle').textContent = name;
     if(pilot){
-      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · '+(pilot.snapshot_date||snapshotDate||'현재 공개본')+' · 신뢰 ' + (pilot.trust || 'N/R');
-      flagEl.textContent = '여섯 축의 상태 프로필입니다. 점선·빈 원의 참조 기준은 대상 실측이 아니며 순위 계산에서 제외됩니다.';
+      document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · '+(pilot.snapshot_date||snapshotDate||'현재 공개본')+' · 근거 신뢰등급 ' + (pilot.trust || 'N/R') + ' · 평판등급이 아님';
+      flagEl.textContent = 'BRIDGE 축의 상태 프로필입니다. 참조값 50은 대상의 실제 평가점수가 아니며 종합지수와 순위 계산에서 제외됩니다.';
       flagEl.style.background = '#e8f3ee';
       flagEl.style.color = '#1d5c42';
       flagEl.style.borderColor = '#2e7d5a';
@@ -451,6 +454,25 @@
         cell.title=state==='reference'?'대상 실측 없음 · 시각적 참조 기준 · 순위 제외':((pilot.axis_evidence_dates||{})[k]||'근거 기준일 확인 필요');
         cell.classList.toggle('axis-reference',state==='reference');
       });
+      var currentStates=pilot.axis_status||{};
+      var availableCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='observed'||currentStates[k]==='maintained';}).length;
+      var observedCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='observed';}).length;
+      var maintainedCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='maintained';}).length;
+      var referenceCount=['B','R','I','D','G','E'].filter(function(k){return currentStates[k]==='reference';}).length;
+      function setMetricSub(id,text){
+        var el=document.getElementById(id), row=el&&typeof el.closest==='function'?el.closest('.bmscore-row'):null, sub=row&&typeof row.querySelector==='function'?row.querySelector('.bmscore-sub'):null;
+        if(sub)sub.textContent=text;
+      }
+      setMetricSub('bmIndexPoint','오늘의 관측 가능한 관계 평판 수준');
+      setMetricSub('bmWeekly','월요일부터 현재까지 일별지수의 근거 신뢰도 가중평균');
+      setMetricSub('bmLastWeek','직전 월~일 일별지수의 근거 신뢰도 가중평균');
+      setMetricSub('bmWow','이번 주와 직전 완료 주간 대표지수의 차이');
+      setMetricSub('bmFourWeek','최근 최대 4개 주간 대표지수 평균');
+      setMetricSub('bmV3Score',availableCount===6?'여섯 축을 모두 가중 반영한 당일 종합지수':'관측·유지 '+availableCount+'/6축을 가중 반영한 당일 종합지수');
+      setMetricSub('bmActivity','이번 주 검증·중복 제거된 사건 활동량');
+      setMetricSub('bmCumulativeActivity','운영 관측기간의 검증된 사건 활동량 누계');
+      setMetricSub('bmCumulative','관측된 주간 대표지수의 누적 평균');
+      setMetricSub('bmStability','최근 주간 대표지수 변동의 안정성');
       // 공개 지표: 내부 산식과 원천변수는 노출하지 않고 결과와 의미만 제공한다.
       var dailyIndex = pilot.daily_index;
       var weeklyIndex = (pilot.weekly_index != null) ? pilot.weekly_index : pilot.score;
@@ -489,7 +511,7 @@
         document.getElementById('bmWow').textContent='— · '+scopeMessage(pilot.comparison_status);
       }
       var isNonVolatile = pilot.method === '비변동성';
-      scoreNote.textContent = '평판 수준은 평균으로, 활동은 총량으로 읽습니다. 관측·유지·추정·참조 상태를 구분하며 참조 축은 순위에 반영하지 않습니다.';
+      scoreNote.textContent = '산출 범위 '+availableCount+'/6축 · 관측 '+observedCount+' · 유지 '+maintainedCount+' · 참조 '+referenceCount+'. 평판 수준은 가중평균으로, 활동은 총량으로 읽으며 참조 축은 종합지수와 순위에 반영하지 않습니다.';
       if(pilot.observed_days!=null)scoreNote.textContent+=' 이번 주 평가 가능 '+pilot.observed_days+'일 · 수집 정상 '+(pilot.collection_ok_days==null?'확인 중':pilot.collection_ok_days+'일')+'.';
       if(pilot.comparison_status&&pilot.comparison_status!=='same_scope')scoreNote.textContent+=' 비교 상태: '+({baseline_pending:'새 기준의 비교 자료 축적 중',scope_expanded:'근거 범위 확대',scope_reduced:'근거 범위 축소',scope_changed:'근거 구성 변경',methodology_changed:'산출 기준 변경',legacy_unverified:'이전 기준 · 비교 검토 필요'}[pilot.comparison_status]||'비교 검토 필요')+'.';
       var evItems = document.getElementById('bridgeEvidenceItems');
@@ -522,6 +544,18 @@
         lim.push('<li>현재 확보된 근거 범위 내에서 산출되었으며, 데이터가 추가되면 정직하게 갱신됩니다.</li>');
       }
       limItems.innerHTML = lim.join('');
+      var legend=document.getElementById('bridgeAxisStateLegend');
+      if(!legend){
+        legend=document.createElement('div');
+        legend.id='bridgeAxisStateLegend';
+        legend.className='axis-state-legend';
+        evList.appendChild(legend);
+      }
+      legend.innerHTML='<div class="axis-state-summary">산출 범위 <b>'+availableCount+'/6축</b> · 관측 '+observedCount+' · 유지 '+maintainedCount+' · 참조 '+referenceCount+'</div>'+
+        '<div class="axis-state-row"><b>관측</b><span>유효 근거로 해당 날짜의 축 값을 산출</span><em>반영</em></div>'+
+        '<div class="axis-state-row"><b>유지</b><span>유효기간 안의 이전 근거를 규칙에 따라 재확인</span><em>반영</em></div>'+
+        '<div class="axis-state-row"><b>참조</b><span>대상별 유효 평가값이 없어 중립 기준선만 표시</span><em>제외</em></div>'+
+        '<p>참조값 50은 대상의 실제 평가점수가 아닙니다.</p>';
       evList.style.display = 'block';
     } else {
       // [2026-10] 예시 제거 — 미산출 대상은 N/R로 정직하게 표기

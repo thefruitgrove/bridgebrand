@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-20T14:21:47.317133+09:00",
+  "checked_at": "2026-10-20T20:00:28.005273+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -19,11 +19,6 @@
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
-    },
-    "GOV-C09": {
-      "status": "review",
-      "homepage": "https://www.gg.go.kr",
-      "reason": "TimeoutError"
     },
     "GOV-C10": {
       "status": "review",
@@ -47,11 +42,7 @@
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@gyeongnamdo",
-        "https://www.youtube.com/user/gyeongnamdo?cpath="
-      ]
+      "reason": "URLError"
     },
     "GOV-M08": {
       "status": "review",
