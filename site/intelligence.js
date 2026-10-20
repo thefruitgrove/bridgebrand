@@ -159,8 +159,8 @@
     const p = currentPackage(), modeLabel = state.mode === 'subscription' ? '정기 관측' : state.mode === 'one-time' ? '단건 분석' : '맞춤 분석 문의';
     const targets = [...$('builderTargets').querySelectorAll('input')].map((i) => i.value.trim()).filter(Boolean);
     $('reviewPackage').textContent = `BRIDGE ${p[0]}`; $('reviewMode').textContent = modeLabel; $('reviewField').textContent = state.field; $('reviewTargets').textContent = targets.length ? targets.join(', ') : '입력 대기'; $('reviewLanguage').textContent = state.language; $('reviewDetail').textContent = p[2];
-    const q = new URLSearchParams({ service: `BRIDGE ${p[0]}`, mode: modeLabel, field: state.field, targets: targets.join(', '), language: state.language });
-    $('intelContact').href = `contact.html?${q.toString()}`;
+    const q = new URLSearchParams({ plan: p[0], mode: state.mode === 'one-time' ? 'once' : state.mode, field: state.field, targets: targets.join(', '), language: state.language });
+    $('intelContact').href = `subscribe.html?${q.toString()}`;
   }
   renderPackages(); renderReview();
 })();
