@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 AXES = ("B", "R", "I", "D", "G", "E")
 KST = ZoneInfo("Asia/Seoul")
+WEEK_CALENDAR_EFFECTIVE = dt.date(2026, 10, 19)
 
 
 def load_methodology() -> dict[str, Any]:
@@ -34,6 +35,19 @@ def publication_date(value: str | None = None) -> dt.date:
         return dt.date.fromisoformat(value)
     now=now_kst()
     return now.date()-dt.timedelta(days=1) if now.time()<dt.time(5,15) else now.date()
+
+
+def week_bounds(value: dt.date) -> tuple[dt.date, dt.date]:
+    """Return the fixed BRIDGE Monday-Sunday calendar week containing value."""
+    monday = value - dt.timedelta(days=value.weekday())
+    return monday, monday + dt.timedelta(days=6)
+
+
+def previous_week_bounds(value: dt.date) -> tuple[dt.date, dt.date]:
+    """Return the completed Monday-Sunday week immediately before value's week."""
+    monday, _ = week_bounds(value)
+    previous_monday = monday - dt.timedelta(days=7)
+    return previous_monday, monday - dt.timedelta(days=1)
 
 
 def iso_week(value: dt.date) -> str:

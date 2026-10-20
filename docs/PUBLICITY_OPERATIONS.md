@@ -16,6 +16,18 @@ The database RLS policy exposes only status=ready and scheduled_at<=now() to ano
 
 Noon cloud task BRIDGE PUBLICITY 공개 점검 independently checks the expected four domain articles or one overall article and diagnoses failures. It may rerun the failed PUBLICITY job, but must not alter score engines, quotas or history. It sends no external Slack/email messages.
 
+## Week calendar contract (effective 2026-W43)
+
+- A BRIDGE week is one complete Korea-time interval from Monday 00:00 through Sunday 23:59.
+- 2026-W43 is 2026-10-19 through 2026-10-25. This boundary applies to CPR, GOV, UNI and ENT without exception.
+- The daily morning run publishes the current week-to-date level from Monday through the observation cutoff. It does not wait for Sunday.
+- Monday must still expose the daily level, the comparison with the immediately preceding calendar-day observation, the current one-day week-to-date level, the preceding completed Monday-Sunday level and WoW when those verified baselines exist.
+- Missing Sunday or previous-week observations are never converted to zero or inferred. The comparison is marked unavailable and the collection gap is diagnosed.
+- The Monday OVERALL PUBLICITY article closes the immediately preceding Monday-Sunday week and belongs to that completed issue week. Wednesday and Friday articles use the current Monday-to-publication-date cutoff.
+- The publication clock, scoring engine, weights, eligibility rules, deduplication and source policy are unchanged.
+
+This contract must be incorporated into the next BRIDGE V6 operations manual and whitepaper revision.
+
 ## Data and editorial rules
 
 publicity/generate.py uses only PUBLIC_FIELDS from site/data/history.json. It does not have access to internal weights, coefficients or raw evidence through the article input. It is a deterministic, versioned interpretation engine, not a language-model/API dependency.

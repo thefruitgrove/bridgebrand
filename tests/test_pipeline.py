@@ -1,7 +1,7 @@
 import datetime as dt
 import unittest
 
-from bridge_pipeline.core import RawItem, SupabaseRest, attention_continuity_score, canonical_url, classify_headline, robust_rank, trust_grade, weighted_score
+from bridge_pipeline.core import RawItem, SupabaseRest, attention_continuity_score, canonical_url, classify_headline, previous_week_bounds, robust_rank, trust_grade, week_bounds, weighted_score
 from bridge_pipeline.run import _extract_candidate_names, merge_official_and_flow
 from bridge_pipeline.events import build_event_record, diagnosis_tags
 from bridge_pipeline.targets import target_quota_report
@@ -21,6 +21,11 @@ CFG = {
 
 
 class PipelineTest(unittest.TestCase):
+    def test_week_43_uses_fixed_monday_sunday_bounds(self):
+        self.assertEqual(week_bounds(dt.date(2026, 10, 19)), (dt.date(2026, 10, 19), dt.date(2026, 10, 25)))
+        self.assertEqual(week_bounds(dt.date(2026, 10, 25)), (dt.date(2026, 10, 19), dt.date(2026, 10, 25)))
+        self.assertEqual(previous_week_bounds(dt.date(2026, 10, 19)), (dt.date(2026, 10, 12), dt.date(2026, 10, 18)))
+
     def test_signal_ledger_separates_issue_from_final_e_score(self):
         item = RawItem("google_news_rss", "x", "가수A 음주운전 논란", "https://example.com/x", "언론사", "2026-10-11T00:00:00Z", {}, "hash")
         signals = classify_headline(item, "ENT-A", "가수A")

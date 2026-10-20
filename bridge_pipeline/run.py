@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 from .core import (
     ROOT, RawItem, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
-    iso_week, load_methodology, now_kst, publication_date, robust_rank,
+    iso_week, load_methodology, now_kst, previous_week_bounds, publication_date, robust_rank, week_bounds,
     trust_grade, weighted_score
 )
 from .targets import TARGET_QUOTAS, load_targets, target_quota_report
@@ -543,8 +543,8 @@ def merge_official_and_flow(official: dict, flow: dict, domain: str) -> dict:
 def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities: list[dict],
                           score_rows: list[dict], accepted_by_entity: dict[str, list[dict]]) -> None:
     """Persist level indices separately from additive activity volume."""
-    monday = as_of - dt.timedelta(days=as_of.weekday())
-    previous_monday = monday - dt.timedelta(days=7)
+    monday, sunday = week_bounds(as_of)
+    previous_monday, previous_sunday = previous_week_bounds(as_of)
     history_start = as_of - dt.timedelta(days=371)
     history = db.select(
         "bridge_scores",
@@ -579,7 +579,7 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
         this_week = [v for d, v in dated if monday <= d <= as_of]
         last_week = [v for d, v in dated if previous_monday <= d < monday]
         weekly = weighted_level([h for h in by_entity.get(entity["id"],[]) if monday<=dt.date.fromisoformat(h["as_of_date"])<=as_of]) or daily
-        previous = weighted_level([h for h in by_entity.get(entity["id"],[]) if previous_monday<=dt.date.fromisoformat(h["as_of_date"])<monday])
+        previous = weighted_level([h for h in by_entity.get(entity["id"],[]) if previous_monday<=dt.date.fromisoformat(h["as_of_date"])<=previous_sunday])
         week_buckets: dict[dt.date, list[float]] = {}
         for observed_day, value in dated:
             key = observed_day - dt.timedelta(days=observed_day.weekday())
@@ -615,7 +615,7 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
             "cumulative_performance": cumulative, "momentum": momentum, "stability": stability,
             "observed_days": len(this_week), "observed_weeks": len(weekly_series),
             "methodology_version": cfg["version"],
-            "diagnostics": {"weekly_method": "daily_quality_weighted_mean", "cumulative_method": "weekly_level_mean", "evidence_policy_version":POLICY_VERSION,
+            "diagnostics": {"weekly_method": "daily_quality_weighted_mean", "week_calendar": "monday_sunday", "week_start": monday.isoformat(), "week_end": sunday.isoformat(), "previous_week_start": previous_monday.isoformat(), "previous_week_end": previous_sunday.isoformat(), "cumulative_method": "weekly_level_mean", "evidence_policy_version":POLICY_VERSION,
                             "comparison_status":comparison_status, "collection_ok_days":collection_ok_days,
                             "new_evidence_days":sum(bool((h.get('diagnostics') or {}).get('new_evidence_observed')) for h in week_rows),
                             "four_week_observed_weeks":len(recent),
