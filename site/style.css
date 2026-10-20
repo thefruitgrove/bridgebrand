@@ -987,8 +987,62 @@ footer .logo .op{ color:#7c86a0;}
  .bmscore-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 8px;align-items:center}
  .bmscore-label{overflow-wrap:anywhere}.bmscore-sub{display:block;margin:3px 0 0;line-height:1.45}
  .bmscore-value{white-space:nowrap;font-size:19px}.bridge-modal-close{width:40px;height:40px;top:5px;right:6px}
+ .bmscore-row:has(.bmscore-wow){grid-template-columns:1fr;align-items:start}
+ .bmscore-row:has(.bmscore-wow) .bmscore-label{min-width:0;width:100%;overflow-wrap:normal;word-break:keep-all}
+ .bmscore-row:has(.bmscore-wow) .bmscore-wow{white-space:normal;overflow-wrap:anywhere;word-break:keep-all;line-height:1.55;justify-self:start;text-align:left;max-width:100%}
  .period-row select{width:100%;max-width:100%;min-width:0}.hero h1{overflow-wrap:anywhere}
  .tw-grid,.twr-grid,.hero-top5{min-width:0;max-width:100%}
+}
+
+/* BRIDGE INTELLIGENCE service entry */
+.intelligence-rail{position:fixed;right:0;top:50%;z-index:70;transform:translateY(-50%);width:38px;min-height:154px;display:flex;align-items:center;justify-content:center;background:#111923;color:#f5f1e8;border:1px solid rgba(206,175,117,.48);border-right:0;text-decoration:none;box-shadow:0 12px 32px rgba(0,0,0,.2)}
+.intelligence-rail span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:800;letter-spacing:.16em}
+.intelligence-mobile-cta{display:none}
+.modal-intelligence-link{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0 4px;padding:15px 17px;background:#111923;color:#f5f1e8;text-decoration:none;border-left:3px solid #b6924f;font-size:12px;font-weight:800;letter-spacing:.02em}
+.modal-intelligence-link::after{content:'\2192';color:#d2b879;font-size:17px}
+.intelligence-home{background:#0e141c;color:#f5f1e8;padding:72px 0;border-top:1px solid rgba(206,175,117,.32);border-bottom:1px solid rgba(206,175,117,.32)}
+.intelligence-home-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:36px;padding:38px;border:1px solid rgba(206,175,117,.42);background:linear-gradient(135deg,rgba(32,43,56,.92),rgba(10,15,21,.96))}
+.intelligence-kicker{display:block;color:#d2b879;font-size:11px;font-weight:800;letter-spacing:.18em;margin-bottom:18px}
+.intelligence-home h2{font-family:var(--serif);font-size:clamp(30px,4vw,52px);margin:0 0 14px;letter-spacing:-.035em}
+.intelligence-home p{max-width:720px;margin:0;color:#b9c0c7;line-height:1.85;font-size:15px;word-break:keep-all}
+.intelligence-home .btn{color:#f5f1e8;border-color:#b6924f;white-space:nowrap}
+
+/* Service preview page */
+.intel-page{background:#0c1118;color:#edf0f2;min-height:100vh}
+.intel-hero{padding:150px 0 92px;background:radial-gradient(circle at 78% 22%,rgba(182,146,79,.18),transparent 28%),linear-gradient(150deg,#182330 0,#0b1016 68%);border-bottom:1px solid rgba(206,175,117,.28)}
+.intel-eyebrow{color:#d2b879;font-size:11px;letter-spacing:.2em;font-weight:800}
+.intel-hero h1{font-family:var(--serif);font-size:clamp(42px,7vw,92px);line-height:1.02;letter-spacing:-.055em;margin:20px 0 26px;max-width:1000px}
+.intel-hero p{max-width:760px;color:#b7bec6;font-size:17px;line-height:1.9;word-break:keep-all}
+.intel-section{padding:84px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+.intel-section-head{display:grid;grid-template-columns:180px 1fr;gap:32px;margin-bottom:40px}
+.intel-section-no{color:#d2b879;font-family:var(--serif);font-size:14px}
+.intel-section h2{font-family:var(--serif);font-size:clamp(29px,4vw,48px);margin:0 0 12px;letter-spacing:-.04em}
+.intel-section-desc{color:#aeb6be;line-height:1.85;max-width:760px;margin:0}
+.brief-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.brief-card,.package-card,.choice-card{border:1px solid rgba(206,175,117,.25);background:#121a23;padding:28px}
+.brief-card b,.choice-card b{display:block;color:#d2b879;font-size:11px;letter-spacing:.16em;margin-bottom:14px}
+.brief-card h3,.choice-card h3{font-family:var(--serif);font-size:25px;margin:0 0 13px}
+.brief-card p,.choice-card p{color:#aeb6be;line-height:1.75;font-size:14px;margin:0}
+.package-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.package-card{padding:24px 20px;display:flex;flex-direction:column;min-height:280px}
+.package-card.featured{border-color:#b6924f;background:linear-gradient(180deg,#1b2633,#111922)}
+.package-card small{color:#d2b879;letter-spacing:.13em;font-weight:800}
+.package-card h3{font-family:var(--serif);font-size:21px;line-height:1.15;margin:17px 0 8px;overflow-wrap:anywhere}
+.package-card .cycle{font-size:13px;color:#e5e8ea;margin-bottom:18px}
+.package-card p{color:#9fa8b0;font-size:13px;line-height:1.7;margin:0 0 18px}
+.package-card ul{list-style:none;padding:0;margin:auto 0 0;border-top:1px solid rgba(255,255,255,.1)}
+.package-card li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:12px;color:#c6ccd1}
+.choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.intel-note{margin-top:26px;padding:20px 24px;border-left:2px solid #b6924f;background:rgba(182,146,79,.08);color:#bfc5ca;line-height:1.8;font-size:13px}
+.intel-cta{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:42px;border:1px solid rgba(206,175,117,.35);background:#17212c}
+.intel-cta h2{margin:0 0 10px}.intel-cta p{margin:0;color:#aeb6be}.intel-cta .btn{color:#fff;border-color:#b6924f;white-space:nowrap}
+@media(max-width:980px){.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brief-grid,.choice-grid{grid-template-columns:1fr}.intel-section-head{grid-template-columns:1fr;gap:10px}}
+@media(max-width:700px){
+ .intelligence-rail{display:none}.intelligence-mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:80;align-items:center;justify-content:center;min-height:48px;background:#111923;color:#fff;border:1px solid #b6924f;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.04em;box-shadow:0 12px 30px rgba(0,0,0,.32)}
+ body.has-intelligence-mobile{padding-bottom:72px}
+ .intelligence-home{padding:46px 0}.intelligence-home-card{grid-template-columns:1fr;padding:28px 22px;gap:24px;align-items:start}
+ .intel-hero{padding:112px 0 66px}.intel-hero p{font-size:15px}.intel-section{padding:58px 0}
+ .package-grid{grid-template-columns:1fr}.package-card{min-height:0}.intel-cta{display:block;padding:28px 22px}.intel-cta .btn{margin-top:24px}
 }
 
 /* Mobile ranking rail: explicit columns prevent hidden rank shifting the name. */
