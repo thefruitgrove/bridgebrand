@@ -6,7 +6,7 @@
 <meta name="description" content="BRIDGE 브랜드평판지수 기반 정기·1회성 관계 평판 분석 서비스 구성">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261014"><link rel="stylesheet" href="style.css?v=20261021-intelligence1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261014"><link rel="stylesheet" href="style.css?v=20261021-intelligence2">
 </head>
 <body class="intel-page">
 <nav class="nav on-dark"><div class="nav-inner">
@@ -18,6 +18,29 @@
 
 <main>
 <section class="intel-hero"><div class="wrap"><span class="intel-eyebrow">SERVICE PREVIEW · BRIDGE INTELLIGENCE</span><h1>순위 뒤의 관계를<br>분석 서비스로.</h1><p>선택한 대상이 공중에게 어떻게 발견되고, 반응을 얻으며, 무엇으로 기억되고, 경험과 행동으로 연결되는지 읽습니다. BRIDGE의 6축 구조와 근거 신뢰도를 바탕으로 정기 관측부터 심층 분석까지 설계합니다.</p></div></section>
+
+<section class="intel-section trio-beta" id="trioBeta"><div class="wrap">
+  <div class="intel-section-head"><span class="intel-section-no">00 / ENT BETA</span><div><span class="trio-badge">FREE DISCOVERY</span><h2>나의 선택, 세 개의 관계 신호.</h2><p class="intel-section-desc">좋아하는 대상 하나와 비교 대상 둘을 골라 같은 날짜·같은 공개 범위의 BRIDGE 구조를 직접 비교합니다. 응원 클릭이나 승패가 아니라, 서로 다른 관계의 모습을 발견하는 체험입니다.</p></div></div>
+  <div class="trio-picker" aria-label="ENT 세 대상 비교 선택">
+    <label><span>MY PICK</span><select id="trioPick1" aria-label="나의 선택"></select></label>
+    <i aria-hidden="true">+</i>
+    <label><span>COMPARE A</span><select id="trioPick2" aria-label="비교 대상 A"></select></label>
+    <i aria-hidden="true">+</i>
+    <label><span>COMPARE B</span><select id="trioPick3" aria-label="비교 대상 B"></select></label>
+    <button type="button" class="trio-run" id="trioRun">비교 시작 →</button>
+  </div>
+  <p class="trio-error" id="trioError" role="alert" hidden></p>
+  <div class="trio-result" id="trioResult" hidden>
+    <div class="trio-result-head"><div><small id="trioDate">—</small><h3>BRIDGE 6축 비교</h3></div><button type="button" class="trio-share" id="trioShare">공유 카드 만들기</button></div>
+    <div class="trio-summary" id="trioSummary"></div>
+    <div class="trio-analysis-grid">
+      <figure class="trio-radar"><svg id="trioRadar" viewBox="0 0 520 430" role="img" aria-label="선택한 세 대상의 BRIDGE 6축 비교 다이어그램"></svg><figcaption>참조 상태인 축은 선에서 제외됩니다. 선이 끊긴 곳은 낮은 점수가 아니라 비교 가능한 대상별 평가값이 없다는 뜻입니다.</figcaption></figure>
+      <div class="trio-findings"><section><small>BIGGEST DIFFERENCES</small><h3>가장 크게 갈린 두 축</h3><div id="trioGaps"></div></section><section><small>TODAY'S RELATIONSHIP TYPE</small><h3>오늘의 관계 유형</h3><div id="trioTypes"></div></section></div>
+    </div>
+    <div class="trio-disclosure"><b>이 비교가 말하는 범위</b><p>공개자료에서 같은 시점에 관측 가능한 상대적 관계 구조입니다. 인기투표, 팬덤 승패, 절대적 가치·능력·윤리성 판정이 아니며 선택과 공유는 점수에 영향을 주지 않습니다.</p></div>
+    <div class="trio-convert"><div><small>DISCOVER → UNDERSTAND</small><h3>차이를 발견했다면, 이제 이유를 읽어보세요.</h3><p>축별 변화 원인, 전일·전주 흐름, 활동량과 평판 수준의 차이, 근거 상태를 일반 또는 스페셜 브리핑으로 확장합니다.</p></div><a href="#serviceBuilder" class="btn">분석 방식 선택하기 →</a></div>
+  </div>
+</div></section>
 
 <section class="intel-section"><div class="wrap"><div class="intel-section-head"><span class="intel-section-no">01 / BRIEFING</span><div><h2>세 단계의 분석 깊이</h2><p class="intel-section-desc">지난 분석 문서의 구성과 해석 방식을 일반 브리핑의 표준으로 삼고, 모든 단계에 분석 결과를 바탕으로 한 퍼블리시티 1편을 포함합니다.</p></div></div><div class="brief-grid">
   <article class="brief-card"><b>BASIC</b><h3>기본 브리핑</h3><p>핵심 지표, 6축 상태, 주요 변화, 근거 범위와 해석 포인트를 빠르게 확인하는 요약형 보고서입니다.</p></article>
@@ -45,8 +68,20 @@
   <article class="brief-card"><b>LANGUAGE ADD-ON</b><h3>BRIDGE GLOBAL EDITION</h3><p>한국어·영어를 우선 제공하고 ENT를 중심으로 일본어·중국어 현지화까지 확장합니다.</p></article>
 </div></div></section>
 
-<section class="intel-section"><div class="wrap"><div class="intel-cta"><div><span class="intel-eyebrow">START WITH A SUBJECT</span><h2>분석할 대상을 알려주세요.</h2><p>분야, 대상 수, 제공 주기와 보고서 깊이에 맞춰 구성을 안내합니다.</p></div><a class="btn" id="intelContact" href="contact.html">분석 요청하기 →</a></div></div></section>
+<section class="intel-section service-builder" id="serviceBuilder"><div class="wrap">
+  <div class="intel-section-head"><span class="intel-section-no">05 / BUILD YOUR SERVICE</span><div><h2>필요한 분석을 단계별로 선택하세요.</h2><p class="intel-section-desc">가격이나 노출을 점수와 연결하지 않습니다. 선택한 관측 범위와 보고서 깊이만 신청 내용에 반영됩니다.</p></div></div>
+  <div class="builder-grid">
+    <div class="builder-controls">
+      <fieldset data-step="1"><legend><b>01</b> 어떤 방식으로 분석받으시겠습니까?</legend><div class="option-row" id="modeOptions"><button type="button" data-value="subscription" class="active">정기적으로 관측하기</button><button type="button" data-value="one-time">한 번 분석받기</button><button type="button" data-value="enterprise">T100 맞춤 문의</button></div></fieldset>
+      <fieldset data-step="2"><legend><b>02</b> 분석 상품을 선택하세요.</legend><div class="package-options" id="packageOptions"></div></fieldset>
+      <fieldset data-step="3"><legend><b>03</b> 관측 분야를 선택하세요.</legend><div class="option-row" id="fieldOptions"><button type="button" data-value="ENT" class="active">ENT</button><button type="button" data-value="CPR">CPR</button><button type="button" data-value="UNI">UNI</button><button type="button" data-value="GOV">GOV</button></div></fieldset>
+      <fieldset data-step="4"><legend><b>04</b> 분석 대상을 입력하세요. <small id="targetLimit"></small></legend><div class="builder-targets" id="builderTargets"></div></fieldset>
+      <fieldset data-step="5"><legend><b>05</b> 제공 언어를 선택하세요.</legend><div class="option-row" id="languageOptions"><button type="button" data-value="한국어" class="active">한국어</button><button type="button" data-value="영어">영어</button><button type="button" data-value="일본어">일본어</button><button type="button" data-value="중국어">중국어</button></div></fieldset>
+    </div>
+    <aside class="builder-review"><small>YOUR BRIDGE PLAN</small><h3 id="reviewPackage">BRIDGE PULSE</h3><dl><div><dt>방식</dt><dd id="reviewMode">정기 관측</dd></div><div><dt>분야</dt><dd id="reviewField">ENT</dd></div><div><dt>대상</dt><dd id="reviewTargets">입력 대기</dd></div><div><dt>언어</dt><dd id="reviewLanguage">한국어</dd></div></dl><p id="reviewDetail"></p><a class="btn" id="intelContact" href="contact.html">이 구성으로 문의하기 →</a><em>신청 전 담당자가 범위와 활용 목적을 확인합니다.</em></aside>
+  </div>
+</div></section>
 </main>
 <footer><div class="wrap"><div class="footer-top"><span class="logo brand-logo-static" aria-label="SIGNALBRIDGE"><img class="brand-wordmark-image" src="assets/signalbridge-wordmark.svg?v=20261018-1" alt="SIGNALBRIDGE"></span><div class="footer-links"><a href="about.html">시그널브릿지 회사소개</a><a href="contact.html">문의 | 이의제기</a></div></div><p class="footer-op">BRIDGE is developed and operated by SignalBridge.</p></div></footer>
-<script src="script.js?v=20261021-intelligence1" defer></script><script>var q=new URLSearchParams(location.search),f=q.get('field'),t=q.get('target'),a=document.getElementById('intelContact');if(a&&(f||t))a.href='contact.html?field='+encodeURIComponent(f||'')+'&target='+encodeURIComponent(t||'');</script>
+<script src="script.js?v=20261021-intelligence2" defer></script><script src="intelligence.js?v=20261021-intelligence2" defer></script>
 </body></html>
