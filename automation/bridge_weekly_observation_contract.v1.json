@@ -1,0 +1,144 @@
+{
+  "version": "weekly-observability-2026.10-1",
+  "effective_week": "2026-W43",
+  "calendar": "Asia/Seoul Monday 00:00 through Sunday 23:59",
+  "rule": "Every entity-axis must be checked weekly; absence of valid evidence never creates a score.",
+  "states": {
+    "O": "new valid evidence observed during the week",
+    "M": "prior evidence revalidated and still within its validity rule",
+    "R": "collection completed but no valid entity-level evaluation value",
+    "F": "collection or attribution verification incomplete"
+  },
+  "remediation_weeks": {
+    "2": "supplementary_source_search",
+    "3": "attribution_and_alias_review",
+    "4": "operational_definition_review",
+    "6": "measurement_design_review"
+  },
+  "common": {
+    "B": {
+      "construct": "independent discovery and reach",
+      "weekly_checks": [
+        "deduplicated independent sources",
+        "qualified discovery paths",
+        "official-channel reach where attributable"
+      ]
+    },
+    "R": {
+      "construct": "public response and relationship quality",
+      "weekly_checks": [
+        "trust and satisfaction",
+        "support and opposition",
+        "responsiveness and mutuality",
+        "exit or relationship strain"
+      ]
+    },
+    "I": {
+      "construct": "identity and remembered association",
+      "weekly_checks": [
+        "official identity claims",
+        "repeated external associations",
+        "identity-association congruence"
+      ]
+    },
+    "D": {
+      "construct": "experienced contact quality",
+      "weekly_checks": [
+        "service or use experience",
+        "complaints and reviews",
+        "contact-process outcomes"
+      ]
+    },
+    "G": {
+      "construct": "verified action elicitation",
+      "weekly_checks": [
+        "participation",
+        "application or attendance",
+        "purchase or subscription",
+        "recommendation or contribution"
+      ]
+    },
+    "E": {
+      "construct": "responsibility, continuity and recovery",
+      "weekly_checks": [
+        "disclosure and explanation",
+        "correction and implementation",
+        "recovery and recurrence",
+        "compliance and accountability"
+      ]
+    }
+  },
+  "domains": {
+    "UNI": {
+      "R": [
+        "student/alumni/public trust",
+        "satisfaction and relationship exit"
+      ],
+      "I": [
+        "official educational identity",
+        "external repeated association"
+      ],
+      "D": [
+        "learning and campus experience",
+        "administrative service experience"
+      ],
+      "G": [
+        "application, participation and recommendation"
+      ],
+      "E": [
+        "correction, implementation, recovery and recurrence"
+      ]
+    },
+    "GOV": {
+      "R": [
+        "public input, response and reflected opinion"
+      ],
+      "I": [
+        "mandate and policy identity congruence"
+      ],
+      "D": [
+        "complaint, application and public-service experience"
+      ],
+      "G": [
+        "participation and policy uptake"
+      ],
+      "E": [
+        "procedure, disclosure, correction, implementation and audit lifecycle"
+      ]
+    },
+    "ENT": {
+      "R": [
+        "fan and general-public response separated"
+      ],
+      "I": [
+        "official concept and repeated public association"
+      ],
+      "D": [
+        "viewing, performance and contact experience"
+      ],
+      "G": [
+        "ticketing, streaming, voting, purchase and contribution"
+      ],
+      "E": [
+        "acknowledgement, correction, recovery and recurrence"
+      ]
+    },
+    "CPR": {
+      "R": [
+        "customer, employee and partner relationship quality"
+      ],
+      "I": [
+        "official promise and external association congruence"
+      ],
+      "D": [
+        "product, service and support experience"
+      ],
+      "G": [
+        "repurchase, recommendation, subscription and exit"
+      ],
+      "E": [
+        "consumer protection, compliance, correction, compensation and recurrence"
+      ]
+    }
+  }
+}
