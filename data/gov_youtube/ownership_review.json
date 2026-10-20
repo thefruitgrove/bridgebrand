@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-20T20:00:28.005273+09:00",
+  "checked_at": "2026-10-21T05:52:17.060244+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -38,6 +38,11 @@
         "https://www.youtube.com/@topcnitv/streams",
         "https://www.youtube.com/user/topcnitv/"
       ]
+    },
+    "GOV-C14": {
+      "status": "review",
+      "homepage": "https://www.jeonnam.go.kr",
+      "reason": "URLError"
     },
     "GOV-C16": {
       "status": "review",

@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-20",
+  "as_of_date": "2026-10-21",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C35": {
-      "channel_id": "UCWiS4vemV0wcxuxYPx9Z62g",
-      "title": "충주시",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C36": {
       "channel_id": "UCMDecCsy3-Lbpo9OSPzJP5w",
@@ -30,6 +25,11 @@
     "GOV-C39": {
       "channel_id": "UCuG2Hlcx32USVkPQKEfrgiA",
       "title": "서산시TV",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C40": {
+      "channel_id": "UCr5N0dZhCauS9qEmryjHY0w",
+      "title": "당진시",
       "reason": "awaiting_human_verification"
     }
   }
