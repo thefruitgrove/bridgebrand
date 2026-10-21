@@ -183,7 +183,7 @@ def head(title, desc=None):
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261022-intelligence-entry1">
+<link rel="stylesheet" href="style.css?v=20261022-intelligence-entry2">
 </head>
 <body>'''
 
