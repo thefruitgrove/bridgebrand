@@ -1086,6 +1086,7 @@ footer .logo .op{ color:#7c86a0;}
 .axis-reference{color:#777!important;font-size:13px!important;white-space:normal;}
 @media(max-width:640px){.bm-val{white-space:normal;overflow-wrap:anywhere;}}
 .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;align-items:stretch}.hero-actions .btn{display:flex;width:100%;height:58px;min-width:0;box-sizing:border-box;padding:10px 14px;border:1px solid rgba(255,255,255,.22);border-radius:10px;background:rgba(255,255,255,.045);color:#f4f1e9;font-size:12px;line-height:1.28;white-space:nowrap}.hero-actions .week-link{align-items:flex-start;justify-content:flex-start;text-align:left}.hero-actions .week-link span{display:block}.hero-actions .publicity-link{align-items:flex-end;justify-content:flex-end;color:#dbc397;text-align:right}.hero-actions .btn:hover,.hero-actions .btn:focus-visible{background:rgba(201,168,74,.16);border-color:rgba(201,168,74,.72);outline:none}
+.hero-actions .publicity-word{display:inline-flex;align-items:baseline;justify-content:flex-end}.hero-actions .publicity-tail{display:inline-block;min-width:2ch;text-align:right}
 
 /* Public whitepaper v5 explanations */
 .public-hero-title{font-size:clamp(30px,4.4vw,62px);line-height:1.2;letter-spacing:-.045em;word-break:keep-all;max-width:1000px}
@@ -1177,3 +1178,4 @@ footer .brand-wordmark-image{
 .field-engine-card.discovery-pending{opacity:.48;cursor:not-allowed}
 .field-engine-card.discovery-pending:hover{transform:none}
 .trio-snapshot-meta{margin:14px 0 0;font-size:11px;letter-spacing:.04em;color:var(--muted,#777)}
+.intel-page footer .footer-method{margin:18px 0 0;color:#7ea8d8;font-size:11px;line-height:1.7;max-width:none}

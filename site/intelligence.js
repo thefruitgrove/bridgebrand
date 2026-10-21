@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const FIELDS = ['UNI', 'ENT'];
+  const FIELDS = ['CPR', 'GOV', 'UNI', 'ENT'];
   const params = new URLSearchParams(location.search);
   const initialField = FIELDS.includes(params.get('field')) ? params.get('field') : 'ENT';
   const state = { entries: [], field: initialField, language: '한국어', mode: 'subscription', pkg: 'PULSE' };
@@ -23,11 +23,12 @@
     state.entries = candidates.filter((x) => x.as_of_date === snapshotDate).sort((a,b) => a.rank-b.rank);
     const ids = new Set(state.entries.map((x) => String(x.external_id)));
     const ranks = new Set(state.entries.map((x) => Number(x.rank)));
-    if (state.entries.length !== 100 || ids.size !== 100 || ranks.size !== 100 || !state.entries.every((x) => x.rank >= 1 && x.rank <= 100)) {
+    const completeRange = state.entries.every((x,index) => Number(x.rank) === index + 1);
+    if (data.dataStatus !== 'published' || state.entries.length < 3 || state.entries.length > 100 || ids.size !== state.entries.length || ranks.size !== state.entries.length || !completeRange) {
       throw new Error(`${state.field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 시작하지 않습니다.`);
     }
     buildSelects();
-    $('trioSnapshotMeta').textContent = `${snapshotDate} 기준 · ${state.field} T100 100개 대상 · 동일 분야 안에서만 비교`;
+    $('trioSnapshotMeta').textContent = `${snapshotDate} 기준 · ${state.field} T100 공개대상 ${state.entries.length}개 · 동일 분야 안에서만 비교`;
   }).catch((err) => { $('trioError').hidden = false; $('trioError').textContent = `${err.message} 잠시 후 다시 확인해 주세요.`; $('trioRun').disabled = true; });
 
   function buildSelects() {

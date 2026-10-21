@@ -183,8 +183,8 @@ def head(title, desc=None):
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261022-intelligence-entry2">
-<style id="hero-action-frame-critical">#hero-cinematic .hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;width:100%!important;max-width:320px!important}#hero-cinematic .hero-actions .btn{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-width:0!important;box-sizing:border-box!important;padding:12px 14px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:10px!important;background:rgba(255,255,255,.045)!important;text-align:left!important;margin:0!important}@media(max-width:650px){#hero-cinematic .hero-actions{gap:10px!important}#hero-cinematic .hero-actions .btn{padding:12px 10px!important;font-size:10px!important}}</style>
+<link rel="stylesheet" href="style.css?v=20261022-allfields1">
+<style id="hero-action-frame-critical">#hero-cinematic .hero-actions{{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;width:100%!important;max-width:320px!important}}#hero-cinematic .hero-actions .btn{{display:flex!important;width:100%!important;height:58px!important;min-width:0!important;box-sizing:border-box!important;padding:10px 14px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:10px!important;background:rgba(255,255,255,.045)!important;margin:0!important;font-size:12px!important;line-height:1.28!important}}#hero-cinematic .hero-actions .week-link{{align-items:flex-start!important;justify-content:flex-start!important;text-align:left!important}}#hero-cinematic .hero-actions .week-link span{{display:block!important}}#hero-cinematic .hero-actions .publicity-link{{align-items:flex-end!important;justify-content:flex-end!important;text-align:right!important}}@media(max-width:650px){{#hero-cinematic .hero-actions{{gap:10px!important}}#hero-cinematic .hero-actions .btn{{height:56px!important;padding:9px 10px!important;font-size:10px!important}}}}</style>
 </head>
 <body>'''
 
@@ -299,7 +299,7 @@ def build_hero():
       </div>
       <div class="hero-explore">
         <div class="hero-tower-inline">{home_top5_html()}</div>
-        <div class="hero-actions"><a class="btn" href="this-week.html">EXPLORE THIS WEEK ↓</a><a class="btn publicity-link" href="publicity.html">PUBLICITY</a></div>
+        <div class="hero-actions"><a class="btn week-link" href="this-week.html"><span>EXPLORE<br>THIS WEEK ↓</span></a><a class="btn publicity-link" href="publicity.html"><span class="publicity-word">PUBLICI<span class="publicity-tail">TY</span></span></a></div>
       </div>
     </div>
   </div>

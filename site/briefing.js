@@ -1,9 +1,9 @@
 (function(){
 'use strict';
-const FIELDS=['UNI','ENT'],AXES=['B','R','I','D','G','E'];
+const FIELDS=['CPR','GOV','UNI','ENT'],LANGUAGES=['한국어','영어','일본어','중국어'],AXES=['B','R','I','D','G','E'];
 const AXIS_NAME={B:'도달',R:'반응',I:'정체성',D:'경험',G:'행동유발',E:'책임·지속'};
 const COLORS=['#c69c3c','#71899e','#a9787e'],RANGE=['01–06','07–10','11–12','13–19','20','21'];
-const query=new URLSearchParams(location.search),field=FIELDS.includes(query.get('field'))?query.get('field'):'ENT',language=query.get('language')||'한국어';
+const query=new URLSearchParams(location.search),field=FIELDS.includes(query.get('field'))?query.get('field'):'ENT',language=LANGUAGES.includes(query.get('language'))?query.get('language'):'한국어';
 let stage=1,entities=[];
 const $=(id)=>document.getElementById(id),num=(v,d=2)=>Number.isFinite(Number(v))?Number(v).toFixed(d):'N/R';
 const signed=(v)=>Number.isFinite(Number(v))?`${Number(v)>=0?'▲':'▼'} ${Math.abs(Number(v)).toFixed(2)}`:'—';
@@ -16,11 +16,12 @@ $('savePdf').addEventListener('click',()=>window.print());$('printReport').addEv
 function showStage(next){if(next<1||next>6)return;stage=next;document.querySelectorAll('[data-stage-panel]').forEach((p)=>{const on=Number(p.dataset.stagePanel)===stage;p.hidden=!on;p.classList.toggle('active',on);});document.querySelectorAll('#journeyTrack [data-stage]').forEach((b)=>b.classList.toggle('active',Number(b.dataset.stage)===stage));$('progressText').textContent=`${String(stage).padStart(2,'0')} / 06 · ${document.querySelector(`#journeyTrack [data-stage="${stage}"] em`).textContent}`;$('progressBar').style.width=`${stage/6*100}%`;$('chapterRange').textContent=RANGE[stage-1];$('pagerLabel').textContent=`${String(stage).padStart(2,'0')} / 06`;$('prevStage').disabled=stage===1;$('nextStage').disabled=stage===6;$('prevStage').textContent=stage===1?'← 이전 단계':`← ${document.querySelector(`#journeyTrack [data-stage="${stage-1}"] span`).lastChild.textContent.trim()}`;$('nextStage').textContent=stage===6?'보고서 완료':`${document.querySelector(`#journeyTrack [data-stage="${stage+1}"] span`).lastChild.textContent.trim()} →`;document.querySelector('.journey-nav').scrollIntoView({behavior:'smooth',block:'start'});}
 
 fetch('data/latest.json',{cache:'no-store'}).then((r)=>{if(!r.ok)throw new Error('공개 데이터를 불러오지 못했습니다.');return r.json();}).then((data)=>{
-  if(!FIELDS.includes(query.get('field')))throw new Error('현재 1단계 분석은 ENT와 UNI만 지원합니다.');
+  if(!FIELDS.includes(query.get('field')))throw new Error('CPR·GOV·UNI·ENT 중 하나의 분야를 선택해야 합니다.');
   const candidates=(data.rankings||[]).filter((x)=>x.domain===field&&x.ranking_type==='T100');
   const snapshotDate=[...new Set(candidates.map((x)=>x.as_of_date).filter(Boolean))].sort().at(-1);
   const all=candidates.filter((x)=>x.as_of_date===snapshotDate).sort((a,b)=>a.rank-b.rank);
-  if(all.length!==100||new Set(all.map((x)=>String(x.external_id))).size!==100||new Set(all.map((x)=>Number(x.rank))).size!==100)throw new Error(`${field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 중단했습니다.`);
+  const completeRange=all.every((x,index)=>Number(x.rank)===index+1);
+  if(data.dataStatus!=='published'||all.length<3||all.length>100||new Set(all.map((x)=>String(x.external_id))).size!==all.length||new Set(all.map((x)=>Number(x.rank))).size!==all.length||!completeRange)throw new Error(`${field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 중단했습니다.`);
   const ids=[query.get('pick'),query.get('compareA'),query.get('compareB')];
   if(ids.some((id)=>!id)||new Set(ids).size!==3)throw new Error('서로 다른 MY PICK, COMPARE A, COMPARE B를 선택해야 합니다.');
   entities=ids.map((id)=>all.find((x)=>String(x.external_id)===id));

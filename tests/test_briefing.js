@@ -15,12 +15,13 @@ for (let i = 1; i <= 6; i += 1) {
   assert(html.includes(label), `missing stage label: ${label}`);
 });
 
-for (const field of ['ENT', 'UNI']) {
+for (const field of ['CPR', 'GOV', 'ENT', 'UNI']) {
   const rows = data.rankings.filter((item) => item.domain === field && item.ranking_type === 'T100');
-  assert.strictEqual(rows.length, 100, `${field} briefing source must be a complete T100 snapshot`);
+  assert(rows.length >= 3 && rows.length <= 100, `${field} briefing source must expose a usable T100 range`);
 }
 
-assert(js.includes("const FIELDS=['UNI','ENT']"), 'phase-one briefing must accept only UNI and ENT');
+assert(js.includes("const FIELDS=['CPR','GOV','UNI','ENT']"), 'briefing must accept all four fields');
+assert(js.includes('completeRange'), 'briefing must enforce contiguous ranks');
 assert(js.includes("new Set(ids).size!==3"), 'briefing must reject duplicate targets');
 assert(js.includes("if(entities.some((entity)=>!entity))"), 'briefing must reject unknown target IDs');
 assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
