@@ -17,6 +17,14 @@ var plans={
 var state={step:0,mode:'',plan:null,field:new Set(),targets:[],language:''};
 var stage=document.getElementById('subscribeStage'),progress=[].slice.call(document.querySelectorAll('#subProgress li'));
 var initialParams=new URLSearchParams(location.search),fieldParam=initialParams.get('field');
+var overviewButtons=[].slice.call(document.querySelectorAll('[data-service-panel]'));
+var overviewPanels=[].slice.call(document.querySelectorAll('[data-service-content]'));
+function showOverview(name){
+ overviewButtons.forEach(function(button){button.classList.toggle('active',button.dataset.servicePanel===name);});
+ overviewPanels.forEach(function(panel){var active=panel.dataset.serviceContent===name;panel.hidden=!active;panel.classList.toggle('active',active);});
+}
+overviewButtons.forEach(function(button){button.addEventListener('click',function(){showOverview(button.dataset.servicePanel);});});
+if(location.hash==='#globalEdition')showOverview('one-time');
 function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function setStep(n){state.step=n;progress.forEach(function(x,i){x.classList.toggle('active',i===n);x.classList.toggle('done',i<n);});render();updateSummary();window.scrollTo({top:0,behavior:'smooth'});}
 function head(no,title,desc){return '<div class="subscribe-step-head"><small>STEP '+no+' OF 6</small><h2>'+title+'</h2><p>'+desc+'</p></div>';}

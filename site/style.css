@@ -1177,5 +1177,22 @@ footer .brand-wordmark-image{
 
 .field-engine-card.discovery-pending{opacity:.48;cursor:not-allowed}
 .field-engine-card.discovery-pending:hover{transform:none}
+
+/* Intelligence entry paths: free discovery and paid configuration stay separate. */
+.intel-page:not(.subscribe-page) .trio-beta~.intel-section{display:none}
+.service-overview{padding:60px 0 76px;background:#0b1118;color:#eef1f3;scroll-margin-top:72px}
+.service-overview-nav{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:28px;border:1px solid rgba(255,255,255,.13)}
+.service-overview-nav button{display:flex;min-height:74px;padding:16px 18px;align-items:center;gap:13px;border:0;border-right:1px solid rgba(255,255,255,.1);background:#101821;color:#8f9aa4;text-align:left;cursor:pointer}
+.service-overview-nav button:last-child{border-right:0}.service-overview-nav button b{font:600 22px var(--serif);color:#667482}.service-overview-nav button span{font-size:10px;font-weight:800;letter-spacing:.1em}
+.service-overview-nav button.active{background:#172432;color:#f0e5c8}.service-overview-nav button.active b{color:#d5ae63}
+.service-overview-panel{padding:38px;border:1px solid rgba(255,255,255,.12);background:#111923}.service-overview-panel[hidden]{display:none}.service-overview-panel header{max-width:760px;margin-bottom:28px}
+.service-overview-panel header>span,.configurator-head>span{color:#d5ae63;font-size:9px;font-weight:800;letter-spacing:.18em}.service-overview-panel h2,.configurator-head h2{margin:10px 0 8px;font:600 clamp(27px,4vw,43px) var(--serif);letter-spacing:-.035em}.service-overview-panel header p{margin:0;color:#98a3ad;line-height:1.75}
+.service-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.service-card-grid>div{min-height:190px;padding:24px;border:1px solid #32404d;background:#0d141c}.service-card-grid>div.featured{border-color:#b6924f;background:rgba(182,146,79,.08)}
+.service-card-grid small{color:#d2b879;font-size:9px;font-weight:800;letter-spacing:.12em}.service-card-grid h3{margin:18px 0 10px;font:600 22px var(--serif)}.service-card-grid p{margin:0;color:#96a1ab;font-size:12px;line-height:1.75}.subscription-cards{grid-template-columns:repeat(5,minmax(0,1fr))}.subscription-cards>div{min-height:175px}
+.service-config-start{display:flex;margin-top:18px;min-height:70px;padding:0 24px;box-sizing:border-box;align-items:center;justify-content:space-between;border:1px solid #b6924f;background:#172432;color:#f3e6c5;text-decoration:none;font-weight:800}.service-config-start span{font-size:9px;letter-spacing:.16em;color:#bfa46b}
+.configurator-head{margin-bottom:26px}.configurator-head h2{color:#f3f4f5}
+
+@media(max-width:900px){.service-overview-nav{grid-template-columns:1fr 1fr}.service-overview-nav button:nth-child(2){border-right:0}.service-overview-nav button:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}.subscription-cards{grid-template-columns:1fr 1fr}.service-card-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.service-overview{padding:42px 0 54px}.service-overview-nav{grid-template-columns:1fr 1fr;margin-left:-2px;margin-right:-2px}.service-overview-nav button{min-height:64px;padding:13px 11px;gap:8px}.service-overview-nav button b{font-size:17px}.service-overview-nav button span{font-size:8px;letter-spacing:.04em;overflow-wrap:anywhere}.service-overview-panel{padding:27px 18px}.service-overview-panel h2{font-size:30px}.service-card-grid,.subscription-cards{grid-template-columns:1fr}.service-card-grid>div,.subscription-cards>div{min-height:0}.service-config-start{align-items:flex-start;flex-direction:column;justify-content:center;gap:5px}.configurator-head h2{font-size:30px}}
 .trio-snapshot-meta{margin:14px 0 0;font-size:11px;letter-spacing:.04em;color:var(--muted,#777)}
 .intel-page footer .footer-method{margin:18px 0 0;color:#7ea8d8;font-size:11px;line-height:1.7;max-width:none}

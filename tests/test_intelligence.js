@@ -3,6 +3,10 @@ const assert = require('assert');
 
 const html = fs.readFileSync('site/intelligence.html', 'utf8');
 const js = fs.readFileSync('site/intelligence.js', 'utf8');
+const subscribeHtml = fs.readFileSync('site/subscribe.html', 'utf8');
+const subscribeJs = fs.readFileSync('site/subscribe.js', 'utf8');
+const briefingHtml = fs.readFileSync('site/briefing.html', 'utf8');
+const briefingJs = fs.readFileSync('site/briefing.js', 'utf8');
 const data = JSON.parse(fs.readFileSync('site/data/latest.json', 'utf8'));
 
 ['trioPick1', 'trioPick2', 'trioPick3', 'trioSnapshotMeta', 'serviceBuilder'].forEach((id) => {
@@ -21,6 +25,16 @@ assert(html.includes('intelligence.html?field=GOV#trioBeta'), 'GOV discovery rou
 assert(js.includes("['PULSE',3") && js.includes("['INSIGHT',5") && js.includes("['INTELLIGENCE',10"), 'subscription target limits missing');
 assert(js.includes("['SNAPSHOT',1") && js.includes("['DEEP DIVE',1"), 'one-time packages missing');
 assert(js.includes("['ENTERPRISE T100',100"), 'enterprise package missing');
+assert(html.includes('subscribe.html#serviceOverview'), 'subscription entry route missing');
+['briefing','subscription','scope','one-time'].forEach((name) => {
+  assert(subscribeHtml.includes(`data-service-panel="${name}"`), `missing subscription overview: ${name}`);
+  assert(subscribeHtml.includes(`data-service-content="${name}"`), `missing subscription content: ${name}`);
+});
+['방식','서비스','분야','대상','언어','확인'].forEach((label) => assert(subscribeHtml.includes(`<li>${label}</li>`) || subscribeHtml.includes(`<li class="active">${label}</li>`), `missing configurator step: ${label}`));
+assert(subscribeJs.includes('showOverview'), 'subscription overview navigation missing');
+assert(briefingHtml.includes('id="trialConversion"'), 'final-stage conversion panel missing');
+assert(briefingHtml.includes('ONE-TIME BRIEFING'), 'one-time briefing label missing');
+assert(briefingJs.includes("$('trialConversion').hidden=stage!==6"), 'conversion panel must appear only at report stage');
 
 for (const field of ['CPR', 'GOV', 'ENT', 'UNI']) {
   const rows = data.rankings.filter((row) => row.domain === field && row.ranking_type === 'T100');
