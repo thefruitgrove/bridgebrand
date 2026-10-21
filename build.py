@@ -230,7 +230,7 @@ def footer(page_key):
     <p class="footer-note">{note}</p>
   </div>
 </footer>
-<script src="script.js?v=20261015-editorial2" defer></script>
+<script src="script.js?v=20261022-intelligence-entry2" defer></script>
 </body>
 </html>'''
 
