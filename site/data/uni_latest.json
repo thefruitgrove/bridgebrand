@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-21",
-  "updated_at": "2026-10-22T07:21:21.875090+09:00",
+  "updated_at": "2026-10-22T08:29:02.683810+09:00",
   "meaning": {
     "daily_index": "오늘 현재의 대학 공공가치 평판 수준",
     "activity_points": "당일 유효 관심·반응·행동의 총량",
@@ -16,7 +16,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 77.7,
+          "B": 77.9,
           "R": null,
           "I": null,
           "D": 72.3,
@@ -24,8 +24,8 @@
           "E": null
         },
         "daily_index": 85.7,
-        "activity_points": 0.24,
-        "event_count": 1,
+        "activity_points": 0.49,
+        "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 1,
@@ -286,29 +286,6 @@
         "waiting_rank": null
       },
       {
-        "university_id": "UNI-D41B558E2351",
-        "name": "호원대학교",
-        "region": "전북",
-        "school_kind": "대학",
-        "school_type": "산업대학",
-        "dims": {
-          "B": 62.8,
-          "R": null,
-          "I": null,
-          "D": 53.7,
-          "G": 92.8,
-          "E": null
-        },
-        "daily_index": 74.1,
-        "activity_points": 0.51,
-        "event_count": 2,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 13,
-        "cohort_rank": 9,
-        "waiting_rank": null
-      },
-      {
         "university_id": "UNI-10227C33D25C",
         "name": "기독간호대학교",
         "region": "전남광주",
@@ -327,7 +304,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 14,
+        "t100_rank": 13,
         "cohort_rank": 5,
         "waiting_rank": null
       },
@@ -349,6 +326,29 @@
         "activity_points": 0,
         "event_count": 0,
         "source_diversity": 0,
+        "trust": "B",
+        "t100_rank": 14,
+        "cohort_rank": 9,
+        "waiting_rank": null
+      },
+      {
+        "university_id": "UNI-D41B558E2351",
+        "name": "호원대학교",
+        "region": "전북",
+        "school_kind": "대학",
+        "school_type": "산업대학",
+        "dims": {
+          "B": 62.6,
+          "R": null,
+          "I": null,
+          "D": 53.7,
+          "G": 92.8,
+          "E": null
+        },
+        "daily_index": 74.0,
+        "activity_points": 0.25,
+        "event_count": 1,
+        "source_diversity": 1,
         "trust": "B",
         "t100_rank": 15,
         "cohort_rank": 10,
@@ -1212,16 +1212,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 73.2,
+          "B": 73.1,
           "R": 54.5,
           "I": null,
           "D": 62.0,
           "G": 80.7,
           "E": null
         },
-        "daily_index": 67.1,
-        "activity_points": 6.31,
-        "event_count": 24,
+        "daily_index": 67.0,
+        "activity_points": 6.05,
+        "event_count": 23,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 53,
@@ -1304,7 +1304,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 54.0,
+          "B": 54.1,
           "R": null,
           "I": null,
           "D": 50.3,
@@ -1312,7 +1312,7 @@
           "E": null
         },
         "daily_index": 66.8,
-        "activity_points": 1.28,
+        "activity_points": 1.29,
         "event_count": 5,
         "source_diversity": 1,
         "trust": "B",
@@ -1551,6 +1551,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-69BBC6D1528F",
+        "name": "을지대학교",
+        "region": "경기",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 72.8,
+          "R": null,
+          "I": 51.2,
+          "D": 41.2,
+          "G": 93.6,
+          "E": 54.0
+        },
+        "daily_index": 66.1,
+        "activity_points": 2.61,
+        "event_count": 10,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 68,
+        "cohort_rank": 38,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-FA8306E10C32",
         "name": "전북과학대학교",
         "region": "전북",
@@ -1569,7 +1592,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 31,
         "waiting_rank": null
       },
@@ -1592,7 +1615,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 32,
         "waiting_rank": null
       },
@@ -1615,8 +1638,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 70,
-        "cohort_rank": 38,
+        "t100_rank": 71,
+        "cohort_rank": 39,
         "waiting_rank": null
       },
       {
@@ -1637,29 +1660,6 @@
         "activity_points": 0,
         "event_count": 0,
         "source_diversity": 0,
-        "trust": "B",
-        "t100_rank": 71,
-        "cohort_rank": 39,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-69BBC6D1528F",
-        "name": "을지대학교",
-        "region": "경기",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 72.7,
-          "R": null,
-          "I": 50.6,
-          "D": 41.2,
-          "G": 93.6,
-          "E": 52.7
-        },
-        "daily_index": 65.7,
-        "activity_points": 1.87,
-        "event_count": 7,
-        "source_diversity": 1,
         "trust": "B",
         "t100_rank": 72,
         "cohort_rank": 40,
@@ -1988,6 +1988,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-563C88B77FA0",
+        "name": "을지대학교",
+        "region": "대전",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 67.3,
+          "R": null,
+          "I": 51.2,
+          "D": 64.1,
+          "G": 81.2,
+          "E": 54.0
+        },
+        "daily_index": 64.7,
+        "activity_points": 2.61,
+        "event_count": 10,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 87,
+        "cohort_rank": 51,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-994C450050E0",
         "name": "초당대학교",
         "region": "전남광주",
@@ -2006,8 +2029,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 87,
-        "cohort_rank": 51,
+        "t100_rank": 88,
+        "cohort_rank": 52,
         "waiting_rank": null
       },
       {
@@ -2029,8 +2052,8 @@
         "event_count": 11,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 88,
-        "cohort_rank": 52,
+        "t100_rank": 89,
+        "cohort_rank": 53,
         "waiting_rank": null
       },
       {
@@ -2052,31 +2075,8 @@
         "event_count": 24,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 89,
-        "cohort_rank": 37,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-563C88B77FA0",
-        "name": "을지대학교",
-        "region": "대전",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 67.2,
-          "R": null,
-          "I": 50.6,
-          "D": 64.1,
-          "G": 81.2,
-          "E": 52.7
-        },
-        "daily_index": 64.3,
-        "activity_points": 1.87,
-        "event_count": 7,
-        "source_diversity": 1,
-        "trust": "B",
         "t100_rank": 90,
-        "cohort_rank": 53,
+        "cohort_rank": 37,
         "waiting_rank": null
       },
       {
@@ -2201,16 +2201,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 88.8,
+          "B": 88.6,
           "R": null,
           "I": 50.6,
           "D": 54.5,
           "G": 59.8,
           "E": null
         },
-        "daily_index": 63.9,
-        "activity_points": 1.69,
-        "event_count": 7,
+        "daily_index": 63.8,
+        "activity_points": 1.43,
+        "event_count": 6,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 96,
@@ -2270,16 +2270,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 69.5,
+          "B": 69.6,
           "R": null,
-          "I": 50.6,
+          "I": 51.2,
           "D": 41.5,
           "G": 85.6,
-          "E": 52.7
+          "E": 54.0
         },
-        "daily_index": 62.9,
-        "activity_points": 1.87,
-        "event_count": 7,
+        "daily_index": 63.3,
+        "activity_points": 2.61,
+        "event_count": 10,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 99,
@@ -2496,29 +2496,6 @@
         "waiting_rank": null
       },
       {
-        "university_id": "UNI-D41B558E2351",
-        "name": "호원대학교",
-        "region": "전북",
-        "school_kind": "대학",
-        "school_type": "산업대학",
-        "dims": {
-          "B": 62.8,
-          "R": null,
-          "I": null,
-          "D": 53.7,
-          "G": 92.8,
-          "E": null
-        },
-        "daily_index": 74.1,
-        "activity_points": 0.51,
-        "event_count": 2,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 13,
-        "cohort_rank": 9,
-        "waiting_rank": null
-      },
-      {
         "university_id": "UNI-65EE7E6DA008",
         "name": "한서대학교",
         "region": "충남",
@@ -2536,6 +2513,29 @@
         "activity_points": 0,
         "event_count": 0,
         "source_diversity": 0,
+        "trust": "B",
+        "t100_rank": 14,
+        "cohort_rank": 9,
+        "waiting_rank": null
+      },
+      {
+        "university_id": "UNI-D41B558E2351",
+        "name": "호원대학교",
+        "region": "전북",
+        "school_kind": "대학",
+        "school_type": "산업대학",
+        "dims": {
+          "B": 62.6,
+          "R": null,
+          "I": null,
+          "D": 53.7,
+          "G": 92.8,
+          "E": null
+        },
+        "daily_index": 74.0,
+        "activity_points": 0.25,
+        "event_count": 1,
+        "source_diversity": 1,
         "trust": "B",
         "t100_rank": 15,
         "cohort_rank": 10,
@@ -3054,16 +3054,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 73.2,
+          "B": 73.1,
           "R": 54.5,
           "I": null,
           "D": 62.0,
           "G": 80.7,
           "E": null
         },
-        "daily_index": 67.1,
-        "activity_points": 6.31,
-        "event_count": 24,
+        "daily_index": 67.0,
+        "activity_points": 6.05,
+        "event_count": 23,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 53,
@@ -3163,6 +3163,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-69BBC6D1528F",
+        "name": "을지대학교",
+        "region": "경기",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 72.8,
+          "R": null,
+          "I": 51.2,
+          "D": 41.2,
+          "G": 93.6,
+          "E": 54.0
+        },
+        "daily_index": 66.1,
+        "activity_points": 2.61,
+        "event_count": 10,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 68,
+        "cohort_rank": 38,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-3D61FF957E87",
         "name": "경동대학교",
         "region": "경기",
@@ -3181,8 +3204,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 70,
-        "cohort_rank": 38,
+        "t100_rank": 71,
+        "cohort_rank": 39,
         "waiting_rank": null
       },
       {
@@ -3203,29 +3226,6 @@
         "activity_points": 0,
         "event_count": 0,
         "source_diversity": 0,
-        "trust": "B",
-        "t100_rank": 71,
-        "cohort_rank": 39,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-69BBC6D1528F",
-        "name": "을지대학교",
-        "region": "경기",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 72.7,
-          "R": null,
-          "I": 50.6,
-          "D": 41.2,
-          "G": 93.6,
-          "E": 52.7
-        },
-        "daily_index": 65.7,
-        "activity_points": 1.87,
-        "event_count": 7,
-        "source_diversity": 1,
         "trust": "B",
         "t100_rank": 72,
         "cohort_rank": 40,
@@ -3462,6 +3462,29 @@
         "waiting_rank": null
       },
       {
+        "university_id": "UNI-563C88B77FA0",
+        "name": "을지대학교",
+        "region": "대전",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "dims": {
+          "B": 67.3,
+          "R": null,
+          "I": 51.2,
+          "D": 64.1,
+          "G": 81.2,
+          "E": 54.0
+        },
+        "daily_index": 64.7,
+        "activity_points": 2.61,
+        "event_count": 10,
+        "source_diversity": 1,
+        "trust": "B",
+        "t100_rank": 87,
+        "cohort_rank": 51,
+        "waiting_rank": null
+      },
+      {
         "university_id": "UNI-994C450050E0",
         "name": "초당대학교",
         "region": "전남광주",
@@ -3480,8 +3503,8 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 87,
-        "cohort_rank": 51,
+        "t100_rank": 88,
+        "cohort_rank": 52,
         "waiting_rank": null
       },
       {
@@ -3503,30 +3526,7 @@
         "event_count": 11,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 88,
-        "cohort_rank": 52,
-        "waiting_rank": null
-      },
-      {
-        "university_id": "UNI-563C88B77FA0",
-        "name": "을지대학교",
-        "region": "대전",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "dims": {
-          "B": 67.2,
-          "R": null,
-          "I": 50.6,
-          "D": 64.1,
-          "G": 81.2,
-          "E": 52.7
-        },
-        "daily_index": 64.3,
-        "activity_points": 1.87,
-        "event_count": 7,
-        "source_diversity": 1,
-        "trust": "B",
-        "t100_rank": 90,
+        "t100_rank": 89,
         "cohort_rank": 53,
         "waiting_rank": null
       },
@@ -3629,16 +3629,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 88.8,
+          "B": 88.6,
           "R": null,
           "I": 50.6,
           "D": 54.5,
           "G": 59.8,
           "E": null
         },
-        "daily_index": 63.9,
-        "activity_points": 1.69,
-        "event_count": 7,
+        "daily_index": 63.8,
+        "activity_points": 1.43,
+        "event_count": 6,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 96,
@@ -3675,16 +3675,16 @@
         "school_kind": "대학",
         "school_type": "대학교",
         "dims": {
-          "B": 69.5,
+          "B": 69.6,
           "R": null,
-          "I": 50.6,
+          "I": 51.2,
           "D": 41.5,
           "G": 85.6,
-          "E": 52.7
+          "E": 54.0
         },
-        "daily_index": 62.9,
-        "activity_points": 1.87,
-        "event_count": 7,
+        "daily_index": 63.3,
+        "activity_points": 2.61,
+        "event_count": 10,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 99,
@@ -3700,7 +3700,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 77.7,
+          "B": 77.9,
           "R": null,
           "I": null,
           "D": 72.3,
@@ -3708,8 +3708,8 @@
           "E": null
         },
         "daily_index": 85.7,
-        "activity_points": 0.24,
-        "event_count": 1,
+        "activity_points": 0.49,
+        "event_count": 2,
         "source_diversity": 1,
         "trust": "B",
         "t100_rank": 1,
@@ -3804,7 +3804,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 14,
+        "t100_rank": 13,
         "cohort_rank": 5,
         "waiting_rank": null
       },
@@ -4206,7 +4206,7 @@
         "school_kind": "전문대학",
         "school_type": "전문대학",
         "dims": {
-          "B": 54.0,
+          "B": 54.1,
           "R": null,
           "I": null,
           "D": 50.3,
@@ -4214,7 +4214,7 @@
           "E": null
         },
         "daily_index": 66.8,
-        "activity_points": 1.28,
+        "activity_points": 1.29,
         "event_count": 5,
         "source_diversity": 1,
         "trust": "B",
@@ -4402,7 +4402,7 @@
         "event_count": 1,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 31,
         "waiting_rank": null
       },
@@ -4425,7 +4425,7 @@
         "event_count": 0,
         "source_diversity": 0,
         "trust": "B",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 32,
         "waiting_rank": null
       },
@@ -4540,7 +4540,7 @@
         "event_count": 24,
         "source_diversity": 1,
         "trust": "B",
-        "t100_rank": 89,
+        "t100_rank": 90,
         "cohort_rank": 37,
         "waiting_rank": null
       },
@@ -4686,6 +4686,29 @@
       "waiting_rank": 3
     },
     {
+      "university_id": "UNI-793B1F04139A",
+      "name": "서정대학교",
+      "region": "경기",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "dims": {
+        "B": 73.6,
+        "R": 55.0,
+        "I": null,
+        "D": 43.1,
+        "G": 74.5,
+        "E": null
+      },
+      "daily_index": 62.9,
+      "activity_points": 2.17,
+      "event_count": 8,
+      "source_diversity": 1,
+      "trust": "B",
+      "t100_rank": null,
+      "cohort_rank": null,
+      "waiting_rank": 4
+    },
+    {
       "university_id": "UNI-96A165DA6425",
       "name": "광주과학기술원",
       "region": "전남광주",
@@ -4706,7 +4729,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 4
+      "waiting_rank": 5
     },
     {
       "university_id": "UNI-4F9EE1F9190E",
@@ -4729,7 +4752,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 5
+      "waiting_rank": 6
     },
     {
       "university_id": "UNI-E375DD6EA6F2",
@@ -4752,7 +4775,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 6
+      "waiting_rank": 7
     },
     {
       "university_id": "UNI-2BE2A03BFF78",
@@ -4772,29 +4795,6 @@
       "activity_points": 0,
       "event_count": 0,
       "source_diversity": 0,
-      "trust": "B",
-      "t100_rank": null,
-      "cohort_rank": null,
-      "waiting_rank": 7
-    },
-    {
-      "university_id": "UNI-695F8AAC9625",
-      "name": "숭실대학교",
-      "region": "서울",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "dims": {
-        "B": 74.3,
-        "R": 52.9,
-        "I": null,
-        "D": 44.7,
-        "G": 75.0,
-        "E": null
-      },
-      "daily_index": 62.6,
-      "activity_points": 1.26,
-      "event_count": 5,
-      "source_diversity": 1,
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
@@ -4847,27 +4847,50 @@
       "waiting_rank": 10
     },
     {
-      "university_id": "UNI-793B1F04139A",
-      "name": "서정대학교",
-      "region": "경기",
-      "school_kind": "전문대학",
-      "school_type": "전문대학",
+      "university_id": "UNI-C521B160EDF3",
+      "name": "순천향대학교",
+      "region": "충남",
+      "school_kind": "대학",
+      "school_type": "대학교",
       "dims": {
-        "B": 73.4,
-        "R": 53.0,
+        "B": 73.5,
+        "R": null,
         "I": null,
-        "D": 43.1,
-        "G": 74.5,
+        "D": 76.2,
+        "G": 46.4,
         "E": null
       },
       "daily_index": 62.1,
-      "activity_points": 1.65,
-      "event_count": 6,
-      "source_diversity": 1,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
       "waiting_rank": 11
+    },
+    {
+      "university_id": "UNI-695F8AAC9625",
+      "name": "숭실대학교",
+      "region": "서울",
+      "school_kind": "대학",
+      "school_type": "대학교",
+      "dims": {
+        "B": 74.2,
+        "R": 51.5,
+        "I": null,
+        "D": 44.7,
+        "G": 75.0,
+        "E": null
+      },
+      "daily_index": 62.1,
+      "activity_points": 0.76,
+      "event_count": 3,
+      "source_diversity": 1,
+      "trust": "B",
+      "t100_rank": null,
+      "cohort_rank": null,
+      "waiting_rank": 12
     },
     {
       "university_id": "UNI-6B13D4448273",
@@ -4890,7 +4913,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 12
+      "waiting_rank": 13
     },
     {
       "university_id": "UNI-03B848DFFC24",
@@ -4913,7 +4936,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 13
+      "waiting_rank": 14
     },
     {
       "university_id": "UNI-EB7E1F7D8503",
@@ -4936,7 +4959,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 14
+      "waiting_rank": 15
     },
     {
       "university_id": "UNI-610197CE7DD8",
@@ -4959,7 +4982,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 15
+      "waiting_rank": 16
     },
     {
       "university_id": "UNI-DD617A0F138B",
@@ -4982,7 +5005,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 16
+      "waiting_rank": 17
     },
     {
       "university_id": "UNI-4A1CE1B52587",
@@ -5005,7 +5028,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 17
+      "waiting_rank": 18
     },
     {
       "university_id": "UNI-9D9CED4645AA",
@@ -5028,7 +5051,7 @@
       "trust": "B",
       "t100_rank": null,
       "cohort_rank": null,
-      "waiting_rank": 18
+      "waiting_rank": 19
     },
     {
       "university_id": "UNI-38EF54B6A3B7",
@@ -5045,29 +5068,6 @@
         "E": null
       },
       "daily_index": 60.8,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
-      "trust": "B",
-      "t100_rank": null,
-      "cohort_rank": null,
-      "waiting_rank": 19
-    },
-    {
-      "university_id": "UNI-0BF2035698EC",
-      "name": "전주비전대학교",
-      "region": "전북",
-      "school_kind": "전문대학",
-      "school_type": "전문대학",
-      "dims": {
-        "B": 59.8,
-        "R": null,
-        "I": null,
-        "D": 61.8,
-        "G": 60.7,
-        "E": null
-      },
-      "daily_index": 60.6,
       "activity_points": 0,
       "event_count": 0,
       "source_diversity": 0,
