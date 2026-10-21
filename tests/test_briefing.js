@@ -15,19 +15,20 @@ for (let i = 1; i <= 6; i += 1) {
   assert(html.includes(label), `missing stage label: ${label}`);
 });
 
-['리센느', '아이브', '르세라핌'].forEach((name) => {
-  const row = data.rankings.find((item) => item.domain === 'ENT' && item.ranking_type === 'T100' && item.name === name);
-  assert(row, `missing public ENT target: ${name}`);
-  assert(row.axes_available === 6, `sample target must have 6 comparable axes: ${name}`);
-});
+for (const field of ['ENT', 'UNI']) {
+  const rows = data.rankings.filter((item) => item.domain === field && item.ranking_type === 'T100');
+  assert.strictEqual(rows.length, 100, `${field} briefing source must be a complete T100 snapshot`);
+}
 
-assert(js.includes("x.domain==='ENT'&&x.ranking_type==='T100'"), 'briefing must use ENT T100 public data');
+assert(js.includes("const FIELDS=['UNI','ENT']"), 'phase-one briefing must accept only UNI and ENT');
+assert(js.includes("new Set(ids).size!==3"), 'briefing must reject duplicate targets');
+assert(js.includes("if(entities.some((entity)=>!entity))"), 'briefing must reject unknown target IDs');
+assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
 assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');
 assert(html.includes('활동량은 긍정 평판이 아니며'), 'activity interpretation boundary missing');
-assert(js.includes('ENT T100 ${r.rank}위'), 'publicity rank must come from the same public snapshot');
 assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank must not remain');
 assert(css.includes('@media(max-width:720px)'), 'mobile responsive contract missing');
-assert(html.includes('assets/reports/BRIDGE_ENT_GENERAL_BRIEFING_리센느_20261021.pdf'), 'report edition PDF link missing');
+assert(html.includes('id="savePdf"') && html.includes('id="printReport"'), 'report edition save and print controls missing');
 
 console.log('Six-stage BRIDGE briefing contract passed.');

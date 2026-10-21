@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const FIELDS = ['CPR', 'GOV', 'UNI', 'ENT'];
+  const FIELDS = ['UNI', 'ENT'];
   const params = new URLSearchParams(location.search);
   const initialField = FIELDS.includes(params.get('field')) ? params.get('field') : 'ENT';
   const state = { entries: [], field: initialField, language: '한국어', mode: 'subscription', pkg: 'PULSE' };
@@ -12,24 +12,48 @@
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   $('discoveryField').textContent = `00 / ${state.field} BETA`;
-  document.querySelectorAll('[data-field-link]').forEach((card) => card.classList.toggle('active', card.dataset.fieldLink === state.field));
+  document.querySelectorAll('[data-field-link]').forEach((card) => {
+    card.classList.toggle('active', card.dataset.fieldLink === state.field);
+    if (card.getAttribute('aria-disabled') === 'true') card.addEventListener('click', (event) => event.preventDefault());
+  });
 
   fetch('data/latest.json', { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error('공개 데이터를 불러오지 못했습니다.'); return r.json(); }).then((data) => {
-    state.entries = (data.rankings || []).filter((x) => x.domain === state.field && x.ranking_type === 'T100').sort((a,b) => a.rank-b.rank);
-    if (state.entries.length < 3) throw new Error(`${state.field} T100에서 비교 가능한 대상이 충분하지 않습니다.`);
+    const candidates = (data.rankings || []).filter((x) => x.domain === state.field && x.ranking_type === 'T100');
+    const snapshotDate = [...new Set(candidates.map((x) => x.as_of_date).filter(Boolean))].sort().at(-1);
+    state.entries = candidates.filter((x) => x.as_of_date === snapshotDate).sort((a,b) => a.rank-b.rank);
+    const ids = new Set(state.entries.map((x) => String(x.external_id)));
+    const ranks = new Set(state.entries.map((x) => Number(x.rank)));
+    if (state.entries.length !== 100 || ids.size !== 100 || ranks.size !== 100 || !state.entries.every((x) => x.rank >= 1 && x.rank <= 100)) {
+      throw new Error(`${state.field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 시작하지 않습니다.`);
+    }
     buildSelects();
+    $('trioSnapshotMeta').textContent = `${snapshotDate} 기준 · ${state.field} T100 100개 대상 · 동일 분야 안에서만 비교`;
   }).catch((err) => { $('trioError').hidden = false; $('trioError').textContent = `${err.message} 잠시 후 다시 확인해 주세요.`; $('trioRun').disabled = true; });
 
   function buildSelects() {
     const preferred = state.field === 'ENT' ? ['리센느','아이브','르세라핌'] : [];
     const defaults = preferred.map((name) => state.entries.find((e) => e.name === name)).filter(Boolean);
     state.entries.forEach((entry) => { if (defaults.length < 3 && !defaults.includes(entry)) defaults.push(entry); });
-    ['trioPick1','trioPick2','trioPick3'].forEach((id,i) => { const select=$(id); select.innerHTML=state.entries.map((e)=>`<option value="${esc(e.external_id)}">${e.rank}. ${esc(e.name)}${e.category?` · ${esc(e.category)}`:''}</option>`).join(''); select.value=defaults[i].external_id; });
+    ['trioPick1','trioPick2','trioPick3'].forEach((id,i) => {
+      const select=$(id);
+      select.innerHTML=state.entries.map((e)=>`<option value="${esc(e.external_id)}">${e.rank}. ${esc(e.name)}${e.category?` · ${esc(e.category)}`:''}</option>`).join('');
+      select.value=defaults[i].external_id;
+      select.addEventListener('change', syncSelectAvailability);
+    });
+    syncSelectAvailability();
+  }
+  function syncSelectAvailability() {
+    const selects=['trioPick1','trioPick2','trioPick3'].map($);
+    const chosen=selects.map((select)=>select.value);
+    selects.forEach((select,index)=>[...select.options].forEach((option)=>{option.disabled=chosen.some((value,i)=>i!==index&&value===option.value);}));
+    $('trioError').hidden = new Set(chosen).size === 3;
+    if (!$('trioError').hidden) $('trioError').textContent='MY PICK과 두 비교 대상은 서로 달라야 합니다.';
+    $('trioRun').disabled = new Set(chosen).size !== 3;
   }
   $('discoveryLanguages').addEventListener('click', (event) => { const button=event.target.closest('button[data-language]'); if(!button)return; $('discoveryLanguages').querySelectorAll('button').forEach((b)=>b.classList.remove('active')); button.classList.add('active'); state.language=button.dataset.language; });
   $('trioRun').addEventListener('click', () => {
     const ids=['trioPick1','trioPick2','trioPick3'].map((id)=>$(id).value);
-    if(new Set(ids).size!==3){$('trioError').hidden=false;$('trioError').textContent='서로 다른 세 대상을 선택해 주세요.';return;}
+    if(new Set(ids).size!==3 || ids.some((id)=>!state.entries.some((entry)=>String(entry.external_id)===id))){$('trioError').hidden=false;$('trioError').textContent='같은 분야 T100 안에서 서로 다른 세 대상을 선택해 주세요.';return;}
     $('trioError').hidden=true;
     const query=new URLSearchParams({field:state.field,pick:ids[0],compareA:ids[1],compareB:ids[2],language:state.language,trial:'free'});
     location.href=`briefing.html?${query.toString()}`;

@@ -1173,3 +1173,7 @@ footer .brand-wordmark-image{
 .axis-state-row b{color:#1b2c3e}.axis-state-row em{font-style:normal;text-align:right;color:#67737f}
 .axis-state-legend p{margin:8px 0 0;color:#6b4f24}
 @media(max-width:680px){.axis-state-legend{font-size:10.5px}.axis-state-row{grid-template-columns:34px minmax(0,1fr) 28px;gap:6px}}
+
+.field-engine-card.discovery-pending{opacity:.48;cursor:not-allowed}
+.field-engine-card.discovery-pending:hover{transform:none}
+.trio-snapshot-meta{margin:14px 0 0;font-size:11px;letter-spacing:.04em;color:var(--muted,#777)}

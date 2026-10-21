@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-const FIELDS=['CPR','GOV','UNI','ENT'],AXES=['B','R','I','D','G','E'];
+const FIELDS=['UNI','ENT'],AXES=['B','R','I','D','G','E'];
 const AXIS_NAME={B:'도달',R:'반응',I:'정체성',D:'경험',G:'행동유발',E:'책임·지속'};
 const COLORS=['#c69c3c','#71899e','#a9787e'],RANGE=['01–06','07–10','11–12','13–19','20','21'];
 const query=new URLSearchParams(location.search),field=FIELDS.includes(query.get('field'))?query.get('field'):'ENT',language=query.get('language')||'한국어';
@@ -16,11 +16,17 @@ $('savePdf').addEventListener('click',()=>window.print());$('printReport').addEv
 function showStage(next){if(next<1||next>6)return;stage=next;document.querySelectorAll('[data-stage-panel]').forEach((p)=>{const on=Number(p.dataset.stagePanel)===stage;p.hidden=!on;p.classList.toggle('active',on);});document.querySelectorAll('#journeyTrack [data-stage]').forEach((b)=>b.classList.toggle('active',Number(b.dataset.stage)===stage));$('progressText').textContent=`${String(stage).padStart(2,'0')} / 06 · ${document.querySelector(`#journeyTrack [data-stage="${stage}"] em`).textContent}`;$('progressBar').style.width=`${stage/6*100}%`;$('chapterRange').textContent=RANGE[stage-1];$('pagerLabel').textContent=`${String(stage).padStart(2,'0')} / 06`;$('prevStage').disabled=stage===1;$('nextStage').disabled=stage===6;$('prevStage').textContent=stage===1?'← 이전 단계':`← ${document.querySelector(`#journeyTrack [data-stage="${stage-1}"] span`).lastChild.textContent.trim()}`;$('nextStage').textContent=stage===6?'보고서 완료':`${document.querySelector(`#journeyTrack [data-stage="${stage+1}"] span`).lastChild.textContent.trim()} →`;document.querySelector('.journey-nav').scrollIntoView({behavior:'smooth',block:'start'});}
 
 fetch('data/latest.json',{cache:'no-store'}).then((r)=>{if(!r.ok)throw new Error('공개 데이터를 불러오지 못했습니다.');return r.json();}).then((data)=>{
-  const all=(data.rankings||[]).filter((x)=>x.domain===field&&x.ranking_type==='T100').sort((a,b)=>a.rank-b.rank);
-  const ids=[query.get('pick'),query.get('compareA'),query.get('compareB')].filter(Boolean);
-  if(ids.length===3)entities=ids.map((id)=>all.find((x)=>String(x.external_id)===id)).filter(Boolean);
-  if(entities.length!==3){const preferred=field==='ENT'?['리센느','아이브','르세라핌']:[];entities=preferred.map((name)=>all.find((x)=>x.name===name)).filter(Boolean);all.forEach((e)=>{if(entities.length<3&&!entities.includes(e))entities.push(e);});}
-  if(entities.length!==3)throw new Error('동일 스냅샷의 세 대상 데이터가 완전하지 않습니다.');render();
+  if(!FIELDS.includes(query.get('field')))throw new Error('현재 1단계 분석은 ENT와 UNI만 지원합니다.');
+  const candidates=(data.rankings||[]).filter((x)=>x.domain===field&&x.ranking_type==='T100');
+  const snapshotDate=[...new Set(candidates.map((x)=>x.as_of_date).filter(Boolean))].sort().at(-1);
+  const all=candidates.filter((x)=>x.as_of_date===snapshotDate).sort((a,b)=>a.rank-b.rank);
+  if(all.length!==100||new Set(all.map((x)=>String(x.external_id))).size!==100||new Set(all.map((x)=>Number(x.rank))).size!==100)throw new Error(`${field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 중단했습니다.`);
+  const ids=[query.get('pick'),query.get('compareA'),query.get('compareB')];
+  if(ids.some((id)=>!id)||new Set(ids).size!==3)throw new Error('서로 다른 MY PICK, COMPARE A, COMPARE B를 선택해야 합니다.');
+  entities=ids.map((id)=>all.find((x)=>String(x.external_id)===id));
+  if(entities.some((entity)=>!entity))throw new Error(`선택 대상 중 ${field} T100 최신 공개 스냅샷에 없는 대상이 있습니다.`);
+  if(entities.some((entity)=>entity.domain!==field||entity.ranking_type!=='T100'||entity.as_of_date!==snapshotDate))throw new Error('분야 또는 기준일이 다른 대상은 비교할 수 없습니다.');
+  render();
 }).catch((error)=>{$('coverStats').innerHTML=`<span>${error.message}</span>`;});
 
 function topAxis(e){return AXES.filter((a)=>valid(e,a)).sort((a,b)=>Number(e.axis_scores[b])-Number(e.axis_scores[a]))[0]||'—';}
