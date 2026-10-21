@@ -14,6 +14,8 @@ assert(js.includes('new Set(ids).size!==3'), 'duplicate target protection missin
 assert(js.includes('state.entries.length < 3') && js.includes('state.entries.length > 100'), 'published T100 range guard missing');
 assert(js.includes('completeRange'), 'contiguous rank guard missing');
 assert(js.includes('syncSelectAvailability'), 'cross-select duplicate prevention missing');
+assert(js.includes("'00 / BRIDGE 6단계 브리핑 체험'"), 'generic six-stage trial label missing');
+assert(js.includes('MY PICK을 선택하세요') && js.includes("select.value=''"), 'selectors must begin blank');
 assert(html.includes('intelligence.html?field=CPR#trioBeta'), 'CPR discovery route missing');
 assert(html.includes('intelligence.html?field=GOV#trioBeta'), 'GOV discovery route missing');
 assert(js.includes("['PULSE',3") && js.includes("['INSIGHT',5") && js.includes("['INTELLIGENCE',10"), 'subscription target limits missing');

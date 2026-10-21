@@ -30,6 +30,9 @@ assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 �
 assert(html.includes('활동량은 긍정 평판이 아니며'), 'activity interpretation boundary missing');
 assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank must not remain');
 assert(css.includes('@media(max-width:720px)'), 'mobile responsive contract missing');
-assert(html.includes('id="savePdf"') && html.includes('id="printReport"'), 'report edition save and print controls missing');
+assert(html.includes('id="previewPdf"') && html.includes('id="savePdf"') && html.includes('id="printReport"'), 'report edition preview, save and print controls missing');
+assert(html.includes('id="exitPdfPreview"') && js.includes('setPdfPreview'), 'full-report preview mode missing');
+assert(js.includes('requestAnimationFrame') && js.includes('window.scrollTo'), 'stage navigation must move to the next stage heading');
+assert(css.includes('background:#172534') && css.includes('.stage-pager button:hover'), 'stage pager contrast treatment missing');
 
 console.log('Six-stage BRIDGE briefing contract passed.');

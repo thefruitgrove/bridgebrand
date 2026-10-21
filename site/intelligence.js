@@ -11,7 +11,7 @@
   };
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  $('discoveryField').textContent = `00 / ${state.field} BETA`;
+  $('discoveryField').textContent = '00 / BRIDGE 6단계 브리핑 체험';
   document.querySelectorAll('[data-field-link]').forEach((card) => {
     card.classList.toggle('active', card.dataset.fieldLink === state.field);
     if (card.getAttribute('aria-disabled') === 'true') card.addEventListener('click', (event) => event.preventDefault());
@@ -32,13 +32,11 @@
   }).catch((err) => { $('trioError').hidden = false; $('trioError').textContent = `${err.message} 잠시 후 다시 확인해 주세요.`; $('trioRun').disabled = true; });
 
   function buildSelects() {
-    const preferred = state.field === 'ENT' ? ['리센느','아이브','르세라핌'] : [];
-    const defaults = preferred.map((name) => state.entries.find((e) => e.name === name)).filter(Boolean);
-    state.entries.forEach((entry) => { if (defaults.length < 3 && !defaults.includes(entry)) defaults.push(entry); });
     ['trioPick1','trioPick2','trioPick3'].forEach((id,i) => {
       const select=$(id);
-      select.innerHTML=state.entries.map((e)=>`<option value="${esc(e.external_id)}">${e.rank}. ${esc(e.name)}${e.category?` · ${esc(e.category)}`:''}</option>`).join('');
-      select.value=defaults[i].external_id;
+      const placeholder=i===0?'MY PICK을 선택하세요':`COMPARE ${i===1?'A':'B'}를 선택하세요`;
+      select.innerHTML=`<option value="" selected disabled>${placeholder}</option>`+state.entries.map((e)=>`<option value="${esc(e.external_id)}">${e.rank}. ${esc(e.name)}${e.category?` · ${esc(e.category)}`:''}</option>`).join('');
+      select.value='';
       select.addEventListener('change', syncSelectAvailability);
     });
     syncSelectAvailability();
@@ -47,9 +45,9 @@
     const selects=['trioPick1','trioPick2','trioPick3'].map($);
     const chosen=selects.map((select)=>select.value);
     selects.forEach((select,index)=>[...select.options].forEach((option)=>{option.disabled=chosen.some((value,i)=>i!==index&&value===option.value);}));
-    $('trioError').hidden = new Set(chosen).size === 3;
-    if (!$('trioError').hidden) $('trioError').textContent='MY PICK과 두 비교 대상은 서로 달라야 합니다.';
-    $('trioRun').disabled = new Set(chosen).size !== 3;
+    const ready=chosen.every(Boolean)&&new Set(chosen).size===3;
+    $('trioError').hidden = true;
+    $('trioRun').disabled = !ready;
   }
   $('discoveryLanguages').addEventListener('click', (event) => { const button=event.target.closest('button[data-language]'); if(!button)return; $('discoveryLanguages').querySelectorAll('button').forEach((b)=>b.classList.remove('active')); button.classList.add('active'); state.language=button.dataset.language; });
   $('trioRun').addEventListener('click', () => {
