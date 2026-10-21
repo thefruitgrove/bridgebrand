@@ -1010,7 +1010,7 @@ footer .logo .op{ color:#7c86a0;}
 .intelligence-home h2{font-family:var(--serif);font-size:clamp(30px,4vw,52px);margin:0 0 14px;letter-spacing:-.035em}
 .intelligence-home p{max-width:720px;margin:0;color:#b9c0c7;line-height:1.85;font-size:15px;word-break:keep-all}
 .intelligence-home .btn{color:#f5f1e8;border-color:#b6924f;white-space:nowrap}
-.intelligence-home-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.btn-gold{background:#b6924f!important;border-color:#b6924f!important;color:#111923!important}.intel-hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.intel-hero-actions .btn{color:#fff;border-color:rgba(210,184,121,.7)}
+.intelligence-home-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.btn-gold{background:#b6924f!important;border-color:#b6924f!important;color:#111923!important}.intel-hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:760px;margin-top:32px}.intel-hero-cta{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:18px;align-items:center;min-height:86px;padding:17px 20px;box-sizing:border-box;border:1px solid rgba(210,184,121,.54);background:rgba(255,255,255,.025);color:#f4f1e9;text-decoration:none;transition:.2s}.intel-hero-cta.primary{background:linear-gradient(115deg,rgba(182,146,79,.22),rgba(182,146,79,.07));border-color:#b6924f}.intel-hero-cta span{align-self:end;font-size:14px;font-weight:800;letter-spacing:-.02em}.intel-hero-cta small{align-self:start;margin-top:6px;color:#b9a06d;font-size:8px;font-weight:800;letter-spacing:.16em}.intel-hero-cta i{grid-column:2;grid-row:1/3;color:#d5ae63;font-size:18px;font-style:normal}.intel-hero-cta:hover,.intel-hero-cta:focus-visible{border-color:#d5ae63;background:rgba(182,146,79,.16);transform:translateY(-2px);outline:none}
 
 /* Service preview page */
 .intel-page{background:#0c1118;color:#edf0f2;min-height:100vh}
@@ -1048,7 +1048,7 @@ footer .logo .op{ color:#7c86a0;}
  .intelligence-home{padding:46px 0}.intelligence-home-card{grid-template-columns:1fr;padding:28px 22px;gap:24px;align-items:start}
  .intel-hero{padding:112px 0 66px}.intel-hero p{font-size:15px}.intel-section{padding:58px 0}
  .package-grid{grid-template-columns:1fr}.package-card{min-height:0}.intel-cta{display:block;padding:28px 22px}.intel-cta .btn{margin-top:24px}
- .intelligence-home-actions{justify-content:flex-start}.intel-hero-actions .btn{width:100%;justify-content:center;text-align:center}
+ .intelligence-home-actions{justify-content:flex-start}
 }
 
 /* BRIDGE subscription configurator */
@@ -1100,6 +1100,7 @@ footer .logo .op{ color:#7c86a0;}
 .trio-picker{grid-template-columns:1fr 28px 1fr 28px 1fr}.discovery-language{grid-column:1/-1;margin:10px 0 0;padding:20px 0 0;border:0;border-top:1px solid rgba(255,255,255,.11)}.discovery-language legend{padding:0 0 12px;color:#d5ae63;font-size:10px;font-weight:800;letter-spacing:.12em}.discovery-language>div{display:flex;flex-wrap:wrap;gap:8px}.discovery-language button{min-width:92px;padding:10px 14px;border:1px solid #354353;background:#0e151e;color:#aeb7bf;cursor:pointer}.discovery-language button.active,.discovery-language button:hover{border-color:#d5ae63;background:rgba(213,174,99,.12);color:#f0dfb8}.trio-picker>.trio-run{grid-column:1/-1;justify-self:end;min-width:170px}.discovery-note{margin:12px 0 0;color:#7f8a95;font-size:11px;line-height:1.6}
 @media(max-width:900px){.field-engine-grid{grid-template-columns:1fr 1fr}.trio-picker{grid-template-columns:1fr 1fr 1fr}.trio-picker>i{display:none}}
 @media(max-width:650px){.field-engine-section{padding:52px 0}.field-engine-grid{grid-template-columns:1fr 1fr;gap:8px}.field-engine-card{min-height:158px;padding:18px}.field-engine-card b{font-size:31px}.field-engine-card span{font-size:9px}.trio-picker{grid-template-columns:1fr}.discovery-language>div{display:grid;grid-template-columns:1fr 1fr}.discovery-language button{min-width:0}.trio-picker>.trio-run{width:100%}}
+@media(max-width:650px){.intel-hero-actions{grid-template-columns:1fr;gap:9px;margin-top:26px}.intel-hero-cta{min-height:78px;padding:15px 17px}.intel-hero-cta span{font-size:13px}.intel-hero-cta small{font-size:7.5px}}
 
 .public-triptych h2{color:#f6f3ed}.public-flow span{color:#545b62}
 
