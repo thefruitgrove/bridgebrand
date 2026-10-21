@@ -1,6 +1,11 @@
 {
-  "checked_at": "2026-10-21T22:28:04.997647+09:00",
+  "checked_at": "2026-10-22T03:10:24.522661+09:00",
   "review": {
+    "GOV-C01": {
+      "status": "review",
+      "homepage": "https://www.seoul.go.kr",
+      "reason": "URLError"
+    },
     "GOV-C02": {
       "status": "review",
       "homepage": "https://www.busan.go.kr",
@@ -9,16 +14,32 @@
     "GOV-C03": {
       "status": "review",
       "homepage": "https://www.daegu.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@PowerfulDaeguTv",
-        "https://www.youtube.com/@OfficialDaeguTV"
-      ]
+      "reason": "URLError"
+    },
+    "GOV-C04": {
+      "status": "review",
+      "homepage": "https://www.incheon.go.kr",
+      "reason": "URLError"
+    },
+    "GOV-C06": {
+      "status": "review",
+      "homepage": "https://www.daejeon.go.kr",
+      "reason": "URLError"
+    },
+    "GOV-C07": {
+      "status": "review",
+      "homepage": "https://www.ulsan.go.kr",
+      "reason": "URLError"
     },
     "GOV-C08": {
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
+    },
+    "GOV-C09": {
+      "status": "review",
+      "homepage": "https://www.gg.go.kr",
+      "reason": "URLError"
     },
     "GOV-C10": {
       "status": "review",
@@ -33,39 +54,47 @@
     "GOV-C12": {
       "status": "review",
       "homepage": "https://www.chungnam.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@topcnitv/streams",
-        "https://www.youtube.com/user/topcnitv/"
-      ]
+      "reason": "URLError"
+    },
+    "GOV-C14": {
+      "status": "review",
+      "homepage": "https://www.jeonnam.go.kr",
+      "reason": "URLError"
+    },
+    "GOV-C15": {
+      "status": "review",
+      "homepage": "https://www.gb.go.kr",
+      "reason": "URLError"
     },
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
       "reason": "URLError"
     },
+    "GOV-M24": {
+      "status": "review",
+      "homepage": "https://www.acrc.go.kr",
+      "reason": "URLError"
+    },
     "GOV-M08": {
       "status": "review",
       "homepage": "https://www.moe.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": []
+      "reason": "URLError"
     },
     "GOV-M10": {
       "status": "review",
       "homepage": "https://www.mcst.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": []
+      "reason": "URLError"
     },
     "GOV-M06": {
       "status": "review",
       "homepage": "https://www.mois.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": []
+      "reason": "URLError"
     },
     "GOV-M17": {
       "status": "review",
       "homepage": "https://www.molit.go.kr",
-      "reason": "HTTPError"
+      "reason": "URLError"
     }
   }
 }
