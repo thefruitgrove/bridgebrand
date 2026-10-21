@@ -39,6 +39,8 @@ jobs:
           node --check site/script.js
           node tests/test_presentation.js
           node --check site/publicity.js
+          node --check site/briefing.js
+          node tests/test_briefing.js
           python tools/verify_publicity.py
       - name: Verify deployed JSON and frontend against current main
         run: |
