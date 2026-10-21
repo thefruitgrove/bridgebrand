@@ -433,6 +433,16 @@
     var cumLbl = document.getElementById('bmCumLabel') || {};
     var pilot = selectModalCase(name,region,snapshotDate);
     document.getElementById('bridgeModalTitle').textContent = name;
+    var intelligenceLink=document.getElementById('bridgeModalIntelligence');
+    if(!intelligenceLink){
+      intelligenceLink=document.createElement('a');
+      intelligenceLink.id='bridgeModalIntelligence';
+      intelligenceLink.className='modal-intelligence-link';
+      intelligenceLink.textContent='이 대상을 더 깊게 분석하기';
+      var modalScore=document.querySelector('.bridge-modal-score');
+      if(modalScore&&modalScore.parentNode)modalScore.parentNode.insertBefore(intelligenceLink,modalScore.nextSibling);
+    }
+    intelligenceLink.href='intelligence.html?field='+encodeURIComponent(region)+'&target='+encodeURIComponent(name);
     if(pilot){
       document.getElementById('bridgeModalSub').textContent = region + ' · ' + type + ' · '+(pilot.snapshot_date||snapshotDate||'현재 공개본')+' · 근거 신뢰등급 ' + (pilot.trust || 'N/R') + ' · 평판등급이 아님';
       flagEl.textContent = 'BRIDGE 축의 상태 프로필입니다. 참조값 50은 대상의 실제 평가점수가 아니며 종합지수와 순위 계산에서 제외됩니다.';
@@ -583,6 +593,18 @@
       evList.style.display = 'none';
     }
     modalOverlay.classList.add('open');
+  }
+
+  /* One quiet service entry per ranking page; mobile uses a reachable bottom action. */
+  if(typeof document.querySelector==='function'&&document.querySelector('.ranking-panels')&&!document.querySelector('.intelligence-rail')){
+    var rail=document.createElement('a');
+    rail.className='intelligence-rail';rail.href='intelligence.html';
+    rail.setAttribute('aria-label','BRIDGE 분석 서비스 보기');rail.innerHTML='<span>BRIDGE INTELLIGENCE</span>';
+    document.body.appendChild(rail);
+    var mobileCta=document.createElement('a');
+    mobileCta.className='intelligence-mobile-cta';mobileCta.href='intelligence.html';
+    mobileCta.textContent='BRIDGE 분석 서비스 보기 →';document.body.appendChild(mobileCta);
+    document.body.classList.add('has-intelligence-mobile');
   }
   function closeBridgeModal(){ if(modalOverlay) modalOverlay.classList.remove('open'); }
   window.openBridgeModal = openBridgeModal;
