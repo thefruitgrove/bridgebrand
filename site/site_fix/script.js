@@ -61,7 +61,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261022-briefingux2';
+    fresh.href='style.css?v=20261018-brand2';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -783,4 +783,16 @@
 
 
 /* [2026-09 수정] 모바일도 탭=모달(벤다이어그램)로 통일 — 펼침 로직 제거 */
+
+/* Preserve equal alignment after generated-page rebuilds. */
+(function alignHomeActions(){
+  var mobile=window.matchMedia('(max-width:650px)').matches;
+  document.querySelectorAll('#hero-cinematic .hero-actions .btn').forEach(function(el){
+    el.style.setProperty('align-items','center','important');
+    el.style.setProperty('justify-content','center','important');
+    el.style.setProperty('text-align','center','important');
+    el.style.setProperty('height',mobile?'48px':'50px','important');
+    el.style.setProperty('line-height','1','important');
+  });
+})();
 

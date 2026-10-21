@@ -790,17 +790,16 @@
 
 /* [2026-09 수정] 모바일도 탭=모달(벤다이어그램)로 통일 — 펼침 로직 제거 */
 
-/* Keep the paired home actions optically identical even when a generated
-   index still carries an older critical-style fragment. */
-(function alignHeroActions(){
-  function center(selector){
-    var el=document.querySelector(selector);
-    if(!el) return;
+/* Generated home pages can retain an older critical fragment. Keep the paired
+   actions optically identical after every daily rebuild. */
+(function alignHomeActions(){
+  var mobile=window.matchMedia('(max-width:650px)').matches;
+  document.querySelectorAll('#hero-cinematic .hero-actions .btn').forEach(function(el){
     el.style.setProperty('align-items','center','important');
     el.style.setProperty('justify-content','center','important');
     el.style.setProperty('text-align','center','important');
-  }
-  center('#hero-cinematic .hero-actions .week-link');
-  center('#hero-cinematic .hero-actions .publicity-link');
+    el.style.setProperty('height',mobile?'48px':'50px','important');
+    el.style.setProperty('line-height','1','important');
+  });
 })();
 
