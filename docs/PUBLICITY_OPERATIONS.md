@@ -40,6 +40,21 @@ publicity/generate.py uses only PUBLIC_FIELDS from site/data/history.json. It do
 - The writer selects a leading profile and a lower-ranked D/E profile where evidence supports it. If not supported, it explains the limitation instead of manufacturing a positive story.
 - Current version is publicity-rules-1.0. Text variety and editorial sophistication can be extended with new verified rules; this initial service does not pretend to be unrestricted AI reporting.
 
+### Interpretation and audit layer (publicity-rules-3.1)
+
+From the next prepared issue, PUBLICITY passes through a read-only interpretation and audit layer after the frozen public snapshot is created. The layer does not alter scores, weights, eligibility, deduplication, trust grades, source records or publication timing.
+
+- It classifies score and rank movement separately, checks eligible-set changes and compares axis coverage.
+- It requires explicit observed/maintained/reference states; it never infers a reference state from a displayed value of 50.
+- Near-score detection is an internal editorial aid only and is not published as statistical equivalence.
+- Activity remains separate from relationship level. Reference axes remain excluded.
+- Trust grade and coverage are reviewed together but a mismatch is a review flag, not an automatic regrading rule.
+- Internal sentence roles are fact, comparison, meaning, limitation, verification question and practical implication.
+- Generated copy is linted for undefined concepts, unsupported causality and absolute superiority claims.
+- The eight-block contract is headline, fact lead, relationship structure, movement reason, evidence scope, domain context, interpretation boundary and next checkpoint.
+
+The audit may hold a future issue when a blocking contract fails. It does not rewrite an already public article and does not expose internal exploratory thresholds or reconstructed weight ranges.
+
 ## Frozen records and permissions
 
 public.bridge_publicity_articles contains public article payloads only. bridge_publicity_private.snapshots stores immutable source inputs keyed by SHA-256; anon/authenticated cannot access it. Public clients have column-limited SELECT access and cannot read `snapshot_hash` or execute bridge_stage_publicity. Existing scoring tables/policies are unchanged.

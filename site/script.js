@@ -61,7 +61,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261022-briefingux2';
+    fresh.href='style.css?v=20261022-interpret31';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -131,7 +131,7 @@
             weekly_reference_axes:rec.weekly_reference_axes,weekly_failed_axes:rec.weekly_failed_axes,
             daily_index:rec.daily_index, weekly_index:rec.weekly_index,
             activity_points:rec.activity_points, cumulative_performance:rec.cumulative_performance,
-            four_week_average:rec.four_week_average, cumulative_activity:rec.cumulative_activity,
+            four_week_average:rec.four_week_average, four_week_observed_weeks:rec.four_week_observed_weeks, cumulative_activity:rec.cumulative_activity,
             observed_weeks:rec.observed_weeks, stability:rec.stability,
             v3_score:rec.weighted_index, trust:rec.trust_grade, method:'live',
             snapshot_date:snapshotDate||rec.as_of_date, last_week_index:rec.last_week_index, wow_delta:rec.wow_delta,
@@ -173,7 +173,7 @@
           dims:rec.axis_scores||{},axis_status:rec.axis_status||{},axis_evidence_dates:rec.axis_evidence_dates||{},
           score:rec.score,daily_index:rec.daily_index,weekly_index:rec.weekly_index,
           activity_points:rec.activity_points,cumulative_performance:rec.cumulative_performance,
-          four_week_average:rec.four_week_average,cumulative_activity:rec.cumulative_activity,
+          four_week_average:rec.four_week_average,four_week_observed_weeks:rec.four_week_observed_weeks,cumulative_activity:rec.cumulative_activity,
           observed_weeks:rec.observed_weeks,observed_days:rec.observed_days,collection_ok_days:rec.collection_ok_days,
           reference_axes_count:rec.reference_axes_count,comparison_status:rec.comparison_status,
           stability:rec.stability,v3_score:rec.weighted_index,trust:rec.trust_grade,method:'live',
@@ -473,11 +473,17 @@
         var el=document.getElementById(id), row=el&&typeof el.closest==='function'?el.closest('.bmscore-row'):null, sub=row&&typeof row.querySelector==='function'?row.querySelector('.bmscore-sub'):null;
         if(sub)sub.textContent=text;
       }
+      function setMetricLabel(id,text){
+        var el=document.getElementById(id), row=el&&typeof el.closest==='function'?el.closest('.bmscore-row'):null, label=row&&typeof row.querySelector==='function'?row.querySelector('.bmscore-label'):null;
+        if(label&&label.childNodes.length)label.childNodes[0].nodeValue=text+' ';
+      }
       setMetricSub('bmIndexPoint','오늘의 관측 가능한 관계 평판 수준');
-      setMetricSub('bmWeekly','월요일부터 현재까지 일별지수의 근거 신뢰도 가중평균');
-      setMetricSub('bmLastWeek','직전 월~일 일별지수의 근거 신뢰도 가중평균');
-      setMetricSub('bmWow','이번 주와 직전 완료 주간 대표지수의 차이');
-      setMetricSub('bmFourWeek','최근 최대 4개 주간 대표지수 평균');
+      setMetricSub('bmWeekly','월요일부터 현재까지의 진행 중 주간 대표값');
+      setMetricSub('bmLastWeek','직전 완료 월~일 주간 대표값');
+      setMetricSub('bmWow','진행 중 주간과 직전 완료 주간의 잠정 차이');
+      var fourWeekCount=Number(pilot.four_week_observed_weeks)||0;
+      setMetricLabel('bmFourWeek',fourWeekCount>=4?'4-WEEK AVERAGE':'AVAILABLE-WEEK AVERAGE');
+      setMetricSub('bmFourWeek',fourWeekCount>=4?'최근 4개 완료 주간 대표지수 평균':(fourWeekCount?'현재 확보된 '+fourWeekCount+'개 완료 주간 평균':'완료 주간 이력 부족'));
       setMetricSub('bmV3Score',availableCount===6?'여섯 축을 모두 가중 반영한 당일 종합지수':'관측·유지 '+availableCount+'/6축을 가중 반영한 당일 종합지수');
       setMetricSub('bmActivity','이번 주 검증·중복 제거된 사건 활동량');
       setMetricSub('bmCumulativeActivity','운영 관측기간의 검증된 사건 활동량 누계');
@@ -783,4 +789,18 @@
 
 
 /* [2026-09 수정] 모바일도 탭=모달(벤다이어그램)로 통일 — 펼침 로직 제거 */
+
+/* Keep the paired home actions optically identical even when a generated
+   index still carries an older critical-style fragment. */
+(function alignHeroActions(){
+  function center(selector){
+    var el=document.querySelector(selector);
+    if(!el) return;
+    el.style.setProperty('align-items','center','important');
+    el.style.setProperty('justify-content','center','important');
+    el.style.setProperty('text-align','center','important');
+  }
+  center('#hero-cinematic .hero-actions .week-link');
+  center('#hero-cinematic .hero-actions .publicity-link');
+})();
 

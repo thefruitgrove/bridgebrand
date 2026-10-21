@@ -59,7 +59,7 @@ class PublicityTests(unittest.TestCase):
   articles,_=articles_for(self.history(),dt.date(2026,10,16))
   for article in articles:
    payload=article['payload']
-   self.assertEqual(payload['template_version'],'publicity-rules-3.0')
+   self.assertEqual(payload['template_version'],'publicity-rules-3.1')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
    self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
    self.assertEqual([s['heading'] for s in payload['sections'][1:]],[
@@ -118,6 +118,7 @@ class PublicityTests(unittest.TestCase):
    self.assertEqual(payload['visual_contract'],['table','profile-figure','relationship-diagram'])
    self.assertTrue(payload['table']);self.assertTrue(payload['profiles'])
    self.assertTrue(payload['diagram']['items'])
+   self.assertEqual(len(payload['editorial_blocks']),8)
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),9)
    self.assertIn('BRIDGE가 남기는 다음 질문',[s['heading'] for s in payload['sections']])
 if __name__=='__main__':unittest.main()

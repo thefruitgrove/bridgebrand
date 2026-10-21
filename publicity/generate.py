@@ -10,12 +10,16 @@ import math
 import statistics
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from reporting.interpretation import (
+    PUBLICITY_BLOCKS, assert_publishable, coverage_change, rank_movement,
+    set_change,
+)
 
 ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
-VERSION='publicity-rules-3.0'
+VERSION='publicity-rules-3.1'
 EDITORIAL_STYLE_EFFECTIVE=dt.date(2026,10,21)
 WEEK_CALENDAR_EFFECTIVE=dt.date(2026,10,19)
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
@@ -152,6 +156,34 @@ def relationship_change(snapshot,leader):
         scope_text='비교된 축의 근거 상태는 유지되어, 이번 변화는 동일한 확인 조건 안에서 읽을 수 있다.'
     return axis_text+' '+scope_text
 
+def rank_and_set_change(snapshot,leader):
+    dates=sorted({r['as_of_date'] for r in snapshot['rows'] if r['domain']==leader['domain']})
+    if len(dates)<2:
+        return '직전 동일 분야 비교집합이 없어 순위 이동의 원인을 확정하지 않는다.'
+    previous_date=dates[-2]
+    current=[r for r in snapshot['rows'] if r['domain']==leader['domain'] and r['as_of_date']==leader['as_of_date']]
+    previous=[r for r in snapshot['rows'] if r['domain']==leader['domain'] and r['as_of_date']==previous_date]
+    prior=next((r for r in previous if r['external_id']==leader['external_id']),None)
+    movement=rank_movement(leader,prior)
+    movement_text={
+        'score_and_rank_rise':'대상 자체의 점수 상승과 상대 순위 상승이 함께 확인됐다.',
+        'score_rise_without_rank_rise':'대상 점수는 상승했지만 상대 순위 상승으로 이어지지는 않았다.',
+        'rank_rise_despite_score_fall':'대상 점수는 낮아졌지만 비교 대상의 움직임으로 상대 순위는 상승했다.',
+        'score_and_rank_fall':'대상 점수와 상대 순위가 함께 낮아졌다.',
+        'relative_move_with_static_score':'대상 점수는 같지만 비교 대상의 움직임으로 순위가 달라졌다.',
+        'mixed_or_static':'점수와 순위는 서로 다른 방향 또는 정지 상태를 보였다.',
+        'no_baseline':'동일 대상의 직전 비교값이 없어 이동 유형을 확정하지 않는다.',
+    }[movement['type']]
+    change=set_change(current,previous)
+    set_text=(f"동시에 공개 비교집합은 {change['previous_size']}개에서 {change['current_size']}개로 달라져 집합 효과를 함께 확인해야 한다."
+              if change['current_size']!=change['previous_size'] or change['entered'] or change['exited']
+              else '공개 비교집합의 구성과 크기는 유지됐다.')
+    coverage=coverage_change(current,previous)
+    changed=[axis for axis,values in coverage.items() if values['delta']]
+    coverage_text=(f"축별 유효 대상 수가 달라진 축은 {', '.join(changed)}이며, 해당 축의 변화는 관측 범위 효과와 분리해 읽는다."
+                   if changed else '축별 유효 대상 수에는 변화가 확인되지 않았다.')
+    return movement_text+' '+set_text+' '+coverage_text
+
 def domain_content(snapshot,domain,style='legacy'):
     members,coverage,mean=summary(snapshot['rows'],domain,snapshot['period_through']);leader=members[0]
     weak=min(AXES,key=lambda a:coverage[a]);strong=max(AXES,key=lambda a:coverage[a])
@@ -167,7 +199,7 @@ def domain_content(snapshot,domain,style='legacy'):
     labels=DOMAIN_LABELS[domain]
     date_count=len(dates)
     date_word='날짜' if date_count==1 else '개 날짜'
-    change_text=relationship_change(snapshot,leader)
+    change_text=relationship_change(snapshot,leader)+' '+rank_and_set_change(snapshot,leader)
     title=(f"{leader['name']} 1위·{leader['score']:.1f}점… {domain}, 순위 뒤에서 읽는 관계 구조"
            if style=='sample-1' else
            f"{leader['name']} 1위, 숫자보다 이유가 달랐다… {domain} 관계의 안쪽"
@@ -184,7 +216,7 @@ def domain_content(snapshot,domain,style='legacy'):
         profile_text=(f"공개 순위 하위권인 {other['name']} 역시 총점 하나의 수치만으로 설명되지 않는다. 다만 현재 확인 범위에서는 경험과 책임·지속을 같은 조건으로 나란히 제시할 하위권 사례가 확인되지 않았다. "
                       "순위가 낮다는 이유로 모든 대외 접점이 취약하다고 속단하거나, 반대로 객관적으로 확인되지 않은 잠재력을 임의로 부여해서는 안 된다.")
     sections=[{'heading':'현상 제시와 순위 이면의 구성','paragraphs':[
-      f"{subject(leader['name'])} {korean_date(snapshot['period_through'])} 기준 {domain}({labels['scope']}) 공개 순위에서 선두에 올랐다. 시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면, {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번 회차 T100 공개 요건을 충족한 비교 집합은 {len(members)}개 대상이며 평균은 {mean:.1f}점으로 집계됐다. 대상 구성은 기준일과 관측 상태에 따라 달라질 수 있다. 단, 이 평균은 이번 공개 집합에 한정된 값일 뿐, 해당 분야 전체의 절대적 수준을 대변하지 않는다.",
+      f"{subject(leader['name'])} {korean_date(snapshot['period_through'])} 기준 {domain}({labels['scope']}) 공개 순위 1위로 관측됐다. 시그널브릿지(SignalBridge) BRIDGE 브랜드평판지수 INDEX에 따르면, {leader['name']}의 일별 지수는 {leader['score']:.1f}점이다. 이번 회차 T100 공개 요건을 충족한 비교 집합은 {len(members)}개 대상이며 평균은 {mean:.1f}점으로 집계됐다. 대상 구성은 기준일과 관측 상태에 따라 달라질 수 있다. 단, 이 평균은 이번 공개 집합에 한정된 값일 뿐, 해당 분야 전체의 절대적 수준을 대변하지 않는다.",
       f"눈길을 끄는 대목은 순위 그 자체보다 그 내부의 구성이다. {topic(leader['name'])} 유효 근거가 확인된 축 중에서 {AXES[high]} {leader['axis_scores'][high]:.1f}점, {AXES[low]} {leader['axis_scores'][low]:.1f}점을 기록했다. {change_text} 이처럼 같은 선두권이라도 공중과 만나는 접점의 결은 서로 다르다. 단순히 ‘선두’라는 위치만으로 관심·반응·경험·신뢰가 고르게 연결되어 있다고 단정하기 어려운 이유가 여기에 있다."]},
       {'heading':'선두 밖에서도 읽히는 관계의 차이','paragraphs':[
       profile_text,
@@ -240,9 +272,10 @@ def articles_from_snapshot(snapshot,digest,spec,example=False,example_domain='CP
                 content['diagram']['items'].append({'axis':d,'label':lead['name']+' · '+AXES[strongest],'value':round(float(lead['axis_scores'][strongest]),1),'state':lead['axis_status'][strongest]})
             content['sections'].append({'heading':'다음 주에 확인할 신호','paragraphs':['네 영역은 관측 대상과 자료의 성격이 달라 점수의 단순 비교로 분야의 우열을 판단할 수 없다. 공통으로 살펴볼 것은 관심이 반응·경험·행동과 어떤 구성을 보이는지, 그리고 근거 범위가 유지되는지다.','이번 종합본은 전주에 실제로 관측된 자료만 사용한다. 날짜가 비어 있거나 새 방법론의 비교 이력이 짧은 경우에는 한 주 전체의 변화나 지속성을 확정하지 않는다.']})
         else:content=domain_content(snapshot,domain,style)
-        payload={**content,'editorial_style':style,'visual_contract':['table','profile-figure','relationship-diagram'],'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
+        payload={**content,'editorial_style':style,'editorial_blocks':list(PUBLICITY_BLOCKS),'visual_contract':['table','profile-figure','relationship-diagram'],'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
         if example:payload['revision_note']='기사체로 다듬은 샘플입니다. 10월 14일의 공개 수치를 사용했습니다.'
         if example:payload['standfirst']='샘플 · 실제 10월 14일 공개 데이터를 바탕으로 구성한 형식 예시입니다. 정식 발행본이 아닙니다. '+payload['standfirst']
+        assert_publishable(payload)
         article={'id':f"{spec['week'].lower()}-{spec['slot'].lower()}-{domain.lower()}"+('-example' if example else ''),'issue_week':spec['week'],'slot':spec['slot'],'domain':domain,'scheduled_at':(dt.datetime.now(KST) if example else spec['scheduled_at']).isoformat(),'is_example':example,'payload':payload,'snapshot_hash':digest}
         articles.append(article)
     return articles,snapshot
