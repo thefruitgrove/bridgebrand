@@ -25,6 +25,8 @@ assert(js.includes("x.domain==='ENT'&&x.ranking_type==='T100'"), 'briefing must 
 assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');
 assert(html.includes('활동량은 긍정 평판이 아니며'), 'activity interpretation boundary missing');
+assert(js.includes('ENT T100 ${r.rank}위'), 'publicity rank must come from the same public snapshot');
+assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank must not remain');
 assert(css.includes('@media(max-width:720px)'), 'mobile responsive contract missing');
 assert(html.includes('assets/reports/BRIDGE_ENT_GENERAL_BRIEFING_리센느_20261021.pdf'), 'report edition PDF link missing');
 
