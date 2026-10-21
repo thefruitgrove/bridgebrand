@@ -21,4 +21,4 @@ def render_home(rows):
             items.append(f'<li><span class="t5-nm">{html.escape(r["name"])}</span><span class="t5-sc">{r["score"]:.1f}</span><span class="t5-{cls}">{text}</span></li>')
         listing=''.join(items) or '<li class="t5-empty">공개 적격 자료를 확인 중입니다.</li>'
         blocks.append(f'<a class="t5-block" href="{href}"><div class="t5-head">{domain} <span class="t5-more">TOP 5 →</span></div><ol class="t5-list">{listing}</ol></a>')
-    return '<div class="hero-top5">'+''.join(blocks)+'</div>'
+    return '<a class="hero-intelligence-service" href="intelligence.html"><span>BRIDGE INTELLIGENCE SERVICE</span><i aria-hidden="true">→</i></a><div class="hero-top5">'+''.join(blocks)+'</div>'
