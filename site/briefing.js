@@ -9,6 +9,7 @@ let stage=1, entities=[];
 const $=(id)=>document.getElementById(id);
 const num=(v,d=2)=>Number(v).toFixed(d);
 const signed=(v)=>`${Number(v)>=0?'▲':'▼'} ${Math.abs(Number(v)).toFixed(2)}`;
+const dateKo=(iso)=>{const [y,m,d]=String(iso).split('-').map(Number);return `${y}년 ${m}월 ${d}일`;};
 const valid=(e,a)=>e&&e.axis_status&&e.axis_status[a]!=='reference'&&Number.isFinite(Number(e.axis_scores&&e.axis_scores[a]));
 
 document.querySelectorAll('[data-stage], [data-go-stage]').forEach((button)=>button.addEventListener('click',()=>showStage(Number(button.dataset.stage||button.dataset.goStage))));
@@ -59,7 +60,7 @@ function render(){
   $('entitySummary').innerHTML=entities.map((e,i)=>{const top=topAxis(e),low=lowAxis(e);return `<article><small>${i===0?'MY PICK':`COMPARE ${i===1?'A':'B'}`}</small><h4>${e.name}</h4><strong>${num(e.daily_index)}</strong><p>ENT T100 ${e.rank}위 · 신뢰 ${e.trust_grade}<br>강한 축 ${top} · 낮은 축 ${low}</p></article>`;}).join('');
   renderBars(r,$('resceneBars'),COLORS[0]);
   $('compareBriefs').innerHTML=entities.slice(1).map((e,i)=>`<article><small>COMPARE ${i===0?'A':'B'}</small><h4>${e.name}</h4><strong>${num(e.daily_index)}</strong><p>${compareNarrative(e)}</p><div class="mini-axis">강한 축 ${topAxis(e)} · 낮은 축 ${lowAxis(e)}</div></article>`).join('');
-  renderRadar();renderGaps();renderActivity();
+  renderRadar();renderGaps();renderActivity();renderPublicity();
 }
 function topAxis(e){return AXES.filter((a)=>valid(e,a)).sort((a,b)=>Number(e.axis_scores[b])-Number(e.axis_scores[a]))[0]||'—';}
 function lowAxis(e){return AXES.filter((a)=>valid(e,a)).sort((a,b)=>Number(e.axis_scores[a])-Number(e.axis_scores[b]))[0]||'—';}
@@ -77,5 +78,11 @@ function renderRadar(){
 }
 function renderGaps(){const gaps=AXES.map((a)=>{const vals=entities.filter((e)=>valid(e,a)).map((e)=>({name:e.name,v:Number(e.axis_scores[a])})).sort((x,y)=>y.v-x.v);return vals.length<2?null:{a,g:vals[0].v-vals.at(-1).v,hi:vals[0],lo:vals.at(-1)};}).filter(Boolean).sort((x,y)=>y.g-x.g).slice(0,3);$('briefingGaps').innerHTML=gaps.map((x)=>`<div class="gap-card"><b>${x.a} · ${AXIS_NAME[x.a]}</b><strong>${num(x.g,1)}p 차이</strong><span>${x.hi.name} ${num(x.hi.v,1)} ↔ ${x.lo.name} ${num(x.lo.v,1)}</span></div>`).join('');}
 function renderActivity(){const max=Math.max(...entities.map((e)=>Number(e.activity_points)||0));$('activityCompare').innerHTML=entities.map((e)=>`<div class="activity-row"><span>${e.name}</span><div class="activity-track"><i style="width:${max?Number(e.activity_points)/max*100:0}%"></i></div><strong>${Math.round(e.activity_points)}P</strong></div>`).join('');}
+function renderPublicity(){
+  const [r,i,l]=entities;
+  $('publicityHeadline').textContent=`리센느 ${num(r.daily_index)}으로 비교 우위…아이브는 활동량, 르세라핌은 지속 기반에서 다른 강점`;
+  $('publicityStandfirst').textContent=`${dateKo(r.as_of_date)} ENT T100에서 리센느는 강한 반응과 선명한 정체성을 바탕으로 세 대상 중 가장 높은 관계 평판 수준을 보였다.`;
+  $('publicityBody').innerHTML=`<p>시그널브릿지 BRIDGE 브랜드평판지수 INDEX 관측에서 리센느는 당일 ${num(r.daily_index)}으로 ENT T100 ${r.rank}위를 기록했다. 비교 대상인 아이브는 ${num(i.daily_index)}, 르세라핌은 ${num(l.daily_index)}로 나타났다. 이번 결과는 같은 날짜와 공개자료 범위에서 세 대상의 상대적 관계 구조를 비교한 것이다.</p><p>리센느의 현재 위치를 만든 핵심은 반응과 정체성이다. 두 축은 각각 ${num(r.axis_scores.R,1)}과 ${num(r.axis_scores.I,1)}으로 나타났고 행동유발도 ${num(r.axis_scores.G,1)}로 뒤를 받쳤다. 공중의 관심이 단순 노출에서 끝나지 않고 특정 이미지와 후속 행동으로 연결되는 구조다.</p><p>다만 경험은 ${num(r.axis_scores.D,1)}, 책임·지속은 ${num(r.axis_scores.E,1)}으로 상대적으로 낮았다. 이를 부정적인 판정으로 해석해서는 안 된다. 현재의 빠른 관심과 정체성이 반복 경험과 장기 신뢰로 전환되는 과정은 후속 관측이 필요하다.</p><p>아이브는 도달 ${num(i.axis_scores.B,1)}과 반응 ${num(i.axis_scores.R,1)}이 강했고 주간 활동량은 ${Math.round(i.activity_points)}P로 세 대상 중 가장 많았다. 르세라핌은 반응 ${num(l.axis_scores.R,1)}과 책임·지속 ${num(l.axis_scores.E,1)}이 강했다. 세 대상은 같은 범주에 있지만 서로 다른 경로로 관계 평판을 형성하고 있다.</p><p>리센느의 현재 우위는 모든 가치와 능력에서 앞선다는 뜻이 아니다. BRIDGE가 다음에 확인할 질문은 분명하다. 지금의 선명한 기억이 실제 경험과 지속 가능한 신뢰로 이어질 수 있는가.</p>`;
+}
 showStage(1);
 })();
