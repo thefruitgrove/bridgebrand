@@ -56,15 +56,30 @@ class InterpretationTests(unittest.TestCase):
         self.assertFalse(finding.blocks_publication)
 
     def test_general_briefing_minimum_and_density(self):
-        claims = [Claim(f"검증된 분석문장 {i}", "fact", ("score",)) for i in range(7)]
+        roles = ["fact", "comparison", "meaning", "limitation", "verification_question", "practical_implication", "meaning"]
+        claims = [Claim(f"검증된 근거를 서로 다른 역할로 해석하는 완결된 분석문장 {i}입니다.", role, ("score",) if role in {"fact", "comparison"} else ()) for i, role in enumerate(roles)]
         pages = [{"number": n, "claims": claims if n >= 11 else []} for n in range(1, 22)]
         self.assertFalse(audit_page_contract(pages))
         pages[10]["claims"] = claims[:6]
         self.assertTrue(any(f.code == "ANALYSIS_DENSITY" for f in audit_page_contract(pages)))
 
+    def test_visual_readout_does_not_satisfy_analysis_density(self):
+        roles = ["fact", "comparison", "meaning", "limitation", "verification_question", "practical_implication"]
+        claims = [{"text": f"표의 값을 그대로 읽는 문장 {i}입니다.", "role": roles[i % len(roles)], "evidence_keys": ["score"], "visual_readout": True} for i in range(7)]
+        pages = [{"number": n, "claims": claims if n >= 11 else []} for n in range(1, 22)]
+        self.assertTrue(any(f.code == "ANALYSIS_DENSITY" for f in audit_page_contract(pages)))
+
+    def test_fact_and_comparison_require_evidence_keys(self):
+        roles = ["fact", "comparison", "meaning", "limitation", "verification_question", "practical_implication", "meaning"]
+        claims = [Claim(f"근거 연결 상태를 확인하기 위한 완결된 분석문장 {i}입니다.", role) for i, role in enumerate(roles)]
+        pages = [{"number": n, "claims": claims if n >= 11 else []} for n in range(1, 22)]
+        self.assertTrue(any(f.code == "EVIDENCE_LINK_MISSING" for f in audit_page_contract(pages)))
+
     def test_publicity_eight_blocks_and_overclaim_lint(self):
+        prose = " ".join(f"검증된 분석문장 {i}입니다." for i in range(24)) + " 활동량은 긍정 방향과 같은 뜻이 아니다."
         payload = {"title": "검증 제목", "standfirst": "관계 구조", "editorial_blocks": list(PUBLICITY_BLOCKS),
-                   "sections": [{"paragraphs": ["활동량은 긍정 방향과 같은 뜻이 아니다."]}]}
+                   "editorial_block_content": {block: prose for block in PUBLICITY_BLOCKS},
+                   "sections": [{"paragraphs": [prose]}]}
         assert_publishable(payload)
         payload["title"] = "압도적 우위"
         with self.assertRaisesRegex(ValueError, "PUBLIC_OVERCLAIM"):

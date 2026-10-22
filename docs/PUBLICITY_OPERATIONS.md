@@ -55,6 +55,19 @@ From the next prepared issue, PUBLICITY passes through a read-only interpretatio
 
 The audit may hold a future issue when a blocking contract fails. It does not rewrite an already public article and does not expose internal exploratory thresholds or reconstructed weight ranges.
 
+### Non-abbreviating analysis contract (publicity-rules-3.2)
+
+From issues prepared after 2026-10-21, factual caution cannot be used as a reason to shorten the explanation. The audit enforces both truthfulness and a minimum explanatory volume.
+
+- A general briefing is never complete below 21 pages.
+- Pages 11–21 each require 7–10 complete analytical sentences, excluding titles, numbers, captions, table cells and sentences that merely read a chart aloud.
+- Every countable sentence carries an internal role: fact, comparison, meaning, limitation, verification question or practical implication. Each of pages 11–21 uses at least four different roles. Fact and comparison sentences require evidence keys.
+- When evidence is insufficient, the writer does not invent a cause. It explains what is unconfirmed and its bounded meaning, what data is needed and what that data would permit, and what the next issue must verify and why that matters operationally.
+- Tables and diagrams remain mandatory aids, but prose must be sufficient for a reader who cannot interpret them independently.
+- If the minimum volume cannot be met without repetition or unsupported claims, publication is held. It is not released as a shortened completed briefing.
+- PUBLICITY's eight editorial functions must each be bound to actual prose. The audit also requires at least 24 complete prose sentences across the headline, standfirst and body.
+- The narrative flow established by the 2026-W43 Wednesday ENT, UNI and CPR articles is the editorial precedent: attention, verified facts, relationship structure, movement and evidence scope, domain context, interpretation boundary and next checkpoint. The facts and sentences themselves are never copied into another issue.
+
 ## Frozen records and permissions
 
 public.bridge_publicity_articles contains public article payloads only. bridge_publicity_private.snapshots stores immutable source inputs keyed by SHA-256; anon/authenticated cannot access it. Public clients have column-limited SELECT access and cannot read `snapshot_hash` or execute bridge_stage_publicity. Existing scoring tables/policies are unchanged.

@@ -11,7 +11,7 @@ import statistics
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from reporting.interpretation import (
-    PUBLICITY_BLOCKS, assert_publishable, coverage_change, rank_movement,
+    PUBLICITY_BLOCKS, PUBLICITY_EDITORIAL_REFERENCES, assert_publishable, coverage_change, rank_movement,
     set_change,
 )
 
@@ -19,7 +19,7 @@ ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
-VERSION='publicity-rules-3.1'
+VERSION='publicity-rules-3.2'
 EDITORIAL_STYLE_EFFECTIVE=dt.date(2026,10,21)
 WEEK_CALENDAR_EFFECTIVE=dt.date(2026,10,19)
 PUBLIC_FIELDS=('as_of_date','domain','external_id','name','rank','score','daily_index','weekly_index','last_week_index','wow_delta','axis_scores','axis_status','observed_days','collection_ok_days','new_evidence_days','trust_grade','activity_points','activity_period','daily_activity_points','comparison_status','methodology_version','observation_window_end')
@@ -115,6 +115,24 @@ def axis_diagram(row):
              'state':row['axis_status'][axis]}
             for axis in AXES if usable(row,axis)
         ],
+    }
+
+def editorial_block_content(content, limitations):
+    """Bind the eight editorial functions to actual prose, not metadata labels."""
+    paragraphs=[p for section in content.get('sections',()) for p in section.get('paragraphs',())]
+    if not paragraphs:
+        raise ValueError('PUBLICITY requires explanatory prose')
+    def at(index):
+        return paragraphs[min(index, len(paragraphs)-1)]
+    return {
+        'attention_headline':content.get('title',''),
+        'fact_lead':' '.join(filter(None,(content.get('standfirst',''),at(0)))),
+        'relationship_structure':at(1),
+        'movement_reason':at(2),
+        'evidence_scope':at(max(0,len(paragraphs)-3)),
+        'domain_context':at(3),
+        'interpretation_boundary':' '.join(limitations),
+        'next_checkpoint':at(len(paragraphs)-1),
     }
 
 def relationship_change(snapshot,leader):
@@ -272,7 +290,8 @@ def articles_from_snapshot(snapshot,digest,spec,example=False,example_domain='CP
                 content['diagram']['items'].append({'axis':d,'label':lead['name']+' · '+AXES[strongest],'value':round(float(lead['axis_scores'][strongest]),1),'state':lead['axis_status'][strongest]})
             content['sections'].append({'heading':'다음 주에 확인할 신호','paragraphs':['네 영역은 관측 대상과 자료의 성격이 달라 점수의 단순 비교로 분야의 우열을 판단할 수 없다. 공통으로 살펴볼 것은 관심이 반응·경험·행동과 어떤 구성을 보이는지, 그리고 근거 범위가 유지되는지다.','이번 종합본은 전주에 실제로 관측된 자료만 사용한다. 날짜가 비어 있거나 새 방법론의 비교 이력이 짧은 경우에는 한 주 전체의 변화나 지속성을 확정하지 않는다.']})
         else:content=domain_content(snapshot,domain,style)
-        payload={**content,'editorial_style':style,'editorial_blocks':list(PUBLICITY_BLOCKS),'visual_contract':['table','profile-figure','relationship-diagram'],'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.'],'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
+        limitations=['공개 적격 대상만 포함하며, 비공개 대상이나 전체 공중을 대표하지 않습니다.','참조 축의 숫자는 대상별 평가값이 아니며 기사에서 강점·약점 판정에 사용하지 않습니다.','자료 유형과 관측 범위에 따른 대리변수의 한계가 있습니다. 인과관계나 미래 성과를 확정하지 않습니다.']
+        payload={**content,'editorial_style':style,'editorial_blocks':list(PUBLICITY_BLOCKS),'editorial_block_content':editorial_block_content(content,limitations),'editorial_reference_ids':list(PUBLICITY_EDITORIAL_REFERENCES),'visual_contract':['table','profile-figure','relationship-diagram'],'template_version':VERSION,'data_from':snapshot['period_from'],'data_through':snapshot['period_through'],'methodology_version':snapshot['methodology_version'],'limitations':limitations,'source_url':'https://bridgebrand.co.kr','frozen_at':dt.datetime.now(KST).isoformat()}
         if example:payload['revision_note']='기사체로 다듬은 샘플입니다. 10월 14일의 공개 수치를 사용했습니다.'
         if example:payload['standfirst']='샘플 · 실제 10월 14일 공개 데이터를 바탕으로 구성한 형식 예시입니다. 정식 발행본이 아닙니다. '+payload['standfirst']
         assert_publishable(payload)

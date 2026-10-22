@@ -59,7 +59,7 @@ class PublicityTests(unittest.TestCase):
   articles,_=articles_for(self.history(),dt.date(2026,10,16))
   for article in articles:
    payload=article['payload']
-   self.assertEqual(payload['template_version'],'publicity-rules-3.1')
+   self.assertEqual(payload['template_version'],'publicity-rules-3.2')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
    self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
    self.assertEqual([s['heading'] for s in payload['sections'][1:]],[

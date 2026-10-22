@@ -7,6 +7,7 @@ weights, no source thresholds and no code that writes to the evidence ledger.
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
+import re
 from typing import Iterable, Mapping, Sequence
 
 AXES = ("B", "R", "I", "D", "G", "E")
@@ -32,6 +33,14 @@ PUBLICITY_BLOCKS = (
     "attention_headline", "fact_lead", "relationship_structure",
     "movement_reason", "evidence_scope", "domain_context",
     "interpretation_boundary", "next_checkpoint",
+)
+MIN_GENERAL_PAGES = 21
+MIN_ANALYSIS_SENTENCES = 7
+MAX_ANALYSIS_SENTENCES = 10
+MIN_PAGE_ROLE_VARIETY = 4
+PUBLICITY_MIN_SENTENCES = 24
+PUBLICITY_EDITORIAL_REFERENCES = (
+    "2026-w43-wed-ent", "2026-w43-wed-uni", "2026-w43-wed-cpr",
 )
 
 # Public prose rules.  Internal exploratory cut-offs are intentionally absent.
@@ -171,9 +180,14 @@ def lint_public_text(text: str) -> list[Finding]:
     return findings
 
 
+def sentence_count(text: str) -> int:
+    """Count complete Korean/English prose sentences, not table cells or labels."""
+    return len([part for part in re.split(r"(?<=[.!?다요됨임])\s+", text.strip()) if part.strip()])
+
+
 def audit_page_contract(pages: Sequence[Mapping]) -> list[Finding]:
     findings: list[Finding] = []
-    if len(pages) < 21:
+    if len(pages) < MIN_GENERAL_PAGES:
         findings.append(Finding("high", "PAGE_COUNT", "일반 브리핑은 최소 21페이지여야 합니다.", True))
     seen = set()
     for page in pages:
@@ -182,16 +196,29 @@ def audit_page_contract(pages: Sequence[Mapping]) -> list[Finding]:
             findings.append(Finding("high", "DUPLICATE_PAGE", f"{number}페이지가 중복되었습니다.", True))
         seen.add(number)
         claims = page.get("claims") or []
-        if 11 <= number <= 21 and not 7 <= len(claims) <= 10:
+        countable_claims = [raw for raw in claims if not (isinstance(raw, Mapping) and raw.get("visual_readout"))]
+        if 11 <= number <= 21 and not MIN_ANALYSIS_SENTENCES <= len(countable_claims) <= MAX_ANALYSIS_SENTENCES:
             findings.append(Finding("high", "ANALYSIS_DENSITY", f"{number}페이지 분석문장은 7~10개여야 합니다.", True))
+        if 11 <= number <= 21:
+            roles = {
+                raw.role if isinstance(raw, Claim) else str(raw.get("role", ""))
+                for raw in countable_claims
+            }
+            if len(roles & REFLECTIVE_ROLES) < MIN_PAGE_ROLE_VARIETY:
+                findings.append(Finding("high", "ROLE_DIVERSITY", f"{number}페이지는 서로 다른 분석 역할을 최소 4개 포함해야 합니다.", True))
         texts = set()
-        for raw in claims:
+        for raw in countable_claims:
             claim = raw if isinstance(raw, Claim) else Claim(str(raw.get("text", "")), str(raw.get("role", "")), tuple(raw.get("evidence_keys", ())))
             normalized = " ".join(claim.text.split())
             if normalized in texts:
                 findings.append(Finding("high", "REPEATED_SENTENCE", f"{number}페이지에 동일 문장이 반복됩니다.", True))
             texts.add(normalized)
+            if claim.role in {"fact", "comparison"} and not claim.evidence_keys:
+                findings.append(Finding("high", "EVIDENCE_LINK_MISSING", f"{number}페이지의 사실·비교 문장에 근거 키가 없습니다.", True))
             findings.extend(lint_public_text(claim.text))
+    missing = sorted(set(range(1, MIN_GENERAL_PAGES + 1)) - seen)
+    if missing:
+        findings.append(Finding("high", "PAGE_SEQUENCE", f"필수 페이지가 누락되었습니다: {', '.join(map(str, missing))}", True))
     return findings
 
 
@@ -200,11 +227,17 @@ def audit_publicity_payload(payload: Mapping) -> list[Finding]:
     blocks = tuple(payload.get("editorial_blocks") or ())
     if blocks != PUBLICITY_BLOCKS:
         findings.append(Finding("high", "PUBLICITY_BLOCKS", "PUBLICITY 8블록 계약이 일치하지 않습니다.", True))
+    block_content = payload.get("editorial_block_content") or {}
+    missing_blocks = [block for block in PUBLICITY_BLOCKS if not str(block_content.get(block, "")).strip()]
+    if missing_blocks:
+        findings.append(Finding("high", "PUBLICITY_BLOCK_CONTENT", "PUBLICITY 기능 블록의 실제 본문이 비었습니다: " + ", ".join(missing_blocks), True))
     prose = " ".join(
         [str(payload.get("title", "")), str(payload.get("standfirst", ""))]
         + [str(p) for section in payload.get("sections", ()) for p in section.get("paragraphs", ())]
     )
     findings.extend(lint_public_text(prose))
+    if sentence_count(prose) < PUBLICITY_MIN_SENTENCES:
+        findings.append(Finding("high", "PUBLICITY_PROSE_DENSITY", f"PUBLICITY 설명 본문은 최소 {PUBLICITY_MIN_SENTENCES}개의 완결된 문장을 포함해야 합니다.", True))
     if "활동량" in prose and not any(boundary in prose for boundary in ("긍정", "우호", "방향")):
         findings.append(Finding("high", "ACTIVITY_BOUNDARY", "활동량과 긍정·우호 방향의 차이를 설명해야 합니다.", True))
     return findings
