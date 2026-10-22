@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-22",
+  "as_of_date": "2026-10-23",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C37": {
-      "channel_id": "UCS9Hk665uj6anEose2quMdw",
-      "title": "천안시 · Cheonan",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C38": {
       "channel_id": "UCYnJQ3U2gVL5SXaKGr39Eyg",
@@ -30,6 +25,11 @@
     "GOV-C41": {
       "channel_id": "UCPmy2I2GzZb2YyoRh7GR_kg",
       "title": "전주시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C42": {
+      "channel_id": "UC2oz_Gh__7Z8xL3ykgG9eKg",
+      "title": "익산시 공식 유튜브",
       "reason": "awaiting_human_verification"
     }
   }
