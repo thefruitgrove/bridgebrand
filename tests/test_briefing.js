@@ -24,6 +24,15 @@ assert(js.includes("const FIELDS=['CPR','GOV','UNI','ENT']"), 'briefing must acc
 assert(js.includes('completeRange'), 'briefing must enforce contiguous ranks');
 assert(js.includes("new Set(ids).size!==3"), 'briefing must reject duplicate targets');
 assert(js.includes("if(entities.some((entity)=>!entity))"), 'briefing must reject unknown target IDs');
+[
+  '발견 반응력','인지도 정체성','도달 경험 전환','발견 행동 전환','확산 지속성',
+  '반응 정체성 결속','반응 경험 일치','반응 행동 전환','반응 관계 유지','약속 경험 일치',
+  '정체성 행동 동력','정체성 지속성','경험 행동 전환','경험 신뢰 축적','행동 관계 지속'
+].forEach((label)=>assert(js.includes(label), `missing BRIDGE pair interpretation: ${label}`));
+assert(html.includes('id="positionNarrative"'), 'position explanation layer missing');
+assert(html.includes('id="pairGrid"'), '15-pair DSSE interpretation surface missing');
+assert(js.includes("['08 · 다음 관측과 실무 제안'"), 'PUBLICITY eight-block explanation missing');
+assert(js.includes('실무적 시사점.'), 'practical implication generation missing');
 assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
 assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');
