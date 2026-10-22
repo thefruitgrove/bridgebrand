@@ -1,7 +1,7 @@
 {
   "as_of_date": "2026-10-23",
   "methodology_version": "2026.10-v5-beta1",
-  "generated_at": "2026-10-23T05:59:57.875445+09:00",
+  "generated_at": "2026-10-23T07:26:40.803743+09:00",
   "ok": true,
   "errors": [],
   "records": [
@@ -53,22 +53,22 @@
       "domain": "CPR",
       "external_id": "CPR-058",
       "name": "티씨케이",
-      "publish_status": "eligible",
-      "axes_available": 3,
+      "publish_status": "shadow",
+      "axes_available": 5,
       "axis_status": {
         "B": "observed",
-        "R": "reference",
+        "R": "observed",
         "I": "reference",
-        "D": "reference",
+        "D": "observed",
         "G": "maintained",
         "E": "maintained"
       },
-      "trust_grade": "B",
+      "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
-        "axes_available": 3,
+        "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 77.0
+        "confidence_score": 49.06
       }
     },
     {
@@ -456,8 +456,8 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "B",
       "collection_status": "success",
@@ -670,11 +670,11 @@
       "external_id": "CPR-018",
       "name": "한화에어로스페이스",
       "publish_status": "shadow",
-      "axes_available": 5,
+      "axes_available": 6,
       "axis_status": {
         "B": "observed",
         "R": "observed",
-        "I": "reference",
+        "I": "observed",
         "D": "observed",
         "G": "maintained",
         "E": "maintained"
@@ -682,9 +682,9 @@
       "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
-        "axes_available": 5,
+        "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 49.06
+        "confidence_score": 45.4
       }
     },
     {
@@ -808,8 +808,8 @@
         "R": "observed",
         "I": "observed",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -882,7 +882,7 @@
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 70.7
+        "confidence_score": 77.0
       }
     },
     {
@@ -1205,7 +1205,7 @@
         "I": "reference",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -1229,12 +1229,12 @@
         "G": "maintained",
         "E": "maintained"
       },
-      "trust_grade": "A",
+      "trust_grade": "C",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 87.5
+        "confidence_score": 68.6
       }
     },
     {
@@ -1359,7 +1359,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -1422,8 +1422,8 @@
       "axis_status": {
         "B": "observed",
         "R": "observed",
-        "I": "observed",
-        "D": "observed",
+        "I": "maintained",
+        "D": "maintained",
         "G": "observed",
         "E": "reference"
       },
@@ -1432,7 +1432,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 35.52
+        "confidence_score": 39.68
       }
     },
     {
@@ -1446,15 +1446,15 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "B",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 3,
         "source_families": 2,
-        "confidence_score": 76.05
+        "confidence_score": 71.33
       }
     },
     {
@@ -1468,7 +1468,7 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "observed",
+        "G": "maintained",
         "E": "maintained"
       },
       "trust_grade": "D",
@@ -1476,7 +1476,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 46.23
+        "confidence_score": 48.72
       }
     },
     {
@@ -1534,8 +1534,8 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -1549,7 +1549,7 @@
       "domain": "CPR",
       "external_id": "CPR-056",
       "name": "동양생명",
-      "publish_status": "eligible",
+      "publish_status": "shadow",
       "axes_available": 4,
       "axis_status": {
         "B": "observed",
@@ -1559,12 +1559,12 @@
         "G": "observed",
         "E": "maintained"
       },
-      "trust_grade": "C",
+      "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 4,
         "source_families": 2,
-        "confidence_score": 58.17
+        "confidence_score": 46.25
       }
     },
     {
@@ -1674,7 +1674,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 33.16
+        "confidence_score": 33.15
       }
     },
     {
@@ -1688,8 +1688,8 @@
         "R": "observed",
         "I": "observed",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -1776,8 +1776,8 @@
         "R": "observed",
         "I": "reference",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -1930,8 +1930,8 @@
         "R": "observed",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -2503,7 +2503,7 @@
         "I": "reference",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -2576,7 +2576,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 38.08
+        "confidence_score": 38.89
       }
     },
     {
@@ -2591,7 +2591,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -2613,7 +2613,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -2862,7 +2862,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 46.39
+        "confidence_score": 47.36
       }
     },
     {
@@ -3559,7 +3559,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -3602,8 +3602,8 @@
         "R": "observed",
         "I": "observed",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -3764,7 +3764,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 31.23
+        "confidence_score": 31.24
       }
     },
     {
@@ -3823,7 +3823,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -3889,7 +3889,7 @@
         "I": "reference",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -3976,15 +3976,15 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 41.43
+        "confidence_score": 42.56
       }
     },
     {
@@ -4087,7 +4087,7 @@
         "I": "observed",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -4219,7 +4219,7 @@
         "I": "observed",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -4482,8 +4482,8 @@
         "R": "reference",
         "I": "reference",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "C",
       "collection_status": "success",
@@ -4681,7 +4681,7 @@
         "I": "observed",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -4835,7 +4835,7 @@
         "I": "observed",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -5142,8 +5142,8 @@
         "R": "reference",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "C",
       "collection_status": "success",
@@ -5370,7 +5370,7 @@
       "trust_basis": {
         "axes_available": 4,
         "source_families": 3,
-        "confidence_score": 62.81
+        "confidence_score": 62.82
       }
     },
     {
@@ -5436,7 +5436,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 3,
-        "confidence_score": 45.45
+        "confidence_score": 46.32
       }
     },
     {
@@ -5451,7 +5451,7 @@
         "I": "reference",
         "D": "reference",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "C",
       "collection_status": "success",
@@ -5626,8 +5626,8 @@
         "R": "reference",
         "I": "reference",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "C",
       "collection_status": "success",
@@ -5714,8 +5714,8 @@
         "R": "observed",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -5868,8 +5868,8 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "B",
       "collection_status": "success",
@@ -5890,7 +5890,7 @@
         "R": "observed",
         "I": "observed",
         "D": "reference",
-        "G": "maintained",
+        "G": "observed",
         "E": "observed"
       },
       "trust_grade": "D",
@@ -6088,7 +6088,7 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
+        "G": "observed",
         "E": "observed"
       },
       "trust_grade": "D",
@@ -6220,8 +6220,8 @@
         "R": "observed",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -6572,8 +6572,8 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "A",
       "collection_status": "success",
@@ -6726,8 +6726,8 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -6756,7 +6756,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 37.02
+        "confidence_score": 37.0
       }
     },
     {
@@ -6778,7 +6778,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 39.78
+        "confidence_score": 39.79
       }
     },
     {
@@ -6822,7 +6822,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 42.83
+        "confidence_score": 42.84
       }
     },
     {
@@ -7013,7 +7013,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -7101,7 +7101,7 @@
         "I": "reference",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -7460,7 +7460,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 38.75
+        "confidence_score": 38.76
       }
     },
     {
@@ -7541,7 +7541,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -7673,7 +7673,7 @@
         "I": "observed",
         "D": "observed",
         "G": "observed",
-        "E": "maintained"
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -7702,7 +7702,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 38.16
+        "confidence_score": 37.29
       }
     },
     {
@@ -7914,8 +7914,8 @@
         "R": "observed",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -8208,7 +8208,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 35.76
+        "confidence_score": 37.13
       }
     },
     {
@@ -8266,8 +8266,8 @@
         "R": "observed",
         "I": "observed",
         "D": "observed",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "D",
       "collection_status": "success",
@@ -8332,8 +8332,8 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "A",
       "collection_status": "success",
@@ -8376,8 +8376,8 @@
         "R": "reference",
         "I": "reference",
         "D": "reference",
-        "G": "maintained",
-        "E": "maintained"
+        "G": "observed",
+        "E": "observed"
       },
       "trust_grade": "B",
       "collection_status": "success",
@@ -8806,7 +8806,7 @@
       }
     }
   ],
-  "linked_signal_count": 95924,
-  "linked_raw_count": 78161,
-  "superseded_nonpublic_rankings": 0
+  "linked_signal_count": 94994,
+  "linked_raw_count": 77511,
+  "superseded_nonpublic_rankings": 4
 }
