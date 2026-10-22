@@ -88,7 +88,7 @@ function renderPublicity(){const[pick,a,b]=entities,top=topAxis(pick),low=lowAxi
 ['05 · 비교 대상이 보여주는 차이',`${a.name}은 ${AXIS_NAME[topAxis(a)]} ${num(a.axis_scores[topAxis(a)],1)}, ${b.name}은 ${AXIS_NAME[topAxis(b)]} ${num(b.axis_scores[topAxis(b)],1)}가 각자의 가장 높은 유효 축으로 나타났다. 이는 한 분야 안에서도 대상마다 관계를 이끄는 접점이 다를 수 있음을 보여준다. 비교 대상의 강점은 ${pick.name}의 약점을 판정하기 위한 잣대가 아니라 다른 관계 경로가 가능한지 살펴보는 분석 조건이다.`],
 ['06 · 활동량과 평판 수준',`세 대상 가운데 이번 주 활동량이 가장 큰 대상은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P다. 활동 포인트는 검증·귀속·중복 제거된 사건과 행동의 규모이며 반응의 긍정·부정 방향을 직접 말하지 않는다. 활동량이 큰 대상과 관계 지수가 높은 대상이 다를 수 있으므로 관심의 크기와 관계의 상태를 분리해 읽어야 한다.`],
 ['07 · 근거와 해석 한계',`${pick.name}의 축 상태는 ${evidenceSummary(pick)}이며 근거 신뢰등급 ${pick.trust_grade}는 평판등급이 아니다. 참조 상태의 축은 중립선으로만 표시되고 종합지수·강약 판정·결합 해석에서 제외된다. 이번 결과는 공개자료로 관측 가능한 관계를 설명하며 인기·능력·시장가치·윤리성 전체나 미래 성과를 확정하지 않는다.`],
-['08 · 다음 관측과 실무 제안',`다음 회차에서는 ${pick.name}의 ${AXIS_NAME[top]} 강점이 반복되는지와 ${AXIS_NAME[low]} 근거가 확장되는지를 함께 확인해야 한다. ${pair?pair.rule[2]:'두 축 연결'} 관점에서는 동일 사건의 반복 노출과 새로운 독립 신호를 구분해야 실제 관계 변화를 판단할 수 있다. 실무적으로는 순위 방어보다 ${pair?pair.action:'부족한 축의 직접 근거를 확보하고 같은 기준으로 반복 관측하는 절차를 우선한다.'}`]
+['08 · 다음 관측과 실무 제안',`다음 회차에서는 ${pick.name}의 ${AXIS_NAME[top]} 강점이 반복되는지와 ${AXIS_NAME[low]} 근거가 확장되는지를 함께 확인해야 한다. ${pair?pair.rule[2]:'두 축 연결'} 관점에서는 동일 사건의 반복 노출과 새로운 독립 신호를 구분해야 실제 관계 변화를 판단할 수 있다. 순위 방어보다 ${pair?pair.action:'부족한 축의 직접 근거를 확보하고 같은 기준으로 반복 관측하는 절차를 우선한다.'}`]
 ];$('publicityBody').innerHTML=blocks.map((x)=>`<section class="publicity-block"><h4>${x[0]}</h4><p>${x[1]}</p></section>`).join('');}
 showStage(1);
 })();
