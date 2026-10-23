@@ -168,6 +168,7 @@ def head(title, desc=None):
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="naver-site-verification" content="001d16d1e750f0885f28026aafffec97b3e4f93c" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
