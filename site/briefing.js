@@ -21,7 +21,7 @@ const PAIR_RULES=[
 ];
 const COLORS=['#c69c3c','#71899e','#a9787e'],RANGE=['01–10','11–12','13–15','16–19','20','21'];
 const query=new URLSearchParams(location.search),field=FIELDS.includes(query.get('field'))?query.get('field'):'ENT',language=LANGUAGES.includes(query.get('language'))?query.get('language'):'한국어';
-let stage=1,entities=[],fieldRows=[];
+let stage=1,entities=[],fieldRows=[],rankStory=[],activityStory=[];
 const $=(id)=>document.getElementById(id),num=(v,d=2)=>Number.isFinite(Number(v))?Number(v).toFixed(d):'N/R';
 const signed=(v)=>Number.isFinite(Number(v))?`${Number(v)>=0?'▲':'▼'} ${Math.abs(Number(v)).toFixed(2)}`:'—';
 const dateKo=(iso)=>{const[y,m,d]=String(iso).split('-').map(Number);return`${y}년 ${m}월 ${d}일`;};
@@ -72,7 +72,7 @@ function render(){
   renderFieldPulse();
   $('positionField').textContent=`${field} T100`;$('positionRows').innerHTML=entities.map((e,i)=>`<tr><td>${e.name}${i===0?' · MY PICK':''}</td><td>${e.rank}위</td><td>${num(e.daily_index)}</td><td class="${Number(e.score_change)>=0?'delta-up':'delta-down'}">${signed(e.score_change)}</td><td>${num(e.weekly_index)}</td><td class="${Number(e.wow_delta)>=0?'delta-up':'delta-down'}">${signed(e.wow_delta)}</td></tr>`).join('');
   const sorted=[...entities].sort((x,y)=>Number(y.daily_index)-Number(x.daily_index)),leader=sorted[0],tail=sorted.at(-1),spread=Number(leader.daily_index)-Number(tail.daily_index);$('positionNarrative').innerHTML=`<p><b>현재 위치.</b> 세 대상 가운데 ${leader.name}의 당일 지수가 ${num(leader.daily_index)}로 가장 높고, ${tail.name}과의 차이는 ${num(spread)}점입니다. 이 차이는 동일한 ${field} T100·동일 기준일 안의 상대적 간격이며 절대적 우열이나 통계적 유의성을 뜻하지 않습니다.</p><p><b>비교의 의미.</b> ${pick.name}의 ${pick.rank}위는 공개 적격 비교집합 안에서 관측된 위치입니다. 사용자가 선택한 세 대상만의 순위가 아니므로, 세 대상 사이의 점수 차이와 전체 T100 위치를 함께 보아야 합니다.</p><p><b>근거 범위.</b> ${pick.name}은 ${evidenceSummary(pick)}, ${a.name}은 ${evidenceSummary(a)}, ${b.name}은 ${evidenceSummary(b)} 상태입니다. 신뢰등급은 평판의 좋고 나쁨이 아니라 이 설명을 뒷받침하는 근거 범위를 가리킵니다.</p><p><b>읽기 한계.</b> 일별 지수는 기준일의 관계 구조이고 주간 지수는 월요일부터 현재까지의 누적 대표값입니다. 서로 다른 기간의 숫자를 직접 대체하거나 하루의 위치를 완료 주간 결과로 확정하지 않습니다.</p>`;
-  const rankStory=[
+  rankStory=[
     `${pick.name}의 전일 대비 지수는 ${signed(pick.score_change)}이며, 순위는 ${Number.isFinite(Number(pick.previous_rank))?pick.previous_rank+'위':'비교 대기'}에서 ${pick.rank}위로 관측됐습니다. 점수 변화는 대상 자체의 지수 움직임을, 순위 변화는 전체 비교집합 안의 상대 위치 변화를 설명합니다.`,
     movementReading(pick),
     `점수는 오늘의 체온처럼 대상 내부의 변화를 보여주고, 순위는 같은 시간대에 다른 대상까지 함께 움직인 결과를 보여줍니다. 두 숫자는 닮아 보이지만 서로 다른 질문에 답합니다.`,
@@ -103,7 +103,7 @@ function render(){
   renderBars(pick,$('resceneBars'),COLORS[0]);$('compareBriefs').innerHTML=entities.slice(1).map((e,i)=>`<article><small>COMPARE ${i===0?'A':'B'}</small><h4>${e.name}</h4><strong>${num(e.daily_index)}</strong><p>${e.name}은 ${AXIS_NAME[topAxis(e)]} 축이 ${num(e.axis_scores[topAxis(e)],1)}로 상대적으로 강합니다. 활동량 ${Math.round(e.activity_points||0)}P는 움직임의 규모이며 긍정 평판과 동일하지 않습니다.</p><div class="mini-axis">강한 축 ${topAxis(e)} · 낮은 축 ${lowAxis(e)}</div></article>`).join('');
   $('radarCaption').textContent=`동일 기준일·동일 ${field} T100 공개 범위의 관계 구조입니다.`;renderRadar();renderGaps();renderPairAnalysis(pick);renderActivity();
   const activityLeader=[...entities].sort((x,y)=>Number(y.activity_points||0)-Number(x.activity_points||0))[0];
-  const activityStory=[
+  activityStory=[
     `이번 주 세 대상 가운데 가장 큰 활동량은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P입니다. 이 숫자는 사건과 움직임의 규모를 보여주지만 호감의 크기나 평판의 방향을 곧바로 말하지 않습니다.`,
     `활동 포인트는 기사·공식 발표·검색·참여처럼 확인된 움직임을 대상에게 귀속한 뒤 중복을 제거해 집계합니다. 같은 내용이 여러 매체에 반복됐다고 모두 새로운 사건으로 세지 않는 이유입니다.`,
     `생활 속 비유로 보면 활동량은 매장 앞을 오간 사람 수에 가깝고, 관계 평판은 그들이 무엇을 경험하고 기억하며 다시 행동했는지를 읽는 값에 가깝습니다. 유동인구가 많다고 만족도가 자동으로 높아지는 것은 아닙니다.`,
@@ -198,3 +198,4 @@ function renderPublicity(){const[pick,a,b]=entities,top=topAxis(pick),low=lowAxi
 ];$('publicityBody').innerHTML=blocks.map((x)=>`<section class="publicity-block"><h4>${x[0]}</h4><p>${x[1]}</p></section>`).join('');}
 showStage(1);
 })();
+
