@@ -53,7 +53,11 @@ assert(html.includes('id="fieldPulseList"') && html.includes('CUMULATIVE PERFORM
 assert(js.includes('function renderFieldPulse()') && js.includes('.slice(0,20)'), 'current field TOP 20 generator missing');
 assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seven-line field interpretation missing');
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
-assert(js.includes('function buildPrintReport()') && js.includes("String(number).padStart(2,'0')} / 21"), '21-page report edition generator missing');
+assert(js.includes('function buildPrintReport()') && js.includes("String(number).padStart(2,'0')} / 23"), '23-page report edition generator missing');
+assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
+assert(js.includes('const rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
+assert(js.includes('const activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
+assert(js.includes('function printReading(') && css.includes('.print-reading'), 'print visual explanation layer missing');
 assert(js.includes("openReportOutput('pdf')") && js.includes("openReportOutput('print')"), 'PDF and print actions must be independently wired');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 
