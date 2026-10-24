@@ -43,5 +43,10 @@ assert(html.includes('id="previewPdf"') && html.includes('id="savePdf"') && html
 assert(html.includes('id="exitPdfPreview"') && js.includes('setPdfPreview'), 'full-report preview mode missing');
 assert(js.includes('requestAnimationFrame') && js.includes('window.scrollTo'), 'stage navigation must move to the next stage heading');
 assert(css.includes('background:#172534') && css.includes('.stage-pager button:hover'), 'stage pager contrast treatment missing');
+assert(html.includes('DUAL READING') && html.includes('data-reading="easy"') && html.includes('data-reading="professional"'), 'easy/professional reading switch missing');
+assert(html.includes('id="positionEasyRead"') && html.includes('id="relationshipEasyRead"') && html.includes('id="publicityEasyRead"'), 'easy reading surfaces missing');
+assert(js.includes("classList.toggle('easy-reading'"), 'dual reading interaction missing');
+assert(js.includes('실제 활동이 전혀 없었다는 뜻은 아닙니다') || js.includes('활동량도 움직임의 크기일 뿐'), 'safe activity explanation missing');
+assert(css.includes('.easy-read-card') && css.includes('.reading-mode'), 'dual reading responsive styles missing');
 
 console.log('Six-stage BRIDGE briefing contract passed.');

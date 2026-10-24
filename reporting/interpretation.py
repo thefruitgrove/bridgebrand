@@ -16,6 +16,7 @@ REFLECTIVE_ROLES = {
     "fact", "comparison", "meaning", "limitation",
     "verification_question", "practical_implication",
 }
+CLAIM_CERTAINTIES = {"confirmed", "bounded", "hypothesis", "recommendation"}
 PAGE_TITLES = {
     1: "표지와 핵심 명제", 2: "선택 대상과 BRIDGE의 공식 정의",
     3: "점수·신뢰등급·축 상태", 4: "BRIDGE 6축 독립 해석",
@@ -50,6 +51,11 @@ FORBIDDEN_PUBLIC_PATTERNS = {
     "정체성 전환력": "정의되지 않은 용어입니다.",
     "모든 사람이 긍정": "반응 강도와 방향을 분리하세요.",
     "도덕성이 낮": "E축은 도덕성 판정이 아닙니다.",
+    "마음을 측정": "공개자료로 관측 가능한 관계 신호라고 표현하세요.",
+    "유일한 해답": "측정 목적과 적용 범위를 설명하세요.",
+    "완벽한 증거": "확인된 근거와 해석 한계를 함께 제시하세요.",
+    "철옹성": "관측된 구조를 중립적으로 설명하세요.",
+    "반등할 것이다": "미래 점수 예측 대신 다음 관측 질문을 제시하세요.",
 }
 
 
@@ -58,12 +64,18 @@ class Claim:
     text: str
     role: str
     evidence_keys: tuple[str, ...] = ()
+    certainty: str = "bounded"
+    audience: str = "professional"
 
     def __post_init__(self):
         if self.role not in REFLECTIVE_ROLES:
             raise ValueError(f"Unknown claim role: {self.role}")
         if not self.text.strip():
             raise ValueError("Empty analysis sentence")
+        if self.certainty not in CLAIM_CERTAINTIES:
+            raise ValueError(f"Unknown claim certainty: {self.certainty}")
+        if self.audience not in {"easy", "professional"}:
+            raise ValueError(f"Unknown claim audience: {self.audience}")
 
 
 @dataclass(frozen=True)

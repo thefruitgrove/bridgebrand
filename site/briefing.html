@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261014">
-<link rel="stylesheet" href="style.css?v=20261018-mobilebrand2"><link rel="stylesheet" href="briefing.css?v=20261022-dsse1">
+<link rel="stylesheet" href="style.css?v=20261018-mobilebrand2"><link rel="stylesheet" href="briefing.css?v=20261025-dualread1">
 </head>
 <body class="briefing-page">
 <nav class="nav on-dark"><div class="nav-inner">
@@ -40,6 +40,10 @@
   </nav>
 
   <div class="briefing-status"><span id="progressText">01 / 06 · SIGNAL GUIDE</span><div><i id="progressBar"></i></div><small>REPORT CHAPTER <b id="chapterRange">01–06</b></small></div>
+  <div class="reading-mode" aria-label="설명 깊이 선택">
+    <div><b>DUAL READING</b><span>같은 데이터를 쉬운 해석과 전문가 분석으로 읽습니다.</span></div>
+    <div role="group"><button type="button" data-reading="easy">쉬운 해석</button><button type="button" data-reading="professional" class="active">전문가 분석</button></div>
+  </div>
 
   <section class="briefing-stage active" data-stage-panel="1">
     <aside class="chapter-nav" aria-label="지수 이해 세부 목차"><b>IN THIS STEP</b><a href="#sg-definition">BRIDGE 공식 정의</a><a href="#sg-reading">숫자 읽기</a><a href="#sg-axes">여섯 축</a><a href="#sg-index">종합지표</a></aside>
@@ -64,7 +68,7 @@
 
   <section class="briefing-stage" data-stage-panel="3" hidden>
     <aside class="chapter-nav"><b>IN THIS STEP</b><a href="#pr-meaning">순위의 의미</a><a href="#pr-position">현재 위치</a><a href="#pr-change">등락 읽기</a></aside>
-    <article class="stage-content"><header class="stage-heading"><span>03 · POSITION READ</span><h2>순위는 결론이 아니라,<br>관계 구조로 들어가는 입구입니다.</h2><p>BRIDGE 순위는 같은 날짜와 대상군에서 관측된 관계 평판 수준의 상대적 위치입니다.</p></header>
+    <article class="stage-content"><header class="stage-heading"><span>03 · POSITION READ</span><h2>순위는 결론이 아니라,<br>관계 구조로 들어가는 입구입니다.</h2><p>BRIDGE 순위는 같은 날짜와 대상군에서 관측된 관계 평판 수준의 상대적 위치입니다.</p></header><div class="easy-read-card" id="positionEasyRead"></div>
       <section id="pr-meaning"><div class="meaning-split"><article><h3>순위가 의미하는 것</h3><ul><li>현재 관계 평판의 상대적 위치</li><li>같은 분야 T100 안에서의 비교 결과</li><li>공개 근거로 관측된 종합적 관계 상태</li></ul></article><article><h3>순위만으로 의미하지 않는 것</h3><ul><li>절대적 인기·능력·시장가치</li><li>모든 공중의 실제 인식</li><li>도덕성·인격 또는 미래 성공</li></ul></article></div></section>
       <section id="pr-position"><h3>세 대상의 현재 위치</h3><div class="position-table-wrap"><table class="position-table"><thead><tr><th>대상</th><th id="positionField">T100</th><th>당일</th><th>전일 대비</th><th>이번 주</th><th>WoW</th></tr></thead><tbody id="positionRows"></tbody></table></div><div class="explanation-stack" id="positionNarrative"></div><p class="section-conclusion">순위 번호만이 아니라 점수 차이와 방향, 근거 신뢰등급을 함께 봐야 합니다.</p></section>
       <section id="pr-change"><h3 id="rankChangeTitle">중심 대상의 현재 변화를 읽습니다</h3><div class="explanation-stack" id="rankChangeCopy"><p>데이터를 확인하고 있습니다.</p></div><div class="interpretation-note"><b>왜 점수와 순위를 함께 보아야 하나요?</b><p>순위는 비교군 전체의 상대적 움직임을 반영합니다. 대상의 점수가 내려가도 다른 대상의 변화가 더 크면 순위는 오를 수 있습니다. 반대로 점수가 올라도 주변 대상이 더 크게 오르면 순위는 유지되거나 내려갈 수 있습니다.</p></div><p class="section-conclusion">현재 위치를 읽었습니다. 이제 세 대상의 여섯 축과 변화 구조를 실제로 분석합니다.</p></section>
@@ -73,7 +77,7 @@
 
   <section class="briefing-stage" data-stage-panel="4" hidden>
     <aside class="chapter-nav"><b>IN THIS STEP</b><a href="#ri-overview">분석 개요</a><a href="#ri-pick">MY PICK</a><a href="#ri-compare">비교 대상</a><a href="#ri-structure">구조 비교</a><a href="#ri-change">변화 분석</a></aside>
-    <article class="stage-content"><header class="stage-heading"><span>04 · RELATIONSHIP INTELLIGENCE</span><h2>세 대상의 차이는<br>점수보다 구조에서 선명해집니다.</h2><p id="relationshipIntro">중심 대상과 비교 대상의 강한 축, 낮은 축, 활동량과 다음 관계 과제를 같은 기준으로 비교합니다.</p></header>
+    <article class="stage-content"><header class="stage-heading"><span>04 · RELATIONSHIP INTELLIGENCE</span><h2>세 대상의 차이는<br>점수보다 구조에서 선명해집니다.</h2><p id="relationshipIntro">중심 대상과 비교 대상의 강한 축, 낮은 축, 활동량과 다음 관계 과제를 같은 기준으로 비교합니다.</p></header><div class="easy-read-card" id="relationshipEasyRead"></div>
       <section id="ri-overview"><h3>분석 개요</h3><div class="entity-summary" id="entitySummary"></div></section>
       <section id="ri-pick"><span class="subject-label">MY PICK</span><h3 id="pickAnalysisTitle">중심 대상의 관계 구조</h3><div class="analysis-layout"><div class="axis-bars" id="resceneBars"></div><div class="analysis-copy" id="pickAnalysisCopy"><p>공개 데이터를 확인하고 있습니다.</p></div></div></section>
       <section id="ri-compare"><h3>비교 대상 기본 브리핑</h3><div class="compare-briefs" id="compareBriefs"></div></section>
@@ -85,7 +89,7 @@
 
   <section class="briefing-stage" data-stage-panel="5" hidden>
     <aside class="chapter-nav"><b>IN THIS STEP</b><a href="#pb-headline">헤드라인</a><a href="#pb-story">기사 본문</a><a href="#pb-boundary">해석 범위</a></aside>
-    <article class="stage-content"><header class="stage-heading"><span>05 · PUBLICITY BRIEF</span><h2>분석을 대중이 읽을 수 있는<br>하나의 이야기로 압축합니다.</h2><p>순위의 주목도는 살리되, 관계 구조와 해석 범위를 함께 전달합니다.</p></header>
+    <article class="stage-content"><header class="stage-heading"><span>05 · PUBLICITY BRIEF</span><h2>분석을 대중이 읽을 수 있는<br>하나의 이야기로 압축합니다.</h2><p>순위의 주목도는 살리되, 관계 구조와 해석 범위를 함께 전달합니다.</p></header><div class="easy-read-card" id="publicityEasyRead"></div>
       <section class="publicity-story" id="pb-headline"><small>BRIDGE PUBLICITY · ENT</small><h3 id="publicityHeadline">동일 스냅샷의 대외 브리핑을 구성하고 있습니다.</h3><p class="standfirst" id="publicityStandfirst">공개 데이터를 확인하고 있습니다.</p></section>
       <section class="publicity-body" id="pb-story"><div class="publicity-reading-guide"><b>읽는 순서</b><p>기준 사실에서 출발해 순위의 의미, 6축 구조, 두 축의 연결, 비교 대상과의 차이, 활동량, 해석 한계와 다음 관측 질문으로 이어집니다.</p></div><div id="publicityBody"><p>동일 기준일의 공개 데이터를 불러오고 있습니다.</p></div></section>
       <section id="pb-boundary"><div class="publicity-boundary"><b>이 브리핑이 말하는 범위</b><p>순위는 기준일과 대상군에서 관측된 상대적 위치입니다. 활동량은 긍정 평판이 아니며, 근거 신뢰등급 D는 평판등급이 아닙니다. BRIDGE는 대상의 절대적 인기·능력·가치·윤리성을 판정하지 않습니다.</p></div><p class="section-conclusion">대외 브리핑이 완성되었습니다. 마지막 단계에서 정식 PDF 보고서를 확인하고 저장할 수 있습니다.</p></section>
@@ -113,5 +117,5 @@
 <button type="button" class="pdf-preview-exit" id="exitPdfPreview" hidden>미리보기 종료 ×</button>
 
 <footer><div class="wrap"><div class="footer-top"><span class="logo brand-logo-static"><img class="brand-wordmark-image" src="assets/signalbridge-wordmark.svg?v=20261018-1" alt="SIGNALBRIDGE"></span><div class="footer-links"><a href="intelligence.html">BRIDGE INTELLIGENCE</a><a href="contact.html">문의 | 이의제기</a></div></div><p class="footer-method">시그널브릿지(SIGNALBRIDGE)는 공개자료와 공중의 관측 신호를 바탕으로 브랜드와 공중 사이의 관계를 읽습니다. BRIDGE 브랜드평판지수는 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 맥락을 구분하고, 도달(B)·반응(R)·정체성(I)·경험(D)·행동유발(G)·책임·지속(E)의 여섯 축으로 현재 위치와 관계 구성, 변화의 방향을 함께 살핍니다. 순위는 관측된 상대적 위치이며 대상의 모든 가치를 뜻하지 않습니다. 결과는 자료의 기준기간과 근거 상태, 신뢰등급을 함께 확인해 해석해야 합니다.</p><p class="footer-op">BRIDGE is developed and operated by SignalBridge.</p></div></footer>
-<script src="script.js?v=20261018-mobilebrand2" defer></script><script src="briefing.js?v=20261022-dsse2" defer></script>
+<script src="script.js?v=20261018-mobilebrand2" defer></script><script src="briefing.js?v=20261025-dualread1" defer></script>
 </body></html>
