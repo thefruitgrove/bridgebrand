@@ -11,7 +11,7 @@ for (let i = 1; i <= 6; i += 1) {
   assert(html.includes(`data-stage-panel="${i}"`), `missing stage panel ${i}`);
 }
 
-['SIGNAL GUIDE', 'CONTEXT MAP', 'POSITION READ', 'RELATIONSHIP INTELLIGENCE', 'PUBLICITY BRIEF', 'REPORT EDITION'].forEach((label) => {
+['SIGNAL GUIDE', 'FIELD PULSE', 'POSITION READ', 'RELATIONSHIP INTELLIGENCE', 'PUBLICITY BRIEF', 'REPORT EDITION'].forEach((label) => {
   assert(html.includes(label), `missing stage label: ${label}`);
 });
 
@@ -48,5 +48,13 @@ assert(html.includes('id="positionEasyRead"') && html.includes('id="relationship
 assert(js.includes("classList.toggle('easy-reading'"), 'dual reading interaction missing');
 assert(js.includes('실제 활동이 전혀 없었다는 뜻은 아닙니다') || js.includes('활동량도 움직임의 크기일 뿐'), 'safe activity explanation missing');
 assert(css.includes('.easy-read-card') && css.includes('.reading-mode'), 'dual reading responsive styles missing');
+assert(html.includes('CONTEXT MAP · INTEGRATED'), 'the former context step must be integrated into SIGNAL GUIDE');
+assert(html.includes('id="fieldPulseList"') && html.includes('CUMULATIVE PERFORMANCE · CURRENT VIEW'), 'field-specific cumulative TOP 20 step missing');
+assert(js.includes('function renderFieldPulse()') && js.includes('.slice(0,20)'), 'current field TOP 20 generator missing');
+assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seven-line field interpretation missing');
+assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
+assert(js.includes('function buildPrintReport()') && js.includes("String(number).padStart(2,'0')} / 21"), '21-page report edition generator missing');
+assert(js.includes("openReportOutput('pdf')") && js.includes("openReportOutput('print')"), 'PDF and print actions must be independently wired');
+assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 
 console.log('Six-stage BRIDGE briefing contract passed.');
