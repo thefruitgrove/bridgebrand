@@ -575,3 +575,8 @@ print("data-extraction.html written")
 # PUBLICITY is built from the same brand shell, without internal score inputs.
 from publicity.build import build_publicity
 build_publicity(head, base_header, footer)
+
+
+# Metadata-only aliases survive every deterministic rebuild.
+from tools.seo_metadata import apply_home_seo
+apply_home_seo(OUT)
