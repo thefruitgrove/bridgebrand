@@ -101,7 +101,13 @@ def apply(path: Path) -> bool:
 def main() -> None:
     files = sorted(SITE.glob("*.html")) + sorted((SITE / "site_fix").glob("*.html"))
     changed = [str(path.relative_to(SITE.parent)) for path in files if apply(path)]
+    try:
+        from tools.seo_metadata import apply_home_seo
+    except ModuleNotFoundError:
+        from seo_metadata import apply_home_seo
+    apply_home_seo(SITE)
     print(f"brand shell applied to {len(changed)} generated pages")
 
 if __name__ == "__main__":
     main()
+
