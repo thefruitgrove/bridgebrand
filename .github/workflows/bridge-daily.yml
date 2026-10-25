@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/bridge-daily.yml'
       - 'bridge_pipeline/**'
+      - 'tests/**'
+      - 'supabase/migrations/**'
       - 'engine3/uni_v43.py'
       - 'uni_builder_v43.py'
       - 'jobs/run_uni_0515.py'
