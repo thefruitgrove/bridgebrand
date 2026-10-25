@@ -1,6 +1,6 @@
 import datetime as dt
 import unittest
-from bridge_pipeline.evidence_v5 import collection_states,valid_signal,unique_signals,profile,comparison,event_activity,weighted_level,carry_valid
+from bridge_pipeline.evidence_v5 import collection_states,valid_signal,unique_signals,source_family_count,profile,comparison,event_activity,weighted_level,carry_valid
 from bridge_pipeline.verify_gov_channels import links
 D=dt.date(2026,10,14)
 class EvidenceV5Test(unittest.TestCase):
@@ -18,6 +18,10 @@ class EvidenceV5Test(unittest.TestCase):
   raw={'a':{'title':'기업A 신제품 출시 - 신문A'},'b':{'title':'기업A 신제품 출시 - 신문B'}}
   signals=[{'entity_id':'e','axis':'B','signal_type':'visibility','raw_item_id':k,'occurred_at':'2026-10-14','confidence':.7} for k in raw]
   self.assertEqual(len(unique_signals(signals,raw)),1)
+ def test_news_publishers_are_capped_independent_families(self):
+  rows=[{'source_id':'google_news_rss','evidence_publisher':p} for p in ('신문A','신문B','신문C')]
+  self.assertEqual(source_family_count(rows),2)
+  self.assertEqual(source_family_count(rows+[{'source_id':'opendart'}]),3)
  def test_reference_profile_is_numeric_but_not_observed(self):
   p=profile([{'axis':'B','score':80,'status':'measured','diagnostics':{}},{'axis':'D','score':70,'status':'carried','diagnostics':{}}],D)
   self.assertEqual(len(p['axis_scores']),6);self.assertEqual(p['axis_scores']['R'],50)

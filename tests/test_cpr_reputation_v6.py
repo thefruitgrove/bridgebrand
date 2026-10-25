@@ -30,6 +30,16 @@ class CprRelationshipEvidenceTests(unittest.TestCase):
         self.assertEqual(boycott["review_status"], "pending")
         self.assertLess(recurrence["direction"], 0)
 
+    def test_rde_expansion_keeps_adverse_claims_under_review(self):
+        rows = classify_cpr_evidence(
+            "소비자 호평 속 고객 경험 개선…배송 지연과 개인정보 유출에는 과징금"
+        )
+        by_type = {row["type"]: row for row in rows}
+        self.assertIn("cpr_relation_positive_response", by_type)
+        self.assertIn("cpr_experience_experience_improvement", by_type)
+        self.assertEqual(by_type["cpr_experience_delivery_delay"]["review_status"], "pending")
+        self.assertEqual(by_type["cpr_responsibility_privacy_breach"]["review_status"], "pending")
+
     def test_cpr_only(self):
         item = RawItem("google_news_rss", "1", "예시기업 고객 의견 반영해 품질 개선",
                        "https://example.test/1", "매체",

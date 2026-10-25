@@ -20,7 +20,7 @@ from .core import (
 )
 from .targets import TARGET_QUOTAS, load_targets, target_quota_report
 from .events import build_event_record, diagnosis_tags
-from .evidence_v5 import (POLICY_VERSION, collection_states, valid_signal, unique_signals, profile, comparison, event_activity, weighted_level, day, carry_valid)
+from .evidence_v5 import (POLICY_VERSION, collection_states, valid_signal, unique_signals, source_family_count, profile, comparison, event_activity, weighted_level, day, carry_valid)
 from .weekly_observation import AXES as WEEKLY_AXES, remediation_stage, weekly_entity_summary
 
 
@@ -703,7 +703,7 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,expires_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z&occurred_at=lt.{upper}")
     raw_items = db.select(
         "bridge_raw_items",
-        f"select=id,title,published_at&published_at=gte.{since}T00:00:00Z"
+        f"select=id,title,publisher,published_at&published_at=gte.{since}T00:00:00Z"
         f"&published_at=lt.{upper}&order=published_at.asc,id.asc",
     )
     signals = unique_signals([v for v in signals if valid_signal(v, as_of)], {r['id']:r for r in raw_items})
@@ -767,7 +767,8 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
             score = pce_score if flow_score is None else 0.70 * pce_score + 0.30 * flow_score
         else:
             score = flow_score
-        families = len({v["source_id"] for v in values})
+        families = (source_family_count(values) if entity["domain"] == "CPR"
+                    else len({v["source_id"] for v in values}))
         confidence = min(1.0, (sum(float(v["confidence"]) for v in values) / count) * min(1.0, count / 5) * min(1.0, families / 2))
         observation = {
             "entity_id": entity_id, "as_of_date": as_of.isoformat(), "axis": axis,

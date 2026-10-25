@@ -46,9 +46,28 @@ def unique_signals(signals, raw_by_id):
         title=re.sub(r'[^0-9a-z가-힣]+',' ',title).strip()
         content=stable_hash(title,day(s.get('occurred_at'))) if title else s.get('raw_item_id') or s.get('id')
         key=(s.get('entity_id'),content,s.get('axis'),s.get('signal_type'))
+        candidate={**s,'event_content_key':content,
+                   'evidence_publisher':str(raw.get('publisher') or '').strip()}
         if key not in unique or float(s.get('confidence') or 0)>float(unique[key].get('confidence') or 0):
-            unique[key]={**s,'event_content_key':content}
+            unique[key]=candidate
     return list(unique.values())
+
+def source_family_count(signals):
+    """Count independent evidence origins, not aggregator transport alone.
+
+    Google News is a transport layer. After event-level deduplication, distinct
+    named publishers can establish at most two corroborating origin families.
+    This rewards independent evidence without letting syndicated volume inflate
+    confidence. Other verified collectors remain one family per source id.
+    """
+    direct={str(s.get('source_id')) for s in signals
+            if s.get('source_id') and s.get('source_id')!='google_news_rss'}
+    publishers={str(s.get('evidence_publisher') or '').casefold().strip()
+                for s in signals if s.get('source_id')=='google_news_rss'
+                and str(s.get('evidence_publisher') or '').strip()}
+    news_families=min(2,len(publishers)) if publishers else (
+        1 if any(s.get('source_id')=='google_news_rss' for s in signals) else 0)
+    return len(direct)+news_families
 
 def profile(observations, as_of):
     by_axis={o['axis']:o for o in observations if o.get('axis') in AXES}

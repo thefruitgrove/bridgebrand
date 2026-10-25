@@ -16,12 +16,16 @@ RELATIONSHIP_POSITIVE = {
     "상생": "partner_mutuality", "동반성장": "partner_mutuality",
     "의견 반영": "responsiveness", "고객 의견": "responsiveness",
     "노사 합의": "employee_commitment", "협력사 지원": "partner_commitment",
+    "호평": "positive_response", "선호도 상승": "preference_gain",
+    "추천 의향": "recommendation_intent", "재이용 의향": "reuse_intent",
 }
 RELATIONSHIP_NEGATIVE = {
     "고객 불만": "consumer_dissatisfaction", "소비자 불만": "consumer_dissatisfaction",
     "불신": "distrust", "불매": "relationship_exit", "해지": "relationship_exit",
     "거래 중단": "partner_exit", "노사 갈등": "employee_strain",
     "협력사 갈등": "partner_strain", "갑질": "fairness_breach",
+    "혹평": "negative_response", "소비자 항의": "consumer_protest",
+    "집단 민원": "collective_complaint", "평점 하락": "rating_decline",
 }
 IDENTITY = {
     "기업 비전": "official_promise", "핵심가치": "official_promise",
@@ -42,6 +46,16 @@ CAPABILITY = {
     "보안 강화": "security_delivery", "개인정보 보호": "privacy_delivery",
     "혁신 기술 상용화": "innovation_delivery", "출시 완료": "implementation",
 }
+EXPERIENCE_POSITIVE = {
+    "고객 경험 개선": "experience_improvement", "사용성 개선": "usability_improvement",
+    "접근성 개선": "accessibility_improvement", "고객센터 강화": "support_improvement",
+    "배송 개선": "delivery_improvement", "서비스 정상화": "service_recovery",
+}
+EXPERIENCE_NEGATIVE = {
+    "접속 장애": "service_outage", "서비스 장애": "service_outage",
+    "배송 지연": "delivery_delay", "제품 결함": "product_defect",
+    "품질 불만": "quality_complaint", "고객정보 유출": "customer_data_breach",
+}
 LIFECYCLE = {
     "공식 확인": "acknowledged", "사과": "acknowledged", "해명": "explained",
     "조사 착수": "investigating", "리콜": "corrective_action",
@@ -56,6 +70,11 @@ RESPONSIBILITY = {
     "소비자 보호": "consumer_protection", "준법경영": "compliance",
     "윤리경영": "ethics", "투명경영": "transparency",
     "사회공헌": "social_contribution", "지역사회 협력": "community_partnership",
+}
+RESPONSIBILITY_ADVERSE = {
+    "과징금": "regulatory_penalty", "행정처분": "administrative_action",
+    "시정명령": "corrective_order", "개인정보 유출": "privacy_breach",
+    "안전사고": "safety_incident", "반복 적발": "repeat_violation",
 }
 DISCOVERY = {
     "입소문": "organic_discovery", "외신 주목": "cross_market_discovery",
@@ -87,6 +106,12 @@ def classify_cpr_evidence(title: str) -> list[dict]:
     for term, concept in _matches(title, CAPABILITY):
         rows.append({"axis": "G", "type": f"cpr_capability_{concept}", "direction": 1,
                      "magnitude": 8.0, "confidence": .52, "term": term, "review_status": "auto"})
+    for term, concept in _matches(title, EXPERIENCE_POSITIVE):
+        rows.append({"axis": "D", "type": f"cpr_experience_{concept}", "direction": 1,
+                     "magnitude": 9.0, "confidence": .54, "term": term, "review_status": "auto"})
+    for term, concept in _matches(title, EXPERIENCE_NEGATIVE):
+        rows.append({"axis": "D", "type": f"cpr_experience_{concept}", "direction": -1,
+                     "magnitude": 11.0, "confidence": .52, "term": term, "review_status": "pending"})
     for term, stage in _matches(title, LIFECYCLE):
         direction = -1 if stage in {"recurred", "unresolved"} else 1
         rows.append({"axis": "E", "type": f"cpr_lifecycle_{stage}", "direction": direction,
@@ -95,6 +120,9 @@ def classify_cpr_evidence(title: str) -> list[dict]:
     for term, concept in _matches(title, RESPONSIBILITY):
         rows.append({"axis": "E", "type": f"cpr_responsibility_{concept}", "direction": 0,
                      "magnitude": 8.0, "confidence": .48, "term": term, "review_status": "auto"})
+    for term, concept in _matches(title, RESPONSIBILITY_ADVERSE):
+        rows.append({"axis": "E", "type": f"cpr_responsibility_{concept}", "direction": -1,
+                     "magnitude": 12.0, "confidence": .54, "term": term, "review_status": "pending"})
     for term, concept in _matches(title, DISCOVERY):
         rows.append({"axis": "B", "type": f"cpr_discovery_{concept}", "direction": 1,
                      "magnitude": 1.0, "confidence": .54, "term": term, "review_status": "auto"})
@@ -117,6 +145,7 @@ def diagnostics(signals: Iterable[dict]) -> dict:
         "identity_concepts": concepts("cpr_identity_"),
         "action_paths": concepts("cpr_action_"),
         "capability_contexts": concepts("cpr_capability_"),
+        "experience_contexts": concepts("cpr_experience_"),
         "lifecycle_stages": concepts("cpr_lifecycle_"),
         "responsibility_concepts": concepts("cpr_responsibility_"),
         "discovery_contexts": concepts("cpr_discovery_"),
