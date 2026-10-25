@@ -123,6 +123,9 @@ jobs:
       - name: Compute shadow scores and rankings
         run: python -m bridge_pipeline.run score ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
+      - name: Audit CPR universe to T100 bottleneck
+        run: python -m bridge_pipeline.cpr_universe_audit ${AS_OF_DATE:+--date "$AS_OF_DATE"}
+
       - name: Verify V5 entity-axis-date lineage
         run: python -m bridge_pipeline.audit_v5 ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
