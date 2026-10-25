@@ -12,7 +12,9 @@ class PublicationGuardTest(unittest.TestCase):
      return [{'id':'rank'}]
    def patch(self,table,values,query):self.calls.append(query)
   db=DB();publish_daily_beta(db,dt.date(2026,10,14))
-  self.assertEqual(len(db.calls),1);self.assertIn('entity_id=in.(current)',db.calls[0])
+  self.assertEqual(len(db.calls),2)
+  self.assertNotIn('entity_id=in.',db.calls[0])
+  self.assertIn('entity_id=in.(current)',db.calls[1])
  def test_no_current_eligible_scores_blocks_publication(self):
   class DB:
    def select(self,*args):return []
