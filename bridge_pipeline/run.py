@@ -692,17 +692,20 @@ def compute_index_metrics(db: SupabaseRest, as_of: dt.date, cfg: dict, entities:
 
 def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     cfg = load_methodology()
-    # 같은 날짜를 재실행할 때 이전 실행의 적격 행이 공개 상태로 남으면 서로
-    # 다른 스냅샷의 순위가 섞인다. 현재 방법론의 당일 공개표시를 먼저 해제하고
-    # 이번 계산에서 통과한 행만 publish 단계에서 다시 공개한다.
-    db.patch("bridge_rankings", {"published_at": None}, f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}")
+    # Scoring is a staging operation. Never hide an already published snapshot
+    # before every read/write has succeeded; publication swaps the eligible set
+    # only after the new ranking has passed its guards.
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
     since = (as_of - dt.timedelta(days=28)).isoformat()
     end_utc = dt.datetime.combine(as_of + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo).astimezone(dt.timezone.utc)
     upper = end_utc.isoformat().replace("+00:00", "Z")
     signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,expires_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z&occurred_at=lt.{upper}")
-    raw_items = db.select("bridge_raw_items", f"select=id,title,published_at&published_at=gte.{since}T00:00:00Z&published_at=lt.{upper}")
+    raw_items = db.select(
+        "bridge_raw_items",
+        f"select=id,title,published_at&published_at=gte.{since}T00:00:00Z"
+        f"&published_at=lt.{upper}&order=published_at.asc,id.asc",
+    )
     signals = unique_signals([v for v in signals if valid_signal(v, as_of)], {r['id']:r for r in raw_items})
     runs = db.select("bridge_collection_runs", f"select=source_id,status,started_at,finished_at,window_start,window_end,diagnostics&window_start=gte.{since}T00:00:00Z&order=started_at.desc")
     observed_states = collection_states(runs, as_of)
@@ -950,6 +953,14 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
     candidates = db.select("bridge_rankings", f"select=id&{ranking_query}&limit=1")
     if not candidates:
         raise RuntimeError("daily beta publication blocked: no eligible CPR/ENT T100 rankings")
+    # Replace the public set only after scoring and publication guards succeed.
+    # This prevents a transient scoring failure from blanking the last valid
+    # snapshot and also removes same-day rows that are no longer eligible.
+    all_current = (
+        f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
+        f"&domain=in.({','.join(domains)})&ranking_type=in.({','.join(ranking_types)})"
+    )
+    db.patch("bridge_rankings", {"published_at": None}, all_current)
     db.patch("bridge_rankings", {"published_at": now_kst().isoformat()}, ranking_query)
     print(f"daily beta published domains={domains} ranking_types={ranking_types} date={as_of}")
 
