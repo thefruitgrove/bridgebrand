@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-26T07:42:29.744644+09:00",
+  "checked_at": "2026-10-26T11:56:29.302002+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -9,16 +9,17 @@
     "GOV-C03": {
       "status": "review",
       "homepage": "https://www.daegu.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@PowerfulDaeguTv",
-        "https://www.youtube.com/@OfficialDaeguTV"
-      ]
+      "reason": "URLError"
     },
     "GOV-C08": {
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
+    },
+    "GOV-C09": {
+      "status": "review",
+      "homepage": "https://www.gg.go.kr",
+      "reason": "TimeoutError"
     },
     "GOV-C10": {
       "status": "review",
@@ -42,7 +43,11 @@
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@gyeongnamdo",
+        "https://www.youtube.com/user/gyeongnamdo?cpath="
+      ]
     },
     "GOV-M08": {
       "status": "review",
