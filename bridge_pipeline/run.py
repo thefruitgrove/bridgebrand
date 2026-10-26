@@ -913,8 +913,7 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                     "previous_rank": prev["rank"] if prev else None,
                     "rank_change": (prev["rank"] - member["rank"]) if prev else 0,
                     "score": member["score"], "score_change": round(member["score"] - float(prev["score"]), 2) if prev else 0,
-                    "trust_grade": member["trust_grade"], "methodology_version": cfg["version"],
-                    "published_at": None
+                    "trust_grade": member["trust_grade"], "methodology_version": cfg["version"]
                 })
     if ranking_rows:
         db.upsert("bridge_rankings", ranking_rows, "as_of_date,domain,ranking_type,entity_id,methodology_version")
