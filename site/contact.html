@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="/icons/bridge-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#121923">
-<link rel="stylesheet" href="style.css?v=20261018-mobilebrand2">
+<link rel="stylesheet" href="style.css?v=20261022-briefingux2">
 <style id="hero-action-frame-critical">#hero-cinematic .hero-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;width:100%!important;max-width:320px!important}#hero-cinematic .hero-actions .btn{display:flex!important;width:100%!important;height:58px!important;min-width:0!important;box-sizing:border-box!important;padding:10px 14px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:10px!important;background:rgba(255,255,255,.045)!important;margin:0!important;font-size:12px!important;line-height:1.28!important}#hero-cinematic .hero-actions .week-link{align-items:center!important;justify-content:flex-start!important;text-align:left!important;font-size:10px!important;letter-spacing:.055em!important}#hero-cinematic .hero-actions .week-link span{display:block!important;white-space:nowrap!important}#hero-cinematic .hero-actions .publicity-link{align-items:flex-end!important;justify-content:flex-end!important;text-align:right!important}@media(max-width:650px){#hero-cinematic .hero-actions{gap:10px!important}#hero-cinematic .hero-actions .btn{height:56px!important;padding:9px 10px!important;font-size:10px!important}#hero-cinematic .hero-actions .week-link{font-size:8.5px!important;letter-spacing:.025em!important}}</style>
 </head>
 <body>
@@ -34,7 +34,7 @@
 </div>
 <nav class="nav">
   <div class="nav-inner">
-    <a class="logo brand-logo-static" href="index.html" aria-label="SIGNALBRIDGE"><img class="brand-wordmark-image" src="assets/signalbridge-wordmark.svg?v=20261018-1" alt="SIGNALBRIDGE"></a>
+    <a class="logo" href="index.html">SIGNALBRIDGE</a>
     <div class="nav-menu"><div class="nav-item"><a href="index.html" class="">HOME</a></div><div class="nav-item"><a href="this-week.html" class="">THIS WEEK</a></div>
       <div class="nav-item has-drop">
         <a href="cpr.html" class="">CPR<i aria-hidden="true"></i></a>
@@ -60,7 +60,8 @@
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top"><span class="logo">BRIDGE</span><button class="mm-close" id="mmClose" aria-label="닫기">&times;</button></div>
-  <div class="mm-group"><a href="index.html">HOME</a></div><div class="mm-group"><a href="this-week.html">THIS WEEK</a></div><div class="mm-group"><a href="publicity.html">PUBLICITY</a></div><div class="mm-group"><a href="cpr.html">CPR</a><a class="mm-child" href="cpr.html#t100">CPR B-T100</a><a class="mm-child" href="cpr.html#bc50">CPR B-BC50</a><a class="mm-child" href="cpr.html#bb50">CPR B-BB50</a></div><div class="mm-group"><a href="gov.html">GOV</a><a class="mm-child" href="gov.html#t100">GOV B-T100</a><a class="mm-child" href="gov.html#m40">GOV B-M40</a><a class="mm-child" href="gov.html#c60">GOV B-C60</a></div><div class="mm-group"><a href="uni.html">UNI</a><a class="mm-child" href="uni.html#t100">UNI B-T100</a><a class="mm-child" href="uni.html#u60">UNI B-U60</a><a class="mm-child" href="uni.html#c40">UNI B-C40</a></div><div class="mm-group"><a href="star.html">ENT</a><a class="mm-child" href="star.html#t100">ENT B-T100</a><a class="mm-child" href="star.html#am45">ENT B-AM40</a><a class="mm-child" href="star.html#aw45">ENT B-AW40</a><a class="mm-child" href="star.html#an10">ENT B-AN20</a></div>
+  <div class="mm-group"><a href="index.html">HOME</a></div><div class="mm-group"><a href="this-week.html">THIS WEEK</a></div><div class="mm-group"><a href="cpr.html">CPR</a><a class="mm-child" href="cpr.html#t100">CPR B-T100</a><a class="mm-child" href="cpr.html#bc50">CPR B-BC50</a><a class="mm-child" href="cpr.html#bb50">CPR B-BB50</a></div><div class="mm-group"><a href="gov.html">GOV</a><a class="mm-child" href="gov.html#t100">GOV B-T100</a><a class="mm-child" href="gov.html#m40">GOV B-M40</a><a class="mm-child" href="gov.html#c60">GOV B-C60</a></div><div class="mm-group"><a href="uni.html">UNI</a><a class="mm-child" href="uni.html#t100">UNI B-T100</a><a class="mm-child" href="uni.html#u60">UNI B-U60</a><a class="mm-child" href="uni.html#c40">UNI B-C40</a></div><div class="mm-group"><a href="star.html">ENT</a><a class="mm-child" href="star.html#t100">ENT B-T100</a><a class="mm-child" href="star.html#am45">ENT B-AM40</a><a class="mm-child" href="star.html#aw45">ENT B-AW40</a><a class="mm-child" href="star.html#an10">ENT B-AN20</a></div>
+  <a href="publicity.html" class="mm-util">PUBLICITY</a>
   <a href="methodology.html" class="mm-util">INDEX</a><a href="data-extraction.html" class="mm-util">DATA TRACE</a><a href="trust.html" class="mm-util">신뢰등급</a>
   <a href="about.html" class="mm-util">시그널브릿지 회사소개</a>
 </div>
@@ -146,16 +147,16 @@
 <footer>
   <div class="wrap">
     <div class="footer-top">
-      <span class="logo brand-logo-static" aria-label="SIGNALBRIDGE"><img class="brand-wordmark-image" src="assets/signalbridge-wordmark.svg?v=20261018-1" alt="SIGNALBRIDGE"></span>
+      <span class="logo">SIGNALBRIDGE</span>
       <div class="footer-links">
         <a href="about.html">시그널브릿지 회사소개</a>
         <a href="contact.html">문의 | 이의제기</a>
       </div>
     </div>
     <p class="footer-op">BRIDGE is developed and operated by SignalBridge.</p>
-    <p class="footer-note">시그널브릿지(SIGNALBRIDGE)는 공개자료와 공중의 관측 신호를 바탕으로 브랜드와 공중 사이의 관계를 읽습니다. BRIDGE 브랜드평판지수는 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)의 맥락을 구분하고, 도달(B)·반응(R)·정체성(I)·경험(D)·행동유발(G)·책임·지속(E)의 여섯 축으로 현재 위치와 관계 구성, 변화의 방향을 함께 살핍니다. 순위는 관측된 상대적 위치이며 대상의 모든 가치를 뜻하지 않습니다. 결과는 자료의 기준기간과 근거 상태, 신뢰등급을 함께 확인해 해석해야 합니다.</p>
+    <p class="footer-note">시그널브릿지(SIGNALBRIDGE)는 공개자료에서 확인되는 신호를 바탕으로 브랜드와 공중 사이의 평판을 반복 관측합니다. BRIDGE 브랜드평판지수는 기업(CPR), 공공기관(GOV), 대학(UNI), 공인(ENT)을 각 분야의 맥락 안에서 살피고, 도달(B)·반응(R)·정체성(I)·경험(D)·행동유발(G)·책임·지속(E)의 여섯 축으로 현재 수준과 축별 구성, 변화의 흐름을 설명합니다. 순위는 같은 분야·같은 기준일·같은 공개 범위에서 관측된 상대적 위치이며, 대상의 절대적 가치나 능력 전체를 판정하지 않습니다. 결과를 읽을 때는 기준기간, 축의 관측·유지·참조 상태, 비교 가능 여부와 근거 신뢰등급을 함께 확인해야 합니다.</p>
   </div>
 </footer>
-<script src="script.js?v=20261018-mobilebrand2" defer></script>
+<script src="script.js?v=20261022-intelligence-entry2" defer></script>
 </body>
 </html>

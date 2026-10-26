@@ -214,6 +214,7 @@ def base_header(active):
 PRE_INDEX_NOTICE = "본 결과는 BRIDGE 모형의 초기 데이터 파이프라인을 검증하기 위한 예비지수이며, 데이터 범위와 신뢰등급에 따라 순위가 수정될 수 있습니다."
 
 from presentation.public_copy import FOOTER_COPY, INDEX, TRUST, TRACE, ABOUT
+from presentation.editorial_standard import DOMAIN_COPY, audit_public_copy
 FOOTER_NOTES = {"index": FOOTER_COPY}
 
 def footer(page_key):
@@ -295,7 +296,7 @@ def build_hero():
       </div>
     </div>
     <div class="hero-bottom">
-      <div class="hero-tagline">화제의 크기가 아니라<br>신뢰가 움직이는 방향을 읽습니다.
+      <div class="hero-tagline">순위는 보여주되,<br>순위만으로 평판을 단정하지 않습니다.
         <div class="hero-identity">BRIDGE 브랜드평판지수 INDEX™</div>
       </div>
       <div class="hero-explore">
@@ -333,9 +334,9 @@ def real_list_page(active, page, title, note, model_blurb, seg_html, panels_html
       <div class="pilot-notice">{model_blurb}</div>
       {build_pilot.period_selector_html(page, period_unit)}
       <div class="rk-legend">
-        <span class="rk-legend-item"><b>점수</b> 0~100점 (높을수록 긍정)</span>
-        <span class="rk-legend-item"><b>N/R</b> 근거 부족으로 미산출(Not Rated)</span>
-        <span class="rk-legend-item"><span class="trust-badge grade-A" style="font-size:11px">A</span>~<span class="trust-badge grade-D" style="font-size:11px">D</span> 신뢰등급(근거의 양·질)</span>
+        <span class="rk-legend-item"><b>점수</b> 관측·유지 상태의 유효 축을 반영한 지수</span>
+        <span class="rk-legend-item"><b>N/R</b> 산출 또는 비교에 필요한 조건이 충족되지 않은 상태</span>
+        <span class="rk-legend-item"><span class="trust-badge grade-A" style="font-size:11px">A</span>~<span class="trust-badge grade-D" style="font-size:11px">D</span> 평판등급이 아닌 근거 신뢰등급</span>
       </div>
       <div class="rk-toolbar">
         <input type="search" class="rk-search" data-page="{page}" placeholder="이름으로 검색…" aria-label="대상 이름 검색">
@@ -363,13 +364,8 @@ cpr_panels_html = (
     f'<div class="rk-panel hidden" id="cpr-bb50">{build_pilot.cpr_rows("B2B")}</div>'
 )
 cpr_html = real_list_page(
-    "CPR", "cpr", "CPR — 시장의 소음을 걷어낸 진짜 가치, Corporate",
-    "대한민국을 대표하는 상장 기업 100곳, 그 이면의 진짜 평판을 읽어냅니다. 산업별 특성에 꼭 맞게 "
-    "전체 기업(B-T100), 소비자 직접접점 기업(B-BC50), 기업·산업재 중심 기업(B-BB50) 3가지 기준으로 세분화하여 "
-    "가장 유의미한 결과를 보여드립니다. 지금 보시는 데이터는 BRIDGE 모델의 정밀한 알고리즘을 통해 "
-    "도출되는 평판 지표입니다. 억지로 점수를 채워 순위를 고정하는 낡은 방식은 지양합니다. 검증된 데이터에 따라 "
-    "평판 지수가 어떻게 갱신되는지, 그 정직한 변화 과정을 투명하게 경험해 보세요.",
-    build_pilot.MODEL_BLURBS["CPR"],
+    "CPR", "cpr", DOMAIN_COPY["CPR"]["title"], DOMAIN_COPY["CPR"]["deck"],
+    '<div class="model-title">Corporate Public Relations Index</div><div class="model-explain">'+DOMAIN_COPY["CPR"]["model"]+'</div><div class="model-source"><i>'+DOMAIN_COPY["CPR"]["source"]+'</i></div>',
     cpr_seg_html, cpr_panels_html, footer_key="cpr", desc='BRIDGE CPR — 코스피·코스닥 상장기업의 공중관계 평판 지수. 시가총액·ESG·논란·행동유발을 6개 축으로 진단합니다.'
 )
 cpr_html = cpr_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>")
@@ -388,13 +384,8 @@ star_panels_html = (
     f'<div class="rk-panel hidden" id="star-an10">{build_pilot.star_rows("AN")}</div>'
 )
 star_html = real_list_page(
-    "ENT", "star", "ENT — 스포트라이트 이면에서 증명된 품격, 광고모델·공인",
-    "대중의 시선이 머무는 100명의 공인, 그 화려한 스포트라이트 이면에 자리한 진짜 평판을 읽어냅니다. "
-    "의미 없는 통합 순위를 지양하고 대상의 특성을 고려하여 전체(B-T100), 남자 광고모델(B-AM40), "
-    "여자 광고모델(B-AW40), 라이징 스타(B-AN20)의 네 가지 시선으로 평판을 입체적으로 분해합니다. 본 지수는 기존 매체들이 "
-    "관행적으로 발표하던 기성 평판 순위를 일절 인용하지 않은 독자적 지표입니다. 철저한 제로 베이스에서 출발하여, "
-    "출처가 명확하고 검증 가능한 데이터만이 누적됨에 따라 지수가 갱신되는 과정을 투명하게 공개합니다.",
-    build_pilot.MODEL_BLURBS["STAR"],
+    "ENT", "star", DOMAIN_COPY["ENT"]["title"], DOMAIN_COPY["ENT"]["deck"],
+    '<div class="model-title">Star Public Reputation Index</div><div class="model-explain">'+DOMAIN_COPY["ENT"]["model"]+'</div><div class="model-source"><i>'+DOMAIN_COPY["ENT"]["source"]+'</i></div>',
     star_seg_html, star_panels_html, footer_key="star", desc='BRIDGE ENT — 광고모델·공인의 공중 평판 지수. SNS 도달·논란·화제성을 6개 축으로 진단합니다.'
 )
 star_html = star_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>")
@@ -410,14 +401,8 @@ gov_panels_html = (
     f'<div class="rk-panel hidden" id="gov-c60">{build_pilot.gov_c60_rows()}</div>'
 )
 gov_html = real_list_page(
-    "GOV", "gov", "GOV — 공중의 일상과 교감하는 신뢰의 파동, 공공기관",
-    "정부 부처와 지자체, 공기업을 아울러 대한민국 공공 영역을 대표하는 100대 기관의 실질적인 평판을 심층 진단합니다. "
-    "기관의 역할과 성격이 다름에도 획일적으로 순위를 매기는 관행을 탈피하기 위해, 전체 통합(B-T100), "
-    "중앙행정기관(B-M40), 지자체 및 공공기관(B-C60)으로 그룹을 나누어 맞춤형 분석 결과를 제공합니다. "
-    "현재 공개된 수치는 고도화된 BRIDGE 분석 체계를 통해 도출되는 평판 지표입니다. 이 지표는 완성된 BRIDGE "
-    "알고리즘이 실시간으로 구동되어 산출하는 최종 결과물입니다. 베일에 싸인 데이터가 아니라, 명확히 입증할 수 있는 "
-    "실체적 데이터가 누적됨에 따라 공공기관 평판의 궤적은 스스로 정직하게 움직입니다.",
-    build_pilot.MODEL_BLURBS["GOV"],
+    "GOV", "gov", DOMAIN_COPY["GOV"]["title"], DOMAIN_COPY["GOV"]["deck"],
+    '<div class="model-title">Government Public Communication Index</div><div class="model-explain">'+DOMAIN_COPY["GOV"]["model"]+'</div><div class="model-source"><i>'+DOMAIN_COPY["GOV"]["source"]+'</i></div>',
     gov_seg_html, gov_panels_html, footer_key="gov", desc='BRIDGE GOV — 중앙행정기관·공공기관의 공공소통 평판 지수. 예산·경영평가·중대재해·이용지표를 6개 축으로 진단합니다.'
 )
 gov_html = gov_html.replace("</body>", build_pilot.BRIDGE_MODAL_HTML + "</body>")
@@ -438,13 +423,8 @@ uni_panels_html = (
     f'<div class="rk-panel hidden" id="uni-waiting">{build_pilot.uni_rows_dynamic(_uni_waiting)}</div>'
 )
 uni_html = real_list_page(
-    "UNI", "uni", "UNI — 상아탑이 뿜어내는 고유한 철학의 온도, 대학",
-    "대한민국 고등교육 생태계를 견인하는 100대 대학(4년제 60개교, 2년제 40개교)의 실질적인 평판을 심층 진단합니다. "
-    "학제가 다른 교육 기관들을 획일적으로 섞어 줄 세우는 관행을 탈피하기 위해, 전체 통합(B-T100), 4년제 대학(B-U60), "
-    "2년제 대학(B-C40)으로 그룹을 나누어 맞춤형 분석 결과를 제공합니다. 현재 공개된 수치는 고도화된 BRIDGE 분석 "
-    "체계를 통해 도출되는 평판 지표입니다. 출처가 불분명한 이면의 데이터는 철저히 배제하며, 오직 투명하게 공개된 "
-    "검증 데이터만을 바탕으로 지수가 갱신되는 과정을 명확히 공개합니다.",
-    build_pilot.MODEL_BLURBS["UNI"],
+    "UNI", "uni", DOMAIN_COPY["UNI"]["title"], DOMAIN_COPY["UNI"]["deck"],
+    '<div class="model-title">University Brand Reputation Index</div><div class="model-explain">'+DOMAIN_COPY["UNI"]["model"]+'</div><div class="model-source"><i>'+DOMAIN_COPY["UNI"]["source"]+'</i></div>',
     uni_seg_html, uni_panels_html, footer_key="index", period_unit="month",
     desc="BRIDGE UNI — 전국 대학의 브랜드 평판 지수. 전임교원 여건·경쟁률·논란을 재학생 경험 중심으로 진단합니다."
 )
@@ -561,6 +541,15 @@ import importlib
 importlib.reload(build_pilot)
 data_extraction_html = head("DATA TRACE — 근거의 맥락", "공개자료의 시점·귀속·유효성과 비교 가능성을 읽는 원칙.") + base_header("INDEX") + TRACE + footer("index")
 with open(f"{OUT}/data-extraction.html","w",encoding="utf-8") as f: f.write(data_extraction_html)
+
+# Public-language QA is separate from numerical validation.  Fail the build on
+# indefensible promotional language while keeping softer repetition warnings visible.
+for _page in (index_html, this_week_html, cpr_html, gov_html, uni_html, star_html,
+              methodology_html, trust_html, about_html, data_extraction_html):
+    _warnings = audit_public_copy(_page)
+    _fatal = [w for w in _warnings if w.startswith('과장·모호 표현:')]
+    if _fatal:
+        raise ValueError('Public copy validation failed: ' + '; '.join(_fatal))
 
 # site_fix is retained as a compatibility mirror by the legacy deployment layout.
 # Keep it synchronized so an old directly-addressable URL cannot expose stale copy.

@@ -32,7 +32,7 @@ assert(js.includes("if(entities.some((entity)=>!entity))"), 'briefing must rejec
 assert(html.includes('id="positionNarrative"'), 'position explanation layer missing');
 assert(html.includes('id="pairGrid"'), '15-pair DSSE interpretation surface missing');
 assert(js.includes("['08 · 다음 관측과 실무 제안'"), 'PUBLICITY eight-block explanation missing');
-assert(js.includes('실무적 시사점.'), 'practical implication generation missing');
+assert(js.includes('활용 제안.'), 'practical implication generation missing');
 assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
 assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');

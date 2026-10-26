@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 from presentation.home import published_rows,render_home
 from presentation.public_copy import FOOTER_COPY
+from presentation.editorial_standard import CHANNEL_RULES, TERM_POLICY, audit_public_copy
 
 class PublicCopyTests(unittest.TestCase):
  def test_home_uses_only_published_date_and_t100(self):
@@ -22,4 +23,13 @@ class PublicCopyTests(unittest.TestCase):
    if '<footer>' in content:
     self.assertIn(FOOTER_COPY,content,str(path))
     self.assertNotIn('왜곡 없는 브랜드의 본연의 가치',content,str(path))
+ def test_editorial_audit_blocks_indefensible_superlatives(self):
+  warnings=audit_public_copy('완벽하게 오차 없이 진짜 평판을 증명합니다.')
+  self.assertTrue(any('완벽하게' in warning for warning in warnings))
+  self.assertTrue(any('오차 없이' in warning for warning in warnings))
+ def test_editorial_spec_separates_channels_and_flags_abstract_repetition(self):
+  self.assertEqual({'homepage','report','publicity'},set(CHANNEL_RULES))
+  self.assertIn('기준일',TERM_POLICY['recommended'])
+  warnings=audit_public_copy('관계 구조. 관계 구조. 관계 구조. 관계 구조.')
+  self.assertTrue(any('추상 명사 반복' in warning for warning in warnings))
 if __name__=='__main__':unittest.main()

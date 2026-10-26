@@ -55,7 +55,7 @@ From the next prepared issue, PUBLICITY passes through a read-only interpretatio
 
 The audit may hold a future issue when a blocking contract fails. It does not rewrite an already public article and does not expose internal exploratory thresholds or reconstructed weight ranges.
 
-### Non-abbreviating analysis contract (publicity-rules-3.2)
+### Non-abbreviating analysis contract (publicity-rules-4.0-editorial)
 
 From issues prepared after 2026-10-21, factual caution cannot be used as a reason to shorten the explanation. The audit enforces both truthfulness and a minimum explanatory volume.
 

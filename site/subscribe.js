@@ -9,7 +9,7 @@ var plans={
   {id:'SIGNATURE',name:'BRIDGE SIGNATURE',limit:10,cycle:'주 7회',brief:'월~일 스페셜',desc:'상시 의사결정을 위한 최상위 연속 분석'}
  ],
  once:[
-  {id:'SNAPSHOT',name:'BRIDGE SNAPSHOT',limit:1,cycle:'1회',brief:'일반 브리핑',desc:'선택 시점의 관계 구조를 한 번에 확인'},
+  {id:'SNAPSHOT',name:'BRIDGE SNAPSHOT',limit:1,cycle:'1회',brief:'일반 브리핑',desc:'선택 시점의 지수와 여섯 축, 근거 상태를 한 번에 확인'},
   {id:'DEEP_DIVE',name:'BRIDGE DEEP DIVE',limit:1,cycle:'1회',brief:'스페셜 브리핑',desc:'사건과 변화 원인을 시각 자료와 함께 심층 분석'}
  ],
  enterprise:[{id:'ENTERPRISE',name:'BRIDGE ENTERPRISE T100',limit:100,cycle:'맞춤',brief:'범위·주기·언어 협의',desc:'T100 전체 또는 조직 목적에 맞춘 별도 설계'}]

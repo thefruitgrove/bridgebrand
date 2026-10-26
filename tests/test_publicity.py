@@ -59,17 +59,17 @@ class PublicityTests(unittest.TestCase):
   articles,_=articles_for(self.history(),dt.date(2026,10,16))
   for article in articles:
    payload=article['payload']
-   self.assertEqual(payload['template_version'],'publicity-rules-3.2')
+   self.assertEqual(payload['template_version'],'publicity-rules-4.0-editorial')
    self.assertEqual(sum(len(s['paragraphs']) for s in payload['sections']),7)
    self.assertEqual([len(s['paragraphs']) for s in payload['sections']],[2,2,1,2])
    self.assertEqual([s['heading'] for s in payload['sections'][1:]],[
-    '선두 밖에서도 읽히는 관계의 차이',
+            '상위권 안에서 달라지는 6축 프로필',
     '활동의 크기와 평판의 방향은 다른 신호',
     '관측 범위와 다음 해석의 경계',
    ])
    self.assertIn('2026년 10월 16일',payload['sections'][0]['paragraphs'][0])
    self.assertIn('해당 분야 전체의 절대적 수준을 대변하지 않는다',payload['sections'][0]['paragraphs'][0])
-   self.assertIn('향후 순위 상승을 예고하는 것은 경계해야 한다',payload['sections'][1]['paragraphs'][1])
+   self.assertIn('다음 순위를 예측해서는 안 된다',payload['sections'][1]['paragraphs'][1])
  def test_korean_particles_do_not_repeat_known_errors(self):
   h=self.history()
   names={'CPR':'디어유','GOV':'진주시','UNI':'고려대학교','ENT':'방탄소년단'}

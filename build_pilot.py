@@ -3194,30 +3194,29 @@ def this_week_digest_html():
   </header>
   <section class="section tw-about">
     <div class="wrap">
-      <h2 class="tw-about-h">이 페이지에 대하여</h2>
-      <p class="tw-about-p">평판은 한 자리에 머물러 있는 숫자가 아닙니다. 매 순간 사람들의 반응과 이슈에 따라 끊임없이 움직이는
-      생생한 신호입니다. &lsquo;THIS WEEK&rsquo;는 이번 주, 그 움직임이 가장 뚜렷하게 나타난 브랜드들을 모아 보여주는 실시간 요약
-      코너입니다. 까다로운 데이터 검증을 거쳐, 당사의 평가 기준 중 <b>최소 2가지 이상</b>에서 의미 있는 변화를 만들어낸
-      대상만이 이곳에 소개됩니다. 크고 작은 이슈와 눈에 띄는 성과들이 브랜드의 가치를 어떻게 바꿔놓았는지, 가장 신선한
-      최신 데이터를 바로 확인해 보세요.</p>
+      <h2 class="tw-about-h">이번 주 화면이 보여주는 것</h2>
+      <p class="tw-about-p">&lsquo;THIS WEEK&rsquo;는 월요일부터 현재까지 공개된 CPR·GOV·UNI·ENT의 변화를 한 화면에 모읍니다.
+      카드의 점수는 기준일의 관측 가능한 평판 수준이고, 화살표는 동일한 비교 조건이 확보됐을 때의 변화를 나타냅니다.
+      새로 관측된 대상과 축 상태가 달라진 대상은 점수 변화만으로 설명하지 않습니다. 이 페이지는 누가 더 가치 있는지를
+      판정하는 목록이 아니라, 이번 주에 어느 대상과 어느 축을 다시 살펴볼 필요가 있는지 알려주는 관측 요약입니다.</p>
 
       <h2 class="tw-about-h">지수와 차트를 읽는 법</h2>
       <div class="tw-read">
         <div class="tw-read-item">
-          <div class="tw-read-t">여섯 개의 눈 · 레이더 차트</div>
+          <div class="tw-read-t">여섯 축 · 한 점수 안의 서로 다른 질문</div>
           <div class="tw-read-d">도달(B)·반응(R)·정체성(I)·경험(D)·행동유발(G)·책임·지속(E)의 6축 중
           <b>데이터가 존재하는 축만으로</b> 그려집니다. 빈 공간은 0점이 아니라
           '아직 측정되지 않음(N/R)'을 뜻하는 정직한 공백입니다.</div>
         </div>
         <div class="tw-read-item">
-          <div class="tw-read-t">신호의 맥락 · 서사</div>
-          <div class="tw-read-d">점수 카드에는 이번 관측에서 두드러진 BRIDGE 축과 변화 방향이 표시됩니다.
-          숫자만이 아니라 브랜드의 현재 위치와 움직임을 함께 읽을 수 있습니다.</div>
+          <div class="tw-read-t">점수와 순위 · 서로 다른 변화</div>
+          <div class="tw-read-d">점수는 대상 자체의 관측값이고 순위는 비교집합 안의 상대적 위치입니다.
+          두 값이 같은 방향으로 움직이지 않을 수 있으므로 기준일과 비교 대상 수를 함께 확인합니다.</div>
         </div>
         <div class="tw-read-item">
-          <div class="tw-read-t">검증 상태 · 신뢰</div>
-          <div class="tw-read-d">확인된 데이터 범위와 신뢰등급을 함께 제시합니다. 측정되지 않은 값은
-          임의로 채우지 않고 <b>N/R</b>로 남겨 결과의 경계를 분명히 합니다.</div>
+          <div class="tw-read-t">근거 상태 · 해석 가능한 범위</div>
+          <div class="tw-read-d">관측·유지 상태의 축은 지수에 반영하고, 참조값은 화면의 기준선으로만 표시합니다.
+          신뢰등급은 대상의 평판등급이 아니라 이번 결과를 뒷받침하는 근거 상태입니다.</div>
         </div>
       </div>
     </div>

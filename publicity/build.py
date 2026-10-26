@@ -8,7 +8,7 @@ def build_publicity(head,header,footer):
     <a class="pub-back" href="index.html">BRIDGE / SIGNALBRIDGE</a>
     <div class="pub-kicker">THE INTERPRETATION OF SIGNALS</div>
     <h1 id="pubHeading">Publicity<span>.</span></h1>
-    <p class="pub-intro" id="pubIntro">순위 너머의 관계를 읽다.<br>브랜드의 현재 위치, 강점과 제약, 변화의 방향을 이야기합니다.</p>
+    <p class="pub-intro" id="pubIntro">순위로 시선을 열고, 여섯 축으로 이유를 설명합니다.<br>점수·활동량·근거 범위를 구분해 이번 회차에서 확인된 변화와 다음 질문을 전합니다.</p>
     <div class="pub-schedule">WED & FRI 12:00 · MON OVERALL 12:00 <span>SEOUL TIME</span></div>
   </section>
   <section id="pubBoard" class="pub-board" aria-label="주차별 PUBLICITY 기사">
@@ -20,7 +20,7 @@ def build_publicity(head,header,footer):
     <a class="pub-index-link" href="publicity.html">← ALL PUBLICITY</a>
     <div id="pubArticleContent"></div>
   </article>
-  <div class="pub-note">PUBLICITY는 공개자료에서 관측한 관계와 신호를 해석합니다. 순위는 모든 가치를 판정하지 않으며, 관측 공백은 부정 평가와 다릅니다.</div>
+  <div class="pub-note">PUBLICITY는 공개자료에서 확인된 결과를 기사 형식으로 설명합니다. 순위는 같은 분야와 공개 범위 안의 상대적 위치이며, 활동량은 긍정 평판과 같지 않습니다. 관측되지 않은 축과 수집 실패도 낮은 점수로 바꾸지 않습니다.</div>
 </main>
 <script src="publicity-config.js?v=1" defer></script><script src="publicity.js?v=20261016-5" defer></script>'''
     shell=head('BRIDGE — PUBLICITY')+header('PUBLICITY')+body+footer('index')
