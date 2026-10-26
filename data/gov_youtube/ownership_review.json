@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-26T11:56:29.302002+09:00",
+  "checked_at": "2026-10-27T03:54:50.997254+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -43,11 +43,7 @@
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@gyeongnamdo",
-        "https://www.youtube.com/user/gyeongnamdo?cpath="
-      ]
+      "reason": "URLError"
     },
     "GOV-M08": {
       "status": "review",

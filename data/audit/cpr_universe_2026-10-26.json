@@ -9,12 +9,12 @@
     "score_computed": 100,
     "publication_eligible": 79,
     "t100_generated": 79,
-    "t100_published": 0
+    "t100_published": 79
   },
   "largest_loss": {
-    "from": "t100_generated",
-    "to": "t100_published",
-    "count": 79
+    "from": "score_computed",
+    "to": "publication_eligible",
+    "count": 21
   },
   "eligibility_exclusion_reasons": {
     "confidence_below_gate": 20,

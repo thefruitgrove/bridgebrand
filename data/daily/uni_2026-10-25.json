@@ -1,7 +1,7 @@
 {
   "schema_version": "UNI-4.3",
   "data_date": "2026-10-25",
-  "run_at": "2026-10-26T11:53:04.967158+09:00",
+  "run_at": "2026-10-27T03:51:26.484344+09:00",
   "official_source": {
     "provider": "대학알리미",
     "source_file": "대학주요정보.xlsx",
@@ -18,7 +18,7 @@
       "교육비": 2026,
       "기숙사": 2025
     },
-    "retrieved_at": "2026-10-26T02:52:39.852751+00:00"
+    "retrieved_at": "2026-10-26T18:51:01.058559+00:00"
   },
   "signal_ledger": [
     {
@@ -80,20 +80,6 @@
     {
       "university_id": "UNI-D0E31B5AF98A",
       "name": "건양대학교",
-      "title": "건양대 개교 35주년 ‘KY FESTA 2026’ 개막 ”교육·의료·지역을 잇다“ - 충청타임즈",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1zWmt6S05qdTF6anZiQVJpMGhNM1dzalN0am4xTGFhempSMFhGd0pVVERsTEcxcmh1QWI2c0FEQTBRNEkxX1k4b0tReEk2cVY3Q3U3Y1hMMjc3SXZMRUxOOXI3eXg3UFB3?oc=5",
-      "source_id": "news:충청타임즈",
-      "published_at": "2026-10-25T03:07:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-D0E31B5AF98A",
-      "name": "건양대학교",
       "title": "건양대 ‘K-국방 Global IC-PBL 리더스캠프’ 개최 - 금강일보",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9Bd0cyVmpwZ19lbVRONVgtSjdqbExCcnc0MkFRa0w3S3RoaUtVY3ppeC1jeDBMT2VsR0I2WEhaSEdNWWJVQ216VDMxbGh4a1NvNWtvVEpGMEpJcGgteTIyYVF0b1gzS1hBOXc?oc=5",
@@ -106,27 +92,13 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-D0E31B5AF98A",
-      "name": "건양대학교",
-      "title": "건양중, 건양대 ‘KY FESTA’서 미래 기술·진로 체험 - nmn.ff.or.kr",
+      "university_id": "UNI-185BC8BA4EA7",
+      "name": "인하대학교",
+      "title": "인하대학교, 제주대·제주한라대와 항공우주·AI 교육 및 연구 협력 확대 - 한국강사신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TS1FhNmpYa1FNTUJORDFsWGtIUWJkMUh2VHlQMlhtOTlTMWktVEQ4dXhBQU9IUmVQOTNYaXBHMnRXMHQ5eXhidjYzNXhtNnViVlVyVmh2OElwYXpwdUE?oc=5",
-      "source_id": "news:nmn.ff.or.kr",
-      "published_at": "2026-10-25T02:51:13+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-D0E31B5AF98A",
-      "name": "건양대학교",
-      "title": "건양대, 개교 35주년 기념 ‘KY FESTA 2026’ 성황리 개최 - 충청매일",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE10VWxTM3pUNXpLdTNjR3ZaRlhmMWgxekZpOGxiM2VYTkx2MUREeU9CeVFjaEVkREVsRm9PU0tTLXZOUHlIRFZYbXFPRWhENmlnZm00TFR1cEp1SkRXVWItVjVFVkthN1lWeFE?oc=5",
-      "source_id": "news:충청매일",
-      "published_at": "2026-10-25T05:00:05+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1HUWhhUjI0NUJGa3NDVWpKSmlpcElLLTJoVUtsYlZMeUxHWVFXSDNuVHFmSUEtRWtPaC1tSXhsSm5USU1xYTR1aFBud2JONUdWZFZNSjhFTjVmaHFEN1hXZzkzRnFvY1FMbGZvNUpUOVY?oc=5",
+      "source_id": "news:한국강사신문",
+      "published_at": "2026-10-25T07:35:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -155,20 +127,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1FVWxvcHB5YmlLU2JfU1I4WWd3S2ZMSURNSDRyMHJ5c29LT2pJVEU3dmcxdjlVcDFTNVl0Q1BPbkVEWXBfSXFrTmFmelNKb2wwN2FYNW5FTnBYVGZ3SmxLZHBjd2FFcEFXQUx1Rk5obC0?oc=5",
       "source_id": "news:한국강사신문",
       "published_at": "2026-10-24T21:02:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-185BC8BA4EA7",
-      "name": "인하대학교",
-      "title": "인하대, '앵커 리더스 포럼' 개최…산·관·학·연 지역 협력 생태계 확장 - 컨슈머타임스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1vVmp5cmNzbUtmMkZDTzNXd05tbFh6amVkOXFXdm1mZFhFaXhmZ25JaTJ2RU1aYW1CUnZ2M3Z1azhLdE5VbXFIZTlJN2RfTUpJbk9NLW5jQUEyUFlCa3cyVHBZbFNwbDBlUUE?oc=5",
-      "source_id": "news:컨슈머타임스",
-      "published_at": "2026-10-25T14:52:13+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -260,13 +218,13 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-E77357DDB344",
-      "name": "건양대학교",
-      "title": "“대학·병원·지역이 通했다” 건양대 ‘2026 KY FESTA’ 역대급 호응 속 성료 - 충청투데이",
+      "university_id": "UNI-4229407FCC52",
+      "name": "연세대학교",
+      "title": "항암 유망기술 6건 ‘사업화 무대’로…연세·고려대의료원·국립암센터, 28일 공동기술설명회 - 산학뉴스",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5UYm9UV0VZa2pIRG1hYjl1c3dnQm90OGt3LVhjclhLNTJRVFJRcmxCNTR3Ti1mMjRyU1VfTE9Ray04LUROcnpRc3BpSGRwU1FrU2YwczU1djJ5X3RPNjMxS3dlQU1zTjBzOFI4N0xR?oc=5",
-      "source_id": "news:충청투데이",
-      "published_at": "2026-10-25T08:00:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9aNDlwWEEwSWY5TkF1S1d4b0V1TFllNmwtdTBuVEpVTFAyTWhwNUlzaDBIOUh4c3J2TVV1dGhYLXEtUUVCRVNLUTNWQ1hMV1dLbkhHZE1Scm82ekMzYWVlWWxja2pValkxdkRz?oc=5",
+      "source_id": "news:산학뉴스",
+      "published_at": "2026-10-25T18:35:23+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -276,11 +234,11 @@
     {
       "university_id": "UNI-E77357DDB344",
       "name": "건양대학교",
-      "title": "건양대 개교 35주년 ‘KY FESTA 2026’ 개막 ”교육·의료·지역을 잇다“ - 충청타임즈",
+      "title": "“대학·병원·지역이 通했다” 건양대 ‘2026 KY FESTA’ 역대급 호응 속 성료 - 충청투데이",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1zWmt6S05qdTF6anZiQVJpMGhNM1dzalN0am4xTGFhempSMFhGd0pVVERsTEcxcmh1QWI2c0FEQTBRNEkxX1k4b0tReEk2cVY3Q3U3Y1hMMjc3SXZMRUxOOXI3eXg3UFB3?oc=5",
-      "source_id": "news:충청타임즈",
-      "published_at": "2026-10-25T03:07:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5UYm9UV0VZa2pIRG1hYjl1c3dnQm90OGt3LVhjclhLNTJRVFJRcmxCNTR3Ti1mMjRyU1VfTE9Ray04LUROcnpRc3BpSGRwU1FrU2YwczU1djJ5X3RPNjMxS3dlQU1zTjBzOFI4N0xR?oc=5",
+      "source_id": "news:충청투데이",
+      "published_at": "2026-10-25T08:00:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -302,34 +260,6 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-E77357DDB344",
-      "name": "건양대학교",
-      "title": "건양중, 건양대 ‘KY FESTA’서 미래 기술·진로 체험 - nmn.ff.or.kr",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TS1FhNmpYa1FNTUJORDFsWGtIUWJkMUh2VHlQMlhtOTlTMWktVEQ4dXhBQU9IUmVQOTNYaXBHMnRXMHQ5eXhidjYzNXhtNnViVlVyVmh2OElwYXpwdUE?oc=5",
-      "source_id": "news:nmn.ff.or.kr",
-      "published_at": "2026-10-25T02:51:13+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-E77357DDB344",
-      "name": "건양대학교",
-      "title": "건양대, 개교 35주년 기념 ‘KY FESTA 2026’ 성황리 개최 - 충청매일",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE10VWxTM3pUNXpLdTNjR3ZaRlhmMWgxekZpOGxiM2VYTkx2MUREeU9CeVFjaEVkREVsRm9PU0tTLXZOUHlIRFZYbXFPRWhENmlnZm00TFR1cEp1SkRXVWItVjVFVkthN1lWeFE?oc=5",
-      "source_id": "news:충청매일",
-      "published_at": "2026-10-25T05:00:05+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
       "university_id": "UNI-C6E10A3A549E",
       "name": "동국대학교",
       "title": "동국대 WISE캠퍼스-경주시의회, 지역인재 정주 모델 머리 맞대 - 경북매일",
@@ -337,34 +267,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5TZHp6d21teU5hWnFKT2JVQmpBRXJoSVBRM1VtUUdtTkdQVzh4cjYzZlRMNDRCNUJMVTc0Wkd3VFViZFRXT19HY0tCbVp5bTNPdWR3SkJ6aGZFUQ?oc=5",
       "source_id": "news:경북매일",
       "published_at": "2026-10-25T02:03:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-C6E10A3A549E",
-      "name": "동국대학교",
-      "title": "동국대 WISE캠퍼스, 경주시의회와 '지역성장·인재양성' 협력 다짐 - 경북신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0wUG1OU3A3NlZsSkoxcUpEbGFsVGFzLW1QMHU3R1lRU0hnU1JsTEtHNnF4ZTFmNVFwcE5jcHN0bDhwTkNOR2JLNEpteW9LSlFaNlN5RTFmMzQ?oc=5",
-      "source_id": "news:경북신문",
-      "published_at": "2026-10-25T02:46:20+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-C6E10A3A549E",
-      "name": "동국대학교",
-      "title": "동국대 WISE캠퍼스, 경주시의회와 지역상생발전 간담회 개최 - 경주시민신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFA4bWEtSUVIRFFSZzE4NURHaHNHOHlEQ0FwUkkzaE1vd3d6TUNKa2JSekRLV1VVWEpaRGNlQm50bXpuSmtJSFFoRGhUa3JaU05Da3MzNEJ5REYtRW4yOEViaQ?oc=5",
-      "source_id": "news:경주시민신문",
-      "published_at": "2026-10-25T04:46:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -388,48 +290,6 @@
     {
       "university_id": "UNI-A3FA63129C41",
       "name": "경복대학교",
-      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:20+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:20+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:20+00:00",
-      "verification_status": "single_source",
-      "event_type": "achievement",
-      "axis": "G",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
       "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - 경기신문",
       "source_class": "independent_media",
       "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5MX0ZpTE5mSUM2UEdsdWloV014WGQ5ZE1Ud1ROcGptTkxvUkU2alpYWFB4Y3RvcVQtS2VydnFLYUFWSlNrVDNhLVlIc21HbjNlSURlNy0tbVhWeWoxTlRTS21R?oc=5",
@@ -463,48 +323,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5MX0ZpTE5mSUM2UEdsdWloV014WGQ5ZE1Ud1ROcGptTkxvUkU2alpYWFB4Y3RvcVQtS2VydnFLYUFWSlNrVDNhLVlIc21HbjNlSURlNy0tbVhWeWoxTlRTS21R?oc=5",
       "source_id": "news:경기신문",
       "published_at": "2026-10-25T08:24:02+00:00",
-      "verification_status": "single_source",
-      "event_type": "achievement",
-      "axis": "G",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:12+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:12+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
-      "source_id": "news:CNB뉴스",
-      "published_at": "2026-10-25T13:11:12+00:00",
       "verification_status": "single_source",
       "event_type": "achievement",
       "axis": "G",
@@ -524,6 +342,90 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:20+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:20+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 준오헤어디자인과, 강윤선 의장 초청 취업특강 및 장학증서 수여식 개최 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBJa1lQMWprX2VueTh6c0xrcF9mRHdvZ190WTJwQjctc3JpU2dDcWJkYVFTc0tqVGZOdUxncVk0UXNkOWFjdHRVMEN5M1hjN3R4bng4ZDBIQXJrcS0tR3phYkR0bVZ3RXJpQXJF?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:20+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:12+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:12+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-A3FA63129C41",
+      "name": "경복대학교",
+      "title": "경복대학교 영상미디어콘텐츠과, 이탈리아 소프메디카 벤처스와 산학협력협약 MOU 체결 - CNB뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4VzRvcC1Eam9COGozZE1wb20wNXQ1Nk56Z2NjR1oyZFhfM0d1NFVJa0pOUTlCSEpPMG9HdWFSMDk3eTJCLVRPRDVMRGN4Rk8tM3Q5R0dKeUxZTU1Qc2R5dTRheXZTUDFiQkM0?oc=5",
+      "source_id": "news:CNB뉴스",
+      "published_at": "2026-10-25T13:11:12+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
     },
     {
       "university_id": "UNI-A3FA63129C41",
@@ -552,20 +454,6 @@
       "axis": "I",
       "direction": 1,
       "severity": 0.45
-    },
-    {
-      "university_id": "UNI-A3FA63129C41",
-      "name": "경복대학교",
-      "title": "문신사 국가면허 시대… 경복대 의료미용과, 10년 교육 ‘눈길’ - 에너지경제신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1iNnBWdG1iaDh2LU1qYkpla2MwNXo0T2ZpclJ1VzNlUHFqc0hlV3haVkVQb2daRHVfSVVRMUppNjN6dndIUTdYbGZVWGlnY3M2SUlDOFlKWHV5SkU?oc=5",
-      "source_id": "news:에너지경제신문",
-      "published_at": "2026-10-25T02:58:33+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
     },
     {
       "university_id": "UNI-71DF76D19DD5",
@@ -631,62 +519,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE42UzNlR094VTZYckRlVVdxX2pZcDh2clpPT0p1Z3RWX0JvNFVPVlBuQUdwYTZxZUkyMFFkS1g4Rk52dFpwNW9FV2NTcEI?oc=5",
       "source_id": "news:모닝투데이",
       "published_at": "2026-10-25T05:30:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-AEFF2D8B4705",
-      "name": "서강대학교",
-      "title": "“수능 안 보고 최대 4년 전액 장학금?”…서강대 난민전형에 ‘역차별’ 논란 - 서울경제",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1RUnNJUDJPeFVoSTh4ZnhaTXFKUVU2ZDJvM3oxRnFCcjR2NHdmX3duWFhzbHRyQk1vMlRuUU5pdjl5X2luWjVxMUdqM1JjMms1ZkHSAVNBVV95cUxQX0g0aFRXUWs4VTRycFhwRWxZZjNFRVN4UHZ3ZU5Wd3l1b3dueUszYmdzLXhNYkxMcGQ0ejZub0l1b0VIcjhBZXN1eFFibXlHcHdxcw?oc=5",
-      "source_id": "news:서울경제",
-      "published_at": "2026-10-25T06:47:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-AEFF2D8B4705",
-      "name": "서강대학교",
-      "title": "“수능 안 보고 최대 4년 전액 장학금?”…서강대 난민전형에 ‘역차별’ 논란 - 서울경제",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1RUnNJUDJPeFVoSTh4ZnhaTXFKUVU2ZDJvM3oxRnFCcjR2NHdmX3duWFhzbHRyQk1vMlRuUU5pdjl5X2luWjVxMUdqM1JjMms1ZkHSAVNBVV95cUxQX0g0aFRXUWs4VTRycFhwRWxZZjNFRVN4UHZ3ZU5Wd3l1b3dueUszYmdzLXhNYkxMcGQ0ejZub0l1b0VIcjhBZXN1eFFibXlHcHdxcw?oc=5",
-      "source_id": "news:서울경제",
-      "published_at": "2026-10-25T06:47:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": -1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-AEFF2D8B4705",
-      "name": "서강대학교",
-      "title": "“수능 안 보고 최대 4년 전액 장학금?”…서강대 난민전형에 ‘역차별’ 논란 - 서울경제",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1RUnNJUDJPeFVoSTh4ZnhaTXFKUVU2ZDJvM3oxRnFCcjR2NHdmX3duWFhzbHRyQk1vMlRuUU5pdjl5X2luWjVxMUdqM1JjMms1ZkHSAVNBVV95cUxQX0g0aFRXUWs4VTRycFhwRWxZZjNFRVN4UHZ3ZU5Wd3l1b3dueUszYmdzLXhNYkxMcGQ0ejZub0l1b0VIcjhBZXN1eFFibXlHcHdxcw?oc=5",
-      "source_id": "news:서울경제",
-      "published_at": "2026-10-25T06:47:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "experience",
-      "axis": "D",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-AEFF2D8B4705",
-      "name": "서강대학교",
-      "title": "[2028대입] 정시에도 '학교장 추천'…서강대, 지역균형 90명 신설 - 교육을 비추다",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9ocTY2UThaZkdudkM2UnRkQWVubVgyR1E0TDlNZGJMMWFOQUNkek1xRld2Q3QwMF9LOFE5MUxkcE1CVldTYlRkaXM1WW5OdzVfTm03ZWROcEQyc2pHeDRVVWZOUEVyUQ?oc=5",
-      "source_id": "news:교육을 비추다",
-      "published_at": "2026-10-25T01:31:53+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -785,34 +617,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9wMUwyQzlJT0JQR3pSM1gxem5TUkRrQUxJanlQdk1EN0d6T2lqVU5RdGl1WjVLUThhM0RfSERWcTRjNi1JX2g3bEV1VERIbzhOYl8xeDdMb215X09naUsza0VZWUhLTTRSbGt1RF9BOVZzRlU?oc=5",
       "source_id": "news:동방일보",
       "published_at": "2026-10-25T14:04:36+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-D8A8FB7BBED6",
-      "name": "경기대학교",
-      "title": "최윤성 경기대 교수 “AI 공급망 보안, 사람의 문서 검증에서 기계 기반 자동 검증으로 전환해야” - 데일리시큐",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE55WlN3YkdkLTJDLTI0UjZtZ1JtTklkenQ3cGxwaG5QQ3daLUNNSjgwRkprMXdONXdiZkF0emZ0bjBCY2dKR2ZZNVdRVno2aS15QWtfZlI5bnh3UnJrakhyMjY1dXA0dkVmaFN3UA?oc=5",
-      "source_id": "news:데일리시큐",
-      "published_at": "2026-10-25T05:21:07+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-D8A8FB7BBED6",
-      "name": "경기대학교",
-      "title": "[경기청소년 매니페스토 페스티벌] “스스로 건네는 약속과 실천”…행복한 동행 위해 함께하는 우리! - 중부일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBHcnVxMEtzcy0tcGdHMU5DWUZrY0FkdGtQSF9PNjZ0V2YtbWtVWmZ3ejdSRU9lLWk2aDZoUlNZcF9mOUt1UEhLb3hFV2pBM0ZyVlhRNG5MZ2RVRFVCdUozbXlHcHJYT0kxSzNSWW5Saw?oc=5",
-      "source_id": "news:중부일보",
-      "published_at": "2026-10-25T04:31:00+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -936,7 +740,7 @@
       "name": "남부대학교",
       "title": "남부대-광주관광공사, '2026 취향의 발견 in 광주 빵페스타' 공동 주최…2만여명 방문 '대성황' - 전자신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE4wNEpzNlY5a3FVanFmdWR3bmN4VlRROXppOXE0bW9aWE9sREotN2lnVWFLUXc1T1VUQ2pSenNrUl82N1FFeXhqdDJPdDA1QQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5QSHVVQXVURjQyV1U1c2hZYmFaQU1MVTVGZjlJMEZrUFduMlJDRVJaUmIzNjllSEh4bDdEajNBcWNYanRwZU1KREctOGY?oc=5",
       "source_id": "news:전자신문",
       "published_at": "2026-10-25T08:58:03+00:00",
       "verification_status": "single_source",
@@ -992,7 +796,7 @@
       "name": "경북과학대학교",
       "title": "경북과학대 간호학과, 건보공단서 진로·취업 현장 체험 - 아이뉴스24",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5OZ0x1SlAxLW1fZm44OEFBWjJVYzZ4cEZ1em43dmRQVkVvd0p5TXNHOXVpSHhMUEhaQkk1OUdEdEh4LWFGLXZPV1lidVE?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5Ea2treFlBUDhaNmJzMzFjZnR3OVpRLTlVeTVoNmoyaDlvY3RKd19NZkNFbzR3ZVRLZGxhTjA4WWRRNzVvbTQ3OXBHSQ?oc=5",
       "source_id": "news:아이뉴스24",
       "published_at": "2026-10-25T06:38:42+00:00",
       "verification_status": "single_source",
@@ -1006,7 +810,7 @@
       "name": "경북과학대학교",
       "title": "경북과학대 간호학과, 건보공단서 진로·취업 현장 체험 - 아이뉴스24",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5OZ0x1SlAxLW1fZm44OEFBWjJVYzZ4cEZ1em43dmRQVkVvd0p5TXNHOXVpSHhMUEhaQkk1OUdEdEh4LWFGLXZPV1lidVE?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5Ea2treFlBUDhaNmJzMzFjZnR3OVpRLTlVeTVoNmoyaDlvY3RKd19NZkNFbzR3ZVRLZGxhTjA4WWRRNzVvbTQ3OXBHSQ?oc=5",
       "source_id": "news:아이뉴스24",
       "published_at": "2026-10-25T06:38:42+00:00",
       "verification_status": "single_source",
@@ -1020,7 +824,7 @@
       "name": "경북과학대학교",
       "title": "경북과학대 간호학과, 건보공단서 진로·취업 현장 체험 - 아이뉴스24",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5OZ0x1SlAxLW1fZm44OEFBWjJVYzZ4cEZ1em43dmRQVkVvd0p5TXNHOXVpSHhMUEhaQkk1OUdEdEh4LWFGLXZPV1lidVE?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5Ea2treFlBUDhaNmJzMzFjZnR3OVpRLTlVeTVoNmoyaDlvY3RKd19NZkNFbzR3ZVRLZGxhTjA4WWRRNzVvbTQ3OXBHSQ?oc=5",
       "source_id": "news:아이뉴스24",
       "published_at": "2026-10-25T06:38:42+00:00",
       "verification_status": "single_source",
@@ -1034,7 +838,7 @@
       "name": "경북과학대학교",
       "title": "경북과학대 간호학과, 건보공단서 진로·취업 현장 체험 - 아이뉴스24",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5OZ0x1SlAxLW1fZm44OEFBWjJVYzZ4cEZ1em43dmRQVkVvd0p5TXNHOXVpSHhMUEhaQkk1OUdEdEh4LWFGLXZPV1lidVE?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5Ea2treFlBUDhaNmJzMzFjZnR3OVpRLTlVeTVoNmoyaDlvY3RKd19NZkNFbzR3ZVRLZGxhTjA4WWRRNzVvbTQ3OXBHSQ?oc=5",
       "source_id": "news:아이뉴스24",
       "published_at": "2026-10-25T06:38:42+00:00",
       "verification_status": "single_source",
@@ -1042,6 +846,20 @@
       "axis": "G",
       "direction": 1,
       "severity": 0.45
+    },
+    {
+      "university_id": "UNI-AE7FD5EB8E38",
+      "name": "대구한의대학교",
+      "title": "대구한의대 청도급식센터, 반시축제서 ‘K-웰빙 식탁’ 선보여… 영양의 날 기념 대성황 - 경상매일신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lb1NlM1B0WmVETTJHeDRncXhtcnphdUNxNjhMbGlJWk8xb0QxUy0tZ3ZqODlvcWR6eFZGcjZOc1N0QzlfRkhCY1FyZEU1R2R3ZHBxSlZGdC1YRk9CVTRN?oc=5",
+      "source_id": "news:경상매일신문",
+      "published_at": "2026-10-25T08:56:39+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
     },
     {
       "university_id": "UNI-AE7FD5EB8E38",
@@ -1072,13 +890,41 @@
       "severity": 0.5
     },
     {
-      "university_id": "UNI-AE7FD5EB8E38",
-      "name": "대구한의대학교",
-      "title": "대구한의대 청도급식센터, 반시축제서 ‘K-웰빙 식탁’ 선보여… 영양의 날 기념 대성황 - 경상매일신문",
+      "university_id": "UNI-E4D438FA9FE3",
+      "name": "선문대학교",
+      "title": "부여교육지원청-선문대학교, AI 인재양성 업무협약 체결 - 밝은미래신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1lb1NlM1B0WmVETTJHeDRncXhtcnphdUNxNjhMbGlJWk8xb0QxUy0tZ3ZqODlvcWR6eFZGcjZOc1N0QzlfRkhCY1FyZEU1R2R3ZHBxSlZGdC1YRk9CVTRN?oc=5",
-      "source_id": "news:경상매일신문",
-      "published_at": "2026-10-25T08:56:39+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAteGpheFZMdWxRQmo2VjEyckpmYlJZbDFUUmVXSWxqQU9ya1pYWDJQT0xSUUJaRk1wUzdSb19QUFNhcTNNVDBqS2x1bVpQR29KMjJ5eHZ4alBXMFFmdUZWeXlvTzczbTF6NWdMQ3lLTERuWGQ4MDVNUFNzQQ?oc=5",
+      "source_id": "news:밝은미래신문",
+      "published_at": "2026-10-25T00:11:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-E4D438FA9FE3",
+      "name": "선문대학교",
+      "title": "부여교육지원청-선문대학교, AI 인재양성 업무협약 체결 - 밝은미래신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAteGpheFZMdWxRQmo2VjEyckpmYlJZbDFUUmVXSWxqQU9ya1pYWDJQT0xSUUJaRk1wUzdSb19QUFNhcTNNVDBqS2x1bVpQR29KMjJ5eHZ4alBXMFFmdUZWeXlvTzczbTF6NWdMQ3lLTERuWGQ4MDVNUFNzQQ?oc=5",
+      "source_id": "news:밝은미래신문",
+      "published_at": "2026-10-25T00:11:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.6499999999999999
+    },
+    {
+      "university_id": "UNI-E4D438FA9FE3",
+      "name": "선문대학교",
+      "title": "선문대·재외한인학회·조선대, 2026년 추계 공동학술대회 개최 - 세계한인신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBHTGJjN0VPYUV2REFSSV80RU5jYjRoc3NUN0tpRjJBeUVmZWZxaE5McG5uLWRCdmlBMU1nbTZpS0pBeC11Y2diZC1Mb1BLcjRNZ1hjTjluZDA3dE1NVHhyZUpzRDItanNEWVV3?oc=5",
+      "source_id": "news:세계한인신문",
+      "published_at": "2026-10-25T01:50:25+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -1112,104 +958,6 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대학교, 현장직무수행능력 평가 및 장학금 수여식 개최 - 국제뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBvYWwyMUFCSTZ1LXRrZmNNWElZU0xEVDBMLTRzMTlSaFVwWVUwQl84Y3FQanhRUzlLQkJnRWpteDBhZHVET25kSDZlMVN2ZTA3MmRvMEJlcjVxUjRZM3N2VjZoM2h2dDVjVmhoUlp3?oc=5",
-      "source_id": "news:국제뉴스",
-      "published_at": "2026-10-25T03:09:49+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대학교, 현장직무수행능력 평가 및 장학금 수여식 개최 - 국제뉴스",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBvYWwyMUFCSTZ1LXRrZmNNWElZU0xEVDBMLTRzMTlSaFVwWVUwQl84Y3FQanhRUzlLQkJnRWpteDBhZHVET25kSDZlMVN2ZTA3MmRvMEJlcjVxUjRZM3N2VjZoM2h2dDVjVmhoUlp3?oc=5",
-      "source_id": "news:국제뉴스",
-      "published_at": "2026-10-25T03:09:49+00:00",
-      "verification_status": "single_source",
-      "event_type": "experience",
-      "axis": "D",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대학교, \" 2026 대구선배시민대회 \" 개최 , 돌봄의 주체로 사회참여 확산 !! - 내외일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5TWHM1REtJcFpwVGg1OXNJb2Z3UVVueURjWHJIaDRxQmtJQ2dPRE5oVkR3bVNCNzFITHh1Qms3clRPSUtlRm1TUXhtS1pOVG9MNTBOU2stM0NsWTdiV1BCYzJjajVMa3NCVjhlOW5Zcw?oc=5",
-      "source_id": "news:내외일보",
-      "published_at": "2026-10-25T04:13:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대학교, \" 2026 대구선배시민대회 \" 개최 , 돌봄의 주체로 사회참여 확산 !! - 내외일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5TWHM1REtJcFpwVGg1OXNJb2Z3UVVueURjWHJIaDRxQmtJQ2dPRE5oVkR3bVNCNzFITHh1Qms3clRPSUtlRm1TUXhtS1pOVG9MNTBOU2stM0NsWTdiV1BCYzJjajVMa3NCVjhlOW5Zcw?oc=5",
-      "source_id": "news:내외일보",
-      "published_at": "2026-10-25T04:13:31+00:00",
-      "verification_status": "single_source",
-      "event_type": "achievement",
-      "axis": "G",
-      "direction": 1,
-      "severity": 0.45
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
-      "source_id": "news:아시아뉴스통신",
-      "published_at": "2026-10-25T02:55:42+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
-      "source_id": "news:아시아뉴스통신",
-      "published_at": "2026-10-25T02:55:42+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-F4B7D13135F4",
-      "name": "대구보건대학교",
-      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
-      "source_id": "news:아시아뉴스통신",
-      "published_at": "2026-10-25T02:55:42+00:00",
-      "verification_status": "single_source",
-      "event_type": "experience",
-      "axis": "D",
-      "direction": 1,
-      "severity": 0.45
     },
     {
       "university_id": "UNI-8363A7C570E8",
@@ -1252,6 +1000,104 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대학교, 현장직무수행능력 평가 및 장학금 수여식 개최 - 국제뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBvYWwyMUFCSTZ1LXRrZmNNWElZU0xEVDBMLTRzMTlSaFVwWVUwQl84Y3FQanhRUzlLQkJnRWpteDBhZHVET25kSDZlMVN2ZTA3MmRvMEJlcjVxUjRZM3N2VjZoM2h2dDVjVmhoUlp3?oc=5",
+      "source_id": "news:국제뉴스",
+      "published_at": "2026-10-25T03:09:49+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대학교, 현장직무수행능력 평가 및 장학금 수여식 개최 - 국제뉴스",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBvYWwyMUFCSTZ1LXRrZmNNWElZU0xEVDBMLTRzMTlSaFVwWVUwQl84Y3FQanhRUzlLQkJnRWpteDBhZHVET25kSDZlMVN2ZTA3MmRvMEJlcjVxUjRZM3N2VjZoM2h2dDVjVmhoUlp3?oc=5",
+      "source_id": "news:국제뉴스",
+      "published_at": "2026-10-25T03:09:49+00:00",
+      "verification_status": "single_source",
+      "event_type": "experience",
+      "axis": "D",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대학교, \" 2026 대구선배시민대회 \" 개최 , 돌봄의 주체로 사회참여 확산 !! - 내외일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5TWHM1REtJcFpwVGg1OXNJb2Z3UVVueURjWHJIaDRxQmtJQ2dPRE5oVkR3bVNCNzFITHh1Qms3clRPSUtlRm1TUXhtS1pOVG9MNTBOU2stM0NsWTdiV1BCYzJjajVMa3NCVjhlOW5Zcw?oc=5",
+      "source_id": "news:내외일보",
+      "published_at": "2026-10-25T04:13:31+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대학교, \" 2026 대구선배시민대회 \" 개최 , 돌봄의 주체로 사회참여 확산 !! - 내외일보",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5TWHM1REtJcFpwVGg1OXNJb2Z3UVVueURjWHJIaDRxQmtJQ2dPRE5oVkR3bVNCNzFITHh1Qms3clRPSUtlRm1TUXhtS1pOVG9MNTBOU2stM0NsWTdiV1BCYzJjajVMa3NCVjhlOW5Zcw?oc=5",
+      "source_id": "news:내외일보",
+      "published_at": "2026-10-25T04:13:31+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
+      "source_id": "news:아시아뉴스통신",
+      "published_at": "2026-10-25T02:55:42+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
+      "source_id": "news:아시아뉴스통신",
+      "published_at": "2026-10-25T02:55:42+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-F4B7D13135F4",
+      "name": "대구보건대학교",
+      "title": "대구보건대 뷰티코디네이션학과, 현장직무수행능력 평가·협약업체 장학금 수여식 개최 - 아시아뉴스통신",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBKMmpYbUtNN3VSZXNEa0ZrRFBCY1lKaEdxSXNwb1AxWGlCZ1F2OEk5N2I2NkpSMHlBSWlLNXl3Q1BtbXdwR09HdVdWalkwZmF2ckZBXzJ3bzhPLWRj?oc=5",
+      "source_id": "news:아시아뉴스통신",
+      "published_at": "2026-10-25T02:55:42+00:00",
+      "verification_status": "single_source",
+      "event_type": "experience",
+      "axis": "D",
+      "direction": 1,
+      "severity": 0.45
     },
     {
       "university_id": "UNI-9D9CED4645AA",
@@ -1352,20 +1198,6 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-A9FF17254581",
-      "name": "명지대학교",
-      "title": "명지대학교 AI이커머스학과, ‘AI 미디어 커머스 트렌드 2027’ 저자 포럼 개최 - 파이낸스투데이",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBtdU1EcHE5dVExMkp1aG9RWkg1bzVTbXBYNmhMVzM4TWhLN0ZGM2NBT0FjRmh4eE5FVWJnTV9HQzVoTFB0ZnNMSFdZMWttMnVUdERUWG1ZdTlScy1DOGxMVzhIeVRkSkE?oc=5",
-      "source_id": "news:파이낸스투데이",
-      "published_at": "2026-10-25T02:10:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
       "university_id": "UNI-5B538D749910",
       "name": "충북보건과학대학교",
       "title": "충북보건과학대, 외국인 유학생 대상 K-푸드 쿠킹클래스 운영 - 충청미디어",
@@ -1378,104 +1210,6 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "title": "부여교육지원청-선문대학교, AI 인재양성 업무협약 체결 - 밝은미래신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAteGpheFZMdWxRQmo2VjEyckpmYlJZbDFUUmVXSWxqQU9ya1pYWDJQT0xSUUJaRk1wUzdSb19QUFNhcTNNVDBqS2x1bVpQR29KMjJ5eHZ4alBXMFFmdUZWeXlvTzczbTF6NWdMQ3lLTERuWGQ4MDVNUFNzQQ?oc=5",
-      "source_id": "news:밝은미래신문",
-      "published_at": "2026-10-25T00:11:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "title": "부여교육지원청-선문대학교, AI 인재양성 업무협약 체결 - 밝은미래신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAteGpheFZMdWxRQmo2VjEyckpmYlJZbDFUUmVXSWxqQU9ya1pYWDJQT0xSUUJaRk1wUzdSb19QUFNhcTNNVDBqS2x1bVpQR29KMjJ5eHZ4alBXMFFmdUZWeXlvTzczbTF6NWdMQ3lLTERuWGQ4MDVNUFNzQQ?oc=5",
-      "source_id": "news:밝은미래신문",
-      "published_at": "2026-10-25T00:11:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.6499999999999999
-    },
-    {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "title": "부여교육지원청·선문대, AI 인재양성 맞손… ‘K-16 지역완결형’ 교육 체계 구축 - 중부매일",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9IZFRMd0NMWUcyVUd1T1I0ZnFIbzB3YWxrRnk5VEVoRmwxTER3dkZTR05TSk5IX2dKa2lUb1hkUDVpVXgzUDByVTRWMnlXeWZNYlNnOUNndGQxamxEWnRKcG1aR2ZFbTgwbjZFV3Rn0gFuQVVfeXFMT0hkVEx3Q0xZRzJVR3VPUjRmcUhvMHdhbGtGeTlURWhGbDFMRHd2RlNHTlNKTkhfZ0praVRvWGRQNWlVeDNQMHJVNFYyeVd5Zk1iU2c5Q2d0ZDFqbERadEpwbVpHZkVtODBuNkVXdGc?oc=5",
-      "source_id": "news:중부매일",
-      "published_at": "2026-10-25T02:41:16+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "title": "부여교육지원청·선문대, AI 인재양성 맞손… ‘K-16 지역완결형’ 교육 체계 구축 - 중부매일",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9IZFRMd0NMWUcyVUd1T1I0ZnFIbzB3YWxrRnk5VEVoRmwxTER3dkZTR05TSk5IX2dKa2lUb1hkUDVpVXgzUDByVTRWMnlXeWZNYlNnOUNndGQxamxEWnRKcG1aR2ZFbTgwbjZFV3Rn0gFuQVVfeXFMT0hkVEx3Q0xZRzJVR3VPUjRmcUhvMHdhbGtGeTlURWhGbDFMRHd2RlNHTlNKTkhfZ0praVRvWGRQNWlVeDNQMHJVNFYyeVd5Zk1iU2c5Q2d0ZDFqbERadEpwbVpHZkVtODBuNkVXdGc?oc=5",
-      "source_id": "news:중부매일",
-      "published_at": "2026-10-25T02:41:16+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
-    },
-    {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "title": "선문대·재외한인학회·조선대, 2026년 추계 공동학술대회 개최 - 세계한인신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBHTGJjN0VPYUV2REFSSV80RU5jYjRoc3NUN0tpRjJBeUVmZWZxaE5McG5uLWRCdmlBMU1nbTZpS0pBeC11Y2diZC1Mb1BLcjRNZ1hjTjluZDA3dE1NVHhyZUpzRDItanNEWVV3?oc=5",
-      "source_id": "news:세계한인신문",
-      "published_at": "2026-10-25T01:50:25+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-AEBED6A153E6",
-      "name": "국민대학교",
-      "title": "용산구의회, 국민대학교 행정대학원과 관·학협력 업무협약(MOU) 체결 - 산경일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1YTi1qdDRHUFFkYmppR0dtUnJ6V1ZER05yMG10amtOZGlQZWNEZW5iOE5aV0Z2MGFlNnFFQ2ZoRU5BUFMtd0l5TXhralVGejg5UE90T25fbDVQRFJSZHE4RE8wMExZUjVNUFdnejFyeVM?oc=5",
-      "source_id": "news:산경일보",
-      "published_at": "2026-10-25T04:57:21+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-AEBED6A153E6",
-      "name": "국민대학교",
-      "title": "용산구의회, 국민대학교 행정대학원과 관·학협력 업무협약(MOU) 체결 - 산경일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1YTi1qdDRHUFFkYmppR0dtUnJ6V1ZER05yMG10amtOZGlQZWNEZW5iOE5aV0Z2MGFlNnFFQ2ZoRU5BUFMtd0l5TXhralVGejg5UE90T25fbDVQRFJSZHE4RE8wMExZUjVNUFdnejFyeVM?oc=5",
-      "source_id": "news:산경일보",
-      "published_at": "2026-10-25T04:57:21+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "R",
-      "direction": 1,
-      "severity": 0.5
     },
     {
       "university_id": "UNI-AEBED6A153E6",
@@ -1520,13 +1254,13 @@
       "severity": 0.45
     },
     {
-      "university_id": "UNI-AEBED6A153E6",
-      "name": "국민대학교",
-      "title": "[디자인정글 이슈] 삶을 읽고, 기술을 엮고, 문화를 디자인하다 — 국민대 공간·문화디자인의 새로운 지평 - 디자인정글",
+      "university_id": "UNI-0FC5DA7185B5",
+      "name": "서울시립대학교",
+      "title": "김윤 서울시립대 교수, 반도체산업 발전 공로로 협회장상 - 신아일보",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9jdGF0ZWYtNHM5cHBRZVhkV0ZwQ3dyajBua2JpeGZ0SmREVDdrOVp2MmNHRHRwVXBhT1liNHh3c1BoTXA4Zm1BWE5PWXppRHhSSnc?oc=5",
-      "source_id": "news:디자인정글",
-      "published_at": "2026-10-25T04:33:34+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8telNVZnZUMTAxU3JoUjBiMGdOQ0pyWG1aUU5kQjdlNkhqaWdkV0VMWmFzR1RSUUpkNmd4WjVnNWhlSTZkMjhBV2ZwNFIzaFlhc0J1VW9EdEMyS3JWc05STUM5VG5NMHM5YjdELXFtRS0?oc=5",
+      "source_id": "news:신아일보",
+      "published_at": "2026-10-25T00:24:36+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -1534,18 +1268,18 @@
       "severity": 0.35
     },
     {
-      "university_id": "UNI-80E642C934B5",
-      "name": "영진전문대학교",
-      "title": "영진전문대 국방군사계열, 해군 함정 승조체험으로 실전형 군사교육 강화 - 시사뉴스",
+      "university_id": "UNI-0FC5DA7185B5",
+      "name": "서울시립대학교",
+      "title": "김윤 서울시립대 교수, 반도체산업 발전 공로로 협회장상 - 신아일보",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBzdHR2MWdqUFlMT1cyQldfemJDWk1wdjVhbVF6dEFEQ01LQVZiX1FTWV9SYVl0Vm5pcmxTdU1tR2RMQ2pVeVA2Ym90Q2toZm1HdEJWN21FSlAyUk9kaVBxZnFvTQ?oc=5",
-      "source_id": "news:시사뉴스",
-      "published_at": "2026-10-25T09:58:01+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8telNVZnZUMTAxU3JoUjBiMGdOQ0pyWG1aUU5kQjdlNkhqaWdkV0VMWmFzR1RSUUpkNmd4WjVnNWhlSTZkMjhBV2ZwNFIzaFlhc0J1VW9EdEMyS3JWc05STUM5VG5NMHM5YjdELXFtRS0?oc=5",
+      "source_id": "news:신아일보",
+      "published_at": "2026-10-25T00:24:36+00:00",
       "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
+      "event_type": "claim",
+      "axis": "I",
+      "direction": 1,
+      "severity": 0.45
     },
     {
       "university_id": "UNI-71B760B0BA39",
@@ -1625,6 +1359,34 @@
       "source_url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5oYTI4d1B5aEhzVWV1MHBZN1daWGp0N0dNMDJ6YjlfZ205SDZJYi1aQjgxUTU4dUEySVkxRkM1QndNZnVTZHFULQ?oc=5",
       "source_id": "news:시사줌뉴스",
       "published_at": "2026-10-25T02:58:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-71B760B0BA39",
+      "name": "강원도립대학교",
+      "title": "강원도립대·강릉시립도서관, 로컬창업·교육문화 협력 강화 - 강원신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAyVHJpNkRtT3hwdU8wMURMTzE1WXhVTmRLTmMyRVVoel9PT0xCU3NHSTRremdEaTFHNGd1WkxrZkpUYTVIbEVodmNWQmtkeEYxWGxLOXFWc1VkQUowc0VISFAzdEJUQlFW?oc=5",
+      "source_id": "news:강원신문",
+      "published_at": "2026-10-24T22:53:07+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-71B760B0BA39",
+      "name": "강원도립대학교",
+      "title": "강원도립대·강릉시립도서관, 로컬창업·교육문화 협력 강화 - 강원신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAyVHJpNkRtT3hwdU8wMURMTzE1WXhVTmRLTmMyRVVoel9PT0xCU3NHSTRremdEaTFHNGd1WkxrZkpUYTVIbEVodmNWQmtkeEYxWGxLOXFWc1VkQUowc0VISFAzdEJUQlFW?oc=5",
+      "source_id": "news:강원신문",
+      "published_at": "2026-10-24T22:53:07+00:00",
       "verification_status": "single_source",
       "event_type": "achievement",
       "axis": "G",
@@ -1644,34 +1406,6 @@
       "axis": "B",
       "direction": 0.25,
       "severity": 0.35
-    },
-    {
-      "university_id": "UNI-71B760B0BA39",
-      "name": "강원도립대학교",
-      "title": "강원도립대·강릉시립도서관, 로컬창업·교육문화 협력 강화 - 강원신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAyVHJpNkRtT3hwdU8wMURMTzE1WXhVTmRLTmMyRVVoel9PT0xCU3NHSTRremdEaTFHNGd1WkxrZkpUYTVIbEVodmNWQmtkeEYxWGxLOXFWc1VkQUowc0VISFAzdEJUQlFW?oc=5",
-      "source_id": "news:강원신문",
-      "published_at": "2026-10-24T22:53:07+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-71B760B0BA39",
-      "name": "강원도립대학교",
-      "title": "강원도립대·강릉시립도서관, 로컬창업·교육문화 협력 강화 - 강원신문",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFAyVHJpNkRtT3hwdU8wMURMTzE1WXhVTmRLTmMyRVVoel9PT0xCU3NHSTRremdEaTFHNGd1WkxrZkpUYTVIbEVodmNWQmtkeEYxWGxLOXFWc1VkQUowc0VISFAzdEJUQlFW?oc=5",
-      "source_id": "news:강원신문",
-      "published_at": "2026-10-24T22:53:07+00:00",
-      "verification_status": "single_source",
-      "event_type": "achievement",
-      "axis": "G",
-      "direction": 1,
-      "severity": 0.45
     },
     {
       "university_id": "UNI-F1246F7018BE",
@@ -1714,6 +1448,76 @@
       "axis": "R",
       "direction": 1,
       "severity": 0.5
+    },
+    {
+      "university_id": "UNI-3F02A7F4D408",
+      "name": "용인예술과학대학교",
+      "title": "용인예술과학대-케어핸드, 돌봄 전문인력 양성·AI플랫폼 취업연계 협력 - www.dt.co.kr",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UdmtWRVZyZ19xMGZVdkxWT0czVTRQMXhjVmp0ZzdCR1VNOXUxVmtFT0poWWs1YkhkblNDNGlCb2FRUExRLU5xQkRTZDVUUQ?oc=5",
+      "source_id": "news:www.dt.co.kr",
+      "published_at": "2026-10-25T02:46:15+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
+    },
+    {
+      "university_id": "UNI-3F02A7F4D408",
+      "name": "용인예술과학대학교",
+      "title": "용인예술과학대-케어핸드, 돌봄 전문인력 양성·AI플랫폼 취업연계 협력 - www.dt.co.kr",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UdmtWRVZyZ19xMGZVdkxWT0czVTRQMXhjVmp0ZzdCR1VNOXUxVmtFT0poWWs1YkhkblNDNGlCb2FRUExRLU5xQkRTZDVUUQ?oc=5",
+      "source_id": "news:www.dt.co.kr",
+      "published_at": "2026-10-25T02:46:15+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "R",
+      "direction": 1,
+      "severity": 0.5
+    },
+    {
+      "university_id": "UNI-3F02A7F4D408",
+      "name": "용인예술과학대학교",
+      "title": "용인예술과학대-케어핸드, 돌봄 전문인력 양성·AI플랫폼 취업연계 협력 - www.dt.co.kr",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UdmtWRVZyZ19xMGZVdkxWT0czVTRQMXhjVmp0ZzdCR1VNOXUxVmtFT0poWWs1YkhkblNDNGlCb2FRUExRLU5xQkRTZDVUUQ?oc=5",
+      "source_id": "news:www.dt.co.kr",
+      "published_at": "2026-10-25T02:46:15+00:00",
+      "verification_status": "single_source",
+      "event_type": "claim",
+      "axis": "I",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-3F02A7F4D408",
+      "name": "용인예술과학대학교",
+      "title": "용인예술과학대-케어핸드, 돌봄 전문인력 양성·AI플랫폼 취업연계 협력 - www.dt.co.kr",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9UdmtWRVZyZ19xMGZVdkxWT0czVTRQMXhjVmp0ZzdCR1VNOXUxVmtFT0poWWs1YkhkblNDNGlCb2FRUExRLU5xQkRTZDVUUQ?oc=5",
+      "source_id": "news:www.dt.co.kr",
+      "published_at": "2026-10-25T02:46:15+00:00",
+      "verification_status": "single_source",
+      "event_type": "achievement",
+      "axis": "G",
+      "direction": 1,
+      "severity": 0.45
+    },
+    {
+      "university_id": "UNI-B9ECE508208D",
+      "name": "제주한라대학교",
+      "title": "인하대학교, 제주대·제주한라대와 항공우주·AI 교육 및 연구 협력 확대 - 한국강사신문",
+      "source_class": "independent_media",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1HUWhhUjI0NUJGa3NDVWpKSmlpcElLLTJoVUtsYlZMeUxHWVFXSDNuVHFmSUEtRWtPaC1tSXhsSm5USU1xYTR1aFBud2JONUdWZFZNSjhFTjVmaHFEN1hXZzkzRnFvY1FMbGZvNUpUOVY?oc=5",
+      "source_id": "news:한국강사신문",
+      "published_at": "2026-10-25T07:35:00+00:00",
+      "verification_status": "single_source",
+      "event_type": "response",
+      "axis": "B",
+      "direction": 0.25,
+      "severity": 0.35
     },
     {
       "university_id": "UNI-90F1EDA4FF01",
@@ -1774,11 +1578,11 @@
     {
       "university_id": "UNI-D62ECF59A6CC",
       "name": "울산대학교",
-      "title": "지역대학·기업·지자체, 혁신인재 양성 머리 맞대 - 울산제일일보",
+      "title": "울산 앵커사업 혁신인재양성 포럼 - 울산신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBXaTZMMktSWXZ4R1ZYWDBVX2lWcHFPUnZldmpzcHJYcjZjYlVJVk5pb3JnODk5QnplQ0NMTnd4c3dCV2g1TVJIazdIZmc2YjBTcnhwbVptSmVObmxVaDM4Z3BpemxYUQ?oc=5",
-      "source_id": "news:울산제일일보",
-      "published_at": "2026-10-25T09:53:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTFB2dUg1Z2dIQ0I0V2t3QmVXd0d0RE1tbDlyRml1eWltTG9zVGMwUlV2MEgwaHlfNFpKbWxFY1BXTmdKRnl3UENqRnFGdkJ3Rk5KSFNlVVdsa2JkNk01UFVvd0dkNm96bGZQdjlLNGdjVnRPZ9IBckFVX3lxTFB2dUg1Z2dIQ0I0V2t3QmVXd0d0RE1tbDlyRml1eWltTG9zVGMwUlV2MEgwaHlfNFpKbWxFY1BXTmdKRnl3UENqRnFGdkJ3Rk5KSFNlVVdsa2JkNk01UFVvd0dkNm96bGZQdjlLNGdjVnRPZw?oc=5",
+      "source_id": "news:울산신문",
+      "published_at": "2026-10-25T12:48:16+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -1788,44 +1592,16 @@
     {
       "university_id": "UNI-D62ECF59A6CC",
       "name": "울산대학교",
-      "title": "지역대학·기업·지자체, 혁신인재 양성 머리 맞대 - 울산제일일보",
+      "title": "울산 앵커사업 혁신인재양성 포럼 - 울산신문",
       "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBXaTZMMktSWXZ4R1ZYWDBVX2lWcHFPUnZldmpzcHJYcjZjYlVJVk5pb3JnODk5QnplQ0NMTnd4c3dCV2g1TVJIazdIZmc2YjBTcnhwbVptSmVObmxVaDM4Z3BpemxYUQ?oc=5",
-      "source_id": "news:울산제일일보",
-      "published_at": "2026-10-25T09:53:00+00:00",
+      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTFB2dUg1Z2dIQ0I0V2t3QmVXd0d0RE1tbDlyRml1eWltTG9zVGMwUlV2MEgwaHlfNFpKbWxFY1BXTmdKRnl3UENqRnFGdkJ3Rk5KSFNlVVdsa2JkNk01UFVvd0dkNm96bGZQdjlLNGdjVnRPZ9IBckFVX3lxTFB2dUg1Z2dIQ0I0V2t3QmVXd0d0RE1tbDlyRml1eWltTG9zVGMwUlV2MEgwaHlfNFpKbWxFY1BXTmdKRnl3UENqRnFGdkJ3Rk5KSFNlVVdsa2JkNk01UFVvd0dkNm96bGZQdjlLNGdjVnRPZw?oc=5",
+      "source_id": "news:울산신문",
+      "published_at": "2026-10-25T12:48:16+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "R",
       "direction": 1,
       "severity": 0.5
-    },
-    {
-      "university_id": "UNI-D62ECF59A6CC",
-      "name": "울산대학교",
-      "title": "울산대, 제107회 전국체전서 은3·동3…씨름·테니스·농구 고른 활약 - 투어코리아",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1fNXNtcWFDdEJGalpLaUtYUV95OE1aZFdqbXd4MWtTczRPemFMWmFUeTNiMXhzZlBEM2tWazQ4dGwxOEx3ck1aWHZVRlF2eXlIdDFwYUozVTJfSk1FUGRwVVpPdkNxMUJfbWlydFp3?oc=5",
-      "source_id": "news:투어코리아",
-      "published_at": "2026-10-25T17:24:16+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-D62ECF59A6CC",
-      "name": "울산대학교",
-      "title": "무거동 단체장협의회, 바보사거리 ‘상생동행 릴레이’ 동참 - 울산제일일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9RRU5ZcTVfdlRoNUpmRGQzeWN4WDVtUXJ2eWtINTY4QkxTLXVHSUphZm04QmtoczI0VnFjUHQxZzA3VHVGbkVaaWdaZTNsRzFCMmpmQlRMT1lhOFJlbE0wcFN5Y1FaQQ?oc=5",
-      "source_id": "news:울산제일일보",
-      "published_at": "2026-10-25T09:34:00+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
     },
     {
       "university_id": "UNI-B73338E399A2",
@@ -1891,20 +1667,6 @@
       "source_url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE0tQVEtbGRQbUlubktTRFBVQVNxb3J5VEhHZjZ4djhrVUlySHQ0VE9rOHBBalpKNUhZWXppbXlSSUFrdzBUNnJWU2FyOTFwZw?oc=5",
       "source_id": "news:전자신문",
       "published_at": "2026-10-25T02:50:46+00:00",
-      "verification_status": "single_source",
-      "event_type": "response",
-      "axis": "B",
-      "direction": 0.25,
-      "severity": 0.35
-    },
-    {
-      "university_id": "UNI-CA856BBE06E8",
-      "name": "인제대학교",
-      "title": "인제대, 지역사회 갈등 해소 ‘화쟁인문학연구소’ 출범 - 경남도민일보",
-      "source_class": "independent_media",
-      "source_url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1wcmc4WUNGaTRlUHRYMmZxVDFIblJDdTdsRTBxcUNpSDJxTjhoOFZXbUdEU3IwQmhLbXhxRHh1dUtEY0hUSFVXZ2lfc3JLcngtX3dqWXNGTnNZNnVfUFI3ZnVaQmkxN1IyQ2c?oc=5",
-      "source_id": "news:경남도민일보",
-      "published_at": "2026-10-25T04:01:29+00:00",
       "verification_status": "single_source",
       "event_type": "response",
       "axis": "B",
@@ -2063,7 +1825,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 67,
+      "t100_rank": 68,
       "cohort_rank": 24
     },
     {
@@ -2523,7 +2285,7 @@
       "establishment": "사립",
       "region": "경기",
       "dims": {
-        "B": 72.2,
+        "B": 72.1,
         "R": 54.6,
         "I": 50.6,
         "D": 61.9,
@@ -2545,11 +2307,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 67.6,
-      "activity_points": 3.59,
-      "event_count": 13,
+      "activity_points": 3.33,
+      "event_count": 12,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.9,
+        "B": 0.75,
         "R": 4.56,
         "I": 0.6,
         "D": 0.0,
@@ -2561,13 +2323,12 @@
       "source_ids": [
         "news:CNB뉴스",
         "news:경기신문",
-        "news:뉴스웍스",
-        "news:에너지경제신문"
+        "news:뉴스웍스"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 57,
+      "t100_rank": 58,
       "cohort_rank": 20
     },
     {
@@ -2720,7 +2481,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 35,
+      "t100_rank": 36,
       "cohort_rank": 12
     },
     {
@@ -3221,7 +2982,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 66,
+      "t100_rank": 67,
       "cohort_rank": 23
     },
     {
@@ -3778,7 +3539,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 21
+      "waiting_rank": 20
     },
     {
       "university_id": "UNI-0BAB98DFC296",
@@ -3931,7 +3692,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 40,
+      "t100_rank": 41,
       "cohort_rank": 15
     },
     {
@@ -3982,7 +3743,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 72,
+      "t100_rank": 73,
       "cohort_rank": 28
     },
     {
@@ -4180,7 +3941,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 79,
+      "t100_rank": 80,
       "cohort_rank": 32
     },
     {
@@ -4525,7 +4286,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 34,
+      "t100_rank": 35,
       "cohort_rank": 11
     },
     {
@@ -4625,7 +4386,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 80,
+      "t100_rank": 81,
       "cohort_rank": 33
     },
     {
@@ -5366,7 +5127,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 30,
+      "t100_rank": 31,
       "cohort_rank": 8
     },
     {
@@ -5713,7 +5474,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 68,
+      "t100_rank": 69,
       "cohort_rank": 25
     },
     {
@@ -5813,7 +5574,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 74,
+      "t100_rank": 75,
       "cohort_rank": 30
     },
     {
@@ -6012,7 +5773,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 51,
+      "t100_rank": 52,
       "cohort_rank": 18
     },
     {
@@ -6803,7 +6564,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 44,
+      "t100_rank": 45,
       "cohort_rank": 16
     },
     {
@@ -6962,7 +6723,7 @@
       "establishment": "사립",
       "region": "대구",
       "dims": {
-        "B": 75.7,
+        "B": 75.5,
         "R": null,
         "I": null,
         "D": 57.4,
@@ -6984,11 +6745,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 58.8,
-      "activity_points": 0.26,
-      "event_count": 1,
-      "source_diversity": 1,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.15,
+        "B": 0.0,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
@@ -6996,13 +6757,12 @@
         "E": 0.0
       },
       "score": 58.8,
-      "quality": 0.83,
-      "source_ids": [
-        "news:시사뉴스"
-      ],
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
-      "window_end": "2026-10-26T05:15:00+09:00"
+      "window_end": "2026-10-26T05:15:00+09:00",
+      "waiting_rank": 40
     },
     {
       "university_id": "UNI-E2432BE54B73",
@@ -7052,7 +6812,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 38
+      "waiting_rank": 37
     },
     {
       "university_id": "UNI-3F02A7F4D408",
@@ -7063,11 +6823,11 @@
       "establishment": "사립",
       "region": "경기",
       "dims": {
-        "B": 71.3,
-        "R": null,
-        "I": null,
+        "B": 71.4,
+        "R": 51.5,
+        "I": 50.6,
         "D": 52.7,
-        "G": 23.3,
+        "G": 24.4,
         "E": null
       },
       "raw": {
@@ -7084,21 +6844,23 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 45.8,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 48.6,
+      "activity_points": 1.01,
+      "event_count": 4,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
-        "I": 0.0,
+        "B": 0.15,
+        "R": 1.47,
+        "I": 0.6,
         "D": 0.0,
-        "G": 0.0,
+        "G": 1.13,
         "E": 0.0
       },
-      "score": 45.8,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 48.6,
+      "quality": 0.83,
+      "source_ids": [
+        "news:www.dt.co.kr"
+      ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00"
@@ -7743,7 +7505,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 73,
+      "t100_rank": 74,
       "cohort_rank": 29
     },
     {
@@ -7895,7 +7657,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 81,
+      "t100_rank": 82,
       "cohort_rank": 34
     },
     {
@@ -7907,7 +7669,7 @@
       "establishment": "사립",
       "region": "제주",
       "dims": {
-        "B": 29.1,
+        "B": 29.2,
         "R": null,
         "I": null,
         "D": 40.2,
@@ -7928,21 +7690,23 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 36.2,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 36.3,
+      "activity_points": 0.26,
+      "event_count": 1,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
+        "B": 0.15,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 36.2,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 36.3,
+      "quality": 0.83,
+      "source_ids": [
+        "news:한국강사신문"
+      ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00"
@@ -8883,7 +8647,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 31,
+      "t100_rank": 32,
       "cohort_rank": 9
     },
     {
@@ -9180,7 +8944,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 32,
+      "t100_rank": 33,
       "cohort_rank": 10
     },
     {
@@ -9280,7 +9044,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 20
+      "waiting_rank": 19
     },
     {
       "university_id": "UNI-49F59F830D59",
@@ -9330,7 +9094,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 36,
+      "t100_rank": 37,
       "cohort_rank": 13
     },
     {
@@ -9381,7 +9145,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 24,
+      "t100_rank": 25,
       "cohort_rank": 7
     },
     {
@@ -9580,7 +9344,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 69,
+      "t100_rank": 70,
       "cohort_rank": 26
     },
     {
@@ -9631,7 +9395,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 62,
+      "t100_rank": 63,
       "cohort_rank": 21
     },
     {
@@ -9780,7 +9544,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 55,
+      "t100_rank": 56,
       "cohort_rank": 19
     },
     {
@@ -9929,7 +9693,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 63,
+      "t100_rank": 64,
       "cohort_rank": 22
     },
     {
@@ -10029,7 +9793,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 78,
+      "t100_rank": 79,
       "cohort_rank": 31
     },
     {
@@ -10227,7 +9991,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 71,
+      "t100_rank": 72,
       "cohort_rank": 27
     },
     {
@@ -10327,7 +10091,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 37,
+      "t100_rank": 38,
       "cohort_rank": 14
     },
     {
@@ -10476,7 +10240,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 40
+      "waiting_rank": 39
     },
     {
       "university_id": "UNI-49889DCF7061",
@@ -10872,8 +10636,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 43,
-      "cohort_rank": 28
+      "t100_rank": 44,
+      "cohort_rank": 29
     },
     {
       "university_id": "UNI-8363A7C570E8",
@@ -10925,7 +10689,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 19
+      "waiting_rank": 18
     },
     {
       "university_id": "UNI-39D76DBF4B19",
@@ -11568,8 +11332,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 38,
-      "cohort_rank": 24
+      "t100_rank": 39,
+      "cohort_rank": 25
     },
     {
       "university_id": "UNI-D5551FD05201",
@@ -11629,7 +11393,7 @@
       "establishment": "사립",
       "region": "충남",
       "dims": {
-        "B": 51.9,
+        "B": 51.5,
         "R": null,
         "I": null,
         "D": 72.7,
@@ -11650,32 +11414,29 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 73.4,
-      "activity_points": 1.26,
-      "event_count": 5,
+      "daily_index": 73.2,
+      "activity_points": 0.51,
+      "event_count": 2,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.74,
+        "B": 0.3,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 73.4,
+      "score": 73.2,
       "quality": 0.83,
       "source_ids": [
-        "news:nmn.ff.or.kr",
         "news:금강일보",
-        "news:충청매일",
-        "news:충청타임즈",
         "news:충청투데이"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 23,
-      "cohort_rank": 17
+      "t100_rank": 24,
+      "cohort_rank": 18
     },
     {
       "university_id": "UNI-E77357DDB344",
@@ -11686,7 +11447,7 @@
       "establishment": "사립",
       "region": "대전",
       "dims": {
-        "B": 45.8,
+        "B": 45.4,
         "R": null,
         "I": null,
         "D": 53.8,
@@ -11707,32 +11468,29 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 69.5,
-      "activity_points": 1.26,
-      "event_count": 5,
+      "daily_index": 69.4,
+      "activity_points": 0.51,
+      "event_count": 2,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.74,
+        "B": 0.3,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 69.5,
+      "score": 69.4,
       "quality": 0.83,
       "source_ids": [
-        "news:nmn.ff.or.kr",
         "news:금강일보",
-        "news:충청매일",
-        "news:충청타임즈",
         "news:충청투데이"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 47,
-      "cohort_rank": 31
+      "t100_rank": 49,
+      "cohort_rank": 32
     },
     {
       "university_id": "UNI-8A9023E373A3",
@@ -11792,7 +11550,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 84.3,
+        "B": 84.0,
         "R": null,
         "I": null,
         "D": 20.8,
@@ -11813,24 +11571,21 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 63.9,
-      "activity_points": 0.51,
-      "event_count": 2,
-      "source_diversity": 1,
+      "daily_index": 63.8,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.3,
+        "B": 0.0,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 63.9,
-      "quality": 0.83,
-      "source_ids": [
-        "news:데일리시큐",
-        "news:중부일보"
-      ],
+      "score": 63.8,
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
@@ -12390,8 +12145,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 33,
-      "cohort_rank": 23
+      "t100_rank": 34,
+      "cohort_rank": 24
     },
     {
       "university_id": "UNI-65A61B78C79F",
@@ -12639,8 +12394,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 76,
-      "cohort_rank": 46
+      "t100_rank": 77,
+      "cohort_rank": 47
     },
     {
       "university_id": "UNI-0D1B00861E1E",
@@ -12939,8 +12694,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 70,
-      "cohort_rank": 44
+      "t100_rank": 71,
+      "cohort_rank": 45
     },
     {
       "university_id": "UNI-21D6D02D34E0",
@@ -13039,8 +12794,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 56,
-      "cohort_rank": 37
+      "t100_rank": 57,
+      "cohort_rank": 38
     },
     {
       "university_id": "UNI-4958773C4682",
@@ -14129,8 +13884,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 61,
-      "cohort_rank": 41
+      "t100_rank": 62,
+      "cohort_rank": 42
     },
     {
       "university_id": "UNI-55F53623EB92",
@@ -14190,8 +13945,8 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 69.8,
-        "R": 52.9,
+        "B": 69.5,
+        "R": 51.5,
         "I": null,
         "D": 57.9,
         "G": 67.0,
@@ -14211,29 +13966,27 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.5,
-      "activity_points": 1.6,
-      "event_count": 6,
+      "daily_index": 59.0,
+      "activity_points": 0.84,
+      "event_count": 3,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.44,
-        "R": 2.95,
+        "B": 0.15,
+        "R": 1.47,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 1.32
       },
-      "score": 59.5,
+      "score": 59.0,
       "quality": 0.83,
       "source_ids": [
-        "news:디자인정글",
-        "news:산경일보",
         "news:시정일보"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 37
+      "waiting_rank": 38
     },
     {
       "university_id": "UNI-8E5F6292D80F",
@@ -14633,7 +14386,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 22
+      "waiting_rank": 21
     },
     {
       "university_id": "UNI-D7255A9049D7",
@@ -15483,7 +15236,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 85.9,
+        "B": 85.6,
         "R": null,
         "I": null,
         "D": 52.9,
@@ -15504,30 +15257,28 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 69.4,
-      "activity_points": 0.75,
-      "event_count": 3,
+      "daily_index": 69.3,
+      "activity_points": 0.25,
+      "event_count": 1,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.44,
+        "B": 0.15,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 69.4,
+      "score": 69.3,
       "quality": 0.83,
       "source_ids": [
-        "news:경북매일",
-        "news:경북신문",
-        "news:경주시민신문"
+        "news:경북매일"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 49,
-      "cohort_rank": 32
+      "t100_rank": 50,
+      "cohort_rank": 33
     },
     {
       "university_id": "UNI-BD55145593AB",
@@ -16031,7 +15782,7 @@
       "establishment": "사립",
       "region": "경기",
       "dims": {
-        "B": 59.1,
+        "B": 59.0,
         "R": null,
         "I": null,
         "D": 59.6,
@@ -16053,11 +15804,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 60.3,
-      "activity_points": 0.25,
-      "event_count": 1,
-      "source_diversity": 1,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.15,
+        "B": 0.0,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
@@ -16065,10 +15816,8 @@
         "E": 0.0
       },
       "score": 60.3,
-      "quality": 0.83,
-      "source_ids": [
-        "news:파이낸스투데이"
-      ],
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
@@ -16320,8 +16069,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 75,
-      "cohort_rank": 45
+      "t100_rank": 76,
+      "cohort_rank": 46
     },
     {
       "university_id": "UNI-4C44A00C6DCB",
@@ -16371,8 +16120,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 64,
-      "cohort_rank": 42
+      "t100_rank": 65,
+      "cohort_rank": 43
     },
     {
       "university_id": "UNI-F23F9D11CF44",
@@ -16716,8 +16465,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 53,
-      "cohort_rank": 35
+      "t100_rank": 54,
+      "cohort_rank": 36
     },
     {
       "university_id": "UNI-577AAA867D8C",
@@ -16875,10 +16624,10 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 70.0,
-        "R": 48.5,
+        "B": 69.7,
+        "R": null,
         "I": null,
-        "D": 46.1,
+        "D": 45.3,
         "G": 90.5,
         "E": null
       },
@@ -16896,29 +16645,26 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 64.8,
-      "activity_points": 1.06,
-      "event_count": 4,
-      "source_diversity": 1,
+      "daily_index": 73.5,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.29,
-        "R": -1.49,
+        "B": 0.0,
+        "R": 0.0,
         "I": 0.0,
-        "D": 0.77,
+        "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 64.8,
-      "quality": 0.83,
-      "source_ids": [
-        "news:교육을 비추다",
-        "news:서울경제"
-      ],
+      "score": 73.5,
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 86,
-      "cohort_rank": 52
+      "t100_rank": 23,
+      "cohort_rank": 17
     },
     {
       "university_id": "UNI-93FBB3C4875C",
@@ -16968,8 +16714,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 84,
-      "cohort_rank": 50
+      "t100_rank": 85,
+      "cohort_rank": 51
     },
     {
       "university_id": "UNI-F7524DB4EE12",
@@ -17372,9 +17118,9 @@
       "establishment": "공립",
       "region": "서울",
       "dims": {
-        "B": 77.1,
+        "B": 77.2,
         "R": null,
-        "I": null,
+        "I": 50.6,
         "D": 44.1,
         "G": 53.0,
         "E": null
@@ -17393,25 +17139,26 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.1,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 57.0,
+      "activity_points": 0.4,
+      "event_count": 2,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
+        "B": 0.15,
         "R": 0.0,
-        "I": 0.0,
+        "I": 0.6,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 59.1,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 57.0,
+      "quality": 0.83,
+      "source_ids": [
+        "news:신아일보"
+      ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
-      "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 39
+      "window_end": "2026-10-26T05:15:00+09:00"
     },
     {
       "university_id": "UNI-2B2ABD5860E3",
@@ -17461,8 +17208,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 58,
-      "cohort_rank": 38
+      "t100_rank": 59,
+      "cohort_rank": 39
     },
     {
       "university_id": "UNI-F010D29ABE59",
@@ -17669,8 +17416,8 @@
       "establishment": "사립",
       "region": "충남",
       "dims": {
-        "B": 59.2,
-        "R": 53.3,
+        "B": 59.1,
+        "R": 51.9,
         "I": null,
         "D": 59.2,
         "G": 75.8,
@@ -17690,29 +17437,28 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 61.8,
-      "activity_points": 1.25,
-      "event_count": 5,
+      "daily_index": 61.3,
+      "activity_points": 0.75,
+      "event_count": 3,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.44,
-        "R": 3.35,
+        "B": 0.29,
+        "R": 1.88,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
         "E": 0.0
       },
-      "score": 61.8,
+      "score": 61.3,
       "quality": 0.83,
       "source_ids": [
         "news:밝은미래신문",
-        "news:세계한인신문",
-        "news:중부매일"
+        "news:세계한인신문"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 16
+      "waiting_rank": 22
     },
     {
       "university_id": "UNI-D00854F6E836",
@@ -17960,7 +17706,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 17
+      "waiting_rank": 16
     },
     {
       "university_id": "UNI-86D801ECC564",
@@ -18157,8 +17903,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 85,
-      "cohort_rank": 51
+      "t100_rank": 86,
+      "cohort_rank": 52
     },
     {
       "university_id": "UNI-B874E07E4F9B",
@@ -18457,8 +18203,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 54,
-      "cohort_rank": 36
+      "t100_rank": 55,
+      "cohort_rank": 37
     },
     {
       "university_id": "UNI-1FA121FCB3F9",
@@ -18917,7 +18663,7 @@
       "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 66.3,
+        "B": 66.5,
         "R": null,
         "I": null,
         "D": 71.3,
@@ -18939,11 +18685,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 70.1,
-      "activity_points": 0.25,
-      "event_count": 1,
+      "activity_points": 0.52,
+      "event_count": 2,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.15,
+        "B": 0.3,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
@@ -18953,13 +18699,14 @@
       "score": 70.1,
       "quality": 0.83,
       "source_ids": [
+        "news:산학뉴스",
         "news:전자신문"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 41,
-      "cohort_rank": 26
+      "t100_rank": 42,
+      "cohort_rank": 27
     },
     {
       "university_id": "UNI-6B13D4448273",
@@ -19304,8 +19051,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 59,
-      "cohort_rank": 39
+      "t100_rank": 60,
+      "cohort_rank": 40
     },
     {
       "university_id": "UNI-1619505EE3B5",
@@ -19455,8 +19202,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 77,
-      "cohort_rank": 47
+      "t100_rank": 78,
+      "cohort_rank": 48
     },
     {
       "university_id": "UNI-C608A47484C0",
@@ -19556,8 +19303,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 60,
-      "cohort_rank": 40
+      "t100_rank": 61,
+      "cohort_rank": 41
     },
     {
       "university_id": "UNI-86E47E1C2459",
@@ -19668,7 +19415,7 @@
       "establishment": "사립",
       "region": "울산",
       "dims": {
-        "B": 39.9,
+        "B": 39.6,
         "R": 53.5,
         "I": null,
         "D": 63.7,
@@ -19689,24 +19436,23 @@
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 42.8,
-      "activity_points": 1.93,
-      "event_count": 7,
+      "daily_index": 42.7,
+      "activity_points": 1.41,
+      "event_count": 5,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.61,
-        "R": 3.47,
+        "B": 0.3,
+        "R": 3.49,
         "I": 0.0,
         "D": 0.0,
         "G": 1.16,
         "E": 0.0
       },
-      "score": 42.8,
+      "score": 42.7,
       "quality": 0.83,
       "source_ids": [
         "news:울산매일 - 울산최초, 최고의 조간신문",
-        "news:울산제일일보",
-        "news:투어코리아"
+        "news:울산신문"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
@@ -19910,7 +19656,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 18
+      "waiting_rank": 17
     },
     {
       "university_id": "UNI-69BBC6D1528F",
@@ -20011,8 +19757,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 39,
-      "cohort_rank": 25
+      "t100_rank": 40,
+      "cohort_rank": 26
     },
     {
       "university_id": "UNI-563C88B77FA0",
@@ -20062,8 +19808,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 27,
-      "cohort_rank": 20
+      "t100_rank": 28,
+      "cohort_rank": 21
     },
     {
       "university_id": "UNI-B73338E399A2",
@@ -20174,7 +19920,7 @@
       "establishment": "사립",
       "region": "경남",
       "dims": {
-        "B": 56.7,
+        "B": 56.6,
         "R": 51.5,
         "I": null,
         "D": 76.1,
@@ -20196,11 +19942,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 50.6,
-      "activity_points": 1.38,
-      "event_count": 5,
+      "activity_points": 1.13,
+      "event_count": 4,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.44,
+        "B": 0.3,
         "R": 1.5,
         "I": 0.0,
         "D": 0.0,
@@ -20210,7 +19956,6 @@
       "score": 50.6,
       "quality": 0.83,
       "source_ids": [
-        "news:경남도민일보",
         "news:김해뉴스",
         "news:전자신문"
       ],
@@ -20400,7 +20145,7 @@
       "event_count": 3,
       "source_diversity": 1,
       "axis_delta": {
-        "B": 0.45,
+        "B": 0.44,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
@@ -20410,14 +20155,13 @@
       "score": 72.8,
       "quality": 0.83,
       "source_ids": [
-        "news:컨슈머타임스",
         "news:한국강사신문"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 25,
-      "cohort_rank": 18
+      "t100_rank": 26,
+      "cohort_rank": 19
     },
     {
       "university_id": "UNI-07ECB56853AB",
@@ -21057,8 +20801,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 50,
-      "cohort_rank": 33
+      "t100_rank": 51,
+      "cohort_rank": 34
     },
     {
       "university_id": "UNI-153C36E68C9E",
@@ -21157,8 +20901,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 28,
-      "cohort_rank": 21
+      "t100_rank": 29,
+      "cohort_rank": 22
     },
     {
       "university_id": "UNI-C784A2F3A440",
@@ -21306,8 +21050,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 26,
-      "cohort_rank": 19
+      "t100_rank": 27,
+      "cohort_rank": 20
     },
     {
       "university_id": "UNI-B7A619BF974D",
@@ -21408,8 +21152,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 82,
-      "cohort_rank": 48
+      "t100_rank": 83,
+      "cohort_rank": 49
     },
     {
       "university_id": "UNI-6FAB1CF39178",
@@ -21853,8 +21597,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 83,
-      "cohort_rank": 49
+      "t100_rank": 84,
+      "cohort_rank": 50
     },
     {
       "university_id": "UNI-C18018138068",
@@ -22102,8 +21846,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 52,
-      "cohort_rank": 34
+      "t100_rank": 53,
+      "cohort_rank": 35
     },
     {
       "university_id": "UNI-C84BF2FBFCC9",
@@ -22355,8 +22099,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 42,
-      "cohort_rank": 27
+      "t100_rank": 43,
+      "cohort_rank": 28
     },
     {
       "university_id": "UNI-CA823989C6CF",
@@ -22653,8 +22397,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 45,
-      "cohort_rank": 29
+      "t100_rank": 46,
+      "cohort_rank": 30
     },
     {
       "university_id": "UNI-D2BF04141384",
@@ -23200,8 +22944,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 65,
-      "cohort_rank": 43
+      "t100_rank": 66,
+      "cohort_rank": 44
     },
     {
       "university_id": "UNI-D7695A025EE7",
@@ -23302,8 +23046,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 29,
-      "cohort_rank": 22
+      "t100_rank": 30,
+      "cohort_rank": 23
     },
     {
       "university_id": "UNI-8FCD50065925",
@@ -23353,8 +23097,8 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "t100_rank": 46,
-      "cohort_rank": 30
+      "t100_rank": 47,
+      "cohort_rank": 31
     },
     {
       "university_id": "UNI-A6B21C52A6C1",
@@ -25079,6 +24823,57 @@
         "cohort_rank": 6
       },
       {
+        "university_id": "UNI-AEFF2D8B4705",
+        "name": "서강대학교",
+        "campus": "본교",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "establishment": "사립",
+        "region": "서울",
+        "dims": {
+          "B": 69.7,
+          "R": null,
+          "I": null,
+          "D": 45.3,
+          "G": 90.5,
+          "E": null
+        },
+        "raw": {
+          "경쟁률": 21.2,
+          "충원율": 98.5,
+          "외국인비율": 28.8751,
+          "교육비": 21230.0,
+          "장학금": 3480684.4,
+          "기숙사": 11.3,
+          "교원당학생": 29.43,
+          "교원강의": 57.0,
+          "취업률": 73.1
+        },
+        "eligible": true,
+        "official_axis_count": 3,
+        "trust": "B",
+        "daily_index": 73.5,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
+        "axis_delta": {
+          "B": 0.0,
+          "R": 0.0,
+          "I": 0.0,
+          "D": 0.0,
+          "G": 0.0,
+          "E": 0.0
+        },
+        "score": 73.5,
+        "quality": 0.79,
+        "source_ids": [],
+        "data_date": "2026-10-25",
+        "window_start": "2026-10-25T05:15:00+09:00",
+        "window_end": "2026-10-26T05:15:00+09:00",
+        "t100_rank": 23,
+        "cohort_rank": 17
+      },
+      {
         "university_id": "UNI-D0E31B5AF98A",
         "name": "건양대학교",
         "campus": "본교",
@@ -25087,7 +24882,7 @@
         "establishment": "사립",
         "region": "충남",
         "dims": {
-          "B": 51.9,
+          "B": 51.5,
           "R": null,
           "I": null,
           "D": 72.7,
@@ -25108,32 +24903,29 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 73.4,
-        "activity_points": 1.26,
-        "event_count": 5,
+        "daily_index": 73.2,
+        "activity_points": 0.51,
+        "event_count": 2,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.74,
+          "B": 0.3,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 73.4,
+        "score": 73.2,
         "quality": 0.83,
         "source_ids": [
-          "news:nmn.ff.or.kr",
           "news:금강일보",
-          "news:충청매일",
-          "news:충청타임즈",
           "news:충청투데이"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 23,
-        "cohort_rank": 17
+        "t100_rank": 24,
+        "cohort_rank": 18
       },
       {
         "university_id": "UNI-6ABD22FDC06E",
@@ -25183,7 +24975,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 24,
+        "t100_rank": 25,
         "cohort_rank": 7
       },
       {
@@ -25221,7 +25013,7 @@
         "event_count": 3,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.45,
+          "B": 0.44,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
@@ -25231,14 +25023,13 @@
         "score": 72.8,
         "quality": 0.83,
         "source_ids": [
-          "news:컨슈머타임스",
           "news:한국강사신문"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 25,
-        "cohort_rank": 18
+        "t100_rank": 26,
+        "cohort_rank": 19
       },
       {
         "university_id": "UNI-9DDEA8861082",
@@ -25288,8 +25079,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 26,
-        "cohort_rank": 19
+        "t100_rank": 27,
+        "cohort_rank": 20
       },
       {
         "university_id": "UNI-563C88B77FA0",
@@ -25339,8 +25130,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 27,
-        "cohort_rank": 20
+        "t100_rank": 28,
+        "cohort_rank": 21
       },
       {
         "university_id": "UNI-4BFBD4D55A62",
@@ -25390,8 +25181,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 28,
-        "cohort_rank": 21
+        "t100_rank": 29,
+        "cohort_rank": 22
       },
       {
         "university_id": "UNI-111BB477BB1C",
@@ -25443,8 +25234,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 29,
-        "cohort_rank": 22
+        "t100_rank": 30,
+        "cohort_rank": 23
       },
       {
         "university_id": "UNI-7FEB07BB814F",
@@ -25494,7 +25285,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 30,
+        "t100_rank": 31,
         "cohort_rank": 8
       },
       {
@@ -25545,7 +25336,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 31,
+        "t100_rank": 32,
         "cohort_rank": 9
       },
       {
@@ -25596,7 +25387,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 32,
+        "t100_rank": 33,
         "cohort_rank": 10
       },
       {
@@ -25649,8 +25440,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 33,
-        "cohort_rank": 23
+        "t100_rank": 34,
+        "cohort_rank": 24
       },
       {
         "university_id": "UNI-F232B3628911",
@@ -25700,7 +25491,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 34,
+        "t100_rank": 35,
         "cohort_rank": 11
       },
       {
@@ -25751,7 +25542,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 35,
+        "t100_rank": 36,
         "cohort_rank": 12
       },
       {
@@ -25802,7 +25593,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 36,
+        "t100_rank": 37,
         "cohort_rank": 13
       },
       {
@@ -25853,7 +25644,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 37,
+        "t100_rank": 38,
         "cohort_rank": 14
       },
       {
@@ -25904,8 +25695,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 38,
-        "cohort_rank": 24
+        "t100_rank": 39,
+        "cohort_rank": 25
       },
       {
         "university_id": "UNI-46208842D943",
@@ -25955,8 +25746,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 39,
-        "cohort_rank": 25
+        "t100_rank": 40,
+        "cohort_rank": 26
       },
       {
         "university_id": "UNI-6A2A49896F2D",
@@ -26010,7 +25801,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 40,
+        "t100_rank": 41,
         "cohort_rank": 15
       },
       {
@@ -26022,7 +25813,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 66.3,
+          "B": 66.5,
           "R": null,
           "I": null,
           "D": 71.3,
@@ -26044,11 +25835,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 70.1,
-        "activity_points": 0.25,
-        "event_count": 1,
+        "activity_points": 0.52,
+        "event_count": 2,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.15,
+          "B": 0.3,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
@@ -26058,13 +25849,14 @@
         "score": 70.1,
         "quality": 0.83,
         "source_ids": [
+          "news:산학뉴스",
           "news:전자신문"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 41,
-        "cohort_rank": 26
+        "t100_rank": 42,
+        "cohort_rank": 27
       },
       {
         "university_id": "UNI-C0F432F38279",
@@ -26114,8 +25906,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 42,
-        "cohort_rank": 27
+        "t100_rank": 43,
+        "cohort_rank": 28
       },
       {
         "university_id": "UNI-C1FFB39D047D",
@@ -26165,8 +25957,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 43,
-        "cohort_rank": 28
+        "t100_rank": 44,
+        "cohort_rank": 29
       },
       {
         "university_id": "UNI-C1D23FB008B4",
@@ -26216,7 +26008,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 44,
+        "t100_rank": 45,
         "cohort_rank": 16
       },
       {
@@ -26267,8 +26059,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 45,
-        "cohort_rank": 29
+        "t100_rank": 46,
+        "cohort_rank": 30
       },
       {
         "university_id": "UNI-8FCD50065925",
@@ -26315,63 +26107,6 @@
         "score": 69.8,
         "quality": 0.79,
         "source_ids": [],
-        "data_date": "2026-10-25",
-        "window_start": "2026-10-25T05:15:00+09:00",
-        "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 46,
-        "cohort_rank": 30
-      },
-      {
-        "university_id": "UNI-E77357DDB344",
-        "name": "건양대학교",
-        "campus": "제2캠퍼스",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "establishment": "사립",
-        "region": "대전",
-        "dims": {
-          "B": 45.8,
-          "R": null,
-          "I": null,
-          "D": 53.8,
-          "G": 95.1,
-          "E": null
-        },
-        "raw": {
-          "경쟁률": 8.5,
-          "충원율": 99.7,
-          "외국인비율": 0.967,
-          "교육비": 0.0,
-          "장학금": 4337264.0,
-          "기숙사": 32.3,
-          "교원당학생": 20.77,
-          "교원강의": 78.1,
-          "취업률": 78.2
-        },
-        "eligible": true,
-        "official_axis_count": 3,
-        "trust": "B",
-        "daily_index": 69.5,
-        "activity_points": 1.26,
-        "event_count": 5,
-        "source_diversity": 1,
-        "axis_delta": {
-          "B": 0.74,
-          "R": 0.0,
-          "I": 0.0,
-          "D": 0.0,
-          "G": 0.0,
-          "E": 0.0
-        },
-        "score": 69.5,
-        "quality": 0.83,
-        "source_ids": [
-          "news:nmn.ff.or.kr",
-          "news:금강일보",
-          "news:충청매일",
-          "news:충청타임즈",
-          "news:충청투데이"
-        ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
@@ -26430,6 +26165,60 @@
         "cohort_rank": 17
       },
       {
+        "university_id": "UNI-E77357DDB344",
+        "name": "건양대학교",
+        "campus": "제2캠퍼스",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "establishment": "사립",
+        "region": "대전",
+        "dims": {
+          "B": 45.4,
+          "R": null,
+          "I": null,
+          "D": 53.8,
+          "G": 95.1,
+          "E": null
+        },
+        "raw": {
+          "경쟁률": 8.5,
+          "충원율": 99.7,
+          "외국인비율": 0.967,
+          "교육비": 0.0,
+          "장학금": 4337264.0,
+          "기숙사": 32.3,
+          "교원당학생": 20.77,
+          "교원강의": 78.1,
+          "취업률": 78.2
+        },
+        "eligible": true,
+        "official_axis_count": 3,
+        "trust": "B",
+        "daily_index": 69.4,
+        "activity_points": 0.51,
+        "event_count": 2,
+        "source_diversity": 1,
+        "axis_delta": {
+          "B": 0.3,
+          "R": 0.0,
+          "I": 0.0,
+          "D": 0.0,
+          "G": 0.0,
+          "E": 0.0
+        },
+        "score": 69.4,
+        "quality": 0.83,
+        "source_ids": [
+          "news:금강일보",
+          "news:충청투데이"
+        ],
+        "data_date": "2026-10-25",
+        "window_start": "2026-10-25T05:15:00+09:00",
+        "window_end": "2026-10-26T05:15:00+09:00",
+        "t100_rank": 49,
+        "cohort_rank": 32
+      },
+      {
         "university_id": "UNI-C6E10A3A549E",
         "name": "동국대학교",
         "campus": "본교",
@@ -26438,7 +26227,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 85.9,
+          "B": 85.6,
           "R": null,
           "I": null,
           "D": 52.9,
@@ -26459,30 +26248,28 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 69.4,
-        "activity_points": 0.75,
-        "event_count": 3,
+        "daily_index": 69.3,
+        "activity_points": 0.25,
+        "event_count": 1,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.44,
+          "B": 0.15,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 69.4,
+        "score": 69.3,
         "quality": 0.83,
         "source_ids": [
-          "news:경북매일",
-          "news:경북신문",
-          "news:경주시민신문"
+          "news:경북매일"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 49,
-        "cohort_rank": 32
+        "t100_rank": 50,
+        "cohort_rank": 33
       },
       {
         "university_id": "UNI-0A6CAD2B7E32",
@@ -26532,8 +26319,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 50,
-        "cohort_rank": 33
+        "t100_rank": 51,
+        "cohort_rank": 34
       },
       {
         "university_id": "UNI-F68EBB931115",
@@ -26583,7 +26370,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 51,
+        "t100_rank": 52,
         "cohort_rank": 18
       },
       {
@@ -26634,8 +26421,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 52,
-        "cohort_rank": 34
+        "t100_rank": 53,
+        "cohort_rank": 35
       },
       {
         "university_id": "UNI-AE15E8EB582F",
@@ -26685,8 +26472,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 53,
-        "cohort_rank": 35
+        "t100_rank": 54,
+        "cohort_rank": 36
       },
       {
         "university_id": "UNI-695F8AAC9625",
@@ -26738,8 +26525,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 54,
-        "cohort_rank": 36
+        "t100_rank": 55,
+        "cohort_rank": 37
       },
       {
         "university_id": "UNI-49614272415E",
@@ -26789,7 +26576,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 55,
+        "t100_rank": 56,
         "cohort_rank": 19
       },
       {
@@ -26840,8 +26627,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 56,
-        "cohort_rank": 37
+        "t100_rank": 57,
+        "cohort_rank": 38
       },
       {
         "university_id": "UNI-A3FA63129C41",
@@ -26852,7 +26639,7 @@
         "establishment": "사립",
         "region": "경기",
         "dims": {
-          "B": 72.2,
+          "B": 72.1,
           "R": 54.6,
           "I": 50.6,
           "D": 61.9,
@@ -26874,11 +26661,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 67.6,
-        "activity_points": 3.59,
-        "event_count": 13,
+        "activity_points": 3.33,
+        "event_count": 12,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.9,
+          "B": 0.75,
           "R": 4.56,
           "I": 0.6,
           "D": 0.0,
@@ -26890,13 +26677,12 @@
         "source_ids": [
           "news:CNB뉴스",
           "news:경기신문",
-          "news:뉴스웍스",
-          "news:에너지경제신문"
+          "news:뉴스웍스"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 57,
+        "t100_rank": 58,
         "cohort_rank": 20
       },
       {
@@ -26947,8 +26733,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 58,
-        "cohort_rank": 38
+        "t100_rank": 59,
+        "cohort_rank": 39
       },
       {
         "university_id": "UNI-1CD6D00EF4FA",
@@ -26998,8 +26784,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 59,
-        "cohort_rank": 39
+        "t100_rank": 60,
+        "cohort_rank": 40
       },
       {
         "university_id": "UNI-0694651CD080",
@@ -27049,8 +26835,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 60,
-        "cohort_rank": 40
+        "t100_rank": 61,
+        "cohort_rank": 41
       },
       {
         "university_id": "UNI-71DF76D19DD5",
@@ -27102,8 +26888,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 61,
-        "cohort_rank": 41
+        "t100_rank": 62,
+        "cohort_rank": 42
       },
       {
         "university_id": "UNI-1A77A0DC197C",
@@ -27153,7 +26939,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 62,
+        "t100_rank": 63,
         "cohort_rank": 21
       },
       {
@@ -27204,7 +26990,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 63,
+        "t100_rank": 64,
         "cohort_rank": 22
       },
       {
@@ -27255,8 +27041,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 64,
-        "cohort_rank": 42
+        "t100_rank": 65,
+        "cohort_rank": 43
       },
       {
         "university_id": "UNI-E89D60749C31",
@@ -27306,8 +27092,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 65,
-        "cohort_rank": 43
+        "t100_rank": 66,
+        "cohort_rank": 44
       },
       {
         "university_id": "UNI-AACADDC6DCC1",
@@ -27357,7 +27143,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 66,
+        "t100_rank": 67,
         "cohort_rank": 23
       },
       {
@@ -27408,7 +27194,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 67,
+        "t100_rank": 68,
         "cohort_rank": 24
       },
       {
@@ -27459,7 +27245,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 25
       },
       {
@@ -27510,7 +27296,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 26
       },
       {
@@ -27561,8 +27347,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 70,
-        "cohort_rank": 44
+        "t100_rank": 71,
+        "cohort_rank": 45
       },
       {
         "university_id": "UNI-E033F55D2D1A",
@@ -27612,7 +27398,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 71,
+        "t100_rank": 72,
         "cohort_rank": 27
       },
       {
@@ -27663,7 +27449,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 72,
+        "t100_rank": 73,
         "cohort_rank": 28
       },
       {
@@ -27714,7 +27500,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 73,
+        "t100_rank": 74,
         "cohort_rank": 29
       },
       {
@@ -27765,7 +27551,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 74,
+        "t100_rank": 75,
         "cohort_rank": 30
       },
       {
@@ -27818,8 +27604,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 75,
-        "cohort_rank": 45
+        "t100_rank": 76,
+        "cohort_rank": 46
       },
       {
         "university_id": "UNI-0B6F3C11E615",
@@ -27871,8 +27657,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 76,
-        "cohort_rank": 46
+        "t100_rank": 77,
+        "cohort_rank": 47
       },
       {
         "university_id": "UNI-4809B97797D6",
@@ -27924,8 +27710,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 77,
-        "cohort_rank": 47
+        "t100_rank": 78,
+        "cohort_rank": 48
       },
       {
         "university_id": "UNI-7170F028FAEE",
@@ -27975,7 +27761,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 78,
+        "t100_rank": 79,
         "cohort_rank": 31
       },
       {
@@ -28026,7 +27812,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 79,
+        "t100_rank": 80,
         "cohort_rank": 32
       },
       {
@@ -28077,7 +27863,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 80,
+        "t100_rank": 81,
         "cohort_rank": 33
       },
       {
@@ -28128,7 +27914,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 81,
+        "t100_rank": 82,
         "cohort_rank": 34
       },
       {
@@ -28179,8 +27965,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 82,
-        "cohort_rank": 48
+        "t100_rank": 83,
+        "cohort_rank": 49
       },
       {
         "university_id": "UNI-03BE82CBE787",
@@ -28230,8 +28016,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 83,
-        "cohort_rank": 49
+        "t100_rank": 84,
+        "cohort_rank": 50
       },
       {
         "university_id": "UNI-93FBB3C4875C",
@@ -28281,8 +28067,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 84,
-        "cohort_rank": 50
+        "t100_rank": 85,
+        "cohort_rank": 51
       },
       {
         "university_id": "UNI-FC1AD46B3B8C",
@@ -28329,60 +28115,6 @@
         "score": 64.9,
         "quality": 0.79,
         "source_ids": [],
-        "data_date": "2026-10-25",
-        "window_start": "2026-10-25T05:15:00+09:00",
-        "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 85,
-        "cohort_rank": 51
-      },
-      {
-        "university_id": "UNI-AEFF2D8B4705",
-        "name": "서강대학교",
-        "campus": "본교",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "establishment": "사립",
-        "region": "서울",
-        "dims": {
-          "B": 70.0,
-          "R": 48.5,
-          "I": null,
-          "D": 46.1,
-          "G": 90.5,
-          "E": null
-        },
-        "raw": {
-          "경쟁률": 21.2,
-          "충원율": 98.5,
-          "외국인비율": 28.8751,
-          "교육비": 21230.0,
-          "장학금": 3480684.4,
-          "기숙사": 11.3,
-          "교원당학생": 29.43,
-          "교원강의": 57.0,
-          "취업률": 73.1
-        },
-        "eligible": true,
-        "official_axis_count": 3,
-        "trust": "B",
-        "daily_index": 64.8,
-        "activity_points": 1.06,
-        "event_count": 4,
-        "source_diversity": 1,
-        "axis_delta": {
-          "B": 0.29,
-          "R": -1.49,
-          "I": 0.0,
-          "D": 0.77,
-          "G": 0.0,
-          "E": 0.0
-        },
-        "score": 64.8,
-        "quality": 0.83,
-        "source_ids": [
-          "news:교육을 비추다",
-          "news:서울경제"
-        ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
@@ -28915,7 +28647,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 84.3,
+          "B": 84.0,
           "R": null,
           "I": null,
           "D": 20.8,
@@ -28936,24 +28668,21 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 63.9,
-        "activity_points": 0.51,
-        "event_count": 2,
-        "source_diversity": 1,
+        "daily_index": 63.8,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
         "axis_delta": {
-          "B": 0.3,
+          "B": 0.0,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 63.9,
-        "quality": 0.83,
-        "source_ids": [
-          "news:데일리시큐",
-          "news:중부일보"
-        ],
+        "score": 63.8,
+        "quality": 0.79,
+        "source_ids": [],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
@@ -29941,6 +29670,57 @@
         "cohort_rank": 16
       },
       {
+        "university_id": "UNI-AEFF2D8B4705",
+        "name": "서강대학교",
+        "campus": "본교",
+        "school_kind": "대학",
+        "school_type": "대학교",
+        "establishment": "사립",
+        "region": "서울",
+        "dims": {
+          "B": 69.7,
+          "R": null,
+          "I": null,
+          "D": 45.3,
+          "G": 90.5,
+          "E": null
+        },
+        "raw": {
+          "경쟁률": 21.2,
+          "충원율": 98.5,
+          "외국인비율": 28.8751,
+          "교육비": 21230.0,
+          "장학금": 3480684.4,
+          "기숙사": 11.3,
+          "교원당학생": 29.43,
+          "교원강의": 57.0,
+          "취업률": 73.1
+        },
+        "eligible": true,
+        "official_axis_count": 3,
+        "trust": "B",
+        "daily_index": 73.5,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
+        "axis_delta": {
+          "B": 0.0,
+          "R": 0.0,
+          "I": 0.0,
+          "D": 0.0,
+          "G": 0.0,
+          "E": 0.0
+        },
+        "score": 73.5,
+        "quality": 0.79,
+        "source_ids": [],
+        "data_date": "2026-10-25",
+        "window_start": "2026-10-25T05:15:00+09:00",
+        "window_end": "2026-10-26T05:15:00+09:00",
+        "t100_rank": 23,
+        "cohort_rank": 17
+      },
+      {
         "university_id": "UNI-D0E31B5AF98A",
         "name": "건양대학교",
         "campus": "본교",
@@ -29949,7 +29729,7 @@
         "establishment": "사립",
         "region": "충남",
         "dims": {
-          "B": 51.9,
+          "B": 51.5,
           "R": null,
           "I": null,
           "D": 72.7,
@@ -29970,32 +29750,29 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 73.4,
-        "activity_points": 1.26,
-        "event_count": 5,
+        "daily_index": 73.2,
+        "activity_points": 0.51,
+        "event_count": 2,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.74,
+          "B": 0.3,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 73.4,
+        "score": 73.2,
         "quality": 0.83,
         "source_ids": [
-          "news:nmn.ff.or.kr",
           "news:금강일보",
-          "news:충청매일",
-          "news:충청타임즈",
           "news:충청투데이"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 23,
-        "cohort_rank": 17
+        "t100_rank": 24,
+        "cohort_rank": 18
       },
       {
         "university_id": "UNI-185BC8BA4EA7",
@@ -30032,7 +29809,7 @@
         "event_count": 3,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.45,
+          "B": 0.44,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
@@ -30042,14 +29819,13 @@
         "score": 72.8,
         "quality": 0.83,
         "source_ids": [
-          "news:컨슈머타임스",
           "news:한국강사신문"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 25,
-        "cohort_rank": 18
+        "t100_rank": 26,
+        "cohort_rank": 19
       },
       {
         "university_id": "UNI-9DDEA8861082",
@@ -30099,8 +29875,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 26,
-        "cohort_rank": 19
+        "t100_rank": 27,
+        "cohort_rank": 20
       },
       {
         "university_id": "UNI-563C88B77FA0",
@@ -30150,8 +29926,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 27,
-        "cohort_rank": 20
+        "t100_rank": 28,
+        "cohort_rank": 21
       },
       {
         "university_id": "UNI-4BFBD4D55A62",
@@ -30201,8 +29977,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 28,
-        "cohort_rank": 21
+        "t100_rank": 29,
+        "cohort_rank": 22
       },
       {
         "university_id": "UNI-111BB477BB1C",
@@ -30254,8 +30030,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 29,
-        "cohort_rank": 22
+        "t100_rank": 30,
+        "cohort_rank": 23
       },
       {
         "university_id": "UNI-AD88E9CAB52B",
@@ -30307,8 +30083,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 33,
-        "cohort_rank": 23
+        "t100_rank": 34,
+        "cohort_rank": 24
       },
       {
         "university_id": "UNI-9C163151446B",
@@ -30358,8 +30134,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 38,
-        "cohort_rank": 24
+        "t100_rank": 39,
+        "cohort_rank": 25
       },
       {
         "university_id": "UNI-46208842D943",
@@ -30409,8 +30185,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 39,
-        "cohort_rank": 25
+        "t100_rank": 40,
+        "cohort_rank": 26
       },
       {
         "university_id": "UNI-4229407FCC52",
@@ -30421,7 +30197,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 66.3,
+          "B": 66.5,
           "R": null,
           "I": null,
           "D": 71.3,
@@ -30443,11 +30219,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 70.1,
-        "activity_points": 0.25,
-        "event_count": 1,
+        "activity_points": 0.52,
+        "event_count": 2,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.15,
+          "B": 0.3,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
@@ -30457,13 +30233,14 @@
         "score": 70.1,
         "quality": 0.83,
         "source_ids": [
+          "news:산학뉴스",
           "news:전자신문"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 41,
-        "cohort_rank": 26
+        "t100_rank": 42,
+        "cohort_rank": 27
       },
       {
         "university_id": "UNI-C0F432F38279",
@@ -30513,8 +30290,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 42,
-        "cohort_rank": 27
+        "t100_rank": 43,
+        "cohort_rank": 28
       },
       {
         "university_id": "UNI-C1FFB39D047D",
@@ -30564,8 +30341,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 43,
-        "cohort_rank": 28
+        "t100_rank": 44,
+        "cohort_rank": 29
       },
       {
         "university_id": "UNI-42447EF140AB",
@@ -30615,8 +30392,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 45,
-        "cohort_rank": 29
+        "t100_rank": 46,
+        "cohort_rank": 30
       },
       {
         "university_id": "UNI-8FCD50065925",
@@ -30666,8 +30443,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 46,
-        "cohort_rank": 30
+        "t100_rank": 47,
+        "cohort_rank": 31
       },
       {
         "university_id": "UNI-E77357DDB344",
@@ -30678,7 +30455,7 @@
         "establishment": "사립",
         "region": "대전",
         "dims": {
-          "B": 45.8,
+          "B": 45.4,
           "R": null,
           "I": null,
           "D": 53.8,
@@ -30699,32 +30476,29 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 69.5,
-        "activity_points": 1.26,
-        "event_count": 5,
+        "daily_index": 69.4,
+        "activity_points": 0.51,
+        "event_count": 2,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.74,
+          "B": 0.3,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 69.5,
+        "score": 69.4,
         "quality": 0.83,
         "source_ids": [
-          "news:nmn.ff.or.kr",
           "news:금강일보",
-          "news:충청매일",
-          "news:충청타임즈",
           "news:충청투데이"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 47,
-        "cohort_rank": 31
+        "t100_rank": 49,
+        "cohort_rank": 32
       },
       {
         "university_id": "UNI-C6E10A3A549E",
@@ -30735,7 +30509,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 85.9,
+          "B": 85.6,
           "R": null,
           "I": null,
           "D": 52.9,
@@ -30756,30 +30530,28 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 69.4,
-        "activity_points": 0.75,
-        "event_count": 3,
+        "daily_index": 69.3,
+        "activity_points": 0.25,
+        "event_count": 1,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.44,
+          "B": 0.15,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 69.4,
+        "score": 69.3,
         "quality": 0.83,
         "source_ids": [
-          "news:경북매일",
-          "news:경북신문",
-          "news:경주시민신문"
+          "news:경북매일"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 49,
-        "cohort_rank": 32
+        "t100_rank": 50,
+        "cohort_rank": 33
       },
       {
         "university_id": "UNI-0A6CAD2B7E32",
@@ -30829,8 +30601,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 50,
-        "cohort_rank": 33
+        "t100_rank": 51,
+        "cohort_rank": 34
       },
       {
         "university_id": "UNI-30257DF07339",
@@ -30880,8 +30652,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 52,
-        "cohort_rank": 34
+        "t100_rank": 53,
+        "cohort_rank": 35
       },
       {
         "university_id": "UNI-AE15E8EB582F",
@@ -30931,8 +30703,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 53,
-        "cohort_rank": 35
+        "t100_rank": 54,
+        "cohort_rank": 36
       },
       {
         "university_id": "UNI-695F8AAC9625",
@@ -30984,8 +30756,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 54,
-        "cohort_rank": 36
+        "t100_rank": 55,
+        "cohort_rank": 37
       },
       {
         "university_id": "UNI-A49B9AAFB01E",
@@ -31035,8 +30807,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 56,
-        "cohort_rank": 37
+        "t100_rank": 57,
+        "cohort_rank": 38
       },
       {
         "university_id": "UNI-2B2ABD5860E3",
@@ -31086,8 +30858,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 58,
-        "cohort_rank": 38
+        "t100_rank": 59,
+        "cohort_rank": 39
       },
       {
         "university_id": "UNI-1CD6D00EF4FA",
@@ -31137,8 +30909,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 59,
-        "cohort_rank": 39
+        "t100_rank": 60,
+        "cohort_rank": 40
       },
       {
         "university_id": "UNI-0694651CD080",
@@ -31188,8 +30960,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 60,
-        "cohort_rank": 40
+        "t100_rank": 61,
+        "cohort_rank": 41
       },
       {
         "university_id": "UNI-71DF76D19DD5",
@@ -31241,8 +31013,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 61,
-        "cohort_rank": 41
+        "t100_rank": 62,
+        "cohort_rank": 42
       },
       {
         "university_id": "UNI-4C44A00C6DCB",
@@ -31292,8 +31064,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 64,
-        "cohort_rank": 42
+        "t100_rank": 65,
+        "cohort_rank": 43
       },
       {
         "university_id": "UNI-E89D60749C31",
@@ -31343,8 +31115,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 65,
-        "cohort_rank": 43
+        "t100_rank": 66,
+        "cohort_rank": 44
       },
       {
         "university_id": "UNI-8A025B5C36D1",
@@ -31394,8 +31166,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 70,
-        "cohort_rank": 44
+        "t100_rank": 71,
+        "cohort_rank": 45
       },
       {
         "university_id": "UNI-EFB5846DAFC5",
@@ -31447,8 +31219,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 75,
-        "cohort_rank": 45
+        "t100_rank": 76,
+        "cohort_rank": 46
       },
       {
         "university_id": "UNI-0B6F3C11E615",
@@ -31500,8 +31272,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 76,
-        "cohort_rank": 46
+        "t100_rank": 77,
+        "cohort_rank": 47
       },
       {
         "university_id": "UNI-4809B97797D6",
@@ -31553,8 +31325,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 77,
-        "cohort_rank": 47
+        "t100_rank": 78,
+        "cohort_rank": 48
       },
       {
         "university_id": "UNI-610197CE7DD8",
@@ -31604,8 +31376,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 82,
-        "cohort_rank": 48
+        "t100_rank": 83,
+        "cohort_rank": 49
       },
       {
         "university_id": "UNI-03BE82CBE787",
@@ -31655,8 +31427,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 83,
-        "cohort_rank": 49
+        "t100_rank": 84,
+        "cohort_rank": 50
       },
       {
         "university_id": "UNI-93FBB3C4875C",
@@ -31706,8 +31478,8 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 84,
-        "cohort_rank": 50
+        "t100_rank": 85,
+        "cohort_rank": 51
       },
       {
         "university_id": "UNI-FC1AD46B3B8C",
@@ -31754,60 +31526,6 @@
         "score": 64.9,
         "quality": 0.79,
         "source_ids": [],
-        "data_date": "2026-10-25",
-        "window_start": "2026-10-25T05:15:00+09:00",
-        "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 85,
-        "cohort_rank": 51
-      },
-      {
-        "university_id": "UNI-AEFF2D8B4705",
-        "name": "서강대학교",
-        "campus": "본교",
-        "school_kind": "대학",
-        "school_type": "대학교",
-        "establishment": "사립",
-        "region": "서울",
-        "dims": {
-          "B": 70.0,
-          "R": 48.5,
-          "I": null,
-          "D": 46.1,
-          "G": 90.5,
-          "E": null
-        },
-        "raw": {
-          "경쟁률": 21.2,
-          "충원율": 98.5,
-          "외국인비율": 28.8751,
-          "교육비": 21230.0,
-          "장학금": 3480684.4,
-          "기숙사": 11.3,
-          "교원당학생": 29.43,
-          "교원강의": 57.0,
-          "취업률": 73.1
-        },
-        "eligible": true,
-        "official_axis_count": 3,
-        "trust": "B",
-        "daily_index": 64.8,
-        "activity_points": 1.06,
-        "event_count": 4,
-        "source_diversity": 1,
-        "axis_delta": {
-          "B": 0.29,
-          "R": -1.49,
-          "I": 0.0,
-          "D": 0.77,
-          "G": 0.0,
-          "E": 0.0
-        },
-        "score": 64.8,
-        "quality": 0.83,
-        "source_ids": [
-          "news:교육을 비추다",
-          "news:서울경제"
-        ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
@@ -32185,7 +31903,7 @@
         "establishment": "사립",
         "region": "서울",
         "dims": {
-          "B": 84.3,
+          "B": 84.0,
           "R": null,
           "I": null,
           "D": 20.8,
@@ -32206,24 +31924,21 @@
         "eligible": true,
         "official_axis_count": 3,
         "trust": "B",
-        "daily_index": 63.9,
-        "activity_points": 0.51,
-        "event_count": 2,
-        "source_diversity": 1,
+        "daily_index": 63.8,
+        "activity_points": 0,
+        "event_count": 0,
+        "source_diversity": 0,
         "axis_delta": {
-          "B": 0.3,
+          "B": 0.0,
           "R": 0.0,
           "I": 0.0,
           "D": 0.0,
           "G": 0.0,
           "E": 0.0
         },
-        "score": 63.9,
-        "quality": 0.83,
-        "source_ids": [
-          "news:데일리시큐",
-          "news:중부일보"
-        ],
+        "score": 63.8,
+        "quality": 0.79,
+        "source_ids": [],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
@@ -32588,7 +32303,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 24,
+        "t100_rank": 25,
         "cohort_rank": 7
       },
       {
@@ -32639,7 +32354,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 30,
+        "t100_rank": 31,
         "cohort_rank": 8
       },
       {
@@ -32690,7 +32405,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 31,
+        "t100_rank": 32,
         "cohort_rank": 9
       },
       {
@@ -32741,7 +32456,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 32,
+        "t100_rank": 33,
         "cohort_rank": 10
       },
       {
@@ -32792,7 +32507,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 34,
+        "t100_rank": 35,
         "cohort_rank": 11
       },
       {
@@ -32843,7 +32558,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 35,
+        "t100_rank": 36,
         "cohort_rank": 12
       },
       {
@@ -32894,7 +32609,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 36,
+        "t100_rank": 37,
         "cohort_rank": 13
       },
       {
@@ -32945,7 +32660,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 37,
+        "t100_rank": 38,
         "cohort_rank": 14
       },
       {
@@ -33000,7 +32715,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 40,
+        "t100_rank": 41,
         "cohort_rank": 15
       },
       {
@@ -33051,7 +32766,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 44,
+        "t100_rank": 45,
         "cohort_rank": 16
       },
       {
@@ -33153,7 +32868,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 51,
+        "t100_rank": 52,
         "cohort_rank": 18
       },
       {
@@ -33204,7 +32919,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 55,
+        "t100_rank": 56,
         "cohort_rank": 19
       },
       {
@@ -33216,7 +32931,7 @@
         "establishment": "사립",
         "region": "경기",
         "dims": {
-          "B": 72.2,
+          "B": 72.1,
           "R": 54.6,
           "I": 50.6,
           "D": 61.9,
@@ -33238,11 +32953,11 @@
         "official_axis_count": 3,
         "trust": "B",
         "daily_index": 67.6,
-        "activity_points": 3.59,
-        "event_count": 13,
+        "activity_points": 3.33,
+        "event_count": 12,
         "source_diversity": 1,
         "axis_delta": {
-          "B": 0.9,
+          "B": 0.75,
           "R": 4.56,
           "I": 0.6,
           "D": 0.0,
@@ -33254,13 +32969,12 @@
         "source_ids": [
           "news:CNB뉴스",
           "news:경기신문",
-          "news:뉴스웍스",
-          "news:에너지경제신문"
+          "news:뉴스웍스"
         ],
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 57,
+        "t100_rank": 58,
         "cohort_rank": 20
       },
       {
@@ -33311,7 +33025,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 62,
+        "t100_rank": 63,
         "cohort_rank": 21
       },
       {
@@ -33362,7 +33076,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 63,
+        "t100_rank": 64,
         "cohort_rank": 22
       },
       {
@@ -33413,7 +33127,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 66,
+        "t100_rank": 67,
         "cohort_rank": 23
       },
       {
@@ -33464,7 +33178,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 67,
+        "t100_rank": 68,
         "cohort_rank": 24
       },
       {
@@ -33515,7 +33229,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 68,
+        "t100_rank": 69,
         "cohort_rank": 25
       },
       {
@@ -33566,7 +33280,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 69,
+        "t100_rank": 70,
         "cohort_rank": 26
       },
       {
@@ -33617,7 +33331,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 71,
+        "t100_rank": 72,
         "cohort_rank": 27
       },
       {
@@ -33668,7 +33382,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 72,
+        "t100_rank": 73,
         "cohort_rank": 28
       },
       {
@@ -33719,7 +33433,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 73,
+        "t100_rank": 74,
         "cohort_rank": 29
       },
       {
@@ -33770,7 +33484,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 74,
+        "t100_rank": 75,
         "cohort_rank": 30
       },
       {
@@ -33821,7 +33535,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 78,
+        "t100_rank": 79,
         "cohort_rank": 31
       },
       {
@@ -33872,7 +33586,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 79,
+        "t100_rank": 80,
         "cohort_rank": 32
       },
       {
@@ -33923,7 +33637,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 80,
+        "t100_rank": 81,
         "cohort_rank": 33
       },
       {
@@ -33974,7 +33688,7 @@
         "data_date": "2026-10-25",
         "window_start": "2026-10-25T05:15:00+09:00",
         "window_end": "2026-10-26T05:15:00+09:00",
-        "t100_rank": 81,
+        "t100_rank": 82,
         "cohort_rank": 34
       },
       {
@@ -35057,60 +34771,6 @@
       "waiting_rank": 15
     },
     {
-      "university_id": "UNI-E4D438FA9FE3",
-      "name": "선문대학교",
-      "campus": "본교",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "establishment": "사립",
-      "region": "충남",
-      "dims": {
-        "B": 59.2,
-        "R": 53.3,
-        "I": null,
-        "D": 59.2,
-        "G": 75.8,
-        "E": null
-      },
-      "raw": {
-        "경쟁률": 4.6,
-        "충원율": 100.0,
-        "외국인비율": 34.9649,
-        "교육비": 15469.6,
-        "장학금": 4715362.3,
-        "기숙사": 30.7,
-        "교원당학생": 33.41,
-        "교원강의": 62.7,
-        "취업률": 68.3
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 61.8,
-      "activity_points": 1.25,
-      "event_count": 5,
-      "source_diversity": 1,
-      "axis_delta": {
-        "B": 0.44,
-        "R": 3.35,
-        "I": 0.0,
-        "D": 0.0,
-        "G": 0.0,
-        "E": 0.0
-      },
-      "score": 61.8,
-      "quality": 0.83,
-      "source_ids": [
-        "news:밝은미래신문",
-        "news:세계한인신문",
-        "news:중부매일"
-      ],
-      "data_date": "2026-10-25",
-      "window_start": "2026-10-25T05:15:00+09:00",
-      "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 16
-    },
-    {
       "university_id": "UNI-DD617A0F138B",
       "name": "세명대학교",
       "campus": "본교",
@@ -35158,7 +34818,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 17
+      "waiting_rank": 16
     },
     {
       "university_id": "UNI-797AF847B185",
@@ -35211,7 +34871,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 18
+      "waiting_rank": 17
     },
     {
       "university_id": "UNI-8363A7C570E8",
@@ -35263,7 +34923,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 19
+      "waiting_rank": 18
     },
     {
       "university_id": "UNI-4A1CE1B52587",
@@ -35313,7 +34973,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 20
+      "waiting_rank": 19
     },
     {
       "university_id": "UNI-F4B7D13135F4",
@@ -35367,7 +35027,7 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 21
+      "waiting_rank": 20
     },
     {
       "university_id": "UNI-9D9CED4645AA",
@@ -35415,6 +35075,59 @@
       "quality": 0.83,
       "source_ids": [
         "news:충청투데이"
+      ],
+      "data_date": "2026-10-25",
+      "window_start": "2026-10-25T05:15:00+09:00",
+      "window_end": "2026-10-26T05:15:00+09:00",
+      "waiting_rank": 21
+    },
+    {
+      "university_id": "UNI-E4D438FA9FE3",
+      "name": "선문대학교",
+      "campus": "본교",
+      "school_kind": "대학",
+      "school_type": "대학교",
+      "establishment": "사립",
+      "region": "충남",
+      "dims": {
+        "B": 59.1,
+        "R": 51.9,
+        "I": null,
+        "D": 59.2,
+        "G": 75.8,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 4.6,
+        "충원율": 100.0,
+        "외국인비율": 34.9649,
+        "교육비": 15469.6,
+        "장학금": 4715362.3,
+        "기숙사": 30.7,
+        "교원당학생": 33.41,
+        "교원강의": 62.7,
+        "취업률": 68.3
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 61.3,
+      "activity_points": 0.75,
+      "event_count": 3,
+      "source_diversity": 1,
+      "axis_delta": {
+        "B": 0.29,
+        "R": 1.88,
+        "I": 0.0,
+        "D": 0.0,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 61.3,
+      "quality": 0.83,
+      "source_ids": [
+        "news:밝은미래신문",
+        "news:세계한인신문"
       ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
@@ -35739,7 +35452,7 @@
       "establishment": "사립",
       "region": "경기",
       "dims": {
-        "B": 59.1,
+        "B": 59.0,
         "R": null,
         "I": null,
         "D": 59.6,
@@ -35761,11 +35474,11 @@
       "official_axis_count": 3,
       "trust": "B",
       "daily_index": 60.3,
-      "activity_points": 0.25,
-      "event_count": 1,
-      "source_diversity": 1,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
       "axis_delta": {
-        "B": 0.15,
+        "B": 0.0,
         "R": 0.0,
         "I": 0.0,
         "D": 0.0,
@@ -35773,10 +35486,8 @@
         "E": 0.0
       },
       "score": 60.3,
-      "quality": 0.83,
-      "source_ids": [
-        "news:파이낸스투데이"
-      ],
+      "quality": 0.79,
+      "source_ids": [],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
@@ -36135,60 +35846,6 @@
       "waiting_rank": 36
     },
     {
-      "university_id": "UNI-AEBED6A153E6",
-      "name": "국민대학교",
-      "campus": "본교",
-      "school_kind": "대학",
-      "school_type": "대학교",
-      "establishment": "사립",
-      "region": "서울",
-      "dims": {
-        "B": 69.8,
-        "R": 52.9,
-        "I": null,
-        "D": 57.9,
-        "G": 67.0,
-        "E": 51.3
-      },
-      "raw": {
-        "경쟁률": 20.3,
-        "충원율": 99.8,
-        "외국인비율": 11.1126,
-        "교육비": 18664.5,
-        "장학금": 4188067.7,
-        "기숙사": 13.3,
-        "교원당학생": 24.62,
-        "교원강의": 64.8,
-        "취업률": 66.5
-      },
-      "eligible": true,
-      "official_axis_count": 3,
-      "trust": "B",
-      "daily_index": 59.5,
-      "activity_points": 1.6,
-      "event_count": 6,
-      "source_diversity": 1,
-      "axis_delta": {
-        "B": 0.44,
-        "R": 2.95,
-        "I": 0.0,
-        "D": 0.0,
-        "G": 0.0,
-        "E": 1.32
-      },
-      "score": 59.5,
-      "quality": 0.83,
-      "source_ids": [
-        "news:디자인정글",
-        "news:산경일보",
-        "news:시정일보"
-      ],
-      "data_date": "2026-10-25",
-      "window_start": "2026-10-25T05:15:00+09:00",
-      "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 37
-    },
-    {
       "university_id": "UNI-E2432BE54B73",
       "name": "오산대학교",
       "campus": "본교",
@@ -36236,57 +35893,59 @@
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 38
+      "waiting_rank": 37
     },
     {
-      "university_id": "UNI-0FC5DA7185B5",
-      "name": "서울시립대학교",
+      "university_id": "UNI-AEBED6A153E6",
+      "name": "국민대학교",
       "campus": "본교",
       "school_kind": "대학",
       "school_type": "대학교",
-      "establishment": "공립",
+      "establishment": "사립",
       "region": "서울",
       "dims": {
-        "B": 77.1,
-        "R": null,
+        "B": 69.5,
+        "R": 51.5,
         "I": null,
-        "D": 44.1,
-        "G": 53.0,
-        "E": null
+        "D": 57.9,
+        "G": 67.0,
+        "E": 51.3
       },
       "raw": {
-        "경쟁률": 14.5,
-        "충원율": 100.0,
-        "외국인비율": 8.3119,
-        "교육비": 20725.6,
-        "장학금": 2521569.6,
-        "기숙사": 11.1,
-        "교원당학생": 23.82,
-        "교원강의": 49.8,
-        "취업률": 63.6
+        "경쟁률": 20.3,
+        "충원율": 99.8,
+        "외국인비율": 11.1126,
+        "교육비": 18664.5,
+        "장학금": 4188067.7,
+        "기숙사": 13.3,
+        "교원당학생": 24.62,
+        "교원강의": 64.8,
+        "취업률": 66.5
       },
       "eligible": true,
       "official_axis_count": 3,
       "trust": "B",
-      "daily_index": 59.1,
-      "activity_points": 0,
-      "event_count": 0,
-      "source_diversity": 0,
+      "daily_index": 59.0,
+      "activity_points": 0.84,
+      "event_count": 3,
+      "source_diversity": 1,
       "axis_delta": {
-        "B": 0.0,
-        "R": 0.0,
+        "B": 0.15,
+        "R": 1.47,
         "I": 0.0,
         "D": 0.0,
         "G": 0.0,
-        "E": 0.0
+        "E": 1.32
       },
-      "score": 59.1,
-      "quality": 0.79,
-      "source_ids": [],
+      "score": 59.0,
+      "quality": 0.83,
+      "source_ids": [
+        "news:시정일보"
+      ],
       "data_date": "2026-10-25",
       "window_start": "2026-10-25T05:15:00+09:00",
       "window_end": "2026-10-26T05:15:00+09:00",
-      "waiting_rank": 39
+      "waiting_rank": 38
     },
     {
       "university_id": "UNI-A855E0311296",
@@ -36331,6 +35990,56 @@
         "E": 0.0
       },
       "score": 58.9,
+      "quality": 0.79,
+      "source_ids": [],
+      "data_date": "2026-10-25",
+      "window_start": "2026-10-25T05:15:00+09:00",
+      "window_end": "2026-10-26T05:15:00+09:00",
+      "waiting_rank": 39
+    },
+    {
+      "university_id": "UNI-80E642C934B5",
+      "name": "영진전문대학교",
+      "campus": "본교",
+      "school_kind": "전문대학",
+      "school_type": "전문대학",
+      "establishment": "사립",
+      "region": "대구",
+      "dims": {
+        "B": 75.5,
+        "R": null,
+        "I": null,
+        "D": 57.4,
+        "G": 46.9,
+        "E": null
+      },
+      "raw": {
+        "경쟁률": 7.4,
+        "충원율": 100.0,
+        "외국인비율": 12.2265,
+        "교육비": 13403.5,
+        "장학금": 4976016.8,
+        "기숙사": 16.1,
+        "교원당학생": 32.99,
+        "교원강의": 48.6,
+        "취업률": 73.2
+      },
+      "eligible": true,
+      "official_axis_count": 3,
+      "trust": "B",
+      "daily_index": 58.8,
+      "activity_points": 0,
+      "event_count": 0,
+      "source_diversity": 0,
+      "axis_delta": {
+        "B": 0.0,
+        "R": 0.0,
+        "I": 0.0,
+        "D": 0.0,
+        "G": 0.0,
+        "E": 0.0
+      },
+      "score": 58.8,
       "quality": 0.79,
       "source_ids": [],
       "data_date": "2026-10-25",
