@@ -1,6 +1,7 @@
 import datetime as dt
+import inspect
 import unittest
-from bridge_pipeline.run import publish_daily_beta
+from bridge_pipeline.run import publish_daily_beta, score_day
 class PublicationGuardTest(unittest.TestCase):
  def test_only_current_eligible_entity_ids_are_published(self):
   class DB:
@@ -20,3 +21,6 @@ class PublicationGuardTest(unittest.TestCase):
    def select(self,*args):return []
    def patch(self,*args):raise AssertionError('must not publish')
   with self.assertRaises(RuntimeError):publish_daily_beta(DB(),dt.date(2026,10,14))
+ def test_scoring_never_resets_existing_publication_state(self):
+  """A retry may refresh scores, but only publish commands own published_at."""
+  self.assertNotIn('"published_at": None', inspect.getsource(score_day))
