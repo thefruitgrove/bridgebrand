@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-10-26",
+  "as_of_date": "2026-10-27",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C41": {
-      "channel_id": "UCPmy2I2GzZb2YyoRh7GR_kg",
-      "title": "전주시",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C42": {
       "channel_id": "UC2oz_Gh__7Z8xL3ykgG9eKg",
@@ -30,6 +25,11 @@
     "GOV-C45": {
       "channel_id": "UCtQ7Fc7Eny5MfWa9QD6CqcA",
       "title": "여수시-여수이야기",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C46": {
+      "channel_id": "UChrP3VKcPcOiR8WZ7LAdO8w",
+      "title": "순천시",
       "reason": "awaiting_human_verification"
     }
   }
