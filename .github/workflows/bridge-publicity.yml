@@ -43,6 +43,9 @@ jobs:
           python-version: '3.12'
       - name: Editorial contract tests
         run: python -m unittest discover -s tests -p test_publicity.py -v
+      - name: Refresh the public archive from immutable published rows
+        if: ${{ github.event_name != 'push' }}
+        run: python -m bridge_pipeline.run export ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
       - name: Prepare the due edition atomically
         if: ${{ github.event_name != 'push' }}
         run: python -m publicity.generate ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
@@ -53,3 +56,4 @@ jobs:
         run: |
           echo '### PUBLICITY editorial' >> "$GITHUB_STEP_SUMMARY"
           echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Missing required observation dates block preparation; existing published articles are not overwritten.' >> "$GITHUB_STEP_SUMMARY"
+
