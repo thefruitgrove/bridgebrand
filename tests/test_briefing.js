@@ -53,7 +53,20 @@ assert(html.includes('id="fieldPulseList"') && html.includes('CUMULATIVE PERFORM
 assert(js.includes('function renderFieldPulse()') && js.includes('.slice(0,20)'), 'current field TOP 20 generator missing');
 assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seven-line field interpretation missing');
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
-assert(js.includes('function buildPrintReport()') && js.includes("String(number).padStart(2,'0')} / 23"), '23-page report edition generator missing');
+assert(
+  js.includes('function buildPrintReport()') &&
+  js.includes("total=reportMode==='basic'?8:23") &&
+  js.includes("String(number).padStart(2,'0')} / ${total}"),
+  'BASIC 8-page and STANDARD 23-page report edition generators missing'
+);
+assert(
+  html.includes('data-report-mode="basic"') &&
+  html.includes('data-report-mode="standard"') &&
+  js.includes("query.get('briefing')==='basic'") &&
+  js.includes("searchParams.set('briefing','basic')") &&
+  js.includes('applyBasicMode'),
+  'BASIC/STANDARD briefing scope switch missing'
+);
 assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
 assert(js.includes('rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
 assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
