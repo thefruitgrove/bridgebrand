@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T07:18:11.982350+09:00",
+  "checked_at": "2026-10-27T09:19:51.827152+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -14,6 +14,11 @@
         "https://www.youtube.com/@PowerfulDaeguTv",
         "https://www.youtube.com/@OfficialDaeguTV"
       ]
+    },
+    "GOV-C07": {
+      "status": "review",
+      "homepage": "https://www.ulsan.go.kr",
+      "reason": "URLError"
     },
     "GOV-C08": {
       "status": "review",
@@ -44,14 +49,14 @@
         "https://www.youtube.com/user/topcnitv/"
       ]
     },
+    "GOV-C14": {
+      "status": "review",
+      "homepage": "https://www.jeonnam.go.kr",
+      "reason": "URLError"
+    },
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "URLError"
-    },
-    "GOV-M24": {
-      "status": "review",
-      "homepage": "https://www.acrc.go.kr",
       "reason": "URLError"
     },
     "GOV-M08": {
@@ -75,7 +80,7 @@
     "GOV-M17": {
       "status": "review",
       "homepage": "https://www.molit.go.kr",
-      "reason": "URLError"
+      "reason": "HTTPError"
     }
   }
 }
