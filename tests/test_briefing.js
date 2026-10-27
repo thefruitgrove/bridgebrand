@@ -55,9 +55,9 @@ assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seve
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
 assert(
   js.includes('function buildPrintReport()') &&
-  js.includes("total=reportMode==='basic'?8:23") &&
+  js.includes("total=reportMode==='basic'?8:24") &&
   js.includes("String(number).padStart(2,'0')} / ${total}"),
-  'BASIC 8-page and STANDARD 23-page report edition generators missing'
+  'BASIC 8-page and STANDARD 24-page report edition generators missing'
 );
 assert(
   html.includes('data-report-mode="basic"') &&
@@ -73,6 +73,13 @@ assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expa
 assert(js.includes('function printReading(') && css.includes('.print-reading'), 'print visual explanation layer missing');
 assert(js.includes("openReportOutput('pdf')") && js.includes("openReportOutput('print')"), 'PDF and print actions must be independently wired');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
+assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
+assert(js.includes('CUMULATIVE PERFORMANCE · CURRENT VIEW') && js.includes('DISTRIBUTION · DOT PLOT'), 'current-view and T100 distribution pages missing');
+assert(js.includes('PAIR READING · PRIORITY 3') && js.includes('ACTION PRIORITIES'), 'pair interpretation and action-priority pages missing');
+assert(js.includes('METHOD · NOTICE · NEXT'), 'method, notice and next-question record page missing');
+assert(!js.includes('<footer class="print-sheet-footer"><span>${id}</span>'), 'long report identifier must not repeat in the footer');
+assert(css.includes('--report-brown:#40251d') && css.includes('.print-cover-split'), 'dark-brown and gold report design system missing');
+assert(css.includes('.print-type-publicity') && css.includes('.print-type-method'), 'page-type density system missing');
 
 console.log('Six-stage BRIDGE briefing contract passed.');
 
