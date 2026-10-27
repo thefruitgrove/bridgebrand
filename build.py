@@ -569,3 +569,12 @@ build_publicity(head, base_header, footer)
 # Metadata-only aliases survive every deterministic rebuild.
 from tools.seo_metadata import apply_home_seo
 apply_home_seo(OUT)
+
+# Cloudflare Pages runs build.py directly, while the daily data workflow also
+# reapplies the presentation shell as a separate safety step.  Keep the public
+# artifact deterministic in both paths: a direct hosting build must receive the
+# same approved wordmark, mobile navigation, public-principles blocks and cache
+# versions as the committed site snapshot.  apply_brand_shell is idempotent, so
+# the workflow's later safety pass remains harmless.
+from tools.apply_brand_shell import main as apply_brand_shell
+apply_brand_shell()
