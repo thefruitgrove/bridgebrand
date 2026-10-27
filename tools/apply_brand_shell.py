@@ -80,7 +80,7 @@ def apply(path: Path) -> bool:
         updated = updated.replace(THIS_WEEK, THIS_WEEK + PRIMARY_PUBLICITY, 1)
     updated = re.sub(
         r'style\.css\?v=[^"\']+',
-        'style.css?v=20261018-mobilebrand2',
+        'style.css?v=20261028-report24b',
         updated,
     )
     updated = re.sub(
