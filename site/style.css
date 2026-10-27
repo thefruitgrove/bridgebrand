@@ -394,7 +394,7 @@ footer .logo .op{ color:#7c86a0;}
   background:linear-gradient(180deg, rgba(10,10,12,.35) 0%, rgba(10,10,12,.55) 60%, var(--paper) 100%);
 }
 .list-hero-photo .wrap{ position:relative; z-index:2; padding-bottom:44px;}
-.list-hero-photo h1{ font-family:var(--myeongjo); font-weight:800; font-size:clamp(28px,4vw,48px); margin-bottom:16px; color:#fff; white-space:nowrap; letter-spacing:-.01em; }
+.list-hero-photo h1{ max-width:1180px; font-family:var(--myeongjo); font-weight:800; font-size:clamp(28px,4vw,48px); line-height:1.16; margin-bottom:16px; color:#fff; white-space:normal; word-break:keep-all; text-wrap:balance; letter-spacing:-.01em; }
 .list-hero-photo .list-note{ color:#e7e4db; max-width:1240px;}
 .list-hero-photo .about-kicker{ color:#cfc9ba;}
 .hero-cpr{ background-image:url("img/hero_cpr.jpg");}
@@ -1016,7 +1016,11 @@ footer .logo .op{ color:#7c86a0;}
 .intel-page{background:#0c1118;color:#edf0f2;min-height:100vh}
 .intel-hero{padding:150px 0 92px;background:radial-gradient(circle at 78% 22%,rgba(182,146,79,.18),transparent 28%),linear-gradient(150deg,#182330 0,#0b1016 68%);border-bottom:1px solid rgba(206,175,117,.28)}
 .intel-eyebrow{color:#d2b879;font-size:11px;letter-spacing:.2em;font-weight:800}
-.intel-hero h1{font-family:var(--serif);font-size:clamp(42px,7vw,92px);line-height:1.02;letter-spacing:-.055em;margin:20px 0 26px;max-width:1000px}
+.intel-hero h1{font-family:var(--serif);font-size:clamp(42px,5.7vw,78px);line-height:1.08;letter-spacing:-.055em;margin:20px 0 26px;max-width:1240px;word-break:keep-all;text-wrap:balance}
+.hero-title>span{display:block;white-space:nowrap}
+.list-hero-photo h1,.public-hero-title,.subscribe-hero h1{word-break:keep-all;text-wrap:balance}
+@media(max-width:900px){.hero-title>span{white-space:normal}.intel-hero h1{font-size:clamp(40px,8vw,64px);max-width:820px}}
+@media(max-width:560px){.intel-hero h1{font-size:clamp(35px,10vw,48px);line-height:1.14}.hero-title>span{display:inline}.hero-title>span+span:before{content:' '}}
 .intel-hero p{max-width:760px;color:#b7bec6;font-size:17px;line-height:1.9;word-break:keep-all}
 .intel-section{padding:84px 0;border-bottom:1px solid rgba(255,255,255,.09)}
 .intel-section-head{display:grid;grid-template-columns:180px 1fr;gap:32px;margin-bottom:40px}
