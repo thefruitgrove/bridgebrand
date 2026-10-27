@@ -5,6 +5,7 @@ const html = fs.readFileSync('site/briefing.html', 'utf8');
 const js = fs.readFileSync('site/briefing.js', 'utf8');
 const css = fs.readFileSync('site/briefing.css', 'utf8');
 const data = JSON.parse(fs.readFileSync('site/data/latest.json', 'utf8'));
+const brandShell = fs.readFileSync('tools/apply_brand_shell.py', 'utf8');
 
 for (let i = 1; i <= 6; i += 1) {
   assert(html.includes(`data-stage="${i}"`), `missing stage navigation ${i}`);
@@ -80,6 +81,7 @@ assert(js.includes('METHOD · NOTICE · NEXT'), 'method, notice and next-questio
 assert(!js.includes('<footer class="print-sheet-footer"><span>${id}</span>'), 'long report identifier must not repeat in the footer');
 assert(css.includes('--report-brown:#40251d') && css.includes('.print-cover-split'), 'dark-brown and gold report design system missing');
 assert(css.includes('.print-type-publicity') && css.includes('.print-type-method'), 'page-type density system missing');
+assert(brandShell.includes("style.css?v=20261028-report24b"), 'daily rebuild must preserve the current report and headline stylesheet version');
 
 console.log('Six-stage BRIDGE briefing contract passed.');
 
