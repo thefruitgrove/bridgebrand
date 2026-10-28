@@ -1,21 +1,11 @@
 {
-  "as_of_date": "2026-10-27",
+  "as_of_date": "2026-10-29",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C42": {
-      "channel_id": "UC2oz_Gh__7Z8xL3ykgG9eKg",
-      "title": "익산시 공식 유튜브",
-      "reason": "awaiting_human_verification"
-    },
-    "GOV-C43": {
-      "channel_id": "UCTwWexE_dvD6kvFDSIQMiwg",
-      "title": "군산시 공식채널",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C44": {
       "channel_id": "UCW0dK4y2eV-3CllA7MdCILA",
@@ -30,6 +20,16 @@
     "GOV-C46": {
       "channel_id": "UCdiJ9td2W0Pi6ZVn-obceug",
       "title": "KBS순천",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C47": {
+      "channel_id": "UCdsxjrFG7OILeqzOAYcwODQ",
+      "title": "광양시 │ 오롯이 광양",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C48": {
+      "channel_id": "UC5GZQWQiEt3lDt1Y4_hUwdw",
+      "title": "포항시ᆞPOHANG CITY",
       "reason": "awaiting_human_verification"
     }
   }
