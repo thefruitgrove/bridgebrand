@@ -1,0 +1,26 @@
+{
+  "domain": "CPR",
+  "as_of_date": "2026-10-30",
+  "methodology_version": "2026.10-v5-beta1",
+  "stages": {
+    "active_registry": 100,
+    "collection_completed": 100,
+    "axis_observed": 100,
+    "score_computed": 100,
+    "publication_eligible": 78,
+    "t100_generated": 78,
+    "t100_published": 0
+  },
+  "largest_loss": {
+    "from": "t100_generated",
+    "to": "t100_published",
+    "count": 78
+  },
+  "eligibility_exclusion_reasons": {
+    "confidence_below_gate": 22,
+    "insufficient_source_families": 8,
+    "score_unavailable": 1
+  },
+  "stale_generated_rows": 0,
+  "status": "warning"
+}
