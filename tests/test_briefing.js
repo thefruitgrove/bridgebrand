@@ -71,6 +71,13 @@ assert(
 assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
 assert(js.includes('rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
 assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
+['axisReading','entityNarrative','comparisonNarrative'].forEach((name) => {
+  assert(js.includes(`function ${name}(`), `${name} data-driven PDF narrative missing`);
+});
+assert(js.includes("AXES.map((x)=>axisReading(pick,x))"), 'MY PICK six-axis PDF commentary missing');
+assert(js.includes("entityNarrative(a,'COMPARE A')") && js.includes("entityNarrative(b,'COMPARE B')"), 'independent comparison narratives missing');
+assert(js.includes('...activityStory.slice(0,9)'), 'full activity/reputation PDF explanation missing');
+assert(css.includes('.print-narrative-full') && css.includes('.print-entity-detail'), 'dense report typography contract missing');
 assert(js.includes('function printReading(') && css.includes('.print-reading'), 'print visual explanation layer missing');
 assert(js.includes("openReportOutput('pdf')") && js.includes("openReportOutput('print')"), 'PDF and print actions must be independently wired');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
