@@ -166,6 +166,7 @@ function applyEnglishWebBriefing(){
   $('reportLanguage').textContent='English';$('reportCoverTitle').innerHTML=`${pick.name}<br>Relationship Reputation Briefing`;
   $('reportCoverCompare').textContent=`with ${a.name} · ${b.name}`;
   document.querySelector('#pdfMobileToolbar em').textContent='Mobile reading view';$('exitPdfPreview').textContent='Close ×';
+  showStage(stage);
 }
 function applyBasicMode(){
   const pick=entities[0],top=topAxis(pick),low=lowAxis(pick),date=pick.as_of_date;

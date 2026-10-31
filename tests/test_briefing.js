@@ -95,7 +95,8 @@ assert(js.includes('function printReading(') && css.includes('.print-reading'), 
 assert(js.includes("openReportOutput('pdf')") && js.includes("openReportOutput('print')"), 'PDF and print actions must be independently wired');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261101-bilingual4'), 'English briefing control cache must be current');
+assert(html.includes('briefing.js?v=20261101-bilingual5'), 'English briefing control cache must be current');
+assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');
 assert(js.includes("IS_ENGLISH?'← Previous':'← 이전 단계'"), 'English stage pager must not fall back to Korean');
 assert(js.includes('CUMULATIVE PERFORMANCE · CURRENT VIEW') && js.includes('DISTRIBUTION · DOT PLOT'), 'current-view and T100 distribution pages missing');
