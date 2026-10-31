@@ -56,10 +56,14 @@ assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seve
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
 assert(
   js.includes('function buildPrintReport()') &&
-  js.includes("total=reportMode==='basic'?8:24") &&
+  js.includes("total=reportMode==='basic'?8:25") &&
   js.includes("String(number).padStart(2,'0')} / ${total}"),
-  'BASIC 8-page and STANDARD 24-page report edition generators missing'
+  'BASIC 8-page and STANDARD 25-page report edition generators missing'
 );
+assert(js.includes("footer=number===1?'':"), 'cover must omit the report footer');
+assert(js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 1/2') && js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 2/2'), 'PUBLICITY must be split instead of shrinking body copy');
+assert(css.includes('font-size:11pt!important') && css.includes('line-height:1.74!important'), 'PDF body typography must remain 11pt with report line spacing');
+assert(css.includes('background:var(--report-tangerine)') && css.includes('--report-tangerine:#d6aa42'), 'page 2+ footer must use the cover tangerine field');
 assert(
   html.includes('data-report-mode="basic"') &&
   html.includes('data-report-mode="standard"') &&
