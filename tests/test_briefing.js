@@ -22,6 +22,10 @@ for (const field of ['CPR', 'GOV', 'ENT', 'UNI']) {
 }
 
 assert(js.includes("const FIELDS=['CPR','GOV','UNI','ENT']"), 'briefing must accept all four fields');
+assert(js.includes("LANGUAGES=['한국어','영어']"), 'briefing must expose Korean and English only');
+assert(js.includes('function buildEnglishPrintReport()'), 'English print report generator missing');
+assert(js.includes("if(IS_ENGLISH){buildEnglishPrintReport();return;}"), 'English report routing missing');
+assert(css.includes('.print-language-en') && css.includes('.language-en'), 'English report typography contract missing');
 assert(js.includes('completeRange'), 'briefing must enforce contiguous ranks');
 assert(js.includes("new Set(ids).size!==3"), 'briefing must reject duplicate targets');
 assert(js.includes("if(entities.some((entity)=>!entity))"), 'briefing must reject unknown target IDs');
@@ -97,7 +101,8 @@ assert(js.includes('METHOD · NOTICE · NEXT'), 'method, notice and next-questio
 assert(!js.includes('<footer class="print-sheet-footer"><span>${id}</span>'), 'long report identifier must not repeat in the footer');
 assert(css.includes('--report-brown:#40251d') && css.includes('.print-cover-split'), 'dark-brown and gold report design system missing');
 assert(css.includes('.print-type-publicity') && css.includes('.print-type-method'), 'page-type density system missing');
-assert(brandShell.includes("style.css?v=20261028-report24b"), 'daily rebuild must preserve the current report and headline stylesheet version');
+assert(brandShell.includes("style.css?v=20261031-bilingual1"), 'daily rebuild must preserve the bilingual stylesheet version');
+assert(brandShell.includes("i18n.js?v=20261031-bilingual1"), 'daily rebuild must preserve the bilingual interface layer');
 
 console.log('Six-stage BRIDGE briefing contract passed.');
 
