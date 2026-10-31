@@ -5,7 +5,8 @@
   const saved=localStorage.getItem('bridge-ui-language');
   const lang=params.get('lang')==='en'?'en':params.get('lang')==='ko'?'ko':saved==='en'?'en':'ko';
   const isEn=lang==='en';
-  const path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const rawPath=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const path=rawPath.includes('.')?rawPath:`${rawPath||'index'}.html`;
   const PUBLICITY=new Set(['publicity.html','publicity-article.html']);
   if(PUBLICITY.has(path))return;
 
@@ -155,12 +156,53 @@
     });
   }
 
+  function setText(selector,value,all=false){
+    const nodes=all?[...document.querySelectorAll(selector)]:[document.querySelector(selector)];
+    nodes.filter(Boolean).forEach((node,index)=>{node.textContent=typeof value==='function'?value(node,index):value;});
+  }
+
+  function applyStructuredEnglish(){
+    if(path==='intelligence.html'){
+      const hero=document.querySelector('.intel-hero .hero-title');
+      if(hero)hero.innerHTML='<span>Why score and rank changed,</span><span>explained through six dimensions.</span>';
+      setText('.intel-hero .wrap > p','Read the selected subject’s current index and rank, its distance from two comparison subjects, the dimensions observed most clearly, and the dimensions that still need evidence in one continuous flow. Plain-language reading opens the numbers; professional analysis adds the reference date, comparison conditions, evidence state and interpretive boundary.');
+      setText('.intel-hero-cta.primary > span','Try the BRIDGE six-stage briefing');
+      setText('.intel-hero-cta:not(.primary) > span','Configure a BRIDGE subscription');
+      setText('.field-engine-head h2','Choose a relationship environment first.');
+      setText('.field-engine-head p','Within one field’s T100, read your selected subject and two comparison subjects using the same date and public-data scope.');
+      setText('#discoveryField','00 / BRIDGE SIX-STAGE BRIEFING TRIAL');
+      setText('.trio-badge','FREE DISCOVERY · ONE-TIME TRIAL');
+      setText('.trio-beta .intel-section-head h2','Choose one subject and compare it with two subjects in the same field.');
+      setText('.trio-beta .intel-section-desc','Compare the composite index, six dimensions, activity volume and evidence status under the same date and scope. This is not a popularity vote or a contest. It shows where differences appear and how far the current evidence supports an explanation.');
+      const picker=document.querySelector('#discoveryPicker');if(picker)picker.setAttribute('aria-label','Select three subjects for comparison');
+      const labels=[['#trioPick1','My pick'],['#trioPick2','Comparison subject A'],['#trioPick3','Comparison subject B']];labels.forEach(([s,v])=>{const n=document.querySelector(s);if(n)n.setAttribute('aria-label',v);});
+      setText('.discovery-language legend','05 Choose a delivery language.');
+      setText('#trioRun','Start comparison →');
+      setText('#trioSnapshotMeta','Checking the latest published T100 snapshot.');
+      setText('.discovery-note','This interface provides one free discovery trial. Your selections and sharing do not affect scores or ranks.');
+    }
+    if(path==='subscribe.html'){
+      const hero=document.querySelector('.subscribe-hero h1');if(hero)hero.innerHTML='Beyond a single result,<br>observe how change continues over time.';
+      setText('.subscribe-hero p','Choose analytical depth, observation cycle, field and subjects in order. Scores from different fields are not directly compared; each field keeps its own criteria and evidence state within one service.');
+      const panelHeads=[
+        ['briefing','Choose the depth that matches the decision you need'],
+        ['subscription','Five plans by observation cycle and purpose'],
+        ['scope','Choose fields and subjects'],
+        ['one-time','One-time analysis is also available']
+      ];
+      panelHeads.forEach(([key,value])=>setText(`[data-service-content="${key}"] header h2`,value));
+      setText('.service-config-start','BUILD YOUR BRIDGE SERVICE · START CONFIGURATION ↓');
+      setText('.configurator-head h2','Complete your configuration in six steps.');
+      const progress=['MODE','SERVICE','FIELD','SUBJECTS','LANGUAGE','REVIEW'];document.querySelectorAll('#subProgress li').forEach((n,i)=>{if(progress[i])n.textContent=progress[i];});
+    }
+  }
+
   function run(){
     document.documentElement.lang=isEn?'en':'ko';document.body.classList.toggle('language-en',isEn);addToggle();
     if(!isEn)return;
     const page=PAGE[path]||{};if(page.title)document.title=page.title;
     if(page.hero){const h=document.querySelector('h1');if(h)h.textContent=page.hero;}
-    replaceText(document.body,page.exact||{});preserveLanguageLinks();
+    replaceText(document.body,page.exact||{});applyStructuredEnglish();preserveLanguageLinks();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();

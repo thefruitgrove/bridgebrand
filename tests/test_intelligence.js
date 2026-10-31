@@ -40,6 +40,10 @@ assert(subscribeJs.includes("['한국어','영어 글로벌 에디션']"), 'subs
 assert(!subscribeHtml.includes('일본어') && !subscribeHtml.includes('중국어'), 'Japanese and Chinese options must be removed');
 assert(i18nJs.includes("const PUBLICITY=new Set(['publicity.html','publicity-article.html'])"), 'PUBLICITY must remain outside the bilingual conversion scope');
 assert(i18nJs.includes('T100 entity names, scores and source records are deliberately preserved'), 'T100 Korean-name preservation contract missing');
+assert(i18nJs.includes("const path=rawPath.includes('.')?rawPath:`${rawPath||'index'}.html`"), 'extensionless production routes must resolve to page translation keys');
+assert(i18nJs.includes('function applyStructuredEnglish()'), 'nested hero and service structures need selector-based English translation');
+assert(i18nJs.includes("setText('#trioRun','Start comparison →')"), 'English discovery action missing');
+assert(i18nJs.includes("if(path==='subscribe.html')"), 'English subscription structure translation missing');
 
 for (const field of ['CPR', 'GOV', 'ENT', 'UNI']) {
   const rows = data.rankings.filter((row) => row.domain === field && row.ranking_type === 'T100');

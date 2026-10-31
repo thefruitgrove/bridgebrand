@@ -102,7 +102,7 @@ assert(!js.includes('<footer class="print-sheet-footer"><span>${id}</span>'), 'l
 assert(css.includes('--report-brown:#40251d') && css.includes('.print-cover-split'), 'dark-brown and gold report design system missing');
 assert(css.includes('.print-type-publicity') && css.includes('.print-type-method'), 'page-type density system missing');
 assert(brandShell.includes("style.css?v=20261031-bilingual1"), 'daily rebuild must preserve the bilingual stylesheet version');
-assert(brandShell.includes("i18n.js?v=20261031-bilingual2"), 'daily rebuild must preserve the bilingual interface layer');
+assert(brandShell.includes("i18n.js?v=20261101-bilingual3"), 'daily rebuild must preserve the bilingual interface layer');
 
 console.log('Six-stage BRIDGE briefing contract passed.');
 

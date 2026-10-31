@@ -96,7 +96,7 @@ def apply(path: Path) -> bool:
     if path.name in bilingual_pages and 'i18n.js?' not in updated:
         updated = updated.replace(
             '</body>',
-            '<script src="i18n.js?v=20261031-bilingual2" defer></script>\n</body>',
+            '<script src="i18n.js?v=20261101-bilingual3" defer></script>\n</body>',
             1,
         )
     updated = updated.replace("VOL. 01 — WEEK", "VOL. 02 — WEEK")
