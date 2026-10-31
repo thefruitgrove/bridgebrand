@@ -1201,3 +1201,23 @@ footer .brand-wordmark-image{
 @media(max-width:620px){.service-overview{padding:42px 0 54px}.service-overview-nav{grid-template-columns:1fr 1fr;margin-left:-2px;margin-right:-2px}.service-overview-nav button{min-height:64px;padding:13px 11px;gap:8px}.service-overview-nav button b{font-size:17px}.service-overview-nav button span{font-size:8px;letter-spacing:.04em;overflow-wrap:anywhere}.service-overview-panel{padding:27px 18px}.service-overview-panel h2{font-size:30px}.service-card-grid,.subscription-cards{grid-template-columns:1fr}.service-card-grid>div,.subscription-cards>div{min-height:0}.service-config-start{align-items:flex-start;flex-direction:column;justify-content:center;gap:5px}.configurator-head h2{font-size:30px}}
 .trio-snapshot-meta{margin:14px 0 0;font-size:11px;letter-spacing:.04em;color:var(--muted,#777)}
 .intel-page footer .footer-method{margin:18px 0 0;color:#7ea8d8;font-size:11px;line-height:1.7;max-width:none}
+/* BRIDGE bilingual interface — desktop and mobile typography */
+.language-switch{display:inline-flex;align-items:center;gap:5px;margin-right:14px;color:rgba(255,255,255,.48);font:600 10px/1 Arial,sans-serif;letter-spacing:.12em;white-space:nowrap}
+.nav:not(.on-dark) .language-switch{color:rgba(37,30,27,.42)}
+.language-switch a{color:inherit;text-decoration:none;padding:8px 2px;transition:color .2s ease}
+.language-switch a.active{color:#c59631}
+.language-switch a:focus-visible{outline:1px solid #c59631;outline-offset:3px}
+.language-en h1,.language-en h2,.language-en h3,.language-en .hero-title{word-break:normal;overflow-wrap:break-word;hyphens:none;letter-spacing:-.025em}
+.language-en .hero-title{max-width:980px;font-family:"Source Serif 4","Noto Serif KR",serif;line-height:1.02}
+.language-en p,.language-en li,.language-en td,.language-en th{word-break:normal;overflow-wrap:break-word}
+.language-en .footer-note,.language-en .footer-method{max-width:1080px;line-height:1.8}
+.language-en .intel-section-head h2,.language-en .field-engine-head h2,.language-en .configurator-head h2{max-width:900px;line-height:1.08}
+@media(max-width:760px){
+  .language-switch{order:1;margin:0 10px 0 auto;font-size:10px;gap:4px}
+  .language-switch a{min-width:28px;padding:12px 3px;text-align:center}
+  .language-en .hero-title{font-size:clamp(34px,10vw,52px);line-height:1.01;letter-spacing:-.035em}
+  .language-en .intel-hero p,.language-en .subscribe-hero p{font-size:15px;line-height:1.75}
+  .language-en .intel-section-head h2,.language-en .field-engine-head h2,.language-en .configurator-head h2{font-size:clamp(28px,8vw,40px);line-height:1.04}
+  .language-en .intel-section-desc,.language-en .footer-note,.language-en .footer-method{font-size:13px;line-height:1.75}
+  .language-en .twr-head-kor{font-size:9px;letter-spacing:.04em}
+}
