@@ -7,19 +7,21 @@ function week(d){var x=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.ge
 function monday(w){var p=w.split('-W'),d=new Date(Date.UTC(Number(p[0]),0,4));d.setUTCDate(d.getUTCDate()-(d.getUTCDay()+6)%7+(Number(p[1])-1)*7);return d;}
 function label(a){return 'WEEK '+Number(a.issue_week.split('W')[1])+' — '+(a.slot==='OVERALL'?'OVERALL ANALYSIS':a.slot+' '+a.domain)+' PUBLICITY';}
 function dateText(value){return new Date(value).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false});}
+function weekSlots(){var slots=[];['WED','FRI'].forEach(function(s){['CPR','GOV','UNI','ENT'].forEach(function(d){slots.push({slot:s,domain:d});});});slots.push({slot:'OVERALL',domain:'ALL'});return slots;}
+function articleFor(w,s){return articles.find(function(x){return x.issue_week===w&&x.slot===s.slot&&x.domain===s.domain&&!x.is_example;})||articles.find(function(x){return x.issue_week===w&&x.slot===s.slot&&x.domain===s.domain&&x.is_example;});}
+function issueRows(w){var now=new Date(),start=monday(w);return weekSlots().map(function(s,i){
+ var a=articleFor(w,s),release=new Date(start);release.setUTCDate(start.getUTCDate()+(s.slot==='WED'?2:s.slot==='FRI'?4:7));var due=release.toISOString().slice(0,10)+'T12:00:00+09:00';
+ var placeholder=new Date(due)<new Date('2026-10-16T00:00:00+09:00')?'정식 발행 전 회차':new Date(due)>now?'발행 예정':'발행 확인 중',identity={issue_week:w,slot:s.slot,domain:s.domain};
+ return '<'+(a?'a href="publicity-article.html?id='+encodeURIComponent(a.id)+'"':'div')+' class="pub-row'+(a?'':' pending')+'"><span class="pub-no">'+String(i+1).padStart(2,'0')+'</span><div><span class="pub-row-label">'+esc(label(identity))+'</span><span class="pub-row-title">'+esc(a?a.payload.title:placeholder)+(a&&a.is_example?'<span class="pub-example">SAMPLE</span>':'')+'</span></div><div class="pub-row-meta">'+esc(a&&a.is_example?'10월 14일 자료 · 예시':dateText(a?a.scheduled_at:due))+'<br>'+(a?'READ THE SIGNAL →':'SEOUL · KST')+'</div></'+(a?'a':'div')+'>';
+ }).join('');}
+function expandedIssue(w,archive){return '<section class="pub-issue'+(archive?' pub-issue-archive-detail':' pub-issue-current')+'"><div class="pub-week"><h3>WEEK '+Number(w.split('W')[1])+'</h3><span>'+w.split('-')[0]+' · 9 EDITIONS</span></div>'+issueRows(w)+'</section>';}
 function issueList(){
   var now=new Date(),kst=new Date(day(now)+'T00:00:00Z');if(kst.getUTCDay()===1)kst.setUTCDate(kst.getUTCDate()-1);
   var weeks=Array.from(new Set(articles.map(function(a){return a.issue_week;}).concat([week(kst)]))).sort().reverse();
-  document.getElementById('pubIssues').innerHTML=weeks.map(function(w){
-    var start=monday(w),slots=[];['WED','FRI'].forEach(function(s){['CPR','GOV','UNI','ENT'].forEach(function(d){slots.push({slot:s,domain:d});});});slots.push({slot:'OVERALL',domain:'ALL'});
-    return '<section class="pub-issue"><div class="pub-week"><h3>WEEK '+Number(w.split('W')[1])+'</h3><span>'+w.split('-')[0]+' · 9 EDITIONS</span></div>'+slots.map(function(s,i){
-      var a=articles.find(function(x){return x.issue_week===w&&x.slot===s.slot&&x.domain===s.domain&&!x.is_example;})||articles.find(function(x){return x.issue_week===w&&x.slot===s.slot&&x.domain===s.domain&&x.is_example;});
-      var release=new Date(start);release.setUTCDate(start.getUTCDate()+(s.slot==='WED'?2:s.slot==='FRI'?4:7));var due=release.toISOString().slice(0,10)+'T12:00:00+09:00';
-      var placeholder=new Date(due)<new Date('2026-10-16T00:00:00+09:00')?'정식 발행 전 회차':new Date(due)>now?'발행 예정':'발행 확인 중';
-      var identity={issue_week:w,slot:s.slot,domain:s.domain};
-      return '<'+(a?'a href="publicity-article.html?id='+encodeURIComponent(a.id)+'"':'div')+' class="pub-row'+(a?'':' pending')+'"><span class="pub-no">'+String(i+1).padStart(2,'0')+'</span><div><span class="pub-row-label">'+esc(label(identity))+'</span><span class="pub-row-title">'+esc(a?a.payload.title:placeholder)+(a&&a.is_example?'<span class="pub-example">SAMPLE</span>':'')+'</span></div><div class="pub-row-meta">'+esc(a&&a.is_example?'10월 14일 자료 · 예시':dateText(a?a.scheduled_at:due))+'<br>'+(a?'READ THE SIGNAL →':'SEOUL · KST')+'</div></'+(a?'a':'div')+'>';
-    }).join('')+'</section>';
-  }).join('');
+  var current=weeks[0],past=weeks.slice(1),selected=new URLSearchParams(location.search).get('week');if(past.indexOf(selected)<0)selected='';
+  var cards=past.map(function(w){var rows=articles.filter(function(a){return a.issue_week===w&&!a.is_example;}),sample=articles.filter(function(a){return a.issue_week===w&&a.is_example;}),count=rows.length||sample.length,lead=(rows[0]||sample[0]||{}).payload||{};return '<button type="button" class="pub-archive-card'+(selected===w?' active':'')+'" data-week="'+esc(w)+'"><span>ARCHIVE · '+esc(w.split('-')[0])+'</span><b>WEEK '+Number(w.split('W')[1])+' PUBLICITY</b><em>'+count+' / 9 EDITIONS</em><p>'+esc(lead.title||'네 영역의 관측과 한 주의 해석을 모았습니다.')+'</p><i>OPEN THE WEEK →</i></button>';}).join('');
+  document.getElementById('pubIssues').innerHTML=expandedIssue(current,false)+(past.length?'<section class="pub-archive"><div class="pub-archive-head"><span>PAST WEEKLY EDITIONS</span><p>지난 주차의 분석을 최근 순서로 모았습니다.</p></div><div class="pub-archive-grid">'+cards+'</div><div id="pubArchiveDetail">'+(selected?expandedIssue(selected,true):'')+'</div></section>':'');
+  document.querySelectorAll('.pub-archive-card').forEach(function(card){card.addEventListener('click',function(){var w=card.dataset.week,u=new URL(location.href);u.searchParams.set('week',w);history.replaceState({},'',u);document.querySelectorAll('.pub-archive-card').forEach(function(x){x.classList.toggle('active',x===card);});document.getElementById('pubArchiveDetail').innerHTML=expandedIssue(w,true);document.getElementById('pubArchiveDetail').scrollIntoView({behavior:'smooth',block:'start'});});});
 }
 function radar(profile){
  var names=['B','R','I','D','G','E'],angles=names.map(function(_,i){return (-90+i*60)*Math.PI/180;}),cx=135,cy=130,r=88;

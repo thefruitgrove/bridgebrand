@@ -140,11 +140,13 @@
   }
 
   function addToggle(){
-    const holder=document.querySelector('.nav-right'); if(!holder||holder.querySelector('.language-switch'))return;
+    const heroClock=document.getElementById('heroSeoulClock');
+    const holder=heroClock||document.querySelector('.nav-right'); if(!holder||document.querySelector('.language-switch'))return;
     const wrap=document.createElement('div'); wrap.className='language-switch'; wrap.setAttribute('aria-label','Language');
     const make=(code,label)=>{const a=document.createElement('a');a.href='#';a.textContent=label;a.dataset.lang=code;a.className=lang===code?'active':'';a.setAttribute('aria-current',lang===code?'true':'false');a.addEventListener('click',e=>{e.preventDefault();localStorage.setItem('bridge-ui-language',code);const u=new URL(location.href);if(code==='en')u.searchParams.set('lang','en');else u.searchParams.delete('lang');location.href=u.toString();});return a;};
     wrap.append(make('ko','KR'),document.createTextNode(' | '),make('en','EN'));
-    const toggle=holder.querySelector('.nav-toggle');holder.insertBefore(wrap,toggle||null);
+    if(heroClock){wrap.classList.add('hero-language-switch');holder.appendChild(wrap);}
+    else{const toggle=holder.querySelector('.nav-toggle');holder.insertBefore(wrap,toggle||null);}
   }
 
   function preserveLanguageLinks(){

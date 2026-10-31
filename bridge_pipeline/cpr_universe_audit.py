@@ -39,6 +39,12 @@ def diagnose(rows: dict[str, list[dict[str, Any]]], config: dict[str, Any]) -> d
     min_families = int(gate.get("minimum_source_families", config["minimum_source_families"]))
     min_confidence = float(gate.get("minimum_confidence_score", config["trust_thresholds"]["C"]))
     reasons = Counter()
+    axis_entities: dict[str, set[str]] = {axis: set() for axis in "BRIDGE"}
+    valid_states = {"measured", "observed", "maintained", "carried"}
+    for row in observations:
+        axis = row.get("axis")
+        if axis in axis_entities and (not row.get("status") or row.get("status") in valid_states):
+            axis_entities[axis].add(row["entity_id"])
     for row in scores:
         if row["entity_id"] in eligible:
             continue
@@ -75,6 +81,17 @@ def diagnose(rows: dict[str, list[dict[str, Any]]], config: dict[str, Any]) -> d
         "stages": stages,
         "largest_loss": largest,
         "eligibility_exclusion_reasons": dict(sorted(reasons.items())),
+        "axis_entity_coverage": {axis: len(ids) for axis, ids in axis_entities.items()},
+        "relationship_evidence_shortfall": {
+            axis: max(0, len(entity_ids) - len(axis_entities[axis])) for axis in "RDE"
+        },
+        "t100_coverage_goal": len(entity_ids),
+        "t100_coverage_gap": max(0, len(entity_ids) - len(published)),
+        "recovery_priority": [
+            "R/D/E source-family coverage",
+            "confidence below gate",
+            "insufficient source families",
+        ],
         "stale_generated_rows": len(generated - eligible),
         "status": "warning" if len(published) < len(entity_ids) else "ok",
     }

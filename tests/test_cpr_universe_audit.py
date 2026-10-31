@@ -46,6 +46,9 @@ class CPRUniverseAuditTest(unittest.TestCase):
         self.assertEqual(
             report["eligibility_exclusion_reasons"]["insufficient_source_families"], 1
         )
+        self.assertEqual(report["t100_coverage_goal"], 3)
+        self.assertEqual(report["t100_coverage_gap"], 2)
+        self.assertIn("R", report["relationship_evidence_shortfall"])
 
     def test_flags_stale_generated_ranking(self):
         rows = {

@@ -943,6 +943,7 @@ footer .logo .op{ color:#7c86a0;}
 .ranking-card-boards{grid-column:2;min-width:0;display:grid;gap:24px}
 .ranking-card-boards .ranking-cohort{border:0;background:transparent;max-height:820px;grid-column:auto;overflow:auto}
 .ranking-card-boards .ranking-panel-head{padding:14px 0;background:var(--paper);border-bottom:1px solid #ded8ca;margin-bottom:14px}
+.ranking-master .ranking-panel-head{min-height:49px;box-sizing:border-box;padding-top:14px;padding-bottom:14px}
 .ranking-card-boards .rk-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .ranking-card-boards .rk-row{display:flex;flex-direction:column;gap:8px;position:relative;min-height:190px;padding:18px;border:1px solid #e4dfd0;border-radius:8px;background:#fff;cursor:pointer}
 .ranking-card-boards .rk-row:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,24,31,.08)}
@@ -1163,6 +1164,9 @@ footer .brand-wordmark-image{
   line-height:1.7;
   letter-spacing:.12em;
 }
+#heroSeoulClock{position:relative;display:inline-block}
+#heroSeoulClock .hero-language-switch{position:absolute;top:calc(100% + 3px);right:0;margin:0;color:rgba(255,255,255,.58);font-family:var(--serif);font-size:11px;line-height:1.7;letter-spacing:.12em}
+#heroSeoulClock .hero-language-switch a{padding:0 2px}
 
 
 /* static SIGNALBRIDGE logo markup — mobile-safe, independent of script cache */
