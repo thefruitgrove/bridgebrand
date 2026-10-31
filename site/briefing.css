@@ -115,6 +115,9 @@
 .pdf-preview-mode .print-sheet[data-page="16"] .print-prose,.pdf-preview-mode .print-sheet[data-page="18"] .print-prose,.pdf-preview-mode .print-sheet[data-page="20"] .print-prose,.pdf-preview-mode .print-sheet[data-page="23"] .print-prose{column-count:2;column-gap:30px;column-rule:1px solid var(--report-line)}
 .pdf-preview-mode .print-sheet[data-page="16"] .print-prose h3,.pdf-preview-mode .print-sheet[data-page="18"] .print-prose h3,.pdf-preview-mode .print-sheet[data-page="20"] .print-prose h3,.pdf-preview-mode .print-sheet[data-page="23"] .print-prose h3{column-span:all}
 .pdf-preview-mode .print-sheet[data-page="16"] .print-prose p,.pdf-preview-mode .print-sheet[data-page="18"] .print-prose p,.pdf-preview-mode .print-sheet[data-page="20"] .print-prose p,.pdf-preview-mode .print-sheet[data-page="23"] .print-prose p{break-inside:avoid;margin:5px 0!important}
+.pdf-preview-mode .print-sheet[data-page="16"],.pdf-preview-mode .print-sheet[data-page="18"],.pdf-preview-mode .print-sheet[data-page="20"]{padding-top:45px;padding-bottom:24px}
+.pdf-preview-mode .print-sheet[data-page="16"] .print-sheet-main,.pdf-preview-mode .print-sheet[data-page="18"] .print-sheet-main,.pdf-preview-mode .print-sheet[data-page="20"] .print-sheet-main{padding-top:14px;padding-bottom:6px}
+.pdf-preview-mode .print-sheet[data-page="16"] h2,.pdf-preview-mode .print-sheet[data-page="18"] h2,.pdf-preview-mode .print-sheet[data-page="20"] h2{margin-bottom:10px}
 .pdf-preview-mode .print-sheet[data-page="9"] .print-sheet-main{padding-top:18px}
 .pdf-preview-mode .print-type-publicity h3{margin:7px 0 2px!important}.pdf-preview-mode .print-type-publicity p{margin:4px 0!important;line-height:1.7!important}.pdf-preview-mode .print-type-publicity .print-lead{font-size:14.667px!important;line-height:1.7!important}
 
@@ -137,6 +140,9 @@
  .print-sheet[data-page="16"] .print-prose,.print-sheet[data-page="18"] .print-prose,.print-sheet[data-page="20"] .print-prose,.print-sheet[data-page="23"] .print-prose{column-count:2;column-gap:8mm;column-rule:1px solid var(--report-line)}
  .print-sheet[data-page="16"] .print-prose h3,.print-sheet[data-page="18"] .print-prose h3,.print-sheet[data-page="20"] .print-prose h3,.print-sheet[data-page="23"] .print-prose h3{column-span:all}
  .print-sheet[data-page="16"] .print-prose p,.print-sheet[data-page="18"] .print-prose p,.print-sheet[data-page="20"] .print-prose p,.print-sheet[data-page="23"] .print-prose p{break-inside:avoid;margin:1.2mm 0!important}
+ .print-sheet[data-page="16"],.print-sheet[data-page="18"],.print-sheet[data-page="20"]{padding-top:12mm;padding-bottom:8mm}
+ .print-sheet[data-page="16"] .print-sheet-main,.print-sheet[data-page="18"] .print-sheet-main,.print-sheet[data-page="20"] .print-sheet-main{padding-top:3.5mm;padding-bottom:1.5mm}
+ .print-sheet[data-page="16"] h2,.print-sheet[data-page="18"] h2,.print-sheet[data-page="20"] h2{margin-bottom:2.5mm}
  .print-sheet[data-page="9"] .print-sheet-main{padding-top:4.5mm}
  .print-type-publicity h3{margin:1.8mm 0 .5mm!important}.print-type-publicity p{margin:1mm 0!important;line-height:1.7!important}.print-type-publicity .print-lead{font-size:11pt!important;line-height:1.7!important}
 }
