@@ -90,3 +90,35 @@
 /* Final report-density overrides follow the report standard rules above. */
 .print-narrative-full .print-prose{margin-top:14px}.print-narrative-full .print-prose p{margin:6px 0;font-size:10.5px;line-height:1.52}.print-axis-detail .print-prose{margin-top:14px}.print-axis-detail .print-prose p{margin:6px 0;font-size:10.5px;line-height:1.5}.print-entity-detail .print-axis-bars>div{padding:5px 0}.print-entity-detail .print-prose{margin-top:12px}.print-entity-detail .print-prose p{margin:4px 0;font-size:9.6px;line-height:1.46}.print-comparison-detail .print-prose{margin-top:14px}.print-comparison-detail .print-prose p{margin:6px 0;font-size:10.5px;line-height:1.52}
 @media print{.print-narrative-full .print-prose{margin-top:3.5mm}.print-narrative-full .print-prose p{margin:1.45mm 0;font-size:7.5pt;line-height:1.48}.print-axis-detail .print-prose{margin-top:3.5mm}.print-axis-detail .print-prose p{margin:1.4mm 0;font-size:7.5pt;line-height:1.47}.print-entity-detail .print-axis-bars>div{padding:1.35mm 0}.print-entity-detail .print-prose{margin-top:3mm}.print-entity-detail .print-prose p{margin:1mm 0;font-size:6.8pt;line-height:1.42}.print-comparison-detail .print-prose{margin-top:3.5mm}.print-comparison-detail .print-prose p{margin:1.4mm 0;font-size:7.5pt;line-height:1.48}}
+
+/* BRIDGE REPORT TYPOGRAPHY STANDARD v7.2
+   Body copy never shrinks to solve pagination. Korean body/heads use Noto Serif KR;
+   English labels and figures use Source Serif 4. Cover has no footer; page 2 onward
+   uses the same tangerine field as the cover. */
+:root{--report-tangerine:#d6aa42;--report-tangerine-ink:#40251d;--report-tangerine-soft:#fff8e9}
+.pdf-preview-mode .print-cover-split{background:linear-gradient(90deg,#fff 0 65%,var(--report-tangerine) 65% 100%)}
+.pdf-preview-mode .print-sheet-footer{box-sizing:border-box;margin-top:auto;padding:11px 14px;border:0;background:var(--report-tangerine);color:var(--report-tangerine-ink);font-family:"Source Serif 4","Noto Serif KR",serif;font-weight:700}
+.pdf-preview-mode .print-sheet[data-page="1"] .print-sheet-main{padding-bottom:0}
+.pdf-preview-mode .print-sheet p,.pdf-preview-mode .print-sheet li{font-family:"Noto Serif KR",serif;font-size:14.667px!important;line-height:1.74!important;font-weight:400}
+.pdf-preview-mode .print-sheet h1,.pdf-preview-mode .print-sheet h2{font-family:"Noto Serif KR",serif;font-weight:700}
+.pdf-preview-mode .print-sheet h3{font-family:"Noto Serif KR",serif;font-weight:600}
+.pdf-preview-mode .print-sheet-kicker,.pdf-preview-mode .print-sheet-header,.pdf-preview-mode .print-sheet-footer,.pdf-preview-mode .print-sheet table,.pdf-preview-mode .print-kpi,.pdf-preview-mode .print-evidence,.pdf-preview-mode .print-axis-bars,.pdf-preview-mode .print-dotplot{font-family:"Source Serif 4","Noto Serif KR",serif}
+.pdf-preview-mode .print-prose p,.pdf-preview-mode .print-reading p,.pdf-preview-mode .print-narrative-full .print-prose p,.pdf-preview-mode .print-axis-detail .print-prose p,.pdf-preview-mode .print-entity-detail .print-prose p,.pdf-preview-mode .print-comparison-detail .print-prose p,.pdf-preview-mode .print-type-analysis p,.pdf-preview-mode .print-type-strategy p,.pdf-preview-mode .print-type-publicity p,.pdf-preview-mode .print-type-method p{font-size:14.667px!important;line-height:1.74!important;margin:8px 0!important}
+.pdf-preview-mode .print-sheet table{font-size:12.667px;line-height:1.45}
+.pdf-preview-mode .print-axis-nodes p,.pdf-preview-mode .print-pairs p,.pdf-preview-mode .print-pairs em,.pdf-preview-mode .print-boundary{font-size:14.667px!important;line-height:1.7!important}
+.pdf-preview-mode .print-prose{margin-top:16px}.pdf-preview-mode .print-prose h3{margin:0 0 8px;padding-bottom:7px;font-size:16px}
+.pdf-preview-mode .print-flow{margin:20px 0;padding:18px 10px}.pdf-preview-mode .print-sheet-main{padding-top:24px;padding-bottom:12px}
+
+@media print{
+ .print-cover-split{background:linear-gradient(90deg,#fff 0 65%,var(--report-tangerine) 65% 100%)}
+ .print-sheet-footer{box-sizing:border-box;margin-top:auto;padding:3mm 4mm;border:0;background:var(--report-tangerine);color:var(--report-tangerine-ink);font-family:"Source Serif 4","Noto Serif KR",serif;font-weight:700}
+ .print-sheet[data-page="1"] .print-sheet-main{padding-bottom:0}
+ .print-sheet p,.print-sheet li{font-family:"Noto Serif KR",serif;font-size:11pt!important;line-height:1.74!important;font-weight:400}
+ .print-sheet h1,.print-sheet h2{font-family:"Noto Serif KR",serif;font-weight:700}.print-sheet h3{font-family:"Noto Serif KR",serif;font-weight:600}
+ .print-sheet-kicker,.print-sheet-header,.print-sheet-footer,.print-sheet table,.print-kpi,.print-evidence,.print-axis-bars,.print-dotplot{font-family:"Source Serif 4","Noto Serif KR",serif}
+ .print-prose p,.print-reading p,.print-narrative-full .print-prose p,.print-axis-detail .print-prose p,.print-entity-detail .print-prose p,.print-comparison-detail .print-prose p,.print-type-analysis p,.print-type-strategy p,.print-type-publicity p,.print-type-method p{font-size:11pt!important;line-height:1.74!important;margin:2mm 0!important}
+ .print-sheet table{font-size:9.5pt;line-height:1.45}.print-sheet th{padding:2.4mm}.print-sheet td{padding:2mm}
+ .print-axis-nodes p,.print-pairs p,.print-pairs em,.print-boundary{font-size:11pt!important;line-height:1.7!important}
+ .print-prose{margin-top:4mm}.print-prose h3{margin:0 0 2mm;padding-bottom:1.8mm;font-size:12pt}.print-flow{margin:5mm 0;padding:4.5mm 2.5mm}
+ .print-sheet-main{padding-top:6mm;padding-bottom:3mm}.print-dense .print-sheet-main{padding-top:4mm}.print-sheet h2{margin-bottom:5mm}
+}
