@@ -42,6 +42,11 @@ assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank m
 assert(css.includes('@media(max-width:720px)'), 'mobile responsive contract missing');
 assert(html.includes('id="previewPdf"') && html.includes('id="savePdf"') && html.includes('id="printReport"'), 'report edition preview, save and print controls missing');
 assert(html.includes('id="exitPdfPreview"') && js.includes('setPdfPreview'), 'full-report preview mode missing');
+assert(html.includes('id="pdfMobileToolbar"') && html.includes('id="pdfMobilePageStatus"'), 'mobile report reader toolbar missing');
+assert(js.includes('updateMobilePreviewPage') && js.includes("getBoundingClientRect().top"), 'mobile report page-position indicator missing');
+assert(js.includes('class="print-table-scroll"') && css.includes('표를 좌우로 밀어 전체 열 보기'), 'mobile report tables must scroll instead of collapsing columns');
+assert(css.includes('BRIDGE MOBILE REPORT VIEW v7.2') && css.includes('min-height:calc(100svh - 92px)'), 'mobile-native report cover reflow missing');
+assert(css.includes('column-count:1') && css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'), 'mobile report prose and six-axis reflow missing');
 assert(js.includes('requestAnimationFrame') && js.includes('window.scrollTo'), 'stage navigation must move to the next stage heading');
 assert(css.includes('background:#172534') && css.includes('.stage-pager button:hover'), 'stage pager contrast treatment missing');
 assert(html.includes('DUAL READING') && html.includes('data-reading="easy"') && html.includes('data-reading="professional"'), 'easy/professional reading switch missing');
