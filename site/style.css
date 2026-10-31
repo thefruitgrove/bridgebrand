@@ -1235,3 +1235,34 @@ footer .brand-wordmark-image{
   .language-en .intel-section-desc,.language-en .footer-note,.language-en .footer-method{font-size:13px;line-height:1.75}
   .language-en .twr-head-kor{font-size:9px;letter-spacing:.04em}
 }
+
+/* Subscription service v2 — two clear entry products, four-step configuration. */
+.service-overview-simplified header{max-width:820px}
+.service-entry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.service-entry-card{display:flex;min-height:390px;padding:30px;box-sizing:border-box;flex-direction:column;justify-content:space-between;border:1px solid #354452;background:#0d141c}
+.service-entry-card.featured{border-color:#b6924f;background:linear-gradient(145deg,rgba(182,146,79,.1),rgba(13,20,28,.98) 48%)}
+.service-entry-card small,.service-terms-strip small,.sub-briefing-choice small{color:#d5ae63;font-size:9px;font-weight:800;letter-spacing:.14em}
+.service-entry-card h3{max-width:470px;margin:20px 0 12px;font:600 clamp(25px,3vw,36px)/1.17 var(--serif);letter-spacing:-.035em;word-break:keep-all}
+.service-entry-card p{max-width:520px;margin:0;color:#a4adb5;font-size:13px;line-height:1.8;word-break:keep-all}
+.service-entry-card ul{margin:24px 0 0;padding:18px 0 0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
+.service-entry-card li{position:relative;margin:8px 0;padding-left:16px;color:#c5cbd0;font-size:11px;line-height:1.55}
+.service-entry-card li:before{content:'—';position:absolute;left:0;color:#b6924f}
+.service-entry-actions{display:flex;margin-top:28px;align-items:center;gap:18px;flex-wrap:wrap}
+.service-entry-actions>a:first-child{display:inline-flex;min-height:46px;padding:0 18px;align-items:center;background:#b6924f;color:#101821;font-size:11px;font-weight:800;text-decoration:none}
+.service-entry-actions>span{display:flex;gap:15px;flex-wrap:wrap}.service-entry-actions .text-link{color:#d2b879;font-size:10px;text-decoration:none;border-bottom:1px solid rgba(210,184,121,.45)}
+.service-terms-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;border:1px solid rgba(255,255,255,.12)}
+.service-terms-strip>div{min-height:78px;padding:18px 20px;box-sizing:border-box;border-right:1px solid rgba(255,255,255,.1)}.service-terms-strip>div:last-child{border-right:0}
+.service-terms-strip small,.service-terms-strip b{display:block}.service-terms-strip b{margin-top:9px;color:#c6ccd1;font-size:11px;font-weight:600;line-height:1.45}
+.subscribe-progress{grid-template-columns:repeat(4,1fr)}
+.sub-briefing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sub-briefing-choice{display:flex;min-height:300px;padding:25px;box-sizing:border-box;flex-direction:column;border:1px solid #344250;background:#0d141c}.sub-briefing-choice.selected{border-color:#b6924f;background:rgba(182,146,79,.07)}
+.sub-briefing-choice h3{margin:15px 0 9px;font:600 25px/1.2 var(--serif);word-break:keep-all}.sub-briefing-choice>p{margin:0;color:#98a3ad;font-size:12px;line-height:1.7}
+.sub-briefing-choice>button,.sub-depth-actions button{appearance:none;min-height:48px;padding:0 15px;border:1px solid #b6924f;background:transparent;color:#e6d5ac;text-align:left;cursor:pointer}.sub-briefing-choice>button{margin-top:auto;font-weight:800}
+.sub-depth-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:24px}.sub-depth-actions button b,.sub-depth-actions button span{display:block}.sub-depth-actions button b{font-size:10px}.sub-depth-actions button span{margin-top:5px;color:#929da7;font-size:9px}
+.sub-choice-grid button.selected{border-color:#b6924f;background:rgba(182,146,79,.08);transform:translateY(-2px)}
+.sub-delivery-grid{grid-template-columns:1fr 1fr}.sub-target-block{margin-top:18px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}.sub-target-block>p{margin:0 0 15px;color:#aab3bb;font-size:11px}.sub-target-block>p b{color:#d2b879}
+.sub-field-prompt{margin:18px 0 0;padding:16px 18px;border-left:2px solid #b6924f;background:#101821;color:#929da7;font-size:11px;line-height:1.6}
+.sub-language-field{margin:22px 0 0;padding:20px;border:1px solid #344250}.sub-language-field legend{padding:0 8px;color:#d2b879;font-size:10px;font-weight:800}.sub-language-field>p{margin:10px 0 0;color:#7f8a94;font-size:10px}
+
+@media(max-width:900px){.service-entry-grid{grid-template-columns:1fr}.service-entry-card{min-height:340px}.service-terms-strip{grid-template-columns:1fr 1fr}.service-terms-strip>div:nth-child(2){border-right:0}.service-terms-strip>div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}}
+@media(max-width:620px){.subscribe-hero h1{font-size:clamp(37px,11vw,52px);line-height:1.07}.subscribe-hero h1 br{display:none}.service-entry-card{min-height:0;padding:24px 20px}.service-entry-card h3{font-size:28px}.service-entry-card p{font-size:12px}.service-entry-actions{align-items:flex-start;flex-direction:column}.service-entry-actions>a:first-child{width:100%;box-sizing:border-box;justify-content:space-between}.service-terms-strip{grid-template-columns:1fr}.service-terms-strip>div{min-height:64px;border-right:0;border-bottom:1px solid rgba(255,255,255,.1)}.service-terms-strip>div:last-child{border-bottom:0}.subscribe-progress li{white-space:normal;line-height:1.35}.sub-briefing-grid,.sub-delivery-grid{grid-template-columns:1fr}.sub-briefing-choice{min-height:250px;padding:22px 18px}.sub-depth-actions{grid-template-columns:1fr}.sub-depth-actions button{min-height:58px}.sub-target-list{grid-template-columns:1fr}.sub-language-field{padding:18px 14px}}

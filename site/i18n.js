@@ -21,11 +21,18 @@
     '이번 주 화면이 보여주는 것':'What this week’s view shows','지수와 차트를 읽는 법':'How to read the index and charts',
     '영역별 장기 평판 성과':'Long-term relationship performance by field',
     '세 단계의 분석 깊이':'Three levels of analytical depth','관측 주기와 목적에 맞춘 다섯 가지':'Five plans by observation cycle and purpose',
+    '필요한 분석은 두 가지에서 시작합니다':'Start with one of two clear analysis paths','하나를 빠르게 이해하기':'Understand one subject quickly','세 대상을 비교하고 깊게 분석하기':'Compare three subjects in depth',
+    '두 가지 분석 방식에서 시작하기 ↓':'Start with two analysis paths ↓','네 단계로 필요한 분석만 선택합니다.':'Choose only what you need in four steps.',
+    '선택한 한 대상의 핵심지표와 순위, 여섯 축의 구성, 주요 변화와 활동량, 근거 상태를 약 15페이지로 정리합니다.':'A focused report of about 15 pages covering one subject’s key indicators, rank, six-dimensional profile, major changes, activity and evidence status.',
+    '분석 대상 1개':'One subject','현재 위치와 관계 구조':'Current position and relationship structure','해석 한계와 다음 관측 질문':'Interpretive limits and next observation questions','BASIC 선택하기 →':'Choose BASIC →','15페이지 샘플 보기':'View the 15-page sample',
+    '중심 대상 하나와 비교 대상 둘을 같은 분야·같은 기준일·같은 공개 범위에서 읽고, 필요한 깊이에 따라 STANDARD 또는 SPECIAL로 완성합니다.':'Read one primary subject and two comparison subjects in the same field, on the same date and within the same public-data scope, then complete the analysis as STANDARD or SPECIAL.',
+    '중심 대상 1개 + 비교 대상 2개':'One primary + two comparison subjects','STANDARD: 관계 구조와 PUBLICITY':'STANDARD: relationship structure and PUBLICITY','SPECIAL: 3일 흐름과 전략 선택지까지 확장':'SPECIAL: three-day flow and strategic options','비교 브리핑 선택하기 →':'Choose comparison briefing →','STANDARD 샘플':'STANDARD sample','SPECIAL 확장본':'SPECIAL extension',
+    '한 번 분석 또는 정기 관측':'One-time analysis or regular observation','한국어 · English':'Korean · English','T100 맞춤 범위는 별도 상담':'Custom T100 scope by consultation',
     '대상과 분야를 선택합니다':'Choose fields and subjects','한 번의 분석도 가능합니다':'One-time analysis is also available',
     '필요한 분석을 단계별로 선택하세요.':'Build the analysis you need, step by step.',
     '기본 브리핑':'Basic Briefing','일반 브리핑':'Standard Briefing','스페셜 브리핑':'Special Briefing',
     '정기적으로 관측하기':'Observe regularly','한 번 분석받기':'Request one analysis','T100 맞춤 분석':'Custom T100 analysis',
-    '한국어':'Korean','영어':'English','제공 언어':'Delivery language','관측 분야':'Observation field','분석 대상':'Subjects',
+    '한국어':'Korean','영어':'English','제공 언어':'Delivery language','관측 분야':'Observation field','분석 대상':'Subjects','브리핑':'Briefing','제공 방식':'Delivery mode','구독 구성':'Analysis service',
     '선택을 시작하세요':'Start your selection','이용 방식':'Service mode','서비스 구성이 완료되었습니다.':'Your service configuration is complete.',
     '6단계 웹 브리핑 보기 →':'Open the six-stage web briefing →','서비스 설명으로 돌아가기':'Return to service overview',
     '일반 브리핑 샘플 PDF 보기 →':'View a Standard Briefing sample PDF →','샘플 PDF 바로 보기':'Open sample PDF',
@@ -184,18 +191,13 @@
       setText('.discovery-note','This interface provides one free discovery trial. Your selections and sharing do not affect scores or ranks.');
     }
     if(path==='subscribe.html'){
-      const hero=document.querySelector('.subscribe-hero h1');if(hero)hero.innerHTML='Beyond a single result,<br>observe how change continues over time.';
-      setText('.subscribe-hero p','Choose analytical depth, observation cycle, field and subjects in order. Scores from different fields are not directly compared; each field keeps its own criteria and evidence state within one service.');
-      const panelHeads=[
-        ['briefing','Choose the depth that matches the decision you need'],
-        ['subscription','Five plans by observation cycle and purpose'],
-        ['scope','Choose fields and subjects'],
-        ['one-time','One-time analysis is also available']
-      ];
-      panelHeads.forEach(([key,value])=>setText(`[data-service-content="${key}"] header h2`,value));
-      setText('.service-config-start','BUILD YOUR BRIDGE SERVICE · START CONFIGURATION ↓');
-      setText('.configurator-head h2','Complete your configuration in six steps.');
-      const progress=['MODE','SERVICE','FIELD','SUBJECTS','LANGUAGE','REVIEW'];document.querySelectorAll('#subProgress li').forEach((n,i)=>{if(progress[i])n.textContent=progress[i];});
+      const hero=document.querySelector('.subscribe-hero h1');if(hero)hero.innerHTML='Understand one subject quickly,<br>or compare three in depth.';
+      setText('.subscribe-hero p','Choose the scope of analysis first. BASIC organises one subject’s current relationship structure in about 15 pages. STANDARD and SPECIAL read one primary subject with two comparison subjects under the same conditions.');
+      setText('.service-overview-simplified header h2','Start with one of two clear analysis paths');
+      setText('.service-overview-simplified header p','You do not need to learn a catalogue of plan names. Choose whether to read one subject or compare three; the next screen shows only the decisions that follow from that choice.');
+      setText('.service-config-start','BUILD YOUR BRIDGE SERVICE · START WITH TWO ANALYSIS PATHS ↓');
+      setText('.configurator-head h2','Choose only what you need in four steps.');
+      const progress=['BRIEFING','FIELD · SUBJECTS','DELIVERY','REVIEW'];document.querySelectorAll('#subProgress li').forEach((n,i)=>{if(progress[i])n.textContent=progress[i];});
     }
   }
 
