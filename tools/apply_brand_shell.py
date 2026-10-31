@@ -80,7 +80,7 @@ def apply(path: Path) -> bool:
         updated = updated.replace(THIS_WEEK, THIS_WEEK + PRIMARY_PUBLICITY, 1)
     updated = re.sub(
         r'style\.css\?v=[^"\']+',
-        'style.css?v=20261028-report24b',
+        'style.css?v=20261031-bilingual1',
         updated,
     )
     updated = re.sub(
@@ -88,6 +88,17 @@ def apply(path: Path) -> bool:
         'script.js?v=20261018-mobilebrand2',
         updated,
     )
+    bilingual_pages = {
+        'index.html', 'this-week.html', 'cpr.html', 'gov.html', 'uni.html',
+        'star.html', 'methodology.html', 'data-extraction.html', 'trust.html',
+        'about.html', 'intelligence.html', 'subscribe.html',
+    }
+    if path.name in bilingual_pages and 'i18n.js?' not in updated:
+        updated = updated.replace(
+            '</body>',
+            '<script src="i18n.js?v=20261031-bilingual1" defer></script>\n</body>',
+            1,
+        )
     updated = updated.replace("VOL. 01 — WEEK", "VOL. 02 — WEEK")
     if path.name == "about.html" and 'data-bridge-identity="v1"' not in updated and IDENTITY_ANCHOR in updated:
         updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
