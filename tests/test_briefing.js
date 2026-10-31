@@ -56,9 +56,9 @@ assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seve
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
 assert(
   js.includes('function buildPrintReport()') &&
-  js.includes("total=reportMode==='basic'?8:25") &&
+  js.includes("total=reportMode==='basic'?8:29") &&
   js.includes("String(number).padStart(2,'0')} / ${total}"),
-  'BASIC 8-page and STANDARD 25-page report edition generators missing'
+  'BASIC 8-page and STANDARD 29-page report edition generators missing'
 );
 assert(js.includes("footer=number===1?'':"), 'cover must omit the report footer');
 assert(js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 1/2') && js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 2/2'), 'PUBLICITY must be split instead of shrinking body copy');
@@ -78,7 +78,7 @@ assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expa
 ['axisReading','entityNarrative','comparisonNarrative'].forEach((name) => {
   assert(js.includes(`function ${name}(`), `${name} data-driven PDF narrative missing`);
 });
-assert(js.includes("AXES.map((x)=>axisReading(pick,x))"), 'MY PICK six-axis PDF commentary missing');
+assert(js.includes("['B','R','I'].map((x)=>axisReading(pick,x))") && js.includes("['D','G','E'].map((x)=>axisReading(pick,x))"), 'MY PICK six-axis PDF commentary missing');
 assert(js.includes("entityNarrative(a,'COMPARE A')") && js.includes("entityNarrative(b,'COMPARE B')"), 'independent comparison narratives missing');
 assert(js.includes('...activityStory.slice(0,9)'), 'full activity/reputation PDF explanation missing');
 assert(css.includes('.print-narrative-full') && css.includes('.print-entity-detail'), 'dense report typography contract missing');
