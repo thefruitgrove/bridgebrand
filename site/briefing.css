@@ -108,6 +108,11 @@
 .pdf-preview-mode .print-axis-nodes p,.pdf-preview-mode .print-pairs p,.pdf-preview-mode .print-pairs em,.pdf-preview-mode .print-boundary{font-size:14.667px!important;line-height:1.7!important}
 .pdf-preview-mode .print-prose{margin-top:16px}.pdf-preview-mode .print-prose h3{margin:0 0 8px;padding-bottom:7px;font-size:16px}
 .pdf-preview-mode .print-flow{margin:20px 0;padding:18px 10px}.pdf-preview-mode .print-sheet-main{padding-top:24px;padding-bottom:12px}
+.pdf-preview-mode .print-axis-detail .print-prose,.pdf-preview-mode .print-entity-detail .print-prose{column-count:2;column-gap:30px;column-rule:1px solid var(--report-line)}
+.pdf-preview-mode .print-axis-detail .print-prose h3,.pdf-preview-mode .print-entity-detail .print-prose h3{column-span:all}.pdf-preview-mode .print-axis-detail .print-prose p,.pdf-preview-mode .print-entity-detail .print-prose p{break-inside:avoid}
+.pdf-preview-mode .print-sheet[data-page="9"] td{padding-top:5px;padding-bottom:5px}.pdf-preview-mode .print-sheet[data-page="10"] .dot-row{min-height:20px}
+.pdf-preview-mode .print-sheet[data-page="15"] .print-prose p,.pdf-preview-mode .print-sheet[data-page="20"] .print-prose p{margin:4px 0!important;line-height:1.7!important}
+.pdf-preview-mode .print-type-publicity h3{margin:7px 0 2px!important}.pdf-preview-mode .print-type-publicity p{margin:4px 0!important;line-height:1.7!important}.pdf-preview-mode .print-type-publicity .print-lead{font-size:14.667px!important;line-height:1.7!important}
 
 @media print{
  .print-cover-split{background:linear-gradient(90deg,#fff 0 65%,var(--report-tangerine) 65% 100%)}
@@ -121,4 +126,9 @@
  .print-axis-nodes p,.print-pairs p,.print-pairs em,.print-boundary{font-size:11pt!important;line-height:1.7!important}
  .print-prose{margin-top:4mm}.print-prose h3{margin:0 0 2mm;padding-bottom:1.8mm;font-size:12pt}.print-flow{margin:5mm 0;padding:4.5mm 2.5mm}
  .print-sheet-main{padding-top:6mm;padding-bottom:3mm}.print-dense .print-sheet-main{padding-top:4mm}.print-sheet h2{margin-bottom:5mm}
+ .print-axis-detail .print-prose,.print-entity-detail .print-prose{column-count:2;column-gap:8mm;column-rule:1px solid var(--report-line)}
+ .print-axis-detail .print-prose h3,.print-entity-detail .print-prose h3{column-span:all}.print-axis-detail .print-prose p,.print-entity-detail .print-prose p{break-inside:avoid}
+ .print-sheet[data-page="9"] td{padding-top:1.3mm;padding-bottom:1.3mm}.print-sheet[data-page="10"] .dot-row{min-height:5.2mm}
+ .print-sheet[data-page="15"] .print-prose p,.print-sheet[data-page="20"] .print-prose p{margin:1mm 0!important;line-height:1.7!important}
+ .print-type-publicity h3{margin:1.8mm 0 .5mm!important}.print-type-publicity p{margin:1mm 0!important;line-height:1.7!important}.print-type-publicity .print-lead{font-size:11pt!important;line-height:1.7!important}
 }
