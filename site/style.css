@@ -942,8 +942,11 @@ footer .logo .op{ color:#7c86a0;}
 .ranking-master{grid-row:1;grid-column:1}
 .ranking-card-boards{grid-column:2;min-width:0;display:grid;gap:24px}
 .ranking-card-boards .ranking-cohort{border:0;background:transparent;max-height:820px;grid-column:auto;overflow:auto}
-.ranking-card-boards .ranking-panel-head{padding:14px 0;background:var(--paper);border-bottom:1px solid #ded8ca;margin-bottom:14px}
-.ranking-master .ranking-panel-head{min-height:49px;box-sizing:border-box;padding-top:14px;padding-bottom:14px}
+.ranking-master,.ranking-card-boards{align-self:start}
+.ranking-card-boards .ranking-panel-head,
+.ranking-master .ranking-panel-head{height:50px;min-height:50px;box-sizing:border-box;display:flex;align-items:center;padding-top:0;padding-bottom:0;margin:0 0 14px}
+.ranking-card-boards .ranking-panel-head{padding-left:0;padding-right:0;background:var(--paper);border-bottom:1px solid #ded8ca}
+.ranking-master .ranking-panel-head{padding-left:16px;padding-right:16px}
 .ranking-card-boards .rk-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .ranking-card-boards .rk-row{display:flex;flex-direction:column;gap:8px;position:relative;min-height:190px;padding:18px;border:1px solid #e4dfd0;border-radius:8px;background:#fff;cursor:pointer}
 .ranking-card-boards .rk-row:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,24,31,.08)}
@@ -977,10 +980,21 @@ footer .logo .op{ color:#7c86a0;}
 }
 @media(max-width:600px){
  .ranking-panels{gap:24px}.ranking-master{max-height:600px}
- .ranking-panel-head{gap:8px;flex-wrap:wrap}.ranking-panel-head span{font-size:9px}
- .ranking-summary-strip .seg-btn{min-width:0;white-space:normal;line-height:1.45}
+ .ranking-panel-head{gap:10px;flex-wrap:nowrap}.ranking-panel-head b{min-width:0;white-space:nowrap}.ranking-panel-head span{font-size:9px;white-space:nowrap}
+ .ranking-summary-strip{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:14px}
+ .ranking-summary-strip .seg-btn{min-width:0;min-height:48px;padding:9px 8px;white-space:normal;line-height:1.3;font-size:11px;text-align:left}
+ .ranking-summary-strip .seg-btn span{float:right;margin-left:6px}
+ .ranking-workspace{margin-top:14px}
+ .ranking-card-boards{gap:18px}
+ .ranking-card-boards .ranking-panel-head,.ranking-master .ranking-panel-head{height:48px;min-height:48px;margin-bottom:10px}
+ .ranking-card-boards .ranking-panel-head b,.ranking-master .ranking-panel-head b{font-size:13px}
+ .ranking-card-boards .ranking-panel-head span,.ranking-master .ranking-panel-head span{font-size:8px;letter-spacing:.04em}
  .ranking-master .rk-row{grid-template-columns:28px minmax(0,1fr) auto auto;gap:7px;padding:12px 10px}
  .ranking-master .rk-name .nm{font-size:12px}.ranking-master .rk-score{font-size:17px}
+ .ranking-card-boards .rk-row{min-height:0;padding:16px;border-radius:6px}
+ .ranking-card-boards .rk-name .nm{font-size:14px;line-height:1.45;word-break:keep-all;overflow-wrap:break-word}
+ .rk-legend{gap:8px 12px;padding:10px 12px;font-size:11px;line-height:1.5}
+ .rk-toolbar{gap:9px}.rk-search{box-sizing:border-box;width:100%;font-size:13px}.rk-sort{justify-content:flex-end;flex-wrap:wrap}.rk-sort-btn{padding:7px 11px;font-size:11px}
  .rk-clickable:focus-visible{outline:2px solid #a9884f;outline-offset:-2px}
  .bridge-modal-overlay{padding:10px;align-items:center}
  .bridge-modal{width:100%;max-width:100%;max-height:calc(100dvh - 20px);padding:42px 16px 20px;overflow-x:hidden;box-sizing:border-box}
@@ -999,10 +1013,8 @@ footer .logo .op{ color:#7c86a0;}
  .tw-grid,.twr-grid,.hero-top5{min-width:0;max-width:100%}
 }
 
-/* BRIDGE INTELLIGENCE service entry */
-.intelligence-rail{position:fixed;right:0;top:50%;z-index:70;transform:translateY(-50%);width:38px;min-height:154px;display:flex;align-items:center;justify-content:center;background:#111923;color:#f5f1e8;border:1px solid rgba(206,175,117,.48);border-right:0;text-decoration:none;box-shadow:0 12px 32px rgba(0,0,0,.2)}
-.intelligence-rail span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:800;letter-spacing:.16em}
-.intelligence-mobile-cta{display:none}
+/* BRIDGE INTELLIGENCE is reached through the main service navigation.
+   Ranking pages intentionally do not add a floating side rail or mobile overlay. */
 .modal-intelligence-link{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0 4px;padding:15px 17px;background:#111923;color:#f5f1e8;text-decoration:none;border-left:3px solid #b6924f;font-size:12px;font-weight:800;letter-spacing:.02em}
 .modal-intelligence-link::after{content:'\2192';color:#d2b879;font-size:17px}
 .intelligence-home{background:#0e141c;color:#f5f1e8;padding:72px 0;border-top:1px solid rgba(206,175,117,.32);border-bottom:1px solid rgba(206,175,117,.32)}
@@ -1048,8 +1060,6 @@ footer .logo .op{ color:#7c86a0;}
 .intel-cta h2{margin:0 0 10px}.intel-cta p{margin:0;color:#aeb6be}.intel-cta .btn{color:#fff;border-color:#b6924f;white-space:nowrap}
 @media(max-width:980px){.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brief-grid,.choice-grid{grid-template-columns:1fr}.intel-section-head{grid-template-columns:1fr;gap:10px}}
 @media(max-width:700px){
- .intelligence-rail{display:none}.intelligence-mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:80;align-items:center;justify-content:center;min-height:48px;background:#111923;color:#fff;border:1px solid #b6924f;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.04em;box-shadow:0 12px 30px rgba(0,0,0,.32)}
- body.has-intelligence-mobile{padding-bottom:72px}
  .intelligence-home{padding:46px 0}.intelligence-home-card{grid-template-columns:1fr;padding:28px 22px;gap:24px;align-items:start}
  .intel-hero{padding:112px 0 66px}.intel-hero p{font-size:15px}.intel-section{padding:58px 0}
  .package-grid{grid-template-columns:1fr}.package-card{min-height:0}.intel-cta{display:block;padding:28px 22px}.intel-cta .btn{margin-top:24px}
@@ -1083,7 +1093,7 @@ footer .logo .op{ color:#7c86a0;}
  .ranking-master .rk-row{grid-template-columns:24px minmax(0,1fr) 42px 34px;min-height:62px;gap:6px;padding:10px}
  .ranking-card-boards .rk-row .rk-num{display:block;font-size:11px}
  .ranking-master .live-snapshot-note{font-size:11px;line-height:1.65;padding:10px 12px}
- .ranking-master .ranking-panel-head{position:sticky;padding:12px}
+ .ranking-master .ranking-panel-head{position:sticky;padding:0 12px}
  .nav-inner{min-height:62px;padding-top:8px;padding-bottom:8px}.logo{font-size:18px;letter-spacing:.03em}
 }
 
