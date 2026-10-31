@@ -1,5 +1,5 @@
 {
-  "as_of_date": "2026-10-30",
+  "as_of_date": "2026-10-31",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
@@ -7,14 +7,9 @@
     "GOV-C03": {
       "reason": "ownership_evidence_required"
     },
-    "GOV-C45": {
-      "channel_id": "UCtQ7Fc7Eny5MfWa9QD6CqcA",
-      "title": "여수시-여수이야기",
-      "reason": "awaiting_human_verification"
-    },
     "GOV-C46": {
-      "channel_id": "UCdiJ9td2W0Pi6ZVn-obceug",
-      "title": "KBS순천",
+      "channel_id": "UChrP3VKcPcOiR8WZ7LAdO8w",
+      "title": "순천시",
       "reason": "awaiting_human_verification"
     },
     "GOV-C47": {
@@ -28,8 +23,13 @@
       "reason": "awaiting_human_verification"
     },
     "GOV-C49": {
-      "channel_id": "UCWX06liHG4ZCJW3yG7FGnBQ",
-      "title": "구미 GUMI Ch. Virtual Hertz",
+      "channel_id": "UCedTii4XO9JZpCOTcuCQgrQ",
+      "title": "구미시_ GUMI",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C50": {
+      "channel_id": "UCHRbL0Q7Z19I_9-HhRuunYw",
+      "title": "경산시",
       "reason": "awaiting_human_verification"
     }
   }
