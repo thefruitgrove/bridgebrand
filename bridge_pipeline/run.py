@@ -697,17 +697,45 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
     # only after the new ranking has passed its guards.
     entities = db.select("bridge_entities", "select=id,external_id,domain,subcategory&active=eq.true")
     entity_by_id = {e["id"]: e for e in entities}
-    since = (as_of - dt.timedelta(days=28)).isoformat()
+    since_date = as_of - dt.timedelta(days=28)
+    since = since_date.isoformat()
+    start_utc = dt.datetime.combine(since_date, dt.time.min, tzinfo=dt.timezone.utc)
     end_utc = dt.datetime.combine(as_of + dt.timedelta(days=1), dt.time.min, tzinfo=now_kst().tzinfo).astimezone(dt.timezone.utc)
     upper = end_utc.isoformat().replace("+00:00", "Z")
-    signals = db.select("bridge_signals", f"select=id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,expires_at,review_status,source_id&occurred_at=gte.{since}T00:00:00Z&occurred_at=lt.{upper}")
-    raw_items = db.select(
+
+    # Large 28-day REST ranges can exceed the database statement timeout as
+    # evidence grows. Read one UTC day at a time so each query can use the
+    # timestamp index, while preserving the same complete scoring window.
+    def select_windowed(table: str, fields: str, time_field: str, *, order: str = "") -> list[dict]:
+        rows: list[dict] = []
+        cursor = start_utc
+        while cursor < end_utc:
+            next_cursor = min(cursor + dt.timedelta(days=1), end_utc)
+            lower = cursor.isoformat().replace("+00:00", "Z")
+            higher = next_cursor.isoformat().replace("+00:00", "Z")
+            suffix = f"&order={order}" if order else ""
+            rows.extend(db.select(table, f"select={fields}&{time_field}=gte.{lower}&{time_field}=lt.{higher}{suffix}"))
+            cursor = next_cursor
+        return rows
+
+    signals = select_windowed(
+        "bridge_signals",
+        "id,entity_id,raw_item_id,axis,signal_type,direction,magnitude,confidence,occurred_at,expires_at,review_status,source_id",
+        "occurred_at",
+    )
+    raw_items = select_windowed(
         "bridge_raw_items",
-        f"select=id,title,publisher,published_at&published_at=gte.{since}T00:00:00Z"
-        f"&published_at=lt.{upper}&order=published_at.asc,id.asc",
+        "id,title,publisher,published_at",
+        "published_at",
+        order="published_at.asc,id.asc",
     )
     signals = unique_signals([v for v in signals if valid_signal(v, as_of)], {r['id']:r for r in raw_items})
-    runs = db.select("bridge_collection_runs", f"select=source_id,status,started_at,finished_at,window_start,window_end,diagnostics&window_start=gte.{since}T00:00:00Z&order=started_at.desc")
+    runs = select_windowed(
+        "bridge_collection_runs",
+        "source_id,status,started_at,finished_at,window_start,window_end,diagnostics",
+        "window_start",
+        order="started_at.desc",
+    )
     observed_states = collection_states(runs, as_of)
     grouped: dict[tuple[str, str], list[dict]] = {}
     accepted_by_entity: dict[str, list[dict]] = {}
