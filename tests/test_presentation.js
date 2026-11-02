@@ -38,3 +38,14 @@ vm.runInContext('function esc(x){return String(x)};'+source.slice(tickerStart,ti
 assert.equal(context.tickerEvidence({axis_status:{B:'observed',R:'reference',E:'maintained'},axis_scores:{B:61,R:100,E:72}}),'E 72.0 · 유효 2축');
 assert(!source.slice(source.indexOf('// 주식시황형 LIVE'),source.indexOf('// HOME hero')).includes('비교대기'));
 console.log('Ticker uses valid weekly comparison or actual evidence; reference values excluded.');
+
+// Mobile visual contract v20261102
+const mobileCss=fs.readFileSync('site/style.css','utf8');
+const indexHtml=fs.readFileSync('site/index.html','utf8');
+assert.match(mobileCss,/#heroSeoulClock\.hero-meta\{display:flex;flex-direction:column;align-items:flex-start/,'masthead rows must share one left edge');
+assert.match(mobileCss,/#heroSeoulClock \.hero-language-switch\{position:static!important/,'mobile language switch must participate in layout');
+assert.match(mobileCss,/#heroSeoulClock \.hero-language-switch a\{display:inline!important;min-width:0!important/,'KR and EN must not inherit oversized mobile link widths');
+assert.match(mobileCss,/#hero-cinematic \.hero-bottom\{display:grid;grid-template-columns:minmax\(0,1fr\)/,'mobile hero must use a single-column visual flow');
+assert.match(mobileCss,/\.service-entry-grid,\.sub-briefing-grid,\.service-card-grid,\.subscription-cards\{grid-template-columns:minmax\(0,1fr\)!important/,'service cards must collapse without horizontal compression');
+assert.match(indexHtml,/style\.css\?v=20261102-mobile5/,'index must request the current mobile visual layer');
+console.log('Mobile visual contract passed: masthead alignment, compact language switch, single-column flow and card containment.');
