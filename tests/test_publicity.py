@@ -24,7 +24,8 @@ class PublicityTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'required observation date'):articles_for(self.history('2026-10-15'),dt.date(2026,10,16))
  def test_monday_requires_latest_date_shared_by_all_domains(self):
   h=self.history('2026-10-16')
-  h['rankings'][0]['as_of_date']='2026-10-15'
+  for row in h['rankings']:
+   if row['domain']=='CPR':row['as_of_date']='2026-10-15'
   with self.assertRaisesRegex(ValueError,'No common verified observation date'):articles_for(h,dt.date(2026,10,19))
  def test_snapshot_is_allowlisted_and_order_independent(self):
   h=self.history();a,s=articles_for(h,dt.date(2026,10,16));h['rankings'].reverse();b,t=articles_for(h,dt.date(2026,10,16))
