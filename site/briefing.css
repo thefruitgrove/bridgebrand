@@ -998,3 +998,11 @@ footer .brand-wordmark-image{
   #hero-cinematic .hero-actions .btn{height:50px!important}
 }
 
+
+
+/* Mobile report table contract: preserve full columns with an explicit horizontal-reading cue. */
+@media(max-width:720px){
+  .print-table-scroll{display:block;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .print-table-scroll:before{content:'표를 좌우로 밀어 전체 열 보기';display:block;position:sticky;left:0;margin:0 0 8px;padding:7px 9px;background:#f1eadb;color:#6f5733;font:700 10px/1.4 sans-serif;letter-spacing:.02em}
+  .print-table-scroll table{min-width:680px;width:100%;table-layout:auto}
+}
