@@ -1,0 +1,46 @@
+{
+  "domain": "CPR",
+  "as_of_date": "2026-11-02",
+  "methodology_version": "2026.10-v5-beta1",
+  "stages": {
+    "active_registry": 100,
+    "collection_completed": 100,
+    "axis_observed": 100,
+    "score_computed": 100,
+    "publication_eligible": 70,
+    "t100_generated": 70,
+    "t100_published": 0
+  },
+  "largest_loss": {
+    "from": "t100_generated",
+    "to": "t100_published",
+    "count": 70
+  },
+  "eligibility_exclusion_reasons": {
+    "confidence_below_gate": 30,
+    "insufficient_source_families": 8,
+    "score_unavailable": 1
+  },
+  "axis_entity_coverage": {
+    "B": 100,
+    "R": 55,
+    "I": 59,
+    "D": 76,
+    "G": 99,
+    "E": 95
+  },
+  "relationship_evidence_shortfall": {
+    "R": 45,
+    "D": 24,
+    "E": 5
+  },
+  "t100_coverage_goal": 100,
+  "t100_coverage_gap": 100,
+  "recovery_priority": [
+    "R/D/E source-family coverage",
+    "confidence below gate",
+    "insufficient source families"
+  ],
+  "stale_generated_rows": 0,
+  "status": "warning"
+}

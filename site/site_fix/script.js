@@ -61,7 +61,7 @@
   (function refreshPresentationLayer(){
     var fresh=document.createElement('link');
     fresh.rel='stylesheet';
-    fresh.href='style.css?v=20261022-interpret31';
+    fresh.href='style.css?v=20261101-ranking4';
     document.head.appendChild(fresh);
   })();
   // The masthead is a Seoul service clock, not a stale build timestamp.
@@ -601,17 +601,6 @@
     modalOverlay.classList.add('open');
   }
 
-  /* One quiet service entry per ranking page; mobile uses a reachable bottom action. */
-  if(typeof document.querySelector==='function'&&document.querySelector('.ranking-panels')&&!document.querySelector('.intelligence-rail')){
-    var rail=document.createElement('a');
-    rail.className='intelligence-rail';rail.href='intelligence.html';
-    rail.setAttribute('aria-label','BRIDGE 분석 서비스 보기');rail.innerHTML='<span>BRIDGE INTELLIGENCE</span>';
-    document.body.appendChild(rail);
-    var mobileCta=document.createElement('a');
-    mobileCta.className='intelligence-mobile-cta';mobileCta.href='intelligence.html';
-    mobileCta.textContent='BRIDGE 분석 서비스 보기 →';document.body.appendChild(mobileCta);
-    document.body.classList.add('has-intelligence-mobile');
-  }
   function closeBridgeModal(){ if(modalOverlay) modalOverlay.classList.remove('open'); }
   window.openBridgeModal = openBridgeModal;
   // Delegation keeps every live row interactive after the 05:15 snapshot

@@ -1,21 +1,11 @@
 {
-  "as_of_date": "2026-10-31",
+  "as_of_date": "2026-11-02",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C46": {
-      "channel_id": "UChrP3VKcPcOiR8WZ7LAdO8w",
-      "title": "순천시",
-      "reason": "awaiting_human_verification"
-    },
-    "GOV-C47": {
-      "channel_id": "UCdsxjrFG7OILeqzOAYcwODQ",
-      "title": "광양시 │ 오롯이 광양",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C48": {
       "channel_id": "UC5GZQWQiEt3lDt1Y4_hUwdw",
@@ -30,6 +20,16 @@
     "GOV-C50": {
       "channel_id": "UCHRbL0Q7Z19I_9-HhRuunYw",
       "title": "경산시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C51": {
+      "channel_id": "UC9KubMS1eabZzmUTCzcvBcg",
+      "title": "경주시 Gyeongjucity ",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C52": {
+      "channel_id": "UCbdBIZiwlOl8lkvkrEaHGNQ",
+      "title": "마카다안동(안동시청_Andongcity )",
       "reason": "awaiting_human_verification"
     }
   }
