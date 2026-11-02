@@ -16,6 +16,7 @@ on:
     paths:
       - 'publicity/**'
       - 'tests/test_publicity.py'
+      - 'tools/verify_publicity.py'
       - '.github/workflows/bridge-publicity.yml'
 
 permissions:
@@ -43,6 +44,8 @@ jobs:
           python-version: '3.12'
       - name: Editorial contract tests
         run: python -m unittest discover -s tests -p test_publicity.py -v
+      - name: Preflight anonymous PUBLICITY access
+        run: python tools/verify_publicity.py
       - name: Refresh the public archive from immutable published rows
         if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
         run: python -m bridge_pipeline.run export ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
@@ -55,4 +58,4 @@ jobs:
         if: always()
         run: |
           echo '### PUBLICITY editorial' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Missing required observation dates block preparation; existing published articles are not overwritten.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Monday OVERALL uses the latest verified date shared by all four domains inside the completed week; Wednesday and Friday require their exact observation date. Anonymous publication access is checked before and after preparation.' >> "$GITHUB_STEP_SUMMARY"
