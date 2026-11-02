@@ -19,9 +19,13 @@ class PublicityTests(unittest.TestCase):
   w=edition(dt.date(2026,10,21));self.assertEqual((w['calendar_from'],w['calendar_through']),(dt.date(2026,10,19),dt.date(2026,10,25)));self.assertEqual(w['through'],dt.date(2026,10,21))
  def test_friday_four_and_monday_one(self):
   a,s=articles_for(self.history(),dt.date(2026,10,16));self.assertEqual({x['domain'] for x in a},set(DOMAINS))
-  b,t=articles_for(self.history('2026-10-18'),dt.date(2026,10,19));self.assertEqual(len(b),1);self.assertEqual(b[0]['domain'],'ALL')
+  b,t=articles_for(self.history('2026-10-16'),dt.date(2026,10,19));self.assertEqual(len(b),1);self.assertEqual(b[0]['domain'],'ALL');self.assertEqual(t['period_through'],'2026-10-16')
  def test_old_data_cannot_be_published_as_friday(self):
   with self.assertRaisesRegex(ValueError,'required observation date'):articles_for(self.history('2026-10-15'),dt.date(2026,10,16))
+ def test_monday_requires_latest_date_shared_by_all_domains(self):
+  h=self.history('2026-10-16')
+  h['rankings'][0]['as_of_date']='2026-10-15'
+  with self.assertRaisesRegex(ValueError,'No common verified observation date'):articles_for(h,dt.date(2026,10,19))
  def test_snapshot_is_allowlisted_and_order_independent(self):
   h=self.history();a,s=articles_for(h,dt.date(2026,10,16));h['rankings'].reverse();b,t=articles_for(h,dt.date(2026,10,16))
   self.assertEqual(a[0]['snapshot_hash'],b[0]['snapshot_hash']);self.assertNotIn('secret_formula',json.dumps(s));self.assertNotIn('NEVER EXPOSE',json.dumps(a))
