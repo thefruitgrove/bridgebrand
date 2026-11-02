@@ -17,7 +17,20 @@ def main():
  assert launch_ids<=visible_ids,'Formal Wednesday/Friday launch articles are incomplete'
  assert not any(r.get('is_example') for r in rows),'Legacy sample article is still public'
  import datetime as dt
+ from zoneinfo import ZoneInfo
  now=dt.datetime.now(dt.timezone.utc)
  assert all(dt.datetime.fromisoformat(r['scheduled_at'].replace('Z','+00:00'))<=now for r in rows),'Future article leaked'
- print(json.dumps({'ok':True,'visible_articles':len(rows),'launch_articles':len(launch_ids),'examples_visible':False,'future_articles_visible':False}))
+ kst=ZoneInfo('Asia/Seoul')
+ now_kst=now.astimezone(kst)
+ due=set()
+ if now_kst.time()>=dt.time(12,0):
+  if now_kst.weekday()==0:
+   iso=(now_kst.date()-dt.timedelta(days=1)).isocalendar()
+   due.add(f'{iso.year}-w{iso.week:02d}-overall-all')
+  elif now_kst.weekday() in (2,4):
+   iso=now_kst.date().isocalendar()
+   slot='wed' if now_kst.weekday()==2 else 'fri'
+   due={f'{iso.year}-w{iso.week:02d}-{slot}-{domain}' for domain in ('cpr','gov','uni','ent')}
+ assert due<=visible_ids,'Due PUBLICITY edition is not anonymously visible after 12:00 KST: '+','.join(sorted(due-visible_ids))
+ print(json.dumps({'ok':True,'visible_articles':len(rows),'launch_articles':len(launch_ids),'due_articles':len(due),'examples_visible':False,'future_articles_visible':False}))
 if __name__=='__main__':main()
