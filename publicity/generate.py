@@ -57,8 +57,8 @@ def edition(publication_date):
     return {'week':f'{y}-W{w:02d}','slot':'OVERALL' if overall else 'WED' if publication_date.weekday()==2 else 'FRI','from':start,'through':end,'calendar_from':start,'calendar_through':calendar_end,'scheduled_at':dt.datetime.combine(publication_date,dt.time(12),KST)}
 
 def freeze(history, spec):
-    through=spec['through'].isoformat();start=spec['from'].isoformat()
-    candidates=[r for r in history.get('rankings',[]) if start<=r.get('as_of_date','')<=through and r.get('domain') in DOMAINS and r.get('ranking_type')=='T100' and r.get('history_type')!='historical_weekly_backfill' and 'v5' in r.get('methodology_version','')]
+    requested_through=spec['through'].isoformat();start=spec['from'].isoformat()
+    candidates=[r for r in history.get('rankings',[]) if start<=r.get('as_of_date','')<=requested_through and r.get('domain') in DOMAINS and r.get('ranking_type')=='T100' and r.get('history_type')!='historical_weekly_backfill' and 'v5' in r.get('methodology_version','')]
     rows=[{k:r.get(k) for k in PUBLIC_FIELDS} for r in candidates]
     rows.sort(key=lambda r:(r['as_of_date'],r['domain'],r['external_id']))
     if not rows:raise ValueError('No verified v5 public observation data in issue period')
@@ -81,9 +81,19 @@ def freeze(history, spec):
             if value is not None and (not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<=value<=100):raise ValueError('Invalid period level')
         value=r.get('activity_points')
         if value is not None and (not isinstance(value,(int,float)) or not math.isfinite(value) or value<0):raise ValueError('Invalid activity amount')
-    # Do not turn yesterday's snapshot into today's scheduled analysis.
-    for domain in DOMAINS:
-        if not any(r['domain']==domain and r['as_of_date']==through for r in rows):raise ValueError(f'{domain}: required observation date {through} missing; publication held')
+    # Wednesday/Friday editions require same-day observations. Monday's
+    # integrated edition uses the latest verified date shared by all four
+    # domains in the completed week; weekend observations are not fabricated.
+    if spec['slot']=='OVERALL':
+        domain_dates=[{r['as_of_date'] for r in rows if r['domain']==domain} for domain in DOMAINS]
+        common_dates=set.intersection(*domain_dates) if all(domain_dates) else set()
+        if not common_dates:raise ValueError(f'No common verified observation date for {spec["week"]}; publication held')
+        through=max(common_dates)
+        rows=[r for r in rows if r['as_of_date']<=through]
+    else:
+        through=requested_through
+        for domain in DOMAINS:
+            if not any(r['domain']==domain and r['as_of_date']==through for r in rows):raise ValueError(f'{domain}: required observation date {through} missing; publication held')
     snapshot={'schema':'publicity-input-1','period_from':start,'period_through':through,'methodology_version':next(iter(versions)),'rows':rows}
     digest=hashlib.sha256(json.dumps(snapshot,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     return snapshot,digest
