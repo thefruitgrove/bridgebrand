@@ -17,6 +17,7 @@ on:
       - 'publicity/**'
       - 'tests/test_publicity.py'
       - 'tools/verify_publicity.py'
+      - 'tools/verify_publicity_schedule.py'
       - '.github/workflows/bridge-publicity.yml'
 
 permissions:
@@ -52,10 +53,13 @@ jobs:
       - name: Prepare the due edition atomically
         if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
         run: python -m publicity.generate ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
+      - name: Validate the due edition is prepared
+        if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
+        run: python tools/verify_publicity_schedule.py
       - name: Validate published article access
         run: python tools/verify_publicity.py
       - name: Publication summary
         if: always()
         run: |
           echo '### PUBLICITY editorial' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Monday OVERALL uses the latest verified date shared by all four domains inside the completed week; Wednesday and Friday require their exact observation date. Anonymous publication access is checked before and after preparation.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Preparation uses a frozen allowlisted public snapshot. The database releases ready articles at 12:00 Asia/Seoul. Monday OVERALL uses the latest verified date shared by all four domains inside the completed week; Wednesday and Friday require their exact observation date. Anonymous publication access is checked before and after preparation. The due edition ID, ready status and prepared timestamp are verified with service access before the run can succeed.' >> "$GITHUB_STEP_SUMMARY"
