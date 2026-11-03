@@ -98,8 +98,8 @@ assert(js.includes('window.html2canvas') && js.includes('window.jspdf?.jsPDF'), 
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261103-pdf-download3'), 'English briefing control cache must be current');
-assert(html.includes('vendor/html2pdf.bundle.min.js?v=0.10.1'), 'PDF download library must be pinned and served by BRIDGE');
+assert(html.includes('briefing.js?v=20261103-pdf-download4'), 'English briefing control cache must be current');
+assert(html.includes('report-engine.js?v=0.10.1'), 'PDF download library must be pinned and served by BRIDGE');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');
 assert(js.includes("IS_ENGLISH?'← Previous':'← 이전 단계'"), 'English stage pager must not fall back to Korean');
