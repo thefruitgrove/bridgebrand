@@ -98,7 +98,7 @@ assert(js.includes('window.html2canvas') && js.includes('window.jspdf?.jsPDF'), 
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261103-pdf-download1'), 'English briefing control cache must be current');
+assert(html.includes('briefing.js?v=20261103-pdf-download2'), 'English briefing control cache must be current');
 assert(html.includes('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js') && html.includes('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js'), 'PDF download libraries must be pinned');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');
