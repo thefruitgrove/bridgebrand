@@ -1,7 +1,7 @@
 {
   "as_of_date": "2026-11-03",
   "methodology_version": "2026.10-v5-beta1",
-  "generated_at": "2026-11-03T12:35:57.286116+09:00",
+  "generated_at": "2026-11-03T18:33:06.904792+09:00",
   "ok": true,
   "errors": [],
   "records": [
@@ -1278,7 +1278,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 42.87
+        "confidence_score": 42.85
       }
     },
     {
@@ -1586,7 +1586,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 66.08
+        "confidence_score": 66.09
       }
     },
     {
@@ -2422,7 +2422,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 31.36
+        "confidence_score": 21.84
       }
     },
     {
@@ -2620,7 +2620,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 2,
-        "confidence_score": 35.13
+        "confidence_score": 35.15
       }
     },
     {
@@ -3918,7 +3918,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 36.18
+        "confidence_score": 36.12
       }
     },
     {
@@ -5326,7 +5326,7 @@
       "trust_basis": {
         "axes_available": 5,
         "source_families": 3,
-        "confidence_score": 53.8
+        "confidence_score": 53.99
       }
     },
     {
@@ -7460,7 +7460,7 @@
       "trust_basis": {
         "axes_available": 6,
         "source_families": 2,
-        "confidence_score": 39.14
+        "confidence_score": 39.13
       }
     },
     {
@@ -8806,7 +8806,7 @@
       }
     }
   ],
-  "linked_signal_count": 194383,
-  "linked_raw_count": 153509,
+  "linked_signal_count": 194628,
+  "linked_raw_count": 153711,
   "superseded_nonpublic_rankings": 0
 }
