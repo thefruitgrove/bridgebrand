@@ -5,6 +5,7 @@ const html = fs.readFileSync('site/briefing.html', 'utf8');
 const js = fs.readFileSync('site/briefing.js', 'utf8');
 const css = fs.readFileSync('site/briefing.css', 'utf8');
 const data = JSON.parse(fs.readFileSync('site/data/latest.json', 'utf8'));
+const fixedSample = JSON.parse(fs.readFileSync('site/data/samples/ent-20261103.json', 'utf8'));
 const brandShell = fs.readFileSync('tools/apply_brand_shell.py', 'utf8');
 
 for (let i = 1; i <= 6; i += 1) {
@@ -65,10 +66,13 @@ assert(js.includes('const lines=[') && js.includes('fieldPulseNarrative'), 'seve
 assert(html.includes('id="positionLifestyle"') && html.includes('id="relationshipLifestyle"') && html.includes('id="publicityB2B"'), 'infotainment and B2B explanation surfaces missing');
 assert(
   js.includes('function buildPrintReport()') &&
-  js.includes("total=reportMode==='basic'?8:29") &&
+  js.includes("total=reportMode==='basic'?18:29") &&
   js.includes("String(number).padStart(2,'0')} / ${total}"),
-  'BASIC 8-page and STANDARD 29-page report edition generators missing'
+  'BASIC 18-page and STANDARD 29-page report edition generators missing'
 );
+assert(fixedSample.asOfDate === '2026-11-03', 'fixed subscription sample date must not drift');
+assert(js.includes("query.get('sample')==='ent-20261103'") && js.includes("data/samples/ent-20261103.json"), 'fixed sample data routing missing');
+assert(js.includes('CONTENTS · BASIC EDITION') && js.includes('BASIC · SINGLE SUBJECT INTELLIGENCE'), 'BASIC must use the full report design system');
 assert(js.includes("footer=number===1?'':"), 'cover must omit the report footer');
 assert(js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 1/2') && js.includes('PUBLICITY BRIEF · EXTERNAL EDITION 2/2'), 'PUBLICITY must be split instead of shrinking body copy');
 assert(css.includes('font-size:11pt!important') && css.includes('line-height:1.74!important'), 'PDF body typography must remain 11pt with report line spacing');
@@ -98,7 +102,7 @@ assert(js.includes('window.html2canvas') && js.includes('window.jspdf?.jsPDF'), 
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261103-pdf-download6'), 'English briefing control cache must be current');
+assert(html.includes('briefing.js?v=20261103-fixed-samples1'), 'briefing sample cache must be current');
 assert(html.includes('html2canvas.min.js?v=1.4.1') && html.includes('jspdf.umd.min.js?v=2.5.2'), 'PDF download libraries must be pinned and served by BRIDGE');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');
