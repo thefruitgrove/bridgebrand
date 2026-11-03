@@ -33,13 +33,47 @@ document.querySelectorAll('[data-stage], [data-go-stage]').forEach((b)=>b.addEve
 document.querySelectorAll('[data-reading]').forEach((button)=>button.addEventListener('click',()=>{const easy=button.dataset.reading==='easy';document.body.classList.toggle('easy-reading',easy);document.querySelectorAll('[data-reading]').forEach((item)=>item.classList.toggle('active',item===button));}));
 document.querySelectorAll('[data-report-mode]').forEach((button)=>{button.classList.toggle('active',button.dataset.reportMode===reportMode);button.addEventListener('click',()=>{const next=new URL(location.href);if(button.dataset.reportMode==='basic')next.searchParams.set('briefing','basic');else next.searchParams.delete('briefing');location.href=next.toString();});});
 $('prevStage').addEventListener('click',()=>showStage(stage-1));$('nextStage').addEventListener('click',()=>showStage(stage+1));
-$('savePdf').addEventListener('click',()=>openReportOutput('pdf'));$('printReport').addEventListener('click',()=>openReportOutput('print'));
+$('savePdf').addEventListener('click',downloadReportPdf);$('printReport').addEventListener('click',()=>openReportOutput('print'));
 $('previewPdf').addEventListener('click',()=>setPdfPreview(true));$('exitPdfPreview').addEventListener('click',()=>setPdfPreview(false));
 let mobilePreviewTick=0;
 function updateMobilePreviewPage(){if(!document.body.classList.contains('pdf-preview-mode')||innerWidth>720)return;cancelAnimationFrame(mobilePreviewTick);mobilePreviewTick=requestAnimationFrame(()=>{const sheets=[...document.querySelectorAll('#printReportDocument .print-sheet')],anchor=innerHeight*.42;let current=sheets[0];for(const sheet of sheets){if(sheet.getBoundingClientRect().top<=anchor)current=sheet;else break;}const page=current?Number(current.dataset.page)||1:1;$('pdfMobilePageStatus').textContent=`${String(page).padStart(2,'0')} / ${String(sheets.length).padStart(2,'0')}`;});}
 addEventListener('scroll',updateMobilePreviewPage,{passive:true});addEventListener('resize',updateMobilePreviewPage,{passive:true});
 function setPdfPreview(on){if(on&&entities.length)buildPrintReport();document.body.classList.toggle('pdf-preview-mode',on);$('pdfMobileToolbar').hidden=!on;$('exitPdfPreview').hidden=false;$('trialConversion').hidden=on||stage!==6;document.querySelectorAll('[data-stage-panel]').forEach((p)=>{const active=Number(p.dataset.stagePanel)===stage;p.hidden=!active;p.classList.toggle('active',active);});window.scrollTo({top:on?0:Math.max(0,document.querySelector(`[data-stage-panel="${stage}"]`).offsetTop-150),behavior:'smooth'});if(on)setTimeout(updateMobilePreviewPage,120);}
-function openReportOutput(mode){if(!entities.length)return;buildPrintReport();const oldTitle=document.title,reportId=$('reportId').textContent,edition=reportMode==='basic'?'BASIC':'GENERAL';document.title=`${reportId}_${entities[0].name}_BRIDGE_${edition}_BRIEFING`;document.body.dataset.outputMode=mode;window.addEventListener('afterprint',()=>{document.title=oldTitle;delete document.body.dataset.outputMode;},{once:true});window.print();}
+function safePdfFilename(value){return String(value||'BRIDGE_REPORT').normalize('NFKC').replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,'_').replace(/_+/g,'_').replace(/^[-_.]+|[-_.]+$/g,'').slice(0,120)||'BRIDGE_REPORT';}
+function reportFilename(){const reportId=$('reportId').textContent,edition=reportMode==='basic'?'BASIC':'GENERAL',subject=entities[0]?.name||field;return safePdfFilename(`${reportId}_${subject}_BRIDGE_${edition}_BRIEFING`)+'.pdf';}
+function waitForFrame(frame){return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('PDF_RENDER_FRAME_TIMEOUT')),15000);frame.addEventListener('load',()=>{clearTimeout(timer);resolve(frame.contentDocument);},{once:true});});}
+async function createPdfRenderFrame(){
+ const report=$('printReportDocument'),frame=document.createElement('iframe'),styles=[...document.querySelectorAll('link[rel="stylesheet"]')].map((link)=>`<link rel="stylesheet" href="${link.href}">`).join('');
+ frame.setAttribute('aria-hidden','true');frame.tabIndex=-1;frame.style.cssText='position:fixed;left:-12000px;top:0;width:900px;height:1200px;border:0;pointer-events:none;opacity:1;z-index:-1';document.body.appendChild(frame);
+ const ready=waitForFrame(frame);
+ frame.srcdoc=`<!doctype html><html lang="${document.documentElement.lang||'ko'}"><head><meta charset="utf-8"><base href="${location.href}">${styles}<style>html,body{margin:0!important;background:#fff!important}.pdf-preview-mode .print-report{display:block!important;padding:0!important;background:#fff!important}.pdf-preview-mode .print-sheet{width:794px!important;min-width:794px!important;max-width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;box-shadow:none!important;overflow:hidden!important}.pdf-preview-mode .pdf-mobile-toolbar,.pdf-preview-mode .pdf-preview-exit{display:none!important}</style></head><body class="pdf-preview-mode pdf-export-mode">${report.outerHTML}</body></html>`;
+ const doc=await ready;if(doc.fonts?.ready)await doc.fonts.ready;await new Promise((resolve)=>requestAnimationFrame(()=>setTimeout(resolve,80)));return {frame,doc};
+}
+async function downloadReportPdf(){
+ if(!entities.length)return;
+ const button=$('savePdf'),original=button.textContent;button.disabled=true;button.setAttribute('aria-busy','true');button.textContent=IS_ENGLISH?'Creating PDF…':'PDF 생성 중…';
+ let renderFrame;
+ try{
+  if(!window.html2canvas||!window.jspdf?.jsPDF)throw new Error('PDF_ENGINE_UNAVAILABLE');
+  buildPrintReport();if(document.fonts?.ready)await document.fonts.ready;
+  renderFrame=await createPdfRenderFrame();
+  const sheets=[...renderFrame.doc.querySelectorAll('#printReportDocument .print-sheet')];if(!sheets.length)throw new Error('PDF_PAGE_NOT_FOUND');
+  const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true,putOnlyUsedFonts:true});
+  for(let index=0;index<sheets.length;index+=1){
+   const canvas=await window.html2canvas(sheets[index],{scale:1.55,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:900,windowHeight:1200,scrollX:0,scrollY:0});
+   if(index>0)pdf.addPage('a4','portrait');
+   pdf.addImage(canvas.toDataURL('image/jpeg',0.94),'JPEG',0,0,210,297,undefined,'FAST');
+   canvas.width=1;canvas.height=1;
+  }
+  const blob=pdf.output('blob'),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download=reportFilename();anchor.rel='noopener';document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+ }catch(error){
+  console.error('BRIDGE PDF download failed',error);
+  alert(IS_ENGLISH?'The PDF could not be created. Please try again after refreshing the page.':'PDF 파일을 생성하지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.');
+ }finally{
+  renderFrame?.frame?.remove();button.disabled=false;button.removeAttribute('aria-busy');button.textContent=original;
+ }
+}
+function openReportOutput(mode){if(!entities.length||mode!=='print')return;buildPrintReport();const oldTitle=document.title;document.title=reportFilename().replace(/\.pdf$/,'');document.body.dataset.outputMode='print';window.addEventListener('afterprint',()=>{document.title=oldTitle;delete document.body.dataset.outputMode;},{once:true});window.print();}
 function showStage(next){if(next<1||next>6)return;stage=next;document.body.classList.remove('pdf-preview-mode');$('exitPdfPreview').hidden=true;$('trialConversion').hidden=stage!==6;document.querySelectorAll('[data-stage-panel]').forEach((p)=>{const on=Number(p.dataset.stagePanel)===stage;p.hidden=!on;p.classList.toggle('active',on);});document.querySelectorAll('#journeyTrack [data-stage]').forEach((b)=>b.classList.toggle('active',Number(b.dataset.stage)===stage));$('progressText').textContent=`${String(stage).padStart(2,'0')} / 06 · ${document.querySelector(`#journeyTrack [data-stage="${stage}"] em`).textContent}`;$('progressBar').style.width=`${stage/6*100}%`;$('chapterRange').textContent=RANGE[stage-1];$('pagerLabel').textContent=`${String(stage).padStart(2,'0')} / 06`;$('prevStage').disabled=stage===1;$('nextStage').disabled=stage===6;const prevLabel=document.querySelector(`#journeyTrack [data-stage="${stage-1}"] span`)?.lastChild.textContent.trim();const nextLabel=document.querySelector(`#journeyTrack [data-stage="${stage+1}"] span`)?.lastChild.textContent.trim();$('prevStage').textContent=stage===1?(IS_ENGLISH?'← Previous':'← 이전 단계'):`← ${prevLabel}`;$('nextStage').textContent=stage===6?(IS_ENGLISH?'Report complete':'보고서 완료'):`${nextLabel} →`;requestAnimationFrame(()=>{const panel=document.querySelector(`[data-stage-panel="${stage}"]`);window.scrollTo({top:Math.max(0,panel.offsetTop-150),behavior:'smooth'});});}
 
 fetch('data/latest.json',{cache:'no-store'}).then((r)=>{if(!r.ok)throw new Error('공개 데이터를 불러오지 못했습니다.');return r.json();}).then((data)=>{
