@@ -55,20 +55,17 @@ async function downloadReportPdf(){
  const button=$('savePdf'),original=button.textContent;button.disabled=true;button.setAttribute('aria-busy','true');button.textContent=IS_ENGLISH?'Creating PDF…':'PDF 생성 중…';
  let renderFrame;
  try{
-  if(typeof window.html2pdf!=='function')throw new Error('PDF_ENGINE_UNAVAILABLE');
+  if(!window.html2canvas||!window.jspdf?.jsPDF)throw new Error('PDF_ENGINE_UNAVAILABLE');
   buildPrintReport();if(document.fonts?.ready)await document.fonts.ready;
   renderFrame=await createPdfRenderFrame();
   const sheets=[...renderFrame.doc.querySelectorAll('#printReportDocument .print-sheet')];if(!sheets.length)throw new Error('PDF_PAGE_NOT_FOUND');
-  const options={margin:0,image:{type:'jpeg',quality:.94},html2canvas:{scale:1.55,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:900,windowHeight:1200,scrollX:0,scrollY:0},jsPDF:{orientation:'portrait',unit:'mm',format:'a4',compress:true,putOnlyUsedFonts:true}};
-  let pdf;
+  const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true,putOnlyUsedFonts:true});
   for(let index=0;index<sheets.length;index+=1){
-   const worker=window.html2pdf().set(options).from(sheets[index]).toCanvas();await worker;
-   const canvas=await worker.get('canvas');
-   if(index===0){await worker.toPdf();pdf=await worker.get('pdf');}
-   else{pdf.addPage('a4','portrait');pdf.addImage(canvas.toDataURL('image/jpeg',.94),'JPEG',0,0,210,297,undefined,'FAST');}
+   const canvas=await window.html2canvas(sheets[index],{scale:1.55,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:900,windowHeight:1200,scrollX:0,scrollY:0});
+   if(index>0)pdf.addPage('a4','portrait');
+   pdf.addImage(canvas.toDataURL('image/jpeg',0.94),'JPEG',0,0,210,297,undefined,'FAST');
    canvas.width=1;canvas.height=1;
   }
-  if(!pdf)throw new Error('PDF_DOCUMENT_NOT_CREATED');
   const blob=pdf.output('blob'),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download=reportFilename();anchor.rel='noopener';document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
  }catch(error){
   console.error('BRIDGE PDF download failed',error);
