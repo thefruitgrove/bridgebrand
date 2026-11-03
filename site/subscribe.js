@@ -2,8 +2,8 @@
 'use strict';
 
 var BRIEFINGS={
- basic:{id:'basic',name:'BASIC 기본 브리핑',short:'BASIC',limit:1,pages:'15–20페이지',sample:'subscription-sample.html?edition=basic',description:'한 대상의 핵심지표·순위·여섯 축·활동량·근거 상태와 다음 관측 질문을 정리합니다.'},
- standard:{id:'standard',name:'STANDARD 일반 브리핑',short:'STANDARD',limit:3,pages:'21–33페이지',sample:'subscription-sample.html?edition=standard',description:'중심 대상과 비교 대상 둘의 관계 구조와 근거 차이를 분석하고 PUBLICITY까지 제공합니다.'},
+ basic:{id:'basic',name:'BASIC 기본 브리핑',short:'BASIC',limit:1,pages:'15–20페이지',sample:'briefing.html?field=ENT&pick=STAR-091&compareA=STAR-056&compareB=STAR-100&language=한국어&briefing=basic&sample=ent-20261103',description:'한 대상의 핵심지표·순위·여섯 축·활동량·근거 상태와 다음 관측 질문을 정리합니다.'},
+ standard:{id:'standard',name:'STANDARD 일반 브리핑',short:'STANDARD',limit:3,pages:'21–33페이지',sample:'briefing.html?field=ENT&pick=STAR-091&compareA=STAR-056&compareB=STAR-100&language=한국어&sample=ent-20261103',description:'중심 대상과 비교 대상 둘의 관계 구조와 근거 차이를 분석하고 PUBLICITY까지 제공합니다.'},
  special:{id:'special',name:'SPECIAL 스페셜 브리핑',short:'SPECIAL',limit:3,pages:'최소 35페이지',sample:'subscription-sample.html?edition=special',description:'STANDARD 전체에 3일 흐름, 이전 2주 PUBLICITY, 대안 해석과 전략 선택지를 확장합니다.'}
 };
 var FIELD_LABEL={ENT:'공인·아티스트',CPR:'기업·브랜드',UNI:'대학',GOV:'정부·공공기관'};
