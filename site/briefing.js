@@ -44,9 +44,10 @@ function reportFilename(){const reportId=$('reportId').textContent,edition=repor
 function waitForFrame(frame){return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('PDF_RENDER_FRAME_TIMEOUT')),15000);frame.addEventListener('load',()=>{clearTimeout(timer);resolve(frame.contentDocument);},{once:true});});}
 async function createPdfRenderFrame(){
  const report=$('printReportDocument'),frame=document.createElement('iframe'),styles=[...document.querySelectorAll('link[rel="stylesheet"]')].map((link)=>`<link rel="stylesheet" href="${link.href}">`).join('');
- frame.setAttribute('aria-hidden','true');frame.tabIndex=-1;frame.style.cssText='position:fixed;left:-12000px;top:0;width:900px;height:1200px;border:0;pointer-events:none;opacity:1;z-index:-1';document.body.appendChild(frame);
+ frame.setAttribute('aria-hidden','true');frame.tabIndex=-1;frame.style.cssText='position:fixed;left:-12000px;top:0;width:900px;height:1200px;border:0;pointer-events:none;opacity:1;z-index:-1';
  const ready=waitForFrame(frame);
  frame.srcdoc=`<!doctype html><html lang="${document.documentElement.lang||'ko'}"><head><meta charset="utf-8"><base href="${location.href}">${styles}<style>html,body{margin:0!important;background:#fff!important}.pdf-preview-mode .print-report{display:block!important;padding:0!important;background:#fff!important}.pdf-preview-mode .print-sheet{width:794px!important;min-width:794px!important;max-width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;box-shadow:none!important;overflow:hidden!important}.pdf-preview-mode .pdf-mobile-toolbar,.pdf-preview-mode .pdf-preview-exit{display:none!important}</style></head><body class="pdf-preview-mode pdf-export-mode">${report.outerHTML}</body></html>`;
+ document.body.appendChild(frame);
  const doc=await ready;if(doc.fonts?.ready)await doc.fonts.ready;await new Promise((resolve)=>requestAnimationFrame(()=>setTimeout(resolve,80)));return {frame,doc};
 }
 async function downloadReportPdf(){
