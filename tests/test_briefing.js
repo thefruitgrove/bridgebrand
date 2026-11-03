@@ -98,7 +98,7 @@ assert(js.includes("typeof window.html2pdf!=='function'") && js.includes("worker
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261103-pdf-download4'), 'English briefing control cache must be current');
+assert(html.includes('briefing.js?v=20261103-pdf-download5'), 'English briefing control cache must be current');
 assert(html.includes('report-engine.js?v=0.10.1'), 'PDF download library must be pinned and served by BRIDGE');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');
