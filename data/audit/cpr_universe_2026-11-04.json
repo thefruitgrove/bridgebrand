@@ -9,12 +9,12 @@
     "score_computed": 100,
     "publication_eligible": 74,
     "t100_generated": 74,
-    "t100_published": 0
+    "t100_published": 74
   },
   "largest_loss": {
-    "from": "t100_generated",
-    "to": "t100_published",
-    "count": 74
+    "from": "score_computed",
+    "to": "publication_eligible",
+    "count": 26
   },
   "eligibility_exclusion_reasons": {
     "confidence_below_gate": 26,
@@ -35,7 +35,7 @@
     "E": 5
   },
   "t100_coverage_goal": 100,
-  "t100_coverage_gap": 100,
+  "t100_coverage_gap": 26,
   "recovery_priority": [
     "R/D/E source-family coverage",
     "confidence below gate",
