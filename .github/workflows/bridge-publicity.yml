@@ -46,7 +46,9 @@ jobs:
       - name: Editorial contract tests
         run: python -m unittest discover -s tests -p test_publicity.py -v
       - name: Preflight anonymous PUBLICITY access
-        run: python tools/verify_publicity.py
+        # A recovery run must be allowed to create a missing due edition first.
+        # The strict due-edition assertion remains in the final anonymous check.
+        run: python tools/verify_publicity.py --preflight
       - name: Refresh the public archive from immutable published rows
         if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
         run: python -m bridge_pipeline.run export ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
