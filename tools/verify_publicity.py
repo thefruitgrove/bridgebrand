@@ -1,10 +1,17 @@
 """Read PUBLICITY as an anonymous visitor, never with service credentials."""
+import argparse
 import json
 import re
 import subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
+ parser=argparse.ArgumentParser()
+ parser.add_argument(
+  '--preflight',action='store_true',
+  help='Check anonymous access without requiring the edition this run is about to recover.',
+ )
+ args=parser.parse_args()
  config=json.loads(re.search(r'=(.*);', (ROOT/'site/publicity-config.js').read_text()).group(1))
  headers=['-H','apikey: '+config['key']]
  if config['key'].startswith('eyJ'):headers+=['-H','Authorization: Bearer '+config['key']]
@@ -23,7 +30,7 @@ def main():
  kst=ZoneInfo('Asia/Seoul')
  now_kst=now.astimezone(kst)
  due=set()
- if now_kst.time()>=dt.time(12,0):
+ if not args.preflight and now_kst.time()>=dt.time(12,0):
   if now_kst.weekday()==0:
    iso=(now_kst.date()-dt.timedelta(days=1)).isocalendar()
    due.add(f'{iso.year}-w{iso.week:02d}-overall-all')
@@ -32,5 +39,5 @@ def main():
    slot='wed' if now_kst.weekday()==2 else 'fri'
    due={f'{iso.year}-w{iso.week:02d}-{slot}-{domain}' for domain in ('cpr','gov','uni','ent')}
  assert due<=visible_ids,'Due PUBLICITY edition is not anonymously visible after 12:00 KST: '+','.join(sorted(due-visible_ids))
- print(json.dumps({'ok':True,'visible_articles':len(rows),'launch_articles':len(launch_ids),'due_articles':len(due),'examples_visible':False,'future_articles_visible':False}))
+ print(json.dumps({'ok':True,'mode':'preflight' if args.preflight else 'final','visible_articles':len(rows),'launch_articles':len(launch_ids),'due_articles':len(due),'examples_visible':False,'future_articles_visible':False}))
 if __name__=='__main__':main()
