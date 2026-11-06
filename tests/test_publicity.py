@@ -55,6 +55,14 @@ class PublicityTests(unittest.TestCase):
  def test_reference_only_profile_cannot_be_interpreted_as_public_score(self):
   h=self.history();h['rankings'][0]['axis_status']={a:'reference' for a in 'BRIDGE'}
   with self.assertRaisesRegex(ValueError,'Insufficient measured axes'):articles_for(h,dt.date(2026,10,16))
+ def test_current_star_source_rows_normalize_to_public_ent(self):
+  h=self.history('2026-11-06')
+  for row in h['rankings']:
+   if row['domain']=='ENT':row['domain']='STAR'
+  articles,snapshot=articles_for(h,dt.date(2026,11,6))
+  self.assertEqual({x['domain'] for x in articles},set(DOMAINS))
+  self.assertEqual({r['domain'] for r in snapshot['rows']},set(DOMAINS))
+  self.assertNotIn('STAR',json.dumps(snapshot,ensure_ascii=False))
  def test_ent_sample_and_news_attribution(self):
   a,s=articles_for(self.history('2026-10-14'),dt.date(2026,10,14),True,'ENT')
   self.assertEqual(a[0]['domain'],'ENT');self.assertEqual({r['domain'] for r in s['rows']},{'ENT'})
