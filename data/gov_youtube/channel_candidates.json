@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-11-05",
+  "as_of_date": "2026-11-06",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C51": {
-      "channel_id": "UC9KubMS1eabZzmUTCzcvBcg",
-      "title": "경주시 Gyeongjucity ",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C52": {
       "channel_id": "UCbdBIZiwlOl8lkvkrEaHGNQ",
@@ -30,6 +25,11 @@
     "GOV-C55": {
       "channel_id": "UCv-B3slVOIL7mSQajbKACYw",
       "title": "양산시 공식 유튜브",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C56": {
+      "channel_id": "UC4ykkRchQ1i2SsPyOq6nt5w",
+      "title": "하모진주_진주시공식유튜브",
       "reason": "awaiting_human_verification"
     }
   }
