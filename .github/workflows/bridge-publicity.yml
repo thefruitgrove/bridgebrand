@@ -30,7 +30,7 @@ concurrency:
 jobs:
   validate-and-prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 8
     env:
       TZ: Asia/Seoul
       SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
@@ -49,9 +49,11 @@ jobs:
         # A recovery run must be allowed to create a missing due edition first.
         # The strict due-edition assertion remains in the final anonymous check.
         run: python tools/verify_publicity.py --preflight
-      - name: Refresh the public archive from immutable published rows
-        if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
-        run: python -m bridge_pipeline.run export ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
+      # Do not rebuild the full September-to-date archive here. The daily pipeline
+      # owns and commits site/data/history.json. PUBLICITY is a lightweight consumer:
+      # scheduled recovery runs simply retry after the daily data commit lands.
+      # Re-exporting tens of thousands of axis rows here previously exhausted the
+      # editorial job's time budget before article staging.
       - name: Prepare the due edition atomically
         if: ${{ github.event_name != 'push' || contains(github.event.head_commit.message, '[publicity-recovery]') }}
         run: python -m publicity.generate ${PUBLICATION_DATE:+--date "$PUBLICATION_DATE"}
