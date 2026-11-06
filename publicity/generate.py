@@ -19,6 +19,7 @@ from presentation.editorial_standard import audit_public_copy
 ROOT=Path(__file__).resolve().parents[1]
 KST=ZoneInfo('Asia/Seoul')
 DOMAINS=('CPR','GOV','UNI','ENT')
+SOURCE_DOMAIN_ALIASES={'STAR':'ENT'}
 AXES={'B':'도달','R':'반응','I':'정체성','D':'경험','G':'행동유발','E':'책임·지속'}
 VERSION='publicity-rules-4.0-editorial'
 EDITORIAL_STYLE_EFFECTIVE=dt.date(2026,10,21)
@@ -56,10 +57,24 @@ def edition(publication_date):
     y,w,_=end.isocalendar()
     return {'week':f'{y}-W{w:02d}','slot':'OVERALL' if overall else 'WED' if publication_date.weekday()==2 else 'FRI','from':start,'through':end,'calendar_from':start,'calendar_through':calendar_end,'scheduled_at':dt.datetime.combine(publication_date,dt.time(12),KST)}
 
+def public_domain(value):
+    """Normalize internal engine domain names to the stable public editorial contract."""
+    return SOURCE_DOMAIN_ALIASES.get(value,value)
+
 def freeze(history, spec):
     requested_through=spec['through'].isoformat();start=spec['from'].isoformat()
-    candidates=[r for r in history.get('rankings',[]) if start<=r.get('as_of_date','')<=requested_through and r.get('domain') in DOMAINS and r.get('ranking_type')=='T100' and r.get('history_type')!='historical_weekly_backfill' and 'v5' in r.get('methodology_version','')]
-    rows=[{k:r.get(k) for k in PUBLIC_FIELDS} for r in candidates]
+    rows=[]
+    for source in history.get('rankings',[]):
+        domain=public_domain(source.get('domain'))
+        if not (start<=source.get('as_of_date','')<=requested_through
+                and domain in DOMAINS
+                and source.get('ranking_type')=='T100'
+                and source.get('history_type')!='historical_weekly_backfill'
+                and 'v5' in source.get('methodology_version','')):
+            continue
+        row={k:source.get(k) for k in PUBLIC_FIELDS}
+        row['domain']=domain
+        rows.append(row)
     rows.sort(key=lambda r:(r['as_of_date'],r['domain'],r['external_id']))
     if not rows:raise ValueError('No verified v5 public observation data in issue period')
     versions={r['methodology_version'] for r in rows}
