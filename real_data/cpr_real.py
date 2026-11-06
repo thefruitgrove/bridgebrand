@@ -123,7 +123,10 @@ CPR_REAL = [
 # preserves every former external_id so historical observations can never be
 # reassigned to a different company.
 CPR_RETIRED_NAMES = {
-    "휴림로봇", "현대무벡스", "쎄트렉아이", "LS머트리얼즈", "한화엔진",
+    # 셀트리온헬스케어는 2023-12-28 셀트리온에 흡수합병되어 소멸.
+    # BB50 정원은 기존 예비군의 원래 선발순서가 가장 앞선 휴림로봇을
+    # 복귀시켜 유지한다. 외부 ID는 재사용하지 않아 이력 귀속을 보존한다.
+    "셀트리온헬스케어", "현대무벡스", "쎄트렉아이", "LS머트리얼즈", "한화엔진",
     "일진전기", "제룡전기", "LS에코에너지", "덕산테코피아", "덕산네오룩스",
     "피에스케이", "케이씨텍", "SK이터닉스", "명신산업", "성우하이텍",
 }
