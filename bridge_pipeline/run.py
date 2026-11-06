@@ -915,7 +915,11 @@ def score_day(db: SupabaseRest, as_of: dt.date) -> None:
                             **({"ent_relationship_enrichment": __import__("bridge_pipeline.ent_reputation_v6", fromlist=["diagnostics"]).diagnostics(accepted_by_entity.get(entity["id"], []))}
                                if entity["domain"] == "STAR" else {})}
         })
-        if eligible:
+        # T100 is the selected evaluation population, not a confidence-gated subset.
+        # CPR therefore keeps score-bearing shadow rows in the ranking and exposes
+        # their lower trust grade instead of silently shrinking a 100-target panel.
+        # A truly unscorable row (score is None) remains withheld/N-R.
+        if eligible or (entity["domain"] == "CPR" and score is not None):
             candidates.append({**entity, "score": score, "confidence_score": confidence_score, "trust_grade": grade})
     db.upsert("bridge_scores", score_rows, "entity_id,as_of_date,methodology_version")
     compute_index_metrics(db, as_of, cfg, entities, score_rows, accepted_by_entity)
@@ -973,11 +977,10 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
         f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
         f"&domain=in.({','.join(domains)})&ranking_type=in.({','.join(ranking_types)})"
     )
-    eligible = db.select("bridge_scores", f"select=entity_id&as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}&publish_status=in.(eligible,published)")
-    if not eligible:
-        raise RuntimeError("daily beta publication blocked: no current eligible scores")
-    entity_ids = ",".join(sorted({row["entity_id"] for row in eligible}))
-    ranking_query += f"&entity_id=in.({entity_ids})"
+    # Ranking generation has already enforced score availability.  Do not reapply
+    # the score-level eligibility gate here: doing so collapses CPR T100 to the
+    # 70–75 high-confidence rows and defeats the fixed 100-target evaluation panel.
+    # Low-confidence rows remain transparent through trust_grade / shadow status.
     candidates = db.select("bridge_rankings", f"select=id&{ranking_query}&limit=1")
     if not candidates:
         raise RuntimeError("daily beta publication blocked: no eligible CPR/ENT T100 rankings")
