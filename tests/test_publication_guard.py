@@ -5,7 +5,8 @@ import unittest
 from bridge_pipeline.run import publish_daily_beta, score_day
 
 
-# Regression contract: fixed T100 publication scope must not regress to score-level eligibility filtering.\nclass PublicationGuardTest(unittest.TestCase):
+# Regression contract: fixed T100 publication scope must not regress to score-level eligibility filtering.
+class PublicationGuardTest(unittest.TestCase):
     def test_daily_beta_publishes_only_current_configured_ranking_scope(self):
         class DB:
             def __init__(self):
