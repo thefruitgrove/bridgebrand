@@ -1,0 +1,49 @@
+name: One-time BRIDGE export recovery 2026-11-10
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/export-recovery-20261110.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  export-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+      AS_OF_DATE: '2026-11-10'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Export already verified published snapshot
+        run: python -m bridge_pipeline.run export --date "$AS_OF_DATE"
+      - name: Recheck pipeline health
+        run: python -m bridge_pipeline.run healthcheck
+      - name: Rebuild static site
+        run: |
+          python build.py
+          python tools/apply_brand_shell.py
+          python build_spa.py
+          python tools/apply_brand_shell.py
+      - name: Commit verified public export
+        run: |
+          git config user.name "bridge-bot"
+          git config user.email "bot@bridgebrand.co.kr"
+          git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/audit data/daily data/weekly data/latest/uni_latest.json site/
+          git diff --cached --quiet && exit 0
+          git commit -m "data: recover BRIDGE export 2026-11-10 [bridge-data]"
+          git push origin HEAD:main
+      - name: Trigger Cloudflare deployment hook
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 3 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
