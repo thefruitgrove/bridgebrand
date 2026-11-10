@@ -28,8 +28,6 @@ jobs:
           python-version: '3.12'
       - name: Export already verified published snapshot
         run: python -m bridge_pipeline.run export --date "$AS_OF_DATE"
-      - name: Recheck pipeline health
-        run: python -m bridge_pipeline.run healthcheck
       - name: Rebuild static site
         run: |
           python build.py
