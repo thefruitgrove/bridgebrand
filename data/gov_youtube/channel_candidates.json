@@ -1,5 +1,5 @@
 {
-  "as_of_date": "2026-11-06",
+  "as_of_date": "2026-11-11",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
@@ -7,29 +7,29 @@
     "GOV-C03": {
       "reason": "ownership_evidence_required"
     },
-    "GOV-C52": {
-      "channel_id": "UCbdBIZiwlOl8lkvkrEaHGNQ",
-      "title": "마카다안동(안동시청_Andongcity )",
+    "GOV-C57": {
+      "channel_id": "UCws2MnAreu8nuHL69BUZt5w",
+      "title": "거제시 공식 유튜브",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C53": {
-      "channel_id": "UC3XKtz0LvxRsP-iFcDx8cMg",
-      "title": "추천창원 (창원시공식유튜브)",
+    "GOV-C58": {
+      "channel_id": "UCWqpEO_K7hUAPV_b2OKs51A",
+      "title": "원주시WonjuCity",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C54": {
-      "channel_id": "UC_lnzPZZg6Cu7e1TEu4dhYw",
-      "title": "김해시TV",
+    "GOV-C59": {
+      "channel_id": "UCCjjxZxmneCU5t-Ojw8L_0w",
+      "title": "춘천시",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C55": {
-      "channel_id": "UCv-B3slVOIL7mSQajbKACYw",
-      "title": "양산시 공식 유튜브",
+    "GOV-C60": {
+      "channel_id": "UC63kXgXcXC3WJ8aDciOvczQ",
+      "title": "강릉야구TV (강원야구TV)",
       "reason": "awaiting_human_verification"
     },
-    "GOV-C56": {
-      "channel_id": "UC4ykkRchQ1i2SsPyOq6nt5w",
-      "title": "하모진주_진주시공식유튜브",
+    "GOV-M02": {
+      "channel_id": "UCwRFj9gC3meixU8fqKJdgxA",
+      "title": "외교부 Ministry of Foreign Affairs, Korea",
       "reason": "awaiting_human_verification"
     }
   }
