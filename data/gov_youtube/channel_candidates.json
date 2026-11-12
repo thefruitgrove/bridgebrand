@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-11-11",
+  "as_of_date": "2026-11-12",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C57": {
-      "channel_id": "UCws2MnAreu8nuHL69BUZt5w",
-      "title": "거제시 공식 유튜브",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C58": {
       "channel_id": "UCWqpEO_K7hUAPV_b2OKs51A",
@@ -23,8 +18,13 @@
       "reason": "awaiting_human_verification"
     },
     "GOV-C60": {
-      "channel_id": "UC63kXgXcXC3WJ8aDciOvczQ",
-      "title": "강릉야구TV (강원야구TV)",
+      "channel_id": "UChTeiHYZmNAlqWgcYvhPzBw",
+      "title": "강릉시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-M01": {
+      "channel_id": "UCnrPF6de3KuHZy3c2ZkqcMA",
+      "title": "재정경제부",
       "reason": "awaiting_human_verification"
     },
     "GOV-M02": {

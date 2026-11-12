@@ -2,13 +2,13 @@
   "version": "2026.10-v5-official-links-1",
   "channels": {
     "GOV-C01": {
-      "channel_id": "UCZUPZW5idAxYp-Asj__lVAA",
+      "username": "seoullive",
       "status": "verified",
       "evidence_urls": [
         "https://www.seoul.go.kr"
       ],
-      "linked_channel_url": "https://www.youtube.com/channel/UCZUPZW5idAxYp-Asj__lVAA",
-      "verified_at": "2026-11-11T09:44:50.324615+09:00",
+      "linked_channel_url": "https://www.youtube.com/user/seoullive",
+      "verified_at": "2026-11-12T10:59:08.121769+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C02": {
@@ -26,7 +26,7 @@
         "https://www.incheon.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/channel/UC960xfXepXPsJ8HHePGvAKw",
-      "verified_at": "2026-11-11T09:44:53.891876+09:00",
+      "verified_at": "2026-11-12T10:59:10.999191+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C05": {
@@ -36,7 +36,7 @@
         "https://www.gwangju.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/channel/UCpCtv8fw6egexjhOJpN1IZw",
-      "verified_at": "2026-11-11T09:44:51.702291+09:00",
+      "verified_at": "2026-11-12T10:59:08.567582+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C06": {
@@ -46,7 +46,7 @@
         "https://www.daejeon.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/channel/UCzIgmDjE0lFDu2IhEF_ewOA",
-      "verified_at": "2026-11-11T09:44:53.257474+09:00",
+      "verified_at": "2026-11-12T10:59:09.294382+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C07": {
@@ -56,7 +56,7 @@
         "https://www.ulsan.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/channel/UCTHZPqsEmZLP5rrCLXJFwNg",
-      "verified_at": "2026-11-06T10:52:43.755394+09:00",
+      "verified_at": "2026-11-12T10:59:11.653108+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C09": {
@@ -76,7 +76,7 @@
         "https://www.jeju.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/@jejudo_official",
-      "verified_at": "2026-11-11T09:45:02.671133+09:00",
+      "verified_at": "2026-11-12T10:59:16.039965+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-M24": {
@@ -86,7 +86,7 @@
         "https://www.acrc.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/user/acrc0229",
-      "verified_at": "2026-11-11T09:45:05.756292+09:00",
+      "verified_at": "2026-11-12T10:59:17.278695+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C13": {
@@ -96,7 +96,7 @@
         "https://www.jeonbuk.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/@jeonbukstar",
-      "verified_at": "2026-11-11T09:44:56.044453+09:00",
+      "verified_at": "2026-11-12T10:59:13.062689+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C14": {
@@ -106,7 +106,7 @@
         "https://www.jeonnam.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/user/greenjeonnam1896",
-      "verified_at": "2026-11-06T10:52:47.093773+09:00",
+      "verified_at": "2026-11-12T10:59:15.304084+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     },
     "GOV-C15": {
@@ -116,7 +116,7 @@
         "https://www.gb.go.kr"
       ],
       "linked_channel_url": "https://www.youtube.com/channel/UClUMxNBoKujXtXtzdqhq9sg",
-      "verified_at": "2026-11-11T09:45:00.219836+09:00",
+      "verified_at": "2026-11-12T10:59:14.076332+09:00",
       "verification_method": "institutional_homepage_outbound_link"
     }
   }
