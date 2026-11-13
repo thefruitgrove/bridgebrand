@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-12T10:59:28.779340+09:00",
+  "checked_at": "2026-11-13T10:10:34.920411+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -20,11 +20,6 @@
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
     },
-    "GOV-C09": {
-      "status": "review",
-      "homepage": "https://www.gg.go.kr",
-      "reason": "TimeoutError"
-    },
     "GOV-C10": {
       "status": "review",
       "homepage": "https://www.provin.gangwon.kr",
@@ -43,6 +38,11 @@
         "https://www.youtube.com/@topcnitv/streams",
         "https://www.youtube.com/user/topcnitv/"
       ]
+    },
+    "GOV-C14": {
+      "status": "review",
+      "homepage": "https://www.jeonnam.go.kr",
+      "reason": "URLError"
     },
     "GOV-C16": {
       "status": "review",
