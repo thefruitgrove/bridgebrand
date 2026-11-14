@@ -76,6 +76,41 @@ EDITORIAL_WORDMARK = (
     '<small>BRAND</small></a>'
 )
 
+# New 2.0 page architecture. Keep all existing data-target IDs unchanged.
+BRIDGE_JOURNEY = '''<section class="bridge-journey" data-bridge-journey="v2" aria-labelledby="bridgeJourneyTitle">
+  <div class="bridge-journey-header"><span>SERVICE JOURNEY / DISCOVER · UNDERSTAND · APPLY</span></div>
+  <h2 id="bridgeJourneyTitle">관심에서 분석으로, 분석에서 활용으로.</h2>
+  <ol>
+    <li><b>01</b><strong>관심 대상 발견</strong><p>홈페이지에서 궁금한 기업·기관·대학·인물을 검색합니다.</p></li>
+    <li><b>02</b><strong>비교 대상 직접 선택</strong><p>같은 분야의 대상 두 곳을 더해 분석 대상을 구성합니다.</p></li>
+    <li><b>03</b><strong>데이터와 근거 확인</strong><p>순위·6축·신뢰등급과 해석 범위를 구분해 읽습니다.</p></li>
+    <li><b>04</b><strong>6단계 전문 브리핑</strong><p>관계 구조·장기 흐름·PUBLICITY를 거쳐 PDF로 보관합니다.</p></li>
+    <li><b>05</b><strong>전문 서비스 검토</strong><p>단건 분석이나 정기 관측 구성을 선택해 신청을 검토합니다.</p></li>
+  </ol>
+  <p class="bridge-journey-note">비교 대상은 현재 이용자가 직접 선택합니다. 유료 신청·계정·결제의 실제 개통 여부는 별도로 확인해야 합니다.</p>
+</section>'''
+
+PULSE_FEATURE_OLD = (
+    '<section id="fp-current"><span class="subject-label">CUMULATIVE PERFORMANCE · CURRENT VIEW</span>'
+    '<h3 id="fieldPulseTitle">영역별 장기 평판 성과</h3>'
+    '<p class="lead-copy compact" id="fieldPulseLead">공개 데이터를 불러오고 있습니다.</p></section>'
+)
+PULSE_FEATURE_NEW = (
+    '<section id="fp-current" class="bridge-pulse-feature" aria-labelledby="fieldPulseTitle">'
+    '<div class="bridge-pulse-copy">'
+    '<span class="subject-label">CUMULATIVE PERFORMANCE · CURRENT VIEW</span>'
+    '<h3 id="fieldPulseTitle">영역별 장기 평판 성과</h3>'
+    '<p class="lead-copy compact" id="fieldPulseLead">공개 데이터를 불러오고 있습니다.</p>'
+    '<p class="bridge-pulse-note">AN EDITORIAL PERSPECTIVE · NOT EVALUATION EVIDENCE</p>'
+    '</div>'
+    '<figure class="bridge-pulse-photo">'
+    '<img id="bridgePulsePhoto" src="img/hero_uni.jpg" '
+    'alt="장기 평판 성과를 표현한 분야별 편집 이미지" loading="lazy">'
+    '<figcaption><span id="bridgePulsePhotoCaption">EDITORIAL FIELD STUDY / BRIDGE</span>'
+    '<b>The long view of reputation.</b></figcaption>'
+    '</figure></section>'
+)
+
 
 def apply(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
@@ -170,6 +205,34 @@ def apply(path: Path) -> bool:
                 count=1,
             )
         updated = updated.replace(WORDMARK, EDITORIAL_WORDMARK, 1)
+    # Keep reading-room layout and service journey across the daily build.
+    if path.name in {"briefing.html", "intelligence.html"}:
+        updated = re.sub(
+            r'(bridge-v2-reading-room[.]css[?]v=)[^"]+',
+            r'\\g<1>20261114-01',
+            updated,
+        )
+        if 'bridge-v2-reading-room.css?' not in updated:
+            updated = updated.replace(
+                '</head>',
+                '<link rel="stylesheet" href="bridge-v2-reading-room.css?v=20261114-01">\\n</head>',
+                1,
+            )
+    if path.name == "briefing.html":
+        if PULSE_FEATURE_OLD in updated:
+            updated = updated.replace(PULSE_FEATURE_OLD, PULSE_FEATURE_NEW, 1)
+        if 'bridge-v2-reading-room.js?' not in updated:
+            updated = updated.replace(
+                '</body>',
+                '<script src="bridge-v2-reading-room.js?v=20261114-01" defer></script>\\n</body>',
+                1,
+            )
+    if path.name == "intelligence.html" and 'data-bridge-journey="v2"' not in updated:
+        updated = updated.replace(
+            '<section class="field-engine-section" id="fieldEngines">',
+            BRIDGE_JOURNEY + '\\n' + '<section class="field-engine-section" id="fieldEngines">',
+            1,
+        )
     # Retire the first V2 color-block experiment rather than stacking
     # incompatible styles on the new editorial reading system.
     if path.name == 'intelligence.html':
