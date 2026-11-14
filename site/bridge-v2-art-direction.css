@@ -1,0 +1,372 @@
+/* BRIDGEBRAND 2.0 — Edition III: photo-essay art direction and contrast repair.
+ * New visual architecture, not a new data engine. Loaded AFTER the existing CSS.
+ * Every warm-paper surface uses ink-dark text. Light text is reserved for actual
+ * photo overlays, explicit blue actions and dark-backdrop dialogs only.
+ */
+:root{--bv-paper:#FFFDF7;--bv-ink:#17191D;--bv-blue:#2458F5;--bv-yellow:#FFD633;--bv-stroke:#D0D4DC}
+body.bridge-editorial{background:var(--bv-paper);color:var(--bv-ink)}
+.bridge-editorial .nav,.bridge-editorial .nav.on-dark{background:var(--bv-paper);box-shadow:none}
+.bridge-editorial .nav-item>a,.bridge-editorial .nav.on-dark .nav-item>a{font-family:'Noto Sans KR',sans-serif;letter-spacing:.045em}
+.bridge-editorial .nav-inner{max-width:1480px}
+.bridge-editorial footer{background:var(--bv-paper);color:var(--bv-ink)}
+.bridge-editorial footer :is(p,span,small,strong,h3){color:var(--bv-ink)}
+.bridge-editorial footer a{color:var(--bv-blue)}
+/* 1 / Cover layouts — replace old image-as-dark-background banners with
+   cream editorial typography alongside a deliberate, uncropped photo panel. */
+.bridge-editorial .list-hero-photo{
+  --bv-cover:url('img/hero_home.jpg');
+  width:calc(100% - 72px);max-width:1480px;margin:32px auto 0;
+  min-height:560px;display:flex;position:relative;align-items:center;
+  background:var(--bv-paper)!important;border:1px solid var(--bv-stroke);
+  color:var(--bv-ink)!important;overflow:hidden
+}
+.bridge-editorial .hero-cpr{--bv-cover:url('img/hero_cpr.jpg')}
+.bridge-editorial .hero-gov{--bv-cover:url('img/hero_gov.jpg')}
+.bridge-editorial .hero-uni{--bv-cover:url('img/hero_uni.jpg')}
+.bridge-editorial .hero-star{--bv-cover:url('img/hero_star.jpg')}
+.bridge-editorial .hero-this-week{--bv-cover:url('img/hero_this_week.jpg')}
+.bridge-editorial .hero-methodology{--bv-cover:url('img/hero_methodology.jpg')}
+.bridge-editorial .hero-trust{--bv-cover:url('img/hero_trust.jpg')}
+.bridge-editorial .hero-about{--bv-cover:url('img/hero_about.jpg')}
+.bridge-editorial .hero-data{--bv-cover:url('img/hero_data.jpg')}
+.bridge-editorial .list-hero-photo:before{display:none!important}
+.bridge-editorial .list-hero-photo:after{
+  content:"";position:absolute;display:block;inset:0 0 0 51%;z-index:0;
+  background-image:var(--bv-cover);background-position:center;
+  background-size:cover;filter:saturate(.73) contrast(1.04);
+  pointer-events:none
+}
+.bridge-editorial .list-hero-photo .wrap{
+  width:51%;max-width:none;margin:0;align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:75px clamp(30px,5.2vw,80px) 55px;position:relative;z-index:2
+}
+.bridge-editorial .list-hero-photo h1,
+.bridge-editorial .list-hero-photo h1.public-hero-title{
+  color:var(--bv-ink)!important;text-shadow:none!important;
+  font-family:'Noto Serif KR',Georgia,serif;font-size:clamp(32px,3.25vw,52px);
+  line-height:1.48;letter-spacing:-.07em;font-weight:600;
+  text-wrap:pretty;max-width:100%;word-break:keep-all;margin:16px 0 22px
+}
+.bridge-editorial .list-hero-photo .list-note,
+.bridge-editorial .list-hero-photo .tw-sub,
+.bridge-editorial .list-hero-photo .tw-latest,
+.bridge-editorial .list-hero-photo .about-kicker{
+  color:#475360!important;text-shadow:none!important;
+  font-size:13px;line-height:1.8;max-width:480px;margin:0
+}
+.bridge-editorial .list-hero-photo .tw-sub{font-size:15px;font-family:'Noto Serif KR',serif}
+.bridge-editorial .list-hero-photo .tw-latest{margin-top:20px;font-size:11px}
+.bridge-editorial .list-hero-photo .about-kicker{color:var(--bv-blue)!important;font-weight:800;letter-spacing:.1em}
+.bridge-editorial .bridge-cover-strap{
+  position:absolute;z-index:3;left:clamp(30px,5.2vw,80px);
+  top:22px;width:calc(51% - clamp(30px,5.2vw,80px)*2);
+  display:flex;justify-content:space-between;gap:10px;
+  border-top:1px solid #17191D;padding-top:12px;
+  color:#17191D;font-size:9px;font-weight:800;letter-spacing:.1em
+}
+.bridge-editorial .bridge-cover-strap span{font-weight:500;color:#647081}
+/* 2 / Ranking desk — turn the old stacked dashboard into a paper data journal.
+   Preserve all rows, filters, list controls and observed signals. */
+.bridge-editorial .pilot-notice{
+  max-width:1200px;margin:30px 0 50px;padding:0;border:0;background:transparent;
+  color:var(--bv-ink)
+}
+.bridge-editorial .model-title{
+  border-top:1px solid #17191D;padding-top:21px;margin-bottom:18px;
+  font:600 clamp(20px,2.6vw,31px)/1.4 'Noto Serif KR',Georgia,serif;
+  color:var(--bv-ink)
+}
+.bridge-editorial .model-explain{
+  background:transparent;border:0;padding:0;margin:0 0 18px;
+  color:#34404D;border-radius:0;font-size:14px;line-height:2
+}
+.bridge-editorial .model-source,
+.bridge-editorial .model-source i{color:#5C6572!important;font-size:11px;line-height:1.9}
+.bridge-editorial .period-selector{
+  border:0;border-top:1px solid #17191D;border-bottom:1px solid #D0D4DC;
+  border-radius:0;padding:22px 0;background:transparent;margin-bottom:40px
+}
+.bridge-editorial .period-selector :is(p,small,span,label){color:#444F5E}
+.bridge-editorial .period-unit-tabs{border-color:#CAD0D9}
+.bridge-editorial .period-unit{background:#FFF;color:#17191D;border-color:#D0D4DC}
+.bridge-editorial .period-unit.active{background:#2458F5;color:#FFF}
+.bridge-editorial .period-range{background:#FFF;border-color:#CBD2DC;color:#17191D}
+.bridge-editorial .ranking-master,.bridge-editorial .ranking-cohort{
+  border:0;border-top:2px solid #17191D;background:transparent;color:#17191D;
+  box-shadow:none
+}
+.bridge-editorial .ranking-panel-head,
+.bridge-editorial .ranking-master .ranking-panel-head{
+  border:0;border-bottom:1px solid #C7CDD5;background:transparent;
+  color:#17191D;padding:20px 5px;box-shadow:none
+}
+.bridge-editorial .ranking-panel-head b{font:600 17px/1.5 'Noto Serif KR',Georgia,serif;color:#17191D}
+.bridge-editorial .ranking-panel-head span{color:#586575}
+.bridge-editorial .ranking-panels{gap:22px}
+.bridge-editorial .ranking-panels .rk-row,
+.bridge-editorial .ranking-master .rk-row,
+.bridge-editorial .ranking-cohort .rk-row{
+  border:0;border-bottom:1px solid #D5DAE0;border-radius:0;
+  background:transparent;color:#17191D!important;padding:15px 7px;
+  box-shadow:none;transition:background .15s ease
+}
+.bridge-editorial .ranking-panels .rk-row.top3,
+.bridge-editorial .ranking-master .rk-row.top3{background:#F6F7F8;border-color:#D5DAE0}
+.bridge-editorial .ranking-panels .rk-row:hover{background:#E9F0FF;transform:none}
+.bridge-editorial .ranking-panels .rk-row :is(.rk-score,.rk-num,.rk-name,.nm,.rk-market,.rk-dims),
+.bridge-editorial .ranking-master .rk-row :is(.rk-score,.rk-num,.rk-name,.nm,.rk-market,.rk-dims){color:#17191D!important}
+.bridge-editorial .ranking-panels .rk-name .sub{color:#627082!important}
+.bridge-editorial .ranking-panels .rk-dims :is(.dm,span){color:#526172}
+.bridge-editorial .ranking-panels .rk-dims .dm b{color:#2458F5}
+.bridge-editorial .ranking-panels .rk-head{background:#FFFDF7;color:#17191D}
+.bridge-editorial .ranking-panels .ranking-summary-strip,
+.bridge-editorial .ranking-panels .rk-toolbar{background:transparent;color:#17191D}
+.bridge-editorial .ranking-panels :is(.rk-search,select,input){color:#17191D;background:#FFF}
+/* Do not recolor direction indicators or evidence grades using a generic selector. */
+.bridge-editorial .ranking-panels .sd-up,.bridge-editorial .ranking-panels .wow-up{color:#17734E!important}
+.bridge-editorial .ranking-panels .sd-down,.bridge-editorial .ranking-panels .wow-down{color:#B43B3B!important}
+/* 3 / Weekly publication and methodological material — hierarchy by editorial
+   rules, whitespace and section typography rather than coloured information cards. */
+.bridge-editorial .tw-about,.bridge-editorial .tw-rank-sec,
+.bridge-editorial .tw-read,.bridge-editorial .public-copy{
+  background:var(--bv-paper);color:var(--bv-ink)
+}
+.bridge-editorial .tw-read-item,.bridge-editorial .twr-col,
+.bridge-editorial .tw-card,.bridge-editorial .dx-domain,
+.bridge-editorial .public-triptych>div{
+  border-radius:0;box-shadow:none;background:transparent;color:#17191D
+}
+.bridge-editorial .tw-read-item,.bridge-editorial .twr-col,
+.bridge-editorial .tw-card,.bridge-editorial .dx-domain{border-top:1px solid #C3CAD4}
+.bridge-editorial .tw-about h2,.bridge-editorial .dx-title,
+.bridge-editorial .tw-rank-sec h2{
+  color:#17191D;font-family:'Noto Serif KR',Georgia,serif;
+  font-weight:600;line-height:1.4;letter-spacing:-.055em
+}
+.bridge-editorial .tw-read-item :is(h2,h3,h4,b,p,span,small),
+.bridge-editorial .twr-col :is(h2,h3,h4,p,span,small),
+.bridge-editorial .dx-domain :is(h2,h3,h4,p,span,small){color:#222936}
+.bridge-editorial .twr-col .twr-head,.bridge-editorial .tw-read-item .tw-read-t,
+.bridge-editorial .dx-domain .dx-tag{color:#2458F5!important}
+.bridge-editorial .tw-read-item .tw-read-d,
+.bridge-editorial .dx-domain .dx-body{color:#44505E!important}
+.bridge-editorial .tw-card :is(.tw-name,.tw-headline,.tw-bottom){color:#17191D}
+.bridge-editorial .tw-card .tw-domain{background:#E9F0FF;color:#2458F5}
+.bridge-editorial .pub-issue,.bridge-editorial .pub-week,
+.bridge-editorial .pub-row{background:transparent;color:#17191D}
+/* 4 / Intelligence. A photographic cover with warm-ink typography, then a
+   reading room without old dark cards or yellow slabs. */
+.bridge-editorial.intel-page .intel-hero,
+.bridge-editorial.intel-page .subscribe-hero{display:flex;align-items:stretch;position:relative;
+  background:#FFFDF7!important;max-width:1480px;margin:25px auto 0;
+  width:calc(100% - 72px);min-height:640px;border:1px solid #D0D4DC;
+  padding:0!important;overflow:hidden
+}
+.bridge-editorial.intel-page .intel-hero .wrap,
+.bridge-editorial.intel-page .subscribe-hero .wrap{
+  position:relative;z-index:2;width:54%;max-width:none;margin:0;
+  padding:95px clamp(27px,4.5vw,70px) 75px;box-sizing:border-box;
+  display:flex;flex-direction:column;justify-content:center
+}
+.bridge-editorial.intel-page .bridge-intel-photo,
+.bridge-editorial.intel-page .bridge-service-photo{
+  position:absolute;inset:0 0 0 54%;margin:0;z-index:0;overflow:hidden;background:#D3D9E0
+}
+.bridge-editorial.intel-page .bridge-intel-photo img,
+.bridge-editorial.intel-page .bridge-service-photo img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.7) contrast(1.05)
+}
+.bridge-editorial.intel-page .bridge-intel-photo figcaption,
+.bridge-editorial.intel-page .bridge-service-photo figcaption{
+  position:absolute;left:25px;bottom:24px;color:#FFF;font-size:9px;font-weight:800;
+  letter-spacing:.15em;text-shadow:0 2px 5px #000b
+}
+.bridge-editorial.intel-page .intel-hero h1,
+.bridge-editorial.intel-page .subscribe-hero h1{
+  color:#17191D!important;font:600 clamp(33px,3.3vw,54px)/1.5 'Noto Serif KR',Georgia,serif;
+  letter-spacing:-.07em;word-break:keep-all;max-width:100%
+}
+.bridge-editorial.intel-page .intel-hero .hero-title>span{display:block;white-space:normal!important}
+.bridge-editorial.intel-page .intel-hero p,
+.bridge-editorial.intel-page .subscribe-hero p{color:#465260!important;line-height:1.9;font-size:14px}
+.bridge-editorial.intel-page .intel-hero .intel-eyebrow,
+.bridge-editorial.intel-page .subscribe-hero .intel-eyebrow{color:#2458F5}
+.bridge-editorial.intel-page .intel-hero-actions{flex-wrap:wrap;gap:12px 22px}
+.bridge-editorial.intel-page .field-engine-section,
+.bridge-editorial.intel-page .intel-section,
+.bridge-editorial.intel-page .service-builder,
+.bridge-editorial.intel-page .subscribe-shell{background:#FFFDF7!important;color:#17191D!important}
+.bridge-editorial.intel-page .field-engine-head h2,
+.bridge-editorial.intel-page .intel-section h2,
+.bridge-editorial.subscribe-page .configurator-head h2{
+  font-family:'Noto Serif KR',Georgia,serif;color:#17191D;font-weight:600
+}
+.bridge-editorial.intel-page .field-engine-head>span,
+.bridge-editorial.intel-page .intel-section-no{color:#2458F5}
+.bridge-editorial.intel-page .field-engine-head p,
+.bridge-editorial.intel-page .intel-section-desc{color:#465363!important}
+.bridge-editorial.intel-page .field-engine-card,
+.bridge-editorial.intel-page .brief-card,
+.bridge-editorial.intel-page .package-card,
+.bridge-editorial.intel-page .choice-card,
+.bridge-editorial.intel-page .trio-picker{
+  border:0;border-top:1px solid #B9C2CD;border-radius:0;
+  box-shadow:none;background:#FFFDF7!important;color:#17191D!important
+}
+.bridge-editorial.intel-page .field-engine-card.active,
+.bridge-editorial.intel-page .field-engine-card:hover{
+  border-top:2px solid #2458F5;background:#E9F0FF!important;color:#17191D!important
+}
+.bridge-editorial.intel-page .field-engine-card :is(span,em,b),
+.bridge-editorial.intel-page .field-engine-card:hover :is(span,em,b),
+.bridge-editorial.intel-page .field-engine-card.active :is(span,em,b){color:#17191D!important}
+.bridge-editorial.intel-page .field-engine-card b{color:#2458F5!important}
+.bridge-editorial.intel-page .trio-picker :is(h3,p,span,label,small,strong),
+.bridge-editorial.intel-page .brief-card :is(h3,p,span,label,small,strong),
+.bridge-editorial.intel-page .package-card :is(h3,p,span,label,small,strong,li),
+.bridge-editorial.intel-page .choice-card :is(h3,p,span,label,small,strong){color:#25303B}
+.bridge-editorial.intel-page .brief-card b,.bridge-editorial.intel-page .package-card b{color:#2458F5}
+.bridge-editorial.intel-page .intel-note,.bridge-editorial.intel-page .discovery-note{
+  background:transparent;color:#43505F;border:0;border-top:1px solid #D0D6E0;padding:20px 0
+}
+.bridge-editorial.intel-page .intel-section .wrap{color:#17191D}
+.bridge-editorial.intel-page .builder-controls,.bridge-editorial.intel-page .builder-grid{color:#17191D}
+.bridge-editorial.intel-page .builder-review{background:#E9F0FF!important;color:#17191D!important}
+.bridge-editorial.intel-page .builder-review :is(h3,h4,strong,b,span,dd){color:#17191D}
+.bridge-editorial.intel-page .builder-review :is(p,small,dt,em){color:#45576F}
+/* 5 / Pricing and subscription remain functional but now read like service
+   editorial pages, not a dark sales dashboard. */
+.bridge-editorial.subscribe-page .service-overview,
+.bridge-editorial.subscribe-page .service-overview-panel,
+.bridge-editorial.subscribe-page .service-card-grid,
+.bridge-editorial.subscribe-page .subscribe-shell,
+.bridge-editorial.subscribe-page .subscribe-stage{
+  background:#FFFDF7!important;color:#17191D!important
+}
+.bridge-editorial.subscribe-page .service-overview{padding-top:85px}
+.bridge-editorial.subscribe-page .service-overview-panel{
+  padding:0;border:0;border-top:1px solid #17191D;border-radius:0
+}
+.bridge-editorial.subscribe-page .service-overview-panel header{padding-top:25px;max-width:1000px}
+.bridge-editorial.subscribe-page .service-overview-panel header :is(h2,p,span),
+.bridge-editorial.subscribe-page .configurator-head :is(h2,p,span),
+.bridge-editorial.subscribe-page .subscribe-step-head :is(h2,p,small){color:#17191D}
+.bridge-editorial.subscribe-page .service-overview-panel header>span,
+.bridge-editorial.subscribe-page .configurator-head>span{color:#2458F5}
+.bridge-editorial.subscribe-page .service-entry-grid{gap:28px}
+.bridge-editorial.subscribe-page .service-entry-card,
+.bridge-editorial.subscribe-page .service-entry-card.featured{
+  min-height:0;padding:30px 0 35px;border:0;border-top:1px solid #B4BDC9;
+  background:transparent!important;color:#17191D!important;border-radius:0
+}
+.bridge-editorial.subscribe-page .service-entry-card :is(h2,h3,h4,p,li,span,small,strong){color:#17191D!important}
+.bridge-editorial.subscribe-page .service-entry-card small{color:#2458F5!important}
+.bridge-editorial.subscribe-page .service-entry-card h3{font:600 clamp(25px,2.6vw,36px)/1.45 'Noto Serif KR',Georgia,serif}
+.bridge-editorial.subscribe-page .service-entry-actions a{color:#2458F5!important;border-color:#2458F5}
+.bridge-editorial.subscribe-page .service-terms-strip{
+  background:transparent;border-top:1px solid #D0D6DF;color:#17191D
+}
+.bridge-editorial.subscribe-page .service-terms-strip :is(div,small,b,strong,p,span){color:#27313B}
+.bridge-editorial.subscribe-page .subscribe-stage{border:0;border-top:2px solid #17191D;padding:35px 0}
+.bridge-editorial.subscribe-page .subscribe-step-head p,
+.bridge-editorial.subscribe-page .configurator-head p{color:#4D5866!important}
+.bridge-editorial.subscribe-page .sub-choice-grid button,
+.bridge-editorial.subscribe-page .sub-plan-grid button,
+.bridge-editorial.subscribe-page .sub-field-grid button,
+.bridge-editorial.subscribe-page .sub-language-grid button,
+.bridge-editorial.subscribe-page .sub-briefing-choice,
+.bridge-editorial.subscribe-page .service-entry-card :is(button,select){
+  background:#FFF!important;color:#17191D!important;border:1px solid #BFC7D1!important
+}
+.bridge-editorial.subscribe-page .sub-choice-grid button :is(small,b,strong,span),
+.bridge-editorial.subscribe-page .sub-plan-grid button :is(small,b,strong,span),
+.bridge-editorial.subscribe-page .sub-field-grid button :is(small,b,strong,span){color:#17191D}
+.bridge-editorial.subscribe-page .sub-choice-grid button.active,
+.bridge-editorial.subscribe-page .sub-plan-grid button.active,
+.bridge-editorial.subscribe-page .sub-field-grid button.active{
+  background:#E9F0FF!important;border-color:#2458F5!important
+}
+.bridge-editorial.subscribe-page .subscribe-summary{background:#E9F0FF!important;color:#17191D!important}
+.bridge-editorial.subscribe-page .subscribe-summary :is(h2,h3,p,span,strong,b,dt,dd){color:#17191D}
+/* 6 / The long-form briefing reading room should be a readable document, not
+   a black screen. Original print/PDF rules are preserved in @media screen. */
+@media screen{
+ .bridge-editorial.briefing-page{background:#FFFDF7;color:#17191D}
+ .bridge-editorial.briefing-page .briefing-cover,
+ .bridge-editorial.briefing-page .briefing-stage{
+   background:#FFFDF7!important;color:#17191D!important
+ }
+ .bridge-editorial.briefing-page .stage-content :is(h2,h3,h4,p,li,small,span,strong),
+ .bridge-editorial.briefing-page .stage-heading :is(h2,p,span),
+ .bridge-editorial.briefing-page .chapter-nav :is(a,b),
+ .bridge-editorial.briefing-page .briefing-cover-stats :is(small,strong,em){
+   color:#17191D
+ }
+ .bridge-editorial.briefing-page .stage-content .stage-heading span,
+ .bridge-editorial.briefing-page .chapter-nav b{color:#2458F5}
+ .bridge-editorial.briefing-page .stage-content .section-conclusion{color:#17191D!important}
+ .bridge-editorial.briefing-page .reading-mode,
+ .bridge-editorial.briefing-page .definition-grid article{background:#FFF!important;color:#17191D}
+ .bridge-editorial.briefing-page .stage-content .easy-read-card{
+   background:#E9F0FF;color:#17191D
+ }
+ .bridge-editorial.briefing-page .stage-content .easy-read-card p{color:#17191D!important}
+ .bridge-editorial.briefing-page .journey-nav{background:#FFFDF7}
+ .bridge-editorial.briefing-page .journey-track button{color:#354253}
+ .bridge-editorial.briefing-page .journey-track button.active{background:#E9F0FF;color:#17191D}
+ .bridge-editorial.briefing-page .journey-track button.active b{color:#2458F5}
+ .bridge-editorial.briefing-page .cover-actions .briefing-primary{background:#2458F5!important;color:#FFF!important}
+}
+@media(max-width:1050px){
+ .bridge-editorial .list-hero-photo{width:calc(100% - 42px);min-height:480px}
+ .bridge-editorial .list-hero-photo h1{font-size:clamp(28px,3.3vw,42px)}
+ .bridge-editorial.intel-page .intel-hero,
+ .bridge-editorial.intel-page .subscribe-hero{width:calc(100% - 42px);min-height:540px}
+ .bridge-editorial.intel-page .intel-hero h1,
+ .bridge-editorial.intel-page .subscribe-hero h1{font-size:clamp(27px,3vw,39px)}
+}
+@media(max-width:760px){
+ .bridge-editorial .list-hero-photo{width:calc(100% - 26px);margin:13px auto 0;
+   display:flex;flex-direction:column;align-items:stretch;min-height:0;overflow:hidden}
+ .bridge-editorial .bridge-cover-strap{left:21px;right:21px;top:16px;width:auto;font-size:8px}
+ .bridge-editorial .list-hero-photo .wrap{
+   width:100%;min-height:300px;display:flex;justify-content:center;padding:70px 21px 35px
+ }
+ .bridge-editorial .list-hero-photo h1,.bridge-editorial .list-hero-photo h1.public-hero-title{
+   font-size:clamp(25px,7vw,38px);line-height:1.46;margin:12px 0 17px;
+   color:#17191D!important
+ }
+ .bridge-editorial .list-hero-photo .list-note{font-size:12px;line-height:1.85}
+ .bridge-editorial .list-hero-photo:after{
+   content:"";display:block;position:relative;inset:auto;left:auto;right:auto;
+   width:100%;height:285px;min-height:285px;background-size:cover
+ }
+ .bridge-editorial .ranking-panels{gap:18px}
+ .bridge-editorial .pilot-notice{margin:25px 0 40px}
+ .bridge-editorial .model-explain{font-size:13px}
+ .bridge-editorial.intel-page .intel-hero,
+ .bridge-editorial.intel-page .subscribe-hero{
+   width:calc(100% - 26px);display:flex;flex-direction:column;min-height:0;
+   padding:0!important;margin:13px auto 0
+ }
+ .bridge-editorial.intel-page .intel-hero .wrap,
+ .bridge-editorial.intel-page .subscribe-hero .wrap{width:100%;padding:60px 20px 32px}
+ .bridge-editorial.intel-page .intel-hero h1,
+ .bridge-editorial.intel-page .subscribe-hero h1{font-size:clamp(26px,7vw,38px);line-height:1.45}
+ .bridge-editorial.intel-page .bridge-intel-photo,
+ .bridge-editorial.intel-page .bridge-service-photo{position:relative;inset:auto;left:auto;right:auto;
+   height:240px;min-height:240px;width:100%;order:2}
+ .bridge-editorial.intel-page .intel-hero .wrap,
+ .bridge-editorial.intel-page .subscribe-hero .wrap{order:1}
+ .bridge-editorial.intel-page .service-entry-grid{grid-template-columns:1fr}
+ .bridge-editorial.subscribe-page .service-overview-panel{padding:0}
+ .bridge-editorial.subscribe-page .service-entry-card{padding:20px 0 27px}
+ .bridge-editorial.subscribe-page .subscribe-stage{padding:25px 0}
+}
+@media(max-width:360px){
+ .bridge-editorial .list-hero-photo h1{font-size:24px}
+ .bridge-editorial .bridge-cover-strap span{display:none}
+ .bridge-editorial.intel-page .intel-hero h1{font-size:24px}
+}
