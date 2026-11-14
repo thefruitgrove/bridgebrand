@@ -498,3 +498,38 @@
  .bridge-editorial.briefing-page .bridge-report-folio span:last-child{display:none}
  .bridge-editorial.briefing-page .report-actions button{min-width:96px}
 }
+
+/* Discovery choice helper: a discreet editorial utility, not another card. */
+body.bridge-editorial.intel-page .bridge-peer-help{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:28px;border-top:1px solid #C2CBD8;border-bottom:1px solid #D0D9E5;
+ padding:19px 0;margin:23px 0 0;color:#17191D;background:#FFFDF7;
+}
+body.bridge-editorial.intel-page .bridge-peer-help b{
+ font:800 11px/1.55 'Noto Sans KR',sans-serif;
+ letter-spacing:.09em;color:#2458F5;
+}
+body.bridge-editorial.intel-page .bridge-peer-help p{
+ margin:8px 0 0;font:400 12px/1.75 'Noto Sans KR',sans-serif;color:#435466;
+}
+body.bridge-editorial.intel-page .bridge-peer-help button{
+ flex:0 0 auto;appearance:none;
+ background:#FFFDF7;color:#2458F5;
+ border:1px solid #2458F5;padding:13px 17px;
+ font:800 12px/1.5 'Noto Sans KR',sans-serif;
+ cursor:pointer;
+}
+body.bridge-editorial.intel-page .bridge-peer-help button:hover,
+body.bridge-editorial.intel-page .bridge-peer-help button:focus-visible{
+ background:#E9F0FF;outline:2px solid #2458F5;
+}
+body.bridge-editorial.intel-page .bridge-peer-status{
+ margin:8px 0;font:500 11px/1.7 'Noto Sans KR',sans-serif;
+ color:#445368;
+}
+@media(max-width:760px){
+ body.bridge-editorial.intel-page .bridge-peer-help{display:block}
+ body.bridge-editorial.intel-page .bridge-peer-help button{
+  width:100%;margin-top:12px;text-align:center;
+ }
+}
