@@ -1,0 +1,41 @@
+name: BRIDGE Capacity Guard
+
+on:
+  schedule:
+    - cron: "10 0 * * 1" # Mondays 09:10 KST, once per week
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-capacity-guard
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check static file size and historical archive integrity
+        run: python tools/capacity_guard.py --out /tmp/bridge-capacity-report.json
+      - name: Summarize report
+        if: always()
+        run: |
+          echo '### BRIDGE storage and deployment capacity' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Read-only; no collection, re-scoring, database mutation, or deployment.' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f /tmp/bridge-capacity-report.json ]; then
+            cat /tmp/bridge-capacity-report.json >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Preserve evidence when there is an actual capacity failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bridge-capacity-failure
+          path: /tmp/bridge-capacity-report.json
+          retention-days: 7
+          if-no-files-found: ignore
