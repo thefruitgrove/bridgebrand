@@ -1,0 +1,96 @@
+name: BRIDGEBRAND 2.0 Editorial Polish — Full Visual and PDF QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-polish-qa.yml'
+      - 'site/bridge-v2-final-polish.css'
+      - 'site/bridge-v2-report-edition.css'
+      - 'tools/verify_v2_polish.mjs'
+      - 'tests/test_v2_refinement.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  polish-and-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Idempotency, unchanged data hooks and brand refinement tests
+        run: |
+          python -m unittest discover -s tests -p 'test_v2_refinement.py' -v
+          python -m unittest discover -s tests -p 'test_v2_full_edition.py' -v
+          python -m unittest discover -s tests -p 'test_v2_editorial.py' -v
+          node --check site/briefing.js
+          node --check tools/verify_v2_polish.mjs
+          node --check tools/verify_v2_pdf_download.mjs
+      - name: Wait for updated public domain before rendering the 2.0 edition
+        run: |
+          python - <<'PY'
+          import time,urllib.request
+          required={
+            '':('REPUTATION INTELLIGENCE','BRIDGE / SIGNAL EDITION'),
+            'cpr.html':('bridge-field-headline','bridge-v2-final-polish.css'),
+            'gov.html':('bridge-field-headline',),
+            'uni.html':('bridge-field-headline',),
+            'star.html':('bridge-field-headline',),
+            'intelligence.html':('id="bridgePeerStatus"','bridge-v2-final-polish.css'),
+            'briefing.html':('bridge-v2-report-edition.css','bridge-v2-final-polish.css'),
+            'briefing.js':('br-cover-title-line','print-cover-editorial-photo'),
+          }
+          for attempt in range(18):
+            failed=[]
+            for path,fragments in required.items():
+              try:
+                req=urllib.request.Request('https://bridgebrand.co.kr/'+path,headers={'User-Agent':'BRIDGE-2.0-Polish-QA'})
+                with urllib.request.urlopen(req,timeout=18) as res:text=res.read().decode('utf-8','replace')
+                failed.extend(path+':'+piece for piece in fragments if piece not in text)
+              except Exception as exc:failed.append(path+':'+str(exc))
+            if not failed:break
+            print('Public edge pending',attempt,failed[:7],flush=True)
+            if attempt<17:time.sleep(12)
+          else:raise SystemExit('Current 2.0 refinement missing from public site')
+          print('PASS: homepage, field pages, Intelligence, briefing CSS+JS visible on public domain')
+          PY
+      - name: Full real-browser PC and mobile typographic review
+        run: node tools/verify_v2_polish.mjs
+      - name: Download real post-redesign STANDARD report PDF
+        run: node tools/verify_v2_pdf_download.mjs
+      - name: Validate downloaded PDF page size and count
+        run: |
+          python -m pip install --quiet 'pypdf>=6,<7'
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          files=list(Path('/tmp/bridge-pdf-qa').glob('*.pdf'))
+          assert len(files)==1,files
+          pdf=PdfReader(str(files[0]))
+          assert len(pdf.pages)==29,len(pdf.pages)
+          assert all(float(p.mediabox.width)>500 and float(p.mediabox.height)>700 for p in pdf.pages)
+          print(f'PASS: {len(pdf.pages)} real PDF pages, {files[0].stat().st_size} bytes, all A4')
+          PY
+      - name: Save PC/mobile image evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridgebrand-2-editorial-polish-desktop-mobile
+          path: /tmp/bridge-polish-qa/*.png
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Save authentic report artifact for internal review
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridgebrand-2-report-post-redesign-qa
+          path: |
+            /tmp/bridge-pdf-qa/*.pdf
+            /tmp/bridge-pdf-qa/*.png
+          if-no-files-found: ignore
+          retention-days: 3
