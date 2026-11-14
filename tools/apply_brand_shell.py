@@ -128,7 +128,7 @@ def apply(path: Path) -> bool:
     # Retire the first V2 color-block experiment rather than stacking
     # incompatible styles on the new editorial reading system.
     if path.name == 'intelligence.html':
-        updated = re.sub(r'<link rel="stylesheet" href="bridge-v2-intelligence\\.css[^"]*">\\s*', '', updated)
+        updated = re.sub(r'<link rel="stylesheet" href="bridge-v2-intelligence[.]css[^"]*">[\\s]*', '', updated)
     if path.name in bilingual_pages and 'i18n.js?' not in updated:
         updated = updated.replace(
             '</body>',
