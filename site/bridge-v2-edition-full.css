@@ -533,3 +533,26 @@ body.bridge-editorial.intel-page .bridge-peer-status{
   width:100%;margin-top:12px;text-align:center;
  }
 }
+
+/* PROTOTYPE SERVICE STATUS — no mistaken suggestion of active payment. */
+body.bridge-editorial.subscribe-page .bridge-commercial-notice{
+ max-width:1340px;width:calc(100% - 72px);margin:40px auto 4px;
+ padding:21px 0 23px;
+ border-top:2px solid #2458F5;border-bottom:1px solid #CCD6E1;
+ background:#FFFDF7;color:#17191D;
+}
+body.bridge-editorial.subscribe-page .bridge-commercial-notice b{
+ display:block;color:#2458F5;
+ font:800 11px/1.5 'Noto Sans KR',sans-serif;
+ letter-spacing:.13em;
+}
+body.bridge-editorial.subscribe-page .bridge-commercial-notice p{
+ font:500 13px/1.85 'Noto Sans KR',sans-serif;
+ color:#354658;margin:11px 0 0;max-width:970px;
+}
+@media screen and (max-width:760px){
+ body.bridge-editorial.subscribe-page .bridge-commercial-notice{
+   width:calc(100% - 30px);margin:24px auto 0;padding:16px 0 22px;
+ }
+ body.bridge-editorial.subscribe-page .bridge-commercial-notice p{font-size:12px}
+}
