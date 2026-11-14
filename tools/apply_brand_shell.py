@@ -109,12 +109,20 @@ def apply(path: Path) -> bool:
         'about.html', 'intelligence.html', 'subscribe.html',
     }
     if path.name in EDITORIAL_PAGES:
+        # Cache-bust updated visual styles on existing pages as well as
+        # first-time injections. Reusing the same version left old text
+        # colours in visitors' browsers even after a successful deployment.
+        updated = re.sub(
+            r'(bridge-v2-art-direction[.]css[?]v=)[^"]+',
+            r'\g<1>20261114-05',
+            updated,
+        )
         # The art-direction layer comes last so it can safely repair old
         # dark text/colour declarations without changing underlying data UI.
         if 'bridge-v2-art-direction.css?' not in updated:
             updated = updated.replace(
                 '</head>',
-                '<link rel="stylesheet" href="bridge-v2-art-direction.css?v=20261114-03">\n</head>',
+                '<link rel="stylesheet" href="bridge-v2-art-direction.css?v=20261114-05">\n</head>',
                 1,
             )
         # The same photo-led cover structure serves every existing index page.
