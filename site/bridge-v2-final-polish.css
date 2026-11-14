@@ -1,0 +1,218 @@
+/* BRIDGEBRAND / EDITION 2.0 / TYPOGRAPHIC REFINEMENT · 2026-11-15
+   The same editorial grid on web; PDF gets a separate print stylesheet.
+   No scores, rankings, trust semantics or report narrative are affected.
+*/
+@media screen {
+  /* Editorial cover titles: exact two designed lines on desktop. */
+  body.bridge-editorial .list-hero-photo .wrap{
+    width:58%;padding-left:clamp(28px,4vw,64px);
+    padding-right:clamp(20px,2vw,40px);
+  }
+  body.bridge-editorial .list-hero-photo h1.bridge-field-headline,
+  body.bridge-editorial .list-hero-photo h1.bridge-field-headline.public-hero-title{
+    max-width:none;width:100%;margin:19px 0 23px;
+    font:600 clamp(29px,2.45vw,40px)/1.52 'Noto Serif KR',Georgia,serif;
+    letter-spacing:-.065em;word-break:keep-all;
+    color:#17191D!important;
+  }
+  body.bridge-editorial .list-hero-photo .bridge-field-line{
+    display:block;white-space:nowrap;
+  }
+  body.bridge-editorial .list-hero-photo .list-note{max-width:660px}
+  /* Cover: genuine three-line typographic title (not arbitrary mid-word wraps). */
+  body.bridge-editorial.briefing-page .briefing-cover h1#coverTitle{
+    max-width:1190px;font-size:clamp(37px,4.4vw,71px);
+    line-height:1.26;letter-spacing:-.07em;
+    word-break:keep-all;overflow-wrap:break-word;
+    margin:20px 0 18px;
+  }
+  body.bridge-editorial.briefing-page #coverTitle .br-cover-title-line{
+    display:block;width:100%;max-width:100%;
+  }
+  body.bridge-editorial.briefing-page #coverTitle .br-cover-title-line:first-child{
+    font-weight:600;
+  }
+  body.bridge-editorial.briefing-page #coverTitle .br-cover-title-line:nth-child(2){
+    color:#2458F5;font-weight:600;
+  }
+  body.bridge-editorial.briefing-page #coverTitle .br-cover-title-line:last-child{
+    font-weight:500;
+  }
+  body.bridge-editorial.briefing-page #coverTitle.br-title-long .br-cover-title-line:first-child{
+    font-size:.81em;
+  }
+  body.bridge-editorial.briefing-page #coverTitle.br-title-extra-long .br-cover-title-line:first-child{
+    font-size:.67em;
+  }
+  /* One clear editorial deck line at standard PC widths; long proper nouns
+     are allowed to wrap rather than causing viewport horizontal overflow. */
+  body.bridge-editorial.briefing-page .briefing-cover p#coverDeck{
+    max-width:none;width:100%;margin:0 0 25px;
+    color:#394858!important;
+    font:500 clamp(12px,1vw,14px)/1.85 'Noto Sans KR',sans-serif!important;
+    letter-spacing:-.024em;
+  }
+  /* The blue rule remains, but text gains a full typographic inset. */
+  body.bridge-editorial.briefing-page .bridge-guide-copy .lead-copy{
+    box-sizing:border-box;
+    border:0!important;border-left:2px solid #2458F5!important;
+    padding:0 0 0 21px!important;
+    margin:0!important;text-indent:0;
+    font:500 clamp(17px,1.55vw,21px)/1.88 'Noto Serif KR',serif!important;
+    color:#203344!important;
+    word-break:keep-all;
+  }
+  body.bridge-editorial.briefing-page #sg-definition.bridge-guide-spread{
+    grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  }
+  /* Number column: text-based missing/suspended values are prose, not 22px
+     serif numerals forced into an unreadable 110px column. */
+  body.bridge-editorial.briefing-page #sg-index .metric-row{
+    grid-template-columns:minmax(182px,1.14fr) minmax(155px,.70fr) minmax(0,2fr);
+    gap:clamp(12px,2vw,26px);border-bottom:1px solid #D0D9E3;
+    align-items:center;padding:18px 5px;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row b{
+    color:#263849;font-size:12px;line-height:1.6;overflow-wrap:anywhere;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row strong{
+    color:#2458F5;line-height:1.35;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row strong.metric-textual{
+    font:600 clamp(13px,1.12vw,17px)/1.54 'Noto Serif KR',serif!important;
+    letter-spacing:-.055em;color:#273B4F!important;
+    overflow-wrap:normal;word-break:keep-all;
+    white-space:normal;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row span{
+    color:#455468;font-size:12px;
+  }
+  /* The position-and-radar paragraphs are not numerical footnotes.
+     Each heading has a balanced, two-line journal heading column. */
+  body.bridge-editorial.briefing-page #positionNarrative,
+  body.bridge-editorial.briefing-page #radarExplanation{
+    border-top:2px solid #17191D;margin-top:24px;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p,
+  body.bridge-editorial.briefing-page #radarExplanation p{
+    display:grid;grid-template-columns:minmax(125px,.30fr) minmax(0,1fr);
+    gap:clamp(14px,3vw,45px);
+    margin:0;padding:23px 4px;border-bottom:1px solid #CAD2DC;
+    background:transparent;color:#334658;
+    font:500 clamp(13px,1.1vw,15px)/1.95 'Noto Sans KR',sans-serif;
+    align-items:start;word-break:keep-all;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p>b,
+  body.bridge-editorial.briefing-page #radarExplanation p>b{
+    margin:0;color:#17191D!important;
+    font:600 clamp(18px,1.68vw,23px)/1.42 'Noto Serif KR',serif!important;
+    letter-spacing:-.07em;word-break:keep-all;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p>b br,
+  body.bridge-editorial.briefing-page #radarExplanation p>b br{
+    display:block;
+  }
+  /* Common neutral styles for the explanation areas in stage 3/4. */
+  body.bridge-editorial.briefing-page #positionLifestyle article,
+  body.bridge-editorial.briefing-page #relationshipLifestyle article{
+    min-height:185px;padding:25px 22px;
+    background:#F5F7FA!important;
+    border:0!important;border-top:2px solid #2458F5!important;
+    color:#17191D!important;
+  }
+  body.bridge-editorial.briefing-page #positionLifestyle article h4,
+  body.bridge-editorial.briefing-page #relationshipLifestyle article h4{
+    font:600 clamp(16px,1.3vw,19px)/1.55 'Noto Serif KR',serif;
+    color:#17191D!important;
+  }
+  body.bridge-editorial.briefing-page #positionLifestyle article p,
+  body.bridge-editorial.briefing-page #relationshipLifestyle article p{
+    font-size:12px;color:#3D4C5C!important;
+  }
+  body.bridge-editorial.intel-page .bridge-peer-help{
+    margin-top:23px;
+  }
+  body.bridge-editorial.intel-page #bridgePeerStatus{
+    margin:10px 0 8px;
+    color:#35475A;font-size:12px;line-height:1.7;
+    text-align:left;white-space:normal;
+  }
+}
+@media screen and (min-width:1250px){
+  body.bridge-editorial.briefing-page #coverDeck:not(.br-deck-long){
+    white-space:nowrap;font-size:clamp(12px,.97vw,14px)!important;
+  }
+}
+@media screen and (max-width:1080px){
+  body.bridge-editorial .list-hero-photo .wrap{width:59%;padding-left:28px;padding-right:20px}
+  body.bridge-editorial .list-hero-photo h1.bridge-field-headline{
+    font-size:clamp(26px,2.6vw,33px);letter-spacing:-.075em;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row{
+    grid-template-columns:minmax(140px,1.05fr) minmax(140px,.8fr) minmax(0,1.55fr);
+  }
+}
+@media screen and (max-width:760px){
+  body.bridge-editorial .list-hero-photo .wrap{
+    width:100%;padding:72px 21px 30px;
+  }
+  body.bridge-editorial .list-hero-photo h1.bridge-field-headline{
+    font-size:clamp(24px,6.8vw,34px);line-height:1.45;
+  }
+  body.bridge-editorial .list-hero-photo .bridge-field-line{
+    white-space:normal;overflow-wrap:normal;
+  }
+  body.bridge-editorial.briefing-page .briefing-cover h1#coverTitle{
+    font-size:clamp(29px,7.1vw,42px);
+    line-height:1.3;letter-spacing:-.065em;
+  }
+  body.bridge-editorial.briefing-page #coverTitle .br-cover-title-line{
+    max-width:100%;word-break:keep-all;
+  }
+  body.bridge-editorial.briefing-page .briefing-cover p#coverDeck{
+    white-space:normal!important;font-size:12px!important;
+    line-height:1.7!important;margin-bottom:18px;
+  }
+  body.bridge-editorial.briefing-page #sg-definition.bridge-guide-spread{
+    display:block;
+  }
+  body.bridge-editorial.briefing-page .bridge-guide-copy .lead-copy{
+    font-size:16px!important;line-height:1.95!important;
+    padding-left:16px!important;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row{
+    grid-template-columns:minmax(0,1fr) minmax(0,auto);
+    gap:8px 12px;padding:16px 4px;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row strong{
+    text-align:right;font-size:19px;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row strong.metric-textual{
+    text-align:right;font-size:12px!important;max-width:170px;
+  }
+  body.bridge-editorial.briefing-page #sg-index .metric-row span{
+    grid-column:1 / -1;font-size:11px;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p,
+  body.bridge-editorial.briefing-page #radarExplanation p{
+    grid-template-columns:minmax(86px,.32fr) minmax(0,1fr);
+    gap:14px;padding:19px 0;
+    font-size:12px;line-height:1.9;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p>b,
+  body.bridge-editorial.briefing-page #radarExplanation p>b{
+    font-size:17px!important;
+  }
+  body.bridge-editorial.briefing-page #positionLifestyle,
+  body.bridge-editorial.briefing-page #relationshipLifestyle{grid-template-columns:1fr}
+  body.bridge-editorial.briefing-page #positionLifestyle article,
+  body.bridge-editorial.briefing-page #relationshipLifestyle article{min-height:0}
+}
+@media screen and (max-width:360px){
+  body.bridge-editorial.briefing-page #positionNarrative p,
+  body.bridge-editorial.briefing-page #radarExplanation p{
+    grid-template-columns:1fr;
+  }
+  body.bridge-editorial.briefing-page #positionNarrative p>b br,
+  body.bridge-editorial.briefing-page #radarExplanation p>b br{display:none}
+}
