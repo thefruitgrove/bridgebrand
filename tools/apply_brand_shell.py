@@ -93,6 +93,8 @@ def apply(path: Path) -> bool:
         'star.html', 'methodology.html', 'data-extraction.html', 'trust.html',
         'about.html', 'intelligence.html', 'subscribe.html',
     }
+    if path.name == 'intelligence.html' and 'bridge-v2-intelligence.css' not in updated:
+        updated = updated.replace('</head>', '<link rel="stylesheet" href="bridge-v2-intelligence.css?v=20261114-01">\\n</head>', 1)
     if path.name in bilingual_pages and 'i18n.js?' not in updated:
         updated = updated.replace(
             '</body>',
