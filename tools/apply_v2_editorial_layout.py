@@ -227,7 +227,7 @@ def intelligence(html: str) -> str:
         anchor = '<p class="trio-snapshot-meta" id="trioSnapshotMeta"'
         if anchor not in html:
             raise ValueError("Intelligence comparison snapshot insertion point missing")
-        html=html.replace(anchor, helper + '\\n  ' + anchor, 1)
+        html=html.replace(anchor, helper + '\n  ' + anchor, 1)
     return html
 
 
@@ -246,7 +246,7 @@ def subscribe(html: str) -> str:
             '이 화면에서 선택한 구성은 구매가 아니라 기기 내 임시 저장입니다.</p>'
             '</div>'
         )
-        html=html.replace(anchor,notice+'\\n  '+anchor,1)
+        html=html.replace(anchor,notice+'\n  '+anchor,1)
     return html
 
 
