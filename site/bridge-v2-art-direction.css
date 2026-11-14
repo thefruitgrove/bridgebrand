@@ -432,3 +432,10 @@ body.bridge-editorial{background:var(--bv-paper);color:var(--bv-ink)}
 .bridge-editorial .discovery-note,
 .bridge-editorial .tw-latest,
 .bridge-editorial .twr-sub{color:#46515F!important}
+
+/* Post-release 12-page browser contrast audit: sample link was gold-on-paper. */
+.bridge-editorial.subscribe-page a.sample-report-link{
+  color:#2458F5!important;background:transparent!important;
+  border:0;border-bottom:1px solid #2458F5;
+  text-decoration:none;font-weight:800
+}
