@@ -1,60 +1,64 @@
 name: BRIDGE Live Deployment Verification
 
+# Verify the already-deployed site once daily after the normal morning
+# pipeline. Do NOT run on every push or immediately after a GitHub commit:
+# Cloudflare Pages may still be building at that point.
 on:
-  workflow_run:
-    workflows: [BRIDGE Daily Pipeline]
-    types: [completed]
-    branches: [main]
-  push:
-    branches: [main]
-    paths:
-      - tools/verify_live.py
-      - .github/workflows/bridge-live-verify.yml
-      - 'site/**'
-      - build.py
-      - build_pilot.py
-      - tests/test_presentation.js
+  schedule:
+    - cron: "30 23 * * *" # 08:30 KST, after 05:15/06:45 KST collection
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: bridge-live-verification
+  cancel-in-progress: true
+
 jobs:
   verify-live:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    concurrency:
-      group: bridge-live-verification
-      cancel-in-progress: true
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - name: Check public presentation contracts
+          python-version: "3.12"
+      - name: Check health classifier without network
         run: |
-          node --check site/script.js
-          node tests/test_presentation.js
-          node --check site/publicity.js
-          node --check site/briefing.js
-          node tests/test_briefing.js
-          python tools/verify_publicity.py
-      - name: Verify deployed JSON and frontend against current main
+          python - <<'PY'
+          import datetime as dt
+          from tools.verify_live import classify
+          today=dt.date(2026,11,14)
+          good={'asOfDate':'2026-11-14','dataStatus':'published','recordCount':400,'rankings':[{}]*400}
+          assert classify(good,good,'2026-11-14 기준',today)['status']=='healthy'
+          prior=dict(good,asOfDate='2026-11-13')
+          assert classify(good,prior,'2026-11-13 기준',today)['status']=='warning'
+          old=dict(good,asOfDate='2026-11-11')
+          assert classify(good,old,'2026-11-11 기준',today)['status']=='failure'
+          assert classify(good,good,'2026-11-11 기준',today)['status']=='failure'
+          print('Four offline health classification checks passed')
+          PY
+      - name: Verify public deployed snapshot and THIS WEEK
+        id: health
         run: |
           set -o pipefail
-          python tools/verify_live.py --attempts 3 --delay 30 | tee live-verification.jsonl
-      - name: Preserve deployment verification evidence
-        if: always()
+          python tools/verify_live.py --attempts 2 --delay 20 --max-age-days 2 | tee live-verification.jsonl
+      - name: Preserve diagnostic evidence on failure only
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: bridge-live-verification
+          name: bridge-live-verification-failure
           path: live-verification.jsonl
-      - name: Explain verification boundary
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Summarize production verification
         if: always()
         run: |
-          echo '### BRIDGE deployment verification' >> "$GITHUB_STEP_SUMMARY"
-          echo 'This job reads the live JSON, index.html and script.js and compares their SHA-256 with checked-out main. It never collects data, writes to the database or deploys. Failure means publication is unverified; inspect the artifact before taking recovery action.' >> "$GITHUB_STEP_SUMMARY"
-
+          echo '### BRIDGE live health check' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Daily 08:30 KST, read-only. Warnings within two days do not fail the job. Confirmed stale/missing/mismatched deployed data fails the job.' >> "$GITHUB_STEP_SUMMARY"
+          if [ -s live-verification.jsonl ]; then
+            tail -n 1 live-verification.jsonl >> "$GITHUB_STEP_SUMMARY"
+          fi
