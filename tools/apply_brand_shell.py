@@ -236,6 +236,13 @@ def apply(path: Path) -> bool:
                 1,
             )
     if path.name == "briefing.html":
+        # Make visitor browsers load the verified 2.0 typography/wordmark
+        # report script instead of reusing a months-old cached JS response.
+        updated = re.sub(
+            r'(briefing[.]js[?]v=)[^"]+',
+            r'\g<1>20261115-07',
+            updated,
+        )
         if PULSE_FEATURE_OLD in updated:
             updated = updated.replace(PULSE_FEATURE_OLD, PULSE_FEATURE_NEW, 1)
         if 'bridge-v2-reading-room.js?' not in updated:
