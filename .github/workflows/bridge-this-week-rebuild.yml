@@ -8,7 +8,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: bridge-daily-production
+  # Static rebuild must not compete with the daily collection/scoring group.
+  group: bridge-this-week-static-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
