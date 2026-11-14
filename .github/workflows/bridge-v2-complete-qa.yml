@@ -1,0 +1,62 @@
+name: BRIDGEBRAND 2.0 Complete Six-Stage and All-Fields QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-complete-qa.yml'
+      - 'tools/verify_v2_complete_flow.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for full editorial assets and 400-subject data on public edge
+        run: |
+          python - <<'PY'
+          import time,urllib.request
+          files={
+            'briefing.html':('bridge-v2-edition-full.css','bridge-guide-spread','bridge-report-folio','bridge-v2-journey.js'),
+            'intelligence.html':('bridgePeerSuggest','bridge-v2-journey.js'),
+            'cpr.html':('bridge-sector-spread','bridge-sector-guide'),
+            'gov.html':('bridge-sector-spread',),
+            'uni.html':('bridge-sector-spread',),
+            'star.html':('bridge-sector-spread',),
+            'this-week.html':('bridge-weekly-feature',),
+            'bridge-v2-edition-full.css':('bridge-publicity-spread','bridge-sector-guide'),
+          }
+          for attempt in range(22):
+            missing=[]
+            for path,required in files.items():
+              try:
+                req=urllib.request.Request('https://bridgebrand.co.kr/'+path,
+                    headers={'User-Agent':'BRIDGE-Complete-QA/2.0'})
+                with urllib.request.urlopen(req,timeout=18) as f:
+                  content=f.read().decode('utf-8','replace')
+                missing.extend(path+':'+item for item in required if item not in content)
+              except Exception as e:missing.append(path+': '+str(e))
+            if not missing:
+              print('All 2.0 HTML and CSS assets live on public edge')
+              break
+            print('public edge pending',attempt,missing[:4],flush=True)
+            if attempt<21:time.sleep(12)
+          else: raise SystemExit('Full editorial edition not live before QA')
+          PY
+      - name: Real Chrome journey and all field tests with screenshots
+        run: |
+          node --check tools/verify_v2_complete_flow.mjs
+          node tools/verify_v2_complete_flow.mjs
+      - name: Save reviewable visual QA screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridgebrand-2-full-flow-and-field-shots
+          path: /tmp/bridge-full-journey/*.png
+          if-no-files-found: ignore
+          retention-days: 14
