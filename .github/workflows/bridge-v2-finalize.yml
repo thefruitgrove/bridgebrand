@@ -1,0 +1,116 @@
+name: BRIDGEBRAND V2 One-Time Final Presentation Sync
+# Intentional separate UI-only release lane: no duplicate collection, no scoring.
+# This syncs generated pages to the latest V2 templates after multiple QA runs.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-finalize.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: bridge-v2-final-static-presentation
+  cancel-in-progress: false
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate V2 source and original intelligence/PDF scripts
+        run: |
+          node --check site/briefing.js
+          node --check site/intelligence.js
+          node --check site/bridge-v2-journey.js
+          node --check site/bridge-v2-reading-room.js
+          python -m unittest discover -s tests -p 'test_v2_editorial.py' -v
+          python -m unittest discover -s tests -p 'test_v2_full_edition.py' -v
+          python -m unittest discover -s tests -p 'test_v2_home.py' -v
+      - name: Apply original build-safe brand shell twice (idempotency)
+        run: |
+          python tools/apply_brand_shell.py
+          python tools/apply_brand_shell.py
+      - name: Enforce 2.0 all-page design and 400 real subjects
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('site')
+          latest=json.loads((root/'data/latest.json').read_text(encoding='utf-8'))
+          assert latest['dataStatus']=='published' and latest['recordCount']==400
+          assert len(latest['rankings'])==400
+          for p in ('briefing','intelligence','cpr','gov','uni','star','this-week','subscribe',
+                    'methodology','trust','data-extraction','about','contact','publicity'):
+            html=(root/(p+'.html')).read_text(encoding='utf-8')
+            assert html.count('bridge-v2-edition-full.css')==1,p
+            assert 'bridge-v2-edition-full.css?v=20261115-04' in html,p
+            assert 'bridge-editorial-footer' in html,p
+          b=(root/'briefing.html').read_text(encoding='utf-8')
+          for marker in ('bridge-guide-spread','bridge-chapter-position','bridge-axis-editorial',
+                         'bridge-publicity-spread','bridge-report-folio','printReportDocument'):
+            assert marker in b,marker
+          i=(root/'intelligence.html').read_text(encoding='utf-8')
+          assert 'bridgePeerSuggest' in i and 'data-bridge-journey="v2"' in i
+          sub=(root/'subscribe.html').read_text(encoding='utf-8')
+          assert 'bridgeCommercialNotice' in sub
+          assert (root/'site_fix/index.html').read_text(encoding='utf-8')==(root/'index.html').read_text(encoding='utf-8')
+          print('PASS: 2.0 full static edition, real data, footer and honest prototype commerce disclosure')
+          PY
+      - name: Commit only regenerated presentation files
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo '::error::Production main advanced; do not overwrite a newer publication'
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/index.html site/site_fix/index.html site/legacy-home.html
+          for name in briefing intelligence cpr gov uni star this-week subscribe methodology trust data-extraction about contact publicity; do
+             git add "site/$name.html"
+             if [ -f "site/site_fix/$name.html" ]; then git add "site/site_fix/$name.html"; fi
+          done
+          if git diff --cached --quiet; then
+             echo '2.0 page presentation already synchronized'
+          else
+             git commit -m 'design: finalize BRIDGEBRAND 2.0 editorial presentation across public site [bridge-data]'
+             git push origin HEAD:main
+          fi
+      - name: Verify current V2 interface on public domain (not just GitHub)
+        run: |
+          python - <<'PY'
+          import urllib.request,time
+          base='https://bridgebrand.co.kr/'
+          expects={
+            'briefing.html':('bridge-v2-edition-full.css?v=20261115-04','bridge-editorial-footer'),
+            'intelligence.html':('bridgePeerSuggest','bridge-editorial-footer'),
+            'subscribe.html':('bridgeCommercialNotice','bridge-editorial-footer'),
+            'cpr.html':('bridge-sector-spread','bridge-editorial-footer'),
+            'this-week.html':('bridge-weekly-feature','bridge-editorial-footer')
+          }
+          for retry in range(16):
+            failures=[]
+            for path,fragments in expects.items():
+              try:
+                req=urllib.request.Request(base+path,headers={'User-Agent':'BRIDGE-Final-V2-QA'})
+                with urllib.request.urlopen(req,timeout=18) as f:
+                  html=f.read().decode('utf-8','replace')
+                for fragment in fragments:
+                  if fragment not in html:failures.append(path+':'+fragment)
+              except Exception as e:failures.append(path+':'+str(e))
+            if not failures:
+              print('PASS: finalized V2 page CSS, footer, service disclosure and data story visible on public domain')
+              break
+            print('edge pending',retry,failures[:5],flush=True)
+            if retry<15:time.sleep(12)
+          else:raise SystemExit('Updated pages not yet on public edge')
+          PY
