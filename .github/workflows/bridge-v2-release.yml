@@ -1,0 +1,83 @@
+name: BRIDGEBRAND 2.0 Safe Homepage Release
+
+# A one-time, reversible presentation release. Re-run manually after later
+# interface changes. It never collects evidence or recalculates rankings.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+jobs:
+  release-home:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      TZ: Asia/Seoul
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate interface JavaScript syntax
+        run: |
+          node --check site/bridge-v2.js
+          node --check site/intelligence.js
+      - name: Test V2 interface and data preservation gates
+        run: python -m unittest discover -s tests -p 'test_v2_home.py' -v
+      - name: Build existing static site and compose V2 homepage
+        run: |
+          python build.py
+          python tools/apply_brand_shell.py
+          python build_spa.py
+          python tools/apply_brand_shell.py
+      - name: Verify new and old home are separate and the live data remains intact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('site')
+          html=(root/'index.html').read_text(encoding='utf-8')
+          assert 'id="v2SearchForm"' in html
+          assert 'bridge-v2.css' in html and 'bridge-v2.js' in html
+          assert 'BRIDGE' in html and 'intelligence.html' in html
+          assert (root/'legacy-home.html').is_file()
+          assert (root/'site_fix/index.html').read_text(encoding='utf-8')==html
+          latest=json.loads((root/'data/latest.json').read_text(encoding='utf-8'))
+          assert latest.get('dataStatus')=='published'
+          assert len(latest.get('rankings',[]))==400
+          print('BRIDGE 2.0 ready; index and site_fix aligned; legacy backup protected')
+          PY
+      - name: Publish only homepage artifacts (never scores or source evidence)
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "::error::Main changed while building; refusing stale interface release"
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/index.html site/site_fix/index.html site/legacy-home.html
+          if git diff --cached --quiet; then
+            echo '2.0 is already present; no commit needed'
+          else
+            git commit -m "design: publish BRIDGEBRAND 2.0 responsive homepage [bridge-data]"
+            git push origin HEAD:main
+          fi
+      - name: Request existing Cloudflare Pages hook if configured
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
