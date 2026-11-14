@@ -125,8 +125,10 @@ def apply(path: Path) -> bool:
                 count=1,
             )
         updated = updated.replace(WORDMARK, EDITORIAL_WORDMARK, 1)
-    if path.name == 'intelligence.html' and 'bridge-v2-intelligence.css' not in updated:
-        updated = updated.replace('</head>', '<link rel="stylesheet" href="bridge-v2-intelligence.css?v=20261114-01">\\n</head>', 1)
+    # Retire the first V2 color-block experiment rather than stacking
+    # incompatible styles on the new editorial reading system.
+    if path.name == 'intelligence.html':
+        updated = re.sub(r'<link rel="stylesheet" href="bridge-v2-intelligence\\.css[^"]*">\\s*', '', updated)
     if path.name in bilingual_pages and 'i18n.js?' not in updated:
         updated = updated.replace(
             '</body>',
