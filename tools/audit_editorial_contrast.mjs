@@ -51,7 +51,7 @@ const scan=`(()=>{
    if(!str||!visible(el)||str.length>290)continue;
    // Photography overlays have deliberate white-on-photo caption text;
    // a solid background-color algorithm cannot measure the actual pixels.
-   if(el.closest('.v2-mag-cover-photo,.v2-photoessay,.v2-mag-intel-image,.bridge-intel-photo,.bridge-service-photo'))continue;
+   if(el.closest('.v2-mag-cover-photo,.v2-photoessay,.v2-mag-intel-image,.bridge-intel-photo,.bridge-service-photo,.bridge-pulse-photo'))continue;
    const style=getComputedStyle(el);
    let color=rgb(style.color);if(!color)continue;
    let ancestor=el,background=null,image=false;
