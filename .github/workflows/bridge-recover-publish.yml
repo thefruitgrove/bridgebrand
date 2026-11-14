@@ -1,0 +1,87 @@
+name: BRIDGE Recover Existing Observations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-recover-publish.yml'
+  workflow_dispatch:
+    inputs:
+      as_of_date:
+        description: 'KST observation date YYYY-MM-DD'
+        required: true
+        default: '2026-11-14'
+        type: string
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      AS_OF_DATE: ${{ inputs.as_of_date || '2026-11-14' }}
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test prior to recovery
+        run: python -m unittest discover -s tests -q
+      - name: Confirm source observations exist; do not recollect
+        run: |
+          python - <<'PY'
+          import os
+          from bridge_pipeline.core import SupabaseRest
+          date = os.environ['AS_OF_DATE']
+          rows = SupabaseRest().select('bridge_axis_observations',f'select=entity_id&as_of_date=eq.{date}&limit=1')
+          if not rows:
+              raise SystemExit(f'No observations for {date}; recovery aborted without collection')
+          print(f'Existing observations found for {date}; running scoring only')
+          PY
+      - name: Recompute scores from stored evidence
+        run: python -m bridge_pipeline.run score --date "$AS_OF_DATE"
+      - name: Verify V5 lineage; block invalid publication
+        run: python -m bridge_pipeline.audit_v5 --date "$AS_OF_DATE"
+      - name: Publish audited snapshot
+        run: python -m bridge_pipeline.run publish-daily --date "$AS_OF_DATE"
+      - name: Export and check
+        run: |
+          python -m bridge_pipeline.run export --date "$AS_OF_DATE"
+          python -m bridge_pipeline.run healthcheck
+      - name: Rebuild static site
+        run: |
+          python build.py
+          python tools/apply_brand_shell.py
+          python build_spa.py
+          python tools/apply_brand_shell.py
+      - name: Commit reproducible public export
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Production has newer commit; refuse stale publication"
+            exit 1
+          fi
+          git config user.name "bridge-bot"
+          git config user.email "bot@bridgebrand.co.kr"
+          git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/audit data/daily data/weekly data/latest/uni_latest.json site/
+          if git diff --cached --quiet; then
+            echo "No public snapshot changes"
+          else
+            git commit -m "data: recovered BRIDGE snapshot $AS_OF_DATE [bridge-data]"
+            git push origin HEAD:main
+          fi
+      - name: Trigger deployment (only if configured)
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
