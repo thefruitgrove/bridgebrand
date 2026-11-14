@@ -127,3 +127,49 @@ body{background:#FFFDF7;color:#17191D}
  .v2-method-layout{grid-template-columns:1fr}
 }
 @media(max-width:380px){.v2-hero h1{font-size:35px}.v2-mag-cover-photo img,.v2-art{height:285px}.v2-field-grid a{min-height:140px}}
+
+/* Editorial edition III: magazine masthead and multi-image photo essay.
+   Warm white is the page; blue is ink; yellow is a rare detail, never a full page. */
+.v2-mag-cover{position:relative;padding-top:43px}
+.v2-mag-issue{display:flex;position:absolute;top:0;left:max(34px,calc((100vw - 1280px)/2));right:max(34px,calc((100vw - 1280px)/2));height:43px;z-index:4;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #17191D;border-bottom:1px solid #17191D;background:#FFFDF7;color:#17191D;font-family:'Noto Sans KR',sans-serif;font-size:9px;letter-spacing:.14em}
+.v2-mag-issue strong{font-weight:900}
+.v2-mag-issue span:last-child{color:#2458F5}
+.v2-mag-cover-photo figcaption small{font-size:9px;letter-spacing:.16em;font-family:'Noto Sans KR',sans-serif}
+.v2-photoessay{background:#FFFDF7;padding:92px 0 108px}
+.v2-photoessay-head{padding:30px 0 48px;display:grid;grid-template-columns:.32fr 1fr .36fr;gap:25px;align-items:end}
+.v2-photoessay-head>p{font-size:10px;line-height:1.9;letter-spacing:.1em;color:#2458F5;font-weight:800;align-self:start}
+.v2-photoessay-head h2{font-family:'Noto Serif KR',Georgia,serif;font-size:clamp(36px,4.1vw,63px);font-weight:600;line-height:1.45;letter-spacing:-.08em;margin:0;color:#17191D}
+.v2-photoessay-head h2 em{font-style:normal;color:#2458F5}
+.v2-photoessay-head>span{font-size:12px;line-height:1.9;color:#4B5666;max-width:210px;justify-self:end}
+.v2-photoessay-layout{display:grid;grid-template-columns:1.53fr .72fr;gap:15px;align-items:stretch}
+.v2-photoessay figure{margin:0;overflow:hidden;position:relative;background:#D6DBE0}
+.v2-photoessay img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:saturate(.75) contrast(1.05)}
+.v2-photoessay figure:hover img{transform:scale(1.025)}
+.v2-photoessay-major{height:700px}
+.v2-photoessay-side{display:grid;grid-template-rows:1fr .8fr;gap:15px;min-width:0}
+.v2-photoessay-side figure{min-height:0}
+.v2-photoessay figcaption{position:absolute;bottom:22px;left:23px;right:20px;z-index:2;display:flex;gap:20px;align-items:start;font-size:11px;font-weight:900;letter-spacing:.12em;line-height:1.6;color:#FFFFFF;text-shadow:0 2px 8px #000b}
+.v2-photoessay figure:after{content:"";position:absolute;pointer-events:none;inset:55% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.v2-photoessay figcaption small{font-size:10px;letter-spacing:0;font-weight:500}
+.v2-photoessay-caption{display:flex;align-items:baseline;justify-content:space-between;gap:25px;padding:17px 0 0;border-bottom:1px solid #CBD1D7}
+.v2-photoessay-caption>span{font-size:9px;letter-spacing:.12em;font-weight:800;white-space:nowrap;color:#2458F5}
+.v2-photoessay-caption p{font-size:10px;line-height:1.8;color:#68717D;text-align:right}
+@media(max-width:1090px){.v2-photoessay-head{grid-template-columns:1fr 2fr}.v2-photoessay-head>span{grid-column:2;justify-self:start;max-width:480px}.v2-photoessay-major{height:580px}.v2-mag-issue{left:28px;right:28px}}
+@media(max-width:760px){
+ .v2-mag-cover{padding-top:37px}
+ .v2-mag-issue{height:37px;left:19px;right:19px;font-size:8px;letter-spacing:.05em}
+ .v2-mag-issue span:last-child{display:none}
+ .v2-photoessay{padding:67px 0}
+ .v2-photoessay-head{display:block;padding:21px 0 30px}
+ .v2-photoessay-head h2{font-size:clamp(29px,7.4vw,43px);margin:18px 0}
+ .v2-photoessay-head>span{display:block;font-size:11px}
+ .v2-photoessay-layout{grid-template-columns:1fr;gap:11px}
+ .v2-photoessay-major{height:430px}
+ .v2-photoessay-side{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:190px;gap:11px}
+ .v2-photoessay-side figcaption{font-size:8px;left:10px;right:8px;bottom:11px}
+ .v2-photoessay-side figcaption b{display:none}
+ .v2-photoessay figcaption{font-size:10px}
+ .v2-photoessay-caption{display:block}
+ .v2-photoessay-caption p{text-align:left}
+}
+@media(max-width:380px){.v2-photoessay-major{height:340px}.v2-photoessay-side{grid-template-rows:160px}.v2-photoessay-head h2{font-size:29px}}
