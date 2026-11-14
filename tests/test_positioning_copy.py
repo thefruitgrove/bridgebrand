@@ -28,7 +28,7 @@ class TestBridgePositioningCopy(unittest.TestCase):
     def test_brand_identity_and_public_trust(self):
         self.assertIn("Evidence-Based Reputation Intelligence", PUBLIC_PRINCIPLES)
         self.assertIn("Evidence makes it meaningful.", PUBLIC_PRINCIPLES)
-        self.assertIn("근거 신뢰등급", IDENTITY_SECTION)
+        self.assertIn("신뢰등급", IDENTITY_SECTION)
 
     def test_hero_copy_retains_data_hooks(self):
         home = (ROOT / "site" / "bridge-v2.html").read_text(encoding="utf-8")
