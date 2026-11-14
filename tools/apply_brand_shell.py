@@ -109,6 +109,43 @@ def apply(path: Path) -> bool:
         'about.html', 'intelligence.html', 'subscribe.html',
     }
     if path.name in EDITORIAL_PAGES:
+        # The art-direction layer comes last so it can safely repair old
+        # dark text/colour declarations without changing underlying data UI.
+        if 'bridge-v2-art-direction.css?' not in updated:
+            updated = updated.replace(
+                '</head>',
+                '<link rel="stylesheet" href="bridge-v2-art-direction.css?v=20261114-03">\n</head>',
+                1,
+            )
+        # The same photo-led cover structure serves every existing index page.
+        if path.name in {
+            'cpr.html','gov.html','uni.html','star.html','this-week.html',
+            'methodology.html','trust.html','data-extraction.html',
+            'about.html','contact.html',
+        } and 'class="bridge-cover-strap"' not in updated:
+            updated = re.sub(
+                r'(<header class="list-hero-photo[^"]*"[^>]*>)',
+                r'\1<div class="bridge-cover-strap" aria-hidden="true"><strong>BRIDGE JOURNAL</strong><span>REPUTATION / RELATIONSHIPS / EVIDENCE</span></div>',
+                updated, count=1,
+            )
+        if path.name == 'intelligence.html' and 'class="bridge-intel-photo"' not in updated:
+            updated = updated.replace(
+                '<section class="intel-hero"><div class="wrap">',
+                '<section class="intel-hero"><figure class="bridge-intel-photo">'
+                '<img src="img/hero_data.jpg" alt="" loading="eager">'
+                '<figcaption>THE READING ROOM / INTELLIGENCE</figcaption>'
+                '</figure><div class="wrap">',
+                1,
+            )
+        if path.name == 'subscribe.html' and 'class="bridge-service-photo"' not in updated:
+            updated = updated.replace(
+                '<header class="subscribe-hero"><div class="wrap">',
+                '<header class="subscribe-hero"><figure class="bridge-service-photo">'
+                '<img src="img/about_prism.jpg" alt="" loading="eager">'
+                '<figcaption>THE SERVICES / BRIDGE</figcaption>'
+                '</figure><div class="wrap">',
+                1,
+            )
         if 'bridge-v2-editorial.css?' not in updated:
             updated = updated.replace(
                 '</head>',
