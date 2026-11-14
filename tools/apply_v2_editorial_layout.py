@@ -84,7 +84,7 @@ def brief(html: str) -> str:
         '<img src="img/bridge-editorial-structure.webp" alt="다양한 주체 사이의 관계 구조를 표현한 편집 이미지" loading="lazy">'
         '<figcaption><span>03 / POSITION READ</span><b>순위가 보여주는 것.<br>순위가 말하지 않는 것.</b></figcaption>'
         '</figure>',
-        'class="bridge-chapter-position"',
+        'bridge-chapter-position',
     )
     if '<section id="pr-position" class="bridge-data-chapter">' not in html:
         html = html.replace('<section id="pr-position">', '<section id="pr-position" class="bridge-data-chapter">', 1)
