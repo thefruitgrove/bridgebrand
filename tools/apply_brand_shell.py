@@ -209,13 +209,13 @@ def apply(path: Path) -> bool:
     if path.name in {"briefing.html", "intelligence.html"}:
         updated = re.sub(
             r'(bridge-v2-reading-room[.]css[?]v=)[^"]+',
-            r'\\g<1>20261114-01',
+            r'\g<1>20261114-01',
             updated,
         )
         if 'bridge-v2-reading-room.css?' not in updated:
             updated = updated.replace(
                 '</head>',
-                '<link rel="stylesheet" href="bridge-v2-reading-room.css?v=20261114-01">\\n</head>',
+                '<link rel="stylesheet" href="bridge-v2-reading-room.css?v=20261114-01">\n</head>',
                 1,
             )
     if path.name == "briefing.html":
@@ -224,13 +224,13 @@ def apply(path: Path) -> bool:
         if 'bridge-v2-reading-room.js?' not in updated:
             updated = updated.replace(
                 '</body>',
-                '<script src="bridge-v2-reading-room.js?v=20261114-01" defer></script>\\n</body>',
+                '<script src="bridge-v2-reading-room.js?v=20261114-01" defer></script>\n</body>',
                 1,
             )
     if path.name == "intelligence.html" and 'data-bridge-journey="v2"' not in updated:
         updated = updated.replace(
             '<section class="field-engine-section" id="fieldEngines">',
-            BRIDGE_JOURNEY + '\\n' + '<section class="field-engine-section" id="fieldEngines">',
+            BRIDGE_JOURNEY + '\n' + '<section class="field-engine-section" id="fieldEngines">',
             1,
         )
     # Retire the first V2 color-block experiment rather than stacking
