@@ -1,0 +1,113 @@
+name: BRIDGEBRAND 2.0 Editorial Cohesion Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-magazine-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check existing client scripts
+        run: |
+          node --check site/bridge-v2.js
+          node --check site/intelligence.js
+          node --check site/briefing.js
+      - name: Magazine composition and repeated-build tests
+        run: |
+          python -m unittest discover -s tests -p 'test_v2_editorial.py' -v
+          python -m unittest discover -s tests -p 'test_v2_home.py' -v
+      - name: Rebuild only public presentation shell
+        run: |
+          python tools/apply_brand_shell.py
+          python tools/apply_brand_shell.py
+      - name: Verify shared design and immutable score snapshot
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('site')
+          data=json.loads((root/'data/latest.json').read_text(encoding='utf-8'))
+          assert data.get('dataStatus')=='published' and len(data['rankings'])==400
+          home=(root/'index.html').read_text(encoding='utf-8')
+          assert 'bridge-v2-magazine.css' in home and 'id="v2SearchForm"' in home
+          assert 'v2-mag-cover-photo' in home
+          names=('cpr','gov','uni','star','this-week','methodology','trust','data-extraction','about','contact','intelligence','subscribe','briefing','publicity')
+          for name in names:
+             path=root/(name+'.html')
+             if not path.is_file():raise ValueError('Missing page '+name)
+             h=path.read_text(encoding='utf-8')
+             if h.count('bridge-v2-editorial.css')!=1:raise ValueError('Style duplication/missing '+name)
+             if 'bridge-editorial-logo' not in h:raise ValueError('Unmatched navigation '+name)
+             if 'class="intel-page' in h and 'bridge-editorial' not in h:raise ValueError('Body missing class '+name)
+          assert (root/'legacy-home.html').exists()
+          assert (root/'site_fix/index.html').read_text(encoding='utf-8')==home
+          print('PASS: 14 detail pages, reversible home and 400-score snapshot')
+          PY
+      - name: Publish static presentation only; preserve all historical data
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "::error::Main advanced while building; do not publish stale UI."
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/index.html site/site_fix/index.html site/legacy-home.html
+          for name in cpr gov uni star this-week methodology trust data-extraction about contact intelligence subscribe briefing publicity; do
+             git add "site/$name.html"
+             if [ -f "site/site_fix/$name.html" ]; then git add "site/site_fix/$name.html"; fi
+          done
+          if git diff --cached --quiet; then
+             echo "Presentation already current."
+          else
+             git commit -m "design: harmonize BRIDGEBRAND magazine edition across site [bridge-data]"
+             git push origin HEAD:main
+          fi
+      - name: Verify public home and page-level design after hosting build
+        run: |
+          python - <<'PY'
+          import time, urllib.request
+          base="https://bridgebrand.co.kr/"
+          checks={"":("bridge-v2-magazine.css","v2-mag-cover-photo"),
+                  "bridge-v2-magazine.css":(".v2-mag-cover-photo",),
+                  "cpr.html":("bridge-v2-editorial.css","bridge-editorial-logo"),
+                  "intelligence.html":("bridge-v2-editorial.css","bridge-editorial-logo"),
+                  "this-week.html":("bridge-v2-editorial.css",)}
+          for attempt in range(1,9):
+            missing=[]
+            for path, fragments in checks.items():
+              try:
+                req=urllib.request.Request(base+path,headers={"User-Agent":"BRIDGE-Magazine-Release/2.0"})
+                with urllib.request.urlopen(req,timeout=15) as f:
+                  page=f.read().decode('utf-8','replace')
+                if any(f not in page for f in fragments):missing.append(path or "home")
+              except Exception as error:missing.append(str(error))
+            if not missing:
+              print("Magazine home and internal pages live on public domain")
+              break
+            print("Edge not yet ready",attempt,missing,flush=True)
+            if attempt<8:time.sleep(15)
+          else:
+            raise SystemExit("Cloudflare pages did not converge within release verification window")
+          PY
