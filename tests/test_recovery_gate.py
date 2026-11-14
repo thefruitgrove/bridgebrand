@@ -13,8 +13,11 @@ def observations(n=1900):
 
 
 COLLECTIONS = [
-    {"source_id": "google_news_rss", "status": "success"},
-    {"source_id": "opendart", "status": "success"},
+    {"source_id": name, "status": "success"} for name in (
+        "google_news_rss", "opendart", "academyinfo",
+        "gov_official_evaluations", "opendart_financials",
+        "wikimedia_pageviews",
+    )
 ]
 
 
