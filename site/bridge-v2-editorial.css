@@ -192,3 +192,11 @@ body.bridge-editorial{
 .bridge-editorial .pub-note{color:#5B6675;border-color:#DDE2E8}
 .bridge-editorial .pub-share button{color:#2458F5;border-color:#2458F5}
 @media(max-width:760px){.bridge-editorial .pub-cover{margin:12px 13px 0;min-height:360px;padding:70px 23px 40px}.bridge-editorial .pub-cover h1{font-size:clamp(48px,13vw,76px)}.bridge-editorial .pub-board{padding-top:40px}}
+
+/* Explicitly win against the legacy dark T100 master-card selectors. */
+.bridge-editorial .ranking-master .ranking-panel-head{background:#F5F6F4;border-color:#DDE2E8;color:#17191D}
+.bridge-editorial .ranking-master .ranking-panel-head b{color:#2458F5}
+.bridge-editorial .ranking-master .rk-name .nm,.bridge-editorial .ranking-master .rk-score{color:#17191D}
+.bridge-editorial .ranking-master .rk-row:hover{background:#E9F0FF}
+.bridge-editorial .ranking-master .rk-row.top3{background:#F5F6FA;border-color:#DDE2E8}
+.bridge-editorial .ranking-master .rk-row.top3 .rk-num{color:#2458F5}
