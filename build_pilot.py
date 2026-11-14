@@ -3057,93 +3057,88 @@ def _domain_of(name):
         return "GOV"
     return "?"
 
+def _this_week_published_snapshot():
+    """Read exactly the verified public snapshot used by the other pages."""
+    import json as _json
+    from pathlib import Path as _Path
+    snapshot_path = _Path(__file__).resolve().parent / "site" / "data" / "latest.json"
+    try:
+        snapshot = _json.loads(snapshot_path.read_text(encoding="utf-8"))
+        if snapshot.get("dataStatus") != "published":
+            return None
+        if not snapshot.get("asOfDate") or not isinstance(snapshot.get("rankings"), list):
+            return None
+        return snapshot
+    except (OSError, ValueError, TypeError):
+        return None
+
+
 def this_week_digest_entries(limit=20):
-    """변동(WoW)이 큰 순서로 정렬해 상위 N개 반환 — '이번 주 가장 많이 움직인' 대상.
-    각 항목: (name, domain, date, score, trust, method, headline, wow, is_new)
-    """
+    """Published snapshot only; never silently mix September pilot cases."""
+    snapshot = _this_week_published_snapshot()
+    if not snapshot:
+        return []
+    axis_public = {
+        "B": "도달 — 브랜드의 가시성이 관측되었습니다.",
+        "R": "반응 — 공중의 응답 변화가 관측되었습니다.",
+        "I": "정체성 — 브랜드 고유성이 관측되었습니다.",
+        "D": "경험 — 실제 접점의 변화가 관측되었습니다.",
+        "G": "행동유발 — 공중의 움직임이 관측되었습니다.",
+        "E": "책임·지속 — 신뢰의 지속성이 관측되었습니다.",
+    }
     rows = []
-    for name, case in REAL_PILOT_CASES.items():
-        if len([v for v in case.get("dims", {}).values() if v is not None]) < 2:
-            continue  # 공개 대상만
-        date = _extract_latest_date(case.get("week", ""))
-        # 공개 화면에는 원천변수·변환식·세부 산출근거를 노출하지 않는다.
-        # 가장 두드러진 유효 축을 BRIDGE 공통 언어로만 요약한다.
-        axis_public = {
-            "B": "도달 — 브랜드의 가시성이 관측되었습니다.",
-            "R": "반응 — 공중의 응답 변화가 관측되었습니다.",
-            "I": "정체성 — 브랜드 고유성이 관측되었습니다.",
-            "D": "경험 — 실제 접점의 변화가 관측되었습니다.",
-            "G": "행동유발 — 공중의 움직임이 관측되었습니다.",
-            "E": "책임·지속 — 신뢰의 지속성이 관측되었습니다.",
-        }
-        valid_dims = [(k, v) for k, v in case.get("dims", {}).items() if isinstance(v, (int, float))]
-        strongest_axis = max(valid_dims, key=lambda kv: kv[1])[0] if valid_dims else None
-        headline = axis_public.get(strongest_axis, "BRIDGE 유효 신호가 관측되었습니다.")
-        # WoW 변동 계산 (history 있으면)
-        wow = None; is_new = False
-        hist = case.get("history", [])
-        if hist:
-            prev = hist[-1].get("score")
-            if prev is not None and case.get("score") is not None:
-                wow = round(case["score"] - prev, 1)
+    for item in snapshot["rankings"]:
+        domain = item.get("domain")
+        if domain not in {"CPR", "GOV", "UNI", "ENT"}:
+            continue
+        if item.get("ranking_type") != "T100":
+            continue
+        score = item.get("score")
+        if not isinstance(score, (float, int)):
+            continue
+        axes = item.get("axis_scores") or {}
+        status = item.get("axis_status") or {}
+        observed = [(axis, value) for axis, value in axes.items()
+                    if axis in axis_public and isinstance(value, (int, float))
+                    and status.get(axis) in {"observed", "maintained", "carried"}]
+        if not observed:
+            headline = "BRIDGE 공개 지수에 포함된 대상입니다."
         else:
-            is_new = True  # 비교 이력 없음 = 신규
-        rows.append((name, _domain_of(name), date, case["score"], case["trust"],
-                      case.get("method", "news"), headline, wow, is_new))
-    # 정렬: 변동 절댓값 큰 순 → 변동 없는 건 뒤로
-    rows.sort(key=lambda r: (abs(r[7]) if r[7] is not None else -1), reverse=True)
+            headline = axis_public[max(observed, key=lambda entry: entry[1])[0]]
+        same_scope = item.get("comparison_status") == "same_scope"
+        delta = item.get("score_change") if same_scope else None
+        wow = round(delta, 1) if isinstance(delta, (float, int)) else None
+        rows.append((item.get("name") or item.get("external_id") or "",
+                     domain, snapshot["asOfDate"], round(float(score), 1),
+                     item.get("trust_grade") or "N/R", "published",
+                     headline, wow, False))
+    # Do not pretend that missing comparisons are new cases.
+    rows.sort(key=lambda r: (r[7] is not None, abs(r[7] or 0)), reverse=True)
     return rows[:limit]
 
 def this_week_digest_html():
     rows = this_week_digest_entries(20)
     domain_page = {"CPR": "cpr.html", "GOV": "gov.html", "UNI": "uni.html", "ENT": "star.html"}
-    # 최신 근거 날짜 자동 추출 (데이터·자동수집 갱신 시 자동 반영)
-    _latest = ""
-    for _r in rows:
-        _d = _r[2] or ""
-        if _d > _latest: _latest = _d
-    # 자동수집(weekly_updates.json)의 최신 주차 날짜도 반영
-    try:
-        import os as _bo, json as _bj, datetime as _bd
-        _wu = _bo.path.join(_bo.path.dirname(__file__), "data", "weekly_updates.json")
-        if _bo.path.exists(_wu):
-            _wd = _bj.load(open(_wu, encoding="utf-8"))
-            if _wd:
-                _wk = sorted(_wd.keys())[-1]  # YYYYMMDD
-                if len(_wk) == 8:
-                    _iso = f"{_wk[:4]}-{_wk[4:6]}-{_wk[6:8]}"
-                    if _iso > _latest: _latest = _iso
-    except Exception:
-        pass
-    # 발행 주차 자동 계산 (published 기반, 매주 자동 변경)
-    try:
-        import datetime as _d2, json as _d2j, os as _d2o
-        _pub = "auto"
-        _dpath = _d2o.path.join(_d2o.path.dirname(__file__), "data", "bridge_data_v2.json")
-        if _d2o.path.exists(_dpath):
-            _pub = _d2j.load(open(_dpath, encoding="utf-8")).get("published", "auto")
-        _pd = _d2.date.today() if _pub in ("auto","",None) else _d2.date.fromisoformat(_pub)
-        _wknum = _pd.isocalendar()[1]
-        _month = _pd.month
-        # 그 달의 몇째 주 — 그 주의 '월요일'이 속한 달 기준
-        _monday = _pd - _d2.timedelta(days=_pd.weekday())
-        _nth = (_monday.day - 1) // 7 + 1
-        _nth_ko = ["첫째","둘째","셋째","넷째","다섯째"][min(_nth-1,4)]
-        _week_label = f"{_monday.month}월 {_nth_ko}주 (WEEK {_wknum})"
-    except Exception:
-        _week_label = ""
-    # 배지: "10월 첫째주 (WEEK 41) | 이번 주 변동 N건" — 날짜 대신 변동 중심
-    _changed = sum(1 for _r in rows if (len(_r)>7 and _r[7] is not None and _r[7]!=0) or (len(_r)>8 and _r[8]))
-    _badge_parts = []
-    if _week_label: _badge_parts.append(_week_label)
-    _badge_parts.append(f"이번 주 변동 {_changed}건")
+    # A displayed date must reflect an actually published snapshot, never today's build date.
+    _snapshot = _this_week_published_snapshot()
+    _published_date = _snapshot.get("asOfDate") if _snapshot else None
+    if _published_date:
+        _badge_parts = [f"{_published_date} 기준 · 검증된 공개 지수"]
+        _changed = sum(1 for row in rows if row[7] is not None and row[7] != 0)
+        _badge_parts.append(f"점수 변동 확인 {_changed}건")
+    else:
+        _badge_parts = ["공개 지수 점검 중 · 기준일 확인 불가"]
     latest_badge = f'<span class="tw-latest">{" | ".join(_badge_parts)}</span>'
     # 영역별 장기 성과 스냅샷 (THIS WEEK 4분할)
     from collections import defaultdict as _dd
     _dom_rank = _dd(list)
-    for _rn, _rc in REAL_PILOT_CASES.items():
-        if len([v for v in _rc.get("dims", {}).values() if v is not None]) >= 2:
-            _dom_rank[_domain_of(_rn)].append((_rn, _rc["score"]))
+    for _item in (_snapshot or {}).get("rankings", []):
+        if _item.get("ranking_type") != "T100":
+            continue
+        _dk = _item.get("domain")
+        _sc = _item.get("cumulative_performance")
+        if _dk in {"CPR", "GOV", "UNI", "ENT"} and isinstance(_sc, (float, int)):
+            _dom_rank[_dk].append((_item.get("name", ""), round(_sc, 1)))
     _dom_meta = {"CPR": ("CPR", "기업", "cpr.html"), "GOV": ("GOV", "공공기관", "gov.html"), "UNI": ("UNI", "대학", "uni.html"), "ENT": ("ENT", "공인", "star.html")}
     _rank_blocks = []
     for _dk in ["CPR", "GOV", "UNI", "ENT"]:
