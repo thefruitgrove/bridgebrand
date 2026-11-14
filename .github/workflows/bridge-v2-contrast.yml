@@ -6,6 +6,8 @@ on:
       - '.github/workflows/bridge-v2-contrast.yml'
       - 'site/bridge-v2-art-direction.css'
       - 'tools/audit_editorial_contrast.mjs'
+      - 'site/bridge-v2-reading-room.css'
+      - 'site/bridge-v2-reading-room.js'
   workflow_dispatch:
 permissions:
   contents: read
