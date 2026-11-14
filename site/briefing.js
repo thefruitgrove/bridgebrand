@@ -28,6 +28,12 @@ let stage=1,entities=[],fieldRows=[],rankStory=[],activityStory=[];
 const $=(id)=>document.getElementById(id),num=(v,d=2)=>Number.isFinite(Number(v))?Number(v).toFixed(d):'N/R';
 const signed=(v)=>Number.isFinite(Number(v))?`${Number(v)>=0?'▲':'▼'} ${Math.abs(Number(v)).toFixed(2)}`:'—';
 const dateKo=(iso)=>{const[y,m,d]=String(iso).split('-').map(Number);return`${y}년 ${m}월 ${d}일`;};
+const coordinationParticle=(name)=>{
+  // Respect Korean batchim; never print e.g. "대학교과" on a report cover.
+  const hangul=[...String(name||'')].filter((x)=>x>='가'&&x<='힣').at(-1);
+  if(!hangul)return'와';
+  return(hangul.charCodeAt(0)-0xAC00)%28===0?'와':'과';
+};
 const valid=(e,a)=>e&&e.axis_status&&e.axis_status[a]!=='reference'&&Number.isFinite(Number(e.axis_scores&&e.axis_scores[a]));
 const fieldNote=document.querySelector('.difference-list article:nth-child(7) p');if(fieldNote)fieldNote.innerHTML='<strong>분야별 특성을 반영합니다.</strong> CPR·GOV·UNI·ENT의 서로 다른 관계 환경을 같은 기준으로 섞지 않습니다.';
 document.querySelectorAll('[data-stage], [data-go-stage]').forEach((b)=>b.addEventListener('click',()=>showStage(Number(b.dataset.stage||b.dataset.goStage))));
@@ -103,7 +109,7 @@ function pairInsight(e,rule){const[x,y,label,question,meaning,action]=rule;if(!v
 function render(){
   const [pick,a,b]=entities,date=pick.as_of_date,top=topAxis(pick),low=lowAxis(pick);
   document.title=`${pick.name} ${field} 일반 브리핑 — BRIDGE INTELLIGENCE`;
-  $('coverEdition').textContent=`${field} GENERAL BRIEFING · ${date.replaceAll('-','.')}`;$('coverPick').textContent=`MY PICK · ${pick.name}`;$('coverTitle').innerHTML=`<span class="br-cover-title-line">${pick.name} ${num(pick.daily_index)},</span><span class="br-cover-title-line">${AXIS_NAME[top]}이 두드러진</span><span class="br-cover-title-line">6축 프로필</span>`;$('coverTitle').classList.toggle('br-title-long',pick.name.length>12);$('coverTitle').classList.toggle('br-title-extra-long',pick.name.length>20);$('coverDeck').textContent=`${a.name}·${b.name}과 같은 기준에서 점수·순위·축별 차이와 다음 확인점을 읽습니다.`;$('coverDeck').classList.toggle('br-deck-long',$('coverDeck').textContent.length>68);
+  $('coverEdition').textContent=`${field} GENERAL BRIEFING · ${date.replaceAll('-','.')}`;$('coverPick').textContent=`MY PICK · ${pick.name}`;$('coverTitle').innerHTML=`<span class="br-cover-title-line">${pick.name} ${num(pick.daily_index)},</span><span class="br-cover-title-line">${AXIS_NAME[top]}이 두드러진</span><span class="br-cover-title-line">6축 프로필</span>`;$('coverTitle').classList.toggle('br-title-long',pick.name.length>12);$('coverTitle').classList.toggle('br-title-extra-long',pick.name.length>20);$('coverDeck').textContent=`${a.name}·${b.name}${coordinationParticle(b.name)} 같은 기준에서 점수·순위·축별 차이와 다음 확인점을 읽습니다.`;$('coverDeck').classList.toggle('br-deck-long',$('coverDeck').textContent.length>68);
   $('coverStats').innerHTML=`<span><small>${field} T100</small><strong>${pick.rank}위</strong></span><span><small>DAILY</small><strong>${num(pick.daily_index)}</strong></span><span><small>WEEKLY</small><strong>${num(pick.weekly_index)}</strong></span><span><small>근거 신뢰등급</small><strong>${pick.trust_grade}</strong><em>평판등급 아님</em></span><span><small>LANGUAGE</small><strong>${language}</strong></span>`;
   const observedWeeks=Number(pick.four_week_observed_weeks)||0;
   const averageLabel=observedWeeks>=4?'4-WEEK AVERAGE':`AVAILABLE-WEEK AVERAGE · 관측 ${observedWeeks||'N/R'}주`;
