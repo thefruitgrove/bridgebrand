@@ -1,0 +1,54 @@
+name: BRIDGEBRAND V2 Public Edge Smoke Test
+
+# Independent, one-time public-host verification after the V2 release.
+# Does not trigger collection, scores, database or source changes.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-live-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-edge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify real Cloudflare public homepage and existing intelligence
+        run: |
+          python - <<'PY'
+          import time
+          import urllib.request
+          BASE='https://bridgebrand.co.kr/'
+          sources={
+            'home': ('', ('id="v2SearchForm"', 'bridge-v2.css', 'bridge-v2.js')),
+            'css': ('bridge-v2.css', ('@media(max-width:760px)', '#FFD633')),
+            'javascript': ('bridge-v2.js', ('data/latest.json', 'intelligence.html?')),
+            'intelligence': ('intelligence.html', ('id="trioPick1"', 'bridge-v2-intelligence.css')),
+          }
+          errors=[]
+          for attempt in range(1,9):
+            errors=[]
+            for key,(endpoint,checks) in sources.items():
+              try:
+                req=urllib.request.Request(BASE+endpoint,headers={'User-Agent':'BRIDGE-public-verification/2.0'})
+                with urllib.request.urlopen(req,timeout=18) as response:
+                  html=response.read().decode('utf-8','replace')
+                  if response.status!=200:raise ValueError('HTTP '+str(response.status))
+                missing=[s for s in checks if s not in html]
+                if missing:errors.append(key+': missing '+str(missing))
+              except Exception as exc:
+                errors.append(key+': '+str(exc))
+            if not errors:
+              print('BRIDGE V2 live EDGE passed: root, CSS, JavaScript, Intelligence.')
+              break
+            print('Attempt',attempt,'not yet ready:', '; '.join(errors),flush=True)
+            if attempt<8:time.sleep(20)
+          if errors:raise SystemExit('V2 public edge has not passed verification')
+          PY
