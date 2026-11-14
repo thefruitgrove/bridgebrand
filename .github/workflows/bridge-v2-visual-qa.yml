@@ -27,6 +27,10 @@ jobs:
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/home-mobile-390.png https://bridgebrand.co.kr/
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/intelligence-desktop-1440.png https://bridgebrand.co.kr/intelligence.html
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/intelligence-mobile-390.png https://bridgebrand.co.kr/intelligence.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/cpr-desktop-1440.png https://bridgebrand.co.kr/cpr.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/cpr-mobile-390.png https://bridgebrand.co.kr/cpr.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/week-desktop-1440.png https://bridgebrand.co.kr/this-week.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/week-mobile-390.png https://bridgebrand.co.kr/this-week.html
           ls -lh /tmp/bridge-v2-screen
       - uses: actions/upload-artifact@v4
         if: always()
