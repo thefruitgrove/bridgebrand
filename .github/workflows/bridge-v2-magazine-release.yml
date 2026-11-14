@@ -6,6 +6,11 @@ on:
     paths:
       - '.github/workflows/bridge-v2-magazine-release.yml'
       - 'tools/apply_brand_shell.py'
+      - 'site/bridge-v2.html'
+      - 'site/bridge-v2-magazine.css'
+      - 'site/bridge-v2-art-direction.css'
+      - 'site/bridge-v2-editorial.css'
+      - 'tests/test_v2_editorial.py'
   workflow_dispatch:
 
 permissions:
@@ -53,12 +58,17 @@ jobs:
           home=(root/'index.html').read_text(encoding='utf-8')
           assert 'bridge-v2-magazine.css' in home and 'id="v2SearchForm"' in home
           assert 'v2-mag-cover-photo' in home
+          assert 'v2-photoessay' in home and 'img/hero_gov.jpg' in home
           names=('cpr','gov','uni','star','this-week','methodology','trust','data-extraction','about','contact','intelligence','subscribe','briefing','publicity')
           for name in names:
              path=root/(name+'.html')
              if not path.is_file():raise ValueError('Missing page '+name)
              h=path.read_text(encoding='utf-8')
              if h.count('bridge-v2-editorial.css')!=1:raise ValueError('Style duplication/missing '+name)
+             if h.count('bridge-v2-art-direction.css')!=1:raise ValueError('Art direction duplication/missing '+name)
+             if name in ('cpr','gov','uni','star','this-week','methodology','trust') and 'bridge-cover-strap' not in h:raise ValueError('Photographic journal cover missing '+name)
+             if name=='intelligence' and 'bridge-intel-photo' not in h:raise ValueError('Intelligence photographic cover missing')
+             if name=='subscribe' and 'bridge-service-photo' not in h:raise ValueError('Services photographic cover missing')
              if 'bridge-editorial-logo' not in h:raise ValueError('Unmatched navigation '+name)
              if 'class="intel-page' in h and 'bridge-editorial' not in h:raise ValueError('Body missing class '+name)
           assert (root/'legacy-home.html').exists()
