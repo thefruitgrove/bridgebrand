@@ -1,0 +1,37 @@
+name: BRIDGEBRAND V2 Desktop and Mobile Screenshot QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-visual-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Capture public PC and mobile layouts with available Chrome
+        run: |
+          mkdir -p /tmp/bridge-v2-screen
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            echo 'Chrome is not installed on this runner; screenshot QA unavailable.'
+            exit 1
+          fi
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/home-desktop-1440.png https://bridgebrand.co.kr/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/home-mobile-390.png https://bridgebrand.co.kr/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/intelligence-desktop-1440.png https://bridgebrand.co.kr/intelligence.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/intelligence-mobile-390.png https://bridgebrand.co.kr/intelligence.html
+          ls -lh /tmp/bridge-v2-screen
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-v2-desktop-mobile-screenshots
+          path: /tmp/bridge-v2-screen/*.png
+          retention-days: 14
+          if-no-files-found: ignore
