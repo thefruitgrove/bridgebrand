@@ -1,0 +1,59 @@
+name: BRIDGEBRAND 2.0 Licensed Editorial Photography Import
+
+# A single editorial production task. The DAILY evidence collection is never run.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-photo-assets.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+      - name: Download and optimize four individually licensed editorial photos
+        run: python tools/import_editorial_photos.py
+      - name: Confirm all assets are renderable WebP under 1MB each
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for path in sorted(Path('site/img').glob('bridge-editorial-*.webp')):
+              with Image.open(path) as im:
+                  im.verify()
+              assert path.stat().st_size<1_000_000
+              print(path, path.stat().st_size)
+          assert len(list(Path('site/img').glob('bridge-editorial-*.webp'))) == 4
+          PY
+      - name: Commit photography only; leave all historical BRIDGE data untouched
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "::error::Main advanced during licensed asset import; abort stale images"
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/img/bridge-editorial-cover.webp site/img/bridge-editorial-rhythm.webp site/img/bridge-editorial-reading.webp site/img/bridge-editorial-structure.webp
+          if git diff --cached --quiet; then
+            echo 'Assets already imported'
+          else
+            git commit -m "assets: publish curated editorial photography for BRIDGE 2.0 [bridge-data]"
+            git push origin HEAD:main
+          fi
