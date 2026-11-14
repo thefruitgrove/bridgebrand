@@ -114,7 +114,7 @@ def apply(path: Path) -> bool:
         # colours in visitors' browsers even after a successful deployment.
         updated = re.sub(
             r'(bridge-v2-art-direction[.]css[?]v=)[^"]+',
-            r'\g<1>20261114-05',
+            r'\g<1>20261114-06',
             updated,
         )
         # The art-direction layer comes last so it can safely repair old
@@ -122,7 +122,7 @@ def apply(path: Path) -> bool:
         if 'bridge-v2-art-direction.css?' not in updated:
             updated = updated.replace(
                 '</head>',
-                '<link rel="stylesheet" href="bridge-v2-art-direction.css?v=20261114-05">\n</head>',
+                '<link rel="stylesheet" href="bridge-v2-art-direction.css?v=20261114-06">\n</head>',
                 1,
             )
         # The same photo-led cover structure serves every existing index page.
