@@ -168,6 +168,30 @@ CONSIDER
 
 ---
 
+
+### 11 / Editor-approved refinement — 2026-11-15
+
+이번 수정은 편집형 지면의 구조를 유지하되 '잡지 자체'로 오해되는 표기와 화면 가독성의 실질적인 문제를 바로잡았다.
+
+| 대상 | 실제 적용 기준 |
+|---|---|
+| HOME | `REPUTATION INTELLIGENCE` / `BRIDGE / SIGNAL EDITION` / `REPUTATION IS A SIGNAL.`; `JOURNAL`·`ISSUE 02` 용어를 메인 제호에서 제거 |
+| HOME 하단 | `Editorial photography` 출처 표기를 `Developed and operated by SIGNALBRIDGE.`와 같은 기본 12px로 배치 |
+| CPR·GOV·UNI·ENT | 사업자가 지정한 **정확한 두 줄**의 제목을 HTML 두 행으로 지정, PC 사진/해설 패널의 너비 조정 |
+| INTELLIGENCE | 비교 설명 사이 출력되던 가시적 `\\n` 문자 제거, 데이터 상태 안내와 선택 버튼의 정렬 통일 |
+| BRIEFING 표지 | 중심 대상·점수 → 두드러진 축 → `6축 프로필`의 3행 조판, 비교 설명은 일반 데스크톱에서 한 줄 우선·긴 고유명사에서는 줄바꿈 허용 |
+| 브리핑 1단계 | 공식 정의 문단의 파란 세로선 뒤 충분한 들여쓰기, 수치와 문자형 값의 서체·크기 구분 |
+| 브리핑 3·4단계 | `현재/위치`, `비교의/의미`, `무엇을/보여주나`와 같이 문단형 소제목을 2행 조판한 편집형 해설 열 |
+| PDF 미리보기·출력 | 실제 생성된 표지에 BRIDGE BRAND 워드마크와 기존 편집 이미지를 사용. 웜화이트 종이·블루 신호색·정제된 표와 차트로 18/29쪽 결과물을 재디자인 |
+| PDF 내용 | 근거·평가·서술의 생산 로직 및 지수 데이터 **변경 없음**. `html2canvas`와 `jsPDF` 엔진 유지 |
+| 유지보수 | `tools/apply_v2_refinement.py`와 마지막 레이어 CSS가 재빌드마다 위 내용을 중복 없이 적용 |
+
+**PDF 표지 충돌 수정:** 실제 브라우저 검사에서 우측 사진과 보고서 메타데이터의 겹침을 발견했다. 사진을 우측, 보고서 식별정보를 좌측 문서 흐름에 배치해 겹침을 제거했다. 이 수정은 `site/bridge-v2-report-edition.css`의 화면용·인쇄용 스타일에 함께 적용된다.
+
+**검증 자료:** `tests/test_v2_refinement.py`, `tools/verify_v2_polish.mjs`, `.github/workflows/bridge-v2-polish-qa.yml`; 별도의 6단계 글자 대비 검사와 실제 다운로드 A4 PDF 검사. 이들은 실제 배포 화면에 기반하나, 사람의 모든 디바이스·접근성 상황을 대신하지 않는다.
+
+**표현 원칙:** 출판물과 같은 편집 디자인은 유지하되, BRIDGEBRAND의 정체성은 '정기 발행 잡지'가 아니라 **근거 기반 관계 평판 인텔리전스 플랫폼**이다. 사진은 시선을 끄는 편집 이미지이며 특정 대상의 점수·평가 근거가 아니다.
+
 **BRIDGE — Reputation is a signal.**  
 *Brand system maintained by SignalBridge.*
 
