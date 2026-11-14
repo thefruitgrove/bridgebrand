@@ -1,0 +1,45 @@
+name: BRIDGEBRAND 2.0 Readability Contrast QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-contrast.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify public editorial CSS is on edge
+        run: |
+          python - <<'PY'
+          import time,urllib.request
+          url='https://bridgebrand.co.kr/bridge-v2-art-direction.css'
+          for attempt in range(14):
+            try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'BRIDGE-ContrastQA'}),timeout=12) as r:
+                css=r.read().decode('utf-8','replace')
+              if 'Cover layouts' in css and 'Ranking desk' in css:
+                print('Current edition III public CSS verified')
+                break
+            except Exception as e: print(type(e).__name__,str(e)[:90])
+            time.sleep(10)
+          else: raise SystemExit('Art-direction CSS not visible on public edge')
+          PY
+      - name: Audit computed text contrast on PC and mobile
+        run: |
+          node --check tools/audit_editorial_contrast.mjs
+          node tools/audit_editorial_contrast.mjs | tee /tmp/bridge-contrast.jsonl
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-editorial-contrast-log
+          path: /tmp/bridge-contrast.jsonl
+          retention-days: 10
+          if-no-files-found: ignore
