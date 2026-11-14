@@ -11,6 +11,9 @@ on:
       - 'site/bridge-v2-art-direction.css'
       - 'site/bridge-v2-editorial.css'
       - 'tests/test_v2_editorial.py'
+      - 'tools/apply_v2_editorial_layout.py'
+      - 'site/bridge-v2-edition-full.css'
+      - 'tests/test_v2_full_edition.py'
   workflow_dispatch:
 
 permissions:
@@ -43,6 +46,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_v2_editorial.py' -v
           python -m unittest discover -s tests -p 'test_v2_home.py' -v
+          python -m unittest discover -s tests -p 'test_v2_full_edition.py' -v
       - name: Rebuild only public presentation shell
         run: |
           python tools/apply_brand_shell.py
@@ -65,6 +69,13 @@ jobs:
              if not path.is_file():raise ValueError('Missing page '+name)
              h=path.read_text(encoding='utf-8')
              if h.count('bridge-v2-editorial.css')!=1:raise ValueError('Style duplication/missing '+name)
+             if h.count('bridge-v2-edition-full.css')!=1:raise ValueError('Full edition style missing/duplicated '+name)
+             if name=='briefing' and any(f'class="bridge-{mark}' not in h for mark in ('guide-spread','axis-editorial','publicity-spread','report-folio')):
+               raise ValueError('Briefing full six-stage architecture missing')
+             if name in ('cpr','gov','uni','star') and 'class="bridge-sector-spread"' not in h:
+               raise ValueError('Field magazine spread missing '+name)
+             if name=='this-week' and 'class="bridge-weekly-feature"' not in h:
+               raise ValueError('Weekly editorial feature missing')
              if h.count('bridge-v2-art-direction.css')!=1:raise ValueError('Art direction duplication/missing '+name)
              if name in ('cpr','gov','uni','star','this-week','methodology','trust') and 'bridge-cover-strap' not in h:raise ValueError('Photographic journal cover missing '+name)
              if name=='intelligence' and 'bridge-intel-photo' not in h:raise ValueError('Intelligence photographic cover missing')
