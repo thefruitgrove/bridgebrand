@@ -34,6 +34,47 @@ class EditorialTests(unittest.TestCase):
         self.assertIn('.bridge-editorial.briefing-page .briefing-cover', css)
         self.assertGreaterEqual(len(EDITORIAL_PAGES), 13)
 
+    def test_reading_room_is_real_layout_not_only_css(self):
+        source = (SITE / 'briefing.html').read_text(encoding='utf-8')
+        with TemporaryDirectory() as directory:
+            page = Path(directory) / 'briefing.html'
+            page.write_text(source, encoding='utf-8')
+            apply(page)
+            content = page.read_text(encoding='utf-8')
+            for fragment in (
+                'class="bridge-pulse-feature"', 'id="bridgePulsePhoto"',
+                'bridge-v2-reading-room.css', 'bridge-v2-reading-room.js',
+                'id="fieldPulseLead"', 'id="fieldPulseList"', 'id="fieldPulseBars"',
+                'id="printReportDocument"', 'id="nextStage"', 'id="prevStage"'
+            ):
+                self.assertIn(fragment, content)
+            self.assertEqual(content.count('id="bridgePulsePhoto"'), 1)
+            apply(page)
+            self.assertEqual(content, page.read_text(encoding='utf-8'))
+
+    def test_intelligence_journey_preserves_existing_comparison(self):
+        source = (SITE / 'intelligence.html').read_text(encoding='utf-8')
+        with TemporaryDirectory() as directory:
+            page = Path(directory) / 'intelligence.html'
+            page.write_text(source, encoding='utf-8')
+            apply(page)
+            content = page.read_text(encoding='utf-8')
+            self.assertIn('data-bridge-journey="v2"', content)
+            for identifier in ('trioPick1', 'trioPick2', 'trioPick3', 'trioRun'):
+                self.assertIn('id="' + identifier + '"', content)
+            self.assertIn('비교 대상 직접 선택', content)
+            self.assertEqual(content.count('data-bridge-journey="v2"'), 1)
+            apply(page)
+            self.assertEqual(content, page.read_text(encoding='utf-8'))
+
+    def test_reading_room_styles_do_not_target_printed_report(self):
+        css = (SITE / 'bridge-v2-reading-room.css').read_text(encoding='utf-8')
+        self.assertIn('@media screen', css)
+        self.assertIn('.field-pulse-layout', css)
+        self.assertIn('.bridge-pulse-feature', css)
+        self.assertNotIn('.print-sheet', css)
+        self.assertNotIn('.print-report', css)
+
     def test_postbuild_hook_is_idempotent(self):
         original = (SITE/'intelligence.html').read_text(encoding='utf-8')
         with TemporaryDirectory() as directory:
