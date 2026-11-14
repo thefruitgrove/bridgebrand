@@ -62,6 +62,21 @@ PUBLIC_PRINCIPLES = '''<section class="section bridge-public-principles" data-br
 PRINCIPLE_PAGES = {"methodology.html", "data-extraction.html", "trust.html"}
 PRINCIPLES_ANCHOR = "<footer>"
 
+# BRIDGEBRAND 2.0 magazine edition is shared across the existing site.
+# Do not add an extra application or replace any existing analysis scripts.
+EDITORIAL_PAGES = {
+    "cpr.html", "gov.html", "uni.html", "star.html", "this-week.html",
+    "intelligence.html", "subscribe.html", "briefing.html",
+    "methodology.html", "trust.html", "data-extraction.html", "about.html",
+    "contact.html", "publicity.html",
+}
+EDITORIAL_WORDMARK = (
+    '<a class="logo bridge-editorial-logo" href="index.html" '
+    'aria-label="BRIDGEBRAND 홈페이지">BRIDGE<b aria-hidden="true">.</b>'
+    '<small>BRAND</small></a>'
+)
+
+
 def apply(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
     updated = text
@@ -93,6 +108,23 @@ def apply(path: Path) -> bool:
         'star.html', 'methodology.html', 'data-extraction.html', 'trust.html',
         'about.html', 'intelligence.html', 'subscribe.html',
     }
+    if path.name in EDITORIAL_PAGES:
+        if 'bridge-v2-editorial.css?' not in updated:
+            updated = updated.replace(
+                '</head>',
+                '<link rel="stylesheet" href="bridge-v2-editorial.css?v=20261114-02">\n</head>',
+                1,
+            )
+        if 'bridge-editorial' not in updated.split('</head>', 1)[-1].split('>', 1)[0]:
+            updated = re.sub(
+                r'<body(?: class="([^"]*)")?>',
+                lambda match: '<body class="' + ' '.join(
+                    x for x in [match.group(1) or '', 'bridge-editorial'] if x
+                ) + '">',
+                updated,
+                count=1,
+            )
+        updated = updated.replace(WORDMARK, EDITORIAL_WORDMARK, 1)
     if path.name == 'intelligence.html' and 'bridge-v2-intelligence.css' not in updated:
         updated = updated.replace('</head>', '<link rel="stylesheet" href="bridge-v2-intelligence.css?v=20261114-01">\\n</head>', 1)
     if path.name in bilingual_pages and 'i18n.js?' not in updated:
