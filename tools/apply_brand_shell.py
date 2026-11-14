@@ -284,13 +284,13 @@ def apply(path: Path) -> bool:
         updated = compose_v2(path, updated)
         updated = re.sub(
             r'(bridge-v2-edition-full[.]css[?]v=)[^"]+',
-            r'\g<1>20261115-02',
+            r'\g<1>20261115-03',
             updated,
         )
         if 'bridge-v2-edition-full.css?' not in updated:
             updated = updated.replace(
                 '</head>',
-                '<link rel="stylesheet" href="bridge-v2-edition-full.css?v=20261115-02">\n</head>',
+                '<link rel="stylesheet" href="bridge-v2-edition-full.css?v=20261115-03">\n</head>',
                 1,
             )
     if updated != text:
