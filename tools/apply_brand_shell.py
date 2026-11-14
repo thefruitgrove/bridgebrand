@@ -38,7 +38,7 @@ IDENTITY_SECTION = '''<section class="section bridge-identity" data-bridge-ident
       <div><small>EXPLAIN</small><h2>설명</h2><p>순위를 해석의 출발점으로 삼고 축별 구조·변화 원인·산출 근거의 신뢰등급을 함께 읽습니다.</p></div>
     </div>
     <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">PUBLIC EVIDENCE</span><h2 class="dx-title">공개 근거 기반 관계 평판 인텔리전스</h2></div>
+      <div class="dx-head"><span class="dx-tag">EVIDENCE-BASED REPUTATION INTELLIGENCE</span><h2 class="dx-title">평판 신호의 근거와 의미를 분석합니다</h2></div>
       <p class="dx-body">BRIDGE의 상품은 순위 그 자체가 아닙니다. 순위 뒤에 있는 관계를 설명하는 능력과, 그 설명이 어디까지 유효한지를 스스로 밝히는 능력입니다. 순위는 독자의 시선을 여는 입구이며, 축별 구조와 변화 원인, 근거 상태가 해석의 본체입니다.</p>
     </div>
   </div>
@@ -54,8 +54,10 @@ PUBLIC_PRINCIPLES = '''<section class="section bridge-public-principles" data-br
       <p class="dx-body">순위는 정해진 기간과 공개자료 범위에서 관측된 상대적 위치입니다. 대상의 절대적 가치·능력·윤리성 전체를 판정하지 않습니다.</p>
     </div>
     <div class="dx-domain">
-      <div class="dx-head"><span class="dx-tag">SIGNALBRIDGE</span><h2 class="dx-title">Reputation is a signal.</h2></div>
-      <p class="dx-body"><strong>BRIDGE reads the relationship behind the rank.</strong></p>
+      <div class="dx-head"><span class="dx-tag">BRIDGE REPUTATION INDEX</span><h2 class="dx-title">Reputation is a signal.</h2></div>
+      <p class="dx-body"><strong>Evidence makes it meaningful.</strong></p>
+      <p class="dx-body">평판은 신호입니다. BRIDGE는 그 신호의 근거와 의미를 분석합니다.</p>
+      <p class="dx-body"><small>Evidence-Based Reputation Intelligence</small></p>
     </div>
   </div>
 </section>'''
