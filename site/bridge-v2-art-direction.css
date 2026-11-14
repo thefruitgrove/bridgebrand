@@ -370,3 +370,65 @@ body.bridge-editorial{background:var(--bv-paper);color:var(--bv-ink)}
  .bridge-editorial .bridge-cover-strap span{display:none}
  .bridge-editorial.intel-page .intel-hero h1{font-size:24px}
 }
+
+/* CONTRAST HOTFIX — detected on real 1440/390 Chrome computed styles. */
+.bridge-editorial .rk-sort-btn.active,
+.bridge-editorial .ranking-workspace .rk-sort-btn.active{
+  color:#FFF!important;background:#2458F5!important;border-color:#2458F5!important
+}
+.bridge-editorial .wow-flat,.bridge-editorial .sd-flat{color:#4E5A67!important}
+.bridge-editorial .ranking-panels .ranking-panel-head :is(span,small){color:#46515E}
+.bridge-editorial.intel-page .trio-badge{color:#2458F5!important;border-color:#2458F5;background:transparent}
+.bridge-editorial.intel-page .discovery-language button.active,
+.bridge-editorial.intel-page .discovery-language [aria-pressed="true"]{
+  color:#FFF!important;background:#2458F5!important;border-color:#2458F5!important
+}
+.bridge-editorial.subscribe-page .service-entry-actions>a,
+.bridge-editorial.subscribe-page .service-entry-actions a:not(.text-link){
+  color:#2458F5!important;background:transparent!important;
+  border:0!important;border-bottom:2px solid #2458F5!important;
+  padding:12px 0!important;border-radius:0
+}
+.bridge-editorial.subscribe-page .subscribe-progress{border-color:#D0D6DE}
+.bridge-editorial.subscribe-page .subscribe-progress li{color:#4F5C6A}
+.bridge-editorial.subscribe-page .subscribe-progress li.active{color:#2458F5!important}
+.bridge-editorial.subscribe-page .subscribe-progress li.active:before{background:#2458F5}
+.bridge-editorial.subscribe-page .subscribe-progress li.done{color:#4B5A69}
+.bridge-editorial.subscribe-page .sub-briefing-choice,
+.bridge-editorial.subscribe-page .sub-briefing-choice.selected{
+  background:#FFFDF7!important;color:#17191D!important;border:1px solid #C4CBD6
+}
+.bridge-editorial.subscribe-page .sub-briefing-choice.selected{border-top:2px solid #2458F5}
+.bridge-editorial.subscribe-page .sub-briefing-choice :is(h3,p,small,span,strong,li,b){color:#242C36!important}
+.bridge-editorial.subscribe-page .sub-briefing-choice small{color:#2458F5!important}
+.bridge-editorial.subscribe-page .sub-briefing-choice button,
+.bridge-editorial.subscribe-page .sub-depth-actions button{
+  background:#FFFDF7!important;border:1px solid #2458F5!important;color:#2458F5!important
+}
+.bridge-editorial.subscribe-page .sub-briefing-choice button :is(b,span),
+.bridge-editorial.subscribe-page .sub-depth-actions button :is(b,span){color:#2458F5!important}
+.bridge-editorial .dx-domain .dx-tag,
+.bridge-editorial .public-copy .dx-tag{
+  color:#2458F5!important;background:transparent!important;border:0!important;
+  padding:0!important;border-radius:0!important;
+  font:800 11px/1.6 'Noto Sans KR',sans-serif!important;letter-spacing:.14em
+}
+.bridge-editorial .public-triptych{
+  background:transparent;border:0;gap:20px
+}
+.bridge-editorial .public-triptych>div{background:transparent!important;color:#17191D!important;
+  border:0;border-top:1px solid #A9B5C0;padding:24px 7px 25px}
+.bridge-editorial .public-triptych :is(h2,h3,p,small,span){
+  color:#17191D!important
+}
+.bridge-editorial .public-triptych small{color:#2458F5!important}
+.bridge-editorial .public-flow li{border-top-color:#2458F5}
+.bridge-editorial .public-flow span{color:#43505F!important}
+.bridge-editorial .public-statement small{color:#2458F5!important}
+.bridge-editorial .pub-board-head :is(span,p){color:#4F5967!important}
+.bridge-editorial .pub-week :is(span,small){color:#526071!important}
+/* Make pale accent text on paper legible without changing the report's semantic colours. */
+.bridge-editorial .trio-snapshot-meta,
+.bridge-editorial .discovery-note,
+.bridge-editorial .tw-latest,
+.bridge-editorial .twr-sub{color:#46515F!important}
