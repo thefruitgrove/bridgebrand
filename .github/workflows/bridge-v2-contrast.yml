@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/bridge-v2-contrast.yml'
+      - 'site/bridge-v2-art-direction.css'
   workflow_dispatch:
 permissions:
   contents: read
@@ -34,6 +35,7 @@ jobs:
           PY
       - name: Audit computed text contrast on PC and mobile
         run: |
+          set -o pipefail
           node --check tools/audit_editorial_contrast.mjs
           node tools/audit_editorial_contrast.mjs | tee /tmp/bridge-contrast.jsonl
       - uses: actions/upload-artifact@v4
