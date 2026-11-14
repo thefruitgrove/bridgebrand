@@ -8,3 +8,9 @@ PAGE='''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="v
 if __name__=='__main__':
  (Path(__file__).resolve().parent/'site/bridge_full_site.html').write_text(PAGE)
  print('Legacy entry routes to canonical pages.')
+ # Only Cloudflare Pages needs oversized assets sharded. GitHub retains
+ # the original history.json as the canonical lossless archive.
+ import os as _os
+ if _os.environ.get('CF_PAGES') == '1':
+  from tools.prepare_pages_assets import main as _prepare_pages_assets
+  _prepare_pages_assets()
