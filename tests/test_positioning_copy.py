@@ -51,7 +51,7 @@ class TestBridgePositioningCopy(unittest.TestCase):
     def test_existing_report_action_and_evidence_sections_preserved(self):
         script = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
         for fragment in ("printEvidence(pick)", "ACTION PRIORITIES", "근거 지도와 해석 한계",
-                         "다음 회차 검증 질문", "buildPrintReport()"):
+                         "nextQuestions", "buildPrintReport()"):
             self.assertIn(fragment, script)
 
 
