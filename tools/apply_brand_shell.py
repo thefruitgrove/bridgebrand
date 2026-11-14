@@ -248,6 +248,25 @@ def apply(path: Path) -> bool:
         updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
     if path.name in PRINCIPLE_PAGES and 'data-bridge-principles="v1"' not in updated and PRINCIPLES_ANCHOR in updated:
         updated = updated.replace(PRINCIPLES_ANCHOR, PUBLIC_PRINCIPLES + PRINCIPLES_ANCHOR, 1)
+    # BRIDGEBRAND Edition IV is a true HTML composition, not merely
+    # additional CSS. Preserve existing JS data hooks and PDF DOM.
+    if path.name in EDITORIAL_PAGES:
+        try:
+            from tools.apply_v2_editorial_layout import compose as compose_v2
+        except ModuleNotFoundError:
+            from apply_v2_editorial_layout import compose as compose_v2
+        updated = compose_v2(path, updated)
+        updated = re.sub(
+            r'(bridge-v2-edition-full[.]css[?]v=)[^"]+',
+            r'\g<1>20261115-01',
+            updated,
+        )
+        if 'bridge-v2-edition-full.css?' not in updated:
+            updated = updated.replace(
+                '</head>',
+                '<link rel="stylesheet" href="bridge-v2-edition-full.css?v=20261115-01">\n</head>',
+                1,
+            )
     if updated != text:
         path.write_text(updated, encoding="utf-8")
         return True
