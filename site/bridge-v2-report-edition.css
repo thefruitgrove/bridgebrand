@@ -354,3 +354,26 @@
     border-color:#2458F5!important;
   }
 }
+
+/* V2.0 COVER COLLISION RESOLUTION
+   The original metadata block is absolutely positioned inside .print-sheet-main,
+   not relative to the whole A4 page. Relative metadata stays in the left
+   text column while the editorial photo occupies only the right column. */
+@media screen and (min-width:721px){
+  body.pdf-preview-mode .print-cover-split .print-cover-meta{
+    position:relative!important;
+    top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+    width:57%!important;max-width:57%!important;
+    margin:29px 0 0!important;padding:16px 0 0!important;
+    z-index:3!important;
+  }
+}
+@media print{
+  .print-cover-split .print-cover-meta{
+    position:relative!important;
+    top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+    width:57%!important;max-width:57%!important;
+    margin:7mm 0 0!important;padding:4mm 0 0!important;
+    z-index:3!important;
+  }
+}
