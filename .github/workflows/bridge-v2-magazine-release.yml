@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/bridge-v2-magazine-release.yml'
+      - 'tools/apply_brand_shell.py'
   workflow_dispatch:
 
 permissions:
