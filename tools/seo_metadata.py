@@ -1,8 +1,8 @@
 """Idempotent metadata-only brand aliases; no scoring or publication changes."""
 from pathlib import Path
 import json,re
-TITLE='브릿지브랜드 | BRIDGEBRAND'
-DESCRIPTION='브릿지브랜드(BRIDGEBRAND)는 공개자료와 공중의 관측 신호를 바탕으로 브랜드와 공중의 관계를 진단하는 브랜드지수·브랜드 분석 서비스입니다. BRIDGE의 여섯 축으로 현재 위치, 관계 구성과 변화 방향을 읽습니다.'
+TITLE='BRIDGE Reputation Index | Reputation is a signal.'
+DESCRIPTION='BRIDGE는 평판의 신호를 근거로 해석합니다. 기업·정부기관·대학·인물의 공개 평판지수, 6축 평가와 근거·신뢰수준을 살펴보세요. Evidence-Based Reputation Intelligence.'
 URL='https://bridgebrand.co.kr/'
 def apply_home_seo(site):
     extra='\n<link rel="canonical" href="'+URL+'">\n<meta property="og:url" content="'+URL+'">\n<script type="application/ld+json" id="bridge-website-schema">'+json.dumps({'@context':'https://schema.org','@type':'WebSite','@id':URL+'#website','name':'브릿지브랜드','alternateName':'BRIDGEBRAND','url':URL},ensure_ascii=False,separators=(',',':'))+'</script>\n'
