@@ -41,6 +41,8 @@ jobs:
           if [ -z "$AS_OF_DATE" ]; then
             echo "AS_OF_DATE=$(python -c 'from bridge_pipeline.core import publication_date; print(publication_date())')" >> "$GITHUB_ENV"
           fi
+      - name: Validate recovery decisions offline before touching production
+        run: python -m unittest discover -s tests -p 'test_recovery_gate.py' -q
       - name: Decide whether any recovery is necessary
         id: gate
         run: python -m tools.recovery_gate --date "$AS_OF_DATE" --github-output "$GITHUB_OUTPUT"
