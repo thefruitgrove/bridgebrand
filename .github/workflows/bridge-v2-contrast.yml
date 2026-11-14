@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/bridge-v2-contrast.yml'
       - 'site/bridge-v2-art-direction.css'
+      - 'site/bridge-v2-edition-full.css'
+      - 'tools/apply_v2_editorial_layout.py'
       - 'tools/audit_editorial_contrast.mjs'
       - 'site/bridge-v2-reading-room.css'
       - 'site/bridge-v2-reading-room.js'
