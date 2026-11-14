@@ -208,6 +208,29 @@ def weekly(html: str) -> str:
     return html
 
 
+def intelligence(html: str) -> str:
+    # Progressive disclosure is user-controlled. "Near-rank" does not
+    # imply a validated competitor, similarity score or an automatic purchase.
+    if 'id="bridgePeerSuggest"' not in html:
+        helper = (
+            '<div class="bridge-peer-help" aria-label="비교 대상 선택 지원">'
+            '<div><b>COMPARE / 같은 분야에서 비교하기</b>'
+            '<p>직접 두 대상을 선택하거나, 인접 순위 대상을 참고 후보로 적용하세요. '
+            '가까운 순위가 실제 경쟁관계를 의미하지는 않습니다.</p></div>'
+            '<button type="button" id="bridgePeerSuggest">'
+            '인접 순위 두 대상 넣기 ↗</button></div>'
+            '<p class="bridge-peer-status" id="bridgePeerStatus" role="status" '
+            'aria-live="polite">비교 대상은 언제든 자유롭게 변경할 수 있습니다.</p>'
+            '<p class="bridge-peer-status" id="bridgePrefilledStatus" '
+            'aria-live="polite"></p>'
+        )
+        anchor = '<p class="trio-snapshot-meta" id="trioSnapshotMeta"'
+        if anchor not in html:
+            raise ValueError("Intelligence comparison snapshot insertion point missing")
+        html=html.replace(anchor, helper + '\\n  ' + anchor, 1)
+    return html
+
+
 def compose(path: Path, html: str) -> str:
     if path.name == "briefing.html":
         return brief(html)
@@ -215,4 +238,6 @@ def compose(path: Path, html: str) -> str:
         return sector(html, path.name)
     if path.name == "this-week.html":
         return weekly(html)
+    if path.name == "intelligence.html":
+        return intelligence(html)
     return html
