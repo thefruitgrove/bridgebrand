@@ -63,7 +63,7 @@ class TestBridgePositioningCopy(unittest.TestCase):
         self.assertIn("id=\"bridgePublicEvidence\"", html)
         self.assertIn("renderPublicEvidence(pick)", js)
         self.assertIn("e.axis_evidence_dates?.[a]", js)
-        self.assertIn("evidenceAxisTable(pick)", js)
+        self.assertIn("evidenceAxisCompact(pick)", js)
         self.assertIn("개별 원자료 ID·원문 링크·자료별 점수 기여도", js)
         self.assertIn("snapshotId", snapshot)
         self.assertIn("axis_evidence_dates", row)
@@ -75,7 +75,7 @@ class TestBridgePositioningCopy(unittest.TestCase):
         html = (ROOT / "site" / "briefing.html").read_text(encoding="utf-8")
         for fragment in ("function actionCheckItems(e)", "function actionCheckSummary(e,maxItems=3)",
                          "function actionCheckHtml(e,maxItems=3)", "priority={reference:0,maintained:1,observed:2}",
-                         "actionCheckHtml(pick)", "escEvidence(v.question)"):
+                         "actionCheckCompact(pick)", "escEvidence(v.question)"):
             self.assertIn(fragment, script)
         self.assertIn('id="bridgeActionChecks"', html)
         self.assertIn("이 목록은 데이터의 적격성 및 검증 필요성에 따른 점검 순서", script)
