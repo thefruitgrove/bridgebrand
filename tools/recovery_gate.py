@@ -21,7 +21,11 @@ from pathlib import Path
 from bridge_pipeline.core import SupabaseRest, publication_date
 
 ROOT = Path(__file__).resolve().parents[1]
-CORE_SOURCES = ("google_news_rss", "opendart")
+CORE_SOURCES = (
+    "google_news_rss", "opendart", "academyinfo",
+    "gov_official_evaluations", "opendart_financials",
+    "wikimedia_pageviews",
+)
 EXPECTED_ENTITIES = 400
 # Observed daily axis coverage is typically ~2,000. Do not rescore from a
 # partial ~1,100-row observation set after an interrupted collection.
