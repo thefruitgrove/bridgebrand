@@ -1,0 +1,356 @@
+/* BRIDGEBRAND 2.0 · REPORT EDITION
+   The existing narrative, numeric tables, six axes, evidence and report size
+   are untouched. Unified reading and downloadable PDF art direction.
+   Re-used by html2canvas's report iframe and browser @media print.
+*/
+@media screen {
+ body.pdf-preview-mode{
+   --report-brown:#17191D;--report-brown-2:#344458;
+   --report-gold:#2458F5;--report-gold-2:#2458F5;
+   --report-ink:#17191D;--report-muted:#465569;
+   --report-line:#D1D9E4;--report-blue:#E9F0FF;
+   --report-paper:#FFFDF7;--report-tangerine:#2458F5;
+   --report-tangerine-ink:#FFFDF7;
+   background:#E6EBF1!important;
+ }
+ body.pdf-preview-mode .print-report{
+   background:transparent!important;
+ }
+ body.pdf-preview-mode .print-sheet{
+   background:#FFFDF7!important;
+   color:#17191D!important;
+   box-shadow:0 20px 55px rgba(25,41,67,.17);
+ }
+ body.pdf-preview-mode .print-sheet:before{
+   border-color:#CBD4DE!important;
+ }
+ body.pdf-preview-mode .print-sheet-header,
+ body.pdf-preview-mode .print-sheet-footer{
+   border-color:#D1D7DE!important;
+   color:#384D62!important;
+ }
+ body.pdf-preview-mode .print-sheet-header{
+   border-top:2px solid #17191D!important;
+   border-bottom:1px solid #CDD5E1!important;
+   padding:13px 0 17px!important;
+   align-items:center;gap:16px;
+ }
+ body.pdf-preview-mode .print-brand-name{
+   display:inline-flex;align-items:baseline;gap:0;
+   font:900 23px/1 'Noto Sans KR',Arial,sans-serif;
+   letter-spacing:-.065em;color:#17191D!important;
+   white-space:nowrap;
+ }
+ body.pdf-preview-mode .print-brand-name b{
+   color:#2458F5!important;
+   font:900 1.07em/1 'Noto Sans KR',sans-serif;
+ }
+ body.pdf-preview-mode .print-brand-name small{
+   display:inline-block;border-left:1px solid #2458F5;
+   padding-left:8px;margin-left:12px;
+   font:900 7px/1 'Noto Sans KR',sans-serif;
+   letter-spacing:.13em;color:#17191D!important;
+ }
+ body.pdf-preview-mode .print-sheet-footer{
+   background:#FFFDF7!important;
+   border:0!important;border-top:2px solid #2458F5!important;
+   color:#2458F5!important;box-shadow:none!important;
+   letter-spacing:.05em;padding:11px 0!important;
+ }
+ body.pdf-preview-mode .print-sheet-kicker{
+   color:#2458F5!important;
+   letter-spacing:.14em;
+ }
+ body.pdf-preview-mode .print-sheet :is(h1,h2,h3){
+   color:#17191D;
+ }
+ body.pdf-preview-mode .print-sheet h1,
+ body.pdf-preview-mode .print-sheet h2{
+   font-family:'Noto Serif KR',Georgia,serif;
+   letter-spacing:-.055em;
+ }
+ body.pdf-preview-mode .print-sheet p,
+ body.pdf-preview-mode .print-sheet li{
+   color:#344458;
+ }
+ body.pdf-preview-mode .print-cover-split{
+   background:linear-gradient(90deg,#FFFDF7 0 64%,#E9F0FF 64% 100%)!important;
+ }
+ body.pdf-preview-mode .print-cover-split .print-sheet-main{
+   position:relative;z-index:2;min-width:0;
+ }
+ body.pdf-preview-mode .print-cover-split h1{
+   max-width:60%;font:600 clamp(35px,4.3vw,52px)/1.34 'Noto Serif KR',serif;
+   color:#17191D!important;
+   letter-spacing:-.07em;word-break:keep-all;
+ }
+ body.pdf-preview-mode .print-cover-split :is(.print-lead,.print-cover-copy,.print-cover-edition){
+   max-width:58%;color:#304257!important;
+ }
+ body.pdf-preview-mode .print-cover-split .print-cover-meta{
+   top:62%!important;right:5%!important;bottom:auto!important;
+   width:30%!important;max-width:30%;
+   border-top:2px solid #2458F5;
+   padding-top:15px!important;position:absolute;
+ }
+ body.pdf-preview-mode .print-cover-split .print-cover-meta :is(span,b){
+   color:#17191D!important;
+ }
+ body.pdf-preview-mode .print-cover-split .print-cover-meta b{
+   margin:8px 0 12px!important;font-size:24px;line-height:1.33;
+   word-break:keep-all;
+ }
+ body.pdf-preview-mode .print-cover-editorial-photo{
+   position:absolute;right:4%;top:18%;width:30%;height:36%;
+   z-index:3;margin:0;overflow:hidden;background:#D7E0E9;
+ }
+ body.pdf-preview-mode .print-cover-editorial-photo img{
+   display:block;width:100%;height:100%;object-fit:cover;
+   filter:saturate(.78);
+ }
+ body.pdf-preview-mode .print-cover-editorial-photo:after{
+   content:"";position:absolute;left:0;right:0;bottom:0;height:30%;
+   background:linear-gradient(transparent,rgba(0,0,0,.65));pointer-events:none;
+ }
+ body.pdf-preview-mode .print-cover-editorial-photo figcaption{
+   position:absolute;bottom:12px;left:12px;right:11px;z-index:1;
+   font:800 8px/1.5 'Noto Sans KR',sans-serif;color:white;
+   letter-spacing:.08em;text-shadow:0 1px 4px #0008;
+ }
+ body.pdf-preview-mode .print-cover-split .cover-signal-field{
+   display:none!important;
+ }
+ body.pdf-preview-mode .print-toc>div{
+   border-color:#CFD7E2!important;
+ }
+ body.pdf-preview-mode .print-toc b,
+ body.pdf-preview-mode .print-kpi b,
+ body.pdf-preview-mode .print-axis-nodes b,
+ body.pdf-preview-mode .print-evidence b,
+ body.pdf-preview-mode .print-time strong{
+   color:#2458F5!important;
+ }
+ body.pdf-preview-mode .print-toc span{color:#17191D!important}
+ body.pdf-preview-mode .print-toc-note,
+ body.pdf-preview-mode .print-reading,
+ body.pdf-preview-mode .print-highlight,
+ body.pdf-preview-mode .print-soft,
+ body.pdf-preview-mode .print-gray,
+ body.pdf-preview-mode .print-card{
+   background:#F3F6FA!important;
+   border-color:#2458F5!important;
+   box-shadow:none!important;
+ }
+ body.pdf-preview-mode .print-toc-note{
+   border-left:4px solid #2458F5!important;
+ }
+ body.pdf-preview-mode .print-kpi{
+   border-top:2px solid #17191D!important;
+   border-bottom:1px solid #D2DBE6!important;
+ }
+ body.pdf-preview-mode .print-kpi>div{border-color:#D2DBE6!important}
+ body.pdf-preview-mode .print-flow,
+ body.pdf-preview-mode .print-axis-nodes,
+ body.pdf-preview-mode .print-evidence,
+ body.pdf-preview-mode .print-time,
+ body.pdf-preview-mode .print-axis-bars>div{
+   border-color:#CFD8E5!important;
+ }
+ body.pdf-preview-mode .print-axis-nodes>div{
+   background:#FFFDF7!important;color:#26394A!important;
+ }
+ body.pdf-preview-mode .print-sheet th{
+   background:#E9F0FF!important;color:#1F3859!important;
+   border-bottom:1px solid #BBCBE0!important;
+ }
+ body.pdf-preview-mode .print-sheet td{
+   color:#273B4E!important;
+   border-bottom-color:#D8E0E9!important;
+ }
+ body.pdf-preview-mode .dot-row{border-color:#D5DEE9!important}
+ body.pdf-preview-mode .dot-row>i{background:#BAC9DB!important}
+ body.pdf-preview-mode .dot-row>i em{
+   background:#2458F5!important;
+ }
+ body.pdf-preview-mode .dot-row>i em.is-pick{
+   background:#2458F5!important;box-shadow:0 0 0 3px #E9F0FF!important;
+ }
+ body.pdf-preview-mode .print-axis-bars i{
+   background:#DCE4EF!important;
+ }
+ body.pdf-preview-mode .print-axis-bars i em{
+   background:#2458F5!important;
+ }
+ body.pdf-preview-mode .print-pairs>div,
+ body.pdf-preview-mode .print-action>div,
+ body.pdf-preview-mode .print-method-grid section{
+   background:#F5F7FA!important;
+   border-color:#2458F5!important;
+ }
+ body.pdf-preview-mode .print-boundary{
+   border-left-color:#2458F5!important;
+   background:#E9F0FF!important;
+   color:#263A4E!important;
+ }
+ body.pdf-preview-mode .print-final{
+   color:#17191D!important;
+   border-color:#2458F5!important;
+   background:#F5F7FA!important;
+ }
+ body.pdf-preview-mode .pdf-mobile-toolbar{
+   background:#FFFDF7!important;color:#17191D!important;
+   border-color:#CBD5E2!important;
+   box-shadow:0 10px 30px rgba(20,31,49,.15)!important;
+ }
+ body.pdf-preview-mode .pdf-mobile-toolbar :is(b,strong,em,span){
+   color:#17191D!important;
+ }
+ body.pdf-preview-mode .pdf-mobile-toolbar>strong{color:#2458F5!important}
+ body.pdf-preview-mode .pdf-preview-exit{
+   background:#2458F5!important;color:white!important;
+   border:0!important;
+ }
+}
+@media screen and (max-width:720px){
+  body.pdf-preview-mode .print-report{
+    padding:72px 10px 90px;
+  }
+  body.pdf-preview-mode .print-sheet{
+    width:100%!important;box-sizing:border-box;
+    min-height:0;height:auto;overflow:visible;
+  }
+  body.pdf-preview-mode .print-sheet-header{
+    padding:10px 0 13px!important;flex-wrap:wrap;
+  }
+  body.pdf-preview-mode .print-brand-name{font-size:19px}
+  body.pdf-preview-mode .print-cover-split{
+    background:#FFFDF7!important;
+    padding-bottom:20px;
+  }
+  body.pdf-preview-mode .print-cover-split .print-sheet-main{
+    min-height:0!important;
+    display:block!important;
+  }
+  body.pdf-preview-mode .print-cover-split h1{
+    max-width:100%!important;font-size:clamp(31px,7.8vw,41px);
+    line-height:1.25;margin-top:24px;word-break:keep-all;
+  }
+  body.pdf-preview-mode .print-cover-split :is(.print-lead,.print-cover-copy,.print-cover-edition){
+    max-width:100%;
+  }
+  body.pdf-preview-mode .print-cover-editorial-photo{
+    position:relative;right:auto;top:auto;
+    width:100%;height:260px;
+    margin:28px auto 14px;
+    order:0;
+  }
+  body.pdf-preview-mode .print-cover-split .print-cover-meta{
+    position:relative;right:auto!important;top:auto!important;bottom:auto!important;
+    max-width:none;width:100%!important;margin-top:20px!important;
+    padding:16px 0 0!important;
+  }
+  body.pdf-preview-mode .print-cover-split .print-cover-meta b{
+    font-size:23px;
+  }
+  body.pdf-preview-mode .print-sheet-footer{
+    padding:11px 0!important;
+  }
+}
+@media print {
+  :root{
+    --report-brown:#17191D!important;--report-brown-2:#344458!important;
+    --report-gold:#2458F5!important;--report-gold-2:#2458F5!important;
+    --report-ink:#17191D!important;--report-muted:#465569!important;
+    --report-line:#D1D9E4!important;--report-blue:#E9F0FF!important;
+    --report-paper:#FFFDF7!important;--report-tangerine:#2458F5!important;
+  }
+  .print-sheet{
+    background:#FFFDF7!important;color:#17191D!important;
+  }
+  .print-sheet:before{border-color:#CBD4DE!important}
+  .print-sheet-header{
+    display:flex!important;align-items:center;
+    color:#384D62!important;border-top:2px solid #17191D!important;
+    border-bottom:1px solid #CDD5E1!important;
+    padding:3.5mm 0 4mm!important;
+  }
+  .print-brand-name{
+    display:inline-flex!important;align-items:baseline;gap:0;
+    font:900 16pt/1 'Noto Sans KR',Arial,sans-serif!important;
+    color:#17191D!important;letter-spacing:-.055em;
+  }
+  .print-brand-name b{color:#2458F5!important;font-size:1.07em}
+  .print-brand-name small{
+    margin-left:3mm;padding-left:2mm;border-left:1px solid #2458F5;
+    font:900 5.5pt/1 'Noto Sans KR',sans-serif!important;
+    letter-spacing:.1em;color:#17191D!important;
+  }
+  .print-sheet-footer{
+    margin-top:auto;
+    background:#FFFDF7!important;border:0!important;
+    border-top:1.3pt solid #2458F5!important;
+    color:#2458F5!important;padding:3mm 0!important;
+  }
+  .print-sheet-kicker{color:#2458F5!important}
+  .print-sheet h1,.print-sheet h2,.print-sheet h3{
+    color:#17191D!important;
+    font-family:'Noto Serif KR',serif!important;
+  }
+  .print-sheet p,.print-sheet li{color:#344458}
+  .print-cover-split{
+    background:linear-gradient(90deg,#FFFDF7 0 64%,#E9F0FF 64% 100%)!important;
+  }
+  .print-cover-split .print-sheet-main{position:relative;z-index:2}
+  .print-cover-split h1{
+    max-width:60%;color:#17191D!important;
+    font-size:34pt!important;line-height:1.3;word-break:keep-all;
+  }
+  .print-cover-split :is(.print-lead,.print-cover-copy,.print-cover-edition){
+    max-width:58%;color:#304257!important;
+  }
+  .print-cover-split .print-cover-meta{
+    top:61%!important;right:5%!important;bottom:auto!important;
+    width:30%!important;max-width:30%;
+    border-top:1.4pt solid #2458F5;padding-top:4mm!important;
+  }
+  .print-cover-split .print-cover-meta :is(span,b){color:#17191D!important}
+  .print-cover-split .print-cover-meta b{
+    margin:2mm 0 3mm!important;font-size:17pt;
+    line-height:1.35;word-break:keep-all;
+  }
+  .print-cover-editorial-photo{
+    position:absolute;right:4%;top:18%;width:30%;height:36%;
+    z-index:3;margin:0;overflow:hidden;background:#D7E0E9;
+  }
+  .print-cover-editorial-photo img{width:100%;height:100%;display:block;object-fit:cover}
+  .print-cover-editorial-photo:after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:28%;
+    background:linear-gradient(transparent,rgba(0,0,0,.65));
+  }
+  .print-cover-editorial-photo figcaption{
+    position:absolute;bottom:3mm;left:3mm;right:2mm;z-index:1;
+    font:800 6pt/1.5 'Noto Sans KR',sans-serif;color:white;
+  }
+  .print-cover-split .cover-signal-field{display:none!important}
+  .print-toc b,.print-kpi b,.print-evidence b,.print-axis-nodes b,
+  .print-time strong{color:#2458F5!important}
+  .print-toc-note,.print-reading,.print-highlight,.print-soft,
+  .print-gray,.print-card{
+    background:#F3F6FA!important;border-color:#2458F5!important;
+  }
+  .print-sheet th{
+    background:#E9F0FF!important;color:#1F3859!important;
+  }
+  .print-sheet td{color:#273B4E!important;border-color:#D8E0E9!important}
+  .print-axis-bars i em,.dot-row>i em{background:#2458F5!important}
+  .print-pairs>div,.print-action>div,.print-method-grid section{
+    background:#F5F7FA!important;border-color:#2458F5!important;
+  }
+  .print-boundary{
+    background:#E9F0FF!important;border-left-color:#2458F5!important;
+  }
+  .print-final{
+    background:#F5F7FA!important;color:#17191D!important;
+    border-color:#2458F5!important;
+  }
+}
