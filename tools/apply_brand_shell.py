@@ -119,7 +119,12 @@ def main() -> None:
     # The 2.0 homepage is composed after legacy build.py output and before
     # SEO normalization. This preserves the experience across every daily
     # regeneration without modifying scoring, data collection or reports.
-    from tools.publish_v2_home import publish as publish_v2_home
+    try:
+        from tools.publish_v2_home import publish as publish_v2_home
+    except ModuleNotFoundError:
+        # python tools/apply_brand_shell.py starts with tools/ on sys.path,
+        # whereas build.py imports this module from the repository root.
+        from publish_v2_home import publish as publish_v2_home
     publish_v2_home()
     apply_home_seo(SITE)
     print(f"brand shell applied to {len(changed)} generated pages; V2 home active")
