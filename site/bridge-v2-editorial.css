@@ -1,0 +1,121 @@
+/* BRIDGEBRAND 2.0 / unified editorial reading system.
+   Scope: existing sector, weekly, trust, methodology, service and briefing pages.
+   This is a presentation layer only: index, analytics, evidence, PDF and
+   subscription JavaScript remain unchanged. */
+body.bridge-editorial{
+  --paper:#FFFDF7;--paper-2:#F7F6F1;--navy:#2458F5;--navy-deep:#2458F5;--gold:#2458F5;
+  --bridge-blue:#2458F5;--bridge-yellow:#FFD633;--bridge-ink:#17191D;
+  color:#17191D;background:#FFFDF7;font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif
+}
+.bridge-editorial a:focus-visible,.bridge-editorial button:focus-visible,.bridge-editorial input:focus-visible,.bridge-editorial select:focus-visible{outline:2px solid #2458F5;outline-offset:3px}
+.bridge-editorial .ticker{background:#FFFDF7;color:#17191D;border-bottom:1px solid #DDE2E8;height:35px}
+.bridge-editorial .ticker-track{height:35px}
+.bridge-editorial .ticker-track span{border-right-color:#DDE2E8;color:#4E596A}
+.bridge-editorial .ticker-track b{color:#2458F5}
+.bridge-editorial .ticker-track .t-score{color:#17191D}
+.bridge-editorial .ticker-toggle{color:#2458F5;border-right-color:#DDE2E8}
+.bridge-editorial .nav,.bridge-editorial .nav.on-dark{position:sticky;top:35px;background:#FFFDF7;border-bottom:1px solid #C9CDD3;z-index:60}
+.bridge-editorial.intel-page .nav,.bridge-editorial.intel-page .nav.on-dark,.bridge-editorial.briefing-page .nav,.bridge-editorial.briefing-page .nav.on-dark{top:0}
+.bridge-editorial .nav-inner{min-height:72px}
+.bridge-editorial .nav-item>a,.bridge-editorial .nav.on-dark .nav-item>a,.bridge-editorial .nav-util,.bridge-editorial .nav.on-dark .nav-util{color:#454D59}
+.bridge-editorial .nav-item>a.active,.bridge-editorial .nav-item>a:hover,.bridge-editorial .nav.on-dark .nav-item>a:hover,.bridge-editorial .nav-util:hover{color:#2458F5;border-bottom-color:#2458F5}
+.bridge-editorial .nav-toggle,.bridge-editorial .nav.on-dark .nav-toggle{color:#17191D}
+.bridge-editorial .nav-drop,.bridge-editorial .nav.on-dark .nav-drop{background:#FFFDF7;border:1px solid #DDE2E8}
+.bridge-editorial .nav-drop a,.bridge-editorial .nav.on-dark .nav-drop a{color:#17191D}
+.bridge-editorial .language-switch,.bridge-editorial .nav:not(.on-dark) .language-switch{color:#5A6677}
+.bridge-editorial .language-switch a.active{color:#2458F5}
+.bridge-editorial .bridge-editorial-logo{display:flex!important;align-items:baseline;gap:0!important;white-space:nowrap;color:#17191D!important;font:900 25px/1 'Noto Sans KR',sans-serif;letter-spacing:-.065em}
+.bridge-editorial .bridge-editorial-logo b{color:#2458F5;font-size:29px}
+.bridge-editorial .bridge-editorial-logo small{border-left:2px solid #2458F5;color:#17191D;font:800 9px/1 'Noto Sans KR',sans-serif;letter-spacing:.1em;margin-left:9px;padding-left:9px}
+.bridge-editorial .mobile-menu{background:#FFFDF7;color:#17191D}
+.bridge-editorial .mobile-menu a.mm-child,.bridge-editorial .mobile-menu a.mm-util{color:#485567}
+.bridge-editorial .mobile-menu a:hover{color:#2458F5}
+.bridge-editorial .list-hero-photo{max-width:1480px;width:calc(100% - 64px);margin:32px auto 0;min-height:440px;display:flex;align-items:flex-end;background-position:center}
+.bridge-editorial .list-hero-photo::before{background:linear-gradient(180deg,rgba(15,19,25,.14) 0,rgba(15,19,25,.42) 65%,rgba(15,19,25,.62) 100%)}
+.bridge-editorial .list-hero-photo .wrap{width:100%;padding-bottom:40px}
+.bridge-editorial .list-hero-photo h1{font-family:'Noto Serif KR',Georgia,serif;font-weight:600;font-size:clamp(36px,4.2vw,64px);line-height:1.38;letter-spacing:-.06em;max-width:1100px;color:#FFFDF7}
+.bridge-editorial .list-hero-photo .list-note,.bridge-editorial .list-hero-photo .about-kicker{color:#F3F4F6}
+.bridge-editorial .list-page,.bridge-editorial .section,.bridge-editorial .public-copy{background:#FFFDF7;color:#17191D}
+.bridge-editorial .section{border-color:#E0E1E2}
+.bridge-editorial .model-title,.bridge-editorial .twr-titleline,.bridge-editorial .dx-title,.bridge-editorial .section-title,.bridge-editorial .intel-section h2{font-family:'Noto Serif KR',Georgia,serif;font-weight:600;letter-spacing:-.06em;line-height:1.4}
+.bridge-editorial .model-explain,.bridge-editorial .list-note,.bridge-editorial .dx-body,.bridge-editorial .section p{line-height:1.85}
+.bridge-editorial .pilot-notice,.bridge-editorial .model-source,.bridge-editorial .rk-legend{border-color:#DDE2E8}
+.bridge-editorial .period-selector,.bridge-editorial .rk-toolbar,.bridge-editorial .ranking-workspace{background:#FFFDF7}
+.bridge-editorial .seg-btn.active,.bridge-editorial .rk-sort-btn.active{border-bottom-color:#2458F5;color:#2458F5}
+.bridge-editorial .ranking-master,.bridge-editorial .ranking-cohort{background:#FFF;color:#17191D;border:1px solid #DDE2E8}
+.bridge-editorial .ranking-panel-head{background:#F5F6F4;color:#17191D;border-color:#DDE2E8}
+.bridge-editorial .ranking-master .rk-row,.bridge-editorial .ranking-cohort .rk-row{color:#17191D;border-color:#E7E8E9}
+.bridge-editorial .ranking-master .rk-head,.bridge-editorial .ranking-cohort .rk-head{background:#F7F8FA;color:#17191D;border-color:#DDE2E8}
+.bridge-editorial .rk-panel,.bridge-editorial .rk-row{border-color:#E2E4E6}
+.bridge-editorial .rk-row:hover{background:#E9F0FF}
+.bridge-editorial .rk-score,.bridge-editorial .rk-num{color:#17191D}
+.bridge-editorial .ranking-panel-head b,.bridge-editorial .rk-name .nm{color:#17191D}
+.bridge-editorial .rk-name .sub,.bridge-editorial .rk-market,.bridge-editorial .rk-head{color:#637081}
+.bridge-editorial .rk-search,.bridge-editorial .rk-sort-btn,.bridge-editorial .period-unit-tabs button{border-color:#CFD4DC}
+.bridge-editorial .twr-grid,.bridge-editorial .tw-grid{gap:16px}
+.bridge-editorial .twr-col,.bridge-editorial .tw-card,.bridge-editorial .tw-read-item{background:#FFFDF7;border:0;border-top:1px solid #B8BEC8;border-radius:0;box-shadow:none}
+.bridge-editorial .twr-head{border-radius:0;background:transparent!important;color:#17191D!important;padding:9px 0 17px;border-bottom:1px solid #DDE2E8;font-family:'Noto Serif KR',Georgia,serif;font-weight:600}
+.bridge-editorial .tw-card:hover{box-shadow:none;border-top-color:#2458F5}
+.bridge-editorial .tw-domain{background:#E9F0FF!important;color:#2458F5}
+.bridge-editorial .tw-date,.bridge-editorial .tw-bottom{color:#667382}
+.bridge-editorial .tw-name,.bridge-editorial .twr-titleline{color:#17191D}
+.bridge-editorial .tw-read{background:#FFFDF7}
+.bridge-editorial .dx-head .dx-tag,.bridge-editorial .about-kicker{color:#2458F5}
+.bridge-editorial .public-triptych>div,.bridge-editorial .dx-domain{border-color:#C9CFD6}
+.bridge-editorial footer{background:#FFFDF7;color:#17191D;border-top:1px solid #17191D}
+.bridge-editorial footer .footer-links a,.bridge-editorial footer .footer-note{color:#4E5868}
+.bridge-editorial footer .footer-op{color:#2458F5}
+.bridge-editorial.intel-page{background:#FFFDF7;color:#17191D}
+.bridge-editorial.intel-page .intel-hero{background:#FFFDF7!important;color:#17191D;border-color:#CFD3DA;padding-top:86px}
+.bridge-editorial.intel-page .intel-hero h1{font-family:'Noto Serif KR',Georgia,serif;font-weight:600;letter-spacing:-.06em;max-width:970px}
+.bridge-editorial.intel-page .intel-hero p{color:#556171}
+.bridge-editorial.intel-page .intel-eyebrow{color:#2458F5}
+.bridge-editorial.intel-page .intel-hero-cta.primary{background:#2458F5;color:#FFF;border-color:#2458F5}
+.bridge-editorial.intel-page .intel-hero-cta.primary small,.bridge-editorial.intel-page .intel-hero-cta.primary i{color:#FFD633}
+.bridge-editorial.intel-page .intel-hero-cta:not(.primary){background:#FFFDF7;color:#17191D;border:1px solid #BFC9D8}
+.bridge-editorial.intel-page .field-engine-section{background:#FFFDF7!important;color:#17191D;border-bottom:1px solid #CFD3DA}
+.bridge-editorial.intel-page .field-engine-card{border:0;border-top:1px solid #17191D;border-radius:0;background:#F5F5F1;color:#17191D}
+.bridge-editorial.intel-page .field-engine-card.active,.bridge-editorial.intel-page .field-engine-card:hover{border-top-color:#2458F5;background:#E9F0FF;color:#17191D}
+.bridge-editorial.intel-page .field-engine-card b,.bridge-editorial.intel-page .field-engine-card:hover b{color:#2458F5}
+.bridge-editorial.intel-page .field-engine-card span,.bridge-editorial.intel-page .field-engine-card:hover span{color:#4F5968}
+.bridge-editorial.intel-page .field-engine-card em,.bridge-editorial.intel-page .field-engine-card:hover em{color:#2458F5}
+.bridge-editorial.intel-page .trio-beta,.bridge-editorial.intel-page .intel-section,.bridge-editorial.intel-page .service-builder{background:#FFFDF7;color:#17191D}
+.bridge-editorial.intel-page .intel-section{border-bottom:1px solid #DDE2E8}
+.bridge-editorial.intel-page .trio-picker,.bridge-editorial.intel-page .brief-card,.bridge-editorial.intel-page .choice-card,.bridge-editorial.intel-page .package-card{background:#FFFDF7;border-color:#DDE2E8;color:#17191D;border-radius:0}
+.bridge-editorial.intel-page .trio-picker{border-top:2px solid #2458F5}
+.bridge-editorial.intel-page .intel-section h2{font-family:'Noto Serif KR',Georgia,serif;font-weight:600}
+.bridge-editorial.intel-page .trio-picker select{background:#FFF;color:#17191D;border-color:#C6CED9}
+.bridge-editorial.intel-page .package-card.featured{background:#E9F0FF;border:1px solid #2458F5}
+.bridge-editorial.intel-page .trio-run{background:#2458F5;color:#FFF;border-color:#2458F5}
+.bridge-editorial.intel-page .builder-review{background:#E9F0FF;color:#17191D;border:1px solid #D2DFF9}
+.bridge-editorial.intel-page .builder-review>small,.bridge-editorial.intel-page .builder-review dt,.bridge-editorial.intel-page .builder-review p,.bridge-editorial.intel-page .builder-review em{color:#52637B}
+.bridge-editorial.intel-page .builder-review .btn{background:#2458F5;color:#FFF}
+.bridge-editorial.subscribe-page .subscribe-hero{background:#FFFDF7!important;color:#17191D;padding-top:90px;border-color:#DDE2E8}
+.bridge-editorial.subscribe-page .subscribe-hero h1{font-family:'Noto Serif KR',Georgia,serif;font-weight:600;letter-spacing:-.06em}
+.bridge-editorial.subscribe-page .subscribe-hero p{color:#505C69}
+.bridge-editorial.subscribe-page .subscribe-shell{background:#FFFDF7!important;color:#17191D}
+.bridge-editorial.subscribe-page .subscribe-stage{background:#FFFDF7;color:#17191D;border:1px solid #DDE2E8}
+.bridge-editorial.subscribe-page .subscribe-summary{background:#E9F0FF;color:#17191D;border:1px solid #C7D9FF}
+.bridge-editorial.subscribe-page .sub-choice-grid button,.bridge-editorial.subscribe-page .sub-plan-grid button,.bridge-editorial.subscribe-page .sub-field-grid button,.bridge-editorial.subscribe-page .sub-language-grid button{background:#FFF;color:#17191D;border-color:#CDD5DD}
+.bridge-editorial.subscribe-page .sub-choice-grid button:hover,.bridge-editorial.subscribe-page .sub-plan-grid button:hover{background:#E9F0FF;border-color:#2458F5}
+.bridge-editorial.subscribe-page .sub-actions button{background:#2458F5;border-color:#2458F5;color:#FFF}
+.bridge-editorial.subscribe-page .sub-actions .sub-back{background:#FFFDF7;color:#17191D;border-color:#BBC4D0}
+.bridge-editorial.subscribe-page .sub-target-list input{background:#FFF;color:#17191D;border-color:#BBC4D0}
+.bridge-editorial.briefing-page .briefing-cover{background:#FFFDF7;color:#17191D}
+.bridge-editorial.briefing-page .briefing-cover h1{font-family:'Noto Serif KR',Georgia,serif;font-weight:600}
+@media(max-width:760px){
+ .bridge-editorial .nav-inner{min-height:64px}
+ .bridge-editorial .bridge-editorial-logo{font-size:22px}
+ .bridge-editorial .bridge-editorial-logo b{font-size:24px}
+ .bridge-editorial .bridge-editorial-logo small{font-size:8px}
+ .bridge-editorial .list-hero-photo{width:calc(100% - 28px);margin:15px auto 0;min-height:330px}
+ .bridge-editorial .list-hero-photo h1{font-size:clamp(27px,7vw,42px);line-height:1.35}
+ .bridge-editorial .list-hero-photo .wrap{padding:0 22px 30px}
+ .bridge-editorial .ranking-panels{grid-template-columns:minmax(0,1fr)}
+ .bridge-editorial .twr-grid{grid-template-columns:minmax(0,1fr)}
+ .bridge-editorial .tw-grid{grid-template-columns:minmax(0,1fr)}
+ .bridge-editorial.intel-page .intel-hero{padding:64px 0}
+ .bridge-editorial.subscribe-page .subscribe-hero{padding:65px 0 40px}
+ .bridge-editorial .mobile-menu{background:#FFFDF7}
+}
+@media(prefers-reduced-motion:reduce){.bridge-editorial *{scroll-behavior:auto!important}}
