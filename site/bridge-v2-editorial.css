@@ -1,3 +1,6 @@
+/* Shared Korean body font: old internal pages only loaded a serif face,
+   leaving functional Korean text missing on systems without local fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
 /* BRIDGEBRAND 2.0 / unified editorial reading system.
    Scope: existing sector, weekly, trust, methodology, service and briefing pages.
    This is a presentation layer only: index, analytics, evidence, PDF and
