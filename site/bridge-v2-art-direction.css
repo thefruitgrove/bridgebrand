@@ -439,3 +439,184 @@ body.bridge-editorial{background:var(--bv-paper);color:var(--bv-ink)}
   border:0;border-bottom:1px solid #2458F5;
   text-decoration:none;font-weight:800
 }
+
+/* BRIEFING READABILITY & PAGER REPAIR 20261114
+ * Fixes screenshots of near-white lead paragraphs and ink-on-ink panels.
+ * All overrides are screen-only, preserving the existing report/PDF print design.
+ */
+@media screen{
+  body.bridge-editorial.briefing-page .stage-content .lead-copy,
+  body.bridge-editorial.briefing-page .stage-content .lead-copy.compact{
+    color:#202933!important;
+    border-left:3px solid #2458F5!important;
+    background:transparent!important;
+    font-weight:500;
+  }
+  body.bridge-editorial.briefing-page .stage-content .section-conclusion{
+    color:#26323E!important;
+    border-color:#CFD5DF!important;
+  }
+  body.bridge-editorial.briefing-page .stage-content .difference-list strong,
+  body.bridge-editorial.briefing-page .stage-content .compact-differences strong{
+    color:#1F2A36!important;
+  }
+  /* Two-column comparison is an editorial light-paper spread, not a black box. */
+  body.bridge-editorial.briefing-page .question-compare{
+    background:#CFD6E0!important;
+    border:1px solid #CFD6E0!important;
+    gap:1px;
+  }
+  body.bridge-editorial.briefing-page .question-compare article,
+  body.bridge-editorial.briefing-page .question-compare article:last-child{
+    background:#F1F4F9!important;
+    color:#202933!important;
+    padding:clamp(22px,3vw,40px);
+  }
+  body.bridge-editorial.briefing-page .question-compare article:last-child{
+    background:#F6F4EE!important;
+  }
+  body.bridge-editorial.briefing-page .question-compare :is(h3,h4,p,span,em,strong,b){
+    color:#202933!important;
+  }
+  body.bridge-editorial.briefing-page .question-compare small{
+    color:#2458F5!important;
+  }
+  /* Current field-pulse graph must not inherit dark navy or dark text on dark navy. */
+  body.bridge-editorial.briefing-page .field-pulse-visual{
+    background:#F2F5F9!important;
+    border:1px solid #CCD4E0!important;
+    color:#202933!important;
+    box-shadow:none;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-visual :is(h4,h3,p,small,span,b,i,strong){
+    color:#26323E!important;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-visual h4{
+    color:#2458F5!important;
+    font-weight:800;
+  }
+  body.bridge-editorial.briefing-page .pulse-bar div{
+    background:#D9E1EC!important;
+  }
+  body.bridge-editorial.briefing-page .pulse-bar i{
+    background:linear-gradient(90deg,#84A5F6,#2458F5)!important;
+  }
+  body.bridge-editorial.briefing-page .pulse-bar strong{
+    color:#172535!important;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-list li{
+    border-color:#D8DDE6!important;
+    background:transparent;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-list li:nth-child(-n+3){
+    background:#F7F5ED!important;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-list :is(i,b,strong){
+    color:#26323E!important;
+  }
+  body.bridge-editorial.briefing-page .field-pulse-list li:nth-child(-n+3) i{
+    color:#2458F5!important;
+  }
+  /* Other dark tiles left over from the previous version. */
+  body.bridge-editorial.briefing-page .lifestyle-prompts article,
+  body.bridge-editorial.briefing-page .pair-priority article,
+  body.bridge-editorial.briefing-page .pair-grid article{
+    background:#F8F8F5!important;
+    border-color:#D4D9E0!important;
+    color:#202933!important;
+    box-shadow:none;
+  }
+  body.bridge-editorial.briefing-page .lifestyle-prompts article :is(h4,p,small),
+  body.bridge-editorial.briefing-page .pair-priority article :is(h4,p,small),
+  body.bridge-editorial.briefing-page .pair-grid article :is(h4,p,small){
+    color:#293643!important;
+  }
+  body.bridge-editorial.briefing-page .pair-atlas summary{
+    color:#2458F5!important;
+    background:#F7F8FA!important;
+  }
+  /* Match the magazine: fine rules, cobalt navigation, no old dark slab. */
+  body.bridge-editorial.briefing-page .stage-pager{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:stretch;
+    background:#FFFDF7!important;
+    border:0!important;
+    border-top:2px solid #2458F5!important;
+    border-bottom:1px solid #CBD1DA!important;
+    box-shadow:none!important;
+    color:#17191D!important;
+    margin-top:38px;
+  }
+  body.bridge-editorial.briefing-page .stage-pager button{
+    border:0!important;
+    background:transparent!important;
+    color:#2458F5!important;
+    padding:25px 18px;
+    font-weight:800;
+    line-height:1.5;
+    min-width:0;
+  }
+  body.bridge-editorial.briefing-page .stage-pager button:hover,
+  body.bridge-editorial.briefing-page .stage-pager button:focus-visible{
+    background:#E9F0FF!important;
+    outline:2px solid #2458F5;
+    outline-offset:-2px;
+  }
+  body.bridge-editorial.briefing-page .stage-pager button:disabled{
+    opacity:.38;
+    color:#637082!important;
+    cursor:not-allowed;
+  }
+  body.bridge-editorial.briefing-page .stage-pager span{
+    align-self:center;
+    background:#E9F0FF!important;
+    border:1px solid #D0DFFD!important;
+    color:#2458F5!important;
+    letter-spacing:.13em;
+    min-width:66px;
+    text-align:center;
+    padding:11px 12px;
+    font-size:11px;
+    font-weight:900;
+  }
+  /* Conversion happens after the actual analysis; preserve available options. */
+  body.bridge-editorial.briefing-page .trial-conversion{
+    background:#FFFDF7!important;
+    border:0!important;
+    border-top:1px solid #BFC7D1!important;
+    box-shadow:none;
+    color:#17191D!important;
+  }
+  body.bridge-editorial.briefing-page .trial-conversion header :is(h2,p),
+  body.bridge-editorial.briefing-page .trial-conversion-grid>a :is(h3,p,b,span){
+    color:#202933!important;
+  }
+  body.bridge-editorial.briefing-page .trial-conversion-grid>a{
+    background:#F7F8FA!important;
+    color:#202933!important;
+    border:1px solid #D0D6DF!important;
+    box-shadow:none;
+  }
+  body.bridge-editorial.briefing-page .trial-conversion-grid>a:hover{
+    background:#E9F0FF!important;
+    border-color:#2458F5!important;
+  }
+  body.bridge-editorial.briefing-page .trial-conversion :is(small,header>span){
+    color:#2458F5!important;
+  }
+}
+@media screen and (max-width:760px){
+  body.bridge-editorial.briefing-page .question-compare{grid-template-columns:1fr!important}
+  body.bridge-editorial.briefing-page .field-pulse-visual{position:relative;top:auto;padding:20px}
+  body.bridge-editorial.briefing-page .stage-pager button{
+    padding:16px 9px;
+    font-size:11px;
+    text-wrap:balance;
+  }
+  body.bridge-editorial.briefing-page .stage-pager span{
+    min-width:53px;
+    padding:8px 6px;
+    font-size:10px;
+  }
+}
