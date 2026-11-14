@@ -73,3 +73,29 @@ Existing image assets (hero_home, hero_this_week, hero_data and category hero ph
 **Unchanged scientific/functional invariants:** collection runs, scoring, trust grading, evidence provenance, baseline snapshots, the 3-subject comparison, 6-stage briefing content, PDF engine, subscriptions and source-history archive.
 
 **Human verification still required:** sample real PC and mobile visual screenshots at 1440px/390px/320px, typography/contrast/overflow, exact cross-page experience, native Korean-English switching on the new home, product conversion events and accessibility checks. Automated deploy checks are necessary but not sufficient for design quality.
+
+## Reading Room edition — Structural implementation (2026-11-14)
+The latest revision moves beyond palette fixes: the **actual briefing HTML grid** for stage 02 is composed into an editorial report spread on each deterministic rebuild. No BRIDGE index, data provenance, rank, trust or PDF-generation code was modified.
+
+### Current rollout boundaries
+- `site/bridge-v2-reading-room.css`: the last, self-contained screen-only reading-room composition. Editorial headings, full-width page rhythm, large field photograph, accessible paper-based T20 table and bar chart, 320px/390px mobile version.
+- `site/bridge-v2-reading-room.js`: chooses the existing field-appropriate **illustrative** photo on CPR/GOV/UNI/ENT from the URL. It is not evidence.
+- `tools/apply_brand_shell.py`: applies a new semantic `#fp-current.bridge-pulse-feature` with the same `fieldPulseLead` etc. IDs and adds the lightweight 5-step `data-bridge-journey="v2"` on the Intelligence gateway. It does not change the full six-step JS analysis.
+- `site/intelligence.html`: presents genuine current acquisition steps. The two comparisons are **manually selected** (no promise of automatic competitor identification); payment/account activation still needs a separate approved implementation.
+- `tests/test_v2_editorial.py`: asserts actual structural markup, stable JS IDs, no duplicate injection, no PDF print CSS selector leakage.
+- `.github/workflows/bridge-v2-reading-room-qa.yml` and `tools/verify_v2_reading_room.mjs`: real public data end-to-end checks of UNI 20-row chart, image loading, no horizontal overflow at desktop 1440 and mobile 390/320, six retained screenshots.
+
+### Design acceptance checklist
+- The page should be judged as a *single editorial research publication* from cover through report, not by whether it contains nice cards.
+- Images support reading rhythm and subject matter, not factual evidence for measured reputation.
+- Each chart must have meaningful labels and real figures, based on the existing 400-subject published snapshot and original six-axis scoring.
+- Every paragraph must remain legible against its own background. Use computed-style contrast auditing and human screenshot review (including inactive/active stages), not merely successful builds.
+- Navigation from MY PICK to the six-stage report, and onward to report preservation and one-off/subscription consultation should remain explicit and error-free.
+- Do not place price or checkout promises until pricing and payment capabilities are approved.
+
+### Next milestones, in order
+1. Extend genuine *structural* layout to all remaining briefing stages (01,03,04,05,06); preserve the 15 existing axis-pair analyses and PDF rendering.
+2. Apply one semantic editorial data-story pattern to four sector rankings and weekly PUBLICITY, not merely an inherited CSS color override.
+3. QA user selection errors, full BRIDGE report, laptop/tablet/mobile view, accessibility (text contrast/keyboard), Korean/English, screenshots and one-page evidence lineage.
+4. Validate real customer task completion: find subject, finish 3-way comparison, understand why, generate/share report, seek a paid service.
+5. Publish the approved identity and implementation rules in the BRIDGEBRAND brandbook only after visual QA confirms parity across pages.
