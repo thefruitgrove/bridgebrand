@@ -38,5 +38,22 @@ class TestBridgePositioningCopy(unittest.TestCase):
         self.assertIn("BRIDGE는 그 신호의 근거와 의미를 분석합니다.", home)
 
 
+    def test_briefing_does_not_promote_missing_values_to_zero(self):
+        script = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
+        self.assertIn("hasNumber=(v)=>v!==null&&v!==undefined&&v!==''", script)
+        self.assertIn("num=(v,d=2)=>hasNumber(v)", script)
+        self.assertIn("signed=(v)=>hasNumber(v)", script)
+        self.assertIn("['observed','maintained'].includes(e.axis_status[a])", script)
+        self.assertIn("!hasNumber(e.score_change)?'delta-flat'", script)
+        self.assertIn("!hasNumber(e.wow_delta)?'delta-flat'", script)
+        self.assertIn("hasNumber(pick.previous_rank)?", script)
+
+    def test_existing_report_action_and_evidence_sections_preserved(self):
+        script = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
+        for fragment in ("printEvidence(pick)", "ACTION PRIORITIES", "근거 지도와 해석 한계",
+                         "다음 회차 검증 질문", "buildPrintReport()"):
+            self.assertIn(fragment, script)
+
+
 if __name__ == "__main__":
     unittest.main()
