@@ -76,7 +76,7 @@ def main() -> int:
     )
     observations = db.select(
         "bridge_axis_observations",
-        f"select=entity_id,axis&as_of_date=eq.{date}&limit=3000",
+        f"select=entity_id,axis&as_of_date=eq.{date}",
     )
     # Keep this query bounded. The morning's current source successes will
     # be in collection_runs with started_at on the requested KST day.
