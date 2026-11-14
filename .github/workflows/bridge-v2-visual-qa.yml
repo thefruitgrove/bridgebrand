@@ -23,6 +23,19 @@ jobs:
             echo 'Chrome is not installed on this runner; screenshot QA unavailable.'
             exit 1
           fi
+          python - <<'PY'
+          import time, urllib.request
+          endpoint='https://bridgebrand.co.kr/bridge-v2-editorial.css'
+          for n in range(10):
+              with urllib.request.urlopen(urllib.request.Request(endpoint,headers={'User-Agent':'BRIDGE-UI-QA'}),timeout=15) as res:
+                  css=res.read().decode('utf-8','replace')
+              if 'Editorial Intelligence gateway' in css:
+                  print('Current magazine detail CSS is on public edge')
+                  break
+              time.sleep(10)
+          else:
+              raise SystemExit('New CSS not yet deployed; refuse screenshots of older release')
+          PY
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/home-desktop-1440.png https://bridgebrand.co.kr/
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/home-mobile-390.png https://bridgebrand.co.kr/
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/intelligence-desktop-1440.png https://bridgebrand.co.kr/intelligence.html
@@ -31,6 +44,7 @@ jobs:
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/cpr-mobile-390.png https://bridgebrand.co.kr/cpr.html
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=1440,1000 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/week-desktop-1440.png https://bridgebrand.co.kr/this-week.html
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=390,844 --force-device-scale-factor=1 --virtual-time-budget=2500 --screenshot=/tmp/bridge-v2-screen/week-mobile-390.png https://bridgebrand.co.kr/this-week.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage --window-size=320,700 --force-device-scale-factor=1 --virtual-time-budget=4000 --screenshot=/tmp/bridge-v2-screen/intelligence-mobile-320.png https://bridgebrand.co.kr/intelligence.html
           ls -lh /tmp/bridge-v2-screen
       - uses: actions/upload-artifact@v4
         if: always()
