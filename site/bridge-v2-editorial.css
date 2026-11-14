@@ -165,3 +165,30 @@ body.bridge-editorial{
  .bridge-editorial.briefing-page .easy-read-card{background:#E9F0FF;border-color:#2458F5}
  .bridge-editorial.briefing-page .easy-read-card p{color:#17191D}
 }
+
+/* PUBLICITY: magazine cover photography followed by a clean editorial index. */
+.bridge-editorial .pub-shell{background:#FFFDF7;color:#17191D}
+.bridge-editorial .pub-shell:before{display:none}
+.bridge-editorial .pub-cover{max-width:1470px;margin:24px auto 0;min-height:460px;padding:90px clamp(23px,6vw,90px) 55px;background:linear-gradient(180deg,rgba(14,18,25,.33),rgba(14,18,25,.7)),url("img/hero_this_week.jpg") center/cover no-repeat;color:#FFFDF7}
+.bridge-editorial .pub-back,.bridge-editorial .pub-kicker{color:#FAF9F2}
+.bridge-editorial .pub-cover h1{color:#FFFDF7;font-family:'Noto Serif KR',Georgia,serif;font-weight:500}
+.bridge-editorial .pub-cover h1 span{color:#FFD633}
+.bridge-editorial .pub-intro{color:#FAF9F2}
+.bridge-editorial .pub-schedule{border-top-color:#FFFFFF77}
+.bridge-editorial .pub-schedule span{color:#F0F3FA}
+.bridge-editorial .pub-board{padding-top:65px}
+.bridge-editorial .pub-board-head{border-color:#17191D}
+.bridge-editorial .pub-board-head h2{color:#2458F5}
+.bridge-editorial .pub-board-head p,.bridge-editorial #pubStatus{color:#556170}
+.bridge-editorial .pub-week h3{color:#17191D}
+.bridge-editorial .pub-week span,.bridge-editorial .pub-row-meta{color:#637080}
+.bridge-editorial .pub-row{color:#17191D;border-color:#DDE2E8}
+.bridge-editorial .pub-row:hover{background:#E9F0FF}
+.bridge-editorial .pub-no,.bridge-editorial .pub-row-label{color:#2458F5}
+.bridge-editorial .pub-row-title{color:#17191D}
+.bridge-editorial .pub-row.pending{color:#6C7480}
+.bridge-editorial .pub-article{background:#FFFDF7;color:#17191D;box-shadow:none;border-top:2px solid #2458F5}
+.bridge-editorial .pub-article-label,.bridge-editorial .pub-index-link{color:#2458F5}
+.bridge-editorial .pub-note{color:#5B6675;border-color:#DDE2E8}
+.bridge-editorial .pub-share button{color:#2458F5;border-color:#2458F5}
+@media(max-width:760px){.bridge-editorial .pub-cover{margin:12px 13px 0;min-height:360px;padding:70px 23px 40px}.bridge-editorial .pub-cover h1{font-size:clamp(48px,13vw,76px)}.bridge-editorial .pub-board{padding-top:40px}}
