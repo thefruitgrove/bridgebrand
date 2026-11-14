@@ -70,5 +70,16 @@ class TestBridgePositioningCopy(unittest.TestCase):
         self.assertNotIn("score_contributions", row)
 
 
+    def test_action_checks_are_evidence_gated(self):
+        script = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
+        html = (ROOT / "site" / "briefing.html").read_text(encoding="utf-8")
+        for fragment in ("function actionCheckItems(e)", "function actionCheckSummary(e,maxItems=3)",
+                         "function actionCheckHtml(e,maxItems=3)", "priority={reference:0,maintained:1,observed:2}",
+                         "actionCheckHtml(pick)", "escEvidence(v.question)"):
+            self.assertIn(fragment, script)
+        self.assertIn('id="bridgeActionChecks"', html)
+        self.assertIn("이 목록은 데이터의 적격성 및 검증 필요성에 따른 점검 순서", script)
+
+
 if __name__ == "__main__":
     unittest.main()
