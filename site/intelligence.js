@@ -28,6 +28,13 @@
       throw new Error(`${state.field} T100 최신 공개 스냅샷이 완전하지 않아 분석을 시작하지 않습니다.`);
     }
     buildSelects();
+    // BRIDGEBRAND 2.0 hand-off: preserve the visitor's first selection
+    // without altering source scores, comparison rules, or report logic.
+    const requestedPick = params.get('pick');
+    if (requestedPick && state.entries.some((entry) => String(entry.external_id) === requestedPick)) {
+      $('trioPick1').value = requestedPick;
+      syncSelectAvailability();
+    }
     $('trioSnapshotMeta').textContent = `${snapshotDate} 기준 · ${state.field} T100 공개대상 ${state.entries.length}개 · 동일 분야 안에서만 비교`;
   }).catch((err) => { $('trioError').hidden = false; $('trioError').textContent = `${err.message} 잠시 후 다시 확인해 주세요.`; $('trioRun').disabled = true; });
 
