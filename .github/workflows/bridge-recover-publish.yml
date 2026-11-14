@@ -1,16 +1,15 @@
 name: BRIDGE Recover Existing Observations
 
+# At 06:45 KST inspect the stored evidence. Never collect sources again from
+# this recovery workflow. A healthy 05:15 run costs only one small DB check.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/bridge-recover-publish.yml'
+  schedule:
+    - cron: "45 21 * * *" # 06:45 KST
   workflow_dispatch:
     inputs:
       as_of_date:
-        description: 'KST observation date YYYY-MM-DD'
-        required: true
-        default: '2026-11-14'
+        description: 'KST observation date YYYY-MM-DD; blank means today'
+        required: false
         type: string
 
 concurrency:
@@ -28,7 +27,7 @@ jobs:
       TZ: Asia/Seoul
       SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
-      AS_OF_DATE: ${{ inputs.as_of_date || '2026-11-14' }}
+      AS_OF_DATE: ${{ inputs.as_of_date }}
       CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
     steps:
       - uses: actions/checkout@v4
@@ -37,51 +36,58 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Test prior to recovery
-        run: python -m unittest discover -s tests -q
-      - name: Confirm source observations exist; do not recollect
+      - name: Fix the Korean publication date
         run: |
-          python - <<'PY'
-          import os
-          from bridge_pipeline.core import SupabaseRest
-          date = os.environ['AS_OF_DATE']
-          rows = SupabaseRest().select('bridge_axis_observations',f'select=entity_id&as_of_date=eq.{date}&limit=1')
-          if not rows:
-              raise SystemExit(f'No observations for {date}; recovery aborted without collection')
-          print(f'Existing observations found for {date}; running scoring only')
-          PY
-      - name: Recompute scores from stored evidence
+          if [ -z "$AS_OF_DATE" ]; then
+            echo "AS_OF_DATE=$(python -c 'from bridge_pipeline.core import publication_date; print(publication_date())')" >> "$GITHUB_ENV"
+          fi
+      - name: Decide whether any recovery is necessary
+        id: gate
+        run: python tools/recovery_gate.py --date "$AS_OF_DATE" --github-output "$GITHUB_OUTPUT"
+      - name: Explain no-op recovery
+        if: ${{ steps.gate.outputs.mode == 'skip' }}
+        run: echo 'Published snapshot and all 400 metrics already match; no re-collection, scoring or redeployment.'
+      - name: Run unit tests before recovery
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        run: python -m unittest discover -s tests -q
+      - name: Compute only if stored evidence is complete and metrics missing
+        if: ${{ steps.gate.outputs.mode == 'score' }}
         run: python -m bridge_pipeline.run score --date "$AS_OF_DATE"
-      - name: Verify V5 lineage; block invalid publication
+      - name: Audit historical lineage before any publication
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
         run: python -m bridge_pipeline.audit_v5 --date "$AS_OF_DATE"
-      - name: Publish audited snapshot
+      - name: Publish existing audited metrics without recollection
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
         run: python -m bridge_pipeline.run publish-daily --date "$AS_OF_DATE"
-      - name: Export and check
+      - name: Export existing publication and check consistency
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
         run: |
           python -m bridge_pipeline.run export --date "$AS_OF_DATE"
           python -m bridge_pipeline.run healthcheck
-      - name: Rebuild static site
+      - name: Rebuild static site from the audited snapshot
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
         run: |
           python build.py
           python tools/apply_brand_shell.py
           python build_spa.py
           python tools/apply_brand_shell.py
-      - name: Commit reproducible public export
+      - name: Commit only if still based on current production source
+        if: ${{ steps.gate.outputs.mode != 'skip' }}
         run: |
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-            echo "Production has newer commit; refuse stale publication"
+            echo "::error::Source changed during recovery; decline stale publication"
             exit 1
           fi
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
           git add site/data/latest.json site/data/uni_latest.json site/data/uni_weekly.json data/pipeline_status.json data/audit data/daily data/weekly data/latest/uni_latest.json site/
           if git diff --cached --quiet; then
-            echo "No public snapshot changes"
+            echo 'No changes to public snapshot'
           else
             git commit -m "data: recovered BRIDGE snapshot $AS_OF_DATE [bridge-data]"
             git push origin HEAD:main
           fi
-      - name: Trigger deployment (only if configured)
-        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+      - name: Request deployment only for actual repaired publication
+        if: ${{ success() && steps.gate.outputs.mode != 'skip' && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
         run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
