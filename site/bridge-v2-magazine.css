@@ -173,3 +173,22 @@ body{background:#FFFDF7;color:#17191D}
  .v2-photoessay-caption p{text-align:left}
 }
 @media(max-width:380px){.v2-photoessay-major{height:340px}.v2-photoessay-side{grid-template-rows:160px}.v2-photoessay-head h2{font-size:29px}}
+
+/* Attribution text is metadata, not a visually dominant second headline. */
+.v2-footer .v2-photo-credit{
+  margin:17px 0 0;
+  max-width:none;
+  font:400 12px/1.8 'Noto Sans KR',sans-serif;
+  color:#525966;
+  letter-spacing:0;
+}
+.v2-footer .v2-photo-credit a{
+  color:inherit;font:inherit;text-decoration:underline;
+  text-decoration-color:#A7B5C4;text-underline-offset:3px;
+}
+.v2-footer .v2-photo-credit a:hover,.v2-footer .v2-photo-credit a:focus-visible{
+  color:#2458F5;text-decoration-color:#2458F5;
+}
+@media(max-width:760px){
+  .v2-footer .v2-photo-credit{font-size:12px;line-height:1.85}
+}
