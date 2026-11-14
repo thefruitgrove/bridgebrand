@@ -43,7 +43,7 @@ jobs:
           fi
       - name: Decide whether any recovery is necessary
         id: gate
-        run: python tools/recovery_gate.py --date "$AS_OF_DATE" --github-output "$GITHUB_OUTPUT"
+        run: python -m tools.recovery_gate --date "$AS_OF_DATE" --github-output "$GITHUB_OUTPUT"
       - name: Explain no-op recovery
         if: ${{ steps.gate.outputs.mode == 'skip' }}
         run: echo 'Published snapshot and all 400 metrics already match; no re-collection, scoring or redeployment.'
