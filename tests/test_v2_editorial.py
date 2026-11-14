@@ -11,8 +11,13 @@ class EditorialTests(unittest.TestCase):
         html = render()
         for required in ('v2SearchForm', 'id="v2SignalCards"', 'v2-mag-cover-photo',
                          'v2-mag-photo', 'v2-mag-intel-image', 'bridge-v2-magazine.css',
-                         'img/hero_home.jpg', 'img/hero_data.jpg'):
+                         'img/bridge-editorial-cover.webp', 'img/bridge-editorial-rhythm.webp',
+                         'img/bridge-editorial-reading.webp', 'img/bridge-editorial-structure.webp'):
             self.assertIn(required, html)
+        # Replacing a photo must update both the HTML and the release test.
+        for image in ('bridge-editorial-cover.webp', 'bridge-editorial-rhythm.webp',
+                      'bridge-editorial-reading.webp', 'bridge-editorial-structure.webp'):
+            self.assertTrue((SITE / 'img' / image).is_file(), f'Missing photo: {image}')
 
     def test_magazine_palette_does_not_turn_every_section_into_a_color_card(self):
         css = (SITE/'bridge-v2-magazine.css').read_text(encoding='utf-8')
