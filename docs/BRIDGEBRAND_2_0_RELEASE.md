@@ -54,3 +54,22 @@ GitHub Actions Release checks node syntax, three regression cases, source validi
 4. Preserve existing Korean/English access throughout the site; validate and implement a native V2 home language switch if needed.
 5. Extend common blue/yellow visual system to THIS WEEK and rank/report pages only after UX testing; keep scientific meaning of chart colors independent.
 6. Finalize monetization service catalogue separately and then issue official Brand Book PDF + design tokens after visual QA.
+
+## Editorial revision II — visual decision (2026-11-14)
+The initial version showed too many competing cobalt/yellow blocks and looked like a presentation dashboard, not a visual research magazine. The user rejected the initial visual quality and inconsistent internal-page styling.
+
+**Superseding design direction:** BRIDGE is a *premium editorial research magazine connected to a working analysis product*, not a four-color pitch deck. Warm white occupies the majority of every ordinary reading page; Signal Blue is typographic/navigation ink, and Signal Yellow is reserved for rare visual punctuation. Avoid alternating full-width white/yellow/blue backgrounds and repeated rounded stat cards. Photo-led covers, ample whitespace, elegant editorial serif titles, restrained captions, hairline rules, real data and source dates define the layout.
+
+**Canonical edition files:**
+- `site/bridge-v2.html` and `site/bridge-v2-magazine.css`: photo-led cover, weekly-photo essay, restrained editorial sector navigation, Intelligence reading-room feature
+- `site/bridge-v2-editorial.css`: shared warm-white/blue magazine visual system for sector ranking, THIS WEEK, PUBLICITY, methodology, evidence grade, Intelligence, subscription and six-stage briefing
+- `tools/apply_brand_shell.py`: deterministic, idempotent styling/link and wordmark application for the same internal pages on future daily rebuilds
+- `tests/test_v2_editorial.py`: test page invariants and editorial style injection
+- `.github/workflows/bridge-v2-magazine-release.yml`: static-only full-site visual synchronization, immutable 400-rankings snapshot assertion, public-edge integration test
+- Screenshot QA workflow captures homepage, CPR, THIS WEEK and Intelligence in desktop/mobile viewport sizes.
+
+Existing image assets (hero_home, hero_this_week, hero_data and category hero photos) are reused. They are illustrative editorial photos; they do not assert particular reputational events or evidence. The existing older blue/yellow color-block Intelligence stylesheet is retired.
+
+**Unchanged scientific/functional invariants:** collection runs, scoring, trust grading, evidence provenance, baseline snapshots, the 3-subject comparison, 6-stage briefing content, PDF engine, subscriptions and source-history archive.
+
+**Human verification still required:** sample real PC and mobile visual screenshots at 1440px/390px/320px, typography/contrast/overflow, exact cross-page experience, native Korean-English switching on the new home, product conversion events and accessibility checks. Automated deploy checks are necessary but not sufficient for design quality.
