@@ -231,6 +231,25 @@ def intelligence(html: str) -> str:
     return html
 
 
+def subscribe(html: str) -> str:
+    # Commercial catalogue and amounts are intentionally PROTOTYPE values
+    # until approved by the operator; do not present checkout as live.
+    if 'id="bridgeCommercialNotice"' not in html:
+        anchor = '<section class="service-overview" id="serviceOverview">'
+        if anchor not in html:
+            raise ValueError("Subscription editorial notice placement missing")
+        notice = (
+            '<div class="bridge-commercial-notice" id="bridgeCommercialNotice" role="note">'
+            '<b>BRIDGE SERVICE / 구성 체험 안내</b>'
+            '<p>현재 상품명·이용주기·표시 가격은 서비스 구성 검토를 위한 임시 예시입니다. '
+            '실제 판매조건은 아직 확정되지 않았으며, 회원가입·결제 및 자동 전달도 개통 전입니다. '
+            '이 화면에서 선택한 구성은 구매가 아니라 기기 내 임시 저장입니다.</p>'
+            '</div>'
+        )
+        html=html.replace(anchor,notice+'\\n  '+anchor,1)
+    return html
+
+
 def compose(path: Path, html: str) -> str:
     if path.name == "briefing.html":
         return brief(html)
@@ -240,4 +259,6 @@ def compose(path: Path, html: str) -> str:
         return weekly(html)
     if path.name == "intelligence.html":
         return intelligence(html)
+    if path.name == "subscribe.html":
+        return subscribe(html)
     return html
