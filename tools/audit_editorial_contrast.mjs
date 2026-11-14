@@ -51,7 +51,7 @@ const scan=`(()=>{
    if(!str||!visible(el)||str.length>290)continue;
    // Photography overlays have deliberate white-on-photo caption text;
    // a solid background-color algorithm cannot measure the actual pixels.
-   if(el.closest('.v2-mag-cover-photo,.v2-photoessay,.v2-mag-intel-image,.bridge-intel-photo,.bridge-service-photo,.bridge-pulse-photo'))continue;
+   if(el.closest('.v2-mag-cover-photo,.v2-photoessay,.v2-mag-intel-image,.bridge-intel-photo,.bridge-service-photo,.bridge-pulse-photo,.bridge-guide-photo,.bridge-chapter-banner,.bridge-publicity-photo,.bridge-sector-spread figure,.bridge-weekly-feature figure'))continue;
    const style=getComputedStyle(el);
    let color=rgb(style.color);if(!color)continue;
    let ancestor=el,background=null,image=false;
@@ -110,9 +110,9 @@ async function start(){
       console.log(JSON.stringify({width,...report}));
       if(report.severe.length)fails.push({width,path,count:report.severe.length,samples:report.severe.slice(0,8)});
       if(path==='briefing.html'){
-        // The initial page alone cannot catch white text on light paper in
+        // All six stage views must be evaluated; the cover cannot catch invisible
         // stage 1 and hidden-on-load field-pulse charts in stage 2.
-        for(const stage of [1,2]){
+        for(const stage of [1,2,3,4,5,6]){
           const click=await command('Runtime.evaluate',{
             expression:`(()=>{
               const button=document.querySelector('.journey-track button[data-stage="${stage}"]');
