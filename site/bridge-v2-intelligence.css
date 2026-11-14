@@ -1,0 +1,78 @@
+/* BRIDGE INTELLIGENCE 2.0 visual layer.
+   Presentation-only: existing 6-stage briefing, scoring and subscription
+   logic remain untouched. Mobile + desktop styles are isolated to intel-page. */
+body.intel-page{--b2-blue:#2458F5;--b2-yellow:#FFD633;--b2-paper:#FFFDF7;--b2-ink:#17191D;--b2-border:#DDE2E8;background:var(--b2-paper);color:var(--b2-ink)}
+.intel-page .nav.on-dark{position:relative;top:auto;background:#2458F5;border-bottom:1px solid #1947CC}
+.intel-page .nav.on-dark .nav-item>a,.intel-page .nav.on-dark .nav-util{color:#FFF}
+.intel-page .nav.on-dark .nav-item>a:hover,.intel-page .nav.on-dark .nav-util:hover{color:#FFD633}
+.intel-page .intel-hero{padding:90px 0 80px;background:radial-gradient(circle at 84% 38%,#FFD633 0,#FFD633 12%,transparent 12.1%),radial-gradient(circle at 75% 35%,#E9F0FF 0,#E9F0FF 21%,transparent 21.1%),#FFFDF7;border-bottom:1px solid #DDE2E8;color:#17191D}
+.intel-page .intel-eyebrow{color:#2458F5;font-family:'Noto Sans KR',sans-serif;font-weight:900}
+.intel-page .intel-hero h1{font-family:'Noto Sans KR',var(--sans);font-weight:900;letter-spacing:-.075em;line-height:1.22;max-width:970px;position:relative;z-index:1}
+.intel-page .intel-hero p{color:#4F5968;font-size:16px;max-width:700px;position:relative;z-index:1}
+.intel-page .intel-hero-cta{background:#fff;border:1px solid #D3DBE8;color:#17191D;border-radius:8px}
+.intel-page .intel-hero-cta.primary{background:#2458F5;border-color:#2458F5;color:#fff}
+.intel-page .intel-hero-cta small{color:#2458F5}
+.intel-page .intel-hero-cta.primary small,.intel-page .intel-hero-cta.primary i{color:#FFD633}
+.intel-page .intel-hero-cta i{color:#2458F5}
+.intel-page .intel-hero-cta:hover{background:#E9F0FF;border-color:#2458F5}
+.intel-page .intel-hero-cta.primary:hover{background:#1647D3}
+.intel-page .field-engine-section{background:#FFD633;color:#17191D;padding:74px 0}
+.intel-page .field-engine-head>span{color:#17191D}
+.intel-page .field-engine-head h2{font-family:'Noto Sans KR',var(--sans);font-weight:900;letter-spacing:-.055em}
+.intel-page .field-engine-head p{color:#4C4636}
+.intel-page .field-engine-card{background:#FFFDF7;color:#17191D;border:1px solid #C7AB36;border-radius:9px;min-height:175px}
+.intel-page .field-engine-card:hover,.intel-page .field-engine-card.active{background:#2458F5;border-color:#2458F5;color:#fff}
+.intel-page .field-engine-card b{font-family:'Noto Sans KR',var(--sans);font-weight:900;color:#2458F5}
+.intel-page .field-engine-card:hover b,.intel-page .field-engine-card.active b{color:#FFD633}
+.intel-page .field-engine-card span{color:#536174}
+.intel-page .field-engine-card:hover span,.intel-page .field-engine-card.active span{color:#EFF4FF}
+.intel-page .field-engine-card em{color:#2458F5}
+.intel-page .field-engine-card:hover em,.intel-page .field-engine-card.active em{color:#FFD633}
+.intel-page .intel-section{border-bottom:1px solid #DDE2E8;background:#FFFDF7;color:#17191D}
+.intel-page .trio-beta{background:#E9F0FF;color:#17191D}
+.intel-page .intel-section-no,.intel-page .brief-card b,.intel-page .choice-card b,.intel-page .package-card small{color:#2458F5}
+.intel-page .intel-section h2{font-family:'Noto Sans KR',var(--sans);font-weight:800;line-height:1.3;letter-spacing:-.065em}
+.intel-page .intel-section-desc{color:#505B6A}
+.intel-page .trio-badge{border-color:#2458F5;color:#2458F5;background:#fff;border-radius:4px}
+.intel-page .trio-picker{background:#fff;border:1px solid #C8D7F5;border-radius:12px}
+.intel-page .trio-picker label span,.intel-page .discovery-language legend{color:#2458F5}
+.intel-page .trio-picker select{color:#17191D;background:#F7F9FC;border:1px solid #C7D0DF;border-radius:7px}
+.intel-page .trio-run{background:#2458F5;color:#fff;border-color:#2458F5;border-radius:7px}
+.intel-page .trio-run:disabled{opacity:.45}
+.intel-page .discovery-language{border-top-color:#DDE2E8}
+.intel-page .discovery-language button{background:#fff;color:#303947;border-color:#C7D0DF;border-radius:6px}
+.intel-page .discovery-language button.active{background:#FFD633;color:#17191D;border-color:#FFD633}
+.intel-page .trio-snapshot-meta,.intel-page .discovery-note{color:#526072}
+.intel-page .brief-card,.intel-page .package-card,.intel-page .choice-card{border:1px solid #DDE2E8;background:#fff;border-radius:11px;color:#17191D}
+.intel-page .brief-card h3,.intel-page .choice-card h3,.intel-page .package-card h3{color:#17191D}
+.intel-page .brief-card p,.intel-page .choice-card p,.intel-page .package-card p{color:#526071}
+.intel-page .package-card.featured{border:2px solid #2458F5;background:#E9F0FF}
+.intel-page .package-card .cycle,.intel-page .package-card li{color:#2F3C50}
+.intel-page .package-card ul{border-top-color:#DDE2E8}
+.intel-page .package-card li{border-bottom-color:#DDE2E8}
+.intel-page .intel-note{border-left:4px solid #2458F5;background:#E9F0FF;color:#344155}
+.intel-page .service-builder{background:#F4F7FD}
+.intel-page .builder-controls,.intel-page .builder-controls fieldset{border-color:#D7DFEC}
+.intel-page .builder-controls legend b{border-color:#2458F5;color:#2458F5}
+.intel-page .option-row button,.intel-page .package-options button{background:#fff;border:1px solid #C7D0DF;border-radius:7px;color:#303947}
+.intel-page .option-row button.active,.intel-page .package-options button.active{background:#FFD633;color:#17191D;border-color:#E3B919}
+.intel-page .package-options span{color:#536071}
+.intel-page .builder-targets input{background:#fff;color:#17191D;border:1px solid #C7D0DF;border-radius:6px}
+.intel-page .builder-review{background:#2458F5;color:#fff;border:0;border-radius:12px}
+.intel-page .builder-review>small{color:#FFD633}
+.intel-page .builder-review dt,.intel-page .builder-review p,.intel-page .builder-review em{color:#E1E9FF}
+.intel-page .builder-review dl,.intel-page .builder-review dl div{border-color:#ffffff44}
+.intel-page .builder-review .btn{background:#FFD633;color:#17191D;border-color:#FFD633;border-radius:6px}
+.intel-page .trio-error{color:#A52929}
+@media(max-width:760px){
+ .intel-page .nav.on-dark{position:relative;top:auto}
+ .intel-page .intel-hero{padding:69px 0 54px;background:radial-gradient(circle at 90% 16%,#FFD633 0,#FFD633 7%,transparent 7.1%),#FFFDF7}
+ .intel-page .intel-hero h1{font-size:clamp(32px,8vw,45px);line-height:1.32}
+ .intel-page .intel-hero p{font-size:13px;line-height:1.85}
+ .intel-page .intel-hero-actions{grid-template-columns:1fr;max-width:none}
+ .intel-page .field-engine-section{padding:54px 0}
+ .intel-page .field-engine-card{min-height:145px}
+ .intel-page .intel-section{padding:54px 0}
+ .intel-page .trio-picker{padding:18px}
+ .intel-page .intel-section h2{font-size:clamp(25px,6vw,35px)}
+}
