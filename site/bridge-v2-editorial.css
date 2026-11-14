@@ -203,3 +203,26 @@ body.bridge-editorial{
 .bridge-editorial .ranking-master .rk-row:hover{background:#E9F0FF}
 .bridge-editorial .ranking-master .rk-row.top3{background:#F5F6FA;border-color:#DDE2E8}
 .bridge-editorial .ranking-master .rk-row.top3 .rk-num{color:#2458F5}
+
+/* Editorial Intelligence gateway: links instead of two pitch-deck tiles. */
+.bridge-editorial.intel-page .intel-hero-actions{display:flex;flex-wrap:wrap;gap:14px 32px;max-width:870px}
+.bridge-editorial.intel-page .intel-hero-cta,
+.bridge-editorial.intel-page .intel-hero-cta.primary,
+.bridge-editorial.intel-page .intel-hero-cta:not(.primary){
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;
+  flex:1 1 300px;min-height:78px;padding:16px 4px 15px;
+  border:0;border-bottom:2px solid #17191D;border-radius:0;
+  background:transparent!important;color:#17191D!important;box-shadow:none
+}
+.bridge-editorial.intel-page .intel-hero-cta.primary{border-bottom-color:#2458F5;color:#2458F5!important}
+.bridge-editorial.intel-page .intel-hero-cta span{font-size:15px}
+.bridge-editorial.intel-page .intel-hero-cta small{color:#6B7786!important;letter-spacing:.1em}
+.bridge-editorial.intel-page .intel-hero-cta i,.bridge-editorial.intel-page .intel-hero-cta.primary i{color:#2458F5!important}
+.bridge-editorial.intel-page .intel-hero-cta:hover{transform:none!important;border-bottom-color:#2458F5;color:#2458F5!important}
+@media(max-width:760px){
+ .bridge-editorial.intel-page .intel-hero h1.hero-title{font-size:clamp(28px,7vw,39px);line-height:1.38;max-width:100%;width:100%;overflow-wrap:normal;word-break:keep-all}
+ .bridge-editorial.intel-page .intel-hero .hero-title>span{display:block!important;white-space:normal!important;word-break:keep-all;overflow-wrap:normal;text-wrap:balance}
+ .bridge-editorial.intel-page .intel-hero-actions{display:grid;grid-template-columns:1fr;gap:2px;max-width:100%}
+ .bridge-editorial.intel-page .intel-hero-cta,.bridge-editorial.intel-page .intel-hero-cta.primary{min-height:69px;padding:14px 3px;max-width:100%}
+ .bridge-editorial.intel-page .intel-hero-cta span{font-size:13px}
+}
