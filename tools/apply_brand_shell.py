@@ -315,13 +315,13 @@ def apply(path: Path) -> bool:
         if path.name == 'briefing.html':
             updated = re.sub(
                 r'(bridge-v2-report-edition[.]css[?]v=)[^"]+',
-                r'\g<1>20261115-05',
+                r'\g<1>20261115-06',
                 updated,
             )
             if 'bridge-v2-report-edition.css?' not in updated:
                 updated = updated.replace(
                     '</head>',
-                    '<link rel="stylesheet" href="bridge-v2-report-edition.css?v=20261115-05">\n</head>',
+                    '<link rel="stylesheet" href="bridge-v2-report-edition.css?v=20261115-06">\n</head>',
                     1,
                 )
     if updated != text:
