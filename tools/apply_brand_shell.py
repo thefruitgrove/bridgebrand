@@ -116,8 +116,13 @@ def main() -> None:
         from tools.seo_metadata import apply_home_seo
     except ModuleNotFoundError:
         from seo_metadata import apply_home_seo
+    # The 2.0 homepage is composed after legacy build.py output and before
+    # SEO normalization. This preserves the experience across every daily
+    # regeneration without modifying scoring, data collection or reports.
+    from tools.publish_v2_home import publish as publish_v2_home
+    publish_v2_home()
     apply_home_seo(SITE)
-    print(f"brand shell applied to {len(changed)} generated pages")
+    print(f"brand shell applied to {len(changed)} generated pages; V2 home active")
 
 if __name__ == "__main__":
     main()
