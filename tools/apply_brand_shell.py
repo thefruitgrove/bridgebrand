@@ -282,6 +282,11 @@ def apply(path: Path) -> bool:
         except ModuleNotFoundError:
             from apply_v2_editorial_layout import compose as compose_v2
         updated = compose_v2(path, updated)
+        try:
+            from tools.apply_v2_refinement import refine as refine_v2
+        except ModuleNotFoundError:
+            from apply_v2_refinement import refine as refine_v2
+        updated = refine_v2(path, updated)
         updated = re.sub(
             r'(bridge-v2-edition-full[.]css[?]v=)[^"]+',
             r'\g<1>20261115-04',
@@ -293,6 +298,32 @@ def apply(path: Path) -> bool:
                 '<link rel="stylesheet" href="bridge-v2-edition-full.css?v=20261115-04">\n</head>',
                 1,
             )
+        # Separate last-layer typography: all pages share one legible style.
+        updated = re.sub(
+            r'(bridge-v2-final-polish[.]css[?]v=)[^"]+',
+            r'\g<1>20261115-05',
+            updated,
+        )
+        if 'bridge-v2-final-polish.css?' not in updated:
+            updated = updated.replace(
+                '</head>',
+                '<link rel="stylesheet" href="bridge-v2-final-polish.css?v=20261115-05">\n</head>',
+                1,
+            )
+        # Report preview/export is rendered from the existing document DOM;
+        # this CSS is linked last and inherited into the iframe automatically.
+        if path.name == 'briefing.html':
+            updated = re.sub(
+                r'(bridge-v2-report-edition[.]css[?]v=)[^"]+',
+                r'\g<1>20261115-05',
+                updated,
+            )
+            if 'bridge-v2-report-edition.css?' not in updated:
+                updated = updated.replace(
+                    '</head>',
+                    '<link rel="stylesheet" href="bridge-v2-report-edition.css?v=20261115-05">\n</head>',
+                    1,
+                )
     if updated != text:
         path.write_text(updated, encoding="utf-8")
         return True
