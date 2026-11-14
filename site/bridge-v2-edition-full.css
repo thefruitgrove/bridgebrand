@@ -572,3 +572,16 @@ body.bridge-editorial footer .bridge-editorial-footer small{
  font:900 10px/1 'Noto Sans KR',sans-serif;
  letter-spacing:.1em;margin-left:14px;padding-left:12px;
 }
+
+/* STAGE SIX CONVERSION CONTRAST FIX — found in real 1440/390 Chrome audit. */
+@media screen {
+ body.bridge-editorial.briefing-page .trial-subscription-link{
+   color:#2458F5!important;
+   background:#FFFDF7!important;
+   border-color:#2458F5!important;
+   font-weight:800;
+ }
+ body.bridge-editorial.briefing-page .trial-subscription-link span{
+   color:#2458F5!important;
+ }
+}
