@@ -127,17 +127,30 @@ class SupabaseRest:
     def upsert(self, table: str, rows: list[dict[str, Any]], conflict: str) -> Any:
         if not rows:
             return []
-        # Large historical windows can exceed the database statement timeout
-        # when sent as one JSON payload. Keep writes deterministic and bounded.
+        # Axis observations include large evidence/diagnostic JSON. A 500-row
+        # PostgREST upsert has exceeded Supabase's statement timeout in daily
+        # production. Keep other tables' existing behavior unchanged.
+        batch_size = 50 if table == "bridge_axis_observations" else 500
+        conflict_query = f"on_conflict={urllib.parse.quote(conflict)}"
+
+        def write_batch(batch: list[dict[str, Any]]) -> list[dict[str, Any]]:
+            try:
+                return self.request(
+                    "POST", table, batch, conflict_query,
+                    "resolution=merge-duplicates,return=representation",
+                ) or []
+            except RuntimeError as exc:
+                # Retry *only* PostgreSQL statement timeouts (57014). Splitting
+                # preserves idempotent conflict keys and avoids re-running the
+                # costly collection stages. Single-row failures remain visible.
+                if '"code":"57014"' not in str(exc) or len(batch) <= 1:
+                    raise
+                midpoint = len(batch) // 2
+                return write_batch(batch[:midpoint]) + write_batch(batch[midpoint:])
+
         result: list[dict[str, Any]] = []
-        batch_size = 500
         for offset in range(0, len(rows), batch_size):
-            batch = self.request(
-                "POST", table, rows[offset:offset + batch_size],
-                f"on_conflict={urllib.parse.quote(conflict)}",
-                "resolution=merge-duplicates,return=representation",
-            ) or []
-            result.extend(batch)
+            result.extend(write_batch(rows[offset:offset + batch_size]))
         return result
 
     def select(self, table: str, query: str) -> list[dict[str, Any]]:
