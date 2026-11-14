@@ -1,0 +1,61 @@
+name: BRIDGEBRAND 2.0 Reading Room End-to-End Visual QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-v2-reading-room-qa.yml'
+      - 'tools/verify_v2_reading_room.mjs'
+      - 'site/bridge-v2-reading-room.css'
+      - 'site/bridge-v2-reading-room.js'
+      - 'tools/apply_brand_shell.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-reading-room:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for new edition on live domain
+        run: |
+          python - <<'PY'
+          import time,urllib.request
+          checks={
+            'briefing.html':'bridge-v2-reading-room.css',
+            'bridge-v2-reading-room.css':'BRIDGEBRAND 2.0',
+            'intelligence.html':'data-bridge-journey="v2"',
+          }
+          for attempt in range(15):
+            issues=[]
+            for path,fragment in checks.items():
+              try:
+                req=urllib.request.Request('https://bridgebrand.co.kr/'+path,headers={'User-Agent':'BRIDGE-V2-ReadingRoom-QA'})
+                with urllib.request.urlopen(req,timeout=15) as res:
+                  text=res.read().decode('utf-8','replace')
+                if fragment not in text:issues.append(path)
+              except Exception as error:issues.append(str(error))
+            if not issues:
+              print('Reading Room assets present on live edge')
+              break
+            print(attempt,issues,flush=True)
+            if attempt<14:time.sleep(12)
+          else: raise SystemExit('New edition not ready at public edge')
+          PY
+      - name: Use real published subjects in desktop and mobile browser
+        run: |
+          node --check tools/verify_v2_reading_room.mjs
+          node tools/verify_v2_reading_room.mjs
+      - name: Retain screenshots for design review
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-v2-reading-room-desktop-mobile
+          path: /tmp/bridge-reading-room/*.png
+          if-no-files-found: ignore
+          retention-days: 14
