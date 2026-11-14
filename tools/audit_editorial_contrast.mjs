@@ -109,6 +109,33 @@ async function start(){
       const report=outcome.result.value;
       console.log(JSON.stringify({width,...report}));
       if(report.severe.length)fails.push({width,path,count:report.severe.length,samples:report.severe.slice(0,8)});
+      if(path==='briefing.html'){
+        // The initial page alone cannot catch white text on light paper in
+        // stage 1 and hidden-on-load field-pulse charts in stage 2.
+        for(const stage of [1,2]){
+          const click=await command('Runtime.evaluate',{
+            expression:`(()=>{
+              const button=document.querySelector('.journey-track button[data-stage="${stage}"]');
+              if(!button)return false;
+              button.click();
+              return true;
+            })()`,
+            returnByValue:true
+          });
+          if(!click.result?.value)throw new Error('Briefing navigation missing stage '+stage);
+          await delay(280);
+          const active=await command('Runtime.evaluate',{
+            expression:"document.querySelector('.briefing-stage:not([hidden])')?.getAttribute('data-stage-panel')",
+            returnByValue:true
+          });
+          if(String(active.result?.value)!==String(stage))throw new Error('Briefing step '+stage+' did not activate');
+          const result=await command('Runtime.evaluate',{expression:scan,returnByValue:true,awaitPromise:true});
+          if(result.exceptionDetails)throw new Error('Briefing contrast scan failed, stage '+stage);
+          const stageReport=result.result.value;
+          console.log(JSON.stringify({width,stage,...stageReport}));
+          if(stageReport.severe.length)fails.push({width,path,stage,count:stageReport.severe.length,samples:stageReport.severe.slice(0,8)});
+        }
+      }
     }
   }
   if(fails.length){
