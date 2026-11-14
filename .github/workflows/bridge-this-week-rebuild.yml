@@ -1,0 +1,82 @@
+name: BRIDGE THIS WEEK static-only rebuild
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-this-week-rebuild.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: bridge-daily-production
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Seoul
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate the published source snapshot
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('site/data/latest.json').read_text(encoding='utf-8'))
+          assert data.get('dataStatus') == 'published', 'unpublished snapshot'
+          assert data.get('asOfDate'), 'missing publication date'
+          assert len(data.get('rankings', [])) == 400, 'expected 400 verified entities'
+          print('Building from verified published snapshot:', data['asOfDate'])
+          PY
+      - name: Rebuild existing static site; do not collect data or rescore
+        run: |
+          python build.py
+          python tools/apply_brand_shell.py
+          python build_spa.py
+          python tools/apply_brand_shell.py
+      - name: Guard against stale THIS WEEK HTML and file mixing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          snapshot = json.loads(Path('site/data/latest.json').read_text(encoding='utf-8'))
+          html = Path('site/this-week.html').read_text(encoding='utf-8')
+          expected = snapshot['asOfDate'] + ' 기준'
+          assert expected in html, f'Public digest date missing: {expected}'
+          for name in [entry.get('name') for entry in snapshot['rankings'][:30]]:
+              if name and name in html:
+                  break
+          else:
+              raise AssertionError('THIS WEEK cards not backed by published top-30')
+          print('THIS WEEK passed source-date and record checks:', expected)
+          PY
+      - name: Commit published static pages without retriggering collection
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Newer production commit exists; refuse stale static release"
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+          else
+            git commit -m "fix: regenerate THIS WEEK from verified snapshot [bridge-data]"
+            git push origin HEAD:main
+          fi
+      - name: Trigger existing Cloudflare deploy hook if configured
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
