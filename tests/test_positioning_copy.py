@@ -55,5 +55,20 @@ class TestBridgePositioningCopy(unittest.TestCase):
             self.assertIn(fragment, script)
 
 
+    def test_public_evidence_metadata_is_traceable_but_not_invented(self):
+        js = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
+        html = (ROOT / "site" / "briefing.html").read_text(encoding="utf-8")
+        snapshot = __import__("json").loads((ROOT / "site" / "data" / "latest.json").read_text(encoding="utf-8"))
+        row = snapshot["rankings"][0]
+        self.assertIn("id=\"bridgePublicEvidence\"", html)
+        self.assertIn("renderPublicEvidence(pick)", js)
+        self.assertIn("e.axis_evidence_dates?.[a]", js)
+        self.assertIn("evidenceAxisTable(pick)", js)
+        self.assertIn("개별 원자료 ID·원문 링크·자료별 점수 기여도", js)
+        self.assertIn("snapshotId", snapshot)
+        self.assertIn("axis_evidence_dates", row)
+        self.assertNotIn("score_contributions", row)
+
+
 if __name__ == "__main__":
     unittest.main()
