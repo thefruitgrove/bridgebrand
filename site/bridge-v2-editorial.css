@@ -119,3 +119,49 @@ body.bridge-editorial{
  .bridge-editorial .mobile-menu{background:#FFFDF7}
 }
 @media(prefers-reduced-motion:reduce){.bridge-editorial *{scroll-behavior:auto!important}}
+
+/* BRIDGE six-stage report reading room: warm paper, editorial type, blue wayfinding.
+   Screen only; the existing PDF print layout and report logic remain unchanged. */
+@media screen{
+ .bridge-editorial.briefing-page{
+   --br-bg:#FFFDF7;--br-panel:#FFFFFF;--br-paper:#FFFDF7;--br-navy:#2458F5;
+   --br-gold:#2458F5;--br-ink:#17191D;--br-muted:#5B6878;
+   --br-line:#DDE2E8;background:#FFFDF7;color:#17191D
+ }
+ .bridge-editorial.briefing-page .briefing-shell{background:#FFFDF7}
+ .bridge-editorial.briefing-page .briefing-cover{
+   min-height:min(780px,calc(100svh - 74px));padding-top:105px;padding-bottom:80px;
+   border-color:#DDE2E8;background:#FFFDF7
+ }
+ .bridge-editorial.briefing-page .briefing-cover:after{color:#2458F5;opacity:.07}
+ .bridge-editorial.briefing-page .briefing-cover h1{color:#17191D;line-height:1.35}
+ .bridge-editorial.briefing-page .briefing-deck,.bridge-editorial.briefing-page .briefing-cover blockquote{color:#505C6D}
+ .bridge-editorial.briefing-page .briefing-cover-meta,.bridge-editorial.briefing-page .briefing-cover-stats small,.bridge-editorial.briefing-page .briefing-cover-stats em{color:#637082}
+ .bridge-editorial.briefing-page .briefing-cover-stats span{background:#FFF;color:#17191D;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .briefing-cover-stats strong{color:#2458F5}
+ .bridge-editorial.briefing-page .cover-actions a,.bridge-editorial.briefing-page .cover-actions button,.bridge-editorial.briefing-page .report-actions a{color:#2458F5;border:1px solid #2458F5;background:#FFFDF7}
+ .bridge-editorial.briefing-page .briefing-primary{background:#2458F5!important;border-color:#2458F5!important;color:#FFFFFF!important}
+ .bridge-editorial.briefing-page .journey-nav{background:#FFFDF7;border-color:#DDE2E8;backdrop-filter:none}
+ .bridge-editorial.briefing-page .journey-track button{color:#5C6775;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .journey-track button.active{background:#E9F0FF;color:#17191D}
+ .bridge-editorial.briefing-page .journey-track button.active b{color:#2458F5}
+ .bridge-editorial.briefing-page .journey-track em{color:#687483}
+ .bridge-editorial.briefing-page .reading-mode{background:#FFFDF7;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .reading-mode span{color:#586475}
+ .bridge-editorial.briefing-page .reading-mode button{color:#414D5B;border-color:#C7D0DE;background:#FFF}
+ .bridge-editorial.briefing-page .reading-mode button.active{background:#2458F5;border-color:#2458F5;color:#FFF}
+ .bridge-editorial.briefing-page .briefing-stage{background:#FFFDF7;border:0;border-top:1px solid #CCD0D5}
+ .bridge-editorial.briefing-page .briefing-status{color:#657180}
+ .bridge-editorial.briefing-page .briefing-status b{color:#17191D}
+ .bridge-editorial.briefing-page .chapter-nav{border-top-color:#C8CDD4}
+ .bridge-editorial.briefing-page .chapter-nav a{color:#5B6674;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .chapter-nav a:hover{color:#2458F5}
+ .bridge-editorial.briefing-page .stage-heading h2,.bridge-editorial.briefing-page .stage-content h3{font-family:'Noto Serif KR',Georgia,serif;color:#17191D;font-weight:600;line-height:1.35}
+ .bridge-editorial.briefing-page .stage-heading p,.bridge-editorial.briefing-page .stage-content p,.bridge-editorial.briefing-page .stage-content li{color:#475465}
+ .bridge-editorial.briefing-page .lead-copy{color:#17191D!important;border-left-color:#2458F5}
+ .bridge-editorial.briefing-page .section-conclusion{color:#17191D!important;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .definition-grid{background:#DDE2E8;border-color:#DDE2E8}
+ .bridge-editorial.briefing-page .definition-grid article{background:#FFFFFF;color:#17191D}
+ .bridge-editorial.briefing-page .easy-read-card{background:#E9F0FF;border-color:#2458F5}
+ .bridge-editorial.briefing-page .easy-read-card p{color:#17191D}
+}
