@@ -620,3 +620,16 @@ body.bridge-editorial{background:var(--bv-paper);color:var(--bv-ink)}
     font-size:10px;
   }
 }
+
+/* PUBLICITY ARCHIVE CHROME CONTRAST FIX — stage-aware 1440/390 audit. */
+body.bridge-editorial .pub-archive-head{
+  background:#FFFDF7!important;
+  border-color:#CDD4DD!important;
+}
+body.bridge-editorial .pub-archive-head>span{
+  color:#2458F5!important;
+  font-weight:800;
+}
+body.bridge-editorial .pub-archive-head>p{
+  color:#485666!important;
+}
