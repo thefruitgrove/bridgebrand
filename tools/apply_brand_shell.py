@@ -76,6 +76,12 @@ EDITORIAL_WORDMARK = (
     '<small>BRAND</small></a>'
 )
 
+EDITORIAL_FOOTER_WORDMARK = (
+    '<span class="bridge-editorial-footer" aria-label="BRIDGEBRAND">BRIDGE'
+    '<b aria-hidden="true">.</b><small>BRAND</small></span>'
+)
+
+
 # New 2.0 page architecture. Keep all existing data-target IDs unchanged.
 BRIDGE_JOURNEY = '''<section class="bridge-journey" data-bridge-journey="v2" aria-labelledby="bridgeJourneyTitle">
   <div class="bridge-journey-header"><span>SERVICE JOURNEY / DISCOVER · UNDERSTAND · APPLY</span></div>
@@ -205,6 +211,17 @@ def apply(path: Path) -> bool:
                 count=1,
             )
         updated = updated.replace(WORDMARK, EDITORIAL_WORDMARK, 1)
+        # Old SIGNALBRIDGE SVG was light artwork on white, leaving a
+        # near-invisible footer. Use the common BRIDGEBRAND wordmark.
+        updated = re.sub(
+            r'<span class="logo brand-logo-static"(?: aria-label="SIGNALBRIDGE")?>'
+            r'<img class="brand-wordmark-image" '
+            r'src="assets/signalbridge-wordmark[.]svg[^"]*" alt="SIGNALBRIDGE">'
+            r'</span>',
+            EDITORIAL_FOOTER_WORDMARK,
+            updated,
+            count=1,
+        )
     # Keep reading-room layout and service journey across the daily build.
     if path.name in {"briefing.html", "intelligence.html"}:
         updated = re.sub(
