@@ -29,6 +29,17 @@ class EditorialClaimsTests(unittest.TestCase):
         self.assertNotIn("근거 신뢰등급 D는 평판등급이 아닙니다.", self.briefing)
         self.assertIn("근거 신뢰등급은 평판등급이 아닙니다.", self.briefing)
 
+    def test_report_marketing_copy_preserves_explanation_depth(self):
+        self.assertIn("각 결과를 어떻게 읽어야 하는지도 함께 안내합니다.", self.intelligence)
+        self.assertIn("표와 그래프에서는 어떤 값과 차이에 주목해야 하는지", self.intelligence)
+        self.assertNotIn("요약형 보고서", self.intelligence)
+        self.assertNotIn("7~10개의 설명 문장", self.intelligence)
+
+    def test_easy_reading_label_is_valid_korean(self):
+        css = (ROOT / "site" / "briefing.css").read_text(encoding="utf-8")
+        self.assertIn("EASY READ · 먼저 이렇게 이해하세요", css)
+        self.assertNotIn("EASY READ Â·", css)
+
     def test_data_boundaries_and_public_elements_remain(self):
         for term in ('id="bridgePublicEvidence"', 'id="bridgeActionChecks"', 'id="briefingRadar"'):
             self.assertIn(term, self.briefing)
