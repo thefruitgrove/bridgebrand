@@ -52,3 +52,35 @@
 - 통합 후보 전체 오프라인 테스트도 [43686267863](https://github.com/thefruitgrove/bridgebrand/actions/runs/43686267863) **SUCCESS**.
 
 **판정 변경 없음:** 11/15 순위 0건, 라이브 홈페이지 11/13 데이터, 오늘 정규 수집 중단 상태는 해결되지 않았다. 따라서 **시스템 배포 종합 GO/NO-GO는 여전히 NO-GO**. 새로 검증한 `2026-11-14` 가상 공개 산출물은 임시 파일에서만 생성했으며 GitHub main·배포용 JSON·Cloudflare·Supabase에 게시하지 않았다. 정식 운영 전 남은 조건은 실제 최신 수집/발행 및 사이트와 DB 스냅샷 일치, PC/모바일/실대상 PDF 라이브 점검, 클라우드 배포 확인이다.
+
+
+## 6. ChatGPT 직접 운영 긴급수정 및 2026-11-15 20:20 KST 재검증
+
+### 운영 main 최소 핫픽스(실제 적용 완료)
+- main 기존 기준: `7b5e644e0c943f8da7cb2d66d02eb09b4645591f`; 원상복구 브랜치 `backup/pre-release-20261115`은 변경하지 않음.
+- main 커밋 `091ce54e23325e2939cc172be9e4fb3b0ada5719`: `tests/test_footer_copy.py`의 잘못된 28개 HTML 개수 조건을 명시적 실제 중요 화면 목록 + v2 푸터 계약 검사로 대체. 운영 첫 단계에서 발생한 확정적 false-positive CI 실패에 대한 최소 변경이며 데이터 생성·점수·발행 코드를 변경하지 않음.
+- main 커밋 `1e0116ffc5c87890548f13daf50db19b28a41f57`: `.github/workflows/bridge-live-verify.yml`의 08:30 KST 검증에서 최대 2일 경과를 허용하던 `--max-age-days 2`를 `0`으로 수정. 정해진 검증 시각에 당일 발행이 없으면 CI 실패로 표시하게 함. 기존 네 가지 오프라인 분류 테스트는 유지.
+- main 두 핫픽스는 **정식 BRIDGE 2.0 PR 병합/지수 발행/Cloudflare 직접 배포가 아니다**. GitHub main 새 SHA를 확인하였으나 Cloudflare 실제 사이트의 적용 여부는 검증되지 않음.
+
+### PR #11 통합 후보의 추가 보호코드
+- `.github/workflows/bridge-daily.yml`: 운영 전 점검을 핵심 점수·원장·순위·공개 검증으로 분리하고, 전체 편집·Node 회귀검사는 비운영 후보 QA로 옮기는 수정(아직 main에 미반영).
+- `.github/workflows/bridge-live-verify.yml`: 동일한 당일 신선도 강화(운영 main에는 위 최소 핫픽스만 별도로 적용).
+- `site/script.js`: null/비숫자 직전 주간 이력을 숫자 0으로 강제 변환하지 않도록 방어, 이전 주간 결측은 `N/R`로 표기.
+- `tests/test_missing_week_display.js`, `tests/test_live_freshness_gate.py`: 결측/실제 0 분리 및 당일 필수 정책 회귀검사.
+- `.github/workflows/bridge-integration-readonly-qa.yml`: 새 JS 검증 포함.
+- 통합 후보 SHA `f8b96f223e900c97096a441a2142468fa0c4fac6`; Actions `43708154740` **SUCCESS** (읽기 전용 전체 회귀검사와 사이트 재빌드, 공개 데이터 불변 검증).
+
+### 운영 DB 직접 조회 결과
+- 2026-11-14 `bridge_index_metrics` 총 400건 중 `last_week_index IS NULL` 386건, 실제 `last_week_index = 0` 0건. 과거 지표 0.00 오인 문제는 DB 수치가 0인 문제가 아니라 프런트엔드/배포 표시 구분 문제임.
+- 운영 DB `bridge_axis_observations`: 11/14 2,113건, 11/15 0건.
+- `bridge_scores`와 `bridge_index_metrics`: 11/14 각각 400건, 11/15 0건.
+- `bridge_rankings` T100: 11/14 각 분야 100건, 총 400건. 11/15 0건.
+- 실측 시각 2026-11-15 20:20 KST: 11/15 원장·지수·순위는 존재하지 않음. 없는 근거를 복제하거나 날짜를 바꾸지 않음.
+
+### 여전히 차단되는 사항
+1. 11/15 실제 수집/점수/발행 미실행. main의 CI false-positive 수정은 다음 정상 실행에서 이 특정 장애를 예방하기 위한 것이지 당일 데이터 복구가 아님.
+2. Cloudflare 계정 제어 403, 실제 Cloudflare 자동 배포·롤백 동작 검증 미완료.
+3. PR #11 전체 코드 통합은 main에 **미병합**. 실운영 모바일·PDF·문자 인코딩 점검 미완료.
+4. 11/14 DB와 11/13 GitHub 공개 JSON 간 날짜 차이 미복구.
+
+**판정: BRIDGE 2.0 정식 배포 NO-GO 유지. 운영 main 최소 CI·모니터링 핫픽스는 완료.**
