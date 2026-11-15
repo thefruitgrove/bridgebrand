@@ -1,0 +1,53 @@
+name: BRIDGE Integration Candidate — Read-only QA
+
+# Isolated candidate quality gate. No secrets, database actions, publication,
+# Cloudflare deployment, or automatic merge.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'bridge_pipeline/**'
+      - 'presentation/**'
+      - 'tools/**'
+      - 'site/**'
+      - 'tests/**'
+      - 'docs/BRIDGE_INTEGRATION_CANDIDATE_REVIEW_20261115.md'
+      - '.github/workflows/bridge-integration-readonly-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-integration-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline-integrated-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source JS syntax
+        run: |
+          node --check site/briefing.js
+          node --check site/bridge-v2.js
+          node --check site/intelligence.js
+          node --check tests/test_evidence_action_rules.js
+      - name: Entire offline Python regression
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Six independent offline Node checks
+        run: |
+          node tests/test_presentation.js
+          node tests/test_intelligence.js
+          node tests/test_briefing.js
+          node tests/test_service_builder_runtime.js
+          node tests/test_evidence_action_rules.js
+      - name: Diff whitespace check
+        run: git diff --check
