@@ -379,7 +379,23 @@ function printProse(title,lines){return`<section class="print-prose"><h3>${title
 function axisStateKo(e,x){const s=e.axis_status&&e.axis_status[x]||'reference';return s==='observed'?'관측':s==='maintained'?'유지':'참조';}
 function topic(name){const s=String(name||''),c=s.charCodeAt(s.length-1);return s+(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28?'은':'는');}
 function axisQuestion(x){return{B:'공개자료에서 얼마나 넓고 독립적으로 발견됐는가',R:'발견된 관심에 공중이 어떤 방향과 강도로 응답했는가',I:'공식 정체성과 외부의 반복 연상이 얼마나 맞물리는가',D:'콘텐츠·서비스·현장 등 실제 접점에서 어떤 경험 신호가 확인됐는가',G:'관심과 경험이 검색·참여·공유 등 후속 행동으로 이어졌는가',E:'책임 있는 대응과 이행, 회복과 지속의 흐름이 확인됐는가'}[x];}
-function axisReading(e,x){const state=axisStateKo(e,x);if(!valid(e,x))return`${x}·${AXIS_NAME[x]}은 참조 상태입니다. 화면의 중립 기준선은 ${e.name}의 실제 50점이 아니며 강약 비교와 종합지수에서 제외됩니다. 지금 확인되지 않은 것은 ${axisQuestion(x)}에 답할 대상별 유효 근거입니다. 다음 회차에는 직접 근거가 확보되는지 먼저 확인해야 합니다.`;const value=num(e.axis_scores[x],1),top=topAxis(e),low=lowAxis(e);const relation=x===top?'유효값이 산출된 평가축 가운데 현재 점수가 가장 높습니다. 이는 근거의 품질이 가장 좋다는 뜻은 아닙니다.':x===low?'유효값이 산출된 평가축 중 현재 점수가 상대적으로 낮습니다. 낮다는 이유만으로 결함이나 부정적 사건을 단정할 수 없습니다.':'유효값이 산출된 축 가운데 가장 높거나 낮은 점수는 아닙니다. 다른 영역과 비교할 때에는 자료의 범위와 관측 조건을 함께 확인합니다.';return`${x}·${AXIS_NAME[x]}은 ${value}점, ${state} 상태입니다. 이 축은 “${axisQuestion(x)}”를 묻습니다. ${relation} 값의 높고 낮음만으로 구체적인 사건 원인이나 대상의 우열을 확정하지 않고, 같은 정의와 범위에서 반복되는지를 확인합니다.`;}
+function axisReading(e,x){
+  const state=axisStateKo(e,x);
+  if(!valid(e,x))return`${x}·${AXIS_NAME[x]}은 참조 상태입니다. 지금은 “${axisQuestion(x)}”를 평가할 대상별 유효 근거가 확보되지 않아 이 영역의 점수를 산출하지 않았습니다. 화면에 표시하는 중립 기준선 50은 실제 점수가 아니며, 종합지수와 축별 강약 비교에서도 제외합니다. 다음 관측에서는 이 질문에 답할 수 있는 자료가 추가되는지 확인해야 합니다.`;
+  const value=num(e.axis_scores[x],1),top=topAxis(e),low=lowAxis(e);
+  const meaning={
+    B:'도달은 공개된 자료에서 얼마나 널리 발견됐는지를 평가합니다. 온라인에 기록된 노출이 실제 전체 인구의 인지도와 같다는 뜻은 아닙니다.',
+    R:'반응은 관심을 보인 사람들이 공개적으로 어떤 응답을 남겼는지를 살펴봅니다. 이 수치만으로 모든 사람의 호감이나 불호를 직접 조사한 결과라고 해석할 수는 없습니다.',
+    I:'정체성은 어떤 이미지나 의미와 연결되어 언급되는지를 봅니다. 실제 사람들의 머릿속에 남은 기억을 모두 측정했다는 뜻은 아니므로 반복되는 연상과 자료의 출처를 함께 확인해야 합니다.',
+    D:'경험은 제품, 서비스, 콘텐츠 또는 현장 접점과 관련해 확인 가능한 자료를 반영합니다. 점수 하나로 모든 이용자의 경험이나 만족도를 대표할 수는 없습니다.',
+    G:'행동유발은 검색, 참여, 공유 등 공개적으로 확인할 수 있는 후속 움직임을 살핍니다. 이런 움직임이 있었다고 해서 특정 메시지가 구매나 참여를 직접 일으켰다고 확정할 수는 없습니다.',
+    E:'책임·지속은 대응, 이행, 회복 및 관계 유지와 관련된 공개자료를 살펴봅니다. 이 점수는 대상의 인격이나 윤리성을 포괄적으로 판정하는 값이 아닙니다.'
+  };
+  const position=x===top?'현재 값이 산출된 축 중 가장 높은 점수입니다.':x===low?'값이 산출된 축 가운데 상대적으로 낮은 점수이므로 자료 범위와 평가 기준을 다른 영역과 나란히 검토할 필요가 있습니다.':'다른 산출축과의 차이를 살펴보되 그 차이를 즉시 우열이나 원인으로 해석하지 않습니다.';
+  const evidenceDate=e.axis_evidence_dates&&e.axis_evidence_dates[x];
+  const basis=evidenceDate?`관련 근거 기준일은 ${evidenceDate}입니다.`:'해당 축의 개별 근거일은 공개된 자료에서 확인하지 못했습니다.';
+  return`${x}·${AXIS_NAME[x]}은 ${value}점이며 근거 상태는 ${state}입니다. ${meaning[x]} ${position} ${basis}`;
+}
 function entityNarrative(e,role='MY PICK'){const top=topAxis(e),low=lowAxis(e),available=AXES.filter((x)=>valid(e,x)).length;return[
 `${role} ${topic(e.name)} ${dateKo(e.as_of_date)} ${field} T100에서 ${e.rank}위, DAILY ${num(e.daily_index)}로 관측됐습니다. 이 숫자는 대상의 모든 가치에 매긴 성적이 아니라 ${available}개 유효 축으로 읽은 기준일의 관계 평판 수준입니다.`,
 ...AXES.map((x)=>axisReading(e,x)),
