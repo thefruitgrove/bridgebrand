@@ -84,3 +84,11 @@
 4. 11/14 DB와 11/13 GitHub 공개 JSON 간 날짜 차이 미복구.
 
 **판정: BRIDGE 2.0 정식 배포 NO-GO 유지. 운영 main 최소 CI·모니터링 핫픽스는 완료.**
+
+
+## 7. 공개 운영 사이트 실제 HTTP 검증 — GitHub-hosted runner
+- 읽기 전용 QA 커밋 `e243308c9ec7276d61bdbdbeddb2dcadcc28554f`, Actions `43708547142` **SUCCESS** (전체 통합 회귀검사).
+- 해당 QA에 공인 사이트의 공개 URL만 조회하는 별도 진단 단계를 추가함. Cloudflare 자격·수정·배포 권한 사용 없음.
+- 2026-11-15 20:21 KST 현장 GET 결과: `origin=https://bridgebrand.co.kr`, `live_date=2026-11-13`, `repository_date=2026-11-13`, `record_count=400`, `status=failure`, `issues=["stale_live_snapshot"]`.
+- 진단 단계는 `continue-on-error: true`이므로 **워크플로 전체 SUCCESS는 운영 데이터 GO가 아님**. stale 진단은 별도 실패 신호로 기록됨.
+- live 시점 데이터 최신성과 수집/발행 장애는 여전히 차단 요소. 기존 main 두 핫픽스가 Cloudflare 화면에 실제 배포되었는지도 검증되지 않았음.
