@@ -24,7 +24,9 @@ class V2RefinementTests(unittest.TestCase):
     def test_home_is_an_intelligence_brand_not_a_periodical(self):
         home = (SITE / 'bridge-v2.html').read_text(encoding="utf-8")
         self.assertIn("REPUTATION INTELLIGENCE",home)
-        self.assertIn("BRIDGE / SIGNAL EDITION",home)
+        self.assertIn("BRIDGE REPUTATION INDEX",home)
+        self.assertIn("EVIDENCE-BASED REPUTATION INTELLIGENCE",home)
+        self.assertIn("EVIDENCE MAKES IT MEANINGFUL.",home)
         self.assertNotIn("THE REPUTATION JOURNAL",home)
         self.assertNotIn("ISSUE 02",home)
         self.assertIn("Editorial photography:",home)
