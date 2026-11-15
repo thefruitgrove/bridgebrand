@@ -65,6 +65,17 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     });
     await page.addStyleTag({ content: fixedA4 });
     const metrics = await page.evaluate(pageMetrics);
+    const cssDiagnostics = await page.evaluate(() => {
+      const grid = document.querySelector('#printReportDocument .print-table-split');
+      const action = document.querySelector('#printReportDocument .print-sheet[data-page="25"] .print-action');
+      const styles = [...document.querySelectorAll('link[rel="stylesheet"]')].map(x => x.getAttribute('href'));
+      const state = element => element ? {
+        display: getComputedStyle(element).display,
+        columns: getComputedStyle(element).gridTemplateColumns,
+        gap: getComputedStyle(element).gap
+      } : null;
+      return {grid:state(grid),action:state(action),styles};
+    });
     assert.equal(metrics.length, expected, label + ': wrong sheet count');
     assert.ok(metrics.every((m, i) => m.page === i + 1), label + ': missing/duplicate page number');
     for (const n of screenshots) {
@@ -94,7 +105,7 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     const overflows = metrics.filter(m => m.scrollOverflow > 6 || m.beyondSheet > 6 || m.mainBottomGap < -6);
     const result = {
       case: label, expectedPages: expected, pdfPages, jsErrors,
-      pageMetrics: metrics, detectedOverflowPages: overflows.map(x => x.page),
+      pageMetrics: metrics, cssDiagnostics, detectedOverflowPages: overflows.map(x => x.page),
       screenshotPages: screenshots.filter(n => n <= expected)
     };
     results.push(result);
@@ -111,10 +122,10 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
   const browser = await chromium.launch(browserOptions);
   try {
     await inspect(browser, 1, 'standard', '한국어', [1, 4, 10], false);
-    await inspect(browser, 50, 'standard', '한국어', [10, 14, 21, 23, 25, 29], true);
+    await inspect(browser, 50, 'standard', '한국어', [10, 14, 16, 18, 20, 21, 23, 25, 29], true);
     await inspect(browser, 100, 'standard', '한국어', [10], false);
     await inspect(browser, 50, 'basic', '한국어', [4, 11, 14], false);
-    await inspect(browser, 50, 'standard', '영어', [10, 21], false);
+    await inspect(browser, 50, 'standard', '영어', [9, 10, 21], false);
   } finally {
     await browser.close();
   }
