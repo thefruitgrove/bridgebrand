@@ -12,6 +12,7 @@ on:
       - 'site/**'
       - 'tests/**'
       - 'docs/BRIDGE_INTEGRATION_CANDIDATE_REVIEW_20261115.md'
+      - '.github/workflows/bridge-daily.yml'
       - '.github/workflows/bridge-integration-readonly-qa.yml'
   workflow_dispatch:
 
