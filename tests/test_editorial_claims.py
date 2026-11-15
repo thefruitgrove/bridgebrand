@@ -13,6 +13,7 @@ class EditorialClaimsTests(unittest.TestCase):
     def setUpClass(cls):
         cls.intelligence = (ROOT / "site" / "intelligence.html").read_text(encoding="utf-8")
         cls.briefing = (ROOT / "site" / "briefing.html").read_text(encoding="utf-8")
+        cls.report_generator = (ROOT / "site" / "briefing.js").read_text(encoding="utf-8")
 
     def test_intelligence_hero_does_not_promise_causal_attribution(self):
         self.assertIn("점수와 순위의 변화를</span><span>여섯 영역으로 살펴봅니다.", self.intelligence)
@@ -39,6 +40,23 @@ class EditorialClaimsTests(unittest.TestCase):
         css = (ROOT / "site" / "briefing.css").read_text(encoding="utf-8")
         self.assertIn("EASY READ · 먼저 이렇게 이해하세요", css)
         self.assertNotIn("EASY READ Â·", css)
+
+    def test_basic_report_explains_and_guards_missing_history(self):
+        basic = self.report_generator.split("function buildBasicPrintReport()", 1)[1]
+        self.assertIn("hasNumber(pick.previous_rank)", basic)
+        self.assertIn("이전 순위를 확인할 수 없어", basic)
+        self.assertIn("hasNumber(pick.score_change)", basic)
+        self.assertIn("전일 대비 지수 자료가 없어", basic)
+        self.assertNotIn("순위는 ${pick.previous_rank}위에서 ${pick.rank}위", basic)
+        self.assertIn("pick.comparison_status==='same_scope'?'동일 범위 비교':'비교 보류'", basic)
+        self.assertIn("변화 수치를 제시하지 않고 N/R로 표시", basic)
+
+    def test_basic_report_does_not_confuse_evidence_quality_with_score(self):
+        basic = self.report_generator.split("function buildBasicPrintReport()", 1)[1]
+        self.assertIn("근거의 충실성은 점수와 별개로", basic)
+        self.assertIn("참조 축은 대상별 평가값이 없으므로 낮은 점수의 축으로 분류하지 않습니다.", basic)
+        self.assertNotIn("이 고정 샘플은", basic)
+        self.assertIn("이 보고서는 ${dateKo(date)} 공개 스냅샷을 기준으로 작성했습니다.", basic)
 
     def test_data_boundaries_and_public_elements_remain(self):
         for term in ('id="bridgePublicEvidence"', 'id="bridgeActionChecks"', 'id="briefingRadar"'):
