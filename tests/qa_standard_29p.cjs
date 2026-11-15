@@ -89,8 +89,8 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
         assert.ok(conclusion.includes(editorial.mainSubject), label + ': pair conclusion missing selected subject');
         assert.match(conclusion, /(의미합니다|뜻입니다)\.$/, label + ': pair conclusion must close with evidence-limited meaning');
       }
-      assert.ok(editorial.positionSubject[0].includes(editorial.mainSubject), label + ': first story must name the actual subject');
-      assert.ok(editorial.activitySubject[0].includes(editorial.mainSubject), label + ': first activity story must name actual subject');
+      assert.ok(editorial.positionSubject.every(p => p.includes(editorial.mainSubject)), label + ': every personalized POSITION item must identify selected subject');
+      assert.ok(editorial.activitySubject.every(p => p.includes(editorial.mainSubject)), label + ': every personalized ACTIVITY item must identify selected subject');
       assert.ok(editorial.overview[0].includes(editorial.mainSubject) && editorial.overview[2].includes(editorial.mainSubject), label + ': introductory evidence lacks selected subject');
     }
     await page.evaluate(async () => {
