@@ -56,9 +56,15 @@ jobs:
       - name: Install UNI official-data dependencies
         run: pip install pandas openpyxl
 
-      - name: Unit and regression tests
+      # Operational preflight must guard scoring/publication integrity without
+      # letting unrelated editorial or footer snapshots suppress daily collection.
+      # Full Python/Node/editorial regression runs in the isolated QA workflow.
+      - name: Production-critical preflight tests
         run: |
-          python -m unittest discover -s tests -v
+          python -m unittest discover -s tests -p 'test_operational_integrity.py' -v
+          python -m unittest discover -s tests -p 'test_authoritative_rank_export.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+          python -m unittest discover -s tests -p 'test_read_only_export_gate.py' -v
           python engine3/test_scoring_v3.py
           python tests/test_uni_v43.py
 
