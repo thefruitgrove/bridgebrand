@@ -35,6 +35,7 @@ jobs:
           node tests/test_briefing.js
           node tests/test_evidence_action_rules.js
           node tests/test_intelligence.js
+          node tests/test_report_dotplot.js
       - name: Build the exact static site again, verify data hash and editorial copy
         run: |
           python tools/verify_release_candidate.py
