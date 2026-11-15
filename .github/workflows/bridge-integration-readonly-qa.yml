@@ -1,0 +1,76 @@
+name: BRIDGE Integration Candidate — Read-only QA
+
+# Isolated candidate quality gate. No secrets, database actions, publication,
+# Cloudflare deployment, or automatic merge.
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'bridge_pipeline/**'
+      - 'presentation/**'
+      - 'tools/**'
+      - 'site/**'
+      - 'tests/**'
+      - 'docs/BRIDGE_INTEGRATION_CANDIDATE_REVIEW_20261115.md'
+      - '.github/workflows/bridge-daily.yml'
+      - '.github/workflows/bridge-integration-readonly-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-integration-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline-integrated-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source JS syntax
+        run: |
+          node --check site/script.js
+          node --check site/briefing.js
+          node --check site/bridge-v2.js
+          node --check site/intelligence.js
+          node --check tests/test_evidence_action_rules.js
+      - name: Dry-run CLI entrypoint smoke (no credentials, no DB)
+        run: python tools/dry_run_public_export.py --help
+      - name: Entire offline Python regression
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Six independent offline Node checks
+        run: |
+          node tests/test_presentation.js
+          node tests/test_intelligence.js
+          node tests/test_missing_week_display.js
+          node tests/test_briefing.js
+          node tests/test_service_builder_runtime.js
+          node tests/test_evidence_action_rules.js
+      - name: Offline site rebuild and immutable public data
+        # Runs only inside the disposable CI checkout, without production keys.
+        run: |
+          python tools/verify_release_candidate.py
+          python -m unittest discover -s tests -p 'test_*.py'
+          node tests/test_briefing.js
+          node tests/test_evidence_action_rules.js
+      - name: Read-only live freshness probe (diagnostic; never deploy)
+        # Uses only public GET requests, not Cloudflare/Supabase credentials.
+        # A stale live site remains NO-GO and is recorded in Actions logs.
+        continue-on-error: true
+        run: |
+          python tools/verify_live.py --attempts 1 --delay 0 --max-age-days 0
+
+      - name: Diff whitespace check (exclude preserved original patch artifact)
+        # operational.patch is an untouched original git-format patch; its
+        # standard email-style "-- " trailer is intentionally preserved.
+        run: git diff --check origin/main...HEAD -- . ':!docs/bridge-handoff/operational.patch' ':!docs/bridge-handoff/original-4b2e9d1.bundle'

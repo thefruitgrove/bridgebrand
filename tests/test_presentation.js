@@ -47,5 +47,12 @@ assert.match(mobileCss,/#heroSeoulClock \.hero-language-switch\{position:static!
 assert.match(mobileCss,/#heroSeoulClock \.hero-language-switch a\{display:inline!important;min-width:0!important/,'KR and EN must not inherit oversized mobile link widths');
 assert.match(mobileCss,/#hero-cinematic \.hero-bottom\{display:grid;grid-template-columns:minmax\(0,1fr\)/,'mobile hero must use a single-column visual flow');
 assert.match(mobileCss,/\.service-entry-grid,\.sub-briefing-grid,\.service-card-grid,\.subscription-cards\{grid-template-columns:minmax\(0,1fr\)!important/,'service cards must collapse without horizontal compression');
-assert.match(indexHtml,/style\.css\?v=20261102-mobile5/,'index must request the current mobile visual layer');
+for(const asset of ['bridge-v2.css','bridge-v2-magazine.css']) {
+  assert(indexHtml.includes(asset+'?v='),'V2 home must load versioned '+asset);
+  assert(fs.existsSync('site/'+asset),'requested stylesheet must exist');
+}
+const v2Css=fs.readFileSync('site/bridge-v2.css','utf8');
+assert.match(v2Css,/@media\(max-width:760px\)/,'V2 home must retain its mobile breakpoint');
+assert(v2Css.includes('.v2-menu-toggle{display:block') && v2Css.includes('.v2-hero{display:flex;flex-direction:column'),
+  'V2 mobile navigation and hero stacking must remain available');
 console.log('Mobile visual contract passed: masthead alignment, compact language switch, single-column flow and card containment.');

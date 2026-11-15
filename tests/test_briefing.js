@@ -40,7 +40,7 @@ assert(html.includes('id="pairGrid"'), '15-pair DSSE interpretation surface miss
 assert(js.includes("['08 · 다음 관측과 실무 제안'"), 'PUBLICITY eight-block explanation missing');
 assert(js.includes('활용 제안.'), 'practical implication generation missing');
 assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
-assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
+assert(js.includes("['observed','maintained'].includes(e.axis_status[a])") && js.includes('hasNumber(e.axis_scores[a])'), 'only valid observed/maintained numeric axes may enter comparisons; reference and null must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');
 assert(html.includes('활동량은 긍정 평판이 아니며'), 'activity interpretation boundary missing');
 assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank must not remain');
@@ -86,8 +86,8 @@ assert(
   'BASIC/STANDARD briefing scope switch missing'
 );
 assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
-assert(js.includes('rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
-assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
+assert(js.includes('rankStory=[') && js.includes('rankStoryWeb.map'), 'expanded POSITION READ story missing');
+assert(js.includes('activityStory=[') && js.includes('activityStoryWeb.map'), 'expanded activity interpretation story missing');
 ['axisReading','entityNarrative','comparisonNarrative'].forEach((name) => {
   assert(js.includes(`function ${name}(`), `${name} data-driven PDF narrative missing`);
 });
@@ -102,7 +102,7 @@ assert(js.includes('window.html2canvas') && js.includes('window.jspdf?.jsPDF'), 
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261103-fixed-samples1'), 'briefing sample cache must be current');
+assert(html.includes('briefing.js?v=20261115-10'), 'briefing script must use the current V2 release cache key');
 assert(html.includes('html2canvas.min.js?v=1.4.1') && html.includes('jspdf.umd.min.js?v=2.5.2'), 'PDF download libraries must be pinned and served by BRIDGE');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');

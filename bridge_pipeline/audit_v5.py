@@ -59,14 +59,26 @@ def audit(db,as_of):
     superseded_rankings=0
     for r in ranks:
         s=sm.get(r['entity_id']);e=entities.get(r['entity_id'],{})
-        if s and s['publish_status'] in {'shadow','withheld'} and r.get('published_at') is None:
+        # score_day deliberately includes score-bearing CPR shadow rows in
+        # its fixed panel. Re-auditing an already published panel must apply
+        # that same rule; published_at is not an eligibility criterion.
+        cpr_panel = bool(s and e.get('domain') == 'CPR'
+                         and s['publish_status'] == 'shadow'
+                         and s.get('score') is not None
+                         and r.get('ranking_type') in {'T100', 'BC50', 'BB50'})
+        if s and not cpr_panel and s['publish_status'] in {'shadow','withheld'} and r.get('published_at') is None:
             superseded_rankings+=1
             continue  # preserved non-public history, not a current publish candidate
-        if not s or s['publish_status'] not in {'eligible','published'} or abs(float(s['score'])-float(r['score']))>.001 or e.get('domain')!=r['domain']:
+        if (not s or s.get('score') is None or r.get('score') is None
+                or (s['publish_status'] not in {'eligible','published'} and not cpr_panel)
+                or abs(float(s['score'])-float(r['score']))>.001 or e.get('domain')!=r['domain']):
             errors.append({'code':'RANK_SCORE_LINK_MISMATCH','entity_id':r['entity_id']})
     out={'as_of_date':as_of.isoformat(),'methodology_version':cfg['version'],'generated_at':now_kst().isoformat(),'ok':not errors,'errors':errors,'records':records,'linked_signal_count':len(signals),'linked_raw_count':len(raw),'superseded_nonpublic_rankings':superseded_rankings}
     path=ROOT/'data/audit/v5_lineage_latest.json';path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(out,ensure_ascii=False,indent=2))
     print(json.dumps({k:v for k,v in out.items() if k not in {'records','errors'}},ensure_ascii=False))
+    if errors:
+        from collections import Counter
+        print(json.dumps({'error_counts':dict(Counter(e['code'] for e in errors))},ensure_ascii=False))
     if errors:raise RuntimeError(f'V5 lineage audit blocked: {len(errors)} errors')
     return out
 if __name__=='__main__':

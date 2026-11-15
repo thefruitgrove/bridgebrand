@@ -352,13 +352,22 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
             raise RuntimeError(f"duplicate public ranking blocked: {key}")
         seen.add(key)
         groups.setdefault((row["domain"], row["ranking_type"]), []).append(row)
-    for members in groups.values():
-        members.sort(key=lambda r: (-float(r["score"]), str(r["external_id"])))
-        for position, row in enumerate(members, 1):
-            row["rank"] = position
-            previous = row.get("previous_rank")
-            row["rank_change"] = int(previous) - position if previous is not None else 0
-    rows.sort(key=lambda r: (r["domain"], r["ranking_type"], r["rank"]))
+    # Published bridge_rankings rows are authoritative. Re-ranking by a
+    # separate external_id tiebreaker silently flips equally scored subjects
+    # (e.g. STAR-096/STAR-016 on 2026-11-14) and breaks DB->public lineage.
+    # Validate rank integrity instead; never overwrite rank or rank_change.
+    for group, members in groups.items():
+        try:
+            ordered = sorted(members, key=lambda r: int(r["rank"]))
+            ranks = [int(r["rank"]) for r in ordered]
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(f"Published ranks unavailable: {group}") from exc
+        if ranks != list(range(1, len(members) + 1)):
+            raise RuntimeError(f"Non-contiguous or duplicate published ranks: {group}")
+        scores = [float(r["score"]) for r in ordered]
+        if any(scores[i] < scores[i + 1] - 1e-9 for i in range(len(scores) - 1)):
+            raise RuntimeError(f"Published rank/score order inconsistent: {group}")
+    rows.sort(key=lambda r: (r["domain"], r["ranking_type"], int(r["rank"])))
     payload = {
         "schemaVersion": "2.0",
         "methodologyVersion":load_methodology()["version"],
@@ -404,12 +413,8 @@ def export_history(db: SupabaseRest, as_of: dt.date) -> None:
         f"&methodology_version=in.({cfg['version']},2026.10-shadow-3)"
     )
     metric_map = {(row["entity_id"], row["as_of_date"],row["methodology_version"]): row for row in metrics}
-    observations = db.select(
-        "bridge_axis_observations",
-        f"select=entity_id,as_of_date,axis,score,status,diagnostics,methodology_version"
-        f"&as_of_date=gte.{start.isoformat()}&as_of_date=lte.{as_of.isoformat()}"
-        f"&methodology_version=in.({cfg['version']},2026.10-shadow-3)"
-    )
+    from .export_reads import public_observations
+    observations = public_observations(db, start, as_of, [cfg['version'], '2026.10-shadow-3'])
     axes_map: dict[tuple[str, str], dict[str, float]] = {}
     for observation in observations:
         if observation.get("score") is None or observation.get("status") not in {"measured", "carried"}:

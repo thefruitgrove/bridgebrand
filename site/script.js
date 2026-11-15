@@ -525,9 +525,14 @@
       document.getElementById('bmStability').textContent = (pilot.stability != null ? pilot.stability : 'N/R');
       var _v3el = document.getElementById('bmV3Score');
       if(_v3el){ _v3el.textContent = (pilot.v3_score != null ? pilot.v3_score : '—'); }
-      if(pilot.history && pilot.history.length){
-        var prevWeek = pilot.history[pilot.history.length - 1];
-        var prevScore = prevWeek.score;
+      // Missing weekly evidence must never be coerced to numeric zero.
+      // Only a finite, genuinely observed prior-week index permits a WoW comparison.
+      var verifiedHistory = Array.isArray(pilot.history)
+        ? pilot.history.filter(function(h){return h && h.score != null && Number.isFinite(Number(h.score));})
+        : [];
+      if(verifiedHistory.length && weeklyIndex != null && Number.isFinite(Number(weeklyIndex))){
+        var prevWeek = verifiedHistory[verifiedHistory.length - 1];
+        var prevScore = Number(prevWeek.score);
         var realWow = Math.round((weeklyIndex - prevScore) * 10) / 10;
         var arrow2 = realWow > 0 ? '▲' : (realWow < 0 ? '▼' : '—');
         // 2) 전주 지표
@@ -535,16 +540,16 @@
         // 3) WoW (실측 표기 제거)
         document.getElementById('bmWow').textContent = arrow2 + ' ' + Math.abs(realWow);
         // 장기 성과는 기간 합계가 아니라 비교 가능한 기간평균으로 표시한다.
-        var weeksN = pilot.observed_weeks || (pilot.history.length + 1);
-        var allScores = pilot.history.map(function(h){return h.score;}).concat([weeklyIndex]);
+        var weeksN = pilot.observed_weeks || (verifiedHistory.length + 1);
+        var allScores = verifiedHistory.map(function(h){return Number(h.score);}).concat([Number(weeklyIndex)]);
         var histSum = allScores.reduce(function(a,b){return a+b;}, 0);
         var histAvg = Math.round((histSum / weeksN) * 10) / 10;
         var cumulativeValue = pilot.cumulative_performance != null ? pilot.cumulative_performance : histAvg;
         document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + cumulativeValue + '</span><span class=\'cum-tail\'> · 관측 ' + weeksN + '주</span>';
       } else {
         // 전주 데이터 아직 없음 — 이번 주가 첫 기록
-        document.getElementById('bmLastWeek').textContent = '—';
-        document.getElementById('bmWow').textContent = '— (첫 주)';
+        document.getElementById('bmLastWeek').textContent = 'N/R';
+        document.getElementById('bmWow').textContent = 'N/R · 이전 완료 주간 근거 부족';
         var firstCumulative = pilot.cumulative_performance != null ? pilot.cumulative_performance : weeklyIndex;
         document.getElementById('bmCumulative').innerHTML = '<span class=\'cum-unit\'>평균</span> <span class=\'cum-num\'>' + firstCumulative + '</span><span class=\'cum-tail\'> · 관측 ' + (pilot.observed_weeks || 1) + '주</span>';
       }

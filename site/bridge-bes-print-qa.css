@@ -1,0 +1,149 @@
+/* BRIDGE BES 1.0 — isolated A4 render corrections.
+   Loaded AFTER all existing briefing styles. No scoring/data changes.
+   The pdf export iframe uses body.pdf-preview-mode and fixed 794 x 1123px sheets.
+*/
+
+/* The selected subject remains visible in the distribution, even at rank 100. */
+body.pdf-preview-mode .print-sheet[data-page="10"]:not(.print-language-en) .dot-row{
+  height:17px!important; min-height:17px!important; line-height:1.15!important; padding:0!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="10"]:not(.print-language-en) .print-dotplot-note{
+  margin:3px 0 5px!important; line-height:1.4!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="10"]:not(.print-language-en) .print-prose p{
+  margin:4px 0!important; line-height:1.56!important; font-size:14px!important;
+}
+
+/* Independent comparison narratives, pages 16/18/20: maintain full explanation
+   with readable 10.5pt body, reducing only excess leading and paragraph gaps. */
+body.pdf-preview-mode .print-sheet[data-page="16"].print-narrative-full .print-prose p,
+body.pdf-preview-mode .print-sheet[data-page="18"].print-narrative-full .print-prose p,
+body.pdf-preview-mode .print-sheet[data-page="20"].print-narrative-full .print-prose p{
+  font-size:14px!important; line-height:1.53!important; margin:5px 0!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="16"].print-narrative-full .print-prose,
+body.pdf-preview-mode .print-sheet[data-page="18"].print-narrative-full .print-prose,
+body.pdf-preview-mode .print-sheet[data-page="20"].print-narrative-full .print-prose{
+  margin-top:10px!important;
+}
+
+/* Page 25 — clear two-column action matrix with compact title/data arrangement;
+   preserve all seven interpretive paragraphs beneath it. */
+body.pdf-preview-mode .print-sheet[data-page="25"].print-type-strategy .print-action{
+  gap:8px!important; grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="25"].print-type-strategy .print-action>div{
+  padding:9px 10px!important; display:grid!important;grid-template-columns:65px minmax(0,1fr)!important;
+  column-gap:8px!important;align-content:start!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="25"].print-type-strategy .print-action>div p{
+  font-size:13px!important;line-height:1.48!important;margin:0!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="25"].print-type-strategy .print-prose{
+  margin-top:9px!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="25"].print-type-strategy .print-prose p{
+  font-size:14px!important;line-height:1.51!important;margin:4px 0!important;
+}
+
+/* English 29p: keep all 20 ranked subjects on pages 9/10 using two parallel
+   tables of 10 rows. No data removal; individual names and scores remain. */
+body.pdf-preview-mode .print-table-split{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  align-items:start!important;gap:14px!important;margin:10px 0 13px!important;
+}
+body.pdf-preview-mode .print-table-split>.print-table-scroll{
+  display:block!important;width:auto!important;min-width:0!important;
+  max-width:100%!important;margin:0!important;padding:0!important;
+  overflow:visible!important;
+}
+body.pdf-preview-mode .print-table-split>.print-table-scroll:before,
+body.pdf-preview-mode .print-table-split>.print-table-scroll:after{display:none!important}
+body.pdf-preview-mode .print-table-split table{
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  table-layout:fixed!important;margin:0!important;font-size:11px!important;line-height:1.3!important;
+}
+body.pdf-preview-mode .print-table-split th,
+body.pdf-preview-mode .print-table-split td{
+  padding:5px 5px!important;white-space:normal!important;overflow-wrap:anywhere!important;
+}
+body.pdf-preview-mode .print-sheet[data-page="9"].print-language-en .print-prose p,
+body.pdf-preview-mode .print-sheet[data-page="10"].print-language-en .print-prose p{
+  font-size:14px!important;line-height:1.5!important;margin:5px 0!important;
+}
+body.pdf-preview-mode .print-distribution-note{
+  color:#586372;margin:6px 0!important;font-size:12px!important;line-height:1.5!important;
+}
+/* Phone reading mode has flexible-height pages. Keep whole tables available there. */
+@media screen and (max-width:720px){
+  body.pdf-preview-mode .print-table-split{grid-template-columns:1fr!important}
+  body.pdf-preview-mode .print-table-split table{font-size:13px!important}
+}
+
+
+/* BES 1.2 — meaningful hierarchy for personalized and universal prose.
+   Web layout only; print typography and PDF page dimensions are untouched. */
+.position-context-intro{
+  margin:24px 0 26px;
+  padding:24px 26px;
+  border:1px solid rgba(171,137,71,.34);
+  border-left:4px solid #b28b46;
+  background:linear-gradient(115deg,rgba(231,224,207,.18),rgba(255,255,255,.48));
+  border-radius:8px;
+}
+.position-context-intro h4{
+  margin:0 0 17px;
+  font-size:1.22rem;
+  font-weight:700;
+  line-height:1.45;
+}
+.position-context-intro p{
+  margin:0 0 13px;
+  font-size:inherit;
+  line-height:1.9;
+  word-break:keep-all;
+}
+.position-context-intro p:last-child{margin-bottom:0}
+.explanation-stack .narrative-group{
+  margin:18px 0 25px;
+  padding:21px 23px;
+  border:1px solid rgba(86,107,128,.18);
+  border-radius:8px;
+}
+.explanation-stack .narrative-group h4{
+  margin:0 0 8px;
+  font-size:1.13rem;
+  font-weight:700;
+  line-height:1.5;
+}
+.explanation-stack .narrative-group .group-subtitle{
+  margin:0 0 20px;
+  color:#66717e;
+  font-size:.94em;
+  line-height:1.7;
+}
+.explanation-stack .narrative-group-subject{
+  background:rgba(199,158,70,.075);
+  border-left:4px solid #b28b46;
+}
+.explanation-stack .narrative-group-general{
+  background:rgba(111,130,153,.07);
+  border-left:4px solid #73879b;
+}
+.explanation-stack .narrative-group>p:not(.group-subtitle){line-height:1.88}
+.pair-grid .pair-subject-conclusion{
+  margin-top:17px;
+  padding:14px 15px;
+  border-top:1px solid rgba(178,139,70,.38);
+  background:rgba(199,158,70,.075);
+  font-weight:600;
+  line-height:1.8;
+  word-break:keep-all;
+}
+@media screen and (max-width:720px){
+  .position-context-intro{padding:17px 16px;margin:20px 0 22px}
+  .explanation-stack .narrative-group{padding:17px 16px}
+  .position-context-intro p,
+  .explanation-stack .narrative-group>p:not(.group-subtitle),
+  .pair-grid .pair-subject-conclusion{line-height:1.75}
+}
