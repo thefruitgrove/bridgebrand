@@ -151,7 +151,7 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
   const browser = await chromium.launch(browserOptions);
   try {
     await inspect(browser, 1, 'standard', '한국어', [1, 4, 10], false);
-    await inspect(browser, 50, 'standard', '한국어', [10, 14, 16, 18, 20, 21, 23, 25, 29], true);
+    await inspect(browser, 50, 'standard', '한국어', [3, 5, 7, 8, 10, 11, 14, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29], true);
     await inspect(browser, 100, 'standard', '한국어', [10], false);
     await inspect(browser, 50, 'basic', '한국어', [4, 11, 14], false);
     await inspect(browser, 50, 'standard', '영어', [9, 10, 21], false);
