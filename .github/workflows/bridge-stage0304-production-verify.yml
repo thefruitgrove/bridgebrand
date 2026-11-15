@@ -15,6 +15,13 @@ jobs:
           node-version: '22'
       - name: Verify production Stage 03/04 with real browser
         run: |
+          command -v google-chrome || true
+          command -v chromium || true
+          command -v chromium-browser || true
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME_BIN" ]; then echo 'No Chrome binary in this runner image'; exit 1; fi
+          export CHROME_BIN
+          "$CHROME_BIN" --version
           node --check tools/verify_briefing_stage0304_live.mjs
           node tools/verify_briefing_stage0304_live.mjs
       - name: Save mobile and desktop stage screenshots
