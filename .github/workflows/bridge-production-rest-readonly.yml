@@ -1,0 +1,40 @@
+name: BRIDGE Production REST Export — Read-only Gate
+
+# Only the integration candidate's own trusted push triggers this check.
+# No PR/fork execution, no database writes, no publication and no Cloudflare.
+on:
+  push:
+    branches: [bridge-integration-candidate-20261115]
+    paths:
+      - '.github/workflows/bridge-production-rest-readonly.yml'
+      - 'bridge_pipeline/**'
+      - 'tools/dry_run_public_export.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bridge-production-rest-readonly
+  cancel-in-progress: false
+
+jobs:
+  live-rest-export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact 2026-11-14 production REST export in a temporary directory
+        run: |
+          test -n "$SUPABASE_SECRET_KEY" || { echo "::error::No authorized read credentials"; exit 1; }
+          python tools/dry_run_public_export.py --date 2026-11-14
+      - name: Keep candidate repository and database unchanged
+        if: always()
+        run: git diff --exit-code -- site/data/latest.json site/data/history.json
