@@ -86,8 +86,8 @@ assert(
   'BASIC/STANDARD briefing scope switch missing'
 );
 assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
-assert(js.includes('rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
-assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
+assert(js.includes('rankStory=[') && js.includes('rankStoryWeb.map'), 'expanded POSITION READ story missing');
+assert(js.includes('activityStory=[') && js.includes('activityStoryWeb.map'), 'expanded activity interpretation story missing');
 ['axisReading','entityNarrative','comparisonNarrative'].forEach((name) => {
   assert(js.includes(`function ${name}(`), `${name} data-driven PDF narrative missing`);
 });
