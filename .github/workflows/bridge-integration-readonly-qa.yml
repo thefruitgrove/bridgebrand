@@ -39,6 +39,7 @@ jobs:
           node-version: '22'
       - name: Verify source JS syntax
         run: |
+          node --check site/script.js
           node --check site/briefing.js
           node --check site/bridge-v2.js
           node --check site/intelligence.js
@@ -51,6 +52,7 @@ jobs:
         run: |
           node tests/test_presentation.js
           node tests/test_intelligence.js
+          node tests/test_missing_week_display.js
           node tests/test_briefing.js
           node tests/test_service_builder_runtime.js
           node tests/test_evidence_action_rules.js
