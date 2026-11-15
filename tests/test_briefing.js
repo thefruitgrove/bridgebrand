@@ -86,8 +86,8 @@ assert(
   'BASIC/STANDARD briefing scope switch missing'
 );
 assert(html.includes('id="activityNarrative"'), 'expanded activity-versus-reputation explanation missing');
-assert(js.includes('rankStory=[') && js.includes('rankStory.map'), 'expanded POSITION READ story missing');
-assert(js.includes('activityStory=[') && js.includes('activityStory.map'), 'expanded activity interpretation story missing');
+assert(js.includes('rankStory=[') && js.includes('rankStoryWeb.map'), 'expanded POSITION READ story missing');
+assert(js.includes('activityStory=[') && js.includes('activityStoryWeb.map'), 'expanded activity interpretation story missing');
 ['axisReading','entityNarrative','comparisonNarrative'].forEach((name) => {
   assert(js.includes(`function ${name}(`), `${name} data-driven PDF narrative missing`);
 });
@@ -102,7 +102,7 @@ assert(js.includes('window.html2canvas') && js.includes('window.jspdf?.jsPDF'), 
 assert(!js.includes("openReportOutput('pdf')"), 'PDF save must not fall back to the browser print dialog');
 assert(css.includes('@page{size:A4 portrait') && css.includes('.print-cover') && css.includes('.print-sheet:before'), 'A4 branded print system missing');
 assert(js.includes('CONTENTS · STANDARD EDITION') && js.includes('EXECUTIVE SIGNAL'), 'cover-two contents and executive signal pages missing');
-assert(html.includes('briefing.js?v=20261115-08'), 'briefing script must use the current V2 release cache key');
+assert(html.includes('briefing.js?v=20261115-10'), 'briefing script must use the current V2 release cache key');
 assert(html.includes('html2canvas.min.js?v=1.4.1') && html.includes('jspdf.umd.min.js?v=2.5.2'), 'PDF download libraries must be pinned and served by BRIDGE');
 assert(js.includes('showStage(stage);'), 'English briefing must refresh pager labels after translation');
 assert(js.includes("const journeyLabels=['INDEX & CONTEXT','FIELD PULSE','POSITION','RELATIONSHIP','EXTERNAL BRIEF','PDF REPORT']"), 'English journey labels must drive the pager');

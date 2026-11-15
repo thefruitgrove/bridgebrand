@@ -1,0 +1,62 @@
+name: BRIDGE Editorial Review — Read-only QA
+
+on:
+  pull_request:
+    branches: [bridge-integration-candidate-20261115]
+    paths:
+      - "site/**"
+      - "presentation/**"
+      - "tools/**"
+      - "tests/**"
+      - "docs/editorial/**"
+      - ".github/workflows/bridge-editorial-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Language claims and complete Python tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: JS checks
+        run: |
+          node --check site/briefing.js
+          node tests/test_briefing.js
+          node tests/test_evidence_action_rules.js
+          node tests/test_intelligence.js
+          node tests/test_report_dotplot.js
+      - name: Install isolated browser and PDF tools for editorial visual QA
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          python -m pip install pypdf
+      - name: Run 29-page real browser and PDF visual QA
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory site > /tmp/bridge-editorial-http.log 2>&1 &
+          node tests/qa_standard_29p.cjs
+      - name: Upload PDF and screenshot QA evidence (sample data only)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bridge-editorial-render-evidence
+          path: qa-artifacts/standard-29p
+          if-no-files-found: warn
+          retention-days: 10
+      - name: Build the exact static site again, verify data hash and editorial copy
+        run: |
+          python tools/verify_release_candidate.py
+          python -m unittest discover -s tests -p 'test_*.py'
+      - name: Record no production changes
+        run: |
+          git diff --exit-code -- site/data/latest.json site/data/history.json
