@@ -39,6 +39,19 @@ class Standard29EditorialTests(unittest.TestCase):
         self.assertIn("어느 축의 근거가 더 정확하다거나 특정 부정적 사건", self.standard)
         self.assertIn("참조 상태에는 대상별 유효 평가값이 없어", self.standard)
 
+    def test_six_dimensions_use_distinct_explanations_and_evidence_dates(self):
+        for fragment in (
+            "실제 전체 인구의 인지도",
+            "모든 사람의 호감이나 불호",
+            "실제 사람들의 머릿속에 남은 기억",
+            "모든 이용자의 경험이나 만족도",
+            "메시지가 구매나 참여를 직접 일으켰다고",
+            "대상의 인격이나 윤리성을 포괄적으로",
+            "관련 근거 기준일은",
+            "개별 근거일은 공개된 자료에서 확인하지 못했습니다."
+        ):
+            self.assertIn(fragment, self.js)
+
     def test_visual_layout_has_page_25_and_distribution_guards(self):
         self.assertIn('.print-sheet[data-page="25"].print-type-strategy', self.css)
         self.assertIn('.print-table-split{display:grid', self.css)
