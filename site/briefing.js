@@ -238,7 +238,7 @@ function render(){
   $('radarCaption').textContent=`동일 기준일·동일 ${field} T100 공개 범위에서 비교한 6축 프로필입니다.`;renderRadar();renderGaps();renderPairAnalysis(pick);renderActivity();
   const activityLeader=[...entities].sort((x,y)=>Number(y.activity_points||0)-Number(x.activity_points||0))[0];
   activityStory=[
-    `이번 주 세 대상 가운데 가장 큰 활동량은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P입니다. 이 숫자는 사건과 움직임의 규모를 보여주지만 호감의 크기나 평판의 방향을 곧바로 말하지 않습니다.`,
+    `${pick.name}의 이번 주 활동량은 ${Math.round(pick.activity_points||0)}P이며, 비교 대상까지 포함한 세 곳 가운데 가장 큰 활동량은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P입니다. 이러한 수치는 사건과 움직임의 규모를 보여주지만 호감의 크기나 평판의 방향을 곧바로 말하지 않습니다.`,
     `활동 포인트는 기사·공식 발표·검색·참여처럼 확인된 움직임을 대상에게 귀속한 뒤 중복을 제거해 집계합니다. 같은 내용이 여러 매체에 반복됐다고 모두 새로운 사건으로 세지 않는 이유입니다.`,
     `생활 속 비유로 보면 활동량은 매장 앞을 오간 사람 수에 가깝고, 관계 평판은 그들이 무엇을 경험하고 기억하며 다시 행동했는지를 읽는 값에 가깝습니다. 유동인구가 많다고 만족도가 자동으로 높아지는 것은 아닙니다.`,
     `활동량이 높고 DAILY도 높다면 큰 움직임과 높은 관계 수준이 같은 시점에 함께 관측된 것입니다. 다만 두 값이 함께 높다는 사실만으로 활동이 평판을 만들었다는 인과관계까지 확정하지 않습니다.`,
