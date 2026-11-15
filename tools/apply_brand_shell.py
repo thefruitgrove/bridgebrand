@@ -240,7 +240,7 @@ def apply(path: Path) -> bool:
         # report script instead of reusing a months-old cached JS response.
         updated = re.sub(
             r'(briefing[.]js[?]v=)[^"]+',
-            r'\g<1>20261115-07',
+            r'\g<1>20261115-stage0304-01',
             updated,
         )
         if PULSE_FEATURE_OLD in updated:
