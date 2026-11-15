@@ -41,9 +41,15 @@ function pageMetrics() {
     const bottomGap = +(footerTop - bodyBox.bottom).toFixed(1);
     const scrollOverflow = Math.max(0, body.scrollHeight - body.clientHeight);
     const beyondSheet = Math.max(0, bodyBox.bottom - sheetBox.bottom);
+    // The flex main box may claim to fit while its last paragraph paints over
+    // the footer. Measure rendered descendants rather than the container only.
+    const contentBoxes = [...body.querySelectorAll('p,h1,h2,h3,table,.print-flow,.print-dotplot,.print-action,.print-kpi,.print-toc,.print-method-grid,.print-evidence,.print-axis-nodes,.print-axis-bars')];
+    const actualBottom = Math.max(bodyBox.top, ...contentBoxes.map(el => el.getBoundingClientRect().bottom));
+    const actualFooterGap = +(footerTop - actualBottom).toFixed(1);
     return {
       page: Number(sheet.dataset.page),
       mainBottomGap: bottomGap,
+      actualFooterGap,
       scrollOverflow: +scrollOverflow.toFixed(1),
       beyondSheet: +beyondSheet.toFixed(1),
       textCharacters: (body.innerText || '').length
@@ -118,7 +124,7 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
       pdfPages = Number(count.stdout.trim());
       assert.equal(pdfPages, expected, label + ': actual downloaded PDF page count');
     }
-    const overflows = metrics.filter(m => m.scrollOverflow > 6 || m.beyondSheet > 6 || m.mainBottomGap < -6);
+    const overflows = metrics.filter(m => m.scrollOverflow > 6 || m.beyondSheet > 6 || m.mainBottomGap < -6 || m.actualFooterGap < -2);
     const result = {
       case: label, expectedPages: expected, pdfPages, jsErrors,
       pageMetrics: metrics, cssDiagnostics, narrativeAudit, detectedOverflowPages: overflows.map(x => x.page),
