@@ -45,7 +45,7 @@ def run() -> None:
     for page in ("bridge-v2.html", "index.html"):
         assert_contains(page, "REPUTATION IS A SIGNAL.", "EVIDENCE MAKES IT MEANINGFUL.",
                         "BRIDGE는 그 신호의 근거와 의미를 분석합니다.", 'id="v2SearchForm"')
-    assert_contains("methodology.html", "EVIDENCE-BASED REPUTATION INTELLIGENCE",
+    assert_contains("methodology.html", "Evidence-Based Reputation Intelligence",
                     "Reputation is a signal.")
     assert_contains("about.html", "WHAT NEXT", "근거")
     assert_contains("trust.html", "Evidence makes it meaningful.")
