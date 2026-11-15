@@ -79,3 +79,71 @@ body.pdf-preview-mode .print-distribution-note{
   body.pdf-preview-mode .print-table-split{grid-template-columns:1fr!important}
   body.pdf-preview-mode .print-table-split table{font-size:13px!important}
 }
+
+
+/* BES 1.2 — meaningful hierarchy for personalized and universal prose.
+   Web layout only; print typography and PDF page dimensions are untouched. */
+.position-context-intro{
+  margin:24px 0 26px;
+  padding:24px 26px;
+  border:1px solid rgba(171,137,71,.34);
+  border-left:4px solid #b28b46;
+  background:linear-gradient(115deg,rgba(231,224,207,.18),rgba(255,255,255,.48));
+  border-radius:8px;
+}
+.position-context-intro h4{
+  margin:0 0 17px;
+  font-size:1.22rem;
+  font-weight:700;
+  line-height:1.45;
+}
+.position-context-intro p{
+  margin:0 0 13px;
+  font-size:inherit;
+  line-height:1.9;
+  word-break:keep-all;
+}
+.position-context-intro p:last-child{margin-bottom:0}
+.explanation-stack .narrative-group{
+  margin:18px 0 25px;
+  padding:21px 23px;
+  border:1px solid rgba(86,107,128,.18);
+  border-radius:8px;
+}
+.explanation-stack .narrative-group h4{
+  margin:0 0 8px;
+  font-size:1.13rem;
+  font-weight:700;
+  line-height:1.5;
+}
+.explanation-stack .narrative-group .group-subtitle{
+  margin:0 0 20px;
+  color:#66717e;
+  font-size:.94em;
+  line-height:1.7;
+}
+.explanation-stack .narrative-group-subject{
+  background:rgba(199,158,70,.075);
+  border-left:4px solid #b28b46;
+}
+.explanation-stack .narrative-group-general{
+  background:rgba(111,130,153,.07);
+  border-left:4px solid #73879b;
+}
+.explanation-stack .narrative-group>p:not(.group-subtitle){line-height:1.88}
+.pair-grid .pair-subject-conclusion{
+  margin-top:17px;
+  padding:14px 15px;
+  border-top:1px solid rgba(178,139,70,.38);
+  background:rgba(199,158,70,.075);
+  font-weight:600;
+  line-height:1.8;
+  word-break:keep-all;
+}
+@media screen and (max-width:720px){
+  .position-context-intro{padding:17px 16px;margin:20px 0 22px}
+  .explanation-stack .narrative-group{padding:17px 16px}
+  .position-context-intro p,
+  .explanation-stack .narrative-group>p:not(.group-subtitle),
+  .pair-grid .pair-subject-conclusion{line-height:1.75}
+}
