@@ -65,6 +65,34 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     await page.goto(urlFor(rank, edition, language), { waitUntil: 'domcontentloaded', timeout: 25000 });
     const expected = edition === 'basic' && language === '영어' ? 8 : edition === 'basic' ? 18 : 29;
     await page.waitForFunction(count => document.querySelectorAll('#printReportDocument .print-sheet').length === count, expected, { timeout: 40000 });
+    if (edition === 'standard' && language === '한국어') {
+      const editorial = await page.evaluate(() => {
+        const groups = sel => [...document.querySelectorAll(sel)].map(x => x);
+        const paragraphs = sel => groups(sel).map(el => el.innerText.trim());
+        return {
+          overview: paragraphs('#rankChangeOverview>p'),
+          positionSubject: paragraphs('#rankChangeCopy .narrative-group-subject>p:not(.group-subtitle)'),
+          positionGeneral: paragraphs('#rankChangeCopy .narrative-group-general>p:not(.group-subtitle)'),
+          activitySubject: paragraphs('#activityNarrative .narrative-group-subject>p:not(.group-subtitle)'),
+          activityGeneral: paragraphs('#activityNarrative .narrative-group-general>p:not(.group-subtitle)'),
+          pairs: paragraphs('#pairGrid .pair-subject-conclusion'),
+          mainSubject: document.querySelector('#reportPick')?.textContent.trim() || ''
+        };
+      });
+      assert.equal(editorial.overview.length, 4, label + ': 4 explanatory paragraphs missing above 01');
+      assert.equal(editorial.positionSubject.length, 10, label + ': selected-subject position story must have 10 items');
+      assert.equal(editorial.positionGeneral.length, 9, label + ': general position story must have 9 items');
+      assert.equal(editorial.activitySubject.length, 5, label + ': selected-subject activity story grouping failed');
+      assert.equal(editorial.activityGeneral.length, 8, label + ': generic activity story grouping failed');
+      assert.equal(editorial.pairs.length, 15, label + ': all 15 pair conclusions must be present');
+      for (const conclusion of editorial.pairs) {
+        assert.ok(conclusion.includes(editorial.mainSubject), label + ': pair conclusion missing selected subject');
+        assert.match(conclusion, /(의미합니다|뜻입니다)\\.$/, label + ': pair conclusion must close with evidence-limited meaning');
+      }
+      assert.ok(editorial.positionSubject[0].includes(editorial.mainSubject), label + ': first story must name the actual subject');
+      assert.ok(editorial.activitySubject[0].includes(editorial.mainSubject), label + ': first activity story must name actual subject');
+      assert.ok(editorial.overview.every(p => p.includes(editorial.mainSubject) || p.includes('DAILY')), label + ': introduction missing subject context');
+    }
     await page.evaluate(async () => {
       document.body.classList.add('pdf-preview-mode');
       if (document.fonts?.ready) await document.fonts.ready;
