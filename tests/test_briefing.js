@@ -40,7 +40,7 @@ assert(html.includes('id="pairGrid"'), '15-pair DSSE interpretation surface miss
 assert(js.includes("['08 · 다음 관측과 실무 제안'"), 'PUBLICITY eight-block explanation missing');
 assert(js.includes('활용 제안.'), 'practical implication generation missing');
 assert(!js.includes('if(entities.length!==3){const preferred='), 'invalid selections must not be silently replaced');
-assert(js.includes("e.axis_status[a]!=='reference'"), 'reference axes must be excluded');
+assert(js.includes("['observed','maintained'].includes(e.axis_status[a])") && js.includes('hasNumber(e.axis_scores[a])'), 'only valid observed/maintained numeric axes may enter comparisons; reference and null must be excluded');
 assert(html.includes('근거 신뢰등급') && html.includes('평판등급이 아니라'), 'trust-grade boundary missing');
 assert(html.includes('활동량은 긍정 평판이 아니며'), 'activity interpretation boundary missing');
 assert(!html.includes('ENT T100 3위를 기록했다'), 'stale hard-coded rank must not remain');
