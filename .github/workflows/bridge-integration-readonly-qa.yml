@@ -42,6 +42,8 @@ jobs:
           node --check site/bridge-v2.js
           node --check site/intelligence.js
           node --check tests/test_evidence_action_rules.js
+      - name: Dry-run CLI entrypoint smoke (no credentials, no DB)
+        run: python tools/dry_run_public_export.py --help
       - name: Entire offline Python regression
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Six independent offline Node checks
