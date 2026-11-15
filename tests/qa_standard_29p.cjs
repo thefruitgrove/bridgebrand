@@ -78,7 +78,7 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     let pdfPages = null;
     if (savePdf) {
       const downloadPromise = page.waitForEvent('download', { timeout: 180000 });
-      await page.locator('#savePdf').click();
+      await page.evaluate(() => document.getElementById('savePdf').click());
       const download = await downloadPromise;
       const file = path.join(artifactDir, label + '.pdf');
       await download.saveAs(file);
