@@ -270,10 +270,29 @@ def apply(path: Path) -> bool:
             1,
         )
     updated = updated.replace("VOL. 01 — WEEK", "VOL. 02 — WEEK")
-    if path.name == "about.html" and 'data-bridge-identity="v1"' not in updated and IDENTITY_ANCHOR in updated:
-        updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
-    if path.name in PRINCIPLE_PAGES and 'data-bridge-principles="v1"' not in updated and PRINCIPLES_ANCHOR in updated:
-        updated = updated.replace(PRINCIPLES_ANCHOR, PUBLIC_PRINCIPLES + PRINCIPLES_ANCHOR, 1)
+    # Existing pages can carry an older v1 explanatory block. Refresh it
+    # deterministically on every rebuild; merely checking for the marker
+    # freezes obsolete positioning text indefinitely.
+    if path.name == "about.html":
+        if 'data-bridge-identity="v1"' in updated:
+            updated, count = re.subn(
+                r'<section class="section bridge-identity" data-bridge-identity="v1">[\\s\\S]*?</section>',
+                lambda _m: IDENTITY_SECTION, updated, count=1,
+            )
+            if count != 1:
+                raise ValueError("BRIDGE identity block marker malformed")
+        elif IDENTITY_ANCHOR in updated:
+            updated = updated.replace(IDENTITY_ANCHOR, IDENTITY_SECTION + IDENTITY_ANCHOR, 1)
+    if path.name in PRINCIPLE_PAGES:
+        if 'data-bridge-principles="v1"' in updated:
+            updated, count = re.subn(
+                r'<section class="section bridge-public-principles" data-bridge-principles="v1">[\\s\\S]*?</section>',
+                lambda _m: PUBLIC_PRINCIPLES, updated, count=1,
+            )
+            if count != 1:
+                raise ValueError("BRIDGE principles block marker malformed")
+        elif PRINCIPLES_ANCHOR in updated:
+            updated = updated.replace(PRINCIPLES_ANCHOR, PUBLIC_PRINCIPLES + PRINCIPLES_ANCHOR, 1)
     # Progressive experience logic is additive; it never changes the
     # existing ranking selectors, report renderer, or subscription prices.
     if path.name in {"briefing.html", "intelligence.html"}:
