@@ -15,7 +15,15 @@ import hashlib
 import json
 import tempfile
 import time
+import sys
 from pathlib import Path
+from zoneinfo import ZoneInfo
+
+# Direct execution (`python tools/dry_run_public_export.py`) otherwise resolves
+# imports relative to tools/, not necessarily the repository checkout root.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from bridge_pipeline import run as pipeline
 from bridge_pipeline.core import SupabaseRest, load_methodology
@@ -96,7 +104,7 @@ def main():
     p.add_argument("--date",required=True)
     args=p.parse_args()
     as_of=dt.date.fromisoformat(args.date)
-    if as_of>dt.date.today():
+    if as_of > dt.datetime.now(ZoneInfo("Asia/Seoul")).date():
         raise ValueError("Future observation date not allowed")
     db=ReadOnlyDB(SupabaseRest())
     original_root=pipeline.ROOT
