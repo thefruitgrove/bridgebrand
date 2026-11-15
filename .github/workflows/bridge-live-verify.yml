@@ -45,7 +45,7 @@ jobs:
         id: health
         run: |
           set -o pipefail
-          python tools/verify_live.py --attempts 2 --delay 20 --max-age-days 2 | tee live-verification.jsonl
+          python tools/verify_live.py --attempts 2 --delay 20 --max-age-days 0 | tee live-verification.jsonl
       - name: Preserve diagnostic evidence on failure only
         if: failure()
         uses: actions/upload-artifact@v4
@@ -58,7 +58,7 @@ jobs:
         if: always()
         run: |
           echo '### BRIDGE live health check' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Daily 08:30 KST, read-only. Warnings within two days do not fail the job. Confirmed stale/missing/mismatched deployed data fails the job.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Daily 08:30 KST, read-only. As of the 08:30 KST verification, missing current-date data is a failure. Confirmed stale/missing/mismatched deployed data fails the job.' >> "$GITHUB_STEP_SUMMARY"
           if [ -s live-verification.jsonl ]; then
             tail -n 1 live-verification.jsonl >> "$GITHUB_STEP_SUMMARY"
           fi
