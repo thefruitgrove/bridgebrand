@@ -65,6 +65,22 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     });
     await page.addStyleTag({ content: fixedA4 });
     const metrics = await page.evaluate(pageMetrics);
+    const narrativeAudit = await page.evaluate(() => {
+      const words = ['따라서','그러나','그리고','그런데','그래서','또한','그러므로','그렇기 때문에','즉'];
+      return [...document.querySelectorAll('#printReportDocument .print-sheet')].map(sheet => {
+        const pageNumber = Number(sheet.dataset.page);
+        const paragraphs = [...sheet.querySelectorAll('.print-sheet-main p')].map(x => x.innerText.trim());
+        const full = paragraphs.join(' ');
+        const counts = Object.fromEntries(words.map(word => {
+          const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\    const cssDiagnostics = await page.evaluate(() => {');
+          const re = new RegExp('(?<![가-힣A-Za-z])' + escaped + '(?![가-힣A-Za-z])', 'g');
+          return [word, [...full.matchAll(re)].length];
+        }));
+        return {page:pageNumber, characters:full.length,
+          repeated:Object.entries(counts).filter(([,n])=>n>1).map(([word,n])=>({word,n})),
+          paragraphs:paragraphs.length};
+      });
+    });
     const cssDiagnostics = await page.evaluate(() => {
       const grid = document.querySelector('#printReportDocument .print-table-split');
       const action = document.querySelector('#printReportDocument .print-sheet[data-page="25"] .print-action');
@@ -105,12 +121,19 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
     const overflows = metrics.filter(m => m.scrollOverflow > 6 || m.beyondSheet > 6 || m.mainBottomGap < -6);
     const result = {
       case: label, expectedPages: expected, pdfPages, jsErrors,
-      pageMetrics: metrics, cssDiagnostics, detectedOverflowPages: overflows.map(x => x.page),
+      pageMetrics: metrics, cssDiagnostics, narrativeAudit, detectedOverflowPages: overflows.map(x => x.page),
       screenshotPages: screenshots.filter(n => n <= expected)
     };
     results.push(result);
     if (jsErrors.length) errors.push(label + ': JS runtime errors: ' + jsErrors.join('; '));
     if (overflows.length) errors.push(label + ': potential clipping on pages ' + overflows.map(o => o.page).join(','));
+    if (edition === 'standard' && language === '한국어') {
+      const repeats = narrativeAudit.filter(x => x.repeated.length);
+      if (repeats.length) errors.push(label + ': repeated connective on page ' + JSON.stringify(repeats.map(x => ({page:x.page, words:x.repeated}))));
+      const pageText = await page.locator('#printReportDocument').innerText();
+      if (!pageText.includes('WHAT') || !pageText.includes('WHY') || !pageText.includes('WHAT NEXT')) errors.push(label + ': WHAT/WHY/WHAT NEXT positioning omitted');
+      if (!pageText.includes('Reputation is a signal.')) errors.push(label + ': canonical brand positioning omitted');
+    }
   } catch (err) {
     errors.push(label + ': ' + String(err.stack || err));
   } finally {
