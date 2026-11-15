@@ -1,0 +1,43 @@
+name: BRIDGE 03-04 production edge verification
+on:
+  push:
+    branches: ['verify/bridge-stage0304-live-20261115']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Compare independent production HTTP assets
+        run: |
+          python - <<'PY'
+          import json,time,urllib.request
+          root='https://bridgebrand.co.kr/'
+          markers={
+            'briefing.html':['id="rankChangeOverview"','bridge-stage0304.css?v=20261115-01','briefing.js?v=20261115-stage0304-01'],
+            'briefing.js':['function pairSubjectConclusion(subject,insight)','const rankSubjectOrder=[0,1,6,7,8,9,10,11,13,16]','const activitySubjectOrder=[9,0,10,11,12]'],
+            'bridge-stage0304.css':['.narrative-group-subject','.narrative-group-general','.pair-subject-conclusion'],
+          }
+          for attempt in range(1,17):
+            results={}
+            try:
+              for path,expected in markers.items():
+                req=urllib.request.Request(root+path+'?release-check='+str(attempt),headers={'Cache-Control':'no-cache','User-Agent':'BRIDGE-Stage-0304-Release-QA'})
+                with urllib.request.urlopen(req,timeout=15) as response:
+                  body=response.read().decode('utf-8','replace')
+                  results[path]={'status':response.status,'missing':[item for item in expected if item not in body],'bytes':len(body)}
+              print(json.dumps({'attempt':attempt,'checks':results},ensure_ascii=False),flush=True)
+              if all(v['status']==200 and not v['missing'] for v in results.values()):
+                req=urllib.request.Request(root+'data/latest.json',headers={'Cache-Control':'no-cache'})
+                with urllib.request.urlopen(req,timeout=15) as response:
+                  data=json.load(response)
+                assert data.get('dataStatus')=='published' and data.get('recordCount')==400 and len(data.get('rankings',[]))==400
+                print('PASS: production Cloudflare serves all Stage 03/04 assets; published 400-row snapshot unchanged, date='+str(data.get('asOfDate')),flush=True)
+                break
+            except Exception as e:
+              print(json.dumps({'attempt':attempt,'error':str(e)},ensure_ascii=False),flush=True)
+            if attempt==16:
+              raise SystemExit('FAIL: public production has not shown the stage 03/04 release. GitHub main and Cloudflare are not proven synchronized.')
+            time.sleep(12)
+          PY
