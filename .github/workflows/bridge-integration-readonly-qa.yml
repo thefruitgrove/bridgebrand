@@ -28,6 +28,8 @@ jobs:
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -50,4 +52,4 @@ jobs:
           node tests/test_service_builder_runtime.js
           node tests/test_evidence_action_rules.js
       - name: Diff whitespace check
-        run: git diff --check
+        run: git diff --check origin/main...HEAD
