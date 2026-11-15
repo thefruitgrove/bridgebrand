@@ -276,8 +276,8 @@ def apply(path: Path) -> bool:
     if path.name == "about.html":
         if 'data-bridge-identity="v1"' in updated:
             updated, count = re.subn(
-                r'<section class="section bridge-identity" data-bridge-identity="v1">[\\s\\S]*?</section>',
-                lambda _m: IDENTITY_SECTION, updated, count=1,
+                r'<section class="section bridge-identity" data-bridge-identity="v1">.*?</section>',
+                lambda _m: IDENTITY_SECTION, updated, count=1, flags=re.S,
             )
             if count != 1:
                 raise ValueError("BRIDGE identity block marker malformed")
@@ -286,8 +286,8 @@ def apply(path: Path) -> bool:
     if path.name in PRINCIPLE_PAGES:
         if 'data-bridge-principles="v1"' in updated:
             updated, count = re.subn(
-                r'<section class="section bridge-public-principles" data-bridge-principles="v1">[\\s\\S]*?</section>',
-                lambda _m: PUBLIC_PRINCIPLES, updated, count=1,
+                r'<section class="section bridge-public-principles" data-bridge-principles="v1">.*?</section>',
+                lambda _m: PUBLIC_PRINCIPLES, updated, count=1, flags=re.S,
             )
             if count != 1:
                 raise ValueError("BRIDGE principles block marker malformed")
