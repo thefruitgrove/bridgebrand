@@ -108,7 +108,7 @@ class ExportReadsTests(unittest.TestCase):
             def select(self, table, query):
                 if '&as_of_date=gte.' in query:
                     raise RuntimeError('{"code":"57014"}')
-                return [row(1, as_of_date='2026-11-13')]
+                return [dict(row(1), as_of_date='2026-11-13')]
         with self.assertRaisesRegex(RuntimeError, 'out-of-window'):
             list(public_observations(DB(),D,D,['v']))
 
