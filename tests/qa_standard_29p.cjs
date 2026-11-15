@@ -87,11 +87,11 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
       assert.equal(editorial.pairs.length, 15, label + ': all 15 pair conclusions must be present');
       for (const conclusion of editorial.pairs) {
         assert.ok(conclusion.includes(editorial.mainSubject), label + ': pair conclusion missing selected subject');
-        assert.match(conclusion, /(의미합니다|뜻입니다)\\.$/, label + ': pair conclusion must close with evidence-limited meaning');
+        assert.match(conclusion, /(의미합니다|뜻입니다)\.$/, label + ': pair conclusion must close with evidence-limited meaning');
       }
       assert.ok(editorial.positionSubject[0].includes(editorial.mainSubject), label + ': first story must name the actual subject');
       assert.ok(editorial.activitySubject[0].includes(editorial.mainSubject), label + ': first activity story must name actual subject');
-      assert.ok(editorial.overview.every(p => p.includes(editorial.mainSubject) || p.includes('DAILY')), label + ': introduction missing subject context');
+      assert.ok(editorial.overview[0].includes(editorial.mainSubject) && editorial.overview[2].includes(editorial.mainSubject), label + ': introductory evidence lacks selected subject');
     }
     await page.evaluate(async () => {
       document.body.classList.add('pdf-preview-mode');
