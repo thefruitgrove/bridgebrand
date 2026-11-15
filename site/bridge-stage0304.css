@@ -64,3 +64,23 @@
   .explanation-stack .narrative-group>p:not(.group-subtitle),
   .pair-grid .pair-subject-conclusion{line-height:1.75}
 }
+
+
+/* Hotfix: Reading Room assigns a two-column grid to all explanation paragraphs.
+   A group subtitle has no numbered label, so it must span the full text width. */
+body.bridge-editorial.briefing-page #rankChangeCopy .narrative-group > p.group-subtitle,
+body.bridge-editorial.briefing-page #activityNarrative .narrative-group > p.group-subtitle{
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-column:1 / -1;
+  width:100%;
+  min-width:0;
+  max-width:none;
+  box-sizing:border-box;
+  margin:0 0 20px!important;
+  padding:0!important;
+  border:0!important;
+  white-space:normal;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
