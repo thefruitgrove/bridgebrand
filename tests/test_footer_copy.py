@@ -16,7 +16,17 @@ class FooterCopyContractTests(unittest.TestCase):
                 pages.append(path)
                 self.assertIn(FOOTER_COPY, text, str(path.relative_to(ROOT)))
 
-        self.assertGreaterEqual(len(pages), 28)
+        # The V2 home has its own operator/limitations footer. Enumerate
+        # required legacy surfaces instead of equating a page count with coverage.
+        covered = {p.relative_to(ROOT / 'site').as_posix() for p in pages}
+        self.assertTrue({'cpr.html', 'gov.html', 'uni.html', 'star.html',
+                         'trust.html', 'methodology.html', 'subscribe.html'} <= covered)
+        for name in ('index.html', 'bridge-v2.html', 'site_fix/index.html'):
+            text = (ROOT / 'site' / name).read_text(encoding='utf-8')
+            self.assertIn('class="v2-footer"', text, name)
+            self.assertIn('Developed and operated by SIGNALBRIDGE.', text, name)
+            self.assertIn('class="v2-legal"', text, name)
+            self.assertIn('contact.html', text, name)
 
     def test_retired_footer_wording_does_not_return(self):
         retired = (
