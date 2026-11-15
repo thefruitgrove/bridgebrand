@@ -51,5 +51,7 @@ jobs:
           node tests/test_briefing.js
           node tests/test_service_builder_runtime.js
           node tests/test_evidence_action_rules.js
-      - name: Diff whitespace check
-        run: git diff --check origin/main...HEAD
+      - name: Diff whitespace check (exclude preserved original patch artifact)
+        # operational.patch is an untouched original git-format patch; its
+        # standard email-style "-- " trailer is intentionally preserved.
+        run: git diff --check origin/main...HEAD -- . ':!docs/bridge-handoff/operational.patch' ':!docs/bridge-handoff/original-4b2e9d1.bundle'
