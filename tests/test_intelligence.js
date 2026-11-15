@@ -27,16 +27,20 @@ assert(js.includes("['PULSE',3") && js.includes("['INSIGHT',5") && js.includes("
 assert(js.includes("['SNAPSHOT',1") && js.includes("['DEEP DIVE',1"), 'one-time packages missing');
 assert(js.includes("['ENTERPRISE T100',100"), 'enterprise package missing');
 assert(html.includes('subscribe.html#serviceOverview'), 'subscription entry route missing');
-['briefing','subscription','scope','one-time'].forEach((name) => {
-  assert(subscribeHtml.includes(`data-service-panel="${name}"`), `missing subscription overview: ${name}`);
-  assert(subscribeHtml.includes(`data-service-content="${name}"`), `missing subscription content: ${name}`);
-});
-['방식','서비스','분야','대상','언어','확인'].forEach((label) => assert(subscribeHtml.includes(`<li>${label}</li>`) || subscribeHtml.includes(`<li class="active">${label}</li>`), `missing configurator step: ${label}`));
-assert(subscribeJs.includes('showOverview'), 'subscription overview navigation missing');
+// The shipped service builder replaced four overview tabs with two entry
+// routes and a four-step configurator. Test those routes and actual functions.
+for(const mode of ['basic','comparison']) {
+  assert(subscribeHtml.includes(`data-start-briefing="${mode}"`), `missing service entry: ${mode}`);
+}
+for(const label of ['분석 방식','분야·대상','제공 방식','확인']) {
+  assert(subscribeHtml.includes(`>${label}</li>`), `missing configurator step: ${label}`);
+}
+assert(subscribeHtml.includes('id="serviceConfigurator"') && subscribeHtml.includes('id="subscribeStage"'), 'service configurator mount missing');
+require('./test_service_builder_runtime.js');
 assert(briefingHtml.includes('id="trialConversion"'), 'final-stage conversion panel missing');
 assert(briefingHtml.includes('ONE-TIME BRIEFING'), 'one-time briefing label missing');
 assert(briefingJs.includes("$('trialConversion').hidden=stage!==6"), 'conversion panel must appear only at report stage');
-assert(subscribeJs.includes("['한국어','영어 글로벌 에디션']"), 'subscription languages must be Korean and English only');
+assert(subscribeJs.includes('data-language="한국어"') && subscribeJs.includes('data-language="English"'), 'Korean and English delivery controls missing');
 assert(!subscribeHtml.includes('일본어') && !subscribeHtml.includes('중국어'), 'Japanese and Chinese options must be removed');
 assert(i18nJs.includes("const PUBLICITY=new Set(['publicity.html','publicity-article.html'])"), 'PUBLICITY must remain outside the bilingual conversion scope');
 assert(i18nJs.includes('T100 entity names, scores and source records are deliberately preserved'), 'T100 Korean-name preservation contract missing');
