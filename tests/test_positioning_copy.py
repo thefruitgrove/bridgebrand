@@ -78,7 +78,7 @@ class TestBridgePositioningCopy(unittest.TestCase):
                          "actionCheckCompact(pick)", "escEvidence(v.question)"):
             self.assertIn(fragment, script)
         self.assertIn('id="bridgeActionChecks"', html)
-        self.assertIn("이 목록은 데이터의 적격성 및 검증 필요성에 따른 점검 순서", script)
+        self.assertIn("위 목록은 데이터의 적격성 및 검증 필요성에 따른 점검 순서", script)
 
 
 if __name__ == "__main__":
