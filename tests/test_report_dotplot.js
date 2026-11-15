@@ -28,7 +28,7 @@ for (const rank of [1, 10, 19, 20, 21, 50, 95, 100]) {
   assert.ok(names.includes(1), 'always show a top ranking reference');
   assert.match(html, /print-dotplot-note/, 'visible range must be explained');
   if (rank > 20) {
-    assert.ok(!names.includes(20), 'do not silently claim to show entire top 20 when selection is lower');
+    assert.notDeepEqual(names, Array.from({length:20}, (_, i) => i + 1), 'show selected range rather than only the top 20');
     assert.match(html, /표시되지 않은 순위는 생략/, 'omitted ranks must be disclosed');
   } else {
     assert.equal(names.length, 20, 'show top 20 for selected rank within top 20');
