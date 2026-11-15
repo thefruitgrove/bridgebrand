@@ -72,7 +72,9 @@ async function inspect(browser, rank, edition, language, screenshots, savePdf) {
         const paragraphs = [...sheet.querySelectorAll('.print-sheet-main p')].map(x => x.innerText.trim());
         const full = paragraphs.join(' ');
         const counts = Object.fromEntries(words.map(word => {
-          // Tokens are fixed Korean connective literals, so no regex escaping is needed.\n          const re = new RegExp('(?<![가-힣A-Za-z])' + word + '(?![가-힣A-Za-z])', 'g');\n          return [word, [...full.matchAll(re)].length];
+          // Tokens are fixed Korean connective literals, so no regex escaping is needed.
+          const re = new RegExp('(?<![가-힣A-Za-z])' + word + '(?![가-힣A-Za-z])', 'g');
+          return [word, [...full.matchAll(re)].length];
         }));
         return {page:pageNumber, characters:full.length,
           repeated:Object.entries(counts).filter(([,n])=>n>1).map(([word,n])=>({word,n})),
