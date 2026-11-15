@@ -63,6 +63,13 @@ jobs:
           python -m unittest discover -s tests -p 'test_*.py'
           node tests/test_briefing.js
           node tests/test_evidence_action_rules.js
+      - name: Read-only live freshness probe (diagnostic; never deploy)
+        # Uses only public GET requests, not Cloudflare/Supabase credentials.
+        # A stale live site remains NO-GO and is recorded in Actions logs.
+        continue-on-error: true
+        run: |
+          python tools/verify_live.py --attempts 1 --delay 0 --max-age-days 0
+
       - name: Diff whitespace check (exclude preserved original patch artifact)
         # operational.patch is an untouched original git-format patch; its
         # standard email-style "-- " trailer is intentionally preserved.
