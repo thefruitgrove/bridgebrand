@@ -1,0 +1,35 @@
+name: BRIDGE 2026-11-17 safe retry after full regressions
+on:
+  push:
+    branches: ['ops/retry-bridge-20261117-after-tests']
+permissions:
+  actions: write
+  contents: read
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Full release regressions prior to spending any collection quota
+        run: |
+          python -m unittest discover -s tests -v
+          python engine3/test_scoring_v3.py
+          python tests/test_uni_v43.py
+      - name: Dispatch official 11/17 collection only if no active run exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ACTIVE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=40" \
+            --jq '[.workflow_runs[] | select(.created_at >= "2026-11-16T20:00:00Z" and (.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested"))] | length')
+          echo "Active current-day official collection runs: $ACTIVE"
+          if [ "$ACTIVE" != "0" ]; then echo 'Another collection is pending: no duplicate started';exit 0;fi
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/dispatches" \
+            -f ref=main -f 'inputs[as_of_date]=2026-11-17'
+          echo 'PASS: dispatched official daily pipeline for real 2026-11-17'
