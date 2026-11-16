@@ -352,13 +352,22 @@ def export_latest(db: SupabaseRest, as_of: dt.date) -> None:
             raise RuntimeError(f"duplicate public ranking blocked: {key}")
         seen.add(key)
         groups.setdefault((row["domain"], row["ranking_type"]), []).append(row)
-    for members in groups.values():
-        members.sort(key=lambda r: (-float(r["score"]), str(r["external_id"])))
-        for position, row in enumerate(members, 1):
-            row["rank"] = position
-            previous = row.get("previous_rank")
-            row["rank_change"] = int(previous) - position if previous is not None else 0
-    rows.sort(key=lambda r: (r["domain"], r["ranking_type"], r["rank"]))
+    # Published bridge_rankings rows are authoritative. Re-ranking by a
+    # separate external_id tiebreaker silently flips equally scored subjects
+    # (e.g. STAR-096/STAR-016 on 2026-11-14) and breaks DB->public lineage.
+    # Validate rank integrity instead; never overwrite rank or rank_change.
+    for group, members in groups.items():
+        try:
+            ordered = sorted(members, key=lambda r: int(r["rank"]))
+            ranks = [int(r["rank"]) for r in ordered]
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(f"Published ranks unavailable: {group}") from exc
+        if ranks != list(range(1, len(members) + 1)):
+            raise RuntimeError(f"Non-contiguous or duplicate published ranks: {group}")
+        scores = [float(r["score"]) for r in ordered]
+        if any(scores[i] < scores[i + 1] - 1e-9 for i in range(len(scores) - 1)):
+            raise RuntimeError(f"Published rank/score order inconsistent: {group}")
+    rows.sort(key=lambda r: (r["domain"], r["ranking_type"], int(r["rank"])))
     payload = {
         "schemaVersion": "2.0",
         "methodologyVersion":load_methodology()["version"],
