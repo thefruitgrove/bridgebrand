@@ -1,0 +1,32 @@
+name: BRIDGE recovery live edge checkpoint
+on:
+  push:
+    branches: ['verify/bridge-live-20261117']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare live Cloudflare JSON against committed release
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const src=JSON.parse(fs.readFileSync('site/data/latest.json','utf8'));
+          if(src.asOfDate!=='2026-11-16'||src.recordCount!==400)throw Error('GitHub main not updated');
+          for(const path of ['/data/latest.json','/data/latest.json?cachecheck=20261117']){
+            const r=await fetch('https://bridgebrand.co.kr'+path,{headers:{'Cache-Control':'no-cache','User-Agent':'Mozilla/5.0 (compatible; BridgeLiveVerification/1.0)'},signal:AbortSignal.timeout(16000)});
+            console.log('HTTP',path,r.status,'cache',r.headers.get('cf-cache-status'));
+            if(!r.ok)throw Error('Cloudflare public snapshot unavailable HTTP '+r.status);
+            const live=await r.json();
+            const counts={};for(const x of live.rankings||[])counts[x.domain]=(counts[x.domain]||0)+1;
+            console.log('PUBLIC',JSON.stringify({asOfDate:live.asOfDate,recordCount:live.recordCount,counts,snapshotId:live.snapshotId}));
+            if(live.snapshotId!==src.snapshotId||live.asOfDate!==src.asOfDate||live.recordCount!==400)throw Error('Cloudflare version mismatch');
+          }
+          console.log('PASS: Cloudflare date, count and snapshot ID exactly match GitHub main');
+          JS
