@@ -22,7 +22,7 @@ permissions:
 jobs:
   recover:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 95
     env:
       TZ: Asia/Seoul
       SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
@@ -46,35 +46,40 @@ jobs:
       - name: Decide whether any recovery is necessary
         id: gate
         run: python -m tools.recovery_gate --date "$AS_OF_DATE" --github-output "$GITHUB_OUTPUT"
+      - name: Fail visibly when available evidence is incomplete
+        if: ${{ steps.gate.outputs.mode == 'blocked' }}
+        run: |
+          echo "::error::Recovery held: insufficient current-date collection/evidence. Public JSON stays unchanged."
+          exit 1
       - name: Explain no-op recovery
         if: ${{ steps.gate.outputs.mode == 'skip' }}
         run: echo 'Published snapshot and all 400 metrics already match; no re-collection, scoring or redeployment.'
       - name: Run unit tests before recovery
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: python -m unittest discover -s tests -q
       - name: Compute only if stored evidence is complete and metrics missing
         if: ${{ steps.gate.outputs.mode == 'score' }}
         run: python -m bridge_pipeline.run score --date "$AS_OF_DATE"
       - name: Audit historical lineage before any publication
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: python -m bridge_pipeline.audit_v5 --date "$AS_OF_DATE"
       - name: Publish existing audited metrics without recollection
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: python -m bridge_pipeline.run publish-daily --date "$AS_OF_DATE"
       - name: Export existing publication and check consistency
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: |
           python -m bridge_pipeline.run export --date "$AS_OF_DATE"
           python -m bridge_pipeline.run healthcheck
       - name: Rebuild static site from the audited snapshot
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: |
           python build.py
           python tools/apply_brand_shell.py
           python build_spa.py
           python tools/apply_brand_shell.py
       - name: Commit only if still based on current production source
-        if: ${{ steps.gate.outputs.mode != 'skip' }}
+        if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: |
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
@@ -91,5 +96,5 @@ jobs:
             git push origin HEAD:main
           fi
       - name: Request deployment only for actual repaired publication
-        if: ${{ success() && steps.gate.outputs.mode != 'skip' && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        if: ${{ success() && (steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export') && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
         run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
