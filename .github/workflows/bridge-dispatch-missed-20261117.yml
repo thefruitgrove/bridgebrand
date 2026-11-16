@@ -1,0 +1,28 @@
+name: BRIDGE 2026-11-17 automatic schedule fallback
+on:
+  push:
+    branches: ['ops/dispatch-bridge-20261117']
+permissions:
+  actions: write
+  contents: read
+jobs:
+  dispatch-if-missed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Dispatch only when today's official run is absent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TODAY='2026-11-17'
+          EXISTING=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=40" \
+            --jq '[.workflow_runs[] | select(.created_at >= "2026-11-16T20:00:00Z" and (.event == "schedule" or .event == "workflow_dispatch"))] | length')
+          echo "Official pipeline starts since 05:00 KST today: $EXISTING"
+          if [ "$EXISTING" != "0" ]; then
+            echo "No duplicate collection will be queued."
+            exit 0
+          fi
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/dispatches" \
+            -f ref=main -f "inputs[as_of_date]=$TODAY"
+          echo "Dispatched existing official 05:15 BRIDGE daily pipeline for $TODAY."
