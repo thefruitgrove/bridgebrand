@@ -28,7 +28,7 @@ jobs:
     # not start a second collection run.
     if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[bridge-data]') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 105
     env:
       TZ: Asia/Seoul
       SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co

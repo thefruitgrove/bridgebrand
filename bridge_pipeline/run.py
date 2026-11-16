@@ -404,12 +404,8 @@ def export_history(db: SupabaseRest, as_of: dt.date) -> None:
         f"&methodology_version=in.({cfg['version']},2026.10-shadow-3)"
     )
     metric_map = {(row["entity_id"], row["as_of_date"],row["methodology_version"]): row for row in metrics}
-    observations = db.select(
-        "bridge_axis_observations",
-        f"select=entity_id,as_of_date,axis,score,status,diagnostics,methodology_version"
-        f"&as_of_date=gte.{start.isoformat()}&as_of_date=lte.{as_of.isoformat()}"
-        f"&methodology_version=in.({cfg['version']},2026.10-shadow-3)"
-    )
+    from .export_reads import public_observations
+    observations = public_observations(db, start, as_of, [cfg['version'], '2026.10-shadow-3'])
     axes_map: dict[tuple[str, str], dict[str, float]] = {}
     for observation in observations:
         if observation.get("score") is None or observation.get("status") not in {"measured", "carried"}:

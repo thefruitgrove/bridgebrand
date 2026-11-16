@@ -1,0 +1,99 @@
+name: BRIDGE 2026-11-16 Verified Recovery (one-time)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bridge-recover-20261117-once.yml'
+permissions:
+  contents: write
+concurrency:
+  group: bridge-production-publish
+  cancel-in-progress: false
+jobs:
+  publish-confirmed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 85
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regression and publication lineage gate
+        run: |
+          python -m unittest discover -s tests -p 'test_authoritative_rank_export.py' -v
+          python -m unittest discover -s tests -p 'test_read_only_export_gate.py' -v
+          python -m bridge_pipeline.audit_v5 --date 2026-11-16
+      - name: Re-export actually published 2026-11-16 data; no recollection or scoring
+        run: python -m bridge_pipeline.run export --date 2026-11-16
+      - name: Compare all 400 authoritative database ranks and trust grades
+        run: |
+          python - <<'PY'
+          from bridge_pipeline.core import SupabaseRest, load_methodology
+          from pathlib import Path
+          import json
+          db=SupabaseRest()
+          version=load_methodology()['version']
+          src=json.loads(Path('site/data/latest.json').read_text(encoding='utf-8'))
+          assert src['asOfDate']=='2026-11-16' and src['dataStatus']=='published'
+          assert src['recordCount']==400 and len(src['rankings'])==400
+          ranks=db.select('bridge_rankings',
+            'select=entity_id,domain,ranking_type,rank,score,trust_grade&as_of_date=eq.2026-11-16'
+            '&ranking_type=eq.T100&published_at=not.is.null&methodology_version=eq.'+version)
+          entities=db.select('bridge_entities','select=id,external_id')
+          names={x['id']:x['external_id'] for x in entities}
+          authoritative={(('ENT' if x['domain']=='STAR' else x['domain']),names[x['entity_id']]):x for x in ranks}
+          assert len(authoritative)==400,len(authoritative)
+          counts={}
+          for row in src['rankings']:
+            k=(row['domain'],row['external_id'])
+            assert k in authoritative,('unknown target',k)
+            original=authoritative.pop(k)
+            assert int(row['rank'])==int(original['rank']),(k,'rank')
+            assert abs(float(row['score'])-float(original['score']))<.00001,(k,'score')
+            assert row['trust_grade']==original['trust_grade'],(k,'trust')
+            counts[row['domain']]=counts.get(row['domain'],0)+1
+          assert not authoritative,('missing rows',len(authoritative))
+          assert counts=={'CPR':100,'GOV':100,'ENT':100,'UNI':100},counts
+          print('PASS: DB->JSON exact 400 T100 target/rank/score/trust equality, date=2026-11-16',flush=True)
+          PY
+      - name: Rebuild site without modifying evidence
+        run: |
+          python build.py
+          python tools/apply_brand_shell.py
+          python build_spa.py
+          python tools/apply_brand_shell.py
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          p=json.loads(Path('site/data/latest.json').read_text(encoding='utf-8'))
+          assert p['asOfDate']=='2026-11-16' and len(p['rankings'])==400
+          html=Path('site/briefing.html').read_text(encoding='utf-8')
+          assert 'rankChangeOverview' in html and 'bridge-stage0304.css' in html
+          PY
+      - name: Commit only validated public outputs, never synthesize dates
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo '::error::main advanced; refuse stale snapshot publication'
+            exit 1
+          fi
+          git config user.name bridge-bot
+          git config user.email bot@bridgebrand.co.kr
+          git add site/ data/pipeline_status.json
+          if git diff --cached --quiet; then
+            echo '::error::No changed public export: unexpected recovery no-op'
+            exit 1
+          fi
+          git diff --cached --stat
+          git commit -m "data: verified 2026-11-16 T100 recovery [bridge-data]"
+          git push origin HEAD:main
+      - name: Optional Cloudflare hook
+        if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
+        run: curl --fail --silent --show-error --retry 2 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
