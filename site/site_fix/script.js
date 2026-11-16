@@ -193,7 +193,32 @@
           renderDomainRows(candidates.filter(function(r){return r.as_of_date===latestDate;}),latestDate);
           return true;
         };
-        fetch('data/history.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('archive unavailable');return r.json();}).then(function(h){window.BRIDGE_HISTORY=h;}).catch(function(){});
+        // Cloudflare Pages caps each asset at 25 MiB. The archived source is
+        // split into small JSON shards at build time without losing records.
+        // Retain legacy single-file loading for previously deployed builds.
+        fetch('data/history-manifest.json',{cache:'no-store'}).then(function(r){
+          if(!r.ok) throw new Error('shard manifest unavailable');
+          return r.json();
+        }).then(function(manifest){
+          if(!Array.isArray(manifest.parts)) throw new Error('invalid history manifest');
+          return Promise.all(manifest.parts.map(function(name){
+            if(!/^history-part-[0-9]+\\.json$/.test(name)) throw new Error('invalid shard name');
+            return fetch('data/'+name,{cache:'no-store'}).then(function(r){
+              if(!r.ok) throw new Error('missing history shard '+name);
+              return r.json();
+            });
+          })).then(function(parts){
+            var rankings=[].concat.apply([],parts);
+            if(rankings.length!==manifest.recordCount) throw new Error('history shard count mismatch');
+            return Object.assign({},manifest.meta||{},{rankings:rankings});
+          });
+        }).catch(function(){
+          return fetch('data/history.json',{cache:'no-store'}).then(function(r){
+            if(!r.ok) throw new Error('archive unavailable');
+            return r.json();
+          });
+        }).then(function(h){window.BRIDGE_HISTORY=h;}).catch(function(){});
+
       }
       // Without a valid weekly baseline, show actual evidence, never a fabricated delta.
       function tickerEvidence(r){
