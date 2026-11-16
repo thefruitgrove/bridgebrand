@@ -17,11 +17,19 @@ class PublicExportTest(unittest.TestCase):
                 export_latest(None, dt.date(2026,10,14))
             return json.loads((root/'site/data/latest.json').read_text())
     def test_current_date_only_and_contiguous_ranks(self):
-        rows=[{'domain':'CPR','ranking_type':'T100','external_id':'A','as_of_date':'2026-10-14','score':70,'rank':9,'previous_rank':3},
-              {'domain':'CPR','ranking_type':'T100','external_id':'B','as_of_date':'2026-10-14','score':80,'rank':6,'previous_rank':1},
+        # Published DB rank and delta are authoritative; do not re-rank a
+        # partial fixture with unrelated tie-breakers during public export.
+        rows=[{'domain':'CPR','ranking_type':'T100','external_id':'A','as_of_date':'2026-10-14','score':70,'rank':2,'previous_rank':3,'rank_change':1},
+              {'domain':'CPR','ranking_type':'T100','external_id':'B','as_of_date':'2026-10-14','score':80,'rank':1,'previous_rank':1,'rank_change':0},
               {'domain':'CPR','ranking_type':'T100','external_id':'A','as_of_date':'2026-10-13','score':99,'rank':1}]
         out=self.run_export(rows)
         self.assertEqual([(r['external_id'],r['rank'],r['rank_change']) for r in out['rankings']], [('B',1,0),('A',2,1)])
+    def test_non_contiguous_or_missing_rank_blocks_export(self):
+        rows=[{'domain':'CPR','ranking_type':'T100','external_id':'A','as_of_date':'2026-10-14','score':80,'rank':1},
+              {'domain':'CPR','ranking_type':'T100','external_id':'B','as_of_date':'2026-10-14','score':70,'rank':9}]
+        with self.assertRaisesRegex(RuntimeError,'Non-contiguous or duplicate published ranks'):
+            self.run_export(rows)
+
     def test_duplicate_aborts_publication(self):
         row={'domain':'CPR','ranking_type':'T100','external_id':'A','as_of_date':'2026-10-14','score':70,'rank':1}
         with self.assertRaisesRegex(RuntimeError,'duplicate public ranking blocked'):
