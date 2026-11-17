@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from tools.verify_export_file import verify_file
-from tests.test_read_only_export_gate import SyntheticDB
+from test_read_only_export_gate import SyntheticDB
 from tools.dry_run_public_export import ReadOnlyDB
 
 class PublicationFileGateTest(unittest.TestCase):

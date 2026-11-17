@@ -1,7 +1,7 @@
 name: BRIDGE Date-Scoped Release Safety QA
 on:
   push:
-    branches: ['ops/bridge-integrity-20261117']
+    branches: ['ops/bridge-integrity-20261117', 'ops/bridge-export-integrity-20261117']
 permissions:
   contents: read
 jobs:
