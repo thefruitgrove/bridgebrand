@@ -107,6 +107,9 @@ jobs:
             python -m bridge_pipeline.run import-official --file /tmp/gov_axes.csv ${AS_OF_DATE:+--date "$AS_OF_DATE"}
           fi
 
+      - name: Hard gate — verify today's mandatory collectors before scoring
+        run: python -m bridge_pipeline.run healthcheck --date "$AS_OF_DATE"
+
       - name: Compute shadow scores and rankings
         run: python -m bridge_pipeline.run score ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
@@ -122,8 +125,8 @@ jobs:
       - name: Export published snapshot
         run: python -m bridge_pipeline.run export ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
-      - name: Pipeline health gate
-        run: python -m bridge_pipeline.run healthcheck
+      - name: Post-publication collector health gate
+        run: python -m bridge_pipeline.run healthcheck --date "$AS_OF_DATE"
 
       - name: Rebuild static site
         run: |

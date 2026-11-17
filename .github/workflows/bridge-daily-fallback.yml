@@ -28,9 +28,12 @@ jobs:
             exit 0
           fi
           ACTIVE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=100" --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
-          echo "Active collection jobs: $ACTIVE"
-          if [ "$ACTIVE" != "0" ]; then
-            echo "Active official collector detected; no duplicate dispatched."
+          # Recovery shares the production concurrency group. Never enqueue
+          # a duplicate daily run while recovery is queued or running.
+          RECOVERY=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-recover-publish.yml/runs?per_page=30" --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+          echo "Active collection jobs: $ACTIVE; active recovery jobs: $RECOVERY"
+          if [ "$ACTIVE" != "0" ] || [ "$RECOVERY" != "0" ]; then
+            echo "Official collector or recovery is active; no duplicate dispatched."
             exit 0
           fi
           gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/dispatches" -f ref=main -f "inputs[as_of_date]=$TODAY"

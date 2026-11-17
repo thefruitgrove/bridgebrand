@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from .core import (
-    ROOT, RawItem, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
+    ROOT, KST, RawItem, SupabaseRest, attention_continuity_score, classify_headline, dump_json, fetch_google_news,
     iso_week, load_methodology, now_kst, previous_week_bounds, publication_date, robust_rank, week_bounds,
     trust_grade, weighted_score
 )
@@ -1001,18 +1001,28 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
     print(f"daily beta published domains={domains} ranking_types={ranking_types} date={as_of}")
 
 
-def healthcheck(db: SupabaseRest) -> None:
-    runs = db.select("bridge_collection_runs", "select=source_id,status,finished_at,fetched_count,accepted_count,error_code&order=started_at.desc&limit=20")
+def healthcheck(db: SupabaseRest, as_of: dt.date | None = None) -> None:
+    """Only completed same-date mandatory collection runs approve publication."""
+    as_of = as_of or publication_date()
+    start = dt.datetime.combine(as_of, dt.time.min, tzinfo=KST)
+    end = start + dt.timedelta(days=1)
+    rows = db.select(
+        "bridge_collection_runs",
+        "select=source_id,status,started_at,finished_at,fetched_count,accepted_count,error_code"
+        f"&started_at=gte.{start.isoformat()}&started_at=lt.{end.isoformat()}"
+        "&order=started_at.desc&limit=200",
+    )
     latest = {}
-    for run in runs:
-        latest.setdefault(run["source_id"], run)
+    for row in rows:
+        latest.setdefault(row["source_id"], row)
     required = {"google_news_rss", "opendart"}
     missing = sorted(required - set(latest))
-    # Candidate discovery is advisory and its failures remain visible in latestRuns.\n    # A 429 in advisory discovery must not block verified registered subjects.\n    # Optional expansion sources may legitimately be partial while verified
-    # mappings are widened. They are reported but must not block publication
-    # of an otherwise valid daily snapshot. Required sources remain hard gates.
-    critical = [r for source, r in latest.items() if source in required and r["status"] != "success"]
-    print(json.dumps({"ok": not critical and not missing, "latestRuns": list(latest.values()), "missingSources": missing}, ensure_ascii=False, indent=2))
+    critical = [latest[source] for source in sorted(required.intersection(latest))
+                if latest[source]["status"] != "success" or not latest[source].get("finished_at")]
+    report = {"ok": not missing and not critical, "asOfDate": as_of.isoformat(),
+              "requiredSources": sorted(required), "missingSources": missing,
+              "failedRequiredSources": critical, "latestRuns": list(latest.values())}
+    print(json.dumps(report, ensure_ascii=False, indent=2))
     if critical or missing:
         raise SystemExit(2)
 
@@ -1047,7 +1057,7 @@ def main(argv: list[str] | None = None) -> None:
     elif args.command == "publish-daily": publish_daily_beta(db, as_of)
     elif args.command == "publish": publish_eligible(db, as_of)
     elif args.command == "export": export_latest(db, as_of)
-    elif args.command == "healthcheck": healthcheck(db)
+    elif args.command == "healthcheck": healthcheck(db, as_of)
 
 
 if __name__ == "__main__":

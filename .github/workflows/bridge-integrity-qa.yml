@@ -1,0 +1,26 @@
+name: BRIDGE Date-Scoped Release Safety QA
+on:
+  push:
+    branches: ['ops/bridge-integrity-20261117']
+permissions:
+  contents: read
+jobs:
+  safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and run operational guards and regressions
+        run: |
+          python -m compileall -q bridge_pipeline tools tests
+          python -m unittest discover -s tests -p 'test_collection_date_health.py' -v
+          python -m unittest discover -s tests -p 'test_recovery_gate.py' -v
+          python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
+          python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
+          python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
+          python -m unittest discover -s tests -v
+          python engine3/test_scoring_v3.py
+          python tests/test_uni_v43.py

@@ -27,13 +27,13 @@ class RateLimitedSourceTests(unittest.TestCase):
     def test_discovery_failure_does_not_mask_required_success(self):
         class FakeDB:
             def select(self,*args,**kwargs):
-                return [dict(source_id='google_news_discovery',status='failed'),dict(source_id='google_news_rss',status='success'),dict(source_id='opendart',status='success')]
+                return [dict(source_id='google_news_discovery',status='failed'),dict(source_id='google_news_rss',status='success',finished_at='2026-11-17T05:20:00+09:00'),dict(source_id='opendart',status='success',finished_at='2026-11-17T05:20:00+09:00')]
         healthcheck(FakeDB())
 
     def test_required_news_failure_still_blocks_publication(self):
         class FakeDB:
             def select(self,*args,**kwargs):
-                return [dict(source_id='google_news_discovery',status='success'),dict(source_id='google_news_rss',status='failed'),dict(source_id='opendart',status='success')]
+                return [dict(source_id='google_news_discovery',status='success',finished_at='2026-11-17T05:20:00+09:00'),dict(source_id='google_news_rss',status='failed'),dict(source_id='opendart',status='success',finished_at='2026-11-17T05:20:00+09:00')]
         with self.assertRaises(SystemExit):
             healthcheck(FakeDB())
 

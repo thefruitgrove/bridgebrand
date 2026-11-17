@@ -31,8 +31,23 @@ class RecoveryGateTests(unittest.TestCase):
     def test_publish_only_after_completed_metrics(self):
         result = choose("2026-11-14", source_date="2026-11-13",
                         source_published=True, metric_rows=metrics(),
-                        observation_rows=[], collection_rows=[])
+                        observation_rows=[], collection_rows=COLLECTIONS)
         self.assertEqual(result["mode"], "export")
+
+    def test_metrics_without_current_core_collection_cannot_be_republished(self):
+        result = choose("2026-11-14", source_date="2026-11-13",
+                        source_published=True, metric_rows=metrics(),
+                        observation_rows=observations(), collection_rows=[])
+        self.assertEqual(result["mode"], "blocked")
+
+    def test_later_failed_core_attempt_overrides_earlier_success(self):
+        previous = [dict(x, started_at="2026-11-14T05:15:00+09:00") for x in COLLECTIONS]
+        later = dict(source_id="google_news_rss", status="failed",
+                     started_at="2026-11-14T06:30:00+09:00")
+        result = choose("2026-11-14", source_date="2026-11-13",
+                        source_published=True, metric_rows=metrics(),
+                        observation_rows=observations(), collection_rows=previous + [later])
+        self.assertEqual(result["mode"], "blocked")
 
     def test_only_score_from_complete_evidence(self):
         result = choose("2026-11-14", source_date="2026-11-13",

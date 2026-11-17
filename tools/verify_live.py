@@ -30,6 +30,10 @@ def classify(source, deployed, page, today, max_age_days=2):
     rows = deployed.get("rankings")
     if deployed.get("recordCount") != 400 or not isinstance(rows, list) or len(rows) != 400:
         issues.append("invalid_live_record_count")
+    if source.get("asOfDate") == day and source.get("dataStatus") == "published":
+        source_id, live_id = source.get("snapshotId"), deployed.get("snapshotId")
+        if source_id and live_id and source_id != live_id:
+            issues.append("same_date_snapshot_id_mismatch")
     if live_date:
         age = (today - live_date).days
         if age > max_age_days:

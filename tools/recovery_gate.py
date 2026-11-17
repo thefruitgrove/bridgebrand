@@ -40,8 +40,12 @@ def choose(date: str, *, source_date: str | None, source_published: bool,
     unique_observations = {
         (x.get("entity_id"), x.get("axis")) for x in observation_rows
     }
+    # The latest same-date run for each required source is authoritative.
+    latest_collection = {}
+    for row in sorted(collection_rows, key=lambda x: x.get("started_at") or "", reverse=True):
+        latest_collection.setdefault(row.get("source_id"), row)
     has_core_collection = all(
-        any(x.get("source_id") == src and x.get("status") == "success" for x in collection_rows)
+        latest_collection.get(src, {}).get("status") == "success"
         for src in CORE_SOURCES
     )
     result = {"date": date, "metrics_count": len(metric_rows),
@@ -55,8 +59,10 @@ def choose(date: str, *, source_date: str | None, source_published: bool,
     elif metric_complete:
         if source_date == date and source_published:
             result.update(mode="skip", reason="metrics_and_publication_complete")
+        elif has_core_collection:
+            result.update(mode="export", reason="metrics_complete_validated_sources")
         else:
-            result.update(mode="export", reason="metrics_complete_publication_missing")
+            result.update(mode="blocked", reason="metrics_exist_but_core_collection_incomplete")
     elif len(observation_rows) >= MIN_OBSERVATIONS and len(unique_observations) >= MIN_OBSERVATIONS and has_core_collection:
         result.update(mode="score", reason="existing_evidence_ready_for_scoring")
     else:

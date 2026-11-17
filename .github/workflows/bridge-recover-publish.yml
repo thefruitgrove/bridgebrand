@@ -70,7 +70,7 @@ jobs:
         if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: |
           python -m bridge_pipeline.run export --date "$AS_OF_DATE"
-          python -m bridge_pipeline.run healthcheck
+          python -m bridge_pipeline.run healthcheck --date "$AS_OF_DATE"
       - name: Rebuild static site from the audited snapshot
         if: ${{ steps.gate.outputs.mode == 'score' || steps.gate.outputs.mode == 'export' }}
         run: |
