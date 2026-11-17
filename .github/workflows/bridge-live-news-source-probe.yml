@@ -1,0 +1,14 @@
+name: BRIDGE alternative live news source reachability (read-only)
+on:
+  push:
+    branches: ['ops/bridge-rss-alternatives-probe-20261117']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe independent public live news feeds once
+        run: python tools/probe_live_news_20261117.py
