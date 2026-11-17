@@ -1,0 +1,38 @@
+name: BRIDGE live authoritative DB and published file parity
+on:
+  push:
+    branches: ['verify/bridge-20261117-production-lineage']
+permissions:
+  contents: read
+jobs:
+  lineage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate actual source rank score trust and snapshot ID — zero writes
+        run: |
+          python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
+          python -m tools.verify_export_file --date 2026-11-16
+      - name: Check official live Cloudflare snapshot equal to signed published git snapshot
+        run: |
+          node --input-type=module - <<'JS'
+          import fs from 'node:fs';
+          const source=JSON.parse(fs.readFileSync('site/data/latest.json','utf8'));
+          const request=await fetch('https://bridgebrand.co.kr/data/latest.json',{headers:{'cache-control':'no-cache'},signal:AbortSignal.timeout(20000)});
+          if(request.status!==200)throw Error('Live Cloudflare data unavailable: '+request.status);
+          const live=await request.json();
+          for(const field of ['asOfDate','dataStatus','recordCount','snapshotId','methodologyVersion']){
+            if(live[field]!==source[field])throw Error('Cloudflare/source mismatch '+field+': '+live[field]+' vs '+source[field]);
+          }
+          if(live.recordCount!==400||source.asOfDate!=='2026-11-16')throw Error('Unexpected dated snapshot');
+          console.log('PASS: Cloudflare and GitHub 400 rankings, date, status, snapshotId and methodology version match');
+          JS
