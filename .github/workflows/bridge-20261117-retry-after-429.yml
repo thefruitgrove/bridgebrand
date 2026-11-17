@@ -24,7 +24,7 @@ jobs:
           set -euo pipefail
           LATEST=$(python -c "import json; print(json.load(open('site/data/latest.json'))['asOfDate'])")
           if [ "$LATEST" = '2026-11-17' ]; then
-            echo 'Today's audited publication already exists; no new collection.'
+            echo "Already published for 2026-11-17; skip collection."
             exit 0
           fi
           ACTIVE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=40" --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
