@@ -7,6 +7,7 @@ import json
 import math
 import os
 import re
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -178,6 +179,32 @@ class SupabaseRest:
         return self.request("PATCH", table, values, query)
 
 
+# Keep a measured interval between outbound Google News RSS requests.
+# This does not convert a rate-limit failure into an empty/valid observation.
+_GOOGLE_NEWS_LAST_REQUEST = 0.0
+
+
+def _google_news_request_root(req: urllib.request.Request) -> ET.Element:
+    global _GOOGLE_NEWS_LAST_REQUEST
+    for attempt in range(4):
+        pause = max(0.0, 1.5 - (time.monotonic() - _GOOGLE_NEWS_LAST_REQUEST)) if _GOOGLE_NEWS_LAST_REQUEST else 0.0
+        if pause:
+            time.sleep(pause)
+        _GOOGLE_NEWS_LAST_REQUEST = time.monotonic()
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return ET.fromstring(response.read())
+        except urllib.error.HTTPError as exc:
+            if exc.code not in (429, 503) or attempt == 3:
+                raise
+            raw = exc.headers.get("Retry-After", "") if exc.headers else ""
+            after = int(raw) if str(raw).isdigit() else (8, 25, 60)[attempt]
+            delay = max(2, min(after, 90))
+            print(f"Google News RSS HTTP {exc.code}: respecting rate limit, retry {attempt+1}/3 after {delay}s", flush=True)
+            time.sleep(delay)
+    raise AssertionError("unreachable")
+
+
 def fetch_google_news(
     query: str, days: int = 1,
     start_date: dt.date | None = None, end_date: dt.date | None = None,
@@ -190,8 +217,7 @@ def fetch_google_news(
         q = f'{query} when:{days}d'
     url = "https://news.google.com/rss/search?" + urllib.parse.urlencode({"q": q, "hl": "ko", "gl": "KR", "ceid": "KR:ko"})
     req = urllib.request.Request(url, headers={"User-Agent": "SignalBridgeBot/1.0 (+https://bridgebrand.co.kr)"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        root = ET.fromstring(resp.read())
+    root = _google_news_request_root(req)
     items: list[RawItem] = []
     for node in root.findall(".//channel/item"):
         title = (node.findtext("title") or "").strip()

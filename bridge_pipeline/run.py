@@ -1006,9 +1006,9 @@ def healthcheck(db: SupabaseRest) -> None:
     latest = {}
     for run in runs:
         latest.setdefault(run["source_id"], run)
-    required = {"google_news_discovery", "google_news_rss", "opendart"}
+    required = {"google_news_rss", "opendart"}
     missing = sorted(required - set(latest))
-    # Optional expansion sources may legitimately be partial while verified
+    # Candidate discovery is advisory and its failures remain visible in latestRuns.\n    # A 429 in advisory discovery must not block verified registered subjects.\n    # Optional expansion sources may legitimately be partial while verified
     # mappings are widened. They are reported but must not block publication
     # of an otherwise valid daily snapshot. Required sources remain hard gates.
     critical = [r for source, r in latest.items() if source in required and r["status"] != "success"]
