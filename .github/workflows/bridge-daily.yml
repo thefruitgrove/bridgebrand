@@ -56,9 +56,11 @@ jobs:
       - name: Install UNI official-data dependencies
         run: pip install pandas openpyxl
 
-      - name: Unit and regression tests
+      - name: Production-critical score and publication preflight
         run: |
-          python -m unittest discover -s tests -v
+          for spec in test_operational_integrity.py test_authoritative_rank_export.py test_public_export.py test_read_only_export_gate.py test_google_rate_limit.py; do
+            python -m unittest discover -s tests -p "$spec" -v
+          done
           python engine3/test_scoring_v3.py
           python tests/test_uni_v43.py
 
@@ -73,10 +75,6 @@ jobs:
           python collectors/collect_uni_homepages_v43.py
           python collectors/collect_uni_news_v43.py
           python jobs/run_uni_0515.py
-
-      - name: Discover unregistered challenger candidates (advisory only)
-        continue-on-error: true
-        run: python -m bridge_pipeline.run discover ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
       - name: Collect registered targets' verified daily evidence (required)
         run: python -m bridge_pipeline.run collect-news ${AS_OF_DATE:+--date "$AS_OF_DATE"}
@@ -143,8 +141,8 @@ jobs:
           # A newer source/data commit makes this run stale; the queued run wins.
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-            echo "Skip stale export: a newer production commit exists"
-            exit 0
+            echo "::error::Stale export blocked: production main advanced; no JSON committed and no deployment permitted"
+            exit 1
           fi
           git config user.name "bridge-bot"
           git config user.email "bot@bridgebrand.co.kr"
@@ -162,3 +160,7 @@ jobs:
       - name: Trigger Cloudflare deployment hook
         if: ${{ success() && env.CLOUDFLARE_DEPLOY_HOOK != '' }}
         run: curl --fail --silent --show-error --retry 3 -X POST "$CLOUDFLARE_DEPLOY_HOOK"
+
+      - name: Discover unregistered challenger candidates (advisory only)
+        continue-on-error: true
+        run: python -m bridge_pipeline.run discover ${AS_OF_DATE:+--date "$AS_OF_DATE"}

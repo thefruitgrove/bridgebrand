@@ -1,0 +1,20 @@
+name: BRIDGE reliability fallback offline QA
+on:
+  push:
+    branches: ['ops/bridge-daily-guard-20261117']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test daily and fallback contracts
+        run: |
+          python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
+          python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v

@@ -1,0 +1,37 @@
+name: BRIDGE Daily Fallback — verify before dispatch
+on:
+  schedule:
+    - cron: '15 22 * * *' # 07:15 Asia/Seoul, after official 05:15
+  workflow_dispatch:
+permissions:
+  actions: write
+  contents: read
+jobs:
+  check-and-dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Dispatch only if published today is absent AND no collection active
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TZ: Asia/Seoul
+        run: |
+          set -euo pipefail
+          TODAY=$(python -c "from datetime import datetime; from zoneinfo import ZoneInfo; print(datetime.now(ZoneInfo('Asia/Seoul')).date())")
+          PUBLIC=$(python -c "import json; print(json.load(open('site/data/latest.json'))['asOfDate'])")
+          echo "Local KST date: $TODAY, last audited public date: $PUBLIC"
+          if [ "$TODAY" = "$PUBLIC" ]; then
+            echo "Today's verified publication is already in GitHub; no duplicate collection."
+            exit 0
+          fi
+          ACTIVE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=100" --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+          echo "Active collection jobs: $ACTIVE"
+          if [ "$ACTIVE" != "0" ]; then
+            echo "Active official collector detected; no duplicate dispatched."
+            exit 0
+          fi
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/dispatches" -f ref=main -f "inputs[as_of_date]=$TODAY"
+          echo "DISPATCHED: official BRIDGE collection for $TODAY"
