@@ -21,6 +21,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
           python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
           python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
+          python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
+          python -m unittest discover -s tests -p 'test_read_only_export_gate.py' -v
           python -m unittest discover -s tests -v
           python engine3/test_scoring_v3.py
           python tests/test_uni_v43.py

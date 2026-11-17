@@ -125,6 +125,9 @@ jobs:
       - name: Export published snapshot
         run: python -m bridge_pipeline.run export ${AS_OF_DATE:+--date "$AS_OF_DATE"}
 
+      - name: Verify 400 authoritative database ranks, scores and trust grades
+        run: python -m tools.verify_export_file --date "$AS_OF_DATE"
+
       - name: Post-publication collector health gate
         run: python -m bridge_pipeline.run healthcheck --date "$AS_OF_DATE"
 
