@@ -1,0 +1,41 @@
+name: BRIDGE 11-17 verified daily retry with bounded 429 backoff
+on:
+  push:
+    branches: ['ops/bridge-retry-20261117-after-429-fix']
+permissions:
+  actions: write
+  contents: read
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify 429 handling and publication integrity before retry
+        run: |
+          python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+      - name: Dispatch at most one genuine 2026-11-17 daily collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          LATEST=$(python - <<'PY'
+          import json
+          print(json.load(open('site/data/latest.json'))['asOfDate'])
+          PY
+          )
+          if [ "$LATEST" = '2026-11-17' ]; then
+            echo 'Today's audited publication already exists; no new collection.'
+            exit 0
+          fi
+          ACTIVE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/runs?per_page=40" --jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+          echo "Active production pipeline jobs: $ACTIVE"
+          if [ "$ACTIVE" != '0' ]; then
+            echo 'No duplicate concurrent collection.'
+            exit 0
+          fi
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/bridge-daily.yml/dispatches" -f ref=main -f 'inputs[as_of_date]=2026-11-17'
+          echo 'DISPATCHED: official collection 2026-11-17 with paced RSS, bounded 429 retries, and hard required-source gates.'
