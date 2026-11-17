@@ -22,11 +22,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          LATEST=$(python - <<'PY'
-          import json
-          print(json.load(open('site/data/latest.json'))['asOfDate'])
-          PY
-          )
+          LATEST=$(python -c "import json; print(json.load(open('site/data/latest.json'))['asOfDate'])")
           if [ "$LATEST" = '2026-11-17' ]; then
             echo 'Today's audited publication already exists; no new collection.'
             exit 0
