@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-18T11:39:21.504082+09:00",
+  "checked_at": "2026-11-19T11:06:43.795581+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -20,6 +20,11 @@
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
     },
+    "GOV-C09": {
+      "status": "review",
+      "homepage": "https://www.gg.go.kr",
+      "reason": "TimeoutError"
+    },
     "GOV-C10": {
       "status": "review",
       "homepage": "https://www.provin.gangwon.kr",
@@ -29,11 +34,6 @@
       "status": "review",
       "homepage": "https://www.chungbuk.go.kr",
       "reason": "RemoteDisconnected"
-    },
-    "GOV-C14": {
-      "status": "review",
-      "homepage": "https://www.jeonnam.go.kr",
-      "reason": "URLError"
     },
     "GOV-C16": {
       "status": "review",

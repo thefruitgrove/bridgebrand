@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-11-18",
+  "as_of_date": "2026-11-19",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-C55": {
-      "channel_id": "UCv-B3slVOIL7mSQajbKACYw",
-      "title": "양산시 공식 유튜브",
-      "reason": "awaiting_human_verification"
     },
     "GOV-C56": {
       "channel_id": "UC4ykkRchQ1i2SsPyOq6nt5w",
@@ -30,6 +25,11 @@
     "GOV-C59": {
       "channel_id": "UCCjjxZxmneCU5t-Ojw8L_0w",
       "title": "춘천시",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-C60": {
+      "channel_id": "UChTeiHYZmNAlqWgcYvhPzBw",
+      "title": "강릉시",
       "reason": "awaiting_human_verification"
     }
   }
