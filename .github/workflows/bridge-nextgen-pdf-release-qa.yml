@@ -1,0 +1,72 @@
+name: BRIDGE Next-Generation PDF Release QA — local actual 33-page download
+on:
+  push:
+    branches: ['release/bridge-report-nextgen-20261122']
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax, publishing invariants and next-gen page grammar
+        run: |
+          node --check site/briefing.js
+          node --check tools/verify_nextgen_pdf_local.mjs
+          python -m unittest discover -s tests -p 'test_v2_refinement.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('site/briefing.js').read_text()
+          html=Path('site/briefing.html').read_text()
+          css=Path('site/bridge-v2-report-edition.css').read_text()
+          assert 'reportMode===\'basic\'?18:(IS_ENGLISH?29:33)' in s
+          assert all(('printPage('+str(n)+',' in s) for n in range(1,34))
+          assert 'savePdfPreview' in s and 'savePdfPreview' in html
+          assert 'scale:1.12' in s and 'PDF 생성 ' in s
+          assert '.print-research-comparison' in css
+          print('PASS: STANDARD 33 pages, BASIC 18, English 29; new visual and download semantics')
+          PY
+      - name: Start local static site and download actual 33-page PDF from preview
+        run: |
+          set -euo pipefail
+          python -m http.server 8742 --directory site >/tmp/bridge-nextgen-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for n in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:8742/briefing.html >/dev/null; then break; fi
+            sleep 1
+          done
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          export CHROME_BIN BRIDGE_AUDIT_ORIGIN=http://127.0.0.1:8742/ BRIDGE_QA_OUTPUT=/tmp/bridge-pdf-nextgen
+          node tools/verify_nextgen_pdf_local.mjs
+      - name: Verify authentic 33-page A4 PDF and sample pages
+        run: |
+          python -m pip install --quiet 'pypdf>=6,<7'
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          docs=list(Path('/tmp/bridge-pdf-nextgen').glob('*.pdf'))
+          assert len(docs)==1,docs
+          r=PdfReader(docs[0])
+          assert len(r.pages)==33,len(r.pages)
+          assert all(abs(float(p.mediabox.width)-595.28)<3 and abs(float(p.mediabox.height)-841.89)<3 for p in r.pages)
+          assert docs[0].stat().st_size>100000
+          print('PASS: real downloaded report, 33 A4 pages, bytes:',docs[0].stat().st_size)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-nextgen-33p-pdf-and-preview
+          path: |
+            /tmp/bridge-pdf-nextgen/*.pdf
+            /tmp/bridge-pdf-nextgen/*.png
+          retention-days: 10
+          if-no-files-found: ignore
