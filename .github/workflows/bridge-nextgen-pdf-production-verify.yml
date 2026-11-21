@@ -1,0 +1,72 @@
+name: BRIDGE nextgen production edge and PDF download verification
+on:
+  push:
+    branches: ['verify/bridge-report-nextgen-live-20261122']
+permissions:
+  contents: read
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Wait for 33-page released assets at the public Cloudflare edge
+        run: |
+          python - <<'PY'
+          import time,urllib.request
+          urls={
+            'briefing.html': ['id="savePdfPreview"', 'briefing.js?v=20261122-nextgen-01'],
+            'briefing.js':['async function downloadReportPdf(event)',"printPage(33,'보고서 기록과 정정 경로'"],
+            'bridge-v2-report-edition.css':['.print-research-ribbon','.pdf-toolbar-download']
+          }
+          for attempt in range(1,31):
+            status={}
+            for path,terms in urls.items():
+              try:
+                req=urllib.request.Request('https://bridgebrand.co.kr/'+path+'?verified=20261122-'+str(attempt),headers={'Cache-Control':'no-cache','User-Agent':'BRIDGE-Nextgen-Release-Verification'})
+                with urllib.request.urlopen(req,timeout=20) as r: content=r.read().decode('utf8','replace')
+                status[path]={'status':r.status,'missing':[term for term in terms if term not in content]}
+              except Exception as e:status[path]={'error':str(e)}
+            print('EDGE CHECK',attempt,status,flush=True)
+            if all(v.get('status')==200 and not v.get('missing') for v in status.values()):
+              print('PASS: all new report assets served by production Cloudflare edge')
+              break
+            if attempt==30:raise SystemExit('FAIL: next-generation PDF assets not deployed')
+            time.sleep(8)
+          PY
+      - name: Chrome directly downloads live 33-page STANDARD report from preview
+        run: |
+          export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          export BRIDGE_AUDIT_ORIGIN=https://bridgebrand.co.kr/
+          export BRIDGE_QA_OUTPUT=/tmp/bridge-nextgen-live
+          node tools/verify_nextgen_pdf_local.mjs
+      - name: Validate live downloaded PDF byte signature and 33 A4 sheets
+        run: |
+          python -m pip install --quiet 'pypdf>=6,<7'
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          files=list(Path('/tmp/bridge-nextgen-live').glob('*.pdf'))
+          assert len(files)==1,files
+          pdf=PdfReader(files[0])
+          assert len(pdf.pages)==33,len(pdf.pages)
+          assert files[0].stat().st_size>100000
+          print('PASS: actual public downloadable 33-page PDF',files[0].stat().st_size,'bytes')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-nextgen-production-33p-pdf
+          path: |
+            /tmp/bridge-nextgen-live/*.pdf
+            /tmp/bridge-nextgen-live/*.png
+          retention-days: 5
+          if-no-files-found: ignore
