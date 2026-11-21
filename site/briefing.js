@@ -40,7 +40,7 @@ document.querySelectorAll('[data-stage], [data-go-stage]').forEach((b)=>b.addEve
 document.querySelectorAll('[data-reading]').forEach((button)=>button.addEventListener('click',()=>{const easy=button.dataset.reading==='easy';document.body.classList.toggle('easy-reading',easy);document.querySelectorAll('[data-reading]').forEach((item)=>item.classList.toggle('active',item===button));}));
 document.querySelectorAll('[data-report-mode]').forEach((button)=>{button.classList.toggle('active',button.dataset.reportMode===reportMode);button.addEventListener('click',()=>{const next=new URL(location.href);if(button.dataset.reportMode==='basic')next.searchParams.set('briefing','basic');else next.searchParams.delete('briefing');location.href=next.toString();});});
 $('prevStage').addEventListener('click',()=>showStage(stage-1));$('nextStage').addEventListener('click',()=>showStage(stage+1));
-$('savePdf').addEventListener('click',downloadReportPdf);$('printReport').addEventListener('click',()=>openReportOutput('print'));
+$('savePdf').addEventListener('click',downloadReportPdf);$('savePdfPreview').addEventListener('click',downloadReportPdf);$('printReport').addEventListener('click',()=>openReportOutput('print'));
 $('previewPdf').addEventListener('click',()=>setPdfPreview(true));$('exitPdfPreview').addEventListener('click',()=>setPdfPreview(false));
 let mobilePreviewTick=0;
 function updateMobilePreviewPage(){if(!document.body.classList.contains('pdf-preview-mode')||innerWidth>720)return;cancelAnimationFrame(mobilePreviewTick);mobilePreviewTick=requestAnimationFrame(()=>{const sheets=[...document.querySelectorAll('#printReportDocument .print-sheet')],anchor=innerHeight*.42;let current=sheets[0];for(const sheet of sheets){if(sheet.getBoundingClientRect().top<=anchor)current=sheet;else break;}const page=current?Number(current.dataset.page)||1:1;$('pdfMobilePageStatus').textContent=`${String(page).padStart(2,'0')} / ${String(sheets.length).padStart(2,'0')}`;});}
@@ -59,7 +59,12 @@ async function createPdfRenderFrame(){
 }
 async function downloadReportPdf(){
  if(!entities.length)return;
- const button=$('savePdf'),original=button.textContent;button.disabled=true;button.setAttribute('aria-busy','true');button.textContent=IS_ENGLISH?'Creating PDF…':'PDF 생성 중…';
+ const button=event?.currentTarget?.id==='savePdfPreview' ? $('savePdfPreview') : $('savePdf');
+ const original=button.textContent,otherButton=button.id==='savePdf' ? $('savePdfPreview') : $('savePdf');
+ const otherOriginal=otherButton.textContent;
+ for(const control of [button,otherButton]){control.disabled=true;control.setAttribute('aria-busy','true');}
+ button.textContent=IS_ENGLISH?'Creating PDF…':'PDF 준비 중…';
+ otherButton.textContent=IS_ENGLISH?'Creating PDF…':'PDF 생성 중…';
  let renderFrame;
  try{
   if(!window.html2canvas||!window.jspdf?.jsPDF)throw new Error('PDF_ENGINE_UNAVAILABLE');
@@ -68,9 +73,15 @@ async function downloadReportPdf(){
   const sheets=[...renderFrame.doc.querySelectorAll('#printReportDocument .print-sheet')];if(!sheets.length)throw new Error('PDF_PAGE_NOT_FOUND');
   const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true,putOnlyUsedFonts:true});
   for(let index=0;index<sheets.length;index+=1){
-   const canvas=await window.html2canvas(sheets[index],{scale:1.55,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:900,windowHeight:1200,scrollX:0,scrollY:0});
+   // Progressive page rendering keeps large 29+ page reports responsive.
+   // The former 1.55x canvas created avoidable memory pressure on laptops.
+   const label=(IS_ENGLISH?'Saving PDF ':'PDF 생성 ') + String(index+1).padStart(2,'0')+' / '+String(sheets.length).padStart(2,'0');
+   button.textContent=label;otherButton.textContent=label;
+   await new Promise(resolve=>setTimeout(resolve,0));
+   const canvas=await window.html2canvas(sheets[index],{scale:1.12,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:900,windowHeight:1200,scrollX:0,scrollY:0});
+   const img=canvas.toDataURL('image/jpeg',0.84);
    if(index>0)pdf.addPage('a4','portrait');
-   pdf.addImage(canvas.toDataURL('image/jpeg',0.94),'JPEG',0,0,210,297,undefined,'FAST');
+   pdf.addImage(img,'JPEG',0,0,210,297,undefined,'FAST');
    canvas.width=1;canvas.height=1;
   }
   const blob=pdf.output('blob'),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download=reportFilename();anchor.rel='noopener';document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
@@ -78,7 +89,7 @@ async function downloadReportPdf(){
   console.error('BRIDGE PDF download failed',error);
   alert(IS_ENGLISH?'The PDF could not be created. Please try again after refreshing the page.':'PDF 파일을 생성하지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.');
  }finally{
-  renderFrame?.frame?.remove();button.disabled=false;button.removeAttribute('aria-busy');button.textContent=original;
+  renderFrame?.frame?.remove();for(const control of [button,otherButton]){control.disabled=false;control.removeAttribute('aria-busy');}button.textContent=original;otherButton.textContent=otherOriginal;
  }
 }
 function openReportOutput(mode){if(!entities.length||mode!=='print')return;buildPrintReport();const oldTitle=document.title;document.title=reportFilename().replace(/\.pdf$/,'');document.body.dataset.outputMode='print';window.addEventListener('afterprint',()=>{document.title=oldTitle;delete document.body.dataset.outputMode;},{once:true});window.print();}

@@ -65,7 +65,7 @@ class V2RefinementTests(unittest.TestCase):
         self.assertIn("br-title-extra-long",script)
         self.assertIn('metric-textual',script)
         self.assertIn('coordinationParticle(b.name)',script)
-        self.assertIn('briefing.js?v=20261115-stage0304-01',after)
+        self.assertIn('briefing.js?v=20261122-nextgen-01',after)
         self.assertIn('현재<br>위치',script)
         self.assertIn('무엇을<br>보여주나',script)
         self.assertIn('print-brand-name',script)
