@@ -433,7 +433,7 @@ function buildPrintReport(){
   pages.push(printPage(27,'PUBLICITY 해석과 다음 관측','PUBLICITY BRIEF · EXTERNAL EDITION 2/2',`${publicitySecond}${printProse('기사에서 다시 분석으로 돌아오는 지점',[`후반 네 블록은 활동량과 관계 수준을 구분하고, 세 대상의 차이를 축별 구조로 번역한 뒤 다음 회차의 검증 질문으로 닫습니다. 독자는 기사만 읽더라도 무엇이 사실이고 무엇이 제한된 해석인지 구분할 수 있어야 합니다.`,`대외 커뮤니케이션에서 활용할 때에는 기준일, 분야, 공개 범위와 근거 신뢰등급을 함께 표기합니다. 강한 축은 현재 관측된 특징으로 설명하고, 상대적으로 낮은 축은 결함이 아니라 추가 근거가 필요한 관계 영역으로 표현합니다.`,`이 두 쪽은 분석의 결론을 과장하는 홍보 문안이 아닙니다. 순위로 관심을 열고 여섯 축과 근거 상태로 의미를 설명하는 BRIDGE의 편집 원칙을 보존한 외부용 요약입니다.`])}`,'','print-type-publicity print-publicity'));
   // Next-generation editorial annex: sourced figures, explicit uncertainty, and
   // research-level interpretation without recomputing any BRIDGE scores.
-  const axisState=(e,x)=>String(e.axis_status?.[x]||'reference');
+  const axisState=(e,x)=>axisStateKo(e,x);
   const axisMark=(e,x)=>valid(e,x)?num(e.axis_scores[x],1):'참조 · 산출 제외';
   const axisValidity=AXES.filter(x=>valid(pick,x));
   const primary=AXES.filter(x=>['B','R','I'].includes(x) && valid(pick,x));

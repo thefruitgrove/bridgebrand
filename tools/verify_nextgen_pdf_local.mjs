@@ -15,6 +15,9 @@ const list=(snapshot.rankings||[]).filter(r=>r.domain==='UNI'&&r.ranking_type===
 if(snapshot.dataStatus!=='published'||snapshot.recordCount!==400||list.length<3)throw Error('Cannot QA without published UNI T100 data');
 const id=x=>String(x.external_id);
 const params=new URLSearchParams({field:'UNI',pick:id(list[2]),compareA:id(list[1]),compareB:id(list[0]),language:'한국어',trial:'free'});
+const mode=process.env.BRIDGE_PDF_MODE||'standard';
+if(mode==='basic')params.set('briefing','basic');
+const expectedPages=mode==='basic'?18:33;
 const url=new URL('briefing.html?'+params,base).toString();
 const dir=mkdtempSync(join(tmpdir(),'bridge-reading-'));
 const port=19527+Math.floor(Math.random()*1000);
@@ -101,7 +104,7 @@ try{
       reportId:$('reportId')?.textContent};
   })()`);
   console.log(JSON.stringify({kind:'pdf-preview',...preview}));
-  if(!preview.previewMode||preview.pages!==33)throw Error('PDF print preview had insufficient actual pages: '+JSON.stringify(preview));
+  if(!preview.previewMode||preview.pages!==expectedPages)throw Error('PDF print preview had insufficient actual pages: '+JSON.stringify(preview));
   const layout=await evalJS(`(()=>{
     return [...document.querySelectorAll('#printReportDocument .print-sheet')].map(sheet=>{
       const main=sheet.querySelector('.print-sheet-main'),foot=sheet.querySelector('.print-sheet-footer');
