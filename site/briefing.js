@@ -57,7 +57,7 @@ async function createPdfRenderFrame(){
  document.body.appendChild(frame);
  const doc=await ready;if(doc.fonts?.ready)await doc.fonts.ready;await new Promise((resolve)=>requestAnimationFrame(()=>setTimeout(resolve,80)));return {frame,doc};
 }
-async function downloadReportPdf(){
+async function downloadReportPdf(event){
  if(!entities.length)return;
  const button=event?.currentTarget?.id==='savePdfPreview' ? $('savePdfPreview') : $('savePdf');
  const original=button.textContent,otherButton=button.id==='savePdf' ? $('savePdfPreview') : $('savePdf');
