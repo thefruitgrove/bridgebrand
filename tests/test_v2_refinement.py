@@ -82,7 +82,7 @@ class V2RefinementTests(unittest.TestCase):
         briefing=(SITE/'briefing.css').read_text(encoding='utf-8')
         self.assertIn('@page{size:A4 portrait;margin:0}',briefing)
         script=(SITE/'briefing.js').read_text(encoding='utf-8')
-        self.assertIn("const total=reportMode==='basic'?18:29",script)
+        self.assertIn("const total=reportMode==='basic'?18:(IS_ENGLISH?29:33)",script)
         self.assertIn("const styles=[",script) if "const styles=[" in script else self.assertIn("styles=[...document.querySelectorAll",script)
 
 
