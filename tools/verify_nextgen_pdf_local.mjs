@@ -21,7 +21,10 @@ const port=19527+Math.floor(Math.random()*1000);
 const chrome=spawn(process.env.CHROME_BIN||'/usr/bin/google-chrome',[
  '--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run',
  '--remote-allow-origins=*','--user-data-dir='+dir,'--remote-debugging-port='+port,'about:blank'
-],{stdio:'ignore'});
+],{stdio:['ignore','ignore','pipe']});
+let startupDetails='';
+chrome.stderr.on('data',b=>{startupDetails+=String(b).slice(-1800);});
+chrome.on('error',e=>{startupDetails+=String(e);});
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 let socket,seq=0;const waiters=new Map();
 async function call(method,params={}){
@@ -43,7 +46,7 @@ async function screenshot(name){
 }
 try{
  let target;
- for(let n=0;n<65;n++){
+ for(let n=0;n<150;n++){
   try{
    const r=await fetch('http://127.0.0.1:'+port+'/json/list');
    target=(await r.json()).find(x=>x.type==='page'&&x.webSocketDebuggerUrl);
@@ -51,7 +54,7 @@ try{
   }catch{}
   await delay(180);
  }
- if(!target)throw Error('Chrome failed to start');
+ if(!target)throw Error('Chrome failed to start. Is Chrome installed? ' + startupDetails.slice(-600));
  socket=new WebSocket(target.webSocketDebuggerUrl);
  await new Promise((resolve,reject)=>{socket.onopen=resolve;socket.onerror=reject});
  socket.onmessage=event=>{
