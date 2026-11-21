@@ -99,6 +99,18 @@ try{
   })()`);
   console.log(JSON.stringify({kind:'pdf-preview',...preview}));
   if(!preview.previewMode||preview.pages!==33)throw Error('PDF print preview had insufficient actual pages: '+JSON.stringify(preview));
+  const layout=await evalJS(`(()=>{
+    return [...document.querySelectorAll('#printReportDocument .print-sheet')].map(sheet=>{
+      const main=sheet.querySelector('.print-sheet-main'),foot=sheet.querySelector('.print-sheet-footer');
+      const bounds=sheet.getBoundingClientRect(),content=main?.getBoundingClientRect(),footer=foot?.getBoundingClientRect();
+      const children=[...main?.children||[]].map(el=>el.getBoundingClientRect().bottom);
+      return {page:Number(sheet.dataset.page),sheetHeight:Math.round(bounds.height),
+        contentBottom:Math.round(content?.bottom||0),lastBottom:Math.round(Math.max(...children,0)),
+        footerTop:Math.round(footer?.top||bounds.bottom),sheetBottom:Math.round(bounds.bottom),
+        overflowPx:Math.round(Math.max(...children,0)-(footer?.top||bounds.bottom-35))};
+    }).filter(p=>p.page>=25);
+  })()`);
+  console.log('PDF_LAYOUT_AUDIT',JSON.stringify(layout));
   await evalJS("document.getElementById('savePdfPreview').click();true");
   let downloaded;
   for(let round=0;round<240;round++){
