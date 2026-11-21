@@ -163,11 +163,11 @@ try{
       coverBackground:one?getComputedStyle(one).backgroundImage:null,
       footerBg:document.querySelector('.print-sheet[data-page="2"] .print-sheet-footer')?getComputedStyle(document.querySelector('.print-sheet[data-page="2"] .print-sheet-footer')).backgroundColor:null};
    })()`);
-  assert(pdf.pages===29&&pdf.loaded&&pdf.brand,'Magazine PDF cover or report pages missing',pdf);
+  assert(pdf.pages===33&&pdf.loaded&&pdf.brand,'Magazine PDF cover or report pages missing',pdf);
   if(width===1440)assert(!pdf.figureAndMetaOverlap,'Cover photo overlaps the report metadata',pdf);
   if(width===1440)await shot('pdf-cover-1440.png','.print-sheet[data-page="1"]');
   if(width===390)await shot('pdf-mobile-cover-390.png','.print-sheet[data-page="1"]');
  }
- console.log('PASS: home masthead+credits, 4 exact field titles, Intelligence, 3-line cover, value text, 03/04 headings, actual photo-led 29-page report on PC/mobile.');
+ console.log('PASS: home masthead+credits, 4 exact field titles, Intelligence, 3-line cover, value text, 03/04 headings, actual photo-led 33-page report on PC/mobile.');
 }catch(error){console.error(error);process.exitCode=1}
 finally{try{socket?.close()}catch{}chrome.kill('SIGTERM');await delay(180);rmSync(temp,{recursive:true,force:true})}

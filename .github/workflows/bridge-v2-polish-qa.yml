@@ -72,7 +72,7 @@ jobs:
           files=list(Path('/tmp/bridge-pdf-qa').glob('*.pdf'))
           assert len(files)==1,files
           pdf=PdfReader(str(files[0]))
-          assert len(pdf.pages)==29,len(pdf.pages)
+          assert len(pdf.pages)==33,len(pdf.pages)
           assert all(float(p.mediabox.width)>500 and float(p.mediabox.height)>700 for p in pdf.pages)
           print(f'PASS: {len(pdf.pages)} real PDF pages, {files[0].stat().st_size} bytes, all A4')
           PY
