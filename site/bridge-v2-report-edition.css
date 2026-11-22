@@ -415,3 +415,39 @@
 .pdf-preview-mode .print-research-agenda section h3{font-size:14px;margin:0 0 7px}
 .pdf-preview-mode .print-research-agenda section p{font-size:12px!important;line-height:1.55!important}
 @media(max-width:720px){.pdf-preview-mode .print-research-ribbon{grid-template-columns:repeat(3,1fr)}.pdf-preview-mode .print-research-path{grid-template-columns:1fr}.pdf-preview-mode .print-research-arrow{padding:0;transform:rotate(90deg)}.pdf-preview-mode .print-research-comparison{grid-template-columns:1fr}}
+
+/* Editorial v2.1 fixed-A4 fit: preserve research prose without clipping it.
+   Scope all densification to the exact overly full sheets only. */
+@media screen {
+ body.pdf-preview-mode .print-sheet[data-page="9"] td {
+  padding:6px 9px!important;
+ }
+ body.pdf-preview-mode .print-sheet[data-page="22"] .print-pairs>div {
+  padding:13px 13px!important;
+ }
+ body.pdf-preview-mode .print-sheet[data-page="22"] .print-pairs p,
+ body.pdf-preview-mode .print-sheet[data-page="22"] .print-pairs em {
+  font-size:13px!important;line-height:1.52!important;
+  margin:5px 0!important;
+ }
+ body.pdf-preview-mode .print-sheet[data-page="22"] .print-pairs h3 {
+  font-size:16px!important;line-height:1.36!important;margin:7px 0!important;
+ }
+ body.pdf-preview-mode .print-sheet[data-page="26"] .publicity-block {
+  padding:12px 0!important;
+ }
+ body.pdf-preview-mode .print-sheet[data-page="26"] .print-prose p {
+  font-size:14px!important;line-height:1.55!important;margin:6px 0!important;
+ }
+}
+@media print {
+ .print-sheet[data-page="9"] td {padding:6px 9px!important}
+ .print-sheet[data-page="22"] .print-pairs>div{padding:13px!important}
+ .print-sheet[data-page="22"] .print-pairs p,
+ .print-sheet[data-page="22"] .print-pairs em {
+  font-size:10pt!important;line-height:1.52!important;margin:5px 0!important;
+ }
+ .print-sheet[data-page="22"] .print-pairs h3{font-size:12pt!important;margin:7px 0!important}
+ .print-sheet[data-page="26"] .publicity-block{padding:12px 0!important}
+ .print-sheet[data-page="26"] .print-prose p{font-size:10.5pt!important;line-height:1.55!important;margin:6px 0!important}
+}
