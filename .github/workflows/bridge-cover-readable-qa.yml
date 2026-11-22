@@ -1,0 +1,40 @@
+name: BRIDGE cover typography QA
+on:
+  push:
+    branches: ['fix/bridge-cover-readable-20261122']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Source syntax and former UI regressions
+        run: |
+          node tests/test_briefing_cover_notice.cjs
+          python -m unittest discover -s tests -p 'test_v2_refinement.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+      - name: Real Chrome responsive and normal selection tests
+        run: |
+          python -m http.server 8742 --directory site >/tmp/bridge-cover-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in $(seq 1 20); do if curl -fsS http://127.0.0.1:8742/briefing.html >/dev/null; then break; fi; sleep 1; done
+          export BRIDGE_AUDIT_ORIGIN=http://127.0.0.1:8742/
+          export BRIDGE_QA_OUTPUT=/tmp/bridge-cover-test
+          export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          node tools/verify_briefing_cover_notice.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-cover-responsive-proof
+          path: /tmp/bridge-cover-test/*.png
+          retention-days: 7
+          if-no-files-found: ignore

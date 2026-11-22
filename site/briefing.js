@@ -108,7 +108,27 @@ fetch(dataSource,{cache:fixedSample?'force-cache':'no-store'}).then((r)=>{if(!r.
   if(entities.some((entity)=>!entity))throw new Error(`선택 대상 중 ${field} T100 최신 공개 스냅샷에 없는 대상이 있습니다.`);
   if(entities.some((entity)=>entity.domain!==field||entity.ranking_type!=='T100'||entity.as_of_date!==snapshotDate))throw new Error('분야 또는 기준일이 다른 대상은 비교할 수 없습니다.');
   render();
-}).catch((error)=>{$('coverStats').innerHTML=`<span>${error.message}</span>`;});
+}).catch((error)=>{
+  // A selection/error message is prose; do not place it into the KPI grid.
+  const box=$('coverStats');
+  box.classList.add('briefing-cover-notice-mode');
+  box.replaceChildren();
+  const missing=!FIELDS.includes(query.get('field'))||!query.get('pick')||!query.get('compareA')||!query.get('compareB');
+  const note=document.createElement('div');
+  note.className='briefing-cover-notice';
+  note.setAttribute('role','status');
+  const title=document.createElement('strong');
+  title.textContent=missing?'분야와 비교 대상을 먼저 선택해 주세요.':'브리핑 데이터를 확인할 수 없습니다.';
+  const desc=document.createElement('p');
+  desc.textContent=missing?'기업·정부 및 공공·대학교·공인 중 한 분야를 고르고, 같은 분야의 대상 세 곳을 선택하면 분석을 시작할 수 있습니다.':'선택한 대상과 공개 데이터의 기준일·순위 정보를 확인해 주세요. 불완전한 자료로 분석하지 않습니다.';
+  const link=document.createElement('a');
+  link.href='intelligence.html';
+  link.className='briefing-cover-retry';
+  link.textContent='분야와 비교 대상 선택하기 →';
+  note.append(title,desc,link);
+  box.append(note);
+  console.warn('BRIDGE briefing initialization:',error.message);
+});
 
 function topAxis(e){return AXES.filter((a)=>valid(e,a)).sort((a,b)=>Number(e.axis_scores[b])-Number(e.axis_scores[a]))[0]||'—';}
 function lowAxis(e){return AXES.filter((a)=>valid(e,a)).sort((a,b)=>Number(e.axis_scores[a])-Number(e.axis_scores[b]))[0]||'—';}
