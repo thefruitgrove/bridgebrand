@@ -305,16 +305,18 @@ def apply(path: Path) -> bool:
                 '<link rel="stylesheet" href="bridge-v2-edition-full.css?v=20261115-04">\n</head>',
                 1,
             )
-        # Separate last-layer typography: all pages share one legible style.
+        # Reading Room cover-fix has a separate cache key because users may
+        # still hold the older (narrow KPI-grid) stylesheet in their browser.
+        polish_version = '20261122-coverfix-01' if path.name == 'briefing.html' else '20261115-05'
         updated = re.sub(
             r'(bridge-v2-final-polish[.]css[?]v=)[^"]+',
-            r'\g<1>20261115-05',
+            lambda m: m.group(1) + polish_version,
             updated,
         )
         if 'bridge-v2-final-polish.css?' not in updated:
             updated = updated.replace(
                 '</head>',
-                '<link rel="stylesheet" href="bridge-v2-final-polish.css?v=20261115-05">\n</head>',
+                f'<link rel="stylesheet" href="bridge-v2-final-polish.css?v={polish_version}">\n</head>',
                 1,
             )
         # Report preview/export is rendered from the existing document DOM;
