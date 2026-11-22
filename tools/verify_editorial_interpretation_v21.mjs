@@ -40,7 +40,7 @@ try{
     const pair=[...document.querySelectorAll('#pairGrid>article')].map(x=>x.innerText);
     const stageRank=document.getElementById('rankChangeOverview').innerText;
     const stagePos=document.getElementById('positionNarrative').innerText;
-    const activity=[...document.querySelectorAll('#activityNarrative .narrative-group-subject>p')].map(x=>x.innerText);
+    const activity=[...document.querySelectorAll('#activityNarrative .narrative-group-subject>p')].filter(x=>x.querySelector('b')).map(x=>x.innerText);
     const priority=[...document.querySelectorAll('#pairPriority article')].map(x=>x.innerText);
     const pdf=document.querySelectorAll('#printReportDocument .print-sheet').length;
     return {pulse: pulse.length,subjectStarts:pulse.slice(4).every(p=>p.includes('라이즈')&&p.indexOf('라이즈')<8),
