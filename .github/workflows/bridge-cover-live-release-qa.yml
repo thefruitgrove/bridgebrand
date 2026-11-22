@@ -51,15 +51,20 @@ jobs:
           node tools/verify_briefing_cover_notice.mjs
       - name: Verify published T100 snapshot date and complete rows
         run: |
-          python - <<'PY'
-          import json,urllib.request
-          with urllib.request.urlopen('https://bridgebrand.co.kr/data/latest.json',timeout=25) as response:data=json.load(response)
-          assert data.get('asOfDate')=='2026-11-22',data.get('asOfDate')
-          assert data.get('dataStatus')=='published',data.get('dataStatus')
-          assert data.get('recordCount')==400,data.get('recordCount')
-          assert len(data.get('rankings',[]))==400
-          print('PASS 2026-11-22 real public T100 400; snapshotId='+str(data.get('snapshotId')))
-          PY
+          node --input-type=module - <<'JS'
+          import {readFileSync} from 'node:fs';
+          // Use the same Fetch client as the browser smoke: Python urllib gets
+          // Cloudflare 403 even when the publicly browsable snapshot is valid.
+          const source=JSON.parse(readFileSync('site/data/latest.json','utf8'));
+          const request=await fetch('https://bridgebrand.co.kr/data/latest.json?check=cover-20261122',{headers:{'User-Agent':'Mozilla/5.0 BRIDGE-Browser-Verification'},signal:AbortSignal.timeout(25000)});
+          if(!request.ok)throw Error('Public data fetch returned '+request.status);
+          const data=await request.json();
+          for(const key of ['asOfDate','dataStatus','recordCount','snapshotId']){
+            if(data[key]!==source[key])throw Error('Published data differs from GitHub: '+key);
+          }
+          if(data.asOfDate!=='2026-11-22'||data.dataStatus!=='published'||data.recordCount!==400||data.rankings.length!==400)throw Error('Invalid 22 Nov dataset');
+          console.log('PASS: 2026-11-22 400 T100, published GitHub and Cloudflare snapshotId '+data.snapshotId);
+          JS
       - uses: actions/upload-artifact@v4
         if: always()
         with:
