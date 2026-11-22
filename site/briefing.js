@@ -222,24 +222,24 @@ function render(){
   $('radarCaption').textContent=`동일 기준일·동일 ${field} T100 공개 범위에서 비교한 6축 프로필입니다.`;renderRadar();renderGaps();renderPairAnalysis(pick);renderActivity();
   const activityLeader=[...entities].sort((x,y)=>Number(y.activity_points||0)-Number(x.activity_points||0))[0];
   activityStory=[
-    `이번 주 세 대상 가운데 가장 큰 활동량은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P입니다. 이 숫자는 사건과 움직임의 규모를 보여주지만 호감의 크기나 평판의 방향을 곧바로 말하지 않습니다.`,
-    `활동 포인트는 기사·공식 발표·검색·참여처럼 확인된 움직임을 대상에게 귀속한 뒤 중복을 제거해 집계합니다. 같은 내용이 여러 매체에 반복됐다고 모두 새로운 사건으로 세지 않는 이유입니다.`,
-    `생활 속 비유로 보면 활동량은 매장 앞을 오간 사람 수에 가깝고, 관계 평판은 그들이 무엇을 경험하고 기억하며 다시 행동했는지를 읽는 값에 가깝습니다. 유동인구가 많다고 만족도가 자동으로 높아지는 것은 아닙니다.`,
-    `활동량이 높고 DAILY도 높다면 큰 움직임과 높은 관계 수준이 같은 시점에 함께 관측된 것입니다. 다만 두 값이 함께 높다는 사실만으로 활동이 평판을 만들었다는 인과관계까지 확정하지 않습니다.`,
-    `활동량은 높지만 지수가 낮거나 정체될 수 있습니다. 논쟁적 사건, 동일 이슈의 반복 노출, 특정 축에 집중된 움직임은 관심의 크기를 키워도 여섯 축 전체를 같은 방향으로 바꾸지는 않습니다.`,
-    `반대로 활동량이 낮아도 관계 지수는 높게 유지될 수 있습니다. 이전에 확인된 정체성·경험·책임과 지속의 근거가 유효기간 안에서 재확인되면, 새 사건이 적은 날에도 기존 평가 기반이 남습니다.`,
-    `0P는 현실에서 아무 일도 없었다는 뜻이 아닙니다. 해당 주에 공개 적격 기준을 통과하고 대상에게 정확히 귀속되며 중복 제거까지 마친 사건 활동이 기록되지 않았다는 제한된 의미입니다.`,
-    `따라서 활동량 막대는 인기투표나 응원 점수가 아닙니다. 팬이나 사용자의 반복 클릭으로 올릴 수 없으며, 높은 포인트를 구매하거나 노출량만으로 관계 수준을 높이는 구조도 아닙니다.`,
-    `실제 해석에서는 활동량을 B·도달, R·반응, G·행동유발과 먼저 대조하고 I·정체성, D·경험, E·책임·지속으로 연결되는 근거가 있는지 확인합니다. 같은 활동도 어느 축에서 확인되느냐에 따라 의미가 달라집니다.`,
-    `${pick.name}의 활동량 ${Math.round(pick.activity_points||0)}P는 DAILY ${num(pick.daily_index)}와 나란히 읽되 서로 대체하지 않습니다. 하나는 움직임의 크기이고 다른 하나는 유효 축을 가중 반영한 관측 가능한 관계 수준입니다.`,
-    `${pick.name}과 ${a.name}, ${b.name}의 차이도 활동량의 승패로 읽지 않습니다. 더 적은 활동으로 특정 축이 선명하게 관측될 수 있으며, 더 많은 활동이 다음 회차의 경험이나 지속 근거로 이어질지는 별도로 확인해야 합니다.`,
-    `${pick.name}의 활동량이 급증했다면 어떤 출처와 사건이 포인트를 만들었는지 원장으로 되돌아가야 합니다. 이후 같은 사건이 6축 가운데 어디에 반영됐고 다음 날에도 독립 신호로 이어지는지를 확인합니다.`,
-    `${pick.name}의 다음 회차에 확인할 핵심 질문은 ‘얼마나 많이 움직였는가’에서 끝나지 않습니다. ‘그 움직임이 무엇으로 기억되고 어떤 경험과 행동, 책임과 지속의 근거로 남았는가’를 같은 기준으로 다시 묻는 것이 BRIDGE의 차별점입니다.`
+    `${kTopic(pick.name)} 이번 주 활동량이 ${Math.round(pick.activity_points||0)}P이고 비교 대상 가운데 활동량이 가장 큰 곳은 ${activityLeader.name}(${Math.round(activityLeader.activity_points||0)}P)입니다. 이 수치는 어느 대상에서 기록 가능한 사건 움직임이 더 많았는지를 보여주지만 반응의 호의적 방향을 판단하지는 않습니다. 실제 의미를 파악하려면 같은 시기 DAILY와 유효 축을 함께 보아 활동이 어느 관계 접점에서 관측됐는지 확인해야 합니다.`,
+    `활동 포인트는 검증된 뉴스·공식 발표·참여 등 관측 가능한 사건을 대상에게 정확히 귀속하고 중복을 제거해 집계합니다. 따라서 여러 매체에서 같은 사건을 반복 보도했다고 해서 모두 독립적 성과로 더하지는 않습니다. 이 과정을 거친 포인트는 정보의 움직임을 보여주는 관측 단위로 이해해야 합니다.`,
+    `활동량은 일상에서 사람들이 어떤 장소를 오가는 규모와 비슷하고, 관계 지수는 그 접점에서 어떤 신호가 형성됐는지를 읽는 값에 가깝습니다. 사람들이 많이 모였다는 사실만으로 좋은 경험을 보장할 수는 없습니다. 그러므로 활동 규모와 관계 수준을 나누어 보면 관측 자료가 말할 수 있는 범위가 더 분명해집니다.`,
+    `활동량과 DAILY가 함께 높게 나타난다면 큰 움직임과 상대적으로 높은 관계 수준이 같은 시기에 관측된 것입니다. 두 값의 동시 상승이 특정 활동의 성과나 인과관계를 입증하는 것은 아닙니다. 대신 어떤 사건이 어느 축에 기록됐는지 확인할 가치가 있다는 뜻으로 받아들이는 것이 적절합니다.`,
+    `활동량이 높아도 DAILY가 상대적으로 낮거나 정체될 수 있습니다. 이는 관심을 모은 사건의 성격과 여섯 축의 근거 분포가 다를 수 있음을 보여줄 뿐, 활동 자체가 실패했다는 뜻은 아닙니다. 실제 평가에서는 긍정·부정 방향을 상상하지 않고 확인 가능한 축별 자료로 그 차이를 설명해야 합니다.`,
+    `활동량이 비교적 낮더라도 DAILY는 높게 유지될 수 있습니다. 새로 기록된 사건이 적더라도 이미 확인된 정체성·경험·책임·지속의 근거가 규정된 기간 안에서 유지될 수 있기 때문입니다. 이런 경우 활동을 늘려야 한다고 단정하지 않고 기존 접점의 재확인 여부를 살펴보는 편이 타당합니다.`,
+    `0P는 해당 관측 기간에 수집·귀속·중복 제거 조건을 통과한 사건 활동이 기록되지 않았다는 의미입니다. 대상의 실제 활동이 전혀 없었다거나 관계가 사라졌다는 결론은 아닙니다. 다음 회차에는 자료 수집 범위와 공식 활동 기록을 대조해 공백의 성격을 확인할 수 있습니다.`,
+    `활동량 막대는 인기투표나 응원 점수가 아니라 검증된 사건 움직임을 기록한 결과입니다. 따라서 반복 클릭이나 일시적인 노출 확대를 곧바로 우수한 평판으로 환산하지 않습니다. 활동이 어떤 관계 신호로 남았는지를 유효 축과 함께 확인할 때 실무적으로 의미 있는 지표가 됩니다.`,
+    `활동량은 먼저 도달(B)·반응(R)·행동유발(G) 등 관측 가능한 접점과 비교할 수 있습니다. 이후 정체성(I)·경험(D)·책임·지속(E)의 독립 근거까지 연결되는지를 살펴야 하지만, 앞쪽 신호가 뒤쪽 변화를 일으켰다고 미리 가정하지는 않습니다. 이 순서는 인과관계의 선언이 아니라 더 확인할 자료를 찾는 분석 절차입니다.`,
+    `${kTopic(pick.name)} 이번 주 ${Math.round(pick.activity_points||0)}P의 활동량과 DAILY ${num(pick.daily_index)}점으로 동시에 관측됐습니다. 하나는 사건 움직임의 규모이고 다른 하나는 유효 축을 종합한 관계 수준이므로 두 수치를 같은 성적표로 취급해서는 안 됩니다. 다만 ${pick.name}의 최근 활동이 실제로 어느 축의 신호와 함께 나타나는지를 검토할 수 있는 기초 자료가 됩니다.`,
+    `${kTopic(pick.name)} ${a.name}(${Math.round(a.activity_points||0)}P), ${b.name}(${Math.round(b.activity_points||0)}P)과 같은 기준으로 활동량을 비교할 수 있습니다. 이 차이는 누가 더 사랑받는지의 답이 아니라 관측 가능한 사건의 움직임이 어느 대상에서 상대적으로 큰지 보여줍니다. 따라서 활동량 순서와 DAILY의 순서를 따로 놓고 관계 구조의 차이를 검토하는 것이 적절합니다.`,
+    `${kTopic(pick.name)} 활동량 변화가 눈에 띄는 경우 먼저 어떤 사건과 출처가 포인트를 만들었는지 확인할 필요가 있습니다. 같은 기사의 반복 전재와 새로운 독립 사건을 구분하지 않으면 움직임을 과대평가할 수 있습니다. 이후에야 이 사건이 어느 축의 유효 근거로 연결됐는지 다음 관측에서 확인할 수 있습니다.`,
+    `${kTopic(pick.name)} 다음 회차에서 단순히 활동량의 증감만 확인해서는 충분하지 않습니다. 지금 나타난 관심이 무엇으로 기억되고 어떤 경험·행동·지속의 독립 신호로 남았는지까지 살펴야 관계의 변화를 설명할 수 있습니다. 따라서 실무에서는 사건 기록과 축별 직접 근거, 재확인 날짜를 함께 관리하는 것이 중요합니다.`
   ];
   // Actual subject measurements first; general activity-vs-reputation rules below.
   const activitySubjectOrder=[9,0,10,11,12],activityGeneralOrder=[1,2,3,4,5,6,7,8];
   const activityStoryWeb=[...activitySubjectOrder.map(i=>activityStory[i]),...activityGeneralOrder.map(i=>activityStory[i])];
-  activityStoryWeb[1]=`${pick.name}의 이번 주 활동량은 ${Math.round(pick.activity_points||0)}P이며, 비교 대상까지 포함한 세 곳 중 가장 큰 활동량은 ${activityLeader.name}의 ${Math.round(activityLeader.activity_points||0)}P입니다. 두 수치는 활동 규모를 설명하며 실제 호감이나 평판 수준을 직접 판정하지 않습니다.`;
+  activityStoryWeb[1]=activityStory[0];
   $('activityNarrative').innerHTML=activityStoryWeb.map((line,i)=>`${i===0?'<div class="narrative-group narrative-group-subject"><h4>01–05 · '+escEvidence(pick.name)+'의 활동량과 비교 결과</h4><p class="group-subtitle">선택 대상의 활동량과 DAILY를 비교해 관측된 사실과 추가 확인할 질문을 설명합니다.</p>':i===5?'<div class="narrative-group narrative-group-general"><h4>06–13 · 활동량과 평판을 읽는 공통 원칙</h4><p class="group-subtitle">활동의 규모와 관계의 질을 구별하고, 실제 축별 근거로 해석을 이어가는 기준입니다.</p>':''}<p><b>${String(i+1).padStart(2,'0')}.</b> ${line}</p>${i===4||i===12?'</div>':''}`).join('');
   $('nextQuestions').innerHTML=entities.map((e)=>`<li>${e.name}의 ${AXIS_NAME[topAxis(e)]} 강점이 반복 관측되고 ${AXIS_NAME[lowAxis(e)]}으로 확장되는가? 이를 확인하려면 다음 회차에도 같은 축 상태와 관련 사건의 귀속을 함께 검증해야 합니다.</li>`).join('');renderPublicity();
   $('reportCoverMeta').textContent=`${field} GENERAL BRIEFING · ${date.replaceAll('-','.')}`;$('reportCoverTitle').innerHTML=`${pick.name}<br>관계 평판 일반 브리핑`;$('reportCoverCompare').textContent=`with ${a.name} · ${b.name}`;$('reportId').textContent=`BR-${field}-${date.replaceAll('-','')}-GEN-${String(pick.external_id).slice(-10).toUpperCase()}`;$('reportField').textContent=field;$('reportPick').textContent=pick.name;$('reportCompare').textContent=`${a.name} · ${b.name}`;$('reportDate').textContent=date;$('reportLanguage').textContent=language;
