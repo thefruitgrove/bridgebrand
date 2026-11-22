@@ -114,9 +114,11 @@ try{
         contentBottom:Math.round(content?.bottom||0),lastBottom:Math.round(Math.max(...children,0)),
         footerTop:Math.round(footer?.top||bounds.bottom),sheetBottom:Math.round(bounds.bottom),
         overflowPx:Math.round(Math.max(...children,0)-(footer?.top||bounds.bottom-35))};
-    }).filter(p=>p.page>=25);
+    }).filter(p=>[9,11,22,23,25,26,27,28,29,30,31,32,33].includes(p.page));
   })()`);
   console.log('PDF_LAYOUT_AUDIT',JSON.stringify(layout));
+  const clipped=layout.filter(p=>[9,11,22,23,26].includes(p.page)&&(p.sheetHeight>1126||p.overflowPx>3));
+  if(clipped.length)throw Error('PDF_A4_CONTENT_CLIPPED '+JSON.stringify(clipped));
   await evalJS("document.getElementById('savePdfPreview').click();true");
   let downloaded;
   for(let round=0;round<240;round++){

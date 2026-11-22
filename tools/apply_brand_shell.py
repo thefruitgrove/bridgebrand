@@ -240,7 +240,7 @@ def apply(path: Path) -> bool:
         # report script instead of reusing a months-old cached JS response.
         updated = re.sub(
             r'(briefing[.]js[?]v=)[^"]+',
-            r'\g<1>20261122-coverfix-01',
+            r'\g<1>20261122-editorial-v21',
             updated,
         )
         if PULSE_FEATURE_OLD in updated:
@@ -307,7 +307,7 @@ def apply(path: Path) -> bool:
             )
         # Reading Room cover-fix has a separate cache key because users may
         # still hold the older (narrow KPI-grid) stylesheet in their browser.
-        polish_version = '20261122-coverfix-01' if path.name == 'briefing.html' else '20261115-05'
+        polish_version = '20261122-editorial-v21' if path.name == 'briefing.html' else '20261115-05'
         updated = re.sub(
             r'(bridge-v2-final-polish[.]css[?]v=)[^"]+',
             lambda m: m.group(1) + polish_version,
@@ -324,13 +324,13 @@ def apply(path: Path) -> bool:
         if path.name == 'briefing.html':
             updated = re.sub(
                 r'(bridge-v2-report-edition[.]css[?]v=)[^"]+',
-                r'\g<1>20261115-06',
+                r'\g<1>20261122-editorial-pdf-v21',
                 updated,
             )
             if 'bridge-v2-report-edition.css?' not in updated:
                 updated = updated.replace(
                     '</head>',
-                    '<link rel="stylesheet" href="bridge-v2-report-edition.css?v=20261115-06">\n</head>',
+                    '<link rel="stylesheet" href="bridge-v2-report-edition.css?v=20261122-editorial-pdf-v21">\n</head>',
                     1,
                 )
     if updated != text:

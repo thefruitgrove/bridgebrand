@@ -255,3 +255,52 @@
  body.bridge-editorial.briefing-page .briefing-cover-stats.briefing-cover-notice-mode{margin:26px 0 22px}
  body.bridge-editorial.briefing-page .briefing-cover-notice .briefing-cover-retry{width:100%}
 }
+
+/* BRIDGE EDITORIAL INTERPRETATION v2.1 — accessible, subject-centred reading.
+   Explicitly scoped to web. PDF A4 uses independently validated report styles. */
+@media screen {
+ body.bridge-editorial.briefing-page .position-table tr.position-row-mypick td {
+  background:#EAF1FF!important;color:#1B2D43!important;border-top:2px solid #2458F5!important;
+  font-weight:650;vertical-align:middle;
+ }
+ body.bridge-editorial.briefing-page .position-table .mypick-marker {
+  display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;
+  margin:0 9px 4px 0;padding:5px 8px;border-radius:3px;background:#2458F5!important;
+  color:#FFF!important;font:800 9px/1.25 'Noto Sans KR',sans-serif;letter-spacing:.06em;
+  white-space:nowrap;
+ }
+ body.bridge-editorial.briefing-page #pickAnalysisCopy blockquote {
+  display:block;box-sizing:border-box;width:100%;margin-top:22px;padding:16px 18px;
+  border:1px solid #C7DBF9;border-left:4px solid #2458F5;border-radius:3px;
+  background:#EAF3FF!important;color:#17314E!important;
+  font:650 clamp(14px,1.4vw,17px)/1.8 'Noto Serif KR',serif!important;
+  letter-spacing:-.015em;word-break:keep-all;overflow-wrap:break-word;white-space:normal;
+ }
+ body.bridge-editorial.briefing-page #fieldPulseNarrative p,
+ body.bridge-editorial.briefing-page #positionNarrative p,
+ body.bridge-editorial.briefing-page #rankChangeCopy p,
+ body.bridge-editorial.briefing-page #radarExplanation p,
+ body.bridge-editorial.briefing-page #activityNarrative p {
+  line-height:1.86;word-break:keep-all;overflow-wrap:break-word;
+ }
+ body.bridge-editorial.briefing-page .pair-priority article p,
+ body.bridge-editorial.briefing-page .pair-grid article p {
+  line-height:1.82;word-break:keep-all;overflow-wrap:break-word;
+ }
+ body.bridge-editorial.briefing-page .pair-priority article p>b,
+ body.bridge-editorial.briefing-page .pair-grid .pair-action b {
+  color:#2458F5!important;
+ }
+ body.bridge-editorial.briefing-page #selectionCopy,
+ body.bridge-editorial.briefing-page .position-context-intro p {
+  line-height:1.85;word-break:keep-all;overflow-wrap:break-word;
+ }
+}
+@media screen and (max-width:720px) {
+ body.bridge-editorial.briefing-page .position-table .mypick-marker {
+  display:inline-flex;margin-bottom:6px;font-size:8px;
+ }
+ body.bridge-editorial.briefing-page #pickAnalysisCopy blockquote {
+  font-size:14px!important;padding:14px 15px;
+ }
+}
