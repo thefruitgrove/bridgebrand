@@ -37,7 +37,7 @@ try{
   if(good.stats!==5||good.notice||good.overflow||!good.pdf)throw Error('Valid report regressed '+JSON.stringify(good));
   const text=await evaluate(`(()=>{
     const pulse=[...document.querySelectorAll('#fieldPulseNarrative>p')].map(x=>x.innerText);
-    const pair=[...document.querySelectorAll('#pairGrid>article')].map(x=>x.innerText);
+    const pair=[...document.querySelectorAll('#pairGrid>article')].map(x=>x.textContent);
     const stageRank=document.getElementById('rankChangeOverview').innerText;
     const stagePos=document.getElementById('positionNarrative').innerText;
     const activity=[...document.querySelectorAll('#activityNarrative .narrative-group-subject>p')].filter(x=>x.querySelector('b')).map(x=>x.innerText);
