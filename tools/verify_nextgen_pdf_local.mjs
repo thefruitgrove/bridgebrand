@@ -117,6 +117,8 @@ try{
     }).filter(p=>[9,11,22,23,25,26,27,28,29,30,31,32,33].includes(p.page));
   })()`);
   console.log('PDF_LAYOUT_AUDIT',JSON.stringify(layout));
+  const clipped=layout.filter(p=>[9,11,22,23,26].includes(p.page)&&(p.sheetHeight>1126||p.overflowPx>3));
+  if(clipped.length)throw Error('PDF_A4_CONTENT_CLIPPED '+JSON.stringify(clipped));
   await evalJS("document.getElementById('savePdfPreview').click();true");
   let downloaded;
   for(let round=0;round<240;round++){
