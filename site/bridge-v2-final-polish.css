@@ -216,3 +216,42 @@
   body.bridge-editorial.briefing-page #positionNarrative p>b br,
   body.bridge-editorial.briefing-page #radarExplanation p>b br{display:none}
 }
+
+/* 2026-11-22 BRIDGE briefing cover accessibility and typography.
+   Missing-selection prose must NOT inherit the five-column KPI grid. */
+@media screen{
+ body.bridge-editorial.briefing-page .briefing-cover-stats.briefing-cover-notice-mode{
+  display:block;width:100%;max-width:820px;margin:clamp(22px,3.5vw,40px) 0 28px;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover-stats.briefing-cover-notice-mode .briefing-cover-notice{
+  display:block;box-sizing:border-box;width:100%;min-width:0;padding:clamp(18px,2.8vw,28px);
+  border:1px solid #d5dfed;border-left:4px solid #2458F5;background:#f4f7fc;color:#203044;text-align:left;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover-notice strong{
+  display:block;width:100%;font:700 clamp(16px,1.65vw,20px)/1.6 'Noto Serif KR',serif;
+  letter-spacing:-.025em;color:#17283c;word-break:keep-all;overflow-wrap:break-word;white-space:normal;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover-notice p{
+  max-width:680px;margin:12px 0 18px;font:500 clamp(13px,1.12vw,15px)/1.85 'Noto Sans KR',sans-serif;
+  letter-spacing:-.018em;color:#46586c;word-break:keep-all;overflow-wrap:break-word;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover-notice .briefing-cover-retry{
+  display:inline-flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box;padding:11px 17px;
+  border:1px solid #2458F5;background:#2458F5;color:#fff!important;text-decoration:none;
+  font:700 13px/1.45 'Noto Sans KR',sans-serif;white-space:normal;word-break:keep-all;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover blockquote{
+  max-width:min(100%,850px);position:relative;z-index:1;font-size:clamp(15px,1.45vw,18px);
+  line-height:1.85;word-break:keep-all;overflow-wrap:break-word;white-space:normal;
+ }
+ body.bridge-editorial.briefing-page .briefing-cover .cover-actions{
+  position:relative;z-index:1;gap:12px;margin-top:clamp(20px,3.5vw,38px);
+ }
+ body.bridge-editorial.briefing-page .briefing-cover .cover-actions button{
+  min-height:46px;white-space:normal;word-break:keep-all;line-height:1.45;
+ }
+}
+@media screen and (max-width:720px){
+ body.bridge-editorial.briefing-page .briefing-cover-stats.briefing-cover-notice-mode{margin:26px 0 22px}
+ body.bridge-editorial.briefing-page .briefing-cover-notice .briefing-cover-retry{width:100%}
+}

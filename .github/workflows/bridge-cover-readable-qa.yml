@@ -1,0 +1,86 @@
+name: BRIDGE cover typography QA
+on:
+  push:
+    branches: ['fix/bridge-cover-readable-20261122']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Source syntax and former UI regressions
+        run: |
+          node tests/test_briefing_cover_notice.cjs
+          python -m unittest discover -s tests -p 'test_v2_refinement.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+      - name: Real Chrome responsive and normal selection tests
+        run: |
+          python -m http.server 8742 --directory site >/tmp/bridge-cover-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in $(seq 1 20); do if curl -fsS http://127.0.0.1:8742/briefing.html >/dev/null; then break; fi; sleep 1; done
+          export BRIDGE_AUDIT_ORIGIN=http://127.0.0.1:8742/
+          export BRIDGE_QA_OUTPUT=/tmp/bridge-cover-test
+          export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          node tools/verify_briefing_cover_notice.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-cover-responsive-proof
+          path: /tmp/bridge-cover-test/*.png
+          retention-days: 7
+          if-no-files-found: ignore
+
+  pdf-unchanged-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Revalidate actual BASIC and STANDARD downloads after cover-only change
+        run: |
+          python -m http.server 8742 --directory site >/tmp/bridge-pdf-regression.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in $(seq 1 20); do if curl -fsS http://127.0.0.1:8742/briefing.html >/dev/null; then break; fi; sleep 1; done
+          export CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          export BRIDGE_AUDIT_ORIGIN=http://127.0.0.1:8742/
+          export BRIDGE_QA_OUTPUT=/tmp/bridge-pdf-standard
+          node tools/verify_nextgen_pdf_local.mjs
+          BRIDGE_PDF_MODE=basic BRIDGE_QA_OUTPUT=/tmp/bridge-pdf-basic node tools/verify_nextgen_pdf_local.mjs
+      - name: Confirm both downloaded PDF binaries are real A4 with correct page counts
+        run: |
+          python -m pip install --quiet 'pypdf>=6,<7'
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          for edition,count in [('standard',33),('basic',18)]:
+            files=list(Path('/tmp/bridge-pdf-'+edition).glob('*.pdf'))
+            assert len(files)==1,(edition,files)
+            pdf=PdfReader(files[0])
+            assert len(pdf.pages)==count,(edition,len(pdf.pages))
+            assert all(abs(float(p.mediabox.width)-595.28)<3 and abs(float(p.mediabox.height)-841.89)<3 for p in pdf.pages)
+            print('PASS',edition,count,'A4 pages, bytes',files[0].stat().st_size)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bridge-cover-fix-pdf-binary-validation
+          path: |
+            /tmp/bridge-pdf-standard/*.pdf
+            /tmp/bridge-pdf-basic/*.pdf
+          retention-days: 5
+          if-no-files-found: ignore

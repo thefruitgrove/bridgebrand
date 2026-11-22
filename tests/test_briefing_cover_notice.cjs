@@ -1,0 +1,12 @@
+'use strict';const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const js=fs.readFileSync('site/briefing.js','utf8');
+const css=fs.readFileSync('site/bridge-v2-final-polish.css','utf8');
+const html=fs.readFileSync('site/briefing.html','utf8');
+new vm.Script(js);
+for(const item of ['briefing.js?v=20261122-coverfix-01','bridge-v2-final-polish.css?v=20261122-coverfix-01'])assert(html.includes(item));
+assert(js.includes("box.classList.add('briefing-cover-notice-mode')"));
+assert(js.includes('box.replaceChildren()'));
+assert(js.includes("link.href='intelligence.html'"));
+assert(!js.includes("{$('coverStats').innerHTML=`<span>${error.message}</span>`;}"));
+assert(css.includes('.briefing-cover-stats.briefing-cover-notice-mode')&&css.includes('word-break:keep-all'));
+console.log('PASS 20261122 briefing cover fallback + source syntax');
