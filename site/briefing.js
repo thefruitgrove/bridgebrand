@@ -146,7 +146,25 @@ function domainLabel(){return{CPR:'기업',GOV:'공공기관',UNI:'대학',ENT:'
 function activityMeaning(e){return Number(e.activity_points||0)===0?`${e.name}의 0P는 이번 관측 범위에서 검증 기준을 통과한 사건 활동이 기록되지 않았다는 뜻이며, 실제 활동이 전혀 없었다는 뜻은 아닙니다.`:`${e.name}의 ${Math.round(e.activity_points)}P는 검증·귀속·중복 제거된 사건 움직임의 크기이며 긍정 평판의 크기가 아닙니다.`;}
 function escEvidence(v){return String(v??'').replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function movementReading(e){if(!hasNumber(e.score_change)||!hasNumber(e.rank)||!hasNumber(e.previous_rank))return`${e.name}은 동일 범위의 직전 비교값이 충분하지 않습니다. 현재 지수와 6축 프로필을 기준선으로 남기고, 다음 회차에 같은 조건의 값을 다시 확인합니다.`;const score=Number(e.score_change),rank=Number(e.rank),previous=Number(e.previous_rank);if(!Number.isFinite(score)||!Number.isFinite(rank)||!Number.isFinite(previous))return`${e.name}은 동일 범위의 직전 비교값이 충분하지 않습니다. 현재 지수와 6축 프로필을 기준선으로 남기고, 다음 회차에 같은 조건의 값을 다시 확인합니다.`;const rankDelta=previous-rank;if(score>0&&rankDelta>0)return`${e.name}은 당일 지수와 상대 순위가 함께 상승했습니다. 두 변화가 같은 사건에서 비롯됐는지는 확인되지 않았으므로, 달라진 축과 비교집합의 움직임을 따로 살펴봅니다.`;if(score>0&&rankDelta<=0)return`${e.name}의 당일 지수는 상승했지만 순위는 함께 오르지 않았습니다. 같은 구간의 다른 대상이 더 크게 움직였을 수 있으므로, 대상의 지수 변화와 시장 안의 위치 변화를 구분해 읽습니다.`;if(score<0&&rankDelta>0)return`${e.name}의 당일 지수는 낮아졌지만 상대 순위는 올랐습니다. 비교집합이 더 큰 폭으로 낮아졌을 가능성이 있어 순위 상승만으로 개선을 판단하지 않습니다.`;if(score<0&&rankDelta<0)return`${e.name}의 당일 지수와 상대 순위가 함께 낮아졌습니다. 아직 원인을 정하지 않고, 어느 축의 값과 근거 상태가 달라졌는지 다음 단계에서 확인합니다.`;return`${e.name}의 점수와 순위는 멈춰 있거나 서로 다른 방향으로 움직였습니다. 이때는 등락 기호 하나보다 축별 값과 주변 대상의 동시 변화를 먼저 봅니다.`;}
-function pairInsight(e,rule){const[x,y,label,question,meaning,action]=rule;if(!valid(e,x)||!valid(e,y))return{rule,status:'근거 확인 필요',delta:null,text:`${x}·${AXIS_NAME[x]} 또는 ${y}·${AXIS_NAME[y]}가 참조 상태여서 ${label}을 대상별 결과로 판정하지 않습니다.`,meaning:'현재 확인되지 않은 것은 두 축 사이의 관계 경로이며, 이것이 곧 관계 부재나 부정 상태를 뜻하지는 않습니다.',action:`${action} 유효 근거가 확보되면 두 축이 함께 움직이는지 또는 한 축에 머무는지 비교할 수 있습니다.`};const xv=Number(e.axis_scores[x]),yv=Number(e.axis_scores[y]),delta=Math.abs(xv-yv),higher=xv>=yv?x:y,lower=xv>=yv?y:x,status=delta<5?'비슷한 수준':`${AXIS_NAME[higher]} 우세`;return{rule,status,delta,text:`${e.name}의 ${x}·${AXIS_NAME[x]}은 ${num(xv,1)}, ${y}·${AXIS_NAME[y]}은 ${num(yv,1)}로 관측됐습니다. 두 값의 간격은 ${num(delta,1)}점이며, 이는 새 결합점수가 아니라 현재 구조의 차이를 설명하기 위한 값입니다.`,meaning:delta<5?`${label}의 두 축은 현재 비슷한 수준으로 관측됐습니다. ${question}라는 질문에 답하려면 같은 방향의 반복 관측과 사건 귀속을 추가로 확인해야 합니다.`:`${AXIS_NAME[higher]} 신호가 ${AXIS_NAME[lower]}보다 앞서 있습니다. ${meaning} 낮은 축을 실패로 단정하지 않고 전환 경로가 아직 덜 확인된 상태로 읽습니다.`,action:`실무적으로는 ${action} 특히 ${AXIS_NAME[lower]} 근거가 늘어날 때 기존 ${AXIS_NAME[higher]} 강점과 연결되는지 확인하는 것이 우선입니다.`};}
+function pairInsight(e,rule){
+ const [x,y,label,question,meaning,action]=rule,subject=reportDisplayName(e);
+ if(!valid(e,x)||!valid(e,y))return{
+  rule,status:'근거 확인 필요',delta:null,
+  text:`${subject}의 ${x}(${AXIS_NAME[x]})과 ${y}(${AXIS_NAME[y]}) 가운데 하나 이상은 대상별 유효 관측값이 확보되지 않았습니다. 따라서 두 축의 격차를 계산하거나 ${label}의 성패를 평가할 수 없습니다.`,
+  meaning:`지금 확인되지 않은 것은 두 축의 관계를 설명할 직접 근거이며, 관계 자체가 없거나 부정적이라는 뜻은 아닙니다. 현재 단계에서는 단정을 유보하고 어떤 접점을 다음에 관측해야 할지 정하는 것이 적절합니다.`,
+  action:`실무적으로는 ${action} 같은 기간에 두 축의 독립 근거가 확보된 다음에야 두 흐름을 대조할 수 있으며, 확보 전에는 방향성을 홍보 효과나 실패로 해석하지 않습니다.`
+ };
+ const xv=Number(e.axis_scores[x]),yv=Number(e.axis_scores[y]),delta=Math.abs(xv-yv),higher=xv>=yv?x:y,lower=xv>=yv?y:x;
+ const close=delta<5,status=close?'비슷한 수준':`${AXIS_NAME[higher]} 우세`;
+ return {
+  rule,status,delta,
+  text:`${subject}의 ${x}(${AXIS_NAME[x]})은 ${num(xv,1)}, ${y}(${AXIS_NAME[y]})는 ${num(yv,1)}로 관측됐습니다. 두 지표의 격차는 ${num(delta,1)}점으로, 새로운 결합점수를 산출하기보다는 현재의 구조적 차이를 짚어보기 위한 수치입니다.`,
+  meaning:close
+   ?`현재 두 축은 ${num(delta,1)}점 차이로 비슷한 수준을 보이고 있습니다. 이는 ${label}의 관계 경로가 완성됐다는 증거는 아니지만, 두 신호가 비슷한 규모로 관측된 만큼 동일 사건과 접점에서 함께 재현되는지 확인할 근거가 됩니다.`
+   :`현재는 ${AXIS_NAME[higher]} 신호가 ${AXIS_NAME[lower]}보다 앞서 있으며 두 축 사이의 간격이 ${num(delta,1)}점입니다. 이 차이를 낮은 축의 성과 부진이나 실패로 곧바로 단정하기보다는, 두 관계 신호가 어떻게 이어지는지 직접 검증할 필요가 있는 상태로 읽는 것이 적절합니다. 격차만으로 실제 전환 여부나 인과관계를 확정할 수는 없습니다.`,
+  action:`실무적으로는 ${action} 특히 ${AXIS_NAME[lower]}을 설명하는 실제 접점과 후속 기록을 추가로 검토하고, 그 근거가 ${AXIS_NAME[higher]}의 기존 신호와 같은 기간에 반복 확인되는지를 살피는 것이 중요합니다.`
+ };
+}
 function render(){
   const [pick,a,b]=entities,date=pick.as_of_date,top=topAxis(pick),low=lowAxis(pick);
   document.title=`${pick.name} ${field} 일반 브리핑 — BRIDGE INTELLIGENCE`;
@@ -295,16 +313,19 @@ function renderFieldPulse(){
   $('fieldPulseLead').textContent=`${dateKo(pick.as_of_date)} 현재, 완료된 주간 대표지수의 누적 평균으로 ${field} 분야의 긴 호흡을 읽습니다. 오늘의 인기표가 아니라 관측된 주간 관계 수준이 시간 속에서 어떤 위치를 형성했는지 보여주는 CURRENT VIEW입니다.`;
   $('fieldPulseList').innerHTML=top20.map((e,i)=>`<li><i>${String(i+1).padStart(2,'0')}</i><b>${e.name}</b><strong>${num(e.cumulative_performance,2)}</strong></li>`).join('');
   $('fieldPulseBars').innerHTML=top20.map((e,i)=>`<div class="pulse-bar"><span>${i+1}</span><div><i style="width:${max?Number(e.cumulative_performance)/max*100:0}%"></i></div><strong>${num(e.cumulative_performance,1)}</strong></div>`).join('');
-  const pickLine=pickIndex>=0?`${pick.name}은 장기 성과 TOP 20에서 ${pickIndex+1}위이며 ${num(top20[pickIndex].cumulative_performance)}로 관측됩니다.`:`${pick.name}은 이번 장기 성과 TOP 20에는 포함되지 않았습니다. 이는 당일 T100 제외나 낮은 가치 판정이 아니라 누적 주간 성과의 현재 상대 위치입니다.`;
+  const pickLine=pickIndex>=0
+    ?`${kTopic(pick.name)} 누적 주간 성과 TOP 20에서 ${pickIndex+1}위·${num(top20[pickIndex].cumulative_performance)}로 관측됐습니다. 당일 ${pick.rank}위·DAILY ${num(pick.daily_index)}와 함께 보면, 같은 대상도 관측 시간에 따라 다른 위치에 나타날 수 있음을 확인할 수 있습니다. 이는 어느 한쪽이 더 정확하다는 뜻이 아니라 단기와 장기 관측이 서로 다른 질문에 답한다는 의미입니다.`
+    :`${kTopic(pick.name)} 현재 누적 주간 성과 TOP 20에 포함되지 않았습니다. 이는 당일 ${field} T100에서 제외됐거나 가치가 낮다는 의미가 아니라, 완료 주간의 누적 평균으로 정렬한 상위 20곳에 이번에는 들어 있지 않다는 뜻입니다. 따라서 ${pick.rank}위·DAILY ${num(pick.daily_index)}라는 오늘의 위치를 별도로 보면서 장기 자료가 어떻게 축적되는지 확인해야 합니다.`;
   const lines=[
-    `이 표는 당일지수가 아니라 관측된 주간 대표지수의 누적 평균을 기준으로 정렬합니다. 오늘 크게 움직인 대상과 장기 상위 대상이 다를 수 있는 이유입니다.`,
-    `현재 상단에는 ${top20.slice(0,3).map((e)=>e.name).join('·')}이 위치합니다. 이름의 유명세가 아니라 동일한 장기 성과 정의로 계산된 상대적 위치입니다.`,
-    `TOP 20의 범위는 ${num(max)}에서 ${num(min)}까지이며 간격은 ${num(max-min)}점입니다. 순위 번호보다 이 간격과 관측 주 수를 함께 읽어야 합니다.`,
-    `상위 5개 평균은 ${num(top5)}, 하위 5개 평균은 ${num(lower)}입니다. 이 차이는 현재 지형의 분포를 보여주지만 통계적 동률이나 절대적 우열을 판정하지 않습니다.`,
+    `이 표는 당일지수가 아니라 관측된 완료 주간 대표지수의 누적 평균을 기준으로 정렬합니다. 따라서 오늘 특정 사건으로 크게 움직인 대상이 장기 상위권에 반드시 포함되는 것은 아닙니다. 여러 관측 주간에 걸쳐 관계 신호가 어느 수준에서 반복됐는지 살펴보는 배경 지도라고 이해하는 것이 적절합니다.`,
+    `현재 상위 세 대상은 ${top20.slice(0,3).map(e=>e.name).join('·')}입니다. 이 순서는 유명세나 팬 규모를 직접 비교한 결과가 아니라 동일한 누적 주간 대표지수 정의를 적용한 현재 위치입니다. 따라서 먼저 각 대상이 같은 기준으로 정렬됐다는 점을 확인하고, 개별 대상의 강점을 판단할 때에는 축별 근거를 따로 살펴보아야 합니다.`,
+    `현재 TOP 20에서 가장 높은 값은 ${num(max)}, 가장 낮은 값은 ${num(min)}으로 범위는 ${num(max-min)}점입니다. 순위가 여러 계단 떨어져 있어도 실제 점수 차이는 작을 수 있고, 그 반대도 가능합니다. 그러므로 순위 번호만으로 격차의 크기를 상상하기보다 점수 분포와 누적 관측기간을 함께 확인하는 것이 타당합니다.`,
+    `상위 5개 평균은 ${num(top5)}, 하위 5개 평균은 ${num(lower)}으로 두 집단의 평균 차이는 ${num(top5-lower)}점입니다. 이는 상위권과 하위권의 누적 관측값이 어느 정도 떨어져 있는지 보여주는 기술적 비교입니다. 하지만 이 값만으로 통계적 유의성이나 대상 전체의 절대적 우수성을 판단하지 않고, 분야 안의 현재 분포를 이해하는 자료로 활용합니다.`,
     pickLine,
-    `장기 성과가 높아도 이번 주 활동량이나 당일지수가 반드시 높다는 뜻은 아닙니다. 누적 관계 수준, 최근 움직임, 사건 활동량은 서로 다른 질문에 답합니다.`,
-    `따라서 FIELD PULSE는 오늘의 등락을 판단하기 위한 배경 지도입니다. 다음 단계에서는 이 긴 호흡 위에 세 대상의 당일 위치·점수 간격·근거 신뢰도를 겹쳐 읽습니다.`
+    `${kTopic(pick.name)} 당일 DAILY ${num(pick.daily_index)}점과 이번 주 활동량 ${Math.round(pick.activity_points||0)}P를 따로 보아야 합니다. 활동량은 확인된 사건 움직임의 규모이고 DAILY는 유효한 여섯 축 근거를 종합한 관계 수준이므로, 한 값이 높다고 다른 값도 높아야 하는 것은 아닙니다. 오히려 두 신호의 방향을 나눠 보면 ${pick.name}의 최근 움직임이 지속적인 관계로 이어지는지 확인할 질문이 분명해집니다.`,
+    `${kTopic(pick.name)} 지금의 장기 성과 지도와 당일 순위에서 서로 다른 시간의 위치를 갖습니다. 이 차이를 오류나 평판의 급격한 변화로 단정하기보다, 어떤 신호가 한 번의 사건에 머물렀고 어떤 신호가 여러 주에 걸쳐 재확인됐는지 확인할 필요가 있습니다. 다음 단계에서는 ${a.name}·${b.name}과 함께 당일 점수 격차, 여섯 축의 구조, 근거 신뢰등급을 대조해 ${pick.name}의 현재 위치를 더 구체적으로 해석합니다.`
   ];
+  fieldPulseStory=lines;
   $('fieldPulseNarrative').innerHTML=lines.map((line,i)=>`<p><b>${String(i+1).padStart(2,'0')}.</b> ${line}</p>`).join('');
 }
 function printTable(headers,rows){return`<div class="print-table-scroll" role="region" aria-label="${IS_ENGLISH?'Table — swipe horizontally to see all columns':'표 — 좌우로 밀어 전체 열 보기'}" tabindex="0"><table><thead><tr>${headers.map((h)=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r)=>`<tr>${r.map((c)=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
@@ -541,16 +562,18 @@ function point(i,value,r,cx,cy){const angle=-Math.PI/2+i*Math.PI/3,rr=r*value/10
 function renderRadar(){const svg=$('briefingRadar'),cx=260,cy=205,r=150;let h='';[20,40,60,80,100].forEach((level)=>{h+=`<polygon points="${AXES.map((_,i)=>point(i,level,r,cx,cy).join(',')).join(' ')}" fill="none" stroke="rgba(255,255,255,.14)"/>`;});AXES.forEach((a,i)=>{const end=point(i,100,r,cx,cy),label=point(i,117,r,cx,cy);h+=`<line x1="${cx}" y1="${cy}" x2="${end[0]}" y2="${end[1]}" stroke="rgba(255,255,255,.12)"/><text x="${label[0]}" y="${label[1]}" text-anchor="middle"><tspan font-weight="800">${a}</tspan><tspan x="${label[0]}" dy="15">${AXIS_NAME[a]}</tspan></text>`;});entities.forEach((e,n)=>{const pts=AXES.map((a,i)=>valid(e,a)?point(i,Number(e.axis_scores[a]),r,cx,cy):null);if(pts.every(Boolean))h+=`<polygon points="${pts.map((p)=>p.join(',')).join(' ')}" fill="${COLORS[n]}22" stroke="${COLORS[n]}" stroke-width="3"/>`;pts.forEach((p)=>{if(p)h+=`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="${COLORS[n]}"/>`;});});svg.innerHTML=h;}
 function renderGaps(){const gaps=AXES.map((a)=>{const vals=entities.filter((e)=>valid(e,a)).map((e)=>({name:e.name,v:Number(e.axis_scores[a])})).sort((x,y)=>y.v-x.v);return vals.length<2?null:{a,g:vals[0].v-vals.at(-1).v,hi:vals[0],lo:vals.at(-1)};}).filter(Boolean).sort((x,y)=>y.g-x.g).slice(0,3);$('briefingGaps').innerHTML=gaps.map((x)=>`<div class="gap-card"><b>${x.a} · ${AXIS_NAME[x.a]}</b><strong>${num(x.g,1)}p 차이</strong><span>${x.hi.name} ${num(x.hi.v,1)} ↔ ${x.lo.name} ${num(x.lo.v,1)}</span></div>`).join('');}
 function pairSubjectConclusion(subject,insight){
-  const[x,y,label]=insight.rule;
-  if(!valid(subject,x)||!valid(subject,y)){
-    return `즉, 이것은 ${subject.name}의 ${label} 관계를 판단할 유효한 두 축의 자료가 아직 충분하지 않으며, 해당 조합에 대해 긍정적 또는 부정적 결론을 내릴 수 없다는 뜻입니다.`;
-  }
-  const xVal=Number(subject.axis_scores[x]),yVal=Number(subject.axis_scores[y]);
-  const diff=Math.abs(xVal-yVal);
-  const comparison=diff<5?'두 평가축이 현재 비슷한 수준에서 관측됐다는 점':xVal>yVal?`${AXIS_NAME[x]}이 ${AXIS_NAME[y]}보다 ${num(diff,1)}점 높게 나타났다는 점`:`${AXIS_NAME[y]}이 ${AXIS_NAME[x]}보다 ${num(diff,1)}점 높게 나타났다는 점`;
-  return `두 점수의 차이만으로 한쪽이 다른 쪽에 영향을 미쳤다고 단정할 수는 없습니다. 즉, 이것은 ${subject.name}의 ${label}을 평가할 때 ${comparison}을 의미합니다.`;
+ const [x,y,label]=insight.rule;
+ if(!valid(subject,x)||!valid(subject,y))return`따라서 ${reportDisplayName(subject)}의 ${label}에 관한 결론은 유보합니다. 직접 관측 자료가 확보되면 두 지표가 함께 움직이는지 다시 대조할 수 있습니다.`;
+ return`이 두 축의 비교는 ${reportDisplayName(subject)}의 ${label}을 이해하기 위한 현재의 관측 단서입니다. 두 값의 차이와 실제 관계가 형성된 이유를 구분하면 무엇을 다음에 확인해야 하는지 더 분명해집니다.`;
 }
-function renderPairAnalysis(pick){const insights=PAIR_RULES.map((rule)=>pairInsight(pick,rule));const usable=insights.filter((x)=>Number.isFinite(x.delta)).sort((x,y)=>y.delta-x.delta),priority=usable.slice(0,3);$('radarExplanation').innerHTML=`<p><b>무엇을<br>보여주나</b> 레이더의 바깥쪽은 해당 축의 유효 관측값이 상대적으로 높다는 뜻입니다. 도형의 넓이가 대상의 종합적 우수성이나 가치 전체를 나타내지는 않습니다.</p><p><b>어디를<br>먼저 보나</b> 세 도형이 크게 갈리는 축은 대상마다 공중과 연결되는 방식이 다른 지점입니다. 차이가 큰 축은 승패가 아니라 다음에 확인할 관계 질문의 우선순위로 사용합니다.</p><p><b>어떻게<br>활용하나</b> 중심 대상 ${pick.name}은 ${AXIS_NAME[topAxis(pick)]}이 다시 관측되는지 살피고, ${AXIS_NAME[lowAxis(pick)]}에는 어떤 직접 근거가 더 필요한지 정할 수 있습니다. 비교 대상의 높은 축은 모방할 정답이 아니라 다른 접근을 검토하는 참고 조건입니다.</p>`;$('pairPriority').innerHTML=priority.map((x,i)=>`<article><small>PRIORITY ${String(i+1).padStart(2,'0')} · ${x.rule[0]}+${x.rule[1]}</small><h4>${x.rule[2]}</h4><p>${x.text}</p><p>${x.meaning}</p><p><b>활용 제안.</b> ${x.action}</p></article>`).join('');$('pairGrid').innerHTML=insights.map((x)=>`<article><header><b>${x.rule[0]}＋${x.rule[1]}</b><span>${x.rule[2]}</span><em>${x.status}</em></header><h4>${x.rule[3]}</h4><p>${x.text}</p><p>${x.meaning}</p><p class="pair-action"><b>다음 확인</b>${x.action}</p><p class="pair-subject-conclusion">${pairSubjectConclusion(pick,x)}</p></article>`).join('');}
+function renderPairAnalysis(pick){
+ const insights=PAIR_RULES.map(rule=>pairInsight(pick,rule));
+ const usable=insights.filter(x=>Number.isFinite(x.delta)).sort((a,b)=>b.delta-a.delta),priority=usable.slice(0,3);
+ const [a,b]=entities.slice(1);
+ $('radarExplanation').innerHTML=`<p><b>무엇을<br>보여주나</b> 레이더에서 바깥쪽으로 뻗은 축은 ${pick.name}과 비교 대상의 해당 관계 신호가 현재 유효 근거 안에서 더 높게 관측됐다는 뜻입니다. 도형의 넓이가 대상의 가치 전체나 관계의 완성도를 뜻하지는 않지만, 어떤 영역이 상대적으로 선명하고 어떤 영역에서 추가 확인이 필요한지 한눈에 비교하는 구조 지도입니다.</p><p><b>어디를<br>먼저 보나</b> ${pick.name}, ${a.name}, ${b.name}의 도형이 크게 갈리는 축을 먼저 살펴보세요. 격차는 대상을 나누는 승패가 아니라 같은 분야 안에서도 공중과 연결되는 방식이 다를 수 있다는 관측 단서입니다. 따라서 가장 큰 차이가 나타난 축을 선택해 각 대상의 유효 근거와 실제 접점부터 확인하는 순서가 적절합니다.</p><p><b>어떻게<br>활용하나</b> ${kTopic(pick.name)} 현재 ${AXIS_NAME[topAxis(pick)]} 축의 신호가 선명하고 ${AXIS_NAME[lowAxis(pick)]} 축은 상대적으로 낮게 나타났습니다. 이는 낮은 축의 실패를 뜻하지 않으며, 두 신호가 동일한 관계 흐름 안에서 이어지는지를 추가로 검증해야 한다는 의미입니다. 비교 대상의 강한 축은 그대로 따라야 하는 정답이 아니라 ${pick.name}에게 가능한 다른 접근을 검토할 참고 기준으로 활용할 수 있습니다.</p>`;
+ $('pairPriority').innerHTML=priority.map((x,i)=>`<article><small>PRIORITY ${String(i+1).padStart(2,'0')} · ${x.rule[0]}+${x.rule[1]}</small><h4>${x.rule[2]}</h4><p>${x.text}</p><p>${x.meaning}</p><p><b>활용 제안.</b> ${x.action}</p></article>`).join('');
+ $('pairGrid').innerHTML=insights.map(x=>`<article><header><b>${x.rule[0]}＋${x.rule[1]}</b><span>${x.rule[2]}</span><em>${x.status}</em></header><h4>${x.rule[3]}</h4><p>${x.text}</p><p>${x.meaning}</p><p class="pair-action"><b>활용 제안</b>${x.action}</p><p class="pair-subject-conclusion">${pairSubjectConclusion(pick,x)}</p></article>`).join('');
+}
 function renderActivity(){const max=Math.max(...entities.map((e)=>Number(e.activity_points)||0));$('activityCompare').innerHTML=entities.map((e)=>`<div class="activity-row"><span>${e.name}</span><div class="activity-track"><i style="width:${max?Number(e.activity_points)/max*100:0}%"></i></div><strong>${Math.round(e.activity_points||0)}P</strong></div>`).join('');}
 function renderPublicity(){const[pick,a,b]=entities,top=topAxis(pick),low=lowAxis(pick),pairs=PAIR_RULES.map((r)=>pairInsight(pick,r)).filter((x)=>Number.isFinite(x.delta)).sort((x,y)=>y.delta-x.delta),pair=pairs[0],activityLeader=[...entities].sort((x,y)=>Number(y.activity_points||0)-Number(x.activity_points||0))[0];$('publicityHeadline').textContent=`${pick.name} ${num(pick.daily_index)}…${AXIS_NAME[top]}이 두드러진 이번 6축 프로필`;$('publicityStandfirst').textContent=`${dateKo(pick.as_of_date)} ${field} T100에서 ${pick.name}과 ${a.name}, ${b.name}을 같은 조건으로 비교하자 점수와 순위만으로는 보이지 않던 축별 차이가 확인됐다.`;const blocks=[
 ['01 · 기준 사실',`시그널브릿지 BRIDGE 브랜드평판지수 관측에서 ${pick.name}은 당일 ${num(pick.daily_index)}으로 ${field} T100 ${pick.rank}위를 기록했다. 비교 대상인 ${a.name}은 ${num(a.daily_index)}으로 ${a.rank}위, ${b.name}은 ${num(b.daily_index)}으로 ${b.rank}위에 위치했다. 세 수치는 ${dateKo(pick.as_of_date)}의 동일 공개 스냅샷에서 산출돼 비교 조건이 일치한다.`],
