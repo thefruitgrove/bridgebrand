@@ -114,7 +114,7 @@ try{
         contentBottom:Math.round(content?.bottom||0),lastBottom:Math.round(Math.max(...children,0)),
         footerTop:Math.round(footer?.top||bounds.bottom),sheetBottom:Math.round(bounds.bottom),
         overflowPx:Math.round(Math.max(...children,0)-(footer?.top||bounds.bottom-35))};
-    }).filter(p=>p.page>=25);
+    }).filter(p=>[9,11,22,23,25,26,27,28,29,30,31,32,33].includes(p.page));
   })()`);
   console.log('PDF_LAYOUT_AUDIT',JSON.stringify(layout));
   await evalJS("document.getElementById('savePdfPreview').click();true");
