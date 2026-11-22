@@ -309,6 +309,7 @@ function renderFieldPulse(){
   const top20=[...fieldRows].filter((e)=>Number.isFinite(Number(e.cumulative_performance))).sort((a,b)=>Number(b.cumulative_performance)-Number(a.cumulative_performance)).slice(0,20);
   if(!top20.length)return;
   const values=top20.map((e)=>Number(e.cumulative_performance)),max=Math.max(...values),min=Math.min(...values),top5=values.slice(0,5).reduce((s,v)=>s+v,0)/Math.min(5,values.length),lower=values.slice(-5).reduce((s,v)=>s+v,0)/Math.min(5,values.length),pick=entities[0],pickIndex=top20.findIndex((e)=>String(e.external_id)===String(pick.external_id));
+  const [a,b]=entities.slice(1);
   $('fieldPulseTitle').textContent=`${field} · ${domainLabel()} 장기 평판 성과 TOP 20`;
   $('fieldPulseLead').textContent=`${dateKo(pick.as_of_date)} 현재, 완료된 주간 대표지수의 누적 평균으로 ${field} 분야의 긴 호흡을 읽습니다. 오늘의 인기표가 아니라 관측된 주간 관계 수준이 시간 속에서 어떤 위치를 형성했는지 보여주는 CURRENT VIEW입니다.`;
   $('fieldPulseList').innerHTML=top20.map((e,i)=>`<li><i>${String(i+1).padStart(2,'0')}</i><b>${e.name}</b><strong>${num(e.cumulative_performance,2)}</strong></li>`).join('');
