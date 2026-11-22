@@ -21,7 +21,7 @@ try{
  for(let i=0;i<110;i++){try{target=(await(await fetch('http://127.0.0.1:'+port+'/json/list')).json()).find(o=>o.type==='page'&&o.webSocketDebuggerUrl);if(target)break}catch{}await pause(160)}
  if(!target)throw Error('Chrome failed');
  ws=new WebSocket(target.webSocketDebuggerUrl);await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject});
- ws.onmessage=e=>{let v=JSON.parse(e.data);if(!v.id)return;let f=pending.get(v.id);if(!f)return;clearTimeout(f.timer);pending.delete(v.id);v.error?f.reject(Error(v.error.message)):f.resolve(v.result)};
+ ws.onmessage=e=>{let v=JSON.parse(e.data);if(v.method==='Runtime.consoleAPICalled')console.log('PAGE_CONSOLE',JSON.stringify((v.params.args||[]).map(x=>x.value||x.description)).slice(0,1500));if(v.method==='Runtime.exceptionThrown')console.log('PAGE_EXCEPTION',JSON.stringify(v.params.exceptionDetails).slice(0,1800));if(!v.id)return;let f=pending.get(v.id);if(!f)return;clearTimeout(f.timer);pending.delete(v.id);v.error?f.reject(Error(v.error.message)):f.resolve(v.result)};
  await call('Page.enable');await call('Runtime.enable');
  for(const width of [1440,1024,430,390,320]){
   await call('Emulation.setDeviceMetricsOverride',{width,height:920,deviceScaleFactor:1,mobile:false});
@@ -33,6 +33,7 @@ try{
   await visit('briefing.html?'+qs.toString());
   const good=await evaluate(`(()=>{const el=document.getElementById('coverStats');return{width:innerWidth,stats:el.querySelectorAll(':scope>span').length,notice:el.classList.contains('briefing-cover-notice-mode'),overflow:document.documentElement.scrollWidth>innerWidth+5,pdf:!!document.getElementById('savePdfPreview')}})()`);
   console.log('VALID_SELECTION',JSON.stringify(good));
+  if(good.notice){const details=await evaluate(`document.getElementById('coverStats').innerText`);console.log('INVALID_SELECTION_DETAILS',String(details).slice(0,700));}
   if(good.stats!==5||good.notice||good.overflow||!good.pdf)throw Error('Valid report regressed '+JSON.stringify(good));
   const text=await evaluate(`(()=>{
     const pulse=[...document.querySelectorAll('#fieldPulseNarrative>p')].map(x=>x.innerText);
