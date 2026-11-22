@@ -35,4 +35,4 @@ try{
   if([1440,390].includes(width))await screenshot('normal-'+width+'.png');
  }
  console.log('PASS real Chrome: missing vs valid selections across 1440, 1024, 430, 390 and 320');
-}catch(e){console.error(e);process.exitCode=1}finally{try{ws?.close()}catch{}chrome.kill('SIGTERM');await pause(130);rmSync(dir,{recursive:true,force:true})}
+}catch(e){console.error(e);process.exitCode=1}finally{try{ws?.close()}catch{}chrome.kill('SIGTERM');await pause(130);try{rmSync(dir,{recursive:true,force:true,maxRetries:8,retryDelay:200})}catch(e){console.warn('Chrome temp cleanup deferred:',e.message)}}
