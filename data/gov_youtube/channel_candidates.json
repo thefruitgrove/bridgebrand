@@ -1,16 +1,11 @@
 {
-  "as_of_date": "2026-11-24",
+  "as_of_date": "2026-11-25",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-M01": {
-      "channel_id": "UCnrPF6de3KuHZy3c2ZkqcMA",
-      "title": "재정경제부",
-      "reason": "awaiting_human_verification"
     },
     "GOV-M02": {
       "channel_id": "UCwRFj9gC3meixU8fqKJdgxA",
@@ -30,6 +25,11 @@
     "GOV-M05": {
       "channel_id": "UCoreZRRtVpu521wZNJWfUqQ",
       "title": "국방부 - ROK Ministry of National Defense",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-M06": {
+      "channel_id": "UCzteSXznVjwESizsCcSKSWw",
+      "title": "행정안전부",
       "reason": "awaiting_human_verification"
     }
   }
