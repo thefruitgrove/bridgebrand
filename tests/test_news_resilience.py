@@ -149,6 +149,58 @@ class NewsResilienceTests(unittest.TestCase):
         incorrect_roster = {**past, "diagnostics": {**past["diagnostics"], "entity_results": {"id-0": statuses["id-0"]}}}
         self.assertEqual(resumable_successes([incorrect_roster], entities(), as_of, start, end, "test-v1"), {})
 
+    def test_second_collection_uses_scoped_checkpoint_and_completes(self):
+        from bridge_pipeline.core import KST, load_methodology
+        as_of = dt.date(2026, 11, 27)
+        end = dt.datetime.combine(as_of, dt.time(5, 15), tzinfo=KST)
+        start = end - dt.timedelta(days=1)
+        past_statuses = {
+            e["id"]: {
+                "status": "success" if e["id"] == "id-0" else "failed",
+                "query_names": search_names(e),
+                "fetched_count": 0 if e["id"] == "id-0" else None,
+                "matched_count": 0,
+            }
+            for e in entities()
+        }
+        prior = {
+            "status": "failed", "window_start": start.isoformat(),
+            "window_end": end.isoformat(),
+            "diagnostics": {
+                "partial_evidence_saved": True,
+                "observation_as_of": as_of.isoformat(),
+                "methodology_version": load_methodology()["version"],
+                "entity_results": past_statuses,
+            },
+        }
+        class FakeDB:
+            def __init__(self):
+                self.patches = []
+            def select(self, table, query):
+                return entities() if table == "bridge_entities" else [prior]
+            def insert(self, table, rows):
+                return [{"id": "run-two"}] if table == "bridge_collection_runs" else []
+            def upsert(self, table, rows, conflict):
+                return []
+            def patch(self, table, values, query):
+                self.patches.append((table, values))
+        db = FakeDB()
+        calls = []
+        def fetch(query, *args):
+            calls.append(query)
+            if '"대상0"' in query:
+                raise AssertionError("persisted successful observation must not be fetched again")
+            return []
+        with patch("bridge_pipeline.run.fetch_google_news", side_effect=fetch):
+            collect_news(db, as_of)
+        self.assertEqual(len(calls), 3)
+        successful_runs = [v for table, v in db.patches if table == "bridge_collection_runs" and v["status"] == "success"]
+        self.assertEqual(len(successful_runs), 1)
+        diag = successful_runs[0]["diagnostics"]
+        self.assertEqual(diag["resumed_success_count"], 1)
+        self.assertEqual(len(diag["entity_results"]), 4)
+        self.assertTrue(all(row["status"] == "success" for row in diag["entity_results"].values()))
+
 
 if __name__ == "__main__":
     unittest.main()
