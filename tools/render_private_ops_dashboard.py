@@ -100,6 +100,41 @@ def render_dashboard(report: dict) -> str:
             clean(summary) + ' &nbsp; ' + details + '</span></div>'
         )
     stage_html = ''.join(stages_markup) or '<p class="muted">작업 단계 기록이 아직 없습니다.</p>'
+    # Only bounded, known source labels and numeric aggregates are rendered.
+    from tools.bridge_source_metrics import SOURCE_LABELS
+    metrics_data = report.get("sourceMetrics") or {}
+    source_rows = []
+    safe_states = {
+        "success": "최근 성공", "failed": "최근 실패",
+        "failure": "최근 실패", "error": "최근 실패",
+        "unknown": "결과 미확인", "not_observed": "기록 없음",
+    }
+    for entry in metrics_data.get("sources") or []:
+        source_id = entry.get("sourceId")
+        if source_id not in SOURCE_LABELS:
+            continue
+        observations = int(entry.get("observedDays") or 0)
+        successful_days = int(entry.get("successfulDays") or 0)
+        runs = int(entry.get("runs") or 0)
+        failures = int(entry.get("failedRuns") or 0)
+        rate = entry.get("successRatePct")
+        runtime = entry.get("averageDurationMinutes")
+        rate_text = str(rate) + "%" if type(rate) in (float, int) else "미측정"
+        runtime_text = str(runtime) + "분" if type(runtime) in (float, int) else "미측정"
+        last = entry.get("lastRunStatus")
+        state_text = safe_states.get(last, "확인 불가")
+        source_rows.append(
+            '<tr><th scope="row">' + clean(SOURCE_LABELS[source_id]) +
+            '</th><td>' + str(observations) + '일 / ' + str(successful_days) +
+            '일</td><td>' + str(runs) + '회</td><td>' + str(failures) +
+            '회</td><td>' + clean(rate_text) + '</td><td>' +
+            clean(runtime_text) + '</td><td>' + clean(state_text) + '</td></tr>'
+        )
+    source_table = ''.join(source_rows)
+    if not source_table:
+        source_table = '<tr><td colspan="7">자료원별 작업 기록을 확인할 수 없습니다.</td></tr>'
+    source_period = (clean(metrics_data.get("windowStart")) + ' ~ ' +
+                     clean(metrics_data.get("windowEnd")))
     db_ok = bool(checks.get("db_ok"))
     live_ok = bool(checks.get("live_ok"))
     source_date = clean(checks.get("repositoryDate"))
@@ -156,6 +191,10 @@ h2{font-size:20px;margin:0;letter-spacing:-.03em}.muted{color:#66758e;font-size:
 .coverage{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.coverage-item{background:#f6f8fc;border:1px solid #e5ebf4;padding:14px;border-radius:10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px}.coverage-item span{color:#63738c}
 .links{display:grid;gap:8px}.links a{border:1px solid #e4eaf2;border-radius:9px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
 .links a:hover{border-color:#6594db;background:#f6faff}.links small{color:#63738c}
+.table-scroll{overflow-x:auto}table.source-table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px;text-align:left}
+.source-table th,.source-table td{padding:12px 9px;border-bottom:1px solid #e6eaf1}
+.source-table thead th{background:#f4f7fc;color:#54657c}
+.source-table tbody th{font-weight:700}
 .notice{font-size:13px;line-height:1.8;color:#5b6b82;margin-top:19px}
 footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64748b}
 @media(max-width:850px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -182,6 +221,11 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 </section><section class="panel"><strong>주요 자동화 단계 바로가기</strong><div class="links" style="margin-top:13px">""" + links + """</div></section></div>
 <div class="sectionhead"><h2>작업별 진단·실패 단계</h2><span class="muted">GitHub Actions의 완료 상태 및 사전 정의된 단계만 표시</span></div>
 <div class="panel">""" + stage_html + """</div>
+<div class="sectionhead"><h2>자료원별 수집 안정성</h2><span class="muted">최근 30일 관측 가능 기간 · 성공률은 시도 기준, 일수는 관측 기준</span></div>
+<section class="panel"><p class="muted">관측 기간: """ + source_period + """ · 재시도 성공은 이전 실패 기록을 지우지 않습니다.</p>
+<div class="table-scroll"><table class="source-table"><thead><tr><th scope="col">자료원</th><th scope="col">관측일 / 성공일</th><th scope="col">시도</th><th scope="col">실패</th><th scope="col">시도 성공률</th><th scope="col">평균 소요</th><th scope="col">최신 실행</th></tr></thead>
+<tbody>""" + source_table + """</tbody></table></div>
+<p class="muted">이 표는 DB의 수집 실행기록만 반영합니다. 데이터 품질이나 각 출처의 실제 신뢰도 점수가 아니며, 기록이 없는 날은 자동으로 실패 또는 성공으로 계산하지 않습니다.</p></section>
 <div class="sectionhead"><h2>4개 분야 T100 평가 범위</h2><span class="muted">아래 숫자는 계약상 기대값이며 해당 날짜의 실측 건수가 아닙니다</span></div>
 <div class="coverage">""" + expected + """</div>
 <p class="notice"><b>운영 판정 안내</b> · '정상'은 정규 수집 및 발행 검증 통과, '복구·주의'는 발행이 확보되었으나 정규 작업에 이상이 있었음을 뜻합니다. '기록 없음'은 실패 또는 성공의 증거가 확보되지 않았다는 뜻입니다. 이 문서는 점검 시점의 정적 보고서이며 실시간 화면이 아닙니다.</p>
