@@ -68,6 +68,38 @@ def render_dashboard(report: dict) -> str:
         f'target="_blank" rel="noopener noreferrer"><span>{label}</span><small>{time} KST</small></a>'
         for label, file, time in WORKFLOWS
     )
+    # Stage names and outcomes are allowlisted; never render raw API errors.
+    stage_names = {"정규 수집", "근거 복구", "재수집 판단", "실서비스 확인"}
+    allowed_outcomes = {
+        "success": "성공", "failure": "실패", "cancelled": "취소",
+        "skipped": "건너뜀", "running": "실행 중",
+        "not_observed": "기록 없음", "timed_out": "시간 초과",
+        "neutral": "중립", "action_required": "조치 필요",
+    }
+    from tools.bridge_stage_diagnostics import STEPS
+    safe_stages = set(STEPS.values())
+    stages_markup = []
+    for item in report.get("stages") or []:
+        label = item.get("label")
+        if label not in stage_names:
+            continue
+        outcome = item.get("status")
+        stage = item.get("failedStage")
+        stage_label = stage if stage in safe_stages else "단계 확인 불가"
+        summary = f'{allowed_outcomes.get(outcome, "확인 불가")} · 실패 {int(item.get("failureCount") or 0)}회'
+        if outcome == "failure":
+            summary += " · 실패 단계: " + stage_label
+        run_id = item.get("runId")
+        if type(run_id) is int and run_id > 0:
+            href = f"https://github.com/thefruitgrove/bridgebrand/actions/runs/{run_id}"
+            details = '<a href="' + href + '" target="_blank" rel="noopener noreferrer">실행 기록 열기</a>'
+        else:
+            details = '<span class="muted">실행 기록 없음</span>'
+        stages_markup.append(
+            '<div class="line"><span>' + clean(label) + '</span><span>' +
+            clean(summary) + ' &nbsp; ' + details + '</span></div>'
+        )
+    stage_html = ''.join(stages_markup) or '<p class="muted">작업 단계 기록이 아직 없습니다.</p>'
     db_ok = bool(checks.get("db_ok"))
     live_ok = bool(checks.get("live_ok"))
     source_date = clean(checks.get("repositoryDate"))
@@ -148,6 +180,8 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 <div class="line"><span>실서비스의 레코드 수</span><b>""" + clean(verified_rows) + """건</b></div>
 <div class="line"><span>모니터 진단 오류 항목 수</span><b>""" + str(errors) + """개</b></div>
 </section><section class="panel"><strong>주요 자동화 단계 바로가기</strong><div class="links" style="margin-top:13px">""" + links + """</div></section></div>
+<div class="sectionhead"><h2>작업별 진단·실패 단계</h2><span class="muted">GitHub Actions의 완료 상태 및 사전 정의된 단계만 표시</span></div>
+<div class="panel">""" + stage_html + """</div>
 <div class="sectionhead"><h2>4개 분야 T100 평가 범위</h2><span class="muted">아래 숫자는 계약상 기대값이며 해당 날짜의 실측 건수가 아닙니다</span></div>
 <div class="coverage">""" + expected + """</div>
 <p class="notice"><b>운영 판정 안내</b> · '정상'은 정규 수집 및 발행 검증 통과, '복구·주의'는 발행이 확보되었으나 정규 작업에 이상이 있었음을 뜻합니다. '기록 없음'은 실패 또는 성공의 증거가 확보되지 않았다는 뜻입니다. 이 문서는 점검 시점의 정적 보고서이며 실시간 화면이 아닙니다.</p>
