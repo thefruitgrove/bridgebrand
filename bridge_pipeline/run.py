@@ -989,6 +989,12 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
     candidates = db.select("bridge_rankings", f"select=id&{ranking_query}&limit=1")
     if not candidates:
         raise RuntimeError("daily beta publication blocked: no eligible CPR/ENT T100 rankings")
+    # Fail closed BEFORE changing any published_at. This read-only contract
+    # validates all four 100-row domain panels and source score/metric lineage.
+    # Prior code first published unverified duplicate ranks and then failed
+    # during export, leaving DB and Git in inconsistent states.
+    from tools.prepublish_contract import check as check_prepublication
+    check_prepublication(db, as_of, cfg)
     # Replace the public set only after scoring and publication guards succeed.
     # This prevents a transient scoring failure from blanking the last valid
     # snapshot and also removes same-day rows that are no longer eligible.

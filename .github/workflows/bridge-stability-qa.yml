@@ -1,0 +1,39 @@
+name: BRIDGE Stability Prepublication QA
+on:
+  push:
+    branches: ['stability/**']
+    paths:
+      - 'bridge_pipeline/**'
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/bridge-daily.yml'
+      - '.github/workflows/bridge-recover-publish.yml'
+      - '.github/workflows/bridge-stability-qa.yml'
+  pull_request:
+    paths:
+      - 'bridge_pipeline/**'
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/bridge-daily.yml'
+      - '.github/workflows/bridge-recover-publish.yml'
+      - '.github/workflows/bridge-stability-qa.yml'
+permissions:
+  contents: read
+jobs:
+  release-guard-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify Python syntax
+        run: python -m compileall -q bridge_pipeline tools tests
+      - name: Check release gates and regression contracts without production secrets
+        run: |
+          python -m unittest discover -s tests -p 'test_prepublish_contract.py' -v
+          python -m unittest discover -s tests -p 'test_public_export.py' -v
+          python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
+          python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
+          python -m unittest discover -s tests -p 'test_recovery_gate.py' -v
