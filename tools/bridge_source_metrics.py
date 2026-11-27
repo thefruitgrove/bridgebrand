@@ -82,6 +82,9 @@ def summarize_sources(rows: list[dict], today: dt.date,
         # coverage; a successful retry does not erase earlier run failures.
         count = len(items)
         last_status = (last or {}).get("status")
+        # "success" without a completion timestamp is not verified success.
+        if last_status in SUCCESS and parse_time((last or {}).get("finished_at")) is None:
+            last_status = "unknown"
         summaries.append({
             "sourceId": source,
             "label": SOURCE_LABELS[source],
