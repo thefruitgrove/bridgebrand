@@ -1035,9 +1035,17 @@ def publish_daily_beta(db: SupabaseRest, as_of: dt.date) -> None:
         f"as_of_date=eq.{as_of.isoformat()}&methodology_version=eq.{cfg['version']}"
         f"&domain=in.({','.join(domains)})&ranking_type=in.({','.join(ranking_types)})"
     )
-    db.patch("bridge_rankings", {"published_at": None}, all_current)
-    db.patch("bridge_rankings", {"published_at": now_kst().isoformat()}, ranking_query)
-    print(f"daily beta published domains={domains} ranking_types={ranking_types} date={as_of}")
+    # Single Postgres function invocation validates and promotes the complete
+    # four-domain snapshot in one transaction. A failed RPC changes NO rows.
+    # The prepublication Python gate remains a fast diagnostic check, but the
+    # SQL function repeats its core invariants under the row lock.
+    result = db.request(
+        "POST", "rpc/bridge_publish_daily_atomic",
+        {"p_date": as_of.isoformat(), "p_version": cfg["version"]},
+    )
+    if not isinstance(result, dict) or result.get("verifiedRows") != 400 or result.get("affectedRows") != 400:
+        raise RuntimeError(f"atomic daily publication returned invalid result: {result!r}")
+    print(f"atomic daily beta publication {result['status']}: date={as_of} rows=400")
 
 
 def healthcheck(db: SupabaseRest, as_of: dt.date | None = None) -> None:
