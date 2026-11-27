@@ -12,7 +12,7 @@ from tools.verify_live import content_integrity, verify
 
 def sample():
     rows = []
-    for domain in ("CPR", "STAR", "GOV", "UNI"):
+    for domain in ("CPR", "ENT", "GOV", "UNI"):
         for rank in range(1, 101):
             rows.append({
                 "domain": domain, "external_id": f"{domain}-{rank:03d}",
@@ -27,6 +27,16 @@ def sample():
 
 
 class FullContentIntegrityTests(unittest.TestCase):
+    def test_internal_star_domain_is_not_a_valid_public_domain(self):
+        source = sample()
+        wrong = copy.deepcopy(source)
+        for row in wrong["rankings"]:
+            if row["domain"] == "ENT":
+                row["domain"] = "STAR"
+        issues = content_integrity(source, wrong)
+        self.assertIn("invalid_live_domain_quota:ENT", issues)
+        self.assertIn("unexpected_live_domain", issues)
+
     def test_400_identical_records_pass(self):
         src = sample()
         self.assertEqual(content_integrity(src, copy.deepcopy(src)), [])
@@ -55,8 +65,8 @@ class FullContentIntegrityTests(unittest.TestCase):
         live["rankings"][101]["rank"] = 1
         live["rankings"][102]["external_id"] = live["rankings"][101]["external_id"]
         issues = content_integrity(src, live)
-        self.assertIn("invalid_live_domain_ranks:STAR", issues)
-        self.assertIn("duplicate_or_missing_live_entities:STAR", issues)
+        self.assertIn("invalid_live_domain_ranks:ENT", issues)
+        self.assertIn("duplicate_or_missing_live_entities:ENT", issues)
 
     def test_missing_domain_and_field_failure(self):
         src = sample()
@@ -66,7 +76,7 @@ class FullContentIntegrityTests(unittest.TestCase):
         issues = content_integrity(src, live)
         self.assertIn("invalid_live_domain_quota:CPR", issues)
         self.assertIn("invalid_live_domain_quota:GOV", issues)
-        self.assertIn("incomplete_live_ranking_fields:STAR", issues)
+        self.assertIn("incomplete_live_ranking_fields:ENT", issues)
 
     def test_current_site_verification_is_fail_closed_on_content_diff(self):
         source = sample()
