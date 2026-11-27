@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: bridge-live-verification
@@ -54,6 +55,43 @@ jobs:
           path: live-verification.jsonl
           retention-days: 7
           if-no-files-found: ignore
+      - name: Open or update deduplicated production incident issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE="BRIDGE HEALTH: production snapshot stale or mismatched"
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "Read-only live health check failed at 08:30 KST."
+            echo
+            echo "Workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo 'Last available health diagnostic (no credentials):'
+            echo '~~~json'
+            if [ -s live-verification.jsonl ]; then tail -n 1 live-verification.jsonl; else echo '{"status":"failure","issues":["diagnostic_unavailable"]}'; fi
+            echo '~~~'
+            echo
+            echo "Do not change snapshot dates or invent data. Check DB, public JSON and Cloudflare deploy; preserve last valid publication."
+          } > /tmp/bridge-incident.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file /tmp/bridge-incident.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file /tmp/bridge-incident.md
+          fi
+      - name: Resolve production incident issue after healthy verification
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE="BRIDGE HEALTH: production snapshot stale or mismatched"
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body "Live verification recovered: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            gh issue close "$EXISTING" --repo "$GITHUB_REPOSITORY" --reason completed
+          fi
       - name: Summarize production verification
         if: always()
         run: |

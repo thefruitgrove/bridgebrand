@@ -9,6 +9,8 @@ on:
       - '.github/workflows/bridge-daily.yml'
       - '.github/workflows/bridge-recover-publish.yml'
       - '.github/workflows/bridge-stability-qa.yml'
+      - '.github/workflows/bridge-live-verify.yml'
+      - 'supabase/migrations/**'
   pull_request:
     paths:
       - 'bridge_pipeline/**'
@@ -33,6 +35,7 @@ jobs:
       - name: Check release gates and regression contracts without production secrets
         run: |
           python -m unittest discover -s tests -p 'test_prepublish_contract.py' -v
+          python -m unittest discover -s tests -p 'test_atomic_daily_publication.py' -v
           python -m unittest discover -s tests -p 'test_news_resilience.py' -v
           python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
           python -m unittest discover -s tests -p 'test_public_export.py' -v
