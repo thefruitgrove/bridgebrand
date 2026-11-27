@@ -1,0 +1,16 @@
+# Dedicated Cloudflare Worker; no build/dependencies, no site files.
+# IMPORTANT: Cron is intentionally disabled until credentials + permission
+# checks and a real dry-run have been completed.
+name = "bridge-external-watchdog"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+[vars]
+DISPATCH_ENABLED = "false"
+
+[triggers]
+crons = []
+
+[observability]
+enabled = true

@@ -9,9 +9,11 @@ on:
       - '.github/workflows/bridge-daily.yml'
       - '.github/workflows/bridge-recover-publish.yml'
       - '.github/workflows/bridge-stability-qa.yml'
+      - 'external_scheduler/**'
       - '.github/workflows/bridge-live-verify.yml'
       - '.github/workflows/bridge-7day-reliability.yml'
       - 'supabase/migrations/**'
+      - 'external_scheduler/**'
   pull_request:
     paths:
       - 'bridge_pipeline/**'
@@ -51,3 +53,5 @@ jobs:
           python -m unittest discover -s tests -p 'test_schedule_incident_workflow.py' -v
           python -m unittest discover -s tests -p 'test_live_full_integrity.py' -v
           python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
+      - name: Verify external scheduler independently of production credentials
+        run: node --test external_scheduler/watchdog.test.mjs
