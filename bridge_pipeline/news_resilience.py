@@ -14,6 +14,7 @@ from typing import Any
 
 TRANSIENT_HTTP = frozenset({429, 502, 503, 504})
 MAX_CONSECUTIVE_FAILURES = 2
+RESUME_CONTRACT_VERSION = "rss-target-resume-v1"
 
 
 class NewsCollectionIncomplete(RuntimeError):
@@ -120,6 +121,7 @@ def resumable_successes(
             or diag.get("partial_evidence_saved") is not True
             or diag.get("observation_as_of") != as_of.isoformat()
             or diag.get("methodology_version") != methodology_version
+            or diag.get("resume_contract_version") != RESUME_CONTRACT_VERSION
             or not _same_instant(attempt.get("window_start"), window_start)
             or not _same_instant(attempt.get("window_end"), window_end)
             or not isinstance(statuses, dict)
