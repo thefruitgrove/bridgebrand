@@ -51,7 +51,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_bridge_source_metrics.py' -v
           python -m unittest discover -s tests -p 'test_bridge_schedule_slo.py' -v
           python -m unittest discover -s tests -p 'test_schedule_incident_workflow.py' -v
-      - name: Verify external scheduler independently of production credentials
-        run: node --test external_scheduler/watchdog.test.mjs
           python -m unittest discover -s tests -p 'test_live_full_integrity.py' -v
           python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
+      - name: Verify external scheduler independently of production credentials
+        run: node --test external_scheduler/watchdog.test.mjs
