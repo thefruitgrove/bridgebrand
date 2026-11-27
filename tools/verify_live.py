@@ -61,6 +61,61 @@ def classify(source, deployed, page, today, max_age_days=2):
     }
 
 
+EXPECTED_DOMAINS = ("CPR", "STAR", "GOV", "UNI")
+
+
+def content_integrity(source, deployed):
+    """Check all 400 live record values, not merely date/count/snapshot ID."""
+    problems = []
+    records = deployed.get("rankings")
+    if not isinstance(records, list) or len(records) != 400:
+        return ["invalid_live_content_count"]
+
+    for domain in EXPECTED_DOMAINS:
+        members = [r for r in records if isinstance(r, dict) and r.get("domain") == domain]
+        if len(members) != 100:
+            problems.append("invalid_live_domain_quota:" + domain)
+            continue
+        ranks = [r.get("rank") for r in members]
+        if not all(type(p) is int for p in ranks) or sorted(ranks) != list(range(1, 101)):
+            problems.append("invalid_live_domain_ranks:" + domain)
+        ids = [r.get("external_id") for r in members]
+        if any(not isinstance(eid, str) or not eid for eid in ids) or len(set(ids)) != 100:
+            problems.append("duplicate_or_missing_live_entities:" + domain)
+        for row in members:
+            if (type(row.get("score")) not in (int, float)
+                or not isinstance(row.get("trust_grade"), str)
+                or not row.get("trust_grade")
+                or not isinstance(row.get("axis_scores"), dict)):
+                problems.append("incomplete_live_ranking_fields:" + domain)
+                break
+
+    if any(not isinstance(row, dict) or row.get("domain") not in EXPECTED_DOMAINS for row in records):
+        problems.append("unexpected_live_domain")
+
+    if source.get("asOfDate") == deployed.get("asOfDate"):
+        expected = source.get("rankings")
+        if not isinstance(expected, list) or len(expected) != 400:
+            problems.append("invalid_repository_content")
+        else:
+            import hashlib
+            def fingerprint(rows):
+                # Covers every published score, evidence date, axis state,
+                # rank and trust grade; only row order is immaterial.
+                ordered = sorted(rows, key=lambda r: (
+                    str(r.get("domain")), str(r.get("external_id")), str(r.get("rank"))
+                ))
+                raw = json.dumps(ordered, ensure_ascii=False, sort_keys=True,
+                                 separators=(",", ":"), allow_nan=False).encode("utf-8")
+                return hashlib.sha256(raw).hexdigest()
+            try:
+                if fingerprint(expected) != fingerprint(records):
+                    problems.append("live_ranking_content_mismatch")
+            except (ValueError, TypeError, AttributeError, OverflowError):
+                problems.append("unreadable_live_ranking_content")
+    return sorted(set(problems))
+
+
 def fetch(origin, path):
     process = subprocess.run(
         ["curl", "--fail", "--silent", "--show-error", "--location",
@@ -79,6 +134,10 @@ def verify(origin, source_file, today, max_age_days):
     live = json.loads(fetch(origin, "data/latest.json"))
     page = fetch(origin, "this-week.html").decode("utf-8", "replace")
     report = classify(source, live, page, today, max_age_days)
+    content_issues = content_integrity(source, live)
+    if content_issues:
+        report["issues"] = sorted(set(report["issues"] + content_issues))
+        report["status"] = "failure"
     report["origin"] = origin
     return report
 
