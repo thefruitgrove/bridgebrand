@@ -141,6 +141,32 @@ def render_dashboard(report: dict) -> str:
         '수집 실행 기록 없음 · 성공 또는 실패를 추정하지 않습니다.'
         if metrics_data.get("metricsAvailable") is False else ''
     )
+    # Schedule punctuality is distinct from eventual publication success.
+    schedule_audit = report.get("scheduleAudit") or {}
+    schedule_label = {
+        "observed": "정시 범위", "late": "지연 실행",
+        "overdue": "미실행·기한 초과", "pending": "예정 전",
+        "within_grace": "대기 중",
+    }
+    valid_schedule_names = {"정규 수집", "근거 복구", "재수집 판단", "실서비스 검증"}
+    schedule_lines = []
+    for item in schedule_audit.get("jobs") or []:
+        if item.get("label") not in valid_schedule_names:
+            continue
+        verdict = schedule_label.get(item.get("status"), "확인 불가")
+        lag = item.get("delayMinutes")
+        info = verdict
+        if type(lag) is int and lag >= 0:
+            info += f" · 예약 대비 {lag}분 지연"
+        schedule_lines.append(
+            '<div class="line"><span>' + clean(item["label"]) +
+            ' · 예약 ' + clean(item.get("expectedKst")) + ' KST</span><b>' +
+            clean(info) + '</b></div>'
+        )
+    schedule_html = ''.join(schedule_lines) or (
+        '<p class="muted">예약 실행시각의 검증 기록이 없습니다.</p>'
+    )
+    schedule_risk = schedule_audit.get("scheduleRisk") is True
     db_ok = bool(checks.get("db_ok"))
     live_ok = bool(checks.get("live_ok"))
     source_date = clean(checks.get("repositoryDate"))
@@ -227,6 +253,10 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 </section><section class="panel"><strong>주요 자동화 단계 바로가기</strong><div class="links" style="margin-top:13px">""" + links + """</div></section></div>
 <div class="sectionhead"><h2>작업별 진단·실패 단계</h2><span class="muted">GitHub Actions의 완료 상태 및 사전 정의된 단계만 표시</span></div>
 <div class="panel">""" + stage_html + """</div>
+<div class="sectionhead"><h2>예약 실행 준수 현황</h2><span class="muted">GitHub 예약 실행 생성 시각 비교 · 실행 결과와 별도</span></div>
+<section class="panel"><p class="muted">GitHub Actions의 예약 실행은 정확한 시각을 보장하지 않습니다. 60분 초과 지연 또는 실행 미확인은 별도 운영 위험으로 표시하며 실제 발행 성공과 혼동하지 않습니다.</p>
+<div class="flagrow"><span class="flag """ + ("off" if schedule_risk else "on") + """">예약 실행 상태: """ + ("지연 또는 미실행 관측" if schedule_risk else "심각한 지연 없음 또는 미확인") + """</span></div>
+""" + schedule_html + """</section>
 <div class="sectionhead"><h2>자료원별 수집 안정성</h2><span class="muted">최근 30일 관측 가능 기간 · 성공률은 시도 기준, 일수는 관측 기준</span></div>
 <section class="panel"><p class="muted">관측 기간: """ + source_period + """ · 재시도 성공은 이전 실패 기록을 지우지 않습니다.</p>
 <p class="muted">""" + clean(source_warning) + """</p>

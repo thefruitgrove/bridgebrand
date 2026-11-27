@@ -200,6 +200,14 @@ def main() -> int:
         # report remains authoritative when workflow metadata is unavailable.
         report["stages"] = []
     try:
+        from tools.bridge_schedule_slo import punctuality
+        report["scheduleAudit"] = punctuality(
+            runs, dt.datetime.now(KST),
+        )
+    except Exception:
+        report["scheduleAudit"] = {"scheduleRisk": None, "jobs": [], "status": "unavailable"}
+        report.setdefault("warnings", []).append("SCHEDULE_AUDIT_UNAVAILABLE")
+    try:
         from tools.bridge_source_metrics import collect_source_summary
         from bridge_pipeline.core import SupabaseRest
         report["sourceMetrics"] = collect_source_summary(SupabaseRest(), today, window_days=30)
