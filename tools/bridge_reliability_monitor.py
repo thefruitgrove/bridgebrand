@@ -199,6 +199,15 @@ def main() -> int:
         # Never fabricate stage diagnoses; the existing full-snapshot health
         # report remains authoritative when workflow metadata is unavailable.
         report["stages"] = []
+    try:
+        from tools.bridge_source_metrics import collect_source_summary
+        from bridge_pipeline.core import SupabaseRest
+        report["sourceMetrics"] = collect_source_summary(SupabaseRest(), today, window_days=30)
+    except Exception:
+        # Failure to collect diagnostic aggregates must remain visible, but
+        # it must never fabricate run-rate success or alter public scores.
+        report["sourceMetrics"] = {"metricsAvailable": False, "sources": [], "status": "unavailable"}
+        report["errors"].append("SOURCE_METRICS_UNAVAILABLE")
     checks = report["checks"]
     report["scorecard"] = scorecard(
         today, live_ok=bool(checks.get("live_ok")),
