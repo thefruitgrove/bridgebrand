@@ -5,6 +5,7 @@
  * the current KST date, after read-only preflight checks.
  *
  * Disabled by default even if deployed: env.DISPATCH_ENABLED must equal "true".
+ * PREFLIGHT_ENABLED=true runs the same read-only checks, but never POSTs.
  * No HTTP administration surface. No tokens, API error bodies or record data
  * are logged.
  */
@@ -89,11 +90,13 @@ function decision(today, publication, dailyRuns, recoveryRuns) {
 }
 
 async function runWatchdog(env, fetchImpl = fetch, now = new Date()) {
-  if (env.DISPATCH_ENABLED !== "true") return {decision: "disabled"};
-  // Safety bound. A late cron must NOT replay yesterday or start a new
-  // collection while the regular pipeline is scheduled to begin.
+  const dispatchEnabled = env.DISPATCH_ENABLED === "true";
+  const preflightEnabled = env.PREFLIGHT_ENABLED === "true";
+  if (!dispatchEnabled && !preflightEnabled) return {decision: "disabled"};
+  // An explicit read-only preflight can exercise API connectivity without
+  // creating a GitHub run. Real dispatch is restricted to the safe KST window.
   const minutes = kstClock(now);
-  if (minutes < 7*60+30 || minutes >= 10*60)
+  if (dispatchEnabled && (minutes < 7*60+30 || minutes >= 10*60))
     return {decision:"outside_safe_window"};
   if (!env.GH_DISPATCH_TOKEN || typeof env.GH_DISPATCH_TOKEN !== "string")
     return {decision:"configuration_error"};
@@ -109,6 +112,7 @@ async function runWatchdog(env, fetchImpl = fetch, now = new Date()) {
     const recovery = recoveryResponse.workflow_runs;
     const choice = decision(today,publication,daily,recovery);
     if (choice !== "dispatch") return {decision:choice, date:today};
+    if (!dispatchEnabled) return {decision:"dry_run_would_dispatch",date:today};
     // Only an allowlisted main-branch workflow for *today* is dispatchable.
     const response = await fetchImpl(
       `${API}/actions/workflows/bridge-daily.yml/dispatches`,{
