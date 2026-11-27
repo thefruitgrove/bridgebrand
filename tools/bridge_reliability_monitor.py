@@ -204,10 +204,10 @@ def main() -> int:
         from bridge_pipeline.core import SupabaseRest
         report["sourceMetrics"] = collect_source_summary(SupabaseRest(), today, window_days=30)
     except Exception:
-        # Failure to collect diagnostic aggregates must remain visible, but
-        # it must never fabricate run-rate success or alter public scores.
+        # This optional telemetry must not turn a verified 400-row production
+        # publication into a false "outage". Surface a warning instead.
         report["sourceMetrics"] = {"metricsAvailable": False, "sources": [], "status": "unavailable"}
-        report["errors"].append("SOURCE_METRICS_UNAVAILABLE")
+        report.setdefault("warnings", []).append("SOURCE_METRICS_UNAVAILABLE")
     checks = report["checks"]
     report["scorecard"] = scorecard(
         today, live_ok=bool(checks.get("live_ok")),
@@ -230,6 +230,7 @@ def main() -> int:
         "sevenDayDelivery": report["scorecard"].get("seven_day_delivery", False),
         "sevenDayClean": report["scorecard"]["seven_day_clean"],
         "errors": report["errors"] + checks.get("errors", []),
+        "warnings": report.get("warnings", []),
     }, ensure_ascii=False, flush=True))
     # A recovered/degraded day is a delivery success, but not a clean day.
     return 0 if status in {"healthy", "degraded"} and not report["errors"] else 1
