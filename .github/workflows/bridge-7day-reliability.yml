@@ -55,12 +55,22 @@ jobs:
               out.write('status='+status+'\n')
           print('BRIDGE reliability status:',status)
           PY
+      - name: Generate sanitized management dashboard
+        if: always()
+        run: |
+          if [ -s bridge-reliability.json ]; then
+            python -m tools.render_private_ops_dashboard --input bridge-reliability.json --output bridge-ops-dashboard.html
+          else
+            echo '::warning::No report available; dashboard cannot be rendered'
+          fi
       - name: Archive a dated, immutable read-only report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bridge-reliability-${{ github.run_id }}
-          path: bridge-reliability.json
+          path: |
+            bridge-reliability.json
+            bridge-ops-dashboard.html
           retention-days: 30
           if-no-files-found: warn
       - name: Add operating scorecard to workflow summary
