@@ -38,6 +38,7 @@ class SourceMetricsTests(unittest.TestCase):
         item=next(r for r in summarize_sources([row],TODAY)["sources"] if r["sourceId"]=="opendart")
         self.assertEqual(item["successfulRuns"],0)
         self.assertEqual(item["incompleteRuns"],1)
+        self.assertEqual(item["lastRunStatus"],"unknown")
 
     def test_outside_window_future_and_unlisted_sources_are_ignored(self):
         rows=[sample("google_news_rss","failed","2026-10-01T00:00:00+09:00","2026-10-01T00:01:00+09:00"),
