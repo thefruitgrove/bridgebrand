@@ -61,7 +61,8 @@ def classify(source, deployed, page, today, max_age_days=2):
     }
 
 
-EXPECTED_DOMAINS = ("CPR", "STAR", "GOV", "UNI")
+# Published JSON uses ENT; STAR is the internal scoring domain only.
+EXPECTED_DOMAINS = ("CPR", "ENT", "GOV", "UNI")
 
 
 def content_integrity(source, deployed):
