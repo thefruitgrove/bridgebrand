@@ -118,7 +118,8 @@ def github_runs(repo: str, token: str) -> list[dict]:
         raise RuntimeError("GITHUB_TOKEN_MISSING")
     result: list[dict] = []
     for workflow in ("bridge-7day-reliability.yml", "bridge-daily.yml",
-                     "bridge-recover-publish.yml"):
+                     "bridge-recover-publish.yml", "bridge-daily-fallback.yml",
+                     "bridge-live-verify.yml"):
         url = (f"https://api.github.com/repos/{repo}/actions/workflows/"
                f"{workflow}/runs?per_page=100")
         request = urllib.request.Request(
@@ -132,7 +133,7 @@ def github_runs(repo: str, token: str) -> list[dict]:
             payload = json.load(response)
         for run in payload.get("workflow_runs", []):
             result.append({k: run.get(k) for k in
-                          ("name", "event", "status", "conclusion",
+                          ("id", "name", "event", "status", "conclusion",
                            "head_branch", "created_at", "html_url")})
     return result
 
@@ -188,6 +189,16 @@ def main() -> int:
     except Exception as exc:
         runs = []
         report["errors"].append("WORKFLOW_HISTORY_UNAVAILABLE:" + type(exc).__name__)
+    try:
+        from tools.bridge_stage_diagnostics import summarize_runs, inspect_failures
+        report["stages"] = inspect_failures(
+            args.repo, os.environ.get("GH_TOKEN", ""),
+            summarize_runs(runs, today),
+        )
+    except Exception:
+        # Never fabricate stage diagnoses; the existing full-snapshot health
+        # report remains authoritative when workflow metadata is unavailable.
+        report["stages"] = []
     checks = report["checks"]
     report["scorecard"] = scorecard(
         today, live_ok=bool(checks.get("live_ok")),
