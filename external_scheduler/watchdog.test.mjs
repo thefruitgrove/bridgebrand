@@ -117,3 +117,26 @@ test("no public control surface is exposed",async()=>{
   const result=await worker.fetch(new Request("https://example.invalid/anything"));
   assert.equal(result.status,404);
 });
+
+test("read-only preflight checks real endpoints but never dispatches",async()=>{
+  const mock=mockFetch();
+  const safe={DISPATCH_ENABLED:"false",PREFLIGHT_ENABLED:"true",GH_DISPATCH_TOKEN:"fake-test-token"};
+  const result=await runWatchdog(safe,mock.fetchMock,new Date("2026-11-28T06:40:00+09:00"));
+  assert.equal(result.decision,"dry_run_would_dispatch");
+  assert.equal(mock.calls.filter(c=>c.method==="GET").length,3);
+  assert.equal(mock.calls.filter(c=>c.method==="POST").length,0);
+});
+
+test("read-only preflight respects existing publication and never dispatches",async()=>{
+  const mock=mockFetch({published:true});
+  const safe={DISPATCH_ENABLED:"false",PREFLIGHT_ENABLED:"true",GH_DISPATCH_TOKEN:"fake-test-token"};
+  assert.equal((await runWatchdog(safe,mock.fetchMock,now)).decision,"published_today");
+  assert.equal(mock.calls.filter(c=>c.method==="POST").length,0);
+});
+
+test("without preflight or dispatch permission even a configured token is inert",async()=>{
+  const mock=mockFetch();
+  const safe={DISPATCH_ENABLED:"false",PREFLIGHT_ENABLED:"false",GH_DISPATCH_TOKEN:"fake-test-token"};
+  assert.equal((await runWatchdog(safe,mock.fetchMock,now)).decision,"disabled");
+  assert.equal(mock.calls.length,0);
+});
