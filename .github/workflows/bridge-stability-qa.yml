@@ -44,3 +44,5 @@ jobs:
           python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
           python -m unittest discover -s tests -p 'test_recovery_gate.py' -v
           python -m unittest discover -s tests -p 'test_bridge_reliability_monitor.py' -v
+          python -m unittest discover -s tests -p 'test_live_full_integrity.py' -v
+          python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
