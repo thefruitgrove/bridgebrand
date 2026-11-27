@@ -1,0 +1,138 @@
+name: BRIDGE 7-Day Reliability Monitor
+
+# Daily KST 09:30: after the 05:15 collector, 06:45 recovery, 07:15
+# fallback, and 08:30 Cloudflare read-only verification.
+# No writes to production DB, published JSON, Git branch or Cloudflare.
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: bridge-reliability-monitor
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TZ: Asia/Seoul
+      SUPABASE_URL: https://gorlbfqvyxtdsxgoqinf.supabase.co
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline regression tests for 7-day evidence rules
+        run: python -m unittest discover -s tests -p 'test_bridge_reliability_monitor.py' -v
+      - name: Verify DB, GitHub publication, live Cloudflare and daily workflows
+        id: monitor
+        continue-on-error: true
+        run: python -m tools.bridge_reliability_monitor --output bridge-reliability.json
+      - name: Read monitoring verdict
+        id: verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          path=Path('bridge-reliability.json')
+          data=json.loads(path.read_text()) if path.exists() else {'scorecard':{'status':'failure'}}
+          status=data['scorecard']['status']
+          if status not in {'healthy','degraded','failure','not_started'}:
+              status='failure'
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
+              out.write('status='+status+'\n')
+          print('BRIDGE reliability status:',status)
+          PY
+      - name: Archive a dated, immutable read-only report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bridge-reliability-${{ github.run_id }}
+          path: bridge-reliability.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Add operating scorecard to workflow summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          path=Path('bridge-reliability.json')
+          lines=['### BRIDGE Stability 1.0 — 7-day monitoring']
+          if path.exists():
+              report=json.loads(path.read_text())
+              score=report['scorecard']
+              lines.append(f"**Today:** {score['today']} | **Status:** {score['status']}")
+              lines.append(f"**7-day evidence:** {score['observed_days']}/7 verified observations, {score['delivered_days']} delivered, {score['clean_days']} clean.")
+              lines.append(f"**7/7 clean:** {score['seven_day_clean']}")
+              lines.append('')
+              lines.append('| KST date | Status | Main success | Main failures | Recovery success |')
+              lines.append('|---|---|---|---:|---|')
+              for row in score.get('days',[]):
+                  lines.append(f"| {row['date']} | {row['status']} | {row.get('primary_success','—')} | {row.get('primary_failures','—')} | {row.get('recovery_success','—')} |")
+              lines.append('')
+              lines.append('The 7-day goal is NOT achieved unless seven distinct observed days have full verified success.')
+          else:
+              lines.append('Monitor failed without producing a report; inspect job logs.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('\n'.join(lines)+'\n')
+          PY
+      - name: Open or update one deduplicated reliability incident
+        if: ${{ always() && (steps.verdict.outputs.status == 'failure' || steps.verdict.outputs.status == 'degraded') }}
+        run: |
+          set -euo pipefail
+          TITLE='BRIDGE Stability: daily reliability degraded or failed'
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          {
+            echo 'BRIDGE 09:30 KST reliability check found degraded or failed operation.'
+            echo
+            echo "Review: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo 'Summary (no secret values):'
+            echo '~~~json'
+            if [ -s bridge-reliability.json ]; then
+              python - <<'PY'
+          import json
+          j=json.load(open('bridge-reliability.json',encoding='utf-8'))
+          s=j['scorecard']; c=j.get('checks',{})
+          print(json.dumps({'date':s['today'],'status':s['status'],'sourceDate':c.get('repositoryDate'),'deliveredDays':s.get('delivered_days'),'cleanDays':s.get('clean_days'),'errors':j.get('errors',[])+c.get('errors',[])},ensure_ascii=False))
+          PY
+            else
+              echo '{"status":"failure","errors":["monitor_report_missing"]}'
+            fi
+            echo '~~~'
+            echo
+            echo 'Do not change score/date/evidence. Identify collector, DB, GitHub or Cloudflare discrepancy and use existing safe recovery.'
+          } > /tmp/bridge-reliability-incident.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file /tmp/bridge-reliability-incident.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file /tmp/bridge-reliability-incident.md
+          fi
+      - name: Close reliability incident on clean production day
+        if: ${{ always() && steps.verdict.outputs.status == 'healthy' }}
+        run: |
+          set -euo pipefail
+          TITLE='BRIDGE Stability: daily reliability degraded or failed'
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body "Clean daily verification: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            gh issue close "$EXISTING" --repo "$GITHUB_REPOSITORY" --reason completed
+          fi
+      - name: Make failed monitoring an actual failed Action run
+        if: ${{ always() && (steps.monitor.outcome == 'failure' || steps.verdict.outputs.status == 'failure') }}
+        run: |
+          echo '::error::BRIDGE reliability verification failed; incident and artifact retained.'
+          exit 1
