@@ -410,18 +410,14 @@ def trust_grade(confidence_score: float, config: dict[str, Any]) -> str:
 
 
 def robust_rank(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Deterministic rank: score, confidence, entity id. Ties receive competition rank."""
+    """Deterministic ordinal rank: score, confidence, then external_id.
+
+    Public T100 exports require one rank per entity (1..N). Equal scores
+    remain equal scores, but their display order uses a stable identifier.
+    Competition ranks (1, 2, 2, 4) are incompatible with that contract.
+    """
     ordered = sorted(rows, key=lambda x: (-float(x["score"]), -float(x["confidence_score"]), x["external_id"]))
-    last_key = None
-    rank = 0
-    ranked: list[dict[str, Any]] = []
-    for position, row in enumerate(ordered, 1):
-        key = (round(float(row["score"]), 2), round(float(row["confidence_score"]), 2))
-        if key != last_key:
-            rank = position
-            last_key = key
-        ranked.append({**row, "rank": rank})
-    return ranked
+    return [{**row, "rank": position} for position, row in enumerate(ordered, 1)]
 
 
 def dump_json(path: Path, value: Any) -> None:
