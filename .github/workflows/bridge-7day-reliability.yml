@@ -57,9 +57,16 @@ jobs:
           status=data['scorecard']['status']
           if status not in {'healthy','degraded','failure','not_started'}:
               status='failure'
+          schedule=data.get('scheduleAudit') or {}
+          jobs=schedule.get('jobs') or []
+          risk=schedule.get('scheduleRisk') is True
+          covered=(len(jobs)==4 and schedule.get('scheduleRisk') is not None)
           with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as out:
               out.write('status='+status+'\n')
+              out.write('schedule_risk='+str(risk).lower()+'\n')
+              out.write('schedule_covered='+str(covered).lower()+'\n')
           print('BRIDGE reliability status:',status)
+          print('BRIDGE scheduling observed:',covered,'risk:',risk)
           PY
       - name: Generate sanitized management dashboard
         if: always()
@@ -145,6 +152,51 @@ jobs:
           EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body "Clean daily verification: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            gh issue close "$EXISTING" --repo "$GITHUB_REPOSITORY" --reason completed
+          fi
+      - name: Raise or update independent schedule delay incident
+        if: ${{ always() && steps.verdict.outputs.schedule_risk == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE='BRIDGE SCHEDULE: scheduled pipeline late or not started'
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          {
+            echo 'GitHub scheduled-run punctuality risk was measured by the BRIDGE 09:30 monitoring job.'
+            echo
+            echo "Monitor: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            python - <<'PY'
+          import json
+          j=json.load(open('bridge-reliability.json',encoding='utf-8'))
+          audit=j.get('scheduleAudit') or {}
+          allowed={'정규 수집','근거 복구','재수집 판단','실서비스 검증'}
+          for row in audit.get('jobs') or []:
+              if row.get('label') not in allowed or row.get('status') not in ('late','overdue'):
+                  continue
+              delay=row.get('delayMinutes')
+              print('- '+row['label']+': '+row['status']+
+                    (f' (+{delay}m)' if type(delay) is int and delay >= 0 else ''))
+          PY
+            echo
+            echo 'Do not invent current-date records or rerun past-dated workflows. Check GitHub schedule timing and collection/repair evidence before triggering anything.'
+          } > /tmp/bridge-schedule-incident.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file /tmp/bridge-schedule-incident.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file /tmp/bridge-schedule-incident.md
+          fi
+      - name: Close schedule issue only after all four scheduled jobs meet threshold
+        if: ${{ always() && steps.verdict.outputs.schedule_risk == 'false' && steps.verdict.outputs.schedule_covered == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE='BRIDGE SCHEDULE: scheduled pipeline late or not started'
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body "All four observed scheduled jobs are within the 60-minute threshold: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             gh issue close "$EXISTING" --repo "$GITHUB_REPOSITORY" --reason completed
           fi
       - name: Make failed monitoring an actual failed Action run
