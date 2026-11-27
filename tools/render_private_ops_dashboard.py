@@ -135,6 +135,12 @@ def render_dashboard(report: dict) -> str:
         source_table = '<tr><td colspan="7">자료원별 작업 기록을 확인할 수 없습니다.</td></tr>'
     source_period = (clean(metrics_data.get("windowStart")) + ' ~ ' +
                      clean(metrics_data.get("windowEnd")))
+    source_warning = (
+        '자료원 통계 조회 불가 · 발행 검증 판정과 별개로 확인이 필요합니다.'
+        if metrics_data.get("status") == "unavailable" else
+        '수집 실행 기록 없음 · 성공 또는 실패를 추정하지 않습니다.'
+        if metrics_data.get("metricsAvailable") is False else ''
+    )
     db_ok = bool(checks.get("db_ok"))
     live_ok = bool(checks.get("live_ok"))
     source_date = clean(checks.get("repositoryDate"))
@@ -223,6 +229,7 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 <div class="panel">""" + stage_html + """</div>
 <div class="sectionhead"><h2>자료원별 수집 안정성</h2><span class="muted">최근 30일 관측 가능 기간 · 성공률은 시도 기준, 일수는 관측 기준</span></div>
 <section class="panel"><p class="muted">관측 기간: """ + source_period + """ · 재시도 성공은 이전 실패 기록을 지우지 않습니다.</p>
+<p class="muted">""" + clean(source_warning) + """</p>
 <div class="table-scroll"><table class="source-table"><thead><tr><th scope="col">자료원</th><th scope="col">관측일 / 성공일</th><th scope="col">시도</th><th scope="col">실패</th><th scope="col">시도 성공률</th><th scope="col">평균 소요</th><th scope="col">최신 실행</th></tr></thead>
 <tbody>""" + source_table + """</tbody></table></div>
 <p class="muted">이 표는 DB의 수집 실행기록만 반영합니다. 데이터 품질이나 각 출처의 실제 신뢰도 점수가 아니며, 기록이 없는 날은 자동으로 실패 또는 성공으로 계산하지 않습니다.</p></section>
