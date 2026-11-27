@@ -62,7 +62,7 @@ def summarize_sources(rows: list[dict], today: dt.date,
     for source in SOURCE_LABELS:
         items = sorted(grouped[source], key=lambda r: r["_start"])
         last = items[-1] if items else None
-        successes = sum(r.get("status") in SUCCESS and parse_time(r.get("finished_at")) for r in items)
+        successes = sum(bool(r.get("status") in SUCCESS and parse_time(r.get("finished_at"))) for r in items)
         failures = sum(r.get("status") in FAILURES for r in items)
         incomplete = len(items) - successes - failures
         durations = []
