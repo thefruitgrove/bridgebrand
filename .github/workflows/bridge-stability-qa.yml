@@ -47,5 +47,6 @@ jobs:
           python -m unittest discover -s tests -p 'test_private_ops_dashboard.py' -v
           python -m unittest discover -s tests -p 'test_bridge_stage_diagnostics.py' -v
           python -m unittest discover -s tests -p 'test_bridge_source_metrics.py' -v
+          python -m unittest discover -s tests -p 'test_bridge_schedule_slo.py' -v
           python -m unittest discover -s tests -p 'test_live_full_integrity.py' -v
           python -m unittest discover -s tests -p 'test_live_snapshot_version.py' -v
