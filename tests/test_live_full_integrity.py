@@ -62,11 +62,11 @@ class FullContentIntegrityTests(unittest.TestCase):
         src = sample()
         live = copy.deepcopy(src)
         live["rankings"][0]["domain"] = "GOV"
-        live["rankings"][200]["trust_grade"] = None
+        live["rankings"][100]["trust_grade"] = None
         issues = content_integrity(src, live)
         self.assertIn("invalid_live_domain_quota:CPR", issues)
         self.assertIn("invalid_live_domain_quota:GOV", issues)
-        self.assertIn("incomplete_live_ranking_fields:GOV", issues)
+        self.assertIn("incomplete_live_ranking_fields:STAR", issues)
 
     def test_current_site_verification_is_fail_closed_on_content_diff(self):
         source = sample()
