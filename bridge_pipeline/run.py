@@ -22,7 +22,7 @@ from .targets import TARGET_QUOTAS, load_targets, target_quota_report
 from .events import build_event_record, diagnosis_tags
 from .evidence_v5 import (POLICY_VERSION, collection_states, valid_signal, unique_signals, source_family_count, profile, comparison, event_activity, weighted_level, day, carry_valid)
 from .weekly_observation import AXES as WEEKLY_AXES, remediation_stage, weekly_entity_summary
-from .news_resilience import NewsCollectionIncomplete, collect_targets, resumable_successes
+from .news_resilience import NewsCollectionIncomplete, RESUME_CONTRACT_VERSION, collect_targets, resumable_successes
 
 
 def bootstrap(db: SupabaseRest) -> None:
@@ -187,10 +187,10 @@ def collect_news(
                 f"Google News RSS unavailable for {len(failed_entities)}/{len(entities)} targets; "
                 "successful evidence persisted, publication blocked"
             )
-        db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
+        db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"resume_contract_version":RESUME_CONTRACT_VERSION,"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
         print(f"news collection success: fetched={fetched} accepted={accepted} rejected={rejected}")
     except Exception as exc:
-        db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "error_code": type(exc).__name__, "error_detail": str(exc)[:2000], "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"failed_entity_ids":failed_entities,"partial_evidence_saved":bool(evidence_persisted and failed_entities),"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
+        db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "error_code": type(exc).__name__, "error_detail": str(exc)[:2000], "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"resume_contract_version":RESUME_CONTRACT_VERSION,"failed_entity_ids":failed_entities,"partial_evidence_saved":bool(evidence_persisted and failed_entities),"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
         db.insert("bridge_pipeline_alerts", [{"run_id": run_id, "severity": "critical", "code": "COLLECTOR_FAILED", "message": str(exc)[:1000], "context": {"source": "google_news_rss"}}])
         raise
 
