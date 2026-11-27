@@ -4,7 +4,7 @@ import urllib.error
 import unittest
 from unittest.mock import patch
 
-from bridge_pipeline.news_resilience import collect_targets, NewsCollectionIncomplete, resumable_successes, search_names
+from bridge_pipeline.news_resilience import collect_targets, NewsCollectionIncomplete, RESUME_CONTRACT_VERSION, resumable_successes, search_names
 from bridge_pipeline.run import collect_news
 
 
@@ -121,6 +121,7 @@ class NewsResilienceTests(unittest.TestCase):
                 "partial_evidence_saved": True,
                 "observation_as_of": as_of.isoformat(),
                 "methodology_version": "test-v1",
+                "resume_contract_version": RESUME_CONTRACT_VERSION,
                 "entity_results": statuses,
             },
         }
@@ -170,6 +171,7 @@ class NewsResilienceTests(unittest.TestCase):
                 "partial_evidence_saved": True,
                 "observation_as_of": as_of.isoformat(),
                 "methodology_version": load_methodology()["version"],
+                "resume_contract_version": RESUME_CONTRACT_VERSION,
                 "entity_results": past_statuses,
             },
         }
