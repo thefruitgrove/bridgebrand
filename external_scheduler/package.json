@@ -1,0 +1,8 @@
+{
+  "name": "bridge-external-watchdog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test watchdog.test.mjs"
+  }
+}
