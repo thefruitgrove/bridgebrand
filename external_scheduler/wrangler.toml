@@ -8,6 +8,7 @@ workers_dev = false
 
 [vars]
 DISPATCH_ENABLED = "false"
+PREFLIGHT_ENABLED = "false"
 
 [triggers]
 crons = []
