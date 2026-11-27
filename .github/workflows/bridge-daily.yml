@@ -58,7 +58,7 @@ jobs:
 
       - name: Production-critical score and publication preflight
         run: |
-          for spec in test_collection_date_health.py test_recovery_gate.py test_publication_file_gate.py test_authoritative_rank_export.py test_public_export.py test_read_only_export_gate.py test_google_rate_limit.py test_daily_workflow_integrity.py test_prepublish_contract.py; do
+          for spec in test_collection_date_health.py test_recovery_gate.py test_publication_file_gate.py test_authoritative_rank_export.py test_public_export.py test_read_only_export_gate.py test_google_rate_limit.py test_news_resilience.py test_daily_workflow_integrity.py test_prepublish_contract.py; do
             python -m unittest discover -s tests -p "$spec" -v
           done
           python engine3/test_scoring_v3.py
