@@ -1,0 +1,44 @@
+name: BRIDGE Full Source Backup 20261128
+on:
+  push:
+    branches:
+      - 'backup/verified-source-20261128'
+    paths:
+      - '.github/workflows/bridge-source-archive-20261128.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create complete tracked-file source archive
+        run: |
+          set -euo pipefail
+          mkdir -p backup-output
+          git rev-parse HEAD > backup-output/SOURCE_COMMIT_SHA.txt
+          git ls-files | LC_ALL=C sort > backup-output/TRACKED_PATHS.txt
+          git archive --format=zip --output=backup-output/BRIDGE_full_source_20261128.zip HEAD
+          sha256sum backup-output/BRIDGE_full_source_20261128.zip > backup-output/CHECKSUMS_SHA256.txt
+          python - <<'PY'
+          import zipfile,pathlib,subprocess
+          p=pathlib.Path("backup-output/BRIDGE_full_source_20261128.zip")
+          paths=subprocess.check_output(["git","ls-files","-z"]).decode().split("\0")
+          paths=[x for x in paths if x]
+          with zipfile.ZipFile(p) as z:
+              files=[x for x in z.namelist() if not x.endswith("/")]
+          if sorted(files)!=sorted(paths):
+              raise RuntimeError("Git tracked-file archive integrity failed")
+          print("Source backup complete, tracked files:",len(files),"bytes:",p.stat().st_size)
+          PY
+      - name: Save source and verification metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: bridge-full-source-20261128-${{ github.run_id }}
+          path: backup-output/
+          retention-days: 90
+          if-no-files-found: error
