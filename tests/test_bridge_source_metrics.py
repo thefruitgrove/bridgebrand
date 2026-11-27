@@ -60,6 +60,20 @@ class SourceMetricsTests(unittest.TestCase):
         self.assertIn("started_at=lt.2026-11-29T00:00:00+09:00",db.query)
         self.assertEqual(result["windowDays"],30)
 
+    def test_unavailable_source_metrics_warns_but_does_not_claim_site_outage(self):
+        report={
+            "scorecard":{"today":"2026-11-28","status":"healthy",
+                         "observed_days":1,"delivered_days":1,"clean_days":1,"days":[]},
+            "checks":{"live_ok":True,"db_ok":True},
+            "sourceMetrics":{"status":"unavailable","metricsAvailable":False,"sources":[]},
+            "warnings":["SOURCE_METRICS_UNAVAILABLE"],
+        }
+        html=render_dashboard(report)
+        self.assertIn("자료원 통계 조회 불가",html)
+        self.assertIn("발행 검증 판정과 별개",html)
+        self.assertIn("현재 운영 판정",html)
+        self.assertIn("정상",html)
+
     def test_dashboard_source_table_no_secrets(self):
         report={
             "scorecard":{"today":"2026-11-28","status":"not_observed","days":[]},
