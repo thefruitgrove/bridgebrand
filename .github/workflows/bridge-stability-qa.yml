@@ -33,6 +33,8 @@ jobs:
       - name: Check release gates and regression contracts without production secrets
         run: |
           python -m unittest discover -s tests -p 'test_prepublish_contract.py' -v
+          python -m unittest discover -s tests -p 'test_news_resilience.py' -v
+          python -m unittest discover -s tests -p 'test_google_rate_limit.py' -v
           python -m unittest discover -s tests -p 'test_public_export.py' -v
           python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
           python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
