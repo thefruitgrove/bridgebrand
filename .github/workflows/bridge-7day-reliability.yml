@@ -33,8 +33,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Offline regression tests for 7-day evidence rules
-        run: python -m unittest discover -s tests -p 'test_bridge_reliability_monitor.py' -v
+      - name: Offline regression tests for management reporting
+        run: |
+          python -m unittest discover -s tests -p 'test_bridge_reliability_monitor.py' -v
+          python -m unittest discover -s tests -p 'test_bridge_source_metrics.py' -v
+          python -m unittest discover -s tests -p 'test_bridge_stage_diagnostics.py' -v
+          python -m unittest discover -s tests -p 'test_private_ops_dashboard.py' -v
+          python -m unittest discover -s tests -p 'test_live_full_integrity.py' -v
       - name: Verify DB, GitHub publication, live Cloudflare and daily workflows
         id: monitor
         continue-on-error: true
