@@ -10,6 +10,7 @@ on:
       - '.github/workflows/bridge-recover-publish.yml'
       - '.github/workflows/bridge-stability-qa.yml'
       - '.github/workflows/bridge-live-verify.yml'
+      - '.github/workflows/bridge-7day-reliability.yml'
       - 'supabase/migrations/**'
   pull_request:
     paths:
@@ -42,3 +43,4 @@ jobs:
           python -m unittest discover -s tests -p 'test_daily_workflow_integrity.py' -v
           python -m unittest discover -s tests -p 'test_publication_file_gate.py' -v
           python -m unittest discover -s tests -p 'test_recovery_gate.py' -v
+          python -m unittest discover -s tests -p 'test_bridge_reliability_monitor.py' -v
