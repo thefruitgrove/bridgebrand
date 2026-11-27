@@ -10,18 +10,19 @@ GitHub Actions의 예약 이벤트는 지연·누락될 수 있다. BRIDGE는 20
 ## 실제 코드
 - `external_scheduler/src/index.js`: 예약 이벤트·사전 확인·GitHub API 요청 로직.
 - `external_scheduler/wrangler.toml`: Worker 이름·진입점. **초기 상태에서는 `crons = []`, `DISPATCH_ENABLED = "false"`**이므로 운영 실행이 시작되지 않는다.
-- `external_scheduler/watchdog.test.mjs`: 오프라인 안전성 검증.
+- `external_scheduler/watchdog.test.mjs`: 오프라인 안전성 검증 및 POST 차단 테스트.
+- `PREFLIGHT_ENABLED=true`는 실제 GitHub 인증키를 사용해 읽기 요청만 진행하며, 배포 승인 없이도 실행 가능 여부를 진단한다.
 - `external_scheduler/package.json`: 외부 런타임 의존성이 없는 테스트 설정.
 - `.github/workflows/bridge-stability-qa.yml`: PR마다 `node --test external_scheduler/watchdog.test.mjs` 수행.
 
 ## 운영 연결을 준비할 때의 필수 체크
 1. GitHub의 `thefruitgrove/bridgebrand` 전용 **fine-grained PAT** 또는 동등한 최소권한 GitHub App 토큰을 준비한다. 접근 범위는 해당 저장소 하나로 제한하고 GitHub Actions 조회(Read)·워크플로우 실행 요청(Write)에 필요한 최소 권한만 사용한다. **토큰 값을 채팅·GitHub·Worker 소스·로그에 기록하지 않는다.**
 2. 기존 Cloudflare 운영 계정에 로그인하여 **별도의** `bridge-external-watchdog` Worker를 준비한다. 기존 BRIDGE Pages/Workers/도메인 및 배포 훅을 변경하지 않는다. Worker의 필수 Secret 이름은 `GH_DISPATCH_TOKEN`이다.
-3. **동일한 코드, 동일한 토큰으로 사전 검증**한다. 인증된 GitHub API에 대한 읽기 권한, 공개 스냅샷 다운로드, 호출 대상 워크플로우 ID, GitHub 사전검사 결과를 확인한다. 첫 검사는 `DISPATCH_ENABLED=false`, Cron 비활성 상태로 진행한다. 모의 테스트 통과만으로 실제 API 권한 검증 완료로 간주하지 않는다.
-4. 정식 활성화가 승인되고 운영연결 검증이 끝난 경우에만 `[triggers] crons = ["35 22 * * *"]`(UTC 22:35 = 다음 날 07:35 KST)과 `DISPATCH_ENABLED = "true"`를 함께 적용한다. 실제 Worker가 활성화되었는지 Cloudflare 관리화면에서 확인한다.
+3. **동일한 코드, 동일한 토큰으로 사전 검증**한다. 인증된 GitHub API에 대한 읽기 권한, 공개 스냅샷 다운로드, 호출 대상 워크플로우 ID, GitHub 사전검사 결과를 확인한다. 첫 검사는 `DISPATCH_ENABLED=false`, `PREFLIGHT_ENABLED=true`인 **읽기 전용 사전검증**으로 진행한다. 이 모드에서는 동일한 GitHub 토큰으로 공개 JSON·Actions 실행이력을 실제 조회하지만, 의사결정이 실행 필요(`dispatch`)라고 나오더라도 `dry_run_would_dispatch`로 보고하고 **POST 요청을 하지 않는다**. Cron 비활성 상태에서는 Cloudflare 테스트 기능 또는 로컬 `wrangler dev --test-scheduled`를 통해 예약 핸들러를 수동 호출한다. 실제 실행 없이 로그의 `preflight_failed`, `configuration_error`, `dry_run_would_dispatch`, `published_today` 등 안전 결과를 확인한다. 모의 테스트 통과만으로 실제 API 권한 검증 완료로 간주하지 않는다.
+4. 정식 활성화가 승인되고 운영연결 검증이 끝난 경우에만 `[triggers] crons = ["35 22 * * *"]`(UTC 22:35 = 다음 날 07:35 KST)과 `DISPATCH_ENABLED = "true"`를 함께 적용하되 `PREFLIGHT_ENABLED`는 `false`로 되돌린다. 실제 Worker가 활성화되었는지 Cloudflare 관리화면에서 확인한다.
 5. 실제 첫 이벤트의 결과가 `published_today`, `existing_active_run`, `already_dispatched_today`, `collection_succeeded`, `recovery_succeeded`, `dispatched` 중 하나인지 기록한다. `dispatched`인 경우 GitHub main의 `BRIDGE Daily Pipeline` 수동 실행이 실제 생성됐는지 별도로 확인하고 해당 날짜 400건만 발행됐는지 검증한다.
 6. `preflight_failed`, `dispatch_rejected`, `configuration_error` 상태라면 자동 재시도를 하지 않는다. 계정 권한·토큰 갱신·GitHub API 상태를 점검한다. 비밀값은 재출력하지 않는다.
-7. 종료하려면 Worker `DISPATCH_ENABLED=false` 및 `crons=[]`를 적용한다. 기존 GitHub 05:15 정규 수집·06:45 복구·07:15 fallback·09:30 모니터는 그대로 유지된다.
+7. 종료하려면 Worker `DISPATCH_ENABLED=false`, `PREFLIGHT_ENABLED=false` 및 `crons=[]`를 적용한다. 기존 GitHub 05:15 정규 수집·06:45 복구·07:15 fallback·09:30 모니터는 그대로 유지된다.
 
 ## 중복·오발행 방지
 - KST 07:30~10:00 범위에서만 실제 Dispatch가 허용된다. 늦게 실행된 Cron은 당일이 바뀌면 과거 날짜를 요청하지 않는다.
