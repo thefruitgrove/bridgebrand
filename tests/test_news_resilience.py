@@ -4,7 +4,7 @@ import urllib.error
 import unittest
 from unittest.mock import patch
 
-from bridge_pipeline.news_resilience import collect_targets, NewsCollectionIncomplete
+from bridge_pipeline.news_resilience import collect_targets, NewsCollectionIncomplete, RESUME_CONTRACT_VERSION, resumable_successes, search_names
 from bridge_pipeline.run import collect_news
 
 
@@ -99,6 +99,109 @@ class NewsResilienceTests(unittest.TestCase):
         self.assertEqual(failures[0]["diagnostics"]["entity_results"]["id-3"]["status"], "not_attempted")
         self.assertEqual(len(failures[0]["diagnostics"]["failed_entity_ids"]), 3)
         self.assertTrue(any(table == "bridge_pipeline_alerts" for table, _ in db.inserts))
+
+    def test_resume_only_matching_persisted_partial_run(self):
+        from zoneinfo import ZoneInfo
+        as_of = dt.date(2026, 11, 27)
+        end = dt.datetime(2026, 11, 27, 5, 15, tzinfo=ZoneInfo("Asia/Seoul"))
+        start = end - dt.timedelta(days=1)
+        statuses = {
+            e["id"]: {
+                "status": "success" if e["id"] == "id-0" else "failed",
+                "query_names": search_names(e),
+                "fetched_count": 0 if e["id"] == "id-0" else None,
+                "matched_count": 0,
+            }
+            for e in entities()
+        }
+        past = {
+            "status": "failed", "window_start": start.astimezone(dt.timezone.utc).isoformat(),
+            "window_end": end.astimezone(dt.timezone.utc).isoformat(),
+            "diagnostics": {
+                "partial_evidence_saved": True,
+                "observation_as_of": as_of.isoformat(),
+                "methodology_version": "test-v1",
+                "resume_contract_version": RESUME_CONTRACT_VERSION,
+                "entity_results": statuses,
+            },
+        }
+        reusable = resumable_successes([past], entities(), as_of, start, end, "test-v1")
+        self.assertEqual(set(reusable), {"id-0"})
+        calls = []
+        def fetch(entity, query):
+            calls.append(entity["id"])
+            return []
+        success, result, failed = collect_targets(entities(), fetch, prior_results=reusable)
+        self.assertEqual(calls, ["id-1", "id-2", "id-3"])
+        self.assertEqual(failed, [])
+        self.assertTrue(result["id-0"]["reused_from_prior_run"])
+        self.assertEqual(len(success), 3)
+        self.assertEqual(set(result), {e["id"] for e in entities()})
+        self.assertTrue(all(v["status"] == "success" for v in result.values()))
+
+        changed = [{**e, "aliases": ["추가 명칭"]} if e["id"] == "id-0" else e for e in entities()]
+        self.assertEqual(resumable_successes([past], changed, as_of, start, end, "test-v1"), {})
+        self.assertEqual(resumable_successes([past], entities(), as_of, start, end, "test-v2"), {})
+        self.assertEqual(resumable_successes([past], entities(), as_of + dt.timedelta(days=1), start, end, "test-v1"), {})
+        later = end + dt.timedelta(hours=1)
+        self.assertEqual(resumable_successes([past], entities(), as_of, start, later, "test-v1"), {})
+        unpersisted = {**past, "diagnostics": {**past["diagnostics"], "partial_evidence_saved": False}}
+        self.assertEqual(resumable_successes([unpersisted], entities(), as_of, start, end, "test-v1"), {})
+        incorrect_roster = {**past, "diagnostics": {**past["diagnostics"], "entity_results": {"id-0": statuses["id-0"]}}}
+        self.assertEqual(resumable_successes([incorrect_roster], entities(), as_of, start, end, "test-v1"), {})
+
+    def test_second_collection_uses_scoped_checkpoint_and_completes(self):
+        from bridge_pipeline.core import KST, load_methodology
+        as_of = dt.date(2026, 11, 27)
+        end = dt.datetime.combine(as_of, dt.time(5, 15), tzinfo=KST)
+        start = end - dt.timedelta(days=1)
+        past_statuses = {
+            e["id"]: {
+                "status": "success" if e["id"] == "id-0" else "failed",
+                "query_names": search_names(e),
+                "fetched_count": 0 if e["id"] == "id-0" else None,
+                "matched_count": 0,
+            }
+            for e in entities()
+        }
+        prior = {
+            "status": "failed", "window_start": start.isoformat(),
+            "window_end": end.isoformat(),
+            "diagnostics": {
+                "partial_evidence_saved": True,
+                "observation_as_of": as_of.isoformat(),
+                "methodology_version": load_methodology()["version"],
+                "resume_contract_version": RESUME_CONTRACT_VERSION,
+                "entity_results": past_statuses,
+            },
+        }
+        class FakeDB:
+            def __init__(self):
+                self.patches = []
+            def select(self, table, query):
+                return entities() if table == "bridge_entities" else [prior]
+            def insert(self, table, rows):
+                return [{"id": "run-two"}] if table == "bridge_collection_runs" else []
+            def upsert(self, table, rows, conflict):
+                return []
+            def patch(self, table, values, query):
+                self.patches.append((table, values))
+        db = FakeDB()
+        calls = []
+        def fetch(query, *args):
+            calls.append(query)
+            if '"대상0"' in query:
+                raise AssertionError("persisted successful observation must not be fetched again")
+            return []
+        with patch("bridge_pipeline.run.fetch_google_news", side_effect=fetch):
+            collect_news(db, as_of)
+        self.assertEqual(len(calls), 3)
+        successful_runs = [v for table, v in db.patches if table == "bridge_collection_runs" and v["status"] == "success"]
+        self.assertEqual(len(successful_runs), 1)
+        diag = successful_runs[0]["diagnostics"]
+        self.assertEqual(diag["resumed_success_count"], 1)
+        self.assertEqual(len(diag["entity_results"]), 4)
+        self.assertTrue(all(row["status"] == "success" for row in diag["entity_results"].values()))
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ from .targets import TARGET_QUOTAS, load_targets, target_quota_report
 from .events import build_event_record, diagnosis_tags
 from .evidence_v5 import (POLICY_VERSION, collection_states, valid_signal, unique_signals, source_family_count, profile, comparison, event_activity, weighted_level, day, carry_valid)
 from .weekly_observation import AXES as WEEKLY_AXES, remediation_stage, weekly_entity_summary
-from .news_resilience import NewsCollectionIncomplete, collect_targets
+from .news_resilience import NewsCollectionIncomplete, RESUME_CONTRACT_VERSION, collect_targets, resumable_successes
 
 
 def bootstrap(db: SupabaseRest) -> None:
@@ -74,9 +74,25 @@ def collect_news(
     else:
         end=dt.datetime.combine(as_of,dt.time(5,15),tzinfo=now_kst().tzinfo)
         start=end-dt.timedelta(days=1)
+    # Resume only successful target scans from a *persisted*, scope-identical
+    # failed attempt. Unknown/legacy failures and changed aliases trigger full
+    # re-collection; no absent evidence is reconstructed.
+    methodology_version = load_methodology()["version"]
+    prior_runs = db.select(
+        "bridge_collection_runs",
+        "select=status,window_start,window_end,diagnostics"
+        "&source_id=eq.google_news_rss&order=started_at.desc&limit=8",
+    )
+    prior_successes = resumable_successes(
+        prior_runs, entities, as_of, start, end, methodology_version,
+    )
     run_id = _start_run(db, "google_news_rss", start, end)
-    fetched = accepted = rejected = 0
+    fetched = sum(int(v["fetched_count"]) for v in prior_successes.values())
+    accepted = sum(int(v["matched_count"]) for v in prior_successes.values())
+    rejected = 0
     entity_results = {}
+    failed_entities: list[str] = []
+    evidence_persisted = False
     seen_entity_items: set[tuple[str, str]] = set()
     try:
         raw_by_hash: dict[str, dict] = {}
@@ -99,7 +115,7 @@ def collect_news(
         # An exhausted HTTP 429/503 for one entity must not discard already
         # collected entities. Two consecutive exhausted transient failures
         # open the circuit to avoid hammering an unhealthy provider.
-        successful_targets, entity_results, failed_entities = collect_targets(entities, fetch_entity)
+        successful_targets, entity_results, failed_entities = collect_targets(entities, fetch_entity, prior_results=prior_successes)
         for entity, items in successful_targets:
             fetched += len(items)
             for item in items:
@@ -162,6 +178,7 @@ def collect_news(
                     existing["confidence"] = max(existing["confidence"], event["confidence"])
         event_rows = list(event_rows_by_key.values())
         db.upsert("bridge_event_ledger", event_rows, "entity_id,event_key")
+        evidence_persisted = True
         # Do not turn a partial source scan into a successful observation.
         # Completed raw items/signals are persisted idempotently, but scoring
         # and public release are blocked until every registered target succeeds.
@@ -170,10 +187,10 @@ def collect_news(
                 f"Google News RSS unavailable for {len(failed_entities)}/{len(entities)} targets; "
                 "successful evidence persisted, publication blocked"
             )
-        db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat()}}, f"id=eq.{run_id}")
+        db.patch("bridge_collection_runs", {"status": "success", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"resume_contract_version":RESUME_CONTRACT_VERSION,"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
         print(f"news collection success: fetched={fetched} accepted={accepted} rejected={rejected}")
     except Exception as exc:
-        db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "error_code": type(exc).__name__, "error_detail": str(exc)[:2000], "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"failed_entity_ids":failed_entities if "failed_entities" in locals() else [],"partial_evidence_saved":bool("failed_entities" in locals() and failed_entities)}}, f"id=eq.{run_id}")
+        db.patch("bridge_collection_runs", {"status": "failed", "finished_at": now_kst().isoformat(), "fetched_count": fetched, "accepted_count": accepted, "rejected_count": rejected, "error_code": type(exc).__name__, "error_detail": str(exc)[:2000], "diagnostics":{"entity_results":entity_results,"policy_version":POLICY_VERSION,"observation_as_of":as_of.isoformat(),"methodology_version":methodology_version,"resume_contract_version":RESUME_CONTRACT_VERSION,"failed_entity_ids":failed_entities,"partial_evidence_saved":bool(evidence_persisted and failed_entities),"resumed_success_count":len(prior_successes)}}, f"id=eq.{run_id}")
         db.insert("bridge_pipeline_alerts", [{"run_id": run_id, "severity": "critical", "code": "COLLECTOR_FAILED", "message": str(exc)[:1000], "context": {"source": "google_news_rss"}}])
         raise
 
