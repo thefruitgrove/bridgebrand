@@ -1,6 +1,6 @@
 """Render a private, static BRIDGE operations dashboard from one monitor report.
 
-The HTML is an Actions artifact, NOT a public site asset. It contains only
+The HTML is a GitHub Actions artifact, NOT a public site asset. Because the\nrepository is public, artifacts must be treated as accessible to readers. It contains only
 sanitized aggregate status, seven-day reliability and links to GitHub Actions.
 No credentials, collector raw diagnostics, subject rows or DB evidence.
 """
@@ -129,7 +129,7 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 @media(max-width:850px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}.days{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:520px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}.coverage{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:15px}.metric strong{font-size:23px}}
 </style></head><body>
-<header><div class="wrap"><div class="top"><div class="logo">BRIDGE<em>.</em> OPERATIONS</div><span class="privacy">내부 점검 보고서 · GitHub 인증 열람</span></div>
+<header><div class="wrap"><div class="top"><div class="logo">BRIDGE<em>.</em> OPERATIONS</div><span class="privacy">운영 점검 보고서 · 민감정보 미포함</span></div>
 <div class="eyebrow" style="margin-top:25px">RELIABILITY &amp; PUBLICATION INTEGRITY</div>
 <h1>브랜드지수 운영 관리 콘솔</h1><p>정규 수집부터 근거 검증, 원자적 발행, Cloudflare 실서비스 확인까지.</p></div></header>
 <main class="wrap">
@@ -151,7 +151,7 @@ footer{border-top:1px solid #dde5ef;padding:22px 0 35px;font-size:12px;color:#64
 <div class="sectionhead"><h2>4개 분야 T100 평가 범위</h2><span class="muted">아래 숫자는 계약상 기대값이며 해당 날짜의 실측 건수가 아닙니다</span></div>
 <div class="coverage">""" + expected + """</div>
 <p class="notice"><b>운영 판정 안내</b> · '정상'은 정규 수집 및 발행 검증 통과, '복구·주의'는 발행이 확보되었으나 정규 작업에 이상이 있었음을 뜻합니다. '기록 없음'은 실패 또는 성공의 증거가 확보되지 않았다는 뜻입니다. 이 문서는 점검 시점의 정적 보고서이며 실시간 화면이 아닙니다.</p>
-</main><footer><div class="wrap">BRIDGE STABILITY 1.0 · ACCESS: GITHUB ACTIONS ARTIFACT · 자동 생성 자료 · 외부 공개 금지</div></footer>
+</main><footer><div class="wrap">BRIDGE STABILITY 1.0 · ACCESS: GITHUB ACTIONS ARTIFACT · 자동 생성 자료 · GitHub 저장소 접근권한 범위에 따라 열람 가능</div></footer>
 </body></html>"""
 
 
