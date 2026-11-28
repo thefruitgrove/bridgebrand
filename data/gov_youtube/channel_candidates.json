@@ -1,26 +1,11 @@
 {
-  "as_of_date": "2026-11-25",
+  "as_of_date": "2026-11-28",
   "candidates": {
     "GOV-C02": {
       "reason": "ownership_evidence_required"
     },
     "GOV-C03": {
       "reason": "ownership_evidence_required"
-    },
-    "GOV-M02": {
-      "channel_id": "UCwRFj9gC3meixU8fqKJdgxA",
-      "title": "외교부 Ministry of Foreign Affairs, Korea",
-      "reason": "awaiting_human_verification"
-    },
-    "GOV-M03": {
-      "channel_id": "UCkxOASipmR5wPoLbGUP4QPA",
-      "title": "통일부UNITV",
-      "reason": "awaiting_human_verification"
-    },
-    "GOV-M04": {
-      "channel_id": "UCv98wlLoiNXta0k34cy0zvA",
-      "title": "법무부TV",
-      "reason": "awaiting_human_verification"
     },
     "GOV-M05": {
       "channel_id": "UCoreZRRtVpu521wZNJWfUqQ",
@@ -30,6 +15,21 @@
     "GOV-M06": {
       "channel_id": "UCzteSXznVjwESizsCcSKSWw",
       "title": "행정안전부",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-M07": {
+      "channel_id": "UClvT0GWxHHznabonSbWf7cg",
+      "title": "국가보훈부",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-M08": {
+      "channel_id": "UCexUyFaq9YH7XJfCQzVR_jg",
+      "title": "교육부",
+      "reason": "awaiting_human_verification"
+    },
+    "GOV-M09": {
+      "channel_id": "UCVJYk1n9MdioVVTl4Ne9Zjg",
+      "title": "우주항공청 KASA",
       "reason": "awaiting_human_verification"
     }
   }

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T12:46:29.053988+09:00",
+  "checked_at": "2026-11-28T13:07:56.225677+09:00",
   "review": {
     "GOV-C02": {
       "status": "review",
@@ -9,12 +9,21 @@
     "GOV-C03": {
       "status": "review",
       "homepage": "https://www.daegu.go.kr",
-      "reason": "URLError"
+      "reason": "ambiguous_or_missing",
+      "candidates": [
+        "https://www.youtube.com/@PowerfulDaeguTv",
+        "https://www.youtube.com/@OfficialDaeguTV"
+      ]
     },
     "GOV-C08": {
       "status": "review",
       "reason": "homepage_redirect_requires_review",
       "homepage": "https://www.sejong.go.kr"
+    },
+    "GOV-C09": {
+      "status": "review",
+      "homepage": "https://www.gg.go.kr",
+      "reason": "TimeoutError"
     },
     "GOV-C10": {
       "status": "review",
@@ -26,14 +35,16 @@
       "homepage": "https://www.chungbuk.go.kr",
       "reason": "RemoteDisconnected"
     },
+    "GOV-C15": {
+      "status": "review",
+      "homepage": "https://www.gb.go.kr",
+      "reason": "ambiguous_or_missing",
+      "candidates": []
+    },
     "GOV-C16": {
       "status": "review",
       "homepage": "https://www.gyeongnam.go.kr",
-      "reason": "ambiguous_or_missing",
-      "candidates": [
-        "https://www.youtube.com/@gyeongnamdo",
-        "https://www.youtube.com/user/gyeongnamdo?cpath="
-      ]
+      "reason": "URLError"
     },
     "GOV-M08": {
       "status": "review",
